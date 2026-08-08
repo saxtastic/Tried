@@ -1,0 +1,20 @@
+name = "ayeyoty-co"
+compatibility_date = "2026-08-08"
+
+# Static site served directly from Cloudflare's edge (Workers Static Assets).
+# No worker script is required for a plain static site.
+[assets]
+directory = "./public"
+not_found_handling = "404-page"
+
+# Once the site is deployed, attach your domain in the Cloudflare dashboard
+# under Workers & Pages > ayeyoty-co > Settings > Domains & Routes,
+# or uncomment and adjust the route below after ayeyoty.co's DNS is
+# proxied through Cloudflare.
+# [[routes]]
+# pattern = "ayeyoty.co"
+# custom_domain = true
+
+# [[routes]]
+# pattern = "www.ayeyoty.co"
+# custom_domain = true

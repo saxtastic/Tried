@@ -1,0 +1,13 @@
+{
+  "name": "ayeyoty-co",
+  "private": true,
+  "version": "0.1.0",
+  "description": "ayeyoty.co static site hosted on Cloudflare Workers",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}
