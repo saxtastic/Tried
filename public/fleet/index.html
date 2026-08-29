@@ -147,43 +147,43 @@
         decided and what did not reconcile — a synthesis showing no residue was an average.</p>
     </div>
     <div class="q-grid">
-        <article class="q" data-state="open">
+        <article class="q" data-state="partial">
           <span class="q-id">Q1-ORDER</span>
-          <span class="q-state">0/2 answered</span>
+          <span class="q-state">1/2 answered</span>
           <h3>Three pull requests target one base. What is the merge order, and does the simulator merge the shell or does the shell absorb the simulator?</h3>
           <p class="q-why">Engineering says whichever order costs fewer conflicts. Creative direction says whichever order leaves one coherent front page. Producer says whichever order can be reversed on the day it goes wrong. These are not the same answer.</p>
           <p class="q-vantages"><span>engineering</span><span>creative-director</span><span>producer</span></p>
-          
+          <p class="q-answer"><strong>engineering</strong> Shell first, simulator retargets onto it. Measured: three conflicted files, and every one of my edits to them is a pure addition (README 44+/0-, index.html 8+/0-) against the shell rewriting them (README 162+/21-, index.html 266+/32-). Additions re-applied onto a rewrite are mechanical; a rewrite carried over additions risks losing them silently. Better still, delete the collision instead of sequencing it.</p>
           
           
         </article>
-        <article class="q" data-state="open">
+        <article class="q" data-state="partial">
           <span class="q-id">Q2-SURVIVAL</span>
-          <span class="q-state">0/2 answered</span>
+          <span class="q-state">1/2 answered</span>
           <h3>What in this repository survives beyond the white wall and the gallery space, and what is screen-only? Name, per surface, its IRL contingency — what happens to it when there is no browser in the room.</h3>
           <p class="q-why">A venue that only exists as a website is a website. The word venue makes a claim about a room. Either the claim is real and each surface has a physical contingency, or the word is decoration and should be dropped rather than defended.</p>
           <p class="q-vantages"><span>producer</span><span>creative-director</span></p>
-          
+          <p class="q-answer"><strong>engineering</strong> Engineering does not hold this vantage and will not manufacture one. What it can supply is the measurement the producer answer needs: the simulator makes 14 requests, all to its own origin, zero external — no font, no CDN, no analytics, no API — and runs with no dependencies installed. But it does NOT run from file://, so the USB-stick claim is false. The real no-browser contingency is the CLI, which is text.</p>
           
           
         </article>
-        <article class="q" data-state="open">
+        <article class="q" data-state="partial">
           <span class="q-id">Q3-REGISTER</span>
-          <span class="q-state">0/2 answered</span>
+          <span class="q-state">1/2 answered</span>
           <h3>Where is the line between engineering and product in this repository? Tech specs and retrofitting are engineering. Product placement, design features, unrealized patents and ecommerce offerings are not. Which files sit on which side, and which currently straddle it?</h3>
           <p class="q-why">The two registers have different truth conditions. An engineering claim is true if it works. A product claim is true if a record backs it. Filing them in one place lets a product claim borrow the credibility of a spec it is not entitled to.</p>
           <p class="q-vantages"><span>engineering</span><span>content-marketing</span></p>
-          
+          <p class="q-answer"><strong>engineering</strong> Engineering: the engine, the corpus, the CLI, the tests, the build script. Product: the docs, which make portability claims a reader is invited to rely on. Straddling: trades.json and the cross-domain verification — an engine is true if it works, but &quot;this model is corroborated by aviation and building codes&quot; is a claim about the world that a reader could act on, and it needs a record, not a test.</p>
           
           
         </article>
-        <article class="q" data-state="open">
+        <article class="q" data-state="partial">
           <span class="q-id">Q4-PROVENANCE</span>
-          <span class="q-state">0/2 answered</span>
+          <span class="q-state">1/2 answered</span>
           <h3>If a catalogue listing is ever generated out of this repository — a Shopify product description, customised or not — what record does each field extract from, and which fields stay blank because no record exists?</h3>
           <p class="q-why">This is the question that decides whether the framework is informed or baseless. Copy generated from nothing is hype, and hype priced as data is the expensive failure: cost of input rises, nothing resolves, and the only thing that scales is the claim. Extraction from a spec, a patent filing or a production record is a different object from generation.</p>
           <p class="q-vantages"><span>content-marketing</span><span>engineering</span><span>producer</span></p>
-          
+          <p class="q-answer"><strong>engineering</strong> provisions.json works because every record carries the same four things: a citation resolving to a public document, a date, the verbatim text, and a note stating what the record does NOT establish. For a catalogue listing, title/identifier/date/specification extract; description extracts only where a spec or filing exists; and provenance, materials, edition size, condition and price stay blank, because nothing in this repository records them.</p>
           
           
         </article>
@@ -209,13 +209,13 @@
         <li data-severity="error"><span class="tag">P9</span>
           <strong>fellowships</strong> — holds the content-marketing vantage or produces an artifact, but declares no catalogue_provenance: every public field needs a named record or an explicit blank</li>
         <li data-severity="warn"><span class="tag">P11</span>
-          <strong>Q1-ORDER</strong> — put to 2 vantage-holder(s), 0 answered — unanswered, so it resolves by whatever happens first</li>
+          <strong>Q1-ORDER</strong> — 1 of 2 answered — arbitrating now would decide it on a partial record</li>
         <li data-severity="warn"><span class="tag">P11</span>
-          <strong>Q2-SURVIVAL</strong> — put to 2 vantage-holder(s), 0 answered — unanswered, so it resolves by whatever happens first</li>
+          <strong>Q2-SURVIVAL</strong> — 1 of 2 answered — arbitrating now would decide it on a partial record</li>
         <li data-severity="warn"><span class="tag">P11</span>
-          <strong>Q3-REGISTER</strong> — put to 2 vantage-holder(s), 0 answered — unanswered, so it resolves by whatever happens first</li>
+          <strong>Q3-REGISTER</strong> — 1 of 2 answered — arbitrating now would decide it on a partial record</li>
         <li data-severity="warn"><span class="tag">P11</span>
-          <strong>Q4-PROVENANCE</strong> — put to 2 vantage-holder(s), 0 answered — unanswered, so it resolves by whatever happens first</li>
+          <strong>Q4-PROVENANCE</strong> — 1 of 2 answered — arbitrating now would decide it on a partial record</li>
         <li data-severity="warn"><span class="tag">P11</span>
           <strong>Q5-ADOPTION</strong> — put to 1 vantage-holder(s), 0 answered — unanswered, so it resolves by whatever happens first</li>
         <li data-severity="error"><span class="tag">P8</span>
