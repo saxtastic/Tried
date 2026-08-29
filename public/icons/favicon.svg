@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="ayeyoty.co">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#14121f"/>
+      <stop offset="1" stop-color="#0b0c10"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a78bfa"/>
+      <stop offset="1" stop-color="#7c5cff"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="115" fill="url(#bg)"/>
+  <g fill="none" stroke="url(#mark)" stroke-linecap="round">
+    <path d="M159.44 339.97 V188.83 A96.56 96.56 0 0 1 352.56 188.83 V339.97" stroke-width="41.98"/>
+    <path d="M88.06 381.95 H423.94" stroke-width="37.79"/>
+  </g>
+</svg>
