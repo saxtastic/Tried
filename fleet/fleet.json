@@ -38,6 +38,12 @@
       "by": "session_01GvNCLtH3R2cqohRaUwqKek",
       "method": "scheduled check-in: git fetch --prune, get_session on both targets, controlled re-fire",
       "register": "O"
+    },
+    {
+      "at": "2026-08-29T20:58:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "scheduled check-in: answers collected off both branches, three questions arbitrated",
+      "register": "O"
     }
   ],
   "environments": [
@@ -179,11 +185,7 @@
         "test/*",
         "docs/*"
       ],
-      "claims_disputed": [
-        "public/index.html",
-        "package.json",
-        "README.md"
-      ],
+      "claims_disputed": [],
       "ritual": false,
       "state": "review",
       "register": "O",
@@ -194,10 +196,12 @@
       "survival": {
         "duration": "indefinite — statute text and case law age slowly",
         "survives_gallery": "yes — the corpus is a document set, not an installation",
-        "irl_contingency": "runs offline; the corpus is bundled into the page rather than fetched",
-        "produces_artifact": false
+        "irl_contingency": "Runs from a static file server, NOT from file:// — corrected 2026-08-29 by the engineering vantage against this file's earlier claim that it runs offline. 14 requests, all same-origin: no font, no CDN, no analytics, no API, no dependencies installed. The real no-browser contingency is sim/cli.mjs, which is text.",
+        "produces_artifact": false,
+        "note": "Earlier entry here overstated survivability. Corrected against measurement supplied by the project itself."
       },
-      "partial_compliance": "104eb5f fixed the CSP finding by bundling the corpus into corpus.bundle.js rather than fetching it — default-src 'none' blocks fetch, which the relay did not spell out and the session worked out itself. It has NOT merged the shell, and still changes all three disputed files. P7 and P8 both stand. Since then eb94e40 verified the model against frameworks in other trades and corrected it — 42 tests passing. Still has not merged the shell; P7 and P8 stand."
+      "partial_compliance": "104eb5f fixed the CSP finding by bundling the corpus into corpus.bundle.js rather than fetching it — default-src 'none' blocks fetch, which the relay did not spell out and the session worked out itself. It has NOT merged the shell, and still changes all three disputed files. P7 and P8 both stand. Since then eb94e40 verified the model against frameworks in other trades and corrected it — 42 tests passing. Still has not merged the shell; P7 and P8 stand.",
+      "merged_upstream": "556734b — merged the venue shell and dropped the contested edits to public/index.html, package.json and README.md"
     }
   ],
   "coworkers": [
@@ -427,6 +431,13 @@
       "action": "create_trigger + fire_trigger (bare) + delete_trigger",
       "target": "session_01GR1Ut4PmfsRVZo96RJZVJu, session_01HCcyjiDYBhyRWFnL1qrKWB",
       "result": "Re-sent the same four questions with the ff9ca54 pointer folded into the prompt and no `text` argument. Both fires returned cse_ ids matching their targets. Concurrent broadcast now actually out.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T20:58:00Z",
+      "action": "collect + arbitrate",
+      "target": "Q1-ORDER, Q3-REGISTER, Q4-PROVENANCE",
+      "result": "Both coworkers answered from their own vantages and both found against their own work. Q1, Q3 and Q4 arbitrated with held_opposition recorded. Q2 left open: the venue holds the missing vantage and asked the question, so it cannot be both party and judge. Q5 remains the owner's.",
       "register": "O"
     }
   ],
