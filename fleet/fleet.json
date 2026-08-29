@@ -56,6 +56,12 @@
       "by": "session_01GvNCLtH3R2cqohRaUwqKek",
       "method": "verification pass on request: git fetch, local mergeability of all three PRs, re-ran both checks, PR state via API",
       "register": "O"
+    },
+    {
+      "at": "2026-08-29T22:57:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "check-in: verified the P9 close in a detached worktree by running the sibling's own checks",
+      "register": "O"
     }
   ],
   "environments": [
@@ -130,7 +136,7 @@
       "inherits": "venue",
       "source_revision": "claude/cloudflare-ayeyoty-setup-uq8pl9",
       "source_note": "Resolved. The session merged the venue branch rather than rebasing onto it, which is what the fixed source revision allows. PR #2 is stacked on PR #1.",
-      "merged_upstream": "335b97f — merged claude/ios-macos-code-repurpose-ofm9ks on 2026-08-29",
+      "merged_upstream": "ceed090 — merged the venue branch including the arbitrations and P13",
       "vantages_held": [
         "producer",
         "content-marketing"
@@ -143,7 +149,8 @@
       },
       "claims_note": "Declared by the fellowships session itself under P8 at b13d6bb, with its own reasoning: PR #2 is stacked on PR #1 so the venue merges first by construction, and it deliberately reverted an earlier change to public/venue.css rather than claim it.",
       "pull_request_base": "claude/ios-macos-code-repurpose-ofm9ks",
-      "conflict": "PR #2 head 773781d conflicts with its base at b40289d on fleet/questions.json. Textual, not semantic: the venue's copy is a strict superset — every PR #2 answer object present verbatim, rules/vantages/note/question text byte-identical. Relayed 2026-08-29T22:32Z with the resolution (take the base copy)."
+      "conflict": "PR #2 head 773781d conflicts with its base at b40289d on fleet/questions.json. Textual, not semantic: the venue's copy is a strict superset — every PR #2 answer object present verbatim, rules/vantages/note/question text byte-identical. Relayed 2026-08-29T22:32Z with the resolution (take the base copy).",
+      "catalogue_provenance_status": "Closed by the fellowships session at fbf5fae and verified in a worktree: P9 no longer fires, `check-registry` asserts 'effort is derived from declared requirement weights', no record stores an effort field, and all 16 summaries are blanked rather than kept as unsourced prose."
     },
     {
       "id": "options",
@@ -380,8 +387,9 @@
     {
       "id": "P8",
       "rule": "A shared file is owned by one project; the rest declare the claim.",
-      "detail": "public/index.html, package.json and README.md are touched by every subtree. The shell owns them. A project that must change one declares it in claims_disputed so the collision is visible before the second merge, not after.",
-      "severity": "error"
+      "detail": "public/index.html, package.json and README.md are touched by every subtree. The shell owns them. A project that must change one declares it in claims_disputed so the collision is visible before the second merge, not after. Severity depends on whether the merge order is settled: a project stacked on the owner merges second by construction, so a declared claim there is a warning. A project running parallel to the owner leaves the order to chance, and that is the error. Declaring the claim never fails the build — the declaration is the compliance, and a rule that reddens on compliance teaches projects not to declare.",
+      "severity": "error when unstacked, warn when stacked",
+      "revised": "2026-08-29, after firing three errors against a branch that had done exactly what the rule asked."
     },
     {
       "id": "P9",
@@ -482,6 +490,13 @@
       "action": "verify",
       "target": "all three pull requests",
       "result": "PR #1 merges to its base as a fast-forward — no conflict possible. PR #2 conflicts on fleet/questions.json, textual only, relayed with the resolution. PR #3 is fast-forward-able but targets the wrong base, so its diff carries 20+ shell files as its own. Both local checks re-run green on b40289d. Zero review threads on PR #1. PR #1 body was stale — it listed seven policy rules against twelve and claimed a check that had since been generalised — and has been rewritten to match the diff.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T22:57:00Z",
+      "action": "verify + revise",
+      "target": "fellowships fbf5fae, and P8",
+      "result": "The P9 close is real, not a stub — verified by running their checks, not by reading their declaration. effort is now derived at read time from sourced requirements and the build rejects a stored effort field, which resolves the Q4 held_opposition rather than dodging it: the derivation RULE moved to config as an editorial weight while the CLAIM stayed sourced. Their branch also exposed a flaw in P8 — it fired three errors at a project for declaring its claims, which is what the rule asks for. Severity now depends on whether the stack settles the order.",
       "register": "O"
     }
   ],
