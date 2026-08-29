@@ -259,6 +259,31 @@
       "target": "session_015e4JiauJkHf1CyYPwGzX1Q",
       "result": "Archived. Branch claude/cloudflare-ayeyoty-setup-uq8pl9 untouched and still the repository default.",
       "register": "O"
+    },
+    {
+      "at": "2026-08-29T14:38:00Z",
+      "action": "create_trigger + fire_trigger + delete_trigger",
+      "target": "session_01GR1Ut4PmfsRVZo96RJZVJu",
+      "result": "Relayed the P7 merge instruction and the subtree conventions. Both spent relay triggers deleted; the record lives here, not in the Routines list.",
+      "register": "O"
+    }
+  ],
+  "mechanisms": [
+    {
+      "id": "RELAY",
+      "name": "Delivering a message to a sibling cloud session",
+      "steps": [
+        "create_trigger with persistent_session_id and no schedule",
+        "fire_trigger to deliver it immediately",
+        "delete_trigger once delivered; log the operation here instead"
+      ],
+      "constraints": [
+        "ListAgents does not reach cloud siblings; there is no direct peer channel.",
+        "update_trigger cannot edit the prompt of a routine that fires into another session — a correction is a new trigger, not an edit.",
+        "The target cannot reply. Read its state with get_session instead of expecting an answer."
+      ],
+      "register": "O",
+      "note": "Established by use on 2026-08-29; each constraint was hit, not read."
     }
   ]
 }
