@@ -2,11 +2,22 @@
   "id": "ENG-P1",
   "officer": "engineering",
   "specificity": "instance",
-  "statement": "The simulator surface issues 14 requests, all same-origin: no font, no CDN, no analytics, no API.",
+  "statement": "The simulator surface issues no off-origin requests: no font, no CDN, no analytics, no API.",
   "basis": "confirmed",
-  "measured_by": "session_01HCcyjiDYBhyRWFnL1qrKWB, reported in its Q2-SURVIVAL answer",
-  "reproduce": "load /simulator/ and count network entries by origin",
+  "measured_by": "session_01HCcyjiDYBhyRWFnL1qrKWB, then independently re-measured by session_01GvNCLtH3R2cqohRaUwqKek",
+  "reproduce": "serve public/ over loopback, load /simulator/ under a headless Chromium context, and partition captured requests by origin",
   "derived_from": null,
   "confidence": [0.9, 1.0],
-  "register": "D"
+  "register": "D",
+  "measurements": [
+    { "at": "2026-08-29T19:15Z", "by": "session_01HCcyjiDYBhyRWFnL1qrKWB", "total": 14, "off_origin": 0, "note": "before the shell was merged" },
+    { "at": "2026-08-29T23:20Z", "by": "session_01HCcyjiDYBhyRWFnL1qrKWB", "total": 18, "off_origin": 0, "note": "after adopting the shell" },
+    { "at": "2026-08-30T00:00Z", "by": "session_01GvNCLtH3R2cqohRaUwqKek", "total": 17, "off_origin": 0, "note": "independent re-measure of the same commit, ba2422b, at a loopback static server" }
+  ],
+  "history": [
+    "Filed as a count of 14. The owning officer corrected it to 18 after adopting the shell, correctly noting that the count moved while the load-bearing claim — nothing leaves the origin — did not.",
+    "An independent re-measure of the same commit returned 17. The one-request gap is most likely a favicon fetch, which headless contexts issue inconsistently.",
+    "So the count is now recorded as a series of measurements with their conditions, and the STATEMENT no longer contains it. Three measurements of one page returned three numbers while the property being asserted held in all three. A premise whose statement carries an environment-dependent figure goes stale on every re-measure; one that asserts the invariant does not."
+  ],
+  "load_bearing": "off_origin === 0, confirmed by two independent measurers on the same commit."
 }
