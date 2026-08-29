@@ -23,6 +23,7 @@ const PARTS = [
   ['provisions', 'provisions.json'],
   ['precedents', 'precedents.json'],
   ['conditions', 'conditions.json'],
+  ['passages', 'passages.json'],
   ['claim', 'case.template.json'],
   ['institution', 'institution.template.json'],
 ];
@@ -43,7 +44,7 @@ export async function renderBundle() {
 
 ${body}
 
-export const corpus = { lexicon, provisions, precedents, conditions, claim, institution };
+export const corpus = { lexicon, provisions, precedents, conditions, passages, claim, institution };
 export default corpus;
 `;
 }

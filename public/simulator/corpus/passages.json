@@ -1,0 +1,52 @@
+[
+  {
+    "kind": "complaint_to_docket",
+    "requested": "that the grievance be treated as a grievance",
+    "produced": "an acknowledgement, and then a reclassification to an informal process with no findings",
+    "glitch": "substituted",
+    "interval_days": 46,
+    "decays": ["salience", "capacity"],
+    "sustains": ["documentation_practice"],
+    "note": "The first passage and the cheapest place for an institution to end a matter: not by deciding it, by re-describing it."
+  },
+  {
+    "kind": "request_to_record",
+    "requested": "the comparator files and the contemporaneous notes of the decision meeting",
+    "produced": null,
+    "glitch": "null_return",
+    "interval_days": 210,
+    "decays": ["evidence", "memory", "standing", "capacity"],
+    "sustains": ["community", "documentation_practice"],
+    "note": "The passage the whole claim rests on. The retention schedule in the institution profile permits destruction of exactly these files, which is why the null return is a finding about the schedule rather than about the request."
+  },
+  {
+    "kind": "record_to_finding",
+    "requested": "a determination on the documents that were produced",
+    "produced": "a decision letter stating a ground not raised in the proceeding",
+    "glitch": "reconstructed",
+    "interval_days": 120,
+    "decays": ["memory", "salience"],
+    "sustains": ["community", "public_record"],
+    "note": "A rationale that postdates the decision it explains gets none of the deference a contemporaneous one would. See admin.reasoned."
+  },
+  {
+    "kind": "finding_to_remedy",
+    "requested": "reinstatement, correction of the record, and an accounting for the work",
+    "produced": "correction of the record only",
+    "glitch": "partial",
+    "interval_days": 90,
+    "decays": ["standing", "capacity"],
+    "sustains": ["counsel", "institutional_ally"],
+    "note": "Being right is not being restored. The remedy that arrives is usually the cheapest one on the list."
+  },
+  {
+    "kind": "remedy_to_repair",
+    "requested": "the interval closed — standing restored and the years accounted for",
+    "produced": null,
+    "glitch": "timed_out",
+    "interval_days": 365,
+    "decays": ["capacity", "salience", "standing"],
+    "sustains": ["community"],
+    "note": "Nobody supervises this passage. It is not in anyone's jurisdiction and it is where the actual loss sits."
+  }
+]

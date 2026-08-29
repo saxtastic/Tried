@@ -10,6 +10,7 @@ import { proponent, opponent } from './agents.js';
 import { adjudicate, disposition } from './judge.js';
 import { profile, necessitySilence, translate, REGIMES as POLICY_REGIMES } from './institution.js';
 import { reframe } from './paradox.js';
+import { itinerary } from './transitions.js';
 
 /** Build the evaluation context from a raw corpus + case. */
 export function buildContext(corpus, options = {}) {
@@ -29,6 +30,7 @@ export function buildContext(corpus, options = {}) {
     regime: options.regime ?? 'contemporary',
     policyRegime: options.policyRegime ?? null,
     necessitySilence: necessitySilence(institution),
+    itinerary: itinerary(corpus.passages ?? []),
   };
 }
 
@@ -150,6 +152,9 @@ export function fullReport(corpus, options = {}) {
   const base = run(corpus, options);
   return {
     ...base,
+    // The passages between findings. Everything else here scores a state; this
+    // scores the intervals, which is where claims are actually lost.
+    itinerary: itinerary(corpus.passages ?? []),
     interpretive_sweep: sweepInterpretations(corpus, options),
     institutional_sweep: sweepInstitutions(corpus, options),
     paradox: reframe(corpus.claim ?? {}),

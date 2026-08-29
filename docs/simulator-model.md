@@ -209,7 +209,86 @@ a finding that the conduct was lawful. It is a finding that *this forum is not
 the one that says so* — and that distinction is the entire content of the
 legislative case.
 
-## 10. What this is not
+## 10. Passages — the intervals between the findings
+
+Every section above scores a **state**: an element met, a condition established,
+a precedent entrenched. States are what doctrine talks about, so states are what
+got built first.
+
+But nobody experiences a state. What a person experiences is the **passage**
+between two of them — the interval after the record is requested and before the
+record exists as a document. That interval is where claims are actually lost,
+and they are not lost for doctrinal reasons.
+
+This is the same gap the cross-domain verification found and could not close: no
+temporal model. The passage layer is the fix, and it is a better frame than a
+simple clock, because it names *what happens in the interval* rather than only
+how long the interval is.
+
+### The glitch
+
+The record as **provisionally requested** and the record as **actually
+documented** are not the same object. The delta between them is not an absence
+of evidence — it *is* evidence:
+
+| Glitch | What it tells you |
+|---|---|
+| `null_return` | A body required to hold the record produced nothing. Either it was never made (failure to maintain) or it is gone (worse). The institution must say which. |
+| `reconstructed` | The document postdates the decision it explains. A rationalisation, not a record — and it earns none of the deference a contemporaneous document would. |
+| `timed_out` | The interval simply ran. Where a body controls both the clock and the remedy, an unbounded process is a limitations defence nobody had to plead. |
+| `substituted` | What arrived answers a question nobody asked. Substitution implies someone read the request and declined it. |
+| `partial` | What is missing was selected by the party with an interest in the selection. |
+
+Each is scored for evidentiary value and surfaces as a finding to plead in its
+own right, not as a hole in the case.
+
+### What the interval costs, and what carries a claim across it
+
+Five decays run against the claim: **evidence** (retention schedules do their
+work), **memory**, **standing** (the claimant graduates, leaves, or is removed,
+and the status that made them owed something lapses), **capacity** (their ability
+to keep going), and **salience** (everyone else stops finding it urgent).
+
+Against those, five sustains — and the model is strict that a sustain only
+offsets the decays it actually *reaches*. Representation carries the procedural
+load and the clock; it does not restore capacity, and the model refuses to
+pretend otherwise. Only one term reaches capacity:
+
+**Spontaneous community engagement.** People who show up without being organised
+into showing up. It is structurally lopsided — many follow the case, the
+claimant knows few of them back — and the model scores that asymmetry as its
+*strength*, not a defect. Reciprocal support is capped by how many relationships
+one exhausted person can maintain. Asymmetric support is not capped, which is
+exactly why it is the term that survives a long interval. It is a real relation
+doing real work on unequal terms, and modelling it as anything softer would be
+both untrue and useless.
+
+Capacity is the heaviest decay in the model and nothing but people touches it.
+That is the finding, and it is not a sentimental one.
+
+### The transition as prose
+
+There is a second, literal reading of all this, borrowed from writing rather than
+from law. Findings emitted as discrete blocks with nothing between them read as a
+*list*, not an argument. The connective tissue is what makes a sequence into a
+case.
+
+So every passage generates its transition sentence — what happened between one
+finding and the next, in prose — and the CLI prints them between the condition
+blocks. The passage is the part a reader skips and a tribunal never sees, which
+is precisely why it has to be written.
+
+### Why it is not decoration
+
+A claim lost in an interval has not been decided against. It has been
+**outlasted** — and the record shows the two identically. So the passages feed
+the statutory challenge like every other failure: a null return produces
+*mandatory retention with a stated consequence*; a timed-out or reconstructed
+passage produces *bound the interval and date the reasons*; standing lost mid-process
+produces *freeze standing for the duration of a pending matter*, because standing
+that lapses on the institution's own timetable rewards delay directly.
+
+## 11. What this is not
 
 It is not a predictor. The weights are stipulated, not fitted, and the corpus is
 small by design so that every input is inspectable. Its value is in forcing the

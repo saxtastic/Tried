@@ -148,6 +148,34 @@ if (!flag('paradox') && !flag('vectors') && !flag('sweep')) {
   }
 }
 
+if (!flag('paradox') && !flag('vectors') && !flag('sweep')) {
+  const it = report.itinerary;
+  console.log(rule('PASSAGES — the intervals between the findings'));
+  console.log(C.dim('  Everything above scores a state. This scores the transitions, which is where'));
+  console.log(C.dim('  claims are actually lost — and a loss here is recorded the same as a ruling.\n'));
+  for (const leg of it.legs) {
+    const mark = leg.carried ? C.g('carried') : C.r('diminished');
+    console.log(`  ${C.b(leg.label)} ${C.dim(`· ${leg.interval_days}d ·`)} ${mark} ${C.dim(`[net ${leg.net_cost}]`)}`);
+    console.log(`    ${C.dim('asked')}    ${leg.requested}`);
+    console.log(`    ${C.dim('arrived')}  ${leg.produced ?? C.r('nothing')}`);
+    console.log(`    ${C.y(leg.glitch.label)} ${C.dim(`(evidentiary value ${leg.glitch.evidentiary_value})`)}`);
+    console.log(wrap(leg.connective, 82, '    '));
+    if (leg.uncovered.length) {
+      console.log(C.dim(`    uncovered: ${leg.uncovered.map((u) => `${u.label.toLowerCase()} — ${u.gloss}`).join(' ')}`));
+    }
+    console.log();
+  }
+  console.log(`  ${C.b('Total elapsed')} ${it.total_span}`);
+  console.log(wrap(it.finding, 84, '  '));
+  if (it.glitches_worth_pleading.length) {
+    console.log(`\n  ${C.c('glitches worth pleading as findings in themselves')}`);
+    for (const g of it.glitches_worth_pleading) {
+      console.log(`    ${g.passage} — ${C.y(g.glitch)} ${C.dim(`[${g.value}]`)}`);
+      console.log(C.dim(wrap(g.reading, 78, '      ')));
+    }
+  }
+}
+
 if (!flag('vectors') && !flag('paradox')) {
   const sw = report.interpretive_sweep;
   console.log(rule('INTERPRETIVE SWEEP — does the outcome depend on which sense of the words governs?'));

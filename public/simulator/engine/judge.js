@@ -323,6 +323,41 @@ function statutoryVectors(rulings, ctx) {
     }
   }
 
+  // Passage-derived vectors. A claim lost in an interval was not decided
+  // against; it was outlasted, and the fix for being outlasted is legislative.
+  for (const leg of ctx.itinerary?.legs ?? []) {
+    if (leg.glitch.id === 'null_return') {
+      add('mandatory_retention', {
+        vector: 'mandatory_retention',
+        title: 'Require the record to exist, and say what happens when it does not',
+        why:
+          'A body that must hold a record and returns nothing currently loses nothing by it. A retention duty with a stated consequence — an adverse inference where the record should exist and does not — converts the gap from the claimant\'s evidentiary problem into the institution\'s, which is where it belongs.',
+        weight: 0.95,
+        unlocks: [leg.label],
+      });
+    }
+    if (leg.glitch.id === 'timed_out' || leg.glitch.id === 'reconstructed') {
+      add('bound_the_interval', {
+        vector: 'bound_the_interval',
+        title: 'Put a clock on the passage, and date the reasons',
+        why:
+          'Where an institution controls both the clock and the remedy, an unbounded interval is a limitations defence nobody had to plead. A deadline for each step, plus a requirement that reasons be recorded at the time rather than reconstructed, makes the passage reviewable instead of merely survivable.',
+        weight: 0.85,
+        unlocks: [leg.label],
+      });
+    }
+    if (!leg.carried && leg.uncovered.some((u) => u.id === 'standing')) {
+      add('preserve_standing', {
+        vector: 'preserve_standing',
+        title: 'Preserve standing through the process',
+        why:
+          'A claimant who graduates, leaves or is removed while the matter is pending can lose the status that made them someone the institution owed anything to. Standing that lapses on the institution\'s own timetable rewards delay directly. Freezing it for the duration of a pending matter costs nothing and removes the incentive.',
+        weight: 0.9,
+        unlocks: [leg.label],
+      });
+    }
+  }
+
   const ns = ctx.necessitySilence;
   if (ns?.triggered) {
     add('supply_an_intelligible_principle', {

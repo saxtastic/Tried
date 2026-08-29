@@ -179,6 +179,35 @@ function debateCard({ condition, pro, con, judgment }) {
   return card;
 }
 
+function passagesCard(report) {
+  const it = report.itinerary;
+  if (!it?.legs?.length) return null;
+  const card = el('section', { class: 'report' },
+    el('h2', {}, 'Passages',
+      el('span', { class: `tag ${it.survived ? 'ok' : 'bad'}` }, it.survived ? 'survived' : `lost at ${it.lost_at.length}`),
+      el('span', { class: 'tag' }, it.total_span)),
+    el('p', { class: 'sub' }, 'Everything else here scores a state. This scores the intervals between them, which is where claims are actually lost — and a loss here is recorded the same as a ruling.'),
+  );
+  for (const leg of it.legs) {
+    card.append(el('div', { class: `passage ${leg.carried ? 'held' : 'lost'}` },
+      el('h3', {}, leg.label,
+        el('span', { class: 'tag' }, `${leg.interval_days}d`),
+        el('span', { class: `tag ${leg.carried ? 'ok' : 'bad'}` }, leg.carried ? 'carried' : 'diminished'),
+        el('span', { class: 'tag warn' }, leg.glitch.label)),
+      el('dl', { class: 'askgot' },
+        el('dt', {}, 'asked'), el('dd', {}, leg.requested ?? '—'),
+        el('dt', {}, 'arrived'), el('dd', { class: leg.produced ? null : 'nothing' }, leg.produced ?? 'nothing'),
+      ),
+      el('p', { class: 'connective' }, leg.connective),
+      leg.uncovered.length
+        ? el('p', { class: 'sub' }, `Uncovered: ${leg.uncovered.map((u) => u.label.toLowerCase()).join(', ')}.`)
+        : null,
+    ));
+  }
+  card.append(el('p', { class: 'spaced' }, it.finding));
+  return card;
+}
+
 function sweepCard(report) {
   const s = report.interpretive_sweep;
   const card = el('section', { class: 'report' },
@@ -303,6 +332,8 @@ function render() {
 
   const frag = document.createDocumentFragment();
   for (const d of report.debates) frag.append(debateCard(d));
+  const passages = passagesCard(report);
+  if (passages) frag.append(passages);
   frag.append(sweepCard(report), institutionCard(report), driftCard(report), governanceCard(report), vectorsCard(report));
   frag.append(el('p', { class: 'disclaimer' }, corpus.claim.disclaimer));
   out.replaceChildren(frag);

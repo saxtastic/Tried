@@ -22,4 +22,12 @@ export { TREATMENTS, onPoint, entrenchment, movesAgainst, findGaps } from './sta
 export { evaluate } from './predicates.js';
 export { DEFEATERS, proponent, opponent } from './agents.js';
 export { STANDARDS, adjudicate, disposition } from './judge.js';
+export {
+  PASSAGE_KINDS,
+  GLITCHES,
+  DECAYS,
+  SUSTAINS,
+  passage,
+  itinerary,
+} from './transitions.js';
 export { buildContext, run, sweepInterpretations, sweepInstitutions, fullReport } from './simulate.js';

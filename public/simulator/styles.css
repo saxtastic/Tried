@@ -252,3 +252,32 @@ details[open] summary { margin-bottom: 0.5rem; color: var(--fg); }
 @media (max-width: 46rem) {
   .cols { grid-template-columns: 1fr; }
 }
+
+/* --------------------------------------------------------------- passages -- */
+
+.passage { border-top: 1px solid var(--hairline); padding: 0.9rem 0; }
+.passage:first-of-type { border-top: 0; }
+.passage h3 {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  overflow-wrap: anywhere;
+}
+.passage.lost { border-left: 3px solid var(--sim-bad); padding-left: 0.8rem; }
+.passage.held { border-left: 3px solid var(--sim-ok); padding-left: 0.8rem; }
+
+dl.askgot {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.15rem 0.7rem;
+  margin: 0 0 0.6rem;
+  font-size: 0.82rem;
+}
+dl.askgot dt { color: var(--fg-2); font-family: var(--font-mono); font-size: 0.75rem; padding-top: 0.1rem; }
+dl.askgot dd { margin: 0; overflow-wrap: anywhere; }
+dl.askgot dd.nothing { color: var(--sim-bad); font-family: var(--font-mono); }
+
+.connective { margin: 0; font-size: 0.86rem; overflow-wrap: anywhere; }
