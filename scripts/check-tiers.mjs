@@ -49,7 +49,9 @@ try {
 const server = http.createServer((req, res) => {
   const url = decodeURIComponent(new URL(req.url, "http://x").pathname);
   let file = path.join(ROOT, url === "/" ? "index.html" : url);
-  if (!file.startsWith(ROOT) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) {
+  // Mirror Workers Static Assets: a directory resolves to its index.html.
+  if (fs.existsSync(file) && fs.statSync(file).isDirectory()) file = path.join(file, "index.html");
+  if (!file.startsWith(ROOT) || !fs.existsSync(file)) {
     file = path.join(ROOT, "404.html");
     res.statusCode = 404;
   }
@@ -87,6 +89,17 @@ for (const vp of VIEWPORTS) {
   if (got.sideways) problems.push("horizontal scroll");
   if (!got.monitorFilled) problems.push("monitor has unfilled rows");
   if (errors.length) problems.push(`console: ${errors.join(" | ")}`);
+
+  // The fleet subtree runs on the same shell, so it must resolve the same tier.
+  await page.goto(new URL("/fleet/", base).href, { waitUntil: "networkidle" });
+  const sub = await page.evaluate(() => ({
+    tier: document.documentElement.dataset.tier,
+    sideways: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
+    roster: document.querySelectorAll(".crew").length,
+  }));
+  if (sub.tier !== vp.expect) problems.push(`/fleet/ tier ${sub.tier} != ${vp.expect}`);
+  if (sub.sideways) problems.push("/fleet/ horizontal scroll");
+  if (sub.roster < 1) problems.push("/fleet/ roster empty");
 
   if (problems.length) failures++;
   console.log(

@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Fleet — ayeyoty.co</title>
+<meta name="description" content="Deployment and management surface for the Claude coworkers building this repository." />
+<meta name="theme-color" content="#f6f5fa" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0b0c10" media="(prefers-color-scheme: dark)" />
+<link rel="icon" href="/icons/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+<link rel="mask-icon" href="/icons/mask-icon.svg" color="#7c5cff" />
+<link rel="stylesheet" href="/venue.css" />
+<link rel="stylesheet" href="/fleet/fleet.css" />
+<script src="/venue.js" defer></script>
+</head>
+<body>
+
+<a class="skip" href="#crew">Skip to the roster</a>
+
+<header class="chrome">
+  <div class="shell">
+    <a class="wordmark" href="/">aye<span>yoty</span>.co</a>
+    <p class="chip" id="tier-chip" aria-live="polite">tier: <span id="tier-name">—</span></p>
+  </div>
+</header>
+
+<main>
+  <section class="shell hero">
+    <div class="hero-copy">
+      <p class="eyebrow">subtree · fleet</p>
+      <h1><span class="wide-only">3 live coworkers. <em>One environment.</em></span><span class="watch-only">Fleet</span></h1>
+      <p class="lede">Every Claude session working this repository, what it owns, what it is
+        blocked on, and what the policy says is owed. Generated from
+        <code>fleet/fleet.json</code> — surveyed 2026-08-29T14:36:00Z, never edited by hand.</p>
+      <div class="actions">
+        <a class="btn btn--primary" href="#crew">The roster</a>
+        <a class="btn btn--quiet wide-only" href="#plan">What is owed</a>
+      </div>
+    </div>
+
+    <div class="hero-art glance" aria-label="Fleet at a glance">
+      <p class="eyebrow">at a glance</p>
+      <dl>
+          <dt>running</dt><dd>2</dd>
+          <dt>archived</dt><dd>2</dd>
+          <dt>idle</dt><dd>1</dd>
+          <dt>projects</dt><dd>4</dd>
+          <dt>routines</dt><dd>0</dd>
+          <dt>findings</dt><dd>0 err / 3 warn</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="shell" id="crew">
+    <div class="section-head">
+      <h2>Roster</h2>
+      <p>Blocked and failed first. A coworker is legible when you can name its project, its
+        branch and the thing standing in its way without opening its transcript.</p>
+    </div>
+    <div class="crew-grid">
+        <article class="crew" data-status="running">
+          <span class="crew-status">running</span>
+          <h3>iOS/macOS code repurposing</h3>
+          <p class="crew-role">ayeyoty.co technovenue · programmer — fleet deployment and management</p>
+          <dl>
+            <dt>model</dt><dd>claude-opus-5</dd>
+            <dt>branch</dt><dd>claude/ios-macos-code-repurpose-ofm9ks</dd>
+            <dt>last active</dt><dd>2026-08-29</dd>
+          </dl>
+          
+          
+          
+        </article>
+        <article class="crew" data-status="running">
+          <span class="crew-status">running</span>
+          <h3>Repository reference for applications and fellowships</h3>
+          <p class="crew-role">Applications and fellowships subtree · builder</p>
+          <dl>
+            <dt>model</dt><dd>claude-opus-5</dd>
+            <dt>branch</dt><dd>claude/apps-fellowships-repository-zlwbft</dd>
+            <dt>last active</dt><dd>2026-08-29</dd>
+          </dl>
+          
+          <p class="crew-note">answered by trig_0161v5EhTNCcD3D4oABVqBJo fired 2026-08-29T14:30Z carrying the decision</p>
+          
+        </article>
+        <article class="crew" data-status="idle">
+          <span class="crew-status">idle</span>
+          <h3>Build AI stock options trading dashboard with predictive intelligence</h3>
+          <p class="crew-role">AI stock options trading dashboard · builder</p>
+          <dl>
+            <dt>model</dt><dd>claude-sonnet-5</dd>
+            <dt>branch</dt><dd>—</dd>
+            <dt>last active</dt><dd>2026-08-08</dd>
+          </dl>
+          
+          
+          
+        </article>
+        <article class="crew" data-status="archived">
+          <span class="crew-status">archived</span>
+          <h3>Cloudflare setup for Ayeyoty.co</h3>
+          <p class="crew-role">ayeyoty.co technovenue · originator</p>
+          <dl>
+            <dt>model</dt><dd>claude-sonnet-5</dd>
+            <dt>branch</dt><dd>claude/ios-macos-code-repurpose-ofm9ks</dd>
+            <dt>last active</dt><dd>2026-08-29</dd>
+          </dl>
+          
+          
+          <p class="crew-note">Model returned a policy error and stopped; the session cannot be continued.</p>
+        </article>
+        <article class="crew" data-status="archived">
+          <span class="crew-status">archived</span>
+          <h3>Integrate Adinkra encoding grammar into Resonance DAW PWA</h3>
+          <p class="crew-role">Adinkra grammar in Resonance DAW PWA · builder</p>
+          <dl>
+            <dt>model</dt><dd>claude-sonnet-5</dd>
+            <dt>branch</dt><dd>—</dd>
+            <dt>last active</dt><dd>2026-08-07</dd>
+          </dl>
+          
+          
+          
+        </article>
+    </div>
+  </section>
+
+  <section class="shell" id="findings">
+    <div class="section-head">
+      <h2>Policy</h2>
+      <p>No errors. 3 warnings against 7 rules.</p>
+    </div>
+    <ul class="findings">
+        <li data-severity="warn"><span class="tag">P7</span>
+          <strong>fellowships</strong> — declares inherits: venue but was checked out from claude/cloudflare-ayeyoty-setup-uq8pl9; claude/ios-macos-code-repurpose-ofm9ks has to be merged into claude/apps-fellowships-repository-zlwbft before it pushes</li>
+        <li data-severity="warn"><span class="tag">P4</span>
+          <strong>session_01QrtdqCnyErpcgysUbPKytp</strong> — idle on a stalled project — nothing has read it, and it holds no repository</li>
+        <li data-severity="warn"><span class="tag">P5</span>
+          <strong>fellowships</strong> — declared a ritual with no Routine bound to it</li>
+    </ul>
+  </section>
+
+  <section class="shell" id="plan">
+    <div class="section-head">
+      <h2>What is owed</h2>
+      <p>The actions the findings imply, in order. Each names the tool and its arguments;
+        an operator session runs them. This page executes nothing.</p>
+    </div>
+    <ul class="plan">
+        <li><span class="tag">1</span>
+          <strong>create_trigger + fire_trigger</strong>
+          <span class="act-why">declares inherits: venue but was checked out from claude/cloudflare-ayeyoty-setup-uq8pl9; claude/ios-macos-code-repurpose-ofm9ks has to be merged into claude/apps-fellowships-repository-zlwbft before it pushes</span>
+          <code>{&quot;persistent_session_id&quot;:&quot;&lt;the builder session&gt;&quot;,&quot;prompt&quot;:&quot;git fetch origin claude/ios-macos-code-repurpose-ofm9ks &amp;&amp; git merge origin/claude/ios-macos-code-repurpose-ofm9ks&quot;}</code>
+          <span class="act-note">Relay it; the session cannot change the source it was created against.</span></li>
+        <li><span class="tag">2</span>
+          <strong>decision required — no tool</strong>
+          <span class="act-why">Build AI stock options trading dashboard with predictive intelligence is review-ready and unread since 2026-08-08</span>
+          <code>{&quot;session_id&quot;:&quot;session_01QrtdqCnyErpcgysUbPKytp&quot;}</code>
+          <span class="act-note">Adopt it into an environment and a repo, or archive it. Leaving it idle is the one option that loses the work.</span></li>
+        <li><span class="tag">3</span>
+          <strong>create_trigger</strong>
+          <span class="act-why">Applications and fellowships subtree is declared a ritual and nothing recurs</span>
+          <code>{&quot;name&quot;:&quot;fellowships re-survey&quot;,&quot;persistent_session_id&quot;:&quot;&lt;the builder session&gt;&quot;,&quot;cron_expression&quot;:&quot;&lt;cadence, UTC&gt;&quot;}</code>
+          <span class="act-note">Bind after the subtree exists; a Routine firing into an empty surface is noise.</span></li>
+        <li><span class="tag">4</span>
+          <strong>set_session_tags</strong>
+          <span class="act-why">the roster is only legible if venue sessions carry their project</span>
+          <code>{&quot;session_ids&quot;:[&quot;session_01GvNCLtH3R2cqohRaUwqKek&quot;],&quot;add&quot;:[&quot;project:venue&quot;]}</code>
+          <span class="act-note">Tags are how a later survey groups sessions without reading every transcript.</span></li>
+        <li><span class="tag">5</span>
+          <strong>set_session_tags</strong>
+          <span class="act-why">the roster is only legible if fellowships sessions carry their project</span>
+          <code>{&quot;session_ids&quot;:[&quot;session_01GR1Ut4PmfsRVZo96RJZVJu&quot;],&quot;add&quot;:[&quot;project:fellowships&quot;]}</code>
+          <span class="act-note">Tags are how a later survey groups sessions without reading every transcript.</span></li>
+    </ul>
+  </section>
+</main>
+
+<nav class="thumbbar" aria-label="Primary">
+  <a class="btn btn--primary" href="#crew">Roster</a>
+  <a class="btn btn--quiet" href="/">Venue</a>
+</nav>
+
+<footer class="footer">
+  <div class="shell">
+    <span>Fleet subtree — a surface of ayeyoty.co, not a second site.</span>
+    <span class="wide-only">Rendered from fleet/fleet.json. No cookies. No storage.</span>
+  </div>
+</footer>
+
+</body>
+</html>

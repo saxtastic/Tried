@@ -117,6 +117,57 @@ The icon geometry exists twice, in `scripts/make-icons.py` and in
 `public/icons/favicon.svg`. They are kept identical by hand; change one and
 change the other. **[O]**
 
+## Subtrees
+
+Work that is not the venue opens from the venue's main page, on the venue's tiers
+and under the venue's constraints. A subtree is a room in this building, never a
+second building — it shares `venue.css`, `venue.js`, the four tiers, the CSP and
+the no-storage rule, and adds only what is its own.
+
+Live subtrees:
+
+| Route | What it is |
+|---|---|
+| `/fleet/` | Deployment and management surface for the Claude coworkers building this repository. |
+
+## The fleet layer
+
+`fleet/fleet.json` is the spine: environments, projects, coworkers, the policy
+rules, and an append-only log of management operations actually executed. Every
+record carries the register it was established at and the time it was observed.
+Declared inputs live there; none of them are constants inside the code. **[O]**
+
+```bash
+node scripts/fleet.mjs survey    # roster, blocked and failed first
+node scripts/fleet.mjs check     # policy findings; exits non-zero on an error
+node scripts/fleet.mjs plan      # the actions the findings imply
+node scripts/fleet.mjs render    # writes public/fleet/index.html
+npm run fleet                    # all four
+```
+
+The policy rules the checker enforces:
+
+| | Rule |
+|---|---|
+| P1 | One writer per path. Two live coworkers claiming overlapping globs is a merge conflict that has not happened yet. |
+| P2 | A live base branch is declared as inherited, not assumed. |
+| P3 | A blocked coworker is an operator debt — it carries the action taken, or an open plan entry. |
+| P4 | Terminal work is retired. Idle work nobody has read is surfaced for a decision. |
+| P5 | A ritual without a Routine is an intention. |
+| P6 | Deployment goes to a declared environment. |
+| P7 | An inherited base is merged, not assumed — a session's source revision is fixed at creation. |
+
+**What the CLI does not do.** It does not call the session API. `plan` names the
+exact tool and arguments for each action and stops. The acting side runs through
+the Claude Code Remote MCP tools held by an operator session, not through an HTTP
+client in this repository — writing one would mean guessing at an endpoint this
+repository has never called. **[D]** — stated at the head of `scripts/fleet.mjs`.
+
+P1 and P7 both earned their place by firing on real state during the first run:
+P1 caught the venue claiming `public/*`, which silently swallowed the fellowships
+subtree, and P7 caught a session that had been told to inherit a branch it could
+not check out. **[O]**
+
 ## Standing constraints
 
 Carried over from the governing instruction this work was commissioned under, and

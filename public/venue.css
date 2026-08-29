@@ -435,6 +435,19 @@ section { scroll-margin-top: 4.5rem; }
 .card h3 { font-size: 1rem; }
 .card ol { margin: 0; padding-left: 1.1rem; color: var(--fg-2); font-size: 0.9rem; display: grid; gap: 0.3rem; }
 
+.subtrees { padding-bottom: 3rem; }
+
+.card--link {
+  text-decoration: none;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.card--link p { color: var(--fg-2); font-size: 0.9rem; }
+.card--link code { font-family: var(--font-mono); font-size: 0.9em; }
+
+@media (hover: hover) and (pointer: fine) {
+  .card--link:hover { transform: translateY(-3px); border-color: var(--accent); }
+}
+
 /* --------------------------------------------------------------- footer -- */
 
 .footer {
