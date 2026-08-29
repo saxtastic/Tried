@@ -2,6 +2,7 @@
 /* Coworker fleet — deployment and management.
  *
  *   node scripts/fleet.mjs survey      roster and counts
+ *   node scripts/fleet.mjs questions   core questions, who was asked, who answered
  *   node scripts/fleet.mjs check       policy findings, exits non-zero on error
  *   node scripts/fleet.mjs plan        the management actions the findings imply
  *   node scripts/fleet.mjs render      writes public/fleet/index.html
@@ -26,6 +27,8 @@ const SPINE = path.join(ROOT, "fleet", "fleet.json");
 const OUT = path.join(ROOT, "public", "fleet", "index.html");
 
 const fleet = JSON.parse(fs.readFileSync(SPINE, "utf8"));
+const QUESTIONS = path.join(ROOT, "fleet", "questions.json");
+const core = fs.existsSync(QUESTIONS) ? JSON.parse(fs.readFileSync(QUESTIONS, "utf8")) : { questions: [], vantages: {}, rules: [] };
 
 const TERMINAL = new Set(["archived", "failed"]);
 const LIVE_PROJECT = new Set(["starting", "building", "review", "stalled"]);
@@ -81,6 +84,37 @@ function check() {
     if (upstream && p.inherits !== upstream.id) {
       add("P2", "error", p.id,
         `base branch ${p.base_branch} is still being pushed to by ${upstream.id}; declare "inherits": "${upstream.id}"`);
+    }
+  }
+
+  // P9 — no product claim without a record behind it
+  for (const p of fleet.projects) {
+    const sells = (p.vantages_held ?? []).includes("content-marketing") || p.survival?.produces_artifact;
+    if (!sells) continue;
+    if (!p.catalogue_provenance) {
+      add("P9", "error", p.id,
+        "holds the content-marketing vantage or produces an artifact, but declares no catalogue_provenance: every public field needs a named record or an explicit blank");
+    }
+  }
+
+  // P10 — a vantage nobody holds is a gap, not an absence
+  const held = new Set(fleet.projects.flatMap((p) => p.vantages_held ?? []));
+  for (const v of Object.keys(core.vantages ?? {})) {
+    if (v === "note") continue;
+    if (!held.has(v)) {
+      add("P10", "warn", v, "no project holds this vantage — the questions it would ask are not being asked by anyone else");
+    }
+  }
+
+  // P11 — a core question put out and not answered is a decision made by default
+  for (const q of core.questions ?? []) {
+    if (q.arbitration) continue;
+    const asked = q.asked_of.length;
+    const answered = q.answers.length;
+    if (answered === 0) {
+      add("P11", "warn", q.id, `put to ${asked} vantage-holder(s), ${answered} answered — unanswered, so it resolves by whatever happens first`);
+    } else if (answered < asked) {
+      add("P11", "warn", q.id, `${answered} of ${asked} answered — arbitrating now would decide it on a partial record`);
     }
   }
 
@@ -259,6 +293,27 @@ function plan(findings) {
 
 const STATUS_ORDER = { blocked: 0, failed: 1, running: 2, idle: 3, archived: 4 };
 
+function questions() {
+  console.log(`core questions — ${core.questions.length} open\n`);
+  for (const q of core.questions) {
+    const state = q.arbitration ? "arbitrated" : `${q.answers.length}/${q.asked_of.length} answered`;
+    console.log(`  ${q.id.padEnd(14)} [${state}]  ${q.vantages.join(" · ")}`);
+    console.log(`  ${"".padEnd(14)} ${q.question}`);
+    for (const a of q.answers) console.log(`  ${"".padEnd(14)} └ ${a.vantage}: ${a.summary}`);
+    if (q.arbitration) {
+      console.log(`  ${"".padEnd(14)} → decided: ${q.arbitration.decision}`);
+      if (q.arbitration.held_opposition)
+        console.log(`  ${"".padEnd(14)} → held open: ${q.arbitration.held_opposition}`);
+    }
+    console.log();
+  }
+  const gaps = Object.keys(core.vantages).filter(
+    (v) => v !== "note" && !fleet.projects.some((p) => (p.vantages_held ?? []).includes(v))
+  );
+  console.log(`  vantages: ${Object.keys(core.vantages).filter((v) => v !== "note").join(", ")}`);
+  console.log(`  unheld:   ${gaps.length ? gaps.join(", ") : "none"}`);
+}
+
 function survey() {
   console.log(`fleet survey — observed ${surveyedAt}\n`);
   const rows = [...fleet.coworkers].sort(
@@ -343,6 +398,17 @@ function render(findings, actions) {
   const errors = findings.filter((f) => f.severity === "error").length;
   const live = fleet.coworkers.filter((c) => !TERMINAL.has(c.status)).length;
 
+  const qCard = (q) => `        <article class="q" data-state="${q.arbitration ? "arbitrated" : q.answers.length ? "partial" : "open"}">
+          <span class="q-id">${esc(q.id)}</span>
+          <span class="q-state">${q.arbitration ? "arbitrated" : `${q.answers.length}/${q.asked_of.length} answered`}</span>
+          <h3>${esc(q.question)}</h3>
+          <p class="q-why">${esc(q.why_core)}</p>
+          <p class="q-vantages">${q.vantages.map((v) => `<span>${esc(v)}</span>`).join("")}</p>
+          ${q.answers.map((a) => `<p class="q-answer"><strong>${esc(a.vantage)}</strong> ${esc(a.summary)}</p>`).join("")}
+          ${q.arbitration ? `<p class="q-decision"><strong>decided</strong> ${esc(q.arbitration.decision)}</p>` : ""}
+          ${q.arbitration?.held_opposition ? `<p class="q-held"><strong>held open</strong> ${esc(q.arbitration.held_opposition)}</p>` : ""}
+        </article>`;
+
   const tally = (list, key) =>
     list.reduce((acc, x) => ((acc[x[key]] = (acc[x[key]] ?? 0) + 1), acc), {});
   const glanceRow = (k, v) => `          <dt>${esc(k)}</dt><dd>${esc(v)}</dd>`;
@@ -390,7 +456,7 @@ function render(findings, actions) {
         <code>fleet/fleet.json</code> — surveyed ${esc(surveyedAt)}, never edited by hand.</p>
       <div class="actions">
         <a class="btn btn--primary" href="#crew">The roster</a>
-        <a class="btn btn--quiet wide-only" href="#plan">What is owed</a>
+        <a class="btn btn--quiet wide-only" href="#questions">Core questions</a>
       </div>
     </div>
 
@@ -410,6 +476,17 @@ ${glance}
     </div>
     <div class="crew-grid">
 ${[...fleet.coworkers].sort((a, b) => (STATUS_ORDER[a.status] ?? 9) - (STATUS_ORDER[b.status] ?? 9)).map(card).join("\n")}
+    </div>
+  </section>
+
+  <section class="shell" id="questions">
+    <div class="section-head">
+      <h2>Core questions</h2>
+      <p>Put to every live coworker at once, not relayed down a chain. Arbitration records what was
+        decided and what did not reconcile — a synthesis showing no residue was an average.</p>
+    </div>
+    <div class="q-grid">
+${core.questions.map(qCard).join("\n")}
     </div>
   </section>
 
@@ -460,6 +537,8 @@ const actions = plan(findings);
 
 if (cmd === "survey") {
   survey();
+} else if (cmd === "questions") {
+  questions();
 } else if (cmd === "check") {
   process.exit(report(findings) ? 1 : 0);
 } else if (cmd === "plan") {
@@ -478,6 +557,6 @@ if (cmd === "survey") {
   console.log(`rendered ${path.relative(ROOT, OUT)}`);
   process.exit(errors ? 1 : 0);
 } else {
-  console.error(`unknown command: ${cmd}\nusage: fleet.mjs survey|check|plan|render|all`);
+  console.error(`unknown command: ${cmd}\nusage: fleet.mjs survey|questions|check|plan|render|all`);
   process.exit(2);
 }
