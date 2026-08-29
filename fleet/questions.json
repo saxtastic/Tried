@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "title": "Core questions — asked concurrently, arbitrated without collapsing",
+  "note": "These are put to every live coworker at once, not relayed one at a time down a chain. A question is core when the vantages in fleet.json disagree about it; a question only one vantage cares about is a task, not a question. Answers are recorded verbatim as they come back. Arbitration records what was decided AND what did not reconcile — held_opposition is not a failure of the process, it is the part of the record worth keeping. A synthesis that shows no residue was an average, not a decision.",
+
+  "vantages": {
+    "engineering": "What the thing is and whether it works. Tech specs, retrofit, tolerances, the build. Answers 'does it hold'.",
+    "creative-director": "What it looks like it is. Coherence of the image across every surface. Answers 'is it one thing or several things wearing the same colour'.",
+    "producer": "Duration, contingency, cost of being wrong. Answers 'does it survive contact with a date and a room'.",
+    "content-marketing": "What is claimed in public, and on what record. Catalogue copy, description, listing. Answers 'can this sentence be traced'."
+  },
+
+  "rules": [
+    "A role is a vantage, not a person. One session holds several; a vantage with no holder is a gap and is recorded as one.",
+    "Questions go out concurrently. Sequential relay produces agreement with whoever was asked last.",
+    "An answer names its vantage. An answer that claims all four vantages at once is one vantage pretending.",
+    "Arbitration holds the opposition. Where two vantages do not reconcile, both go in the record and the decision names which one it overrode and what that costs.",
+    "No question is closed by the asker answering it."
+  ],
+
+  "questions": [
+    {
+      "id": "Q1-ORDER",
+      "question": "Three pull requests target one base. What is the merge order, and does the simulator merge the shell or does the shell absorb the simulator?",
+      "why_core": "Engineering says whichever order costs fewer conflicts. Creative direction says whichever order leaves one coherent front page. Producer says whichever order can be reversed on the day it goes wrong. These are not the same answer.",
+      "asked_of": ["session_01GR1Ut4PmfsRVZo96RJZVJu", "session_01HCcyjiDYBhyRWFnL1qrKWB"],
+      "vantages": ["engineering", "creative-director", "producer"],
+      "answers": [],
+      "arbitration": null
+    },
+    {
+      "id": "Q2-SURVIVAL",
+      "question": "What in this repository survives beyond the white wall and the gallery space, and what is screen-only? Name, per surface, its IRL contingency — what happens to it when there is no browser in the room.",
+      "why_core": "A venue that only exists as a website is a website. The word venue makes a claim about a room. Either the claim is real and each surface has a physical contingency, or the word is decoration and should be dropped rather than defended.",
+      "asked_of": ["session_01GR1Ut4PmfsRVZo96RJZVJu", "session_01HCcyjiDYBhyRWFnL1qrKWB"],
+      "vantages": ["producer", "creative-director"],
+      "answers": [],
+      "arbitration": null
+    },
+    {
+      "id": "Q3-REGISTER",
+      "question": "Where is the line between engineering and product in this repository? Tech specs and retrofitting are engineering. Product placement, design features, unrealized patents and ecommerce offerings are not. Which files sit on which side, and which currently straddle it?",
+      "why_core": "The two registers have different truth conditions. An engineering claim is true if it works. A product claim is true if a record backs it. Filing them in one place lets a product claim borrow the credibility of a spec it is not entitled to.",
+      "asked_of": ["session_01GR1Ut4PmfsRVZo96RJZVJu", "session_01HCcyjiDYBhyRWFnL1qrKWB"],
+      "vantages": ["engineering", "content-marketing"],
+      "answers": [],
+      "arbitration": null
+    },
+    {
+      "id": "Q4-PROVENANCE",
+      "question": "If a catalogue listing is ever generated out of this repository — a Shopify product description, customised or not — what record does each field extract from, and which fields stay blank because no record exists?",
+      "why_core": "This is the question that decides whether the framework is informed or baseless. Copy generated from nothing is hype, and hype priced as data is the expensive failure: cost of input rises, nothing resolves, and the only thing that scales is the claim. Extraction from a spec, a patent filing or a production record is a different object from generation.",
+      "asked_of": ["session_01GR1Ut4PmfsRVZo96RJZVJu", "session_01HCcyjiDYBhyRWFnL1qrKWB"],
+      "vantages": ["content-marketing", "engineering", "producer"],
+      "answers": [],
+      "arbitration": null
+    },
+    {
+      "id": "Q5-ADOPTION",
+      "question": "The stock options session has been review-ready and unread since 2026-08-08, holds no repository, and sits outside the declared environment. Adopt it into a project or archive it.",
+      "why_core": "Third check-in with no answer. Idle is the one option that loses the work, and it is the option that happens by default when nobody chooses.",
+      "asked_of": ["owner"],
+      "vantages": ["producer"],
+      "answers": [],
+      "arbitration": null
+    }
+  ]
+}

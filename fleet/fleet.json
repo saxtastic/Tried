@@ -26,6 +26,12 @@
       "by": "session_01GvNCLtH3R2cqohRaUwqKek",
       "method": "scheduled check-in: git fetch --prune, list_sessions, list_pull_requests",
       "register": "O"
+    },
+    {
+      "at": "2026-08-29T16:45:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "scheduled check-in: git fetch --prune, branch ancestry, commit inspection",
+      "register": "O"
     }
   ],
   "environments": [
@@ -67,7 +73,18 @@
       "state": "review",
       "register": "D",
       "note": "The shell. Front page and design system; every other surface in this repo opens as a subtree from it.",
-      "owns_note": "Enumerated, not public/*. A broad glob on the shell silently claims every subtree that opens from it, which is exactly the collision P1 exists to catch."
+      "owns_note": "Enumerated, not public/*. A broad glob on the shell silently claims every subtree that opens from it, which is exactly the collision P1 exists to catch.",
+      "vantages_held": [
+        "engineering",
+        "creative-director"
+      ],
+      "survival": {
+        "duration": "indefinite — it is the shell every other surface opens from",
+        "survives_gallery": "⟦FILL: whether the venue has any physical instantiation, or is a website using the word venue⟧",
+        "irl_contingency": "⟦FILL⟧",
+        "produces_artifact": false,
+        "note": "Q2-SURVIVAL is open on this. The name makes a claim about a room that the repository does not currently support."
+      }
     },
     {
       "id": "fellowships",
@@ -88,7 +105,18 @@
       "inherits": "venue",
       "source_revision": "claude/cloudflare-ayeyoty-setup-uq8pl9",
       "source_note": "Resolved. The session merged the venue branch rather than rebasing onto it, which is what the fixed source revision allows. PR #2 is stacked on PR #1.",
-      "merged_upstream": "335b97f — merged claude/ios-macos-code-repurpose-ofm9ks on 2026-08-29"
+      "merged_upstream": "335b97f — merged claude/ios-macos-code-repurpose-ofm9ks on 2026-08-29",
+      "vantages_held": [
+        "producer",
+        "content-marketing"
+      ],
+      "survival": {
+        "duration": "recurring — deadlines re-survey on a cadence, so it outlives any one cycle",
+        "survives_gallery": "yes — a deadline exists whether or not anything is on a wall",
+        "irl_contingency": "the calls are external and dated; the surface can go dark without the opportunities disappearing",
+        "produces_artifact": false
+      },
+      "claims_note": "Declared by the fellowships session itself under P8 at b13d6bb, with its own reasoning: PR #2 is stacked on PR #1 so the venue merges first by construction, and it deliberately reverted an earlier change to public/venue.css rather than claim it."
     },
     {
       "id": "options",
@@ -101,7 +129,14 @@
       "ritual": false,
       "state": "stalled",
       "register": "O",
-      "note": "No repository recorded on the session. Review-ready and untouched since 2026-08-08. Outside this repo; tracked so it is not silently lost."
+      "note": "No repository recorded on the session. Review-ready and untouched since 2026-08-08. Outside this repo; tracked so it is not silently lost.",
+      "vantages_held": [],
+      "survival": {
+        "duration": "unknown",
+        "survives_gallery": "⟦FILL⟧",
+        "irl_contingency": "⟦FILL⟧",
+        "produces_artifact": false
+      }
     },
     {
       "id": "resonance",
@@ -114,7 +149,14 @@
       "ritual": false,
       "state": "done",
       "register": "O",
-      "note": "Completed and archived."
+      "note": "Completed and archived.",
+      "vantages_held": [],
+      "survival": {
+        "duration": "closed",
+        "survives_gallery": "⟦FILL⟧",
+        "irl_contingency": "⟦FILL⟧",
+        "produces_artifact": false
+      }
     },
     {
       "id": "simulator",
@@ -139,7 +181,17 @@
       "ritual": false,
       "state": "review",
       "register": "O",
-      "note": "Built against the placeholder, in parallel with the venue rather than as a subtree of it. Corpus scanned 2026-08-29: generic federal statute text and public case law (Title VI, § 1983, 17 U.S.C. § 201, FERPA, a template enabling act), no personal names, no student records, no institution-specific provisions. The collision is architectural, not content."
+      "note": "Built against the placeholder, in parallel with the venue rather than as a subtree of it. Corpus scanned 2026-08-29: generic federal statute text and public case law (Title VI, § 1983, 17 U.S.C. § 201, FERPA, a template enabling act), no personal names, no student records, no institution-specific provisions. The collision is architectural, not content.",
+      "vantages_held": [
+        "engineering"
+      ],
+      "survival": {
+        "duration": "indefinite — statute text and case law age slowly",
+        "survives_gallery": "yes — the corpus is a document set, not an installation",
+        "irl_contingency": "runs offline; the corpus is bundled into the page rather than fetched",
+        "produces_artifact": false
+      },
+      "partial_compliance": "104eb5f fixed the CSP finding by bundling the corpus into corpus.bundle.js rather than fetching it — default-src 'none' blocks fetch, which the relay did not spell out and the session worked out itself. It has NOT merged the shell, and still changes all three disputed files. P7 and P8 both stand."
     }
   ],
   "coworkers": [
@@ -154,9 +206,13 @@
       "status": "running",
       "observed_at": "2026-08-29T14:29:00Z",
       "register": "O",
-      "last_activity": "2026-08-29T15:45:00Z",
+      "last_activity": "2026-08-29T16:45:00Z",
       "tags": [
         "project:venue"
+      ],
+      "vantages": [
+        "engineering",
+        "creative-director"
       ]
     },
     {
@@ -171,12 +227,16 @@
       "unblocked_by": "trig_0161v5EhTNCcD3D4oABVqBJo fired 2026-08-29T14:30Z carrying the decision",
       "observed_at": "2026-08-29T14:29:00Z",
       "register": "O",
-      "last_activity": "2026-08-29T15:03:11Z",
+      "last_activity": "2026-08-29T16:40:00Z",
       "was_blocked_on": "AskUserQuestion — repo scope and Vantage UX scope",
       "tags": [
         "project:fellowships"
       ],
-      "note": "Merged the venue and rebuilt /fellowships/ as a subtree ranked on return on effort. PR #2 open, stacked on PR #1. Left 7 deadline fields blank rather than filling them in."
+      "note": "Merged the fleet spine and declared its own shared-file claim under P8 at b13d6bb, with reasoning. It is reading the policy file and arguing with it rather than being driven by relays.",
+      "vantages": [
+        "producer",
+        "content-marketing"
+      ]
     },
     {
       "session": "session_015e4JiauJkHf1CyYPwGzX1Q",
@@ -193,7 +253,11 @@
       "note": "Produced the base branch that is currently the repository default. Dead, but its branch is load-bearing — retire the session, never the branch.",
       "last_activity": "2026-08-29T14:17:57Z",
       "retired_at": "2026-08-29T14:36:00Z",
-      "retired_by": "archive_session, fleet plan action 2"
+      "retired_by": "archive_session, fleet plan action 2",
+      "vantages": [
+        "engineering",
+        "creative-director"
+      ]
     },
     {
       "session": "session_01QrtdqCnyErpcgysUbPKytp",
@@ -208,7 +272,8 @@
       "observed_at": "2026-08-29T14:29:00Z",
       "register": "O",
       "note": "Bridge environment, review-ready. Nothing has read its output in three weeks.",
-      "last_activity": "2026-08-08T17:08:33Z"
+      "last_activity": "2026-08-08T17:08:33Z",
+      "vantages": []
     },
     {
       "session": "session_01Wxbis3yAZzRo874SXaNjvL",
@@ -221,7 +286,8 @@
       "status": "archived",
       "observed_at": "2026-08-29T14:29:00Z",
       "register": "O",
-      "last_activity": "2026-08-07T08:54:18Z"
+      "last_activity": "2026-08-07T08:54:18Z",
+      "vantages": []
     },
     {
       "session": "session_01HCcyjiDYBhyRWFnL1qrKWB",
@@ -233,9 +299,12 @@
       "origin": "ios",
       "status": "idle",
       "observed_at": "2026-08-29T15:45:00Z",
-      "last_activity": "2026-08-29T14:55:50Z",
+      "last_activity": "2026-08-29T16:40:00Z",
       "register": "O",
-      "note": "Review-ready, polling its own PR hourly. Did not know the venue existed when it started."
+      "note": "Acted on the CSP finding at 104eb5f. Has not merged the shell; P7 and P8 still stand against it.",
+      "vantages": [
+        "engineering"
+      ]
     }
   ],
   "routines": [],
@@ -287,6 +356,13 @@
       "rule": "A shared file is owned by one project; the rest declare the claim.",
       "detail": "public/index.html, package.json and README.md are touched by every subtree. The shell owns them. A project that must change one declares it in claims_disputed so the collision is visible before the second merge, not after.",
       "severity": "error"
+    },
+    {
+      "id": "P9",
+      "rule": "No product claim without a record behind it.",
+      "detail": "Engineering and product are different registers with different truth conditions. An engineering claim is true if it works; a product claim is true if a record backs it. Any catalogue field — a listing, a description, a spec sheet, a Shopify product body — extracts from a named record: a tech spec, a patent filing, a production note, a measurement. Where no record exists the field stays blank and is marked. Generated copy is not extracted copy, and a blank field is a finding while a fabricated one is a defect.",
+      "severity": "error",
+      "applies_to": "any project whose vantages_held include content-marketing, or that declares produces_artifact"
     }
   ],
   "stale_after_days": 14,
@@ -325,6 +401,13 @@
       "target": "session_01HCcyjiDYBhyRWFnL1qrKWB",
       "result": "Relayed the P7 merge and the P8 file collisions, plus one defect its own checks cannot see: its nav styling lives in an inline <style> block that the CSP added by PR #1 blocks silently. Confirmed to it that the corpus itself is not in question.",
       "register": "O"
+    },
+    {
+      "at": "2026-08-29T16:45:00Z",
+      "action": "observation — no tool",
+      "target": "claude/apps-fellowships-repository-zlwbft, claude/governance-corpus-simulator-m2sjkw",
+      "result": "Fellowships merged c9d77fc and self-declared under P8. Simulator fixed the CSP defect independently but has not merged. A local merge of the fellowships branch into the venue branch was made and reset without pushing: it fast-forwarded, which would have collapsed PR #2 into PR #1 and destroyed the stack.",
+      "register": "O"
     }
   ],
   "mechanisms": [
@@ -344,5 +427,12 @@
       "register": "O",
       "note": "Established by use on 2026-08-29; each constraint was hit, not read."
     }
-  ]
+  ],
+  "vantages": {
+    "note": "A role is a vantage, not a person. One coworker holds several. A vantage with no holder is a gap and is recorded as one, because the questions that vantage would have asked do not get asked by anybody else. Full definitions and the arbitration rules live in fleet/questions.json.",
+    "engineering": "What the thing is and whether it works. Tech specs, retrofit, tolerances.",
+    "creative-director": "What it looks like it is. Coherence of the image across every surface.",
+    "producer": "Duration, contingency, cost of being wrong. Survival of contact with a date and a room.",
+    "content-marketing": "What is claimed in public and on what record. Catalogue copy, listing, description."
+  }
 }
