@@ -1,0 +1,21 @@
+{
+  "id": "respondent-institution",
+  "name": "the respondent institution",
+  "note": "A template profile. `regime` is inferred from policy_density and conflicts when omitted. Set it explicitly to force a regime.",
+  "policy_density": 0.35,
+  "discretion": 0.75,
+  "enabling_act": "enabling_act",
+  "enabling_act_supplies_standard": false,
+  "published_policies": ["grievance_procedure", "nondiscrimination_statement"],
+  "settled_practices": ["advisor_review_before_action"],
+  "conflicts": [
+    {
+      "between": ["grievance_procedure", "academic_integrity_policy"],
+      "note": "One requires advisor review before any action; the other authorises immediate action by the chair. Both cannot be followed in the same case."
+    },
+    {
+      "between": ["records_retention_schedule", "nondiscrimination_statement"],
+      "note": "The retention schedule permits destruction of the comparator files the nondiscrimination process would need in order to function."
+    }
+  ]
+}

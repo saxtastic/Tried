@@ -1,0 +1,580 @@
+[
+  {
+    "id": "civil.intentional",
+    "track": "civil",
+    "provision": "title_vi_601",
+    "standard": "preponderance",
+    "covers": [
+      "civil.intent"
+    ],
+    "statement": "The adverse action was taken on the ground of race, in a program receiving federal financial assistance.",
+    "elements": [
+      {
+        "id": "funding",
+        "statement": "the respondent operates a program or activity receiving federal financial assistance",
+        "principles": [
+          "equal_protection"
+        ],
+        "covers": [
+          "civil.intent"
+        ],
+        "test": {
+          "fact": "federal_funding"
+        }
+      },
+      {
+        "id": "adverse",
+        "statement": "an adverse action was taken against the claimant",
+        "principles": [
+          "equal_protection",
+          "procedural_regularity"
+        ],
+        "covers": [
+          "civil.intent"
+        ],
+        "test": {
+          "fact": "adverse_action"
+        }
+      },
+      {
+        "id": "reach",
+        "statement": "the statutory term reaches the theory pleaded",
+        "term": "discrimination",
+        "principles": [
+          "equal_protection"
+        ],
+        "covers": [
+          "civil.intent"
+        ],
+        "test": {
+          "term": "discrimination",
+          "reach": "disparate_treatment"
+        }
+      },
+      {
+        "id": "ground",
+        "statement": "race was a ground of the action, shown by differential treatment of comparators together with a rationale that shifted",
+        "principles": [
+          "equal_protection",
+          "institutional_candor",
+          "non_arbitrariness"
+        ],
+        "covers": [
+          "civil.intent"
+        ],
+        "test": {
+          "all": [
+            {
+              "fact": "race_known_to_decisionmaker"
+            },
+            {
+              "any": [
+                {
+                  "fact": "comparator_treatment_differs"
+                },
+                {
+                  "fact": "stated_reason_shifted"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "civil.impact",
+    "track": "civil",
+    "provision": "title_vi_602",
+    "standard": "preponderance",
+    "covers": [
+      "civil.private_right.disparate_impact"
+    ],
+    "statement": "A facially neutral practice produced an unjustified racial disparity, actionable by this claimant.",
+    "elements": [
+      {
+        "id": "practice",
+        "statement": "a specific facially neutral practice is identified",
+        "principles": [
+          "equal_protection"
+        ],
+        "covers": [
+          "civil.private_right.disparate_impact"
+        ],
+        "test": {
+          "fact": "neutral_practice_identified"
+        }
+      },
+      {
+        "id": "disparity",
+        "statement": "the practice produced a racial disparity the respondent has not justified by necessity",
+        "principles": [
+          "equal_protection",
+          "non_arbitrariness"
+        ],
+        "covers": [
+          "civil.private_right.disparate_impact"
+        ],
+        "test": {
+          "all": [
+            {
+              "fact": "statistical_disparity"
+            },
+            {
+              "not": {
+                "fact": "necessity_shown"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "reach",
+        "statement": "the statutory term reaches effects as well as intent",
+        "term": "discrimination",
+        "principles": [
+          "equal_protection",
+          "remedial_completeness"
+        ],
+        "covers": [
+          "civil.private_right.disparate_impact"
+        ],
+        "test": {
+          "term": "discrimination",
+          "reach": "disparate_impact"
+        }
+      },
+      {
+        "id": "forum",
+        "statement": "the provision relied on affords this claimant a private right of action",
+        "principles": [
+          "remedial_completeness"
+        ],
+        "covers": [
+          "civil.private_right.disparate_impact"
+        ],
+        "test": {
+          "provision": "title_vi_602",
+          "confers_private_right": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "admin.reasoned",
+    "track": "admin",
+    "provision": "state_apa_review",
+    "standard": "arbitrary_capricious",
+    "covers": [
+      "admin.reasoned_decision",
+      "admin.reviewability",
+      "admin.academic_deference"
+    ],
+    "statement": "The decision was taken without a reason given at the time that the record will bear.",
+    "elements": [
+      {
+        "id": "reviewable",
+        "statement": "there is law to apply, so the decision is reviewable rather than committed to discretion",
+        "term": "discretion",
+        "principles": [
+          "non_arbitrariness"
+        ],
+        "covers": [
+          "admin.reviewability"
+        ],
+        "test": {
+          "term": "discretion",
+          "reach": "presumptively_reviewable"
+        }
+      },
+      {
+        "id": "no_contemporaneous_reason",
+        "statement": "no reason was stated at the time, or the reason stated has since been replaced",
+        "principles": [
+          "non_arbitrariness",
+          "institutional_candor"
+        ],
+        "covers": [
+          "admin.reasoned_decision"
+        ],
+        "test": {
+          "any": [
+            {
+              "fact": "stated_reason_shifted"
+            },
+            {
+              "not": {
+                "fact": "basis_disclosed"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "not_academic",
+        "statement": "the decision is disciplinary in substance and does not attract academic deference merely by its label",
+        "term": "academic_judgment",
+        "principles": [
+          "procedural_regularity"
+        ],
+        "covers": [
+          "admin.academic_deference"
+        ],
+        "test": {
+          "fact": "decision_was_disciplinary"
+        }
+      }
+    ]
+  },
+  {
+    "id": "admin.own_rules",
+    "track": "admin",
+    "provision": "state_apa_review",
+    "standard": "preponderance",
+    "covers": [
+      "admin.own_rules",
+      "admin.process_owed"
+    ],
+    "statement": "The respondent departed from a process it had published and was bound to follow.",
+    "elements": [
+      {
+        "id": "published",
+        "statement": "the process relied on was published, or was a settled practice on which reliance was induced",
+        "principles": [
+          "self_binding",
+          "reliance"
+        ],
+        "covers": [
+          "admin.own_rules"
+        ],
+        "test": {
+          "any": [
+            {
+              "institution": "published_policy",
+              "ref": "grievance_procedure"
+            },
+            {
+              "institution": "settled_practice",
+              "ref": "advisor_review_before_action"
+            }
+          ]
+        }
+      },
+      {
+        "id": "departure",
+        "statement": "the respondent departed from it in this case",
+        "principles": [
+          "self_binding",
+          "procedural_regularity"
+        ],
+        "covers": [
+          "admin.own_rules"
+        ],
+        "test": {
+          "fact": "policy_departure"
+        }
+      },
+      {
+        "id": "not_harmless",
+        "statement": "the departure bore on the outcome",
+        "principles": [
+          "procedural_regularity",
+          "remedial_completeness"
+        ],
+        "covers": [
+          "admin.process_owed"
+        ],
+        "test": {
+          "not": {
+            "fact": "outcome_would_be_same"
+          }
+        }
+      }
+    ],
+    "vehicle_note": "The enabling act and the published grievance procedure supply the rule; the review statute supplies the forum. Accardi binds the body to its own rule, but it is not itself a right of action."
+  },
+  {
+    "id": "ip.authorship",
+    "track": "ip",
+    "provision": "copyright_201",
+    "standard": "preponderance",
+    "covers": [
+      "ip.authorship"
+    ],
+    "statement": "Copyright in the work vested in the claimant and was not transferred.",
+    "elements": [
+      {
+        "id": "created",
+        "statement": "the claimant created the work",
+        "principles": [
+          "authorial_ownership"
+        ],
+        "covers": [
+          "ip.authorship"
+        ],
+        "test": {
+          "fact": "work_authored_by_claimant"
+        }
+      },
+      {
+        "id": "author_reach",
+        "statement": "the statutory term \"author\" reaches the claimant rather than the institution",
+        "term": "author",
+        "principles": [
+          "authorial_ownership",
+          "textual_fidelity"
+        ],
+        "covers": [
+          "ip.authorship"
+        ],
+        "test": {
+          "term": "author",
+          "reach": "originator"
+        }
+      },
+      {
+        "id": "no_writing",
+        "statement": "no signed written instrument transfers ownership, and the claimant was not an employee in the agency sense",
+        "principles": [
+          "authorial_ownership",
+          "textual_fidelity"
+        ],
+        "covers": [
+          "ip.authorship"
+        ],
+        "test": {
+          "all": [
+            {
+              "not": {
+                "fact": "written_assignment"
+              }
+            },
+            {
+              "not": {
+                "fact": "employment_agency_relationship"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "fiduciary.candor",
+    "track": "fiduciary",
+    "provision": "ferpa",
+    "standard": "preponderance",
+    "covers": [
+      "records.private_right",
+      "admin.own_rules"
+    ],
+    "statement": "The respondent owed and breached a duty to disclose the basis on which it acted.",
+    "elements": [
+      {
+        "id": "duty",
+        "statement": "the respondent stood in a relationship of trust and control over the claimant's record and standing",
+        "principles": [
+          "institutional_candor",
+          "reliance"
+        ],
+        "covers": [
+          "records.private_right"
+        ],
+        "test": {
+          "all": [
+            {
+              "fact": "institution_controls_record"
+            },
+            {
+              "fact": "reliance_induced"
+            }
+          ]
+        }
+      },
+      {
+        "id": "record_reach",
+        "statement": "the material withheld is a record the claimant may inspect and seek to correct",
+        "term": "record",
+        "principles": [
+          "institutional_candor"
+        ],
+        "covers": [
+          "records.private_right"
+        ],
+        "test": {
+          "term": "record",
+          "reach": "student_correctable"
+        }
+      },
+      {
+        "id": "breach",
+        "statement": "the basis for the action was not disclosed",
+        "principles": [
+          "institutional_candor",
+          "non_arbitrariness"
+        ],
+        "covers": [
+          "records.private_right"
+        ],
+        "test": {
+          "not": {
+            "fact": "basis_disclosed"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "fiduciary.common_law",
+    "track": "fiduciary",
+    "provision": "state_apa_review",
+    "standard": "preponderance",
+    "covers": [
+      "fiduciary.duty"
+    ],
+    "statement": "Independently of any statute, the respondent owed a duty of care and candor arising from its control over the claimant's standing, and breached it.",
+    "note": "The alternative pleading. fiduciary.candor routes through FERPA and dies at Gonzaga; this route does not depend on a spending-clause statute at all, which is the point of running both.",
+    "elements": [
+      {
+        "id": "relationship",
+        "statement": "the respondent held discretionary control over an interest of the claimant's that the claimant could not protect independently",
+        "principles": [
+          "institutional_candor",
+          "reliance"
+        ],
+        "covers": [
+          "fiduciary.duty"
+        ],
+        "test": {
+          "all": [
+            {
+              "fact": "institution_controls_record"
+            },
+            {
+              "institution": "discretion_above",
+              "value": 0.5
+            }
+          ]
+        }
+      },
+      {
+        "id": "induced_reliance",
+        "statement": "the respondent induced reliance on its published commitments",
+        "principles": [
+          "reliance",
+          "self_binding"
+        ],
+        "covers": [
+          "fiduciary.duty"
+        ],
+        "test": {
+          "all": [
+            {
+              "fact": "reliance_induced"
+            },
+            {
+              "institution": "published_policy",
+              "ref": "nondiscrimination_statement"
+            }
+          ]
+        }
+      },
+      {
+        "id": "breach_candor",
+        "statement": "the respondent acted against that interest without disclosing the basis",
+        "principles": [
+          "institutional_candor",
+          "non_arbitrariness"
+        ],
+        "covers": [
+          "fiduciary.duty"
+        ],
+        "test": {
+          "all": [
+            {
+              "fact": "adverse_action"
+            },
+            {
+              "not": {
+                "fact": "basis_disclosed"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "governance.warrant",
+    "track": "governance",
+    "provision": "state_apa_review",
+    "standard": "preponderance",
+    "covers": [
+      "governance.warrant"
+    ],
+    "statement": "The respondent holds its authority on terms it did not keep, and the relief sought is an exercise of that authority rather than a surrender of it.",
+    "elements": [
+      {
+        "id": "conferred_on_terms",
+        "statement": "the authority was conferred subject to stated purposes and published commitments",
+        "principles": [
+          "self_binding",
+          "procedural_regularity"
+        ],
+        "covers": [
+          "governance.warrant"
+        ],
+        "test": {
+          "any": [
+            {
+              "institution": "published_policy",
+              "ref": "nondiscrimination_statement"
+            },
+            {
+              "fact": "charter_states_purpose"
+            }
+          ]
+        }
+      },
+      {
+        "id": "departure_from_warrant",
+        "statement": "the exercise complained of departed from those terms",
+        "principles": [
+          "self_binding",
+          "institutional_candor"
+        ],
+        "covers": [
+          "governance.warrant"
+        ],
+        "test": {
+          "fact": "policy_departure"
+        }
+      },
+      {
+        "id": "standardless",
+        "statement": "the enabling act supplies no standard by which the exercise could have been guided or reviewed",
+        "principles": [
+          "non_arbitrariness",
+          "institutional_candor"
+        ],
+        "covers": [
+          "governance.warrant",
+          "admin.reviewability"
+        ],
+        "test": {
+          "all": [
+            {
+              "not": {
+                "institution": "enabling_standard"
+              }
+            },
+            {
+              "institution": "has_conflict"
+            }
+          ]
+        }
+      }
+    ],
+    "vehicle_note": "Pleaded as review of a standardless exercise, not as a challenge to the charter itself. See the paradox layer analysis."
+  }
+]

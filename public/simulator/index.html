@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Governance &amp; Corpus Simulator</title>
+  <meta name="description" content="An adversarial simulator for governance and corpus systems: one agent affirms the conditions, one negates them, and a principle-driven bench decides." />
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Governance &amp; Corpus Simulator</h1>
+      <p>
+        One agent argues that the conditions are satisfied; a second argues that they are not. A bench decides
+        each contested element on principle, records what the authorities do not reach, tests every reading of
+        the operative words, re-runs the case against four kinds of institution, and resolves the governance
+        paradox into a holding a body can actually grant.
+      </p>
+    </div>
+  </header>
+
+  <div class="wrap layout">
+    <aside>
+      <h2>Controls</h2>
+      <div class="field">
+        <label for="regime">Interpretive regime</label>
+        <select id="regime"></select>
+      </div>
+      <div class="field">
+        <label for="policy">Institutional policy regime</label>
+        <select id="policy">
+          <option value="">as recorded</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Tracks</label>
+        <div class="toggles" id="tracks"></div>
+      </div>
+      <div class="field">
+        <button id="rerun">Re-run</button>
+      </div>
+      <div class="field">
+        <button class="ghost" id="download">Download report (JSON)</button>
+      </div>
+      <h2 style="margin-top:1.2rem">Disposition</h2>
+      <div id="disposition" class="sub">—</div>
+    </aside>
+
+    <main id="out"><p class="loading">Loading corpus…</p></main>
+  </div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+{
+  "id": "template-education-civil-ip-fiduciary",
+  "title": "Template case: adverse academic action with civil-rights, authorship, fiduciary, and governance dimensions",
+  "disclaimer": "This is a parameterised template, not a record of any real proceeding. Every fact below is a dial. Replace the values, strengths, and sources with the actual record before drawing any conclusion about a real matter.",
+  "year": 2026,
+  "remedy": "reinstatement, correction of the record, an accounting for the work, and compensation for the interval",
+  "instrument": "the respondent's charter, its published nondiscrimination statement, and its grievance procedure",
+  "attacks": [
+    {
+      "layer": "constitutive",
+      "weight": 1,
+      "statement": "The respondent's authority over the claimant's standing was never legitimately held"
+    },
+    {
+      "layer": "competence",
+      "weight": 1,
+      "statement": "The particular decision was taken without a stated, reviewable basis"
+    }
+  ],
+  "relief_requires_disavowal": true,
+  "facts": {
+    "federal_funding": { "value": true, "strength": 0.95, "source": "published federal award data" },
+    "adverse_action": { "value": true, "strength": 0.9, "source": "the decision letter" },
+    "race_known_to_decisionmaker": { "value": true, "strength": 0.8, "source": "in-person proceedings" },
+    "comparator_treatment_differs": { "value": true, "strength": 0.6, "source": "comparator files, partial" },
+    "stated_reason_shifted": { "value": true, "strength": 0.75, "source": "successive letters give different grounds" },
+    "intent_evidence_present": { "value": true, "strength": 0.6 },
+    "neutral_practice_identified": { "value": true, "strength": 0.7 },
+    "statistical_disparity": { "value": true, "strength": 0.55, "source": "small-N institutional data" },
+    "necessity_shown": { "value": false, "strength": 0.6 },
+    "decision_was_disciplinary": { "value": true, "strength": 0.7, "note": "the decision was labelled academic but proceeded on allegations of conduct" },
+    "basis_disclosed": { "value": false, "strength": 0.85 },
+    "policy_departure": { "value": true, "strength": 0.8, "source": "grievance procedure §4 not followed" },
+    "outcome_would_be_same": { "value": false, "strength": 0.5 },
+    "work_authored_by_claimant": { "value": true, "strength": 0.9 },
+    "written_assignment": { "value": false, "strength": 0.85 },
+    "employment_agency_relationship": { "value": false, "strength": 0.7 },
+    "institution_controls_record": { "value": true, "strength": 0.95 },
+    "reliance_induced": { "value": true, "strength": 0.7 },
+    "charter_states_purpose": { "value": true, "strength": 0.85 },
+    "exhausted": { "value": true, "strength": 0.7 },
+    "within_limitations": { "value": true, "strength": 0.8 }
+  }
+}

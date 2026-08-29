@@ -5,9 +5,12 @@
   "description": "ayeyoty.co static site hosted on Cloudflare Workers",
   "scripts": {
     "dev": "wrangler dev",
-    "deploy": "wrangler deploy"
+    "deploy": "wrangler deploy",
+    "sim": "node sim/cli.mjs",
+    "test": "node --test \"test/**/*.test.mjs\""
   },
   "devDependencies": {
     "wrangler": "^4.0.0"
-  }
+  },
+  "type": "module"
 }
