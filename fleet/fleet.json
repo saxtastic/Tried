@@ -166,7 +166,16 @@
         },
         "catalogue_ready": false,
         "blocking": "A listing generated today would extract title, vendor, link and one date, and generate its description, eligibility bullets and effort grading. Extraction failures are visible (a blank looks blank); generation failures are invisible (plausible copy looks sourced), so the invisible one is the one that would ship. No catalogue listing until the six generated fields carry a source or go blank.",
-        "remedy": "Extend data/record.schema.json so every product-register field carries its own basis/sourced_from pair rather than only closes and award; make summary a quoted extract with a source or blank; source effort or move it into data/vantage.config.json where it is visibly an editorial weight rather than a fact about the programme. Not executed — the core-questions round said answer, do not execute."
+        "remedy": "Extend data/record.schema.json so every product-register field carries its own basis/sourced_from pair rather than only closes and award; make summary a quoted extract with a source or blank; and source `effort` from the programme's own stated requirements or drop it from the ranking. WITHDRAWN from the earlier remedy: moving `effort` into data/vantage.config.json. That relocates an unsourced claim into the file this project's own Q3 answer named as the straddle whose form lends editorial positions a spec's authority — the Q4 arbitration caught the contradiction and it is accepted. Not executed; recorded.",
+        "counts_verified": {
+          "at": "2026-08-29, recounted from this block rather than from prose",
+          "extracted": "5 groups / 9 fields — of which 4 groups are public catalogue fields; sourced_from and verified are provenance apparatus and would never appear in a listing",
+          "blank_no_record": "3 groups",
+          "generated_not_extracted": "4 groups / 7 fields",
+          "supersedes": "This session's Q4 summary said 'six extract from a named record' and 'six extract from nothing'. Both were wrong; the arbitration inherited the second. Corrected in fleet/questions.json under Q4-PROVENANCE."
+        },
+        "validator_reality": "build-registry.mjs enum-checks four of the seven generated fields — career_stage, effort, kind, cycle — against data/record.schema.json, and requires a source for none of them. An earlier claim that the validator 'does not look at any of them' was wrong and too generous: a field that passes an enum check reads as a field that was checked, so the enum-checked four hide better than the three that are visibly unguarded.",
+        "live_exposure": "The Q4 arbitration overrode content-marketing on timeline and proceeds on producer's prospective schedule. Recorded cost: four field-groups keep rendering as fact on the published /fellowships/ surface until the schema pass lands, and two of them — effort, and the eligibility trio — already move what the module promotes to the top of a band. Defensible while nothing external consumes the registry; not defensible the moment something does."
       }
     },
     {
