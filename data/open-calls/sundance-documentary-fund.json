@@ -1,0 +1,21 @@
+{
+  "id": "sundance-documentary-fund",
+  "name": "Sundance Documentary Fund",
+  "org": "Sundance Institute",
+  "kind": "grant",
+  "url": "https://www.sundance.org/programs/documentary-film/",
+  "summary": "Production and post-production grants to independent nonfiction filmmakers working on feature documentaries worldwide.",
+  "disciplines": ["film", "journalism"],
+  "geography": ["any"],
+  "career_stage": ["emerging", "mid", "established"],
+  "award": { "min": null, "max": null, "currency": "USD", "basis": "estimated", "note": "⟦FILL: current grant bands for the open cycle⟧" },
+  "effort": "high",
+  "cycle": "biannual",
+  "opens": "2026-07-01",
+  "closes": "2026-09-03",
+  "date_basis": "estimated",
+  "stage": "review",
+  "register": "V",
+  "verified": null,
+  "source": "https://www.sundance.org/programs/documentary-film/"
+}

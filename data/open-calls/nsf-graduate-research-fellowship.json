@@ -1,0 +1,21 @@
+{
+  "id": "nsf-graduate-research-fellowship",
+  "name": "NSF Graduate Research Fellowship",
+  "org": "National Science Foundation",
+  "kind": "fellowship",
+  "url": "https://www.nsfgrfp.org/",
+  "summary": "Three years of support for graduate students pursuing research-based master's and doctoral degrees in NSF-supported fields.",
+  "disciplines": ["technology", "engineering", "social-science", "mathematics"],
+  "geography": ["US"],
+  "career_stage": ["student"],
+  "award": { "min": null, "max": null, "currency": "USD", "basis": "estimated", "note": "Annual stipend plus cost-of-education allowance to the institution. ⟦FILL: current stipend⟧" },
+  "effort": "high",
+  "cycle": "annual",
+  "opens": "2026-08-01",
+  "closes": "2026-10-19",
+  "date_basis": "estimated",
+  "stage": "discovered",
+  "register": "V",
+  "verified": null,
+  "source": "https://www.nsfgrfp.org/"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "creative-capital-award",
+  "name": "Creative Capital Award",
+  "org": "Creative Capital",
+  "kind": "grant",
+  "url": "https://creative-capital.org/",
+  "summary": "Project grants plus advisory services for adventurous artists across visual, performing, film and technology-driven practice. Open call, no nomination required.",
+  "disciplines": ["arts", "film", "music", "technology", "dance"],
+  "geography": ["US"],
+  "career_stage": ["emerging", "mid", "established"],
+  "award": { "min": null, "max": null, "currency": "USD", "basis": "estimated", "note": "Project grant plus career development services. ⟦FILL: current award figure⟧" },
+  "effort": "high",
+  "cycle": "annual",
+  "opens": "2027-01-04",
+  "closes": "2027-03-01",
+  "date_basis": "estimated",
+  "stage": "discovered",
+  "register": "V",
+  "verified": null,
+  "source": "https://creative-capital.org/"
+}

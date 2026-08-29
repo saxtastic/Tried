@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Vantage — open calls · ayeyoty.co</title>
+<meta name="description" content="A repository reference for open calls: applications, fellowships, grants and residencies, on one configurable surface." />
+
+<link rel="manifest" href="/app.webmanifest" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="ayeyoty" />
+<meta name="format-detection" content="telephone=no" />
+
+<meta name="theme-color" content="#f6f5fa" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0b0c10" media="(prefers-color-scheme: dark)" />
+
+<link rel="icon" href="/icons/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+<link rel="mask-icon" href="/icons/mask-icon.svg" color="#7c5cff" />
+
+<link rel="stylesheet" href="/venue.css" />
+<link rel="stylesheet" href="/vantage.css" />
+<script src="/venue.js" defer></script>
+<script src="/workflow.js" defer></script>
+<script src="/vantage.js" defer></script>
+</head>
+<body>
+
+<a class="skip" href="#vantage">Skip to the module</a>
+
+<header class="chrome">
+  <div class="shell">
+    <a class="wordmark" href="/">aye<span>yoty</span>.co</a>
+    <p class="chip" id="tier-chip" aria-live="polite">tier: <span id="tier-name">—</span></p>
+  </div>
+</header>
+
+<main>
+
+  <section class="shell dash-head">
+    <p class="eyebrow">open calls</p>
+    <!-- Title and lede are configuration, not copy. They come from
+         data/vantage.config.json via /registry.json. -->
+    <h1 id="vantage-title">Vantage</h1>
+    <p class="lede" id="vantage-lede">Loading the reference…</p>
+  </section>
+
+  <!-- THE SINGULAR MODULE.
+       One module, no tabs. Its fields, its ordering, its bands, its colour
+       and its density at each floor are all declared in
+       data/vantage.config.json. Nothing below this comment is a view mode the
+       reader has to choose between; there is one surface, and configuration
+       decides what it holds. -->
+  <section class="shell module" id="vantage" aria-labelledby="vantage-title" data-state="loading">
+
+    <div class="module-strip" id="vantage-strip" role="status" aria-live="polite"></div>
+
+    <div class="module-surface" id="vantage-surface"></div>
+
+    <p class="module-note" id="vantage-note"></p>
+  </section>
+
+  <section class="shell provenance">
+    <h2>What these records are, and are not</h2>
+    <p>
+      Every open call in this reference is a real programme, and every
+      <em>Guidelines</em> link goes to the organisation that runs it. No date or
+      award figure here has been confirmed against its source. They are
+      placeholders derived from each programme’s usual cycle, marked
+      <span class="prov prov--estimated"><i></i>estimated</span> wherever they
+      appear, and they must not be relied on. Open the guidelines and read the
+      real deadline before you plan against it.
+    </p>
+    <p>
+      Confirm a record by editing its file under <code>data/open-calls/</code>:
+      set the true <code>closes</code> date, change <code>date_basis</code> to
+      <code>confirmed</code>, put today in <code>verified</code>, and raise
+      <code>register</code> from <code>V</code> to <code>D</code>. The build
+      refuses any record that claims verification it does not have.
+    </p>
+  </section>
+
+  <noscript>
+    <section class="shell provenance">
+      <h2>Without JavaScript</h2>
+      <p>
+        The module composes itself from configuration at runtime, so it needs
+        scripting. The underlying data is plain JSON and stays readable without
+        it: <a href="/registry.json">/registry.json</a>.
+      </p>
+    </section>
+  </noscript>
+
+</main>
+
+<footer class="footer">
+  <div class="shell">
+    <p>ayeyoty.co — open-calls reference</p>
+    <p><a href="/registry.json">registry.json</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

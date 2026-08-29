@@ -1,0 +1,21 @@
+{
+  "id": "united-states-artists-fellowship",
+  "name": "USA Fellowship",
+  "org": "United States Artists",
+  "kind": "fellowship",
+  "url": "https://www.unitedstatesartists.org/fellowship",
+  "summary": "Unrestricted awards to artists and collectives across ten disciplines. Nomination-based rather than open application in most cycles.",
+  "disciplines": ["arts", "music", "film", "writing", "dance", "architecture"],
+  "geography": ["US"],
+  "career_stage": ["mid", "established"],
+  "award": { "min": null, "max": null, "currency": "USD", "basis": "estimated", "note": "Unrestricted cash award. ⟦FILL: current award figure⟧" },
+  "effort": "medium",
+  "cycle": "annual",
+  "opens": "2026-08-01",
+  "closes": "2026-10-13",
+  "date_basis": "estimated",
+  "stage": "discovered",
+  "register": "V",
+  "verified": null,
+  "source": "https://www.unitedstatesartists.org/fellowship"
+}

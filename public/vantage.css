@@ -1,0 +1,315 @@
+/* ayeyoty.co — Vantage, the open-calls module.
+   Loaded after venue.css and built entirely on its tokens: no new colour, no
+   new font, no new radius invented here.
+
+   FORM LIVES HERE. SEMANTICS LIVE IN data/vantage.config.json.
+   The stylesheet knows what a "row", a "band" and a "meter" look like. It does
+   not know which fields exist, which bands there are, or what colour a band
+   is — those arrive as custom properties the module sets through the CSSOM.
+   Adding a band or a field to the configuration needs no rule in this file. */
+
+/* ------------------------------------------------------------- heading -- */
+
+.dash-head {
+  padding-block: clamp(1.5rem, 6vh, 3rem) 1rem;
+  display: grid;
+  gap: 0.6rem;
+  justify-items: start;
+}
+.dash-head h1 { font-size: clamp(1.6rem, 4.5vw, 2.75rem); }
+
+/* -------------------------------------------------------------- module -- */
+
+.module {
+  padding-bottom: 2.5rem;
+  display: grid;
+  gap: 0.875rem;
+}
+
+/* The summary strip. Its cells are generated, so it is a flow, not a grid of
+   named columns. */
+.module-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  min-height: 1.9rem;
+}
+
+.tally {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 0.78rem;
+  color: var(--fg-2);
+}
+.tally b {
+  font-family: var(--font-rounded);
+  font-size: 0.9rem;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+}
+/* Band colour is configuration. The module sets --band-h / --band-c per node;
+   this rule only says where colour goes, never which. */
+.tally[data-band] b { color: oklch(0.62 var(--band-c) var(--band-h)); }
+
+/* ------------------------------------------------------------- surface -- */
+
+.module-surface { display: grid; gap: 0.5rem; }
+
+.module[data-state="loading"] .module-surface::after {
+  content: "Reading the reference…";
+  color: var(--fg-3);
+  font-size: 0.9rem;
+  padding: 1rem 0;
+}
+.module[data-state="error"] .module-surface::after {
+  content: "The reference could not be read. /registry.json did not load.";
+  color: var(--fg-2);
+  font-size: 0.9rem;
+  padding: 1rem 0;
+}
+
+.band-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding-top: 0.9rem;
+  font-family: var(--font-rounded);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: oklch(0.58 var(--band-c) var(--band-h));
+}
+.band-head::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: oklch(0.62 var(--band-c) var(--band-h));
+}
+.band-head span { color: var(--fg-3); font-weight: 500; letter-spacing: 0.04em; }
+.band-head:first-child { padding-top: 0; }
+
+/* ---------------------------------------------------------------- item -- */
+
+.item {
+  position: relative;
+  border: 1px solid var(--hairline);
+  border-left: 3px solid oklch(0.62 var(--band-c) var(--band-h));
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  padding: 0.8rem 0.9rem;
+  display: grid;
+  gap: 0.45rem;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.item[data-terminal="true"] { opacity: 0.62; }
+
+@media (hover: hover) and (pointer: fine) {
+  .item:hover { border-color: var(--hairline-strong); border-left-color: oklch(0.62 var(--band-c) var(--band-h)); }
+}
+
+/* Every field renders into one of these rows. Which row a field lands on is
+   configuration (field.line); this rule only says what a row is. A field the
+   configuration does not list for the current floor is never built, not merely
+   hidden — the watch floor pays nothing for a field it does not show. */
+.item-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.6rem;
+}
+
+.f-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.f-countdown {
+  font-family: var(--font-rounded);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: oklch(0.58 var(--band-c) var(--band-h));
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.f-meta { font-size: 0.82rem; color: var(--fg-2); }
+.f-date { font-family: var(--font-mono); font-size: 0.72rem; color: var(--fg-3); }
+.f-prose { font-size: 0.85rem; color: var(--fg-2); max-width: 62ch; }
+
+.f-stage,
+.f-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.1rem 0.45rem;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+  color: var(--fg-2);
+  white-space: nowrap;
+}
+.f-stage { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+.f-stage[data-committed="true"] { background: color-mix(in oklab, var(--accent) 14%, transparent); }
+
+/* Fit meter. Width is the only thing the module sets; the track, the fill and
+   the label are all form. */
+.f-meter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.68rem;
+  color: var(--fg-3);
+  font-family: var(--font-mono);
+}
+.f-meter i {
+  display: block;
+  width: 3.5rem;
+  height: 0.3rem;
+  border-radius: 999px;
+  background: var(--hairline);
+  overflow: hidden;
+}
+.f-meter i::after {
+  content: "";
+  display: block;
+  height: 100%;
+  width: var(--fill, 0%);
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+/* Provenance. The whole point of the reference is that this marker is never
+   absent, so it is styled to be readable rather than decorative. */
+.prov {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-family: var(--font-rounded);
+  font-weight: 600;
+  color: var(--fg-3);
+  white-space: nowrap;
+}
+.prov i {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+.prov--estimated { color: oklch(0.62 0.13 68); }
+.prov--confirmed { color: oklch(0.6 0.12 155); }
+
+.f-link {
+  font-size: 0.78rem;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in oklab, var(--accent) 35%, transparent);
+}
+@media (hover: hover) and (pointer: fine) {
+  .f-link:hover { border-bottom-color: var(--accent); }
+}
+
+/* Auto-transition trail: why a record moved without anyone touching it. */
+.f-trail {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  color: var(--fg-3);
+}
+
+/* ------------------------------------------------------------- actions -- */
+
+.item-actions { display: flex; flex-wrap: wrap; gap: 0.35rem; padding-top: 0.15rem; }
+
+.act {
+  min-height: 32px;
+  padding: 0.25rem 0.7rem;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--fg-2);
+  font: inherit;
+  font-size: 0.74rem;
+  cursor: pointer;
+  transition: border-color 0.16s ease, color 0.16s ease;
+}
+.act:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) {
+  .act:hover { border-color: var(--accent); color: var(--accent); }
+}
+
+/* Touch floors get Apple's comfortable target back. */
+@media (pointer: coarse) {
+  .act { min-height: 44px; padding-inline: 0.9rem; }
+}
+
+.module-note {
+  font-size: 0.78rem;
+  color: var(--fg-3);
+  max-width: 64ch;
+  padding-top: 0.5rem;
+}
+
+/* --------------------------------------------------------- provenance --- */
+
+.provenance {
+  padding-bottom: 3rem;
+  display: grid;
+  gap: 0.6rem;
+  max-width: 60rem;
+}
+.provenance h2 { font-size: clamp(1.1rem, 2.6vw, 1.4rem); }
+.provenance p { font-size: 0.88rem; color: var(--fg-2); max-width: 64ch; }
+.provenance code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  padding: 0.05em 0.3em;
+  border-radius: 4px;
+  background: color-mix(in oklab, var(--fg) 8%, transparent);
+}
+
+/* ------------------------------------------------------ density: card --- */
+/* The desk floor is the only one that gets the two-column card treatment. The
+   configuration asks for it by setting density.desk.unit to "card"; this rule
+   is what "card" looks like. */
+
+.module-surface[data-unit="card"] { gap: 0.6rem; }
+.module-surface[data-unit="card"] .item { padding: 1rem 1.1rem; }
+
+/* ------------------------------------------------------ density: line --- */
+/* The watch floor. One call per line, nothing blurred, nothing that costs a
+   composite. Matches the venue's own watch rules. */
+
+.module-surface[data-unit="line"] .item {
+  padding: 0.5rem 0.6rem;
+  gap: 0.2rem;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-radius: 8px;
+}
+.module-surface[data-unit="line"] .f-title { font-size: 0.85rem; }
+.module-surface[data-unit="line"] .f-countdown { font-size: 0.72rem; }
+
+@media (max-width: 319px) {
+  .dash-head { padding-block: 0.75rem 0.5rem; gap: 0.3rem; }
+  .dash-head .lede { display: none; }
+  .module-strip { gap: 0.25rem; }
+  .tally { padding: 0.2rem 0.5rem; font-size: 0.66rem; }
+  .provenance { display: none; }
+  .module-note { display: none; }
+}

@@ -1,0 +1,21 @@
+{
+  "id": "fulbright-us-scholar",
+  "name": "Fulbright U.S. Scholar Program",
+  "org": "Institute of International Education / U.S. Department of State",
+  "kind": "fellowship",
+  "url": "https://fulbrightscholars.org/",
+  "summary": "Teaching, research and combined awards placing U.S. academics and professionals at host institutions abroad, across a large annual catalogue of country-specific awards.",
+  "disciplines": ["humanities", "social-science", "arts", "technology", "education"],
+  "geography": ["US"],
+  "career_stage": ["mid", "established"],
+  "award": { "min": null, "max": null, "currency": "USD", "basis": "estimated", "note": "Varies per country award; stipend plus travel. ⟦FILL: award-specific figures⟧" },
+  "effort": "high",
+  "cycle": "annual",
+  "opens": "2026-02-01",
+  "closes": "2026-09-23",
+  "date_basis": "estimated",
+  "stage": "screening",
+  "register": "V",
+  "verified": null,
+  "source": "https://fulbrightscholars.org/"
+}

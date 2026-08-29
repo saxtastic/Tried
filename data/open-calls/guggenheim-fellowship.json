@@ -1,0 +1,21 @@
+{
+  "id": "guggenheim-fellowship",
+  "name": "Guggenheim Fellowship",
+  "org": "John Simon Guggenheim Memorial Foundation",
+  "kind": "fellowship",
+  "url": "https://www.gf.org/applicants/",
+  "summary": "Unrestricted fellowships to mid-career individuals who have already demonstrated exceptional capacity for productive scholarship or exceptional creative ability in the arts.",
+  "disciplines": ["arts", "humanities", "writing", "social-science"],
+  "geography": ["US", "CA"],
+  "career_stage": ["mid", "established"],
+  "award": { "min": null, "max": null, "currency": "USD", "basis": "estimated", "note": "Amount varies by fellow; the foundation does not publish a fixed figure. ⟦FILL: current typical award range⟧" },
+  "effort": "high",
+  "cycle": "annual",
+  "opens": "2026-07-01",
+  "closes": "2026-09-15",
+  "date_basis": "estimated",
+  "stage": "drafting",
+  "register": "V",
+  "verified": null,
+  "source": "https://www.gf.org/applicants/"
+}

@@ -1,0 +1,68 @@
+{
+  "$comment": "CONFIGURATION INPUT FOR THE SINGULAR VANTAGE MODULE. One module, no tabs. Everything the module shows — which signals appear, at which screen sizes, in what order, in what colour — is declared here. public/vantage.js names no field, no band and no colour of its own; it reads this file and renders whatever it finds. Change this file and the interface re-forms with no code change. Same rule venue.css keeps for --tier, moved up a level.",
+
+  "module": {
+    "id": "vantage",
+    "title": "Vantage",
+    "lede": "Every open call in the reference, on one surface, ordered by what runs out first."
+  },
+
+  "horizon_days": 420,
+
+  "bands": [
+    { "id": "now",     "label": "Closing",  "max_days": 7,    "hue": 8,   "chroma": 0.16 },
+    { "id": "near",    "label": "Near",     "max_days": 30,   "hue": 46,  "chroma": 0.14 },
+    { "id": "planned", "label": "Planned",  "max_days": 90,   "hue": 268, "chroma": 0.13 },
+    { "id": "distant", "label": "Distant",  "max_days": null, "hue": 232, "chroma": 0.07 },
+    { "id": "closed",  "label": "Closed",   "max_days": null, "hue": 0,   "chroma": 0.0, "when_past": true }
+  ],
+
+  "order": [
+    { "key": "derived.band_order", "dir": "asc" },
+    { "key": "derived.days",       "dir": "asc" },
+    { "key": "derived.fit",        "dir": "desc" }
+  ],
+
+  "profile": {
+    "$comment": "What fit is scored against. This is the one place the reader describes themselves; nothing here is transmitted anywhere.",
+    "disciplines": ["film", "technology", "writing"],
+    "geography": ["US"],
+    "career_stage": ["emerging"],
+    "effort_tolerance": ["low", "medium"]
+  },
+
+  "fit": {
+    "$comment": "Each criterion names a key on the profile above and a key on the record, so the module can score fit without knowing what any of them mean. Add a criterion here and it is scored; the meter re-weights itself. \"any\" on either side is a wildcard.",
+    "criteria": [
+      { "id": "discipline",    "profile": "disciplines",      "call": "disciplines",  "weight": 3 },
+      { "id": "geography",     "profile": "geography",        "call": "geography",    "weight": 2 },
+      { "id": "career stage",  "profile": "career_stage",     "call": "career_stage", "weight": 2 },
+      { "id": "effort",        "profile": "effort_tolerance", "call": "effort",       "weight": 1 }
+    ]
+  },
+
+  "$fields_comment": "Each field declares WHAT it shows (from), WHAT KIND of thing it is (role), WHICH floors get it (tiers) and WHICH line of the item it sits on (line). Line grouping is configuration, not layout code: the module builds one row per distinct line value, in the order the values first appear here. Move a field to another line and the item re-forms.",
+
+  "fields": [
+    { "id": "name",     "role": "title",      "from": "call.name",          "line": "signals", "tiers": ["watch", "phone", "pad", "desk"] },
+    { "id": "countdown","role": "countdown",  "from": "derived.days",       "line": "signals", "tiers": ["watch", "phone", "pad", "desk"] },
+    { "id": "org",      "role": "meta",       "from": "call.org",           "line": "signals", "tiers": ["phone", "pad", "desk"] },
+    { "id": "stage",    "role": "stage",      "from": "derived.stage_label","line": "signals", "tiers": ["phone", "pad", "desk"] },
+    { "id": "closes",   "role": "date",       "from": "call.closes",        "line": "signals", "tiers": ["pad", "desk"] },
+    { "id": "kind",     "role": "tag",        "from": "call.kind",          "line": "signals", "tiers": ["pad", "desk"] },
+    { "id": "fit",      "role": "meter",      "from": "derived.fit",        "line": "signals", "tiers": ["pad", "desk"], "label": "fit" },
+    { "id": "effort",   "role": "tag",        "from": "call.effort",        "line": "signals", "tiers": ["desk"] },
+    { "id": "cycle",    "role": "tag",        "from": "call.cycle",         "line": "signals", "tiers": ["desk"] },
+    { "id": "summary",  "role": "prose",      "from": "call.summary",       "line": "detail",  "tiers": ["desk"] },
+    { "id": "basis",    "role": "provenance", "from": "derived.provenance", "line": "foot",    "tiers": ["watch", "phone", "pad", "desk"] },
+    { "id": "source",   "role": "link",       "from": "call.url",           "line": "foot",    "tiers": ["phone", "pad", "desk"], "label": "Guidelines" }
+  ],
+
+  "density": {
+    "$comment": "How much of the surface survives at each floor. max_rows null means all of them. The module reads its floor from --tier, exactly as venue.js does; it never measures a width.",
+    "watch": { "max_rows": 3,    "band_headings": false, "actions": false, "unit": "line" },
+    "phone": { "max_rows": 12,   "band_headings": true,  "actions": true,  "unit": "row" },
+    "pad":   { "max_rows": null, "band_headings": true,  "actions": true,  "unit": "row" },
+    "desk":  { "max_rows": null, "band_headings": true,  "actions": true,  "unit": "card" }
+  }
+}

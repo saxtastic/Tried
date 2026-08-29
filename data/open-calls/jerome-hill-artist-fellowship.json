@@ -1,0 +1,21 @@
+{
+  "id": "jerome-hill-artist-fellowship",
+  "name": "Jerome Hill Artist Fellowship",
+  "org": "Jerome Foundation",
+  "kind": "fellowship",
+  "url": "https://www.jeromefdn.org/",
+  "summary": "Multi-year unrestricted fellowships for early-career artists based in Minnesota and New York City.",
+  "disciplines": ["arts", "film", "music", "writing", "dance"],
+  "geography": ["US"],
+  "career_stage": ["emerging"],
+  "award": { "min": null, "max": null, "currency": "USD", "basis": "estimated", "note": "Unrestricted, paid across the fellowship term. ⟦FILL: current figure and term length⟧" },
+  "effort": "high",
+  "cycle": "biannual",
+  "opens": "2026-10-01",
+  "closes": "2027-01-08",
+  "date_basis": "estimated",
+  "stage": "discovered",
+  "register": "V",
+  "verified": null,
+  "source": "https://www.jeromefdn.org/"
+}

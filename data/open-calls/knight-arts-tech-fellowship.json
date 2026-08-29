@@ -1,0 +1,21 @@
+{
+  "id": "knight-arts-tech-fellowship",
+  "name": "Knight Arts + Technology Fellowship",
+  "org": "John S. and James L. Knight Foundation",
+  "kind": "fellowship",
+  "url": "https://knightfoundation.org/",
+  "summary": "Support for artists working at the intersection of art and emerging technology, concentrated in the communities where Knight invests.",
+  "disciplines": ["arts", "technology", "film", "music"],
+  "geography": ["US"],
+  "career_stage": ["mid", "established"],
+  "award": { "min": null, "max": null, "currency": "USD", "basis": "estimated", "note": "⟦FILL: current award figure and whether the cycle is open call or nomination⟧" },
+  "effort": "medium",
+  "cycle": "annual",
+  "opens": "2026-09-01",
+  "closes": "2026-11-06",
+  "date_basis": "estimated",
+  "stage": "discovered",
+  "register": "V",
+  "verified": null,
+  "source": "https://knightfoundation.org/"
+}

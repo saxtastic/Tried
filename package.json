@@ -2,14 +2,19 @@
   "name": "ayeyoty-co",
   "private": true,
   "version": "0.1.0",
-  "description": "ayeyoty.co technovenue — an Apple-device-first static site on Cloudflare Workers",
+  "description": "ayeyoty.co — an open-calls reference (applications, fellowships, grants, residencies) with a declarative workflow engine and the Vantage module, on Cloudflare Workers",
   "scripts": {
     "dev": "wrangler dev",
-    "deploy": "wrangler deploy",
+    "deploy": "npm run build && wrangler deploy",
+    "build": "node scripts/build-registry.mjs",
     "icons": "python3 scripts/make-icons.py",
-    "check": "node scripts/check-tiers.mjs"
+    "check": "npm run check:data && npm run check:tiers && npm run check:vantage",
+    "check:data": "node scripts/build-registry.mjs --check && node scripts/check-registry.mjs",
+    "check:tiers": "node scripts/check-tiers.mjs",
+    "check:vantage": "node scripts/check-vantage.mjs"
   },
   "devDependencies": {
+    "playwright": "1.56.0",
     "wrangler": "^4.0.0"
   }
 }

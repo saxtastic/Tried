@@ -1,0 +1,21 @@
+{
+  "id": "rhodes-scholarship",
+  "name": "Rhodes Scholarship",
+  "org": "Rhodes Trust",
+  "kind": "scholarship",
+  "url": "https://www.rhodeshouse.ox.ac.uk/scholarships/the-rhodes-scholarship/",
+  "summary": "Fully funded postgraduate study at the University of Oxford, selected on academic excellence alongside energy to use one's talents to the full.",
+  "disciplines": ["any"],
+  "geography": ["US", "CA", "AU", "IN", "ZA", "other"],
+  "career_stage": ["student", "emerging"],
+  "award": { "min": null, "max": null, "currency": "GBP", "basis": "estimated", "note": "Covers university and college fees plus a personal stipend. ⟦FILL: current stipend figure⟧" },
+  "effort": "high",
+  "cycle": "annual",
+  "opens": "2026-06-01",
+  "closes": "2026-10-01",
+  "date_basis": "estimated",
+  "stage": "discovered",
+  "register": "V",
+  "verified": null,
+  "source": "https://www.rhodeshouse.ox.ac.uk/scholarships/the-rhodes-scholarship/"
+}

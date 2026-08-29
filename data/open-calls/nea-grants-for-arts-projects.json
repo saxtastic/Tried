@@ -1,0 +1,21 @@
+{
+  "id": "nea-grants-for-arts-projects",
+  "name": "Grants for Arts Projects",
+  "org": "National Endowment for the Arts",
+  "kind": "grant",
+  "url": "https://www.arts.gov/grants",
+  "summary": "Project-based matching grants to nonprofit organisations across artistic disciplines. Individuals are generally not eligible except in specific literature categories.",
+  "disciplines": ["arts", "music", "film", "writing", "dance", "architecture"],
+  "geography": ["US"],
+  "career_stage": ["any"],
+  "award": { "min": null, "max": null, "currency": "USD", "basis": "estimated", "note": "Matching grant; applicant must supply cost share. ⟦FILL: current minimum and maximum⟧" },
+  "effort": "high",
+  "cycle": "biannual",
+  "opens": "2026-11-01",
+  "closes": "2027-02-11",
+  "date_basis": "estimated",
+  "stage": "discovered",
+  "register": "V",
+  "verified": null,
+  "source": "https://www.arts.gov/grants"
+}

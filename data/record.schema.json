@@ -1,0 +1,25 @@
+{
+  "$comment": "The open-call record contract. Enforced by scripts/build-registry.mjs, which is the only validator — there is no JSON Schema runtime in this repository and no dependency is added for one.",
+  "id": "kebab-case, unique, stable. Renaming an id breaks nothing but loses the record's identity across commits.",
+  "required": [
+    "id", "name", "org", "kind", "url", "summary",
+    "disciplines", "geography", "career_stage",
+    "award", "effort", "cycle", "closes", "date_basis",
+    "stage", "register", "verified", "source"
+  ],
+  "enums": {
+    "kind": ["fellowship", "grant", "residency", "prize", "scholarship", "accelerator"],
+    "effort": ["low", "medium", "high"],
+    "cycle": ["annual", "biannual", "rolling", "one-off"],
+    "date_basis": ["confirmed", "estimated"],
+    "register": ["O", "D", "I", "V"],
+    "career_stage": ["student", "emerging", "mid", "established", "any"]
+  },
+  "notes": {
+    "date_basis": "confirmed means a human opened `source` and read the date off it on the day recorded in `verified`. estimated means the date is a placeholder derived from the programme's usual cycle and MUST NOT be relied on. The Vantage module marks every estimated date in the interface.",
+    "verified": "ISO date a human last checked this record against `source`, or null if never. A null `verified` forces `register` to V.",
+    "register": "O observed in this repository, D documented against a named source, I inferred, V unverified. Same register marks the README uses.",
+    "award": "min/max may be null when the programme does not publish a figure. `basis` follows the same rule as date_basis.",
+    "stage": "The workflow stage this record currently sits in. Must be a stage id declared in data/workflow.json. The engine owns every transition out of it."
+  }
+}

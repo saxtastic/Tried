@@ -1,0 +1,21 @@
+{
+  "id": "pd-soros-fellowship",
+  "name": "Paul & Daisy Soros Fellowship for New Americans",
+  "org": "The Paul & Daisy Soros Fellowships for New Americans",
+  "kind": "fellowship",
+  "url": "https://www.pdsoros.org/",
+  "summary": "Graduate school funding for immigrants and children of immigrants in the United States, across any field of graduate study.",
+  "disciplines": ["any"],
+  "geography": ["US"],
+  "career_stage": ["student", "emerging"],
+  "award": { "min": null, "max": null, "currency": "USD", "basis": "estimated", "note": "Tuition support plus stipend across up to two years. ⟦FILL: current figures⟧" },
+  "effort": "high",
+  "cycle": "annual",
+  "opens": "2026-06-01",
+  "closes": "2026-10-29",
+  "date_basis": "estimated",
+  "stage": "discovered",
+  "register": "V",
+  "verified": null,
+  "source": "https://www.pdsoros.org/"
+}

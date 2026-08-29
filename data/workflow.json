@@ -1,0 +1,57 @@
+{
+  "$comment": "THE WORKFLOW IS DECLARED HERE AND NOWHERE ELSE. public/workflow.js executes this file and never names a stage or a transition of its own. Add a stage here and the engine, the module and the checks all follow. This is the same rule venue.css keeps for --tier.",
+  "version": 1,
+  "initial": "discovered",
+
+  "stages": [
+    { "id": "discovered",  "label": "Discovered",  "order": 0, "terminal": false, "committed": false, "note": "In the reference, not yet looked at." },
+    { "id": "screening",   "label": "Screening",   "order": 1, "terminal": false, "committed": false, "note": "Reading the guidelines against the profile." },
+    { "id": "eligible",    "label": "Eligible",    "order": 2, "terminal": false, "committed": false, "note": "Cleared eligibility; not yet started." },
+    { "id": "drafting",    "label": "Drafting",    "order": 3, "terminal": false, "committed": true,  "note": "Materials in progress." },
+    { "id": "review",      "label": "In review",   "order": 4, "terminal": false, "committed": true,  "note": "Draft complete, being read before submission." },
+    { "id": "submitted",   "label": "Submitted",   "order": 5, "terminal": false, "committed": true,  "note": "Sent. Nothing further to do but wait." },
+    { "id": "decision",    "label": "Awaiting decision", "order": 6, "terminal": false, "committed": true, "note": "Past the close date, outcome not yet known." },
+    { "id": "awarded",     "label": "Awarded",     "order": 7, "terminal": true,  "committed": true,  "note": "Won." },
+    { "id": "declined",    "label": "Declined",    "order": 8, "terminal": true,  "committed": true,  "note": "Not selected." },
+    { "id": "ineligible",  "label": "Ineligible",  "order": 9, "terminal": true,  "committed": false, "note": "Screened out on the guidelines." },
+    { "id": "passed",      "label": "Passed",      "order": 10, "terminal": true, "committed": false, "note": "Eligible, deliberately not pursued this cycle." },
+    { "id": "lapsed",      "label": "Lapsed",      "order": 11, "terminal": true, "committed": false, "note": "Close date went by without a submission. Applied by the engine, never by hand." }
+  ],
+
+  "transitions": [
+    { "id": "screen",     "from": ["discovered"], "to": "screening",  "mode": "manual", "label": "Screen" },
+    { "id": "qualify",    "from": ["screening"],  "to": "eligible",   "mode": "manual", "label": "Mark eligible" },
+    { "id": "disqualify", "from": ["screening"],  "to": "ineligible", "mode": "manual", "label": "Not eligible" },
+    { "id": "start",      "from": ["eligible"],   "to": "drafting",   "mode": "manual", "label": "Start draft" },
+    { "id": "ready",      "from": ["drafting"],   "to": "review",     "mode": "manual", "label": "Send to review" },
+    { "id": "reopen",     "from": ["review"],     "to": "drafting",   "mode": "manual", "label": "Back to draft" },
+    { "id": "submit",     "from": ["review", "drafting"], "to": "submitted", "mode": "manual", "label": "Mark submitted" },
+    { "id": "pass",       "from": ["discovered", "screening", "eligible", "drafting"], "to": "passed", "mode": "manual", "label": "Pass this cycle" },
+    { "id": "award",      "from": ["decision", "submitted"], "to": "awarded",  "mode": "manual", "label": "Awarded" },
+    { "id": "decline",    "from": ["decision", "submitted"], "to": "declined", "mode": "manual", "label": "Declined" },
+
+    {
+      "id": "close-out",
+      "from": ["submitted"],
+      "to": "decision",
+      "mode": "auto",
+      "label": "Close date passed",
+      "guard": { "all": [ { "path": "derived.days", "op": "lt", "value": 0 } ] }
+    },
+    {
+      "id": "lapse",
+      "from": ["discovered", "screening", "eligible", "drafting", "review"],
+      "to": "lapsed",
+      "mode": "auto",
+      "label": "Close date passed without submission",
+      "guard": { "all": [ { "path": "derived.days", "op": "lt", "value": 0 } ] }
+    }
+  ],
+
+  "guards": {
+    "$comment": "Structured predicates, not strings. There is no expression parser and no eval() in this repository: the engine walks these objects directly. Supported ops are listed here and asserted by scripts/check-registry.mjs.",
+    "ops": ["eq", "ne", "lt", "lte", "gt", "gte", "in", "truthy", "falsy"],
+    "combinators": ["all", "any", "not"],
+    "paths": "Dotted reads against { call, derived }. A path that does not resolve reads as undefined and fails every op except falsy."
+  }
+}

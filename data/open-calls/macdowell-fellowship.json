@@ -1,0 +1,21 @@
+{
+  "id": "macdowell-fellowship",
+  "name": "MacDowell Fellowship",
+  "org": "MacDowell",
+  "kind": "residency",
+  "url": "https://www.macdowell.org/apply",
+  "summary": "Residency of up to eight weeks in Peterborough, New Hampshire, with private studio, room and board, for artists across disciplines. No fee to attend.",
+  "disciplines": ["arts", "writing", "music", "film", "architecture"],
+  "geography": ["any"],
+  "career_stage": ["emerging", "mid", "established"],
+  "award": { "min": null, "max": null, "currency": "USD", "basis": "estimated", "note": "Residency in kind rather than cash; stipends available on request. ⟦FILL: current stipend policy⟧" },
+  "effort": "medium",
+  "cycle": "biannual",
+  "opens": "2026-07-15",
+  "closes": "2026-09-10",
+  "date_basis": "estimated",
+  "stage": "eligible",
+  "register": "V",
+  "verified": null,
+  "source": "https://www.macdowell.org/apply"
+}
