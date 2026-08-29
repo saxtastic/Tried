@@ -10,6 +10,8 @@
     "fleet": "node scripts/fleet.mjs all",
     "fleet:render": "node scripts/fleet.mjs render",
     "icons": "python3 scripts/make-icons.py",
+    "propose": "node scripts/propose.mjs",
+    "check:propose": "node scripts/check-propose.mjs",
     "sim": "node sim/cli.mjs",
     "test": "node --test \"test/**/*.test.mjs\"",
     "build:corpus": "node scripts/build-corpus.mjs",

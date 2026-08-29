@@ -1,0 +1,16 @@
+{
+  "id": "ENG-P1",
+  "officer": "engineering",
+  "specificity": "instance",
+  "statement": "The simulator surface issues 18 requests, all same-origin: no font, no CDN, no analytics, no API.",
+  "basis": "confirmed",
+  "measured_by": "session_01HCcyjiDYBhyRWFnL1qrKWB",
+  "reproduce": "serve public/ and load /simulator/, counting network entries by origin",
+  "derived_from": null,
+  "confidence": [
+    0.9,
+    1.0
+  ],
+  "register": "D",
+  "corrects": "Superseded its own earlier figure of 14. Adopting the venue shell added /venue.css, /venue.js and /icons/favicon.svg to the page. The count moved; the claim that nothing leaves the origin did not, which is the part that was load-bearing."
+}

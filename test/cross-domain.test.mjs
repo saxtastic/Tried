@@ -86,3 +86,19 @@ test('each construct a trade checks is one the simulator actually exhibits', () 
     assert.ok(known.has(c), `trades.json checks "${c}", which the simulator does not have`);
   }
 });
+
+test('trades.json marks which of its fields are sourced and which are authored', () => {
+  // The straddle flagged twice and now resolved at field level rather than by
+  // relocation: instruments and protocol come off named documents; the
+  // convergence verdicts are this session's judgment and say so.
+  for (const t of trades) {
+    assert.ok(t.provenance, `${t.id} carries no provenance`);
+    assert.equal(t.provenance.instruments.basis, 'sourced', `${t.id}: instruments are named documents`);
+    assert.equal(t.provenance.protocol.basis, 'sourced', `${t.id}: protocol paraphrases a named framework`);
+    for (const authored of ['convergence', 'what_it_confirms', 'what_it_adds', 'where_it_breaks']) {
+      assert.equal(t.provenance[authored].basis, 'none',
+        `${t.id}: ${authored} is an authored assessment and must not claim a record`);
+    }
+    assert.ok(t.provenance.convergence.owed, `${t.id}: must name what would make the verdict sourced`);
+  }
+});

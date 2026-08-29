@@ -1,0 +1,18 @@
+{
+  "officer": "content-marketing",
+  "specificity": "local",
+  "owns": "What is claimed in public, and on what record.",
+  "will_assert": [
+    "Which field extracts from which record",
+    "Which fields are blank and what is owed to fill them",
+    "That a claim is traceable, or that it is not"
+  ],
+  "will_not_assert": [
+    "That prose written from general knowledge is sourced",
+    "An eligibility rule read off no page",
+    "A grading presented as a fact about a programme"
+  ],
+  "declines": "Filling a field because it looks empty. A blank field is a finding.",
+  "bases_accepted": ["confirmed", "sourced", "derived", "none"],
+  "register": "O"
+}

@@ -100,52 +100,55 @@ export const GLITCHES = {
 };
 
 // What the interval costs, per unit of time.
-// Every rate below is STIPULATED — chosen to express a judgment, not measured
-// from anything. `basis` says so on each one, and `measurable_by` says what
-// would have to exist for it to become a number with a record behind it. This
-// matters because the ordering of these rates determines the model's headline
-// output, and an ordering that comes from the author is an assumption made
-// legible, never a finding.
+// Every rate below carries basis `none` in the repository's vocabulary
+// (corpus/README.md): nothing behind it — the statement is held, not asserted.
+// `owed` names what would have to exist for it to become `sourced` or
+// `confirmed`. This matters because the ordering of these rates determines the
+// model's headline output, and an ordering that comes from the author is an
+// assumption made legible, never a finding.
+//
+// A premise with basis `none` is legitimate and useful: it is a question this
+// officer has not answered, kept where it will be seen, rather than a blank.
 export const DECAYS = {
   evidence: {
-    label: 'Evidence', rate: 0.9, basis: 'stipulated',
+    label: 'Evidence', rate: 0.9, basis: 'none',
     gloss: 'Files are purged on schedule; devices are reissued; the contemporaneous record thins.',
-    measurable_by: 'published retention schedules, which state the actual half-life of a given record class',
+    owed: 'published retention schedules, which state the actual half-life of a given record class',
   },
   memory: {
-    label: 'Memory', rate: 0.7, basis: 'stipulated',
+    label: 'Memory', rate: 0.7, basis: 'none',
     gloss: 'Witnesses recall the account they last gave rather than the events.',
-    measurable_by: 'the eyewitness-memory literature, which has real decay curves this could be fitted to',
+    owed: 'the eyewitness-memory literature, which has real decay curves this could be fitted to',
   },
   standing: {
-    label: 'Standing', rate: 1.0, basis: 'stipulated',
+    label: 'Standing', rate: 1.0, basis: 'none',
     gloss: 'The status that made the claimant a person the institution owes something to lapses — they graduate, leave, or are removed.',
-    measurable_by: 'the institution\'s own enrolment and separation rules, which fix the date exactly',
+    owed: 'the institution\'s own enrolment and separation rules, which fix the date exactly',
   },
   capacity: {
-    label: 'Capacity', rate: 1.1, basis: 'stipulated',
+    label: 'Capacity', rate: 1.1, basis: 'none',
     gloss: 'The claimant\'s ability to keep doing this. The term no doctrine mentions.',
-    measurable_by: 'nothing available here. Attrition rates in long institutional proceedings would do it, and this session has no such data.',
+    owed: 'nothing available here. Attrition rates in long institutional proceedings would do it, and this session has no such data.',
   },
   salience: {
-    label: 'Salience', rate: 0.6, basis: 'stipulated',
+    label: 'Salience', rate: 0.6, basis: 'none',
     gloss: 'Everyone else stops finding it urgent, including people who agreed with it.',
-    measurable_by: 'nothing available here.',
+    owed: 'nothing available here.',
   },
 };
 
 // What carries a claim across an interval.
-// As above: `strength` is stipulated, and `sustains` — which decay each term
-// reaches — is a definition written by the author. Any statement of the form
-// "only X reaches Y" is therefore true by construction and must never be
+// As above: `strength` carries basis `none`, and `sustains` — which decay each
+// term reaches — is a definition written by the author. Any statement of the
+// form "only X reaches Y" is therefore true by construction and must never be
 // reported as though the model discovered it.
 export const SUSTAINS = {
   community: {
     label: 'Spontaneous community engagement',
     reciprocity: 'asymmetric',
     strength: 1.2,
-    basis: 'stipulated',
-    measurable_by: 'nothing available here. Case studies of long-running individual claims against institutions would be the record.',
+    basis: 'none',
+    owed: 'nothing available here. Case studies of long-running individual claims against institutions would be the record.',
     gloss:
       'People who show up without being organised into showing up. Structurally lopsided: many follow the case, the claimant knows few of them back. ' +
       'That is not a lesser form of support. Reciprocal support is capped by how many relationships one exhausted person can maintain, and this is not capped, ' +
@@ -156,8 +159,8 @@ export const SUSTAINS = {
     label: 'Representation',
     reciprocity: 'contractual',
     strength: 1.0,
-    basis: 'stipulated',
-    measurable_by: 'legal-services outcome studies',
+    basis: 'none',
+    owed: 'legal-services outcome studies',
     gloss: 'Carries the procedural load and the clock. Does not carry capacity, and is usually the first thing that runs out of money.',
     sustains: ['evidence', 'standing'],
   },
@@ -165,8 +168,8 @@ export const SUSTAINS = {
     label: 'The claimant\'s own contemporaneous record',
     reciprocity: 'none',
     strength: 0.9,
-    basis: 'stipulated',
-    measurable_by: 'nothing available here.',
+    basis: 'none',
+    owed: 'nothing available here.',
     gloss: 'The one term entirely within the claimant\'s control, and the only defence against a null return: a record the institution does not hold cannot be purged by it.',
     sustains: ['evidence', 'memory'],
   },
@@ -174,8 +177,8 @@ export const SUSTAINS = {
     label: 'Someone inside who stayed',
     reciprocity: 'mutual_but_costly',
     strength: 0.8,
-    basis: 'stipulated',
-    measurable_by: 'nothing available here.',
+    basis: 'none',
+    owed: 'nothing available here.',
     gloss: 'Preserves standing and often produces the document. Bears real risk, which is why this term is unreliable by nature rather than by character.',
     sustains: ['standing', 'evidence'],
   },
@@ -183,8 +186,8 @@ export const SUSTAINS = {
     label: 'The account made public',
     reciprocity: 'asymmetric',
     strength: 0.7,
-    basis: 'stipulated',
-    measurable_by: 'nothing available here.',
+    basis: 'none',
+    owed: 'nothing available here.',
     gloss: 'Fixes the version of events before memory drifts, and makes salience someone else\'s problem to maintain. Costs privacy permanently and cannot be undone.',
     sustains: ['memory', 'salience'],
   },
@@ -290,8 +293,9 @@ export function itinerary(specs = []) {
 
   return {
     provenance: {
-      weights: 'stipulated',
-      basis: 'Every decay rate and sustain strength in this module was chosen by the author to express a judgment. None is measured.',
+      basis: 'none',
+      vocabulary: 'corpus/README.md',
+      statement: 'Every decay rate and sustain strength in this module was chosen by the author to express a judgment. None is measured, sourced or derived.',
       reportable: 'Run sensitivity() before stating any conclusion here as a finding. Only the robust class survives the weights being wrong.',
     },
     legs,
@@ -378,7 +382,7 @@ export function sensitivity(specs = [], { spread = 0.4, steps = 5 } = {}) {
       },
     ],
     note:
-      'Every weight in this module is stipulated. That is not a defect to be apologised for — it is the point, because a stipulated weight is inspectable and a fitted one is not. ' +
+      'Every weight in this module carries basis `none`. That is not a defect to be apologised for — it is the point, because a held weight is inspectable and a fitted one is not. ' +
       'But it means a statement is only reportable as a finding if it is in the robust class. Anything by_construction is an assumption made legible, and saying otherwise would be laundering an authored judgment through an engine.',
   };
 }

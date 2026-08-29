@@ -113,20 +113,23 @@ test('the itinerary is part of the full report', () => {
 
 // --- Provenance: the module must not launder stipulation as measurement. -----
 
-test('every weight declares that it is stipulated and what would measure it', () => {
+test('every weight declares its basis in the repository vocabulary, and what is owed', () => {
+  // corpus/README.md: confirmed | sourced | derived | none. These are held, not
+  // asserted, so `none` is the honest basis and `owed` names what would change it.
   for (const [id, d] of Object.entries(DECAYS)) {
-    assert.equal(d.basis, 'stipulated', `${id} must declare its basis`);
-    assert.ok(d.measurable_by, `${id} must say what would make it a measured number`);
+    assert.equal(d.basis, 'none', `${id} must declare its basis`);
+    assert.ok(d.owed, `${id} must say what is owed before it could be sourced or confirmed`);
   }
   for (const [id, s] of Object.entries(SUSTAINS)) {
-    assert.equal(s.basis, 'stipulated', `${id} must declare its basis`);
-    assert.ok(s.measurable_by, `${id} must say what would make it a measured number`);
+    assert.equal(s.basis, 'none', `${id} must declare its basis`);
+    assert.ok(s.owed, `${id} must say what is owed before it could be sourced or confirmed`);
   }
 });
 
 test('the itinerary carries its own provenance so no consumer can read it as measured', () => {
   const it = itinerary(corpus.passages);
-  assert.equal(it.provenance.weights, 'stipulated');
+  assert.equal(it.provenance.basis, 'none');
+  assert.match(it.provenance.vocabulary, /corpus\/README/);
   assert.match(it.provenance.reportable, /sensitivity/);
 });
 
