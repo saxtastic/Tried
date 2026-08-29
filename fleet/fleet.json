@@ -80,6 +80,11 @@
         "public/fellowships/*",
         "fellowships/*"
       ],
+      "claims_disputed": [
+        "public/index.html",
+        "package.json",
+        "README.md"
+      ],
       "ritual": true,
       "ritual_note": "Open calls are re-surveyed and re-ranked on a cadence. Requires a Routine; none exists yet.",
       "state": "review",
@@ -88,7 +93,8 @@
       "inherits": "venue",
       "source_revision": "claude/cloudflare-ayeyoty-setup-uq8pl9",
       "source_note": "Resolved. The session merged the venue branch rather than rebasing onto it, which is what the fixed source revision allows. PR #2 is stacked on PR #1.",
-      "merged_upstream": "335b97f — merged claude/ios-macos-code-repurpose-ofm9ks on 2026-08-29"
+      "merged_upstream": "335b97f — merged claude/ios-macos-code-repurpose-ofm9ks on 2026-08-29",
+      "claims_note": "Declared under P8. All three are changed: one .card--link added inside the venue's own Subtrees section, four check/build scripts plus a pinned playwright devDependency in package.json, and README.md rewritten for the subtree. Lower risk than the simulator's claim because PR #2 is stacked on PR #1 and already carries the venue's head, so the venue merges first by construction — but the files are shared, so the claim is declared rather than assumed harmless. public/venue.css is deliberately NOT claimed: an earlier nav addition to it was reverted and it is byte-identical to the venue's."
     },
     {
       "id": "options",
