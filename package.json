@@ -2,10 +2,12 @@
   "name": "ayeyoty-co",
   "private": true,
   "version": "0.1.0",
-  "description": "ayeyoty.co static site hosted on Cloudflare Workers",
+  "description": "ayeyoty.co technovenue — an Apple-device-first static site on Cloudflare Workers",
   "scripts": {
     "dev": "wrangler dev",
-    "deploy": "wrangler deploy"
+    "deploy": "wrangler deploy",
+    "icons": "python3 scripts/make-icons.py",
+    "check": "node scripts/check-tiers.mjs"
   },
   "devDependencies": {
     "wrangler": "^4.0.0"
