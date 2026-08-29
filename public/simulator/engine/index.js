@@ -29,5 +29,6 @@ export {
   SUSTAINS,
   passage,
   itinerary,
+  sensitivity,
 } from './transitions.js';
 export { buildContext, run, sweepInterpretations, sweepInstitutions, fullReport } from './simulate.js';

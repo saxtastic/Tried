@@ -167,6 +167,18 @@ if (!flag('paradox') && !flag('vectors') && !flag('sweep')) {
   }
   console.log(`  ${C.b('Total elapsed')} ${it.total_span}`);
   console.log(wrap(it.finding, 84, '  '));
+
+  const sens = report.passage_sensitivity;
+  if (sens) {
+    console.log(`\n  ${C.c('what survives the weights being wrong')}`);
+    console.log(C.dim('  Every weight above is stipulated. Only the robust class is reportable as a finding.'));
+    for (const cl of sens.claims) {
+      const paint = cl.class === 'robust' ? C.g : cl.class === 'fragile' ? C.y : C.dim;
+      console.log(`    ${paint(cl.class.padEnd(16))} ${cl.claim}`);
+      console.log(C.dim(wrap(cl.why, 76, '      ')));
+    }
+    console.log(C.dim(`    perturbations: ${sens.perturbations.map((x) => `${x.factor}→${x.survived ? 'survived' : `${x.lost_at.length} lost`}`).join('  ')}`));
+  }
   if (it.glitches_worth_pleading.length) {
     console.log(`\n  ${C.c('glitches worth pleading as findings in themselves')}`);
     for (const g of it.glitches_worth_pleading) {

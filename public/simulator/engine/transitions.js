@@ -100,20 +100,52 @@ export const GLITCHES = {
 };
 
 // What the interval costs, per unit of time.
+// Every rate below is STIPULATED — chosen to express a judgment, not measured
+// from anything. `basis` says so on each one, and `measurable_by` says what
+// would have to exist for it to become a number with a record behind it. This
+// matters because the ordering of these rates determines the model's headline
+// output, and an ordering that comes from the author is an assumption made
+// legible, never a finding.
 export const DECAYS = {
-  evidence: { label: 'Evidence', gloss: 'Files are purged on schedule; devices are reissued; the contemporaneous record thins.', rate: 0.9 },
-  memory: { label: 'Memory', gloss: 'Witnesses recall the account they last gave rather than the events.', rate: 0.7 },
-  standing: { label: 'Standing', gloss: 'The status that made the claimant a person the institution owes something to lapses — they graduate, leave, or are removed.', rate: 1.0 },
-  capacity: { label: 'Capacity', gloss: 'The claimant\'s ability to keep doing this. The most decisive term and the one no doctrine mentions.', rate: 1.1 },
-  salience: { label: 'Salience', gloss: 'Everyone else stops finding it urgent, including people who agreed with it.', rate: 0.6 },
+  evidence: {
+    label: 'Evidence', rate: 0.9, basis: 'stipulated',
+    gloss: 'Files are purged on schedule; devices are reissued; the contemporaneous record thins.',
+    measurable_by: 'published retention schedules, which state the actual half-life of a given record class',
+  },
+  memory: {
+    label: 'Memory', rate: 0.7, basis: 'stipulated',
+    gloss: 'Witnesses recall the account they last gave rather than the events.',
+    measurable_by: 'the eyewitness-memory literature, which has real decay curves this could be fitted to',
+  },
+  standing: {
+    label: 'Standing', rate: 1.0, basis: 'stipulated',
+    gloss: 'The status that made the claimant a person the institution owes something to lapses — they graduate, leave, or are removed.',
+    measurable_by: 'the institution\'s own enrolment and separation rules, which fix the date exactly',
+  },
+  capacity: {
+    label: 'Capacity', rate: 1.1, basis: 'stipulated',
+    gloss: 'The claimant\'s ability to keep doing this. The term no doctrine mentions.',
+    measurable_by: 'nothing available here. Attrition rates in long institutional proceedings would do it, and this session has no such data.',
+  },
+  salience: {
+    label: 'Salience', rate: 0.6, basis: 'stipulated',
+    gloss: 'Everyone else stops finding it urgent, including people who agreed with it.',
+    measurable_by: 'nothing available here.',
+  },
 };
 
 // What carries a claim across an interval.
+// As above: `strength` is stipulated, and `sustains` — which decay each term
+// reaches — is a definition written by the author. Any statement of the form
+// "only X reaches Y" is therefore true by construction and must never be
+// reported as though the model discovered it.
 export const SUSTAINS = {
   community: {
     label: 'Spontaneous community engagement',
     reciprocity: 'asymmetric',
     strength: 1.2,
+    basis: 'stipulated',
+    measurable_by: 'nothing available here. Case studies of long-running individual claims against institutions would be the record.',
     gloss:
       'People who show up without being organised into showing up. Structurally lopsided: many follow the case, the claimant knows few of them back. ' +
       'That is not a lesser form of support. Reciprocal support is capped by how many relationships one exhausted person can maintain, and this is not capped, ' +
@@ -124,6 +156,8 @@ export const SUSTAINS = {
     label: 'Representation',
     reciprocity: 'contractual',
     strength: 1.0,
+    basis: 'stipulated',
+    measurable_by: 'legal-services outcome studies',
     gloss: 'Carries the procedural load and the clock. Does not carry capacity, and is usually the first thing that runs out of money.',
     sustains: ['evidence', 'standing'],
   },
@@ -131,6 +165,8 @@ export const SUSTAINS = {
     label: 'The claimant\'s own contemporaneous record',
     reciprocity: 'none',
     strength: 0.9,
+    basis: 'stipulated',
+    measurable_by: 'nothing available here.',
     gloss: 'The one term entirely within the claimant\'s control, and the only defence against a null return: a record the institution does not hold cannot be purged by it.',
     sustains: ['evidence', 'memory'],
   },
@@ -138,6 +174,8 @@ export const SUSTAINS = {
     label: 'Someone inside who stayed',
     reciprocity: 'mutual_but_costly',
     strength: 0.8,
+    basis: 'stipulated',
+    measurable_by: 'nothing available here.',
     gloss: 'Preserves standing and often produces the document. Bears real risk, which is why this term is unreliable by nature rather than by character.',
     sustains: ['standing', 'evidence'],
   },
@@ -145,6 +183,8 @@ export const SUSTAINS = {
     label: 'The account made public',
     reciprocity: 'asymmetric',
     strength: 0.7,
+    basis: 'stipulated',
+    measurable_by: 'nothing available here.',
     gloss: 'Fixes the version of events before memory drifts, and makes salience someone else\'s problem to maintain. Costs privacy permanently and cannot be undone.',
     sustains: ['memory', 'salience'],
   },
@@ -249,6 +289,11 @@ export function itinerary(specs = []) {
   const evidentiary = legs.filter((l) => l.glitch.evidentiary_value >= 0.6);
 
   return {
+    provenance: {
+      weights: 'stipulated',
+      basis: 'Every decay rate and sustain strength in this module was chosen by the author to express a judgment. None is measured.',
+      reportable: 'Run sensitivity() before stating any conclusion here as a finding. Only the robust class survives the weights being wrong.',
+    },
     legs,
     total_days: totalDays,
     total_span: totalDays >= 365 ? `${(totalDays / 365).toFixed(1)} years` : `${Math.round(totalDays / 30)} months`,
@@ -266,6 +311,102 @@ export function itinerary(specs = []) {
         : `The claim is diminished at: ${lost.map((l) => l.label).join('; ')}. None of those losses appear as a ruling anywhere. ` +
           'A claim that fails here has not been decided against; it has been outlasted, and the two are recorded identically.',
   };
+}
+
+/**
+ * Sensitivity.
+ *
+ * The headline outputs of this module follow from weights the author chose. So
+ * the honest report is not the ordering but which conclusions SURVIVE the
+ * ordering being wrong. Three classes come out of this, and they are not
+ * equally worth anything:
+ *
+ *   by_construction — true because of how the model is defined, so perturbing
+ *                     the numbers cannot touch it. Never a finding.
+ *   fragile         — flips when the weights move within a plausible range.
+ *                     Report only alongside the weights that produced it.
+ *   robust          — survives every perturbation tried. The only class that
+ *                     may be stated without immediately restating its basis.
+ */
+export function sensitivity(specs = [], { spread = 0.4, steps = 5 } = {}) {
+  const base = itinerary(specs);
+  const runs = [];
+
+  for (let i = 0; i < steps; i += 1) {
+    const f = 1 - spread + (2 * spread * i) / Math.max(1, steps - 1);
+    const decays = Object.fromEntries(
+      Object.entries(DECAYS).map(([k, v]) => [k, { ...v, rate: v.rate * f }]),
+    );
+    const sustains = Object.fromEntries(
+      Object.entries(SUSTAINS).map(([k, v]) => [k, { ...v, strength: v.strength * (2 - f) }]),
+    );
+    runs.push({ factor: round(f), result: itineraryWith(specs, decays, sustains) });
+  }
+
+  const lostSets = runs.map((r) => r.result.lost_at.join('|'));
+  const survivedFlags = runs.map((r) => r.result.survived);
+
+  return {
+    base_lost_at: base.lost_at,
+    perturbations: runs.map((r) => ({ factor: r.factor, survived: r.result.survived, lost_at: r.result.lost_at })),
+    claims: [
+      {
+        claim: 'Only community engagement reaches the capacity decay.',
+        class: 'by_construction',
+        why: 'The reach list on each sustain is written by the author. Perturbing weights cannot change it, so this is a modelling decision stated in the model, not a result produced by it.',
+      },
+      {
+        claim: 'Capacity is the heaviest decay.',
+        class: 'by_construction',
+        why: 'It is heaviest because its rate was set highest. Reporting it as a finding would be circular.',
+      },
+      {
+        claim: 'The claim does not survive every passage intact.',
+        class: new Set(survivedFlags).size === 1 ? 'robust' : 'fragile',
+        why:
+          new Set(survivedFlags).size === 1
+            ? `Held across every perturbation tried (±${spread * 100}% on all weights simultaneously). This one does not depend on the particular numbers.`
+            : 'Flips within the perturbation range, so it is a statement about the chosen weights rather than about the case.',
+      },
+      {
+        claim: 'The claim is lost at specific passages rather than others.',
+        class: new Set(lostSets).size === 1 ? 'robust' : 'fragile',
+        why:
+          new Set(lostSets).size === 1
+            ? 'The same passages fail across the whole range, so the location of the loss is driven by the intervals and glitches in the record rather than by the weights.'
+            : `Which passages fail moves with the weights (${new Set(lostSets).size} distinct outcomes across the range), so name the weights whenever naming the passage.`,
+      },
+    ],
+    note:
+      'Every weight in this module is stipulated. That is not a defect to be apologised for — it is the point, because a stipulated weight is inspectable and a fitted one is not. ' +
+      'But it means a statement is only reportable as a finding if it is in the robust class. Anything by_construction is an assumption made legible, and saying otherwise would be laundering an authored judgment through an engine.',
+  };
+}
+
+/** itinerary(), run against substituted weight tables. */
+function itineraryWith(specs, decays, sustains) {
+  const legs = specs.map((spec) => passageWith(spec, decays, sustains));
+  const lost = legs.filter((l) => !l.carried);
+  return { survived: lost.length === 0, lost_at: lost.map((l) => l.label) };
+}
+
+function passageWith(spec, decays, sustains) {
+  const months = (spec.interval_days ?? 0) / 30;
+  const kind = PASSAGE_KINDS[spec.kind] ?? PASSAGE_KINDS.request_to_record;
+  const decaying = (spec.decays ?? []).map((id) => ({
+    id,
+    cost: Math.min(1, (decays[id]?.rate ?? 0.5) * months * 0.08),
+  }));
+  const carrying = (spec.sustains ?? []).map((id) => sustains[id]).filter(Boolean);
+  let offset = 0;
+  for (const d of decaying) {
+    const helpers = carrying.filter((s) => (s.sustains ?? []).includes(d.id));
+    if (!helpers.length) continue;
+    const best = Math.max(...helpers.map((s) => s.strength ?? 0.5));
+    offset += Math.min(d.cost, d.cost * best * 0.8);
+  }
+  const net = decaying.reduce((a, b) => a + b.cost, 0) - offset;
+  return { label: kind.label, carried: net < 0.35 };
 }
 
 function round(n) {

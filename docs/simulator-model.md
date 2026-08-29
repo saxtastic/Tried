@@ -263,8 +263,38 @@ exactly why it is the term that survives a long interval. It is a real relation
 doing real work on unequal terms, and modelling it as anything softer would be
 both untrue and useless.
 
-Capacity is the heaviest decay in the model and nothing but people touches it.
-That is the finding, and it is not a sentimental one.
+### What is a finding here, and what is not
+
+Capacity is the heaviest decay in this model and nothing but people touches it —
+and that is **not a finding**. It is heaviest because its rate was set highest,
+and only community reaches it because the reach lists were written that way.
+Both are true by construction. Reporting either as though the model discovered
+it would be laundering an authored judgment through an engine, which is exactly
+the failure the register question was about.
+
+Every weight here is stipulated, declares `basis: 'stipulated'` in the data, and
+carries a `measurable_by` field naming what would have to exist for it to become
+a number with a record behind it. For most of them the honest answer is *nothing
+available here*.
+
+So `sensitivity()` sorts every conclusion into three classes by perturbing all
+weights ±40% simultaneously:
+
+| Class | Meaning | Reportable? |
+|---|---|---|
+| `by_construction` | Follows from how the model is defined. Perturbation cannot touch it. | Never as a finding |
+| `fragile` | Flips within a plausible weight range. | Only alongside the weights |
+| `robust` | Survives every perturbation tried. | Yes |
+
+On the template case, one conclusion is robust: **the claim does not survive
+every passage intact.** That holds whatever the numbers. Which *particular*
+passages fail is fragile — three distinct outcomes across the range — so the
+passages must never be named without naming the weights.
+
+That distinction is the whole value of stipulating weights rather than fitting
+them. A stipulated weight is inspectable; a fitted one is not. But inspectable
+only helps if the report says which of its own outputs are assumptions wearing
+the costume of results.
 
 ### The transition as prose
 

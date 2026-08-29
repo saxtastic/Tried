@@ -10,7 +10,7 @@ import { proponent, opponent } from './agents.js';
 import { adjudicate, disposition } from './judge.js';
 import { profile, necessitySilence, translate, REGIMES as POLICY_REGIMES } from './institution.js';
 import { reframe } from './paradox.js';
-import { itinerary } from './transitions.js';
+import { itinerary, sensitivity } from './transitions.js';
 
 /** Build the evaluation context from a raw corpus + case. */
 export function buildContext(corpus, options = {}) {
@@ -155,6 +155,7 @@ export function fullReport(corpus, options = {}) {
     // The passages between findings. Everything else here scores a state; this
     // scores the intervals, which is where claims are actually lost.
     itinerary: itinerary(corpus.passages ?? []),
+    passage_sensitivity: sensitivity(corpus.passages ?? []),
     interpretive_sweep: sweepInterpretations(corpus, options),
     institutional_sweep: sweepInstitutions(corpus, options),
     paradox: reframe(corpus.claim ?? {}),

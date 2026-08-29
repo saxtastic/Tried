@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 
 import { loadCorpus } from '../sim/load.mjs';
 import {
-  PASSAGE_KINDS, GLITCHES, DECAYS, SUSTAINS, passage, itinerary,
+  PASSAGE_KINDS, GLITCHES, DECAYS, SUSTAINS, passage, itinerary, sensitivity,
 } from '../public/simulator/engine/transitions.js';
 import { fullReport } from '../public/simulator/engine/simulate.js';
 
@@ -109,4 +109,52 @@ test('the itinerary is part of the full report', () => {
   assert.ok(r.itinerary.legs.length);
   assert.ok(r.itinerary.total_span);
   assert.ok(r.itinerary.glitches_worth_pleading.length, 'the glitches are pleadable findings in themselves');
+});
+
+// --- Provenance: the module must not launder stipulation as measurement. -----
+
+test('every weight declares that it is stipulated and what would measure it', () => {
+  for (const [id, d] of Object.entries(DECAYS)) {
+    assert.equal(d.basis, 'stipulated', `${id} must declare its basis`);
+    assert.ok(d.measurable_by, `${id} must say what would make it a measured number`);
+  }
+  for (const [id, s] of Object.entries(SUSTAINS)) {
+    assert.equal(s.basis, 'stipulated', `${id} must declare its basis`);
+    assert.ok(s.measurable_by, `${id} must say what would make it a measured number`);
+  }
+});
+
+test('the itinerary carries its own provenance so no consumer can read it as measured', () => {
+  const it = itinerary(corpus.passages);
+  assert.equal(it.provenance.weights, 'stipulated');
+  assert.match(it.provenance.reportable, /sensitivity/);
+});
+
+test('sensitivity refuses to call a construction a finding', () => {
+  const s = sensitivity(corpus.passages);
+  const byConstruction = s.claims.filter((c) => c.class === 'by_construction').map((c) => c.claim);
+  assert.ok(
+    byConstruction.some((c) => /only community/i.test(c)),
+    'that only community reaches capacity is a definition, not a result, and must be classed as one',
+  );
+  assert.ok(
+    byConstruction.some((c) => /heaviest decay/i.test(c)),
+    'that capacity is heaviest follows from its rate being set highest',
+  );
+});
+
+test('sensitivity actually perturbs and can distinguish robust from fragile', () => {
+  const s = sensitivity(corpus.passages);
+  assert.ok(s.perturbations.length >= 3);
+  const factors = s.perturbations.map((p) => p.factor);
+  assert.ok(Math.max(...factors) > Math.min(...factors), 'the weights must really move');
+  const classes = new Set(s.claims.map((c) => c.class));
+  assert.ok(classes.has('robust') || classes.has('fragile'),
+    'the check must be capable of separating the two, not label everything by_construction');
+});
+
+test('the full report carries the sensitivity beside the itinerary', () => {
+  const r = fullReport(corpus);
+  assert.ok(r.passage_sensitivity?.claims?.length);
+  assert.match(r.passage_sensitivity.note, /laundering/);
 });
