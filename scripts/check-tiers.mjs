@@ -3,7 +3,8 @@
  * Serves ./public over a loopback port, opens it at four viewports, and asserts
  * that the floor the CSS reports is the floor that was expected, that exactly
  * one bay is marked, that nothing scrolls sideways, and that the console stays
- * clean. Reproducible: fixed viewports, no network, no randomness.
+ * clean. Every subtree under public/ is discovered and checked the same way, so
+ * a surface added by another session is covered the moment it lands. Reproducible: fixed viewports, no network, no randomness.
  *
  *   npm run check
  *
@@ -30,6 +31,14 @@ const TYPES = {
   ".xml": "application/xml",
   ".txt": "text/plain; charset=utf-8",
 };
+
+// Any public/<name>/index.html is a subtree of the shell and is checked as one.
+const SUBTREES = fs
+  .readdirSync(ROOT, { withFileTypes: true })
+  .filter((e) => e.isDirectory() && e.name !== "icons")
+  .filter((e) => fs.existsSync(path.join(ROOT, e.name, "index.html")))
+  .map((e) => `/${e.name}/`)
+  .sort();
 
 const VIEWPORTS = [
   { name: "watch", width: 208, height: 264, expect: "watch" },
@@ -65,6 +74,22 @@ const base = `http://127.0.0.1:${server.address().port}/`;
 const browser = await chromium.launch();
 let failures = 0;
 
+// Structural, not viewport-dependent: every subtree card on the front page must
+// point at a route this branch actually contains. A subtree registers itself in
+// its own pull request; the shell linking a route it does not carry ships a dead
+// link on the front page the moment the shell merges alone.
+{
+  const shell = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
+  const hrefs = [...shell.matchAll(/class="card card--link"\s+href="([^"]+)"/g)].map((m) => m[1]);
+  const dead = hrefs.filter((h) => h.startsWith("/") && !fs.existsSync(path.join(ROOT, h, "index.html")));
+  if (dead.length) {
+    failures++;
+    console.log(`FAIL  links    front page points at ${dead.join(", ")} — not in this branch`);
+  } else {
+    console.log(`PASS  links    ${hrefs.length} subtree card(s), all resolve`);
+  }
+}
+
 for (const vp of VIEWPORTS) {
   const context = await browser.newContext({ viewport: { width: vp.width, height: vp.height } });
   const page = await context.newPage();
@@ -90,16 +115,21 @@ for (const vp of VIEWPORTS) {
   if (!got.monitorFilled) problems.push("monitor has unfilled rows");
   if (errors.length) problems.push(`console: ${errors.join(" | ")}`);
 
-  // The fleet subtree runs on the same shell, so it must resolve the same tier.
-  await page.goto(new URL("/fleet/", base).href, { waitUntil: "networkidle" });
-  const sub = await page.evaluate(() => ({
-    tier: document.documentElement.dataset.tier,
-    sideways: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
-    roster: document.querySelectorAll(".crew").length,
-  }));
-  if (sub.tier !== vp.expect) problems.push(`/fleet/ tier ${sub.tier} != ${vp.expect}`);
-  if (sub.sideways) problems.push("/fleet/ horizontal scroll");
-  if (sub.roster < 1) problems.push("/fleet/ roster empty");
+  // Every subtree runs on the same shell, so each must resolve the same tier and
+  // stay inside the viewport. Discovered rather than listed: a subtree added by
+  // another session is covered the moment it lands, which is the failure this
+  // check had when it only knew about /fleet/.
+  for (const route of SUBTREES) {
+    await page.goto(new URL(route, base).href, { waitUntil: "networkidle" });
+    const sub = await page.evaluate(() => ({
+      tier: document.documentElement.dataset.tier,
+      sideways: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
+      empty: document.querySelector("main") === null,
+    }));
+    if (sub.tier !== vp.expect) problems.push(`${route} tier ${sub.tier} != ${vp.expect}`);
+    if (sub.sideways) problems.push(`${route} horizontal scroll`);
+    if (sub.empty) problems.push(`${route} has no main element`);
+  }
 
   if (problems.length) failures++;
   console.log(

@@ -53,10 +53,21 @@
         "at": "2026-08-29T20:58:00Z",
         "by": "session_01GvNCLtH3R2cqohRaUwqKek",
         "decision": "Shell first, then fellowships, then simulator; the simulator retargets onto the shell rather than the shell absorbing it. Producer and engineering reached this from different tests — reversibility on the day it goes wrong, versus the mechanics of re-applying additions onto a rewrite — and the measurement settles it: every simulator edit to the three contested files is a pure addition (README 44+/0-, index.html 8+/0-) against the shell rewriting them (README 162+/21-, index.html 266+/32-). Already executed by the simulator at 556734b.",
-        "held_opposition": "Engineering went further than producer and deleted the collision rather than sequencing it. That is cheaper now and it discards content: the simulator's README section, its nav entry and its package.json scripts are no longer represented anywhere. Producer's sequencing would have carried them through the merge. Whoever re-adds them onto the shell owns that, and if nobody does, deleting the collision will have quietly deleted the work. Separately, creative-director was named on this question and did not answer: the venue holds that vantage and is also the asker, so whether the three surfaces read as one thing has not been put to anyone independent.",
+        "held_opposition": "Engineering went further than producer and deleted the collision rather than sequencing it. That is cheaper now and it discarded content — and the scope of what was discarded was overstated here and has been corrected below. The substance stands: whoever re-adds deleted content owns that, and if nobody does, deleting a collision quietly deletes the work. Separately, creative-director was named on this question and did not answer: the venue holds that vantage and is also the asker, so whether the three surfaces read as one thing has not been put to anyone independent.",
         "overrode": "producer, on the narrow point of sequencing versus deletion",
-        "cost": "three files of simulator content now unrepresented until someone re-applies them"
-      }
+        "cost": "One file of simulator content was unrepresented — the front-page nav entry — and it has since been re-added by the session that deleted it, in the shell's own idiom. The README section and the package.json scripts were never lost; the merge resolved them as a union.",
+        "corrections": [
+          {
+            "at": "2026-08-29T21:56:00Z",
+            "raised_by": "session_01HCcyjiDYBhyRWFnL1qrKWB (engineering)",
+            "verified_by": "session_01GvNCLtH3R2cqohRaUwqKek, independently against the branch at 0f82a58",
+            "what_was_wrong": "The original held_opposition and cost claimed the simulator's README section, nav entry and package.json scripts were 'no longer represented anywhere' — 'three files of simulator content'. Two of the three were false. README.md carried the simulator section at line 187, 39 lines; package.json carried sim, test, build:corpus and verify alongside the shell's own scripts. Only public/index.html had genuinely lost its entry.",
+            "how_it_happened": "The arbiter inferred the scope of the deletion from the commit subject 'dropping the contested edits' rather than reading the resulting tree. Three files were contested, so it asserted three files were lost. A union merge resolves a contested file without discarding either side, and that possibility was never checked.",
+            "standing": "The correction is accepted in full. The one true claim is now closed by the session that raised it."
+          }
+        ]
+      },
+      "note": "Arbitrated, then corrected on the facts by the vantage it overrode. See arbitration.corrections. The correction is the process working: an arbitration that could not be checked against the tree would have kept an overstatement in the record permanently."
     },
     {
       "id": "Q2-SURVIVAL",

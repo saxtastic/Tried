@@ -74,7 +74,7 @@ let current = null;
 // ---- rendering ------------------------------------------------------------
 
 function debateCard({ condition, pro, con, judgment }) {
-  const card = el('section', { class: 'card' });
+  const card = el('section', { class: 'debate' });
   card.append(el('h2', {},
     el('span', { class: 'tag info' }, condition.track),
     condition.id,
@@ -181,7 +181,7 @@ function debateCard({ condition, pro, con, judgment }) {
 
 function sweepCard(report) {
   const s = report.interpretive_sweep;
-  const card = el('section', { class: 'card' },
+  const card = el('section', { class: 'report' },
     el('h2', {}, 'Interpretive sweep', el('span', { class: `tag ${s.outcome_depends_on_regime ? 'warn' : 'ok'}` }, s.outcome_depends_on_regime ? 'outcome moves' : 'outcome holds')),
     el('p', { class: 'sub' }, 'The same record, read under every regime the words will support.'),
   );
@@ -198,7 +198,7 @@ function sweepCard(report) {
 
 function institutionCard(report) {
   const s = report.institutional_sweep;
-  const card = el('section', { class: 'card' },
+  const card = el('section', { class: 'report' },
     el('h2', {}, 'Institutional sweep', el('span', { class: 'tag info' }, `recorded: ${s.actual_regime}`)),
     el('p', { class: 'sub' }, 'How the same tests translate when the institution is loose, rigid, without policy, or drowning in it.'),
   );
@@ -227,7 +227,7 @@ function institutionCard(report) {
 function governanceCard(report) {
   const g = report.disposition.governance;
   const d = g.remedial_dialectic;
-  return el('section', { class: 'card' },
+  return el('section', { class: 'report' },
     el('h2', {}, 'Governance — the authority of the premise',
       el('span', { class: 'tag bad' }, `pleaded ${g.self_defeat_risk_before}`),
       el('span', { class: 'tag ok' }, `reframed ${g.self_defeat_risk_after}`)),
@@ -253,7 +253,7 @@ function governanceCard(report) {
 
 function vectorsCard(report) {
   const vs = report.disposition.statutory_challenge;
-  const card = el('section', { class: 'card' },
+  const card = el('section', { class: 'report' },
     el('h2', {}, 'Statutory challenge', el('span', { class: 'tag warn' }, `${vs.length} vectors`)),
     el('p', { class: 'sub' }, 'Every place the claim fails for a reason a tribunal cannot fix is a place a legislature can. Ranked by how much of the case each one unlocks.'),
   );
@@ -270,7 +270,7 @@ function vectorsCard(report) {
 }
 
 function driftCard(report) {
-  const card = el('section', { class: 'card' },
+  const card = el('section', { class: 'report' },
     el('h2', {}, 'Lexicon drift'),
     el('p', { class: 'sub' }, 'Where the operative words have moved, and what was lost when they did.'),
   );
@@ -309,9 +309,11 @@ function render() {
 
   const s = report.disposition.summary;
   document.getElementById('disposition').replaceChildren(
-    el('div', {}, `${s.established}/${s.conditions} established`),
-    el('div', {}, `${s.barred} barred at the forum`),
-    el('div', {}, `${s.lost_on_principle} lost on principle`),
+    el('dt', {}, 'established'), el('dd', {}, `${s.established}/${s.conditions}`),
+    el('dt', {}, 'barred'), el('dd', {}, String(s.barred)),
+    el('dt', {}, 'on principle'), el('dd', {}, String(s.lost_on_principle)),
+    el('dt', {}, 'regime'), el('dd', {}, report.regime),
+    el('dt', {}, 'institution'), el('dd', {}, report.policy_regime),
   );
 }
 

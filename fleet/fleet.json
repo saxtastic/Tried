@@ -32,6 +32,24 @@
       "by": "session_01GvNCLtH3R2cqohRaUwqKek",
       "method": "scheduled check-in: git fetch --prune, branch ancestry, commit inspection",
       "register": "O"
+    },
+    {
+      "at": "2026-08-29T20:08:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "scheduled check-in: git fetch --prune, get_session on both targets, controlled re-fire",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T20:58:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "scheduled check-in: answers collected off both branches, three questions arbitrated",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T21:58:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "scheduled check-in: verified the simulator's correction against the tree at 0f82a58",
+      "register": "O"
     }
   ],
   "environments": [
@@ -173,11 +191,7 @@
         "test/*",
         "docs/*"
       ],
-      "claims_disputed": [
-        "public/index.html",
-        "package.json",
-        "README.md"
-      ],
+      "claims_disputed": [],
       "ritual": false,
       "state": "review",
       "register": "O",
@@ -188,10 +202,12 @@
       "survival": {
         "duration": "indefinite — statute text and case law age slowly",
         "survives_gallery": "yes — the corpus is a document set, not an installation",
-        "irl_contingency": "runs offline; the corpus is bundled into the page rather than fetched",
-        "produces_artifact": false
+        "irl_contingency": "Runs from a static file server, NOT from file:// — corrected 2026-08-29 by the engineering vantage against this file's earlier claim that it runs offline. 14 requests, all same-origin: no font, no CDN, no analytics, no API, no dependencies installed. The real no-browser contingency is sim/cli.mjs, which is text.",
+        "produces_artifact": false,
+        "note": "Earlier entry here overstated survivability. Corrected against measurement supplied by the project itself."
       },
-      "partial_compliance": "104eb5f fixed the CSP finding by bundling the corpus into corpus.bundle.js rather than fetching it — default-src 'none' blocks fetch, which the relay did not spell out and the session worked out itself. It has NOT merged the shell, and still changes all three disputed files. P7 and P8 both stand."
+      "partial_compliance": "104eb5f fixed the CSP finding by bundling the corpus into corpus.bundle.js rather than fetching it — default-src 'none' blocks fetch, which the relay did not spell out and the session worked out itself. It has NOT merged the shell, and still changes all three disputed files. P7 and P8 both stand. Since then eb94e40 verified the model against frameworks in other trades and corrected it — 42 tests passing. Still has not merged the shell; P7 and P8 stand.",
+      "merged_upstream": "556734b — merged the venue shell and dropped the contested edits to public/index.html, package.json and README.md"
     }
   ],
   "coworkers": [
@@ -363,6 +379,13 @@
       "detail": "Engineering and product are different registers with different truth conditions. An engineering claim is true if it works; a product claim is true if a record backs it. Any catalogue field — a listing, a description, a spec sheet, a Shopify product body — extracts from a named record: a tech spec, a patent filing, a production note, a measurement. Where no record exists the field stays blank and is marked. Generated copy is not extracted copy, and a blank field is a finding while a fabricated one is a defect.",
       "severity": "error",
       "applies_to": "any project whose vantages_held include content-marketing, or that declares produces_artifact"
+    },
+    {
+      "id": "P12",
+      "rule": "A subtree registers itself in its own pull request.",
+      "detail": "The shell owns public/index.html, but the card announcing a subtree belongs to the subtree's PR, not the shell's. If the shell carries the card, the shell merging alone ships a dead link on the front page. Enforced structurally in scripts/check-tiers.mjs: every .card--link href must resolve to an index.html present on the branch.",
+      "severity": "error",
+      "established": "2026-08-29. The simulator session re-added its own card to the shell's file to close a gap this file had raised against it — the right instinct, filed one branch too early. Taking it onto the shell branch produced a front page linking /simulator/, which does not exist there."
     }
   ],
   "stale_after_days": 14,
@@ -408,6 +431,34 @@
       "target": "claude/apps-fellowships-repository-zlwbft, claude/governance-corpus-simulator-m2sjkw",
       "result": "Fellowships merged c9d77fc and self-declared under P8. Simulator fixed the CSP defect independently but has not merged. A local merge of the fellowships branch into the venue branch was made and reset without pushing: it fast-forwarded, which would have collapsed PR #2 into PR #1 and destroyed the stack.",
       "register": "O"
+    },
+    {
+      "at": "2026-08-29T19:15:00Z",
+      "action": "create_trigger + fire_trigger (with text) — FAILED",
+      "target": "session_01GR1Ut4PmfsRVZo96RJZVJu, session_01HCcyjiDYBhyRWFnL1qrKWB",
+      "result": "Non-delivery. Neither session received the core questions. Fellowships' updated_at was 19:09:32, six minutes before the fire, and never moved; the simulator's 19:15 commit was its own cross-domain verification work already in flight. Both returned cse_ ids unrelated to their targets.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T20:08:00Z",
+      "action": "create_trigger + fire_trigger (bare) + delete_trigger",
+      "target": "session_01GR1Ut4PmfsRVZo96RJZVJu, session_01HCcyjiDYBhyRWFnL1qrKWB",
+      "result": "Re-sent the same four questions with the ff9ca54 pointer folded into the prompt and no `text` argument. Both fires returned cse_ ids matching their targets. Concurrent broadcast now actually out.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T20:58:00Z",
+      "action": "collect + arbitrate",
+      "target": "Q1-ORDER, Q3-REGISTER, Q4-PROVENANCE",
+      "result": "Both coworkers answered from their own vantages and both found against their own work. Q1, Q3 and Q4 arbitrated with held_opposition recorded. Q2 left open: the venue holds the missing vantage and asked the question, so it cannot be both party and judge. Q5 remains the owner's.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T21:58:00Z",
+      "action": "verify + correct",
+      "target": "Q1-ORDER arbitration",
+      "result": "The simulator raised a factual correction against the arbitration's held_opposition. Verified independently against its branch: README.md carried the simulator section (line 187, 39 lines) and package.json carried sim, test, build:corpus and verify alongside the shell's scripts — both survived as a union merge. Only the front-page nav entry was genuinely lost, and the simulator has since re-added it. The arbitration overstated by two of three files; amended, with the correction recorded beside it rather than over it.",
+      "register": "O"
     }
   ],
   "mechanisms": [
@@ -422,10 +473,12 @@
       "constraints": [
         "ListAgents does not reach cloud siblings; there is no direct peer channel.",
         "update_trigger cannot edit the prompt of a routine that fires into another session — a correction is a new trigger, not an edit.",
-        "The target cannot reply. Read its state with get_session instead of expecting an answer."
+        "The target cannot reply. Read its state with get_session instead of expecting an answer.",
+        "fire_trigger with a `text` argument does not deliver into the bound session. Established by controlled comparison on 2026-08-29: three fires without `text` returned session_id = cse_ + the target's own suffix and the target acted; two fires with `text` returned unrelated cse_ ids and neither target was touched — one had not been updated since six minutes BEFORE the fire. Put everything in the prompt and fire bare. The returned session_id is the delivery receipt: if its suffix does not match the target, nothing arrived."
       ],
       "register": "O",
-      "note": "Established by use on 2026-08-29; each constraint was hit, not read."
+      "note": "Established by use on 2026-08-29; each constraint was hit, not read.",
+      "verification": "Do not treat a fire as delivered because the call returned 200. Check the returned session_id suffix, and check the target's updated_at moved. A relay that silently no-ops looks exactly like a coworker choosing not to answer."
     }
   ],
   "vantages": {

@@ -115,6 +115,12 @@ function check() {
       add("P11", "warn", q.id, `put to ${asked} vantage-holder(s), ${answered} answered — unanswered, so it resolves by whatever happens first`);
     } else if (answered < asked) {
       add("P11", "warn", q.id, `${answered} of ${asked} answered — arbitrating now would decide it on a partial record`);
+    } else if (!q.note) {
+      // Fully answered and unarbitrated is the case the rule originally missed:
+      // answers accumulate, nothing resolves, and nothing says so. A question
+      // deliberately held open carries a note explaining why; one that just
+      // stalled does not.
+      add("P11", "warn", q.id, `${answered} of ${asked} answered and not arbitrated, with no note saying why it is held`);
     }
   }
 
