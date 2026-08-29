@@ -2,14 +2,12 @@
   "schema_version": "1.0",
   "title": "Core questions — asked concurrently, arbitrated without collapsing",
   "note": "These are put to every live coworker at once, not relayed one at a time down a chain. A question is core when the vantages in fleet.json disagree about it; a question only one vantage cares about is a task, not a question. Answers are recorded verbatim as they come back. Arbitration records what was decided AND what did not reconcile — held_opposition is not a failure of the process, it is the part of the record worth keeping. A synthesis that shows no residue was an average, not a decision.",
-
   "vantages": {
     "engineering": "What the thing is and whether it works. Tech specs, retrofit, tolerances, the build. Answers 'does it hold'.",
     "creative-director": "What it looks like it is. Coherence of the image across every surface. Answers 'is it one thing or several things wearing the same colour'.",
     "producer": "Duration, contingency, cost of being wrong. Answers 'does it survive contact with a date and a room'.",
     "content-marketing": "What is claimed in public, and on what record. Catalogue copy, description, listing. Answers 'can this sentence be traced'."
   },
-
   "rules": [
     "A role is a vantage, not a person. One session holds several; a vantage with no holder is a gap and is recorded as one.",
     "Questions go out concurrently. Sequential relay produces agreement with whoever was asked last.",
@@ -17,50 +15,113 @@
     "Arbitration holds the opposition. Where two vantages do not reconcile, both go in the record and the decision names which one it overrode and what that costs.",
     "No question is closed by the asker answering it."
   ],
-
   "questions": [
     {
       "id": "Q1-ORDER",
       "question": "Three pull requests target one base. What is the merge order, and does the simulator merge the shell or does the shell absorb the simulator?",
       "why_core": "Engineering says whichever order costs fewer conflicts. Creative direction says whichever order leaves one coherent front page. Producer says whichever order can be reversed on the day it goes wrong. These are not the same answer.",
-      "asked_of": ["session_01GR1Ut4PmfsRVZo96RJZVJu", "session_01HCcyjiDYBhyRWFnL1qrKWB"],
-      "vantages": ["engineering", "creative-director", "producer"],
-      "answers": [],
+      "asked_of": [
+        "session_01GR1Ut4PmfsRVZo96RJZVJu",
+        "session_01HCcyjiDYBhyRWFnL1qrKWB"
+      ],
+      "vantages": [
+        "engineering",
+        "creative-director",
+        "producer"
+      ],
+      "answers": [
+        {
+          "vantage": "producer",
+          "session": "session_01GR1Ut4PmfsRVZo96RJZVJu",
+          "summary": "Venue, then fellowships, then simulator — and the simulator merges the shell, never the shell absorbing the simulator.",
+          "detail": "The producer test is not fewest conflicts, it is what you can reverse on the bad day. Merge in dependency order, because the last thing merged is always the cheapest thing to reverse, and dependency order keeps the cheapest revert pointed at the newest and least-depended-on change.\n\n#1 venue first. Both subtrees are already built against it, and at its merge nothing downstream is in the base yet, so it is the one moment its revert is cheap.\n\n#2 fellowships second. It is stacked on #1 and already carries its head — merged at 335b97f, again at 4c31ec2, again at the questions commit — so merging it introduces no shell change at all. Backing it out is one revert of one merge commit plus deleting public/fellowships/; the shell is untouched and /fleet/ never notices.\n\n#3 simulator last, because it is the only one of the three whose merge would otherwise force the shell to change shape, and it is the one whose blast radius I cannot bound from this vantage.\n\nOn direction: the simulator merges the shell into its branch. If the shell absorbs the simulator, the shell's history now contains it, and reverting means surgery on the files every surface depends on — public/index.html, venue.css, _headers. Reversibility says the load-bearing thing never absorbs the experimental thing; the experimental thing takes the dependency and pays the merge cost. It also puts the P8 collision on the simulator's side of the line, where the session that created it can resolve it, instead of on the base where whoever merges second inherits it cold.\n\nWhat my answer costs, stated rather than hidden: this is the slowest order for the simulator. It rebases most and waits longest, and if engineering argues fewest-conflicts it will likely want the simulator in earlier while the shell is still small. I would override that. The cost is one session doing merge work twice; the thing it buys is that no revert ever has to cut into the shell."
+        }
+      ],
       "arbitration": null
     },
     {
       "id": "Q2-SURVIVAL",
       "question": "What in this repository survives beyond the white wall and the gallery space, and what is screen-only? Name, per surface, its IRL contingency — what happens to it when there is no browser in the room.",
       "why_core": "A venue that only exists as a website is a website. The word venue makes a claim about a room. Either the claim is real and each surface has a physical contingency, or the word is decoration and should be dropped rather than defended.",
-      "asked_of": ["session_01GR1Ut4PmfsRVZo96RJZVJu", "session_01HCcyjiDYBhyRWFnL1qrKWB"],
-      "vantages": ["producer", "creative-director"],
-      "answers": [],
+      "asked_of": [
+        "session_01GR1Ut4PmfsRVZo96RJZVJu",
+        "session_01HCcyjiDYBhyRWFnL1qrKWB"
+      ],
+      "vantages": [
+        "producer",
+        "creative-director"
+      ],
+      "answers": [
+        {
+          "vantage": "producer",
+          "session": "session_01GR1Ut4PmfsRVZo96RJZVJu",
+          "summary": "Yes, /fellowships/ is the one surface here that already survives the browser going away — but it passes in kind and only 6/16 in degree, and what survives is the external obligation, not my surface.",
+          "detail": "The relay asked whether my claim is true. It is true, with a qualifier I would rather state than be caught on.\n\n/fellowships/ — SURVIVES. What survives is not the page; it is the obligation the page indexes. Six real institutions have six real dates: MacDowell 10 Sep, Guggenheim 15 Sep, Fulbright 15 Sep, Rhodes 7 Oct, NSF GRFP 20 Oct, PD Soros 29 Oct, all 2026. IRL contingency: those six print onto one sheet of paper and stay true and actionable on a wall with no power and no browser. That is a real pass — the deadline does not care whether the site is up.\nThe qualifier: three further records survive only as 'no open call right now', which is worth knowing and is not actionable, and seven survive only as ⟦FILL⟧ markers, which is a to-do list rather than a deliverable. So the surface passes the test in kind, at 6/16 in degree, and the honest print run today is one page with six lines on it.\n\n/fleet/ — SCREEN-ONLY. It describes sessions, branches and pull requests. There is no object to hand anyone, and nothing on it is true off this machine. Its IRL contingency is a printed status page that is stale the moment it leaves the printer.\n\nThe venue shell — SCREEN-ONLY. It is a website. 'Venue' is doing rhetorical work the artifact does not back: four device tiers are a claim about screens, not about a room. I hold producer, not creative-director, so I will not rule on whether to drop the word — but from where I sit the word currently has no contingency behind it, and Q2's own framing says that makes it decoration.\n\nproduces_artifact: false is correct as the venue recorded it for my project. The reference produces a registry, not an object.\n\nWhere my vantage has no view: whether the white wall and the gallery space are a specific booked room with dates. If they are, that room's calendar and my six deadlines are the same kind of object and belong on one timeline. I cannot see the room from here and I am not going to infer it."
+        }
+      ],
       "arbitration": null
     },
     {
       "id": "Q3-REGISTER",
       "question": "Where is the line between engineering and product in this repository? Tech specs and retrofitting are engineering. Product placement, design features, unrealized patents and ecommerce offerings are not. Which files sit on which side, and which currently straddle it?",
       "why_core": "The two registers have different truth conditions. An engineering claim is true if it works. A product claim is true if a record backs it. Filing them in one place lets a product claim borrow the credibility of a spec it is not entitled to.",
-      "asked_of": ["session_01GR1Ut4PmfsRVZo96RJZVJu", "session_01HCcyjiDYBhyRWFnL1qrKWB"],
-      "vantages": ["engineering", "content-marketing"],
-      "answers": [],
+      "asked_of": [
+        "session_01GR1Ut4PmfsRVZo96RJZVJu",
+        "session_01HCcyjiDYBhyRWFnL1qrKWB"
+      ],
+      "vantages": [
+        "engineering",
+        "content-marketing"
+      ],
+      "answers": [
+        {
+          "vantage": "content-marketing",
+          "session": "session_01GR1Ut4PmfsRVZo96RJZVJu",
+          "summary": "In my subtree the two registers are cleanly split except for two files that straddle — and data/vantage.config.json is the dangerous one, because it holds editorial positions in a file whose form borrows the credibility of a spec.",
+          "detail": "Engineering — true if it runs: scripts/build-registry.mjs, check-registry.mjs, check-vantage.mjs, check-tiers.mjs; public/fellowships/workflow.js, vantage.js, fellowships.css; data/workflow.json (a state machine whose truth condition is that settle() terminates and every stage reaches a terminal); public/_headers.\n\nProduct — true only if a record backs it: every file in data/open-calls/, each one a set of claims about a real institution; the summary and cycle_note prose; the copy in public/fellowships/index.html and README.md.\n\nStraddling:\n1. data/vantage.config.json. It reads as engineering — a config the module executes, with a schema and checks over it — but its contents are editorial. rank.award_value decides what counts as a large award. rank.effort_cost decides what counts as expensive. profile decides who the reference is for. Those are positions with no record behind them, sitting in a file whose form lends them the authority of a spec. This is precisely the borrowing P9 names, and it is in my project, not someone else's.\n2. data/record.schema.json. Engineering-shaped, since the validator enforces it, but its content is the product register's truth conditions. I would keep this straddle: it is the place where a product claim is made checkable, which is the useful direction for the two registers to touch.\n3. README.md straddles by being one document in one voice about both. The [O]/[D]/[I]/[V] register marks are the only thing separating them, which works only as long as every claim carries one.\n\nThe asymmetry worth naming: an engineering file that is wrong fails a check. A product file that is wrong renders beautifully. Filing them in one repository is fine; filing them in one register is what lets the second borrow from the first."
+        }
+      ],
       "arbitration": null
     },
     {
       "id": "Q4-PROVENANCE",
       "question": "If a catalogue listing is ever generated out of this repository — a Shopify product description, customised or not — what record does each field extract from, and which fields stay blank because no record exists?",
       "why_core": "This is the question that decides whether the framework is informed or baseless. Copy generated from nothing is hype, and hype priced as data is the expensive failure: cost of input rises, nothing resolves, and the only thing that scales is the claim. Extraction from a spec, a patent filing or a production record is a different object from generation.",
-      "asked_of": ["session_01GR1Ut4PmfsRVZo96RJZVJu", "session_01HCcyjiDYBhyRWFnL1qrKWB"],
-      "vantages": ["content-marketing", "engineering", "producer"],
-      "answers": [],
+      "asked_of": [
+        "session_01GR1Ut4PmfsRVZo96RJZVJu",
+        "session_01HCcyjiDYBhyRWFnL1qrKWB"
+      ],
+      "vantages": [
+        "content-marketing",
+        "engineering",
+        "producer"
+      ],
+      "answers": [
+        {
+          "vantage": "content-marketing",
+          "session": "session_01GR1Ut4PmfsRVZo96RJZVJu",
+          "summary": "Six field-groups extract from a named record, three are blank by design — and six extract from nothing while still rendering as fact. Two of those six drive the ranking, and my own validator does not look at any of them.",
+          "detail": "Audited against all 16 records rather than asserted.\n\nEXTRACTS FROM A NAMED RECORD:\n- name, org, url, source (16/16) ← the organisation's own page.\n- closes (6/16) ← the URL in sourced_from, read 2026-08-29.\n- sourced_from, verified (9/16) ← the read itself.\n- cycle_note (16/16) ← the same read, or a ⟦FILL⟧ marker naming what is owed.\n- award.max (1/16) ← pdsoros.org/application-process.\n\nBLANK BECAUSE NO RECORD EXISTS:\n- opens (0/16) — no open date was ever read.\n- closes (10/16) — 3 checked and genuinely between cycles, 7 never looked at.\n- award figures (15/16) — basis 'none'.\n\nEXTRACTS FROM NOTHING AND IS NOT BLANK — this is the finding, and it is against me:\n- summary (16/16): prose I wrote from general knowledge. Not quoted, not cited.\n- disciplines, geography, career_stage (16/16): eligibility rules. These are the most product-copy-shaped claims in the record and I assigned every one of them without reading an eligibility page.\n- effort (16/16): my judgement — and it is the denominator of return-on-effort, so it directly moves what the module promotes to the top of a band.\n- kind, cycle (16/16): my classification.\n\nSo a Shopify body generated from a record today would EXTRACT its title, vendor, link and (for six of sixteen) one date, and would GENERATE its description, its eligibility bullets and its effort grading. The first set is extraction. The second is exactly the object P9 separates out: generated copy wearing the same JSON as extracted copy, indistinguishable at the field level, and my validator does not catch it because I wrote the rule to guard dates and money and nothing else.\n\nThe relay said my instinct on the seven blanks was the answer. It was right and it was also too narrow: I applied it to the two fields I expected to be challenged on, not to every field that makes a claim. The eligibility fields are more dangerous than the dates, because a wrong date is discovered by the applicant before they spend anything and a wrong eligibility rule is discovered after.\n\nThe fix, named but not executed per the instruction: extend record.schema.json so every product-register field carries its own basis/sourced_from pair rather than only closes and award; make summary a quoted extract with a source or blank; and either source effort or move it out of the record into vantage.config.json, where it is visibly an editorial weight rather than a fact about the programme."
+        },
+        {
+          "vantage": "producer",
+          "session": "session_01GR1Ut4PmfsRVZo96RJZVJu",
+          "summary": "No catalogue ships off these records today. The gap is cheap to close now and expensive to retract later, and the failure mode that ships is the invisible one.",
+          "detail": "The producer question is what it costs to be wrong in public.\n\nA blank field costs an email asking what goes there. A generated eligibility rule costs an applicant a wasted submission — and costs us the claim that the reference is sourced at all. One wrong 'open to emerging artists, any geography' on a listing is a correction, a refund if money touched it, and it discredits the six fields that were actually extracted alongside it.\n\nThe asymmetry is the whole problem: extraction failures are visible, because a blank looks blank. Generation failures are invisible, because plausible copy looks like sourced copy. The invisible one is therefore the one that ships, and no amount of care at publish time catches it — it has to be caught in the schema.\n\nSequencing: do not generate any catalogue listing out of these records until the six unsourced product fields either carry a source or go blank. The extra sourcing pass is bounded — 16 records, one eligibility page each. Retracting a published listing is not bounded.\n\nReversibility, same test as Q1: a blank listing can be filled in later at no cost. A published wrong eligibility rule has already been read by the person it misled, and there is no revert for that."
+        }
+      ],
       "arbitration": null
     },
     {
       "id": "Q5-ADOPTION",
       "question": "The stock options session has been review-ready and unread since 2026-08-08, holds no repository, and sits outside the declared environment. Adopt it into a project or archive it.",
       "why_core": "Third check-in with no answer. Idle is the one option that loses the work, and it is the option that happens by default when nobody chooses.",
-      "asked_of": ["owner"],
-      "vantages": ["producer"],
+      "asked_of": [
+        "owner"
+      ],
+      "vantages": [
+        "producer"
+      ],
       "answers": [],
       "arbitration": null
     }
