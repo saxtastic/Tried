@@ -66,6 +66,11 @@ export const DEFEATERS = {
     principles: ['finality', 'institutional_competence'],
     gloss: 'The process departed, but the outcome would have been the same.',
   },
+  structured_compliance: {
+    label: 'Formal compliance with every written rule',
+    principles: ['textual_fidelity', 'institutional_competence'],
+    gloss: 'Conduct that satisfies each written rule while defeating their purpose is formally unimpeachable.',
+  },
 };
 
 /** Build the proponent's case for a condition. */
@@ -182,6 +187,48 @@ export function opponent(condition, ctx, proCase) {
       target: condition.id,
       argument: `${respondentTheory.argument} (${respondentTheory.label}, in a ${inst.regime} policy regime.)`,
       vulnerability: respondentTheory.vulnerability,
+      // Every other profession that grants deference to expert judgment makes it
+      // conditional on producing the professional standard and showing conformity
+      // to it. Educational deference asks for no equivalent showing, and that
+      // asymmetry is itself an argument.
+      answer_available: kind === 'deference'
+        ? {
+            move: 'demand_the_peer_standard',
+            argument:
+              'Deference to professional judgment is granted elsewhere only against a demonstrated professional ' +
+              'standard: the respondent produces what a responsible body of practitioners would have done, shows ' +
+              'conformity, and the tribunal may still reject a standard that will not bear logical scrutiny. ' +
+              'Deference claimed here rests on the respondent\'s own characterisation of its decision as academic, ' +
+              'with no such showing. The party seeking the benefit should carry the burden every comparable ' +
+              'profession carries.',
+            source: 'medical standard-of-care practice (Bolam as qualified by Bolitho)',
+          }
+        : null,
+    }));
+  }
+
+  // 4b. The dense-rulebook shield.
+  //
+  // The simulator originally scored a rigid regime as favourable to the claimant,
+  // on the theory that more written rules means more to breach. Financial
+  // reporting spent decades learning the opposite is at least as often true:
+  // density invites conduct engineered to satisfy every rule while defeating what
+  // the rules were for, and that conduct is formally unimpeachable. So the shield
+  // is modelled, and so is the answer to it.
+  if (inst.regime === 'rigid' || inst.policy_density >= 0.7) {
+    const theory = THEORIES.structured_compliance;
+    raised.push(mkDefeater('structured_compliance', 0.4 + inst.policy_density * 0.3, {
+      target: condition.id,
+      argument: theory.argument,
+      vulnerability: theory.vulnerability,
+      answer_available: {
+        move: 'purpose_and_recorded_judgment',
+        argument:
+          'A written requirement has an objective. Conduct meeting the text while defeating the objective is not ' +
+          'compliance, and a party invoking the rulebook as a shield must show it made the judgment at the time ' +
+          'rather than reconstructing it afterwards.',
+        source: 'the settled answer in financial reporting to the same argument',
+      },
     }));
   }
 

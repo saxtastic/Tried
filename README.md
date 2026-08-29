@@ -66,6 +66,17 @@ to a corpus entry or a stipulated weight.
 
 - [`docs/simulator-model.md`](docs/simulator-model.md) — what it models and why
 - [`docs/simulator-usage.md`](docs/simulator-usage.md) — running it, and editing the corpus
+- [`docs/cross-domain-verification.md`](docs/cross-domain-verification.md) — the model checked against frameworks in other trades
+
+Every construct is verified against a named framework from a profession that had
+to solve the same structural problem independently — aviation's just culture,
+performance-based building codes, military mission command, financial reporting
+standards, the medical standard of care. Nine frameworks: five corroborate, three
+partly, and one contradicted the model outright and changed it.
+
+```bash
+npm run verify       # the cross-domain report
+```
 
 The bundled case is a parameterised template, not a record of any real
 proceeding. It is a working example and a set of dials.

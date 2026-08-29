@@ -81,6 +81,18 @@ export const THEORIES = {
     vulnerability: 'Formal compliance with a process whose substance was predetermined is itself reviewable.',
     base_strength: 0.6,
   },
+  structured_compliance: {
+    label: 'Formal compliance with every written rule',
+    principles: ['textual_fidelity', 'institutional_competence'],
+    argument:
+      'Every applicable written requirement was satisfied. Where conduct meets each rule as drafted, ' +
+      'a complaint that it defeated the rules\' purpose is a complaint about the drafting, not about the conduct.',
+    vulnerability:
+      'The answer is the one financial reporting settled on after decades of the same argument: a rule has an ' +
+      'objective, conduct engineered to satisfy the text while defeating the objective does not comply, and the ' +
+      'party claiming the shield must show it made and recorded the judgment at the time.',
+    base_strength: 0.62,
+  },
   standardless_therefore_arbitrary: {
     label: 'Standardless, therefore arbitrary',
     principles: ['non_arbitrariness', 'equal_protection'],
@@ -164,6 +176,24 @@ export function necessitySilence(inst) {
     regime: p.regime,
     conflicts: p.conflicts,
     enabling_act: p.enabling_act,
+    // Aviation's substitution test, borrowed because the construct asserted that
+    // discretion was "functionally required" without supplying a way to prove it.
+    // This is a thing a record can actually establish.
+    substitution_test: triggered
+      ? {
+          question:
+            'Would another similarly trained and experienced person, in the same circumstances and with the same ' +
+            'information, plausibly have made the same choice between the conflicting provisions?',
+          if_yes:
+            'The finding is systemic. The defect belongs to the instrument that forced the choice, not to the person ' +
+            'who made it, and no amount of scrutiny of the individual decision will reach it.',
+          if_no:
+            'The departure was not compelled by the conflict, and the ordinary review of that particular exercise ' +
+            'applies without needing this argument at all.',
+          proves: 'that the discretion was required rather than merely convenient',
+          source: 'ICAO Annex 19 / Just Culture practice',
+        }
+      : null,
     finding: triggered
       ? 'Discretion is required for the institution to function and is unauthorised by the instrument that created it. ' +
         'Every exercise is therefore both unavoidable and uncitable, and no reviewing body can test it against anything.'
