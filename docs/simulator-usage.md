@@ -30,6 +30,18 @@ npm run dev          # wrangler dev, then open /simulator/
 The page exposes the interpretive regime, the policy regime, and track
 filtering as live controls, and will hand you the full report as JSON.
 
+It needs a server — any static one will do, `python3 -m http.server` from
+`public/` is enough — because the engine is a set of ES modules and browsers
+refuse to load modules from `file://` (they are blocked as cross-origin from
+origin `null`). Once served it makes no network requests beyond its own origin:
+no fonts, no CDN, no analytics, no API. Measured at fourteen requests, all
+same-origin, so it runs with the network unplugged. It does not run by
+double-clicking the file.
+
+If you need the simulator somewhere there is no browser at all, use the CLI. It
+prints the whole argument as text, and `--json` gives the same content as a data
+file.
+
 ## Tests
 
 ```bash
