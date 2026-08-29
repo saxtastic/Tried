@@ -84,11 +84,28 @@ function check() {
     }
   }
 
+  // P8 — a shared file is owned by one project; the rest declare the claim
+  const owner = new Map();
+  for (const p of fleet.projects) {
+    for (const g of p.owns) if (!g.endsWith("*")) owner.set(g, p.id);
+  }
+  for (const p of fleet.projects) {
+    for (const f of p.claims_disputed ?? []) {
+      const holder = owner.get(f);
+      if (holder && holder !== p.id) {
+        add("P8", "error", `${p.id} → ${f}`,
+          `owned by ${holder}; ${p.id} changes it too, so whichever of PR #${project(holder).pull_request} / PR #${p.pull_request} merges second conflicts`);
+      }
+    }
+  }
+
   // P7 — an inherited base is merged, not assumed
   for (const p of fleet.projects) {
     if (!p.inherits) continue;
     const up = project(p.inherits);
-    if (up && p.source_revision && p.source_revision !== up.branch) {
+    // merged_upstream discharges it: the merge is the thing the rule asks for,
+    // and the fixed source revision never changes to record that it happened.
+    if (up && p.source_revision && p.source_revision !== up.branch && !p.merged_upstream) {
       add("P7", "warn", p.id,
         `declares inherits: ${up.id} but was checked out from ${p.source_revision}; ${up.branch} has to be merged into ${p.branch} before it pushes`);
     }
@@ -140,6 +157,25 @@ function check() {
 
 function plan(findings) {
   const actions = [];
+
+  // P8 fires once per disputed file; one relay per project is what an operator
+  // actually sends, so collapse the findings before emitting the action.
+  const disputed = new Map();
+  for (const f of findings) {
+    if (f.rule !== "P8") continue;
+    const id = f.subject.split(" → ")[0];
+    if (!disputed.has(id)) disputed.set(id, []);
+    disputed.get(id).push(f.subject.split(" → ")[1]);
+  }
+  for (const [id, files] of disputed) {
+    const p = project(id);
+    actions.push({
+      why: `${id} changes ${files.join(", ")}, all owned by another project`,
+      tool: "create_trigger + fire_trigger",
+      args: { persistent_session_id: "<the claiming session>", prompt: `merge the owning branch, then re-apply your changes to ${files.join(", ")} on top` },
+      note: `PR #${p.pull_request} and the owning PR both touch these; whichever merges second conflicts. Cheaper now than after.`,
+    });
+  }
 
   for (const f of findings) {
     if (f.rule === "P3") {

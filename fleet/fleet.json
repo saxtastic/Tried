@@ -20,6 +20,12 @@
       "by": "session_01GvNCLtH3R2cqohRaUwqKek",
       "method": "Claude Code Remote MCP: get_session after executing the plan",
       "register": "O"
+    },
+    {
+      "at": "2026-08-29T15:45:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "scheduled check-in: git fetch --prune, list_sessions, list_pull_requests",
+      "register": "O"
     }
   ],
   "environments": [
@@ -69,19 +75,20 @@
       "repo": "saxtastic/Tried",
       "base_branch": "claude/ios-macos-code-repurpose-ofm9ks",
       "branch": "claude/apps-fellowships-repository-zlwbft",
-      "pull_request": null,
+      "pull_request": 2,
       "owns": [
         "public/fellowships/*",
         "fellowships/*"
       ],
       "ritual": true,
       "ritual_note": "Open calls are re-surveyed and re-ranked on a cadence. Requires a Routine; none exists yet.",
-      "state": "building",
+      "state": "review",
       "register": "D",
       "note": "Subtree opening from the main module. Deadline foresight is the primary lens, ranked by return on effort. Base branch was redirected from the placeholder to the venue branch on 2026-08-29 so it inherits the shell rather than conflicting with it.",
       "inherits": "venue",
       "source_revision": "claude/cloudflare-ayeyoty-setup-uq8pl9",
-      "source_note": "A session's checked-out source is fixed when the session is created and cannot be redirected afterwards. This one was created against the placeholder branch, so inheriting the venue is a merge it must perform, not a base it was given."
+      "source_note": "Resolved. The session merged the venue branch rather than rebasing onto it, which is what the fixed source revision allows. PR #2 is stacked on PR #1.",
+      "merged_upstream": "335b97f — merged claude/ios-macos-code-repurpose-ofm9ks on 2026-08-29"
     },
     {
       "id": "options",
@@ -108,6 +115,31 @@
       "state": "done",
       "register": "O",
       "note": "Completed and archived."
+    },
+    {
+      "id": "simulator",
+      "name": "Governance and corpus legal simulator",
+      "repo": "saxtastic/Tried",
+      "base_branch": "claude/cloudflare-ayeyoty-setup-uq8pl9",
+      "branch": "claude/governance-corpus-simulator-m2sjkw",
+      "source_revision": "claude/cloudflare-ayeyoty-setup-uq8pl9",
+      "inherits": "venue",
+      "pull_request": 3,
+      "owns": [
+        "public/simulator/*",
+        "sim/*",
+        "test/*",
+        "docs/*"
+      ],
+      "claims_disputed": [
+        "public/index.html",
+        "package.json",
+        "README.md"
+      ],
+      "ritual": false,
+      "state": "review",
+      "register": "O",
+      "note": "Built against the placeholder, in parallel with the venue rather than as a subtree of it. Corpus scanned 2026-08-29: generic federal statute text and public case law (Title VI, § 1983, 17 U.S.C. § 201, FERPA, a template enabling act), no personal names, no student records, no institution-specific provisions. The collision is architectural, not content."
     }
   ],
   "coworkers": [
@@ -122,7 +154,7 @@
       "status": "running",
       "observed_at": "2026-08-29T14:29:00Z",
       "register": "O",
-      "last_activity": "2026-08-29T14:25:32Z",
+      "last_activity": "2026-08-29T15:45:00Z",
       "tags": [
         "project:venue"
       ]
@@ -135,16 +167,16 @@
       "environment": "env_01G7235p3dGNiTfRZcvAouqx",
       "model": "claude-opus-5",
       "origin": "ios",
-      "status": "running",
+      "status": "idle",
       "unblocked_by": "trig_0161v5EhTNCcD3D4oABVqBJo fired 2026-08-29T14:30Z carrying the decision",
       "observed_at": "2026-08-29T14:29:00Z",
       "register": "O",
-      "last_activity": "2026-08-29T14:20:49Z",
+      "last_activity": "2026-08-29T15:03:11Z",
       "was_blocked_on": "AskUserQuestion — repo scope and Vantage UX scope",
       "tags": [
         "project:fellowships"
       ],
-      "note": "Unblocked by the relay. Reports building the registry and workflow engine, 6/7 components written."
+      "note": "Merged the venue and rebuilt /fellowships/ as a subtree ranked on return on effort. PR #2 open, stacked on PR #1. Left 7 deadline fields blank rather than filling them in."
     },
     {
       "session": "session_015e4JiauJkHf1CyYPwGzX1Q",
@@ -190,6 +222,20 @@
       "observed_at": "2026-08-29T14:29:00Z",
       "register": "O",
       "last_activity": "2026-08-07T08:54:18Z"
+    },
+    {
+      "session": "session_01HCcyjiDYBhyRWFnL1qrKWB",
+      "title": "Governance and corpus legal simulator",
+      "project": "simulator",
+      "role": "builder",
+      "environment": "env_01G7235p3dGNiTfRZcvAouqx",
+      "model": "claude-opus-5",
+      "origin": "ios",
+      "status": "idle",
+      "observed_at": "2026-08-29T15:45:00Z",
+      "last_activity": "2026-08-29T14:55:50Z",
+      "register": "O",
+      "note": "Review-ready, polling its own PR hourly. Did not know the venue existed when it started."
     }
   ],
   "routines": [],
@@ -235,6 +281,12 @@
       "rule": "An inherited base is merged, not assumed.",
       "detail": "A session's source revision is fixed at creation. If a project declares inherits but its source_revision is not the upstream branch, the inheritance exists only on paper until the upstream branch is merged into the working branch.",
       "severity": "warn"
+    },
+    {
+      "id": "P8",
+      "rule": "A shared file is owned by one project; the rest declare the claim.",
+      "detail": "public/index.html, package.json and README.md are touched by every subtree. The shell owns them. A project that must change one declares it in claims_disputed so the collision is visible before the second merge, not after.",
+      "severity": "error"
     }
   ],
   "stale_after_days": 14,
@@ -265,6 +317,13 @@
       "action": "create_trigger + fire_trigger + delete_trigger",
       "target": "session_01GR1Ut4PmfsRVZo96RJZVJu",
       "result": "Relayed the P7 merge instruction and the subtree conventions. Both spent relay triggers deleted; the record lives here, not in the Routines list.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T15:46:00Z",
+      "action": "create_trigger + fire_trigger + delete_trigger",
+      "target": "session_01HCcyjiDYBhyRWFnL1qrKWB",
+      "result": "Relayed the P7 merge and the P8 file collisions, plus one defect its own checks cannot see: its nav styling lives in an inline <style> block that the CSP added by PR #1 blocks silently. Confirmed to it that the corpus itself is not in question.",
       "register": "O"
     }
   ],
