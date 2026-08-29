@@ -5,17 +5,33 @@
   "kind": "fellowship",
   "url": "https://www.pdsoros.org/",
   "summary": "Graduate school funding for immigrants and children of immigrants in the United States, across any field of graduate study.",
-  "disciplines": ["any"],
-  "geography": ["US"],
-  "career_stage": ["student", "emerging"],
-  "award": { "min": null, "max": null, "currency": "USD", "basis": "estimated", "note": "Tuition support plus stipend across up to two years. ⟦FILL: current figures⟧" },
+  "disciplines": [
+    "any"
+  ],
+  "geography": [
+    "US"
+  ],
+  "career_stage": [
+    "student",
+    "emerging"
+  ],
+  "award": {
+    "min": null,
+    "max": 90000,
+    "currency": "USD",
+    "basis": "sourced",
+    "note": "Up to $90,000 over two years."
+  },
   "effort": "high",
   "cycle": "annual",
-  "opens": "2026-06-01",
+  "opens": null,
   "closes": "2026-10-29",
-  "date_basis": "estimated",
+  "date_basis": "sourced",
+  "cycle_note": "2027 cycle, 2:00pm ET. 77 finalists interview in Jan–Feb 2027; 30 selected.",
+  "sourced_from": "https://pdsoros.org/application-process/",
   "stage": "discovered",
-  "register": "V",
-  "verified": null,
+  "drafts": [],
+  "register": "D",
+  "verified": "2026-08-29",
   "source": "https://www.pdsoros.org/"
 }

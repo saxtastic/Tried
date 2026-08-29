@@ -27,6 +27,7 @@
   var surface = $("#vantage-surface");
   var strip = $("#vantage-strip");
   var note = $("#vantage-note");
+  var glance = $("#vantage-glance");
   var moduleEl = $("#vantage");
   if (!moduleEl || !surface) return;
 
@@ -76,15 +77,19 @@
      wins; a call already past its close date takes the band flagged when_past.
      No band id is named here. */
   function bandFor(bands, days) {
-    var past = null, i, b;
-    for (i = 0; i < bands.length; i++) if (bands[i].when_past) past = i;
+    var past = null, undated = null, i, b;
+    for (i = 0; i < bands.length; i++) {
+      if (bands[i].when_past) past = i;
+      if (bands[i].when_undated) undated = i;
+    }
 
-    if (days === null) return past !== null ? past : bands.length - 1;
+    /* No sourced date is its own band, not a guess at one. */
+    if (days === null) return undated !== null ? undated : bands.length - 1;
     if (days < 0 && past !== null) return past;
 
     for (i = 0; i < bands.length; i++) {
       b = bands[i];
-      if (b.when_past) continue;
+      if (b.when_past || b.when_undated) continue;
       if (b.max_days === null || b.max_days === undefined) return i;
       if (days <= b.max_days) return i;
     }
@@ -108,12 +113,57 @@
     return total ? got / total : 0;
   }
 
+  /* Award value banded by the configuration. An unsourced figure scores at the
+     configured unknown value rather than zero, so a missing number neither
+     flatters nor punishes a call — the card marks it missing either way. */
+  function awardValue(rank, call) {
+    var aw = call.award || {};
+    if (aw.basis === "none" || (aw.min === null && aw.max === null)) return rank.unknown_award;
+    var figure = aw.max !== null && aw.max !== undefined ? aw.max : aw.min;
+    var bands = rank.award_value || [];
+    for (var i = 0; i < bands.length; i++) {
+      if (bands[i].up_to === null || bands[i].up_to === undefined) return bands[i].value;
+      if (figure <= bands[i].up_to) return bands[i].value;
+    }
+    return bands.length ? bands[bands.length - 1].value : 0;
+  }
+
+  /* Return on effort: what the configuration says this call is worth, divided
+     by what it says the call costs to enter. The module supplies neither. */
+  function returnOnEffort(config, call, fit) {
+    var rank = config.rank || {};
+    var w = rank.weights || {};
+    var total = (w.award || 0) + (w.fit || 0);
+    if (!total) return 0;
+    var worth = ((w.award || 0) * awardValue(rank, call) + (w.fit || 0) * fit) / total;
+    var cost = (rank.effort_cost || {})[call.effort];
+    if (!cost) cost = 1;
+    return worth / cost;
+  }
+
+  function awardLabel(call) {
+    var aw = call.award || {};
+    if (aw.basis === "none" || (aw.min === null && aw.max === null)) return "award not sourced";
+    var figure = aw.max !== null && aw.max !== undefined ? aw.max : aw.min;
+    return "up to " + (aw.currency || "") + " " + Number(figure).toLocaleString("en-US");
+  }
+
+  /* Provenance is the whole point of the reference, so it says three different
+     things rather than one: read off the organisation, read off a named third
+     party, or nobody has looked. */
   function provenanceFor(call) {
-    var estimated = call.date_basis === "estimated" || !call.verified;
-    return {
-      kind: estimated ? "estimated" : "confirmed",
-      label: estimated ? "estimated" : "confirmed " + call.verified
-    };
+    /* `kind` drives the styling hook, `group` is what a reader is shown when
+       records are counted, `label` is what the card itself says. */
+    if (call.date_basis === "confirmed") {
+      return { kind: "confirmed", group: "confirmed", label: "confirmed " + call.verified };
+    }
+    if (call.date_basis === "sourced") {
+      return { kind: "sourced", group: "sourced", label: "sourced " + call.verified };
+    }
+    if (call.verified) {
+      return { kind: "nocall", group: "no open call", label: "no open call" };
+    }
+    return { kind: "unsourced", group: "not sourced", label: "date not sourced" };
   }
 
   /* Everything the configuration can read through a "derived.*" path. */
@@ -126,11 +176,16 @@
     var settled = engine.settle(scope);
     var stage = engine.stage(settled.stage);
 
+    var fit = fitFor(config, call);
+
     return {
       days: days,
       band: band,
       band_order: bandIndex,
-      fit: fitFor(config, call),
+      fit: fit,
+      ret: returnOnEffort(config, call, fit),
+      effort_label: call.effort ? call.effort + " effort" : null,
+      award_label: awardLabel(call),
       stage_id: settled.stage,
       stage_label: stage ? stage.label : settled.stage,
       stage_committed: !!(stage && stage.committed),
@@ -193,6 +248,41 @@
       n.appendChild(el("span", null, v.label));
       return n;
     },
+    amount: function (v) { return el("span", "f-amount", v); },
+    /* The cycle's terms, or — on an undated record — what is still owed.
+       A ⟦FILL⟧ marker is the reference naming its own gap, so it is styled as
+       a finding rather than hidden. */
+    terms: function (v) {
+      var n = el("p", "f-terms", v);
+      n.setAttribute("data-owed", /⟦FILL/.test(v) ? "true" : "false");
+      return n;
+    },
+    /* Drafts attached to the opportunity. An empty list is the honest state,
+       and it still renders: the attach point is the thing that tells a reader
+       nothing has been started yet. */
+    drafts: function (v, f, entry) {
+      var n = el("div", "f-drafts");
+      n.setAttribute("data-empty", v.length ? "false" : "true");
+      if (f.label) n.appendChild(el("span", "f-drafts-label", f.label));
+      if (!v.length) {
+        n.appendChild(el("span", "f-drafts-none", "none attached"));
+        return n;
+      }
+      v.forEach(function (d) {
+        var item;
+        if (d.href) {
+          item = el("a", "f-draft", d.label);
+          item.href = d.href;
+          item.rel = "noopener noreferrer";
+        } else {
+          item = el("span", "f-draft", d.label);
+        }
+        if (d.state) item.setAttribute("data-state", d.state);
+        item.setAttribute("aria-describedby", "call-" + entry.call.id);
+        n.appendChild(item);
+      });
+      return n;
+    },
     link: function (v, f, entry) {
       var a = el("a", "f-link", f.label || "Guidelines");
       a.href = v;
@@ -222,6 +312,8 @@
       if (!render) return;
       var v = valueAt(entry, f.from);
       if (v === null || v === undefined || v === "") return;
+      /* An empty array is a real value here — "no drafts attached" is the
+         thing the card needs to say. Only null and "" mean absent. */
 
       var key = f.line || "signals";
       if (!byLine[key]) {
@@ -337,14 +429,37 @@
       surface.appendChild(renderItem(entry, floor, density));
     });
 
+    /* The glance panel counts provenance, not bands — the strip already shows
+       bands, and what a reader most needs to know about this reference is how
+       much of it has actually been sourced. Rows are grouped by whatever kinds
+       come back; no kind is named here. */
+    if (glance) {
+      glance.textContent = "";
+      var kinds = [];
+      var seenKind = {};
+      entries.forEach(function (e) {
+        var k = e.derived.provenance;
+        if (!seenKind[k.kind]) { seenKind[k.kind] = { group: k.group, n: 0 }; kinds.push(seenKind[k.kind]); }
+        seenKind[k.kind].n++;
+      });
+      kinds.forEach(function (k) {
+        var dt = el("dt", null, k.group);
+        var dd = el("dd", null, k.n);
+        glance.appendChild(dt);
+        glance.appendChild(dd);
+      });
+      glance.appendChild(el("dt", null, "total"));
+      glance.appendChild(el("dd", null, entries.length));
+    }
+
     moduleEl.setAttribute("data-state", entries.length ? "ready" : "empty");
 
     if (note) {
       var hidden = entries.length - shown.length;
       var bits = [entries.length + " open calls within " + config.horizon_days + " days"];
       if (hidden > 0) bits.push(hidden + " held back by this floor's density");
-      var unverified = entries.filter(function (e) { return e.derived.provenance.kind === "estimated"; }).length;
-      if (unverified) bits.push(unverified + " carrying estimated dates — confirm against the guidelines before planning");
+      var owed = entries.filter(function (e) { return e.derived.days === null; }).length;
+      if (owed) bits.push(owed + " with no sourced deadline — that is work the reference still owes, not a gap in the programme");
       note.textContent = bits.join(" · ");
     }
   }
@@ -390,7 +505,7 @@
 
   /* ----------------------------------------------------------- loading -- */
 
-  fetch("/registry.json", { credentials: "omit", cache: "no-cache" })
+  fetch("/fellowships/registry.json", { credentials: "omit", cache: "no-cache" })
     .then(function (r) {
       if (!r.ok) throw new Error("registry " + r.status);
       return r.json();

@@ -5,17 +5,38 @@
   "kind": "grant",
   "url": "https://creative-capital.org/",
   "summary": "Project grants plus advisory services for adventurous artists across visual, performing, film and technology-driven practice. Open call, no nomination required.",
-  "disciplines": ["arts", "film", "music", "technology", "dance"],
-  "geography": ["US"],
-  "career_stage": ["emerging", "mid", "established"],
-  "award": { "min": null, "max": null, "currency": "USD", "basis": "estimated", "note": "Project grant plus career development services. ⟦FILL: current award figure⟧" },
+  "disciplines": [
+    "arts",
+    "film",
+    "music",
+    "technology",
+    "dance"
+  ],
+  "geography": [
+    "US"
+  ],
+  "career_stage": [
+    "emerging",
+    "mid",
+    "established"
+  ],
+  "award": {
+    "min": null,
+    "max": null,
+    "currency": "USD",
+    "basis": "none",
+    "note": "⟦FILL: award figure not sourced⟧"
+  },
   "effort": "high",
   "cycle": "annual",
-  "opens": "2027-01-04",
-  "closes": "2027-03-01",
-  "date_basis": "estimated",
+  "opens": null,
+  "closes": null,
+  "date_basis": "none",
+  "cycle_note": "The 2027 open call closed 2 April 2026. The next cycle has not been announced. ⟦FILL: next open call deadline when announced⟧",
+  "sourced_from": "https://creative-capital.org/creative-capital-award/award-application/",
   "stage": "discovered",
-  "register": "V",
-  "verified": null,
+  "drafts": [],
+  "register": "D",
+  "verified": "2026-08-29",
   "source": "https://creative-capital.org/"
 }

@@ -189,17 +189,6 @@ kbd {
 }
 .wordmark span { color: var(--accent); }
 
-.chrome-nav { margin-inline-start: auto; margin-inline-end: 0.75rem; }
-.chrome-nav a {
-  font-size: 0.85rem;
-  color: var(--fg-2);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-}
-@media (hover: hover) and (pointer: fine) {
-  .chrome-nav a:hover { color: var(--fg); border-bottom-color: var(--hairline-strong); }
-}
-
 .chip {
   display: inline-flex;
   align-items: center;
@@ -503,7 +492,6 @@ section { scroll-margin-top: 4.5rem; }
   .lede { font-size: 0.9rem; }
   .chrome { position: static; }
   .chrome > .shell { min-height: 0; flex-wrap: wrap; }
-  .chrome-nav { display: none; }
   .floor { grid-template-columns: 1fr; gap: 0.5rem; padding-bottom: 1.25rem; }
   .bay { padding: 0.75rem; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
   .bay-glyph { display: none; }

@@ -19,7 +19,7 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const PUBLIC = path.join(ROOT, "public");
-const registry = JSON.parse(fs.readFileSync(path.join(PUBLIC, "registry.json"), "utf8"));
+const registry = JSON.parse(fs.readFileSync(path.join(PUBLIC, "fellowships", "registry.json"), "utf8"));
 
 const TYPES = {
   ".html": "text/html; charset=utf-8",
@@ -51,7 +51,9 @@ try {
 const server = http.createServer((req, res) => {
   const url = decodeURIComponent(new URL(req.url, "http://x").pathname);
   let file = path.join(PUBLIC, url === "/" ? "index.html" : url);
-  if (!file.startsWith(PUBLIC) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) {
+  // Mirror Workers Static Assets: a directory resolves to its index.html.
+  if (fs.existsSync(file) && fs.statSync(file).isDirectory()) file = path.join(file, "index.html");
+  if (!file.startsWith(PUBLIC) || !fs.existsSync(file)) {
     file = path.join(PUBLIC, "404.html");
     res.statusCode = 404;
   }
@@ -60,7 +62,7 @@ const server = http.createServer((req, res) => {
 });
 
 await new Promise((r) => server.listen(0, "127.0.0.1", r));
-const base = `http://127.0.0.1:${server.address().port}/dashboard.html`;
+const base = `http://127.0.0.1:${server.address().port}/fellowships/`;
 
 const browser = await chromium.launch();
 let failures = 0;
@@ -100,7 +102,6 @@ for (const vp of VIEWPORTS) {
   });
 
   const density = config.density[vp.expect];
-  const fieldOn = (id) => config.fields.find((f) => f.id === id)?.tiers.includes(vp.expect);
   const expectedItems = density.max_rows === null ? got.items : Math.min(got.items, density.max_rows);
 
   const problems = [];
@@ -122,10 +123,17 @@ for (const vp of VIEWPORTS) {
   if (!density.band_headings && got.bandHeads) problems.push("band headings built where configuration withholds them");
   if (density.band_headings && !got.bandHeads) problems.push("band headings configured but absent");
   if (!density.actions && got.actions) problems.push("workflow actions built where configuration withholds them");
-  if (!fieldOn("fit") && got.meters) problems.push("fit meter built on a floor that does not list it");
-  if (fieldOn("fit") && !got.meters) problems.push("fit meter listed for this floor but absent");
-  if (!fieldOn("summary") && got.prose) problems.push("summary built on a floor that does not list it");
-  if (fieldOn("summary") && !got.prose) problems.push("summary listed for this floor but absent");
+
+  /* Counted by role, not by field id — naming a field here would be the same
+     hard-coding this check exists to catch. Both roles read values that are
+     always present, so the count is exactly items x fields-for-this-floor. */
+  for (const [role, seen] of [["meter", got.meters], ["prose", got.prose]]) {
+    const listed = config.fields.filter((f) => f.role === role && f.tiers.includes(vp.expect)).length;
+    const want = listed * got.items;
+    if (seen !== want) {
+      problems.push(`${seen} ${role} field(s) built, configuration lists ${listed} per item over ${got.items} items (${want})`);
+    }
+  }
 
   /* Rows are configuration: the item must carry exactly the line groups the
      configuration declares for this floor, in the order it declares them. */

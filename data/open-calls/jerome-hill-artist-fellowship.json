@@ -5,16 +5,35 @@
   "kind": "fellowship",
   "url": "https://www.jeromefdn.org/",
   "summary": "Multi-year unrestricted fellowships for early-career artists based in Minnesota and New York City.",
-  "disciplines": ["arts", "film", "music", "writing", "dance"],
-  "geography": ["US"],
-  "career_stage": ["emerging"],
-  "award": { "min": null, "max": null, "currency": "USD", "basis": "estimated", "note": "Unrestricted, paid across the fellowship term. ⟦FILL: current figure and term length⟧" },
+  "disciplines": [
+    "arts",
+    "film",
+    "music",
+    "writing",
+    "dance"
+  ],
+  "geography": [
+    "US"
+  ],
+  "career_stage": [
+    "emerging"
+  ],
+  "award": {
+    "min": null,
+    "max": null,
+    "currency": "USD",
+    "basis": "none",
+    "note": "⟦FILL: award figure not sourced⟧"
+  },
   "effort": "high",
   "cycle": "biannual",
-  "opens": "2026-10-01",
-  "closes": "2027-01-08",
-  "date_basis": "estimated",
+  "opens": null,
+  "closes": null,
+  "date_basis": "none",
+  "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
+  "sourced_from": null,
   "stage": "discovered",
+  "drafts": [],
   "register": "V",
   "verified": null,
   "source": "https://www.jeromefdn.org/"

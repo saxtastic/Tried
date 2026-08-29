@@ -5,17 +5,35 @@
   "kind": "fellowship",
   "url": "https://www.nsfgrfp.org/",
   "summary": "Three years of support for graduate students pursuing research-based master's and doctoral degrees in NSF-supported fields.",
-  "disciplines": ["technology", "engineering", "social-science", "mathematics"],
-  "geography": ["US"],
-  "career_stage": ["student"],
-  "award": { "min": null, "max": null, "currency": "USD", "basis": "estimated", "note": "Annual stipend plus cost-of-education allowance to the institution. ⟦FILL: current stipend⟧" },
+  "disciplines": [
+    "technology",
+    "engineering",
+    "social-science",
+    "mathematics"
+  ],
+  "geography": [
+    "US"
+  ],
+  "career_stage": [
+    "student"
+  ],
+  "award": {
+    "min": null,
+    "max": null,
+    "currency": "USD",
+    "basis": "none",
+    "note": "⟦FILL: award figure not sourced⟧"
+  },
   "effort": "high",
   "cycle": "annual",
-  "opens": "2026-08-01",
-  "closes": "2026-10-19",
-  "date_basis": "estimated",
+  "opens": null,
+  "closes": "2026-10-20",
+  "date_basis": "sourced",
+  "cycle_note": "Deadline is field-specific across 19–23 October 2026; this record carries the earliest that applies to its listed disciplines. Reference letters due 16 October.",
+  "sourced_from": "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program/nsf26-526/solicitation",
   "stage": "discovered",
-  "register": "V",
-  "verified": null,
+  "drafts": [],
+  "register": "D",
+  "verified": "2026-08-29",
   "source": "https://www.nsfgrfp.org/"
 }

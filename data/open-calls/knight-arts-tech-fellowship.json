@@ -5,16 +5,35 @@
   "kind": "fellowship",
   "url": "https://knightfoundation.org/",
   "summary": "Support for artists working at the intersection of art and emerging technology, concentrated in the communities where Knight invests.",
-  "disciplines": ["arts", "technology", "film", "music"],
-  "geography": ["US"],
-  "career_stage": ["mid", "established"],
-  "award": { "min": null, "max": null, "currency": "USD", "basis": "estimated", "note": "⟦FILL: current award figure and whether the cycle is open call or nomination⟧" },
+  "disciplines": [
+    "arts",
+    "technology",
+    "film",
+    "music"
+  ],
+  "geography": [
+    "US"
+  ],
+  "career_stage": [
+    "mid",
+    "established"
+  ],
+  "award": {
+    "min": null,
+    "max": null,
+    "currency": "USD",
+    "basis": "none",
+    "note": "⟦FILL: award figure not sourced⟧"
+  },
   "effort": "medium",
   "cycle": "annual",
-  "opens": "2026-09-01",
-  "closes": "2026-11-06",
-  "date_basis": "estimated",
+  "opens": null,
+  "closes": null,
+  "date_basis": "none",
+  "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
+  "sourced_from": null,
   "stage": "discovered",
+  "drafts": [],
   "register": "V",
   "verified": null,
   "source": "https://knightfoundation.org/"

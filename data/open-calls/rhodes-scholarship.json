@@ -5,17 +5,38 @@
   "kind": "scholarship",
   "url": "https://www.rhodeshouse.ox.ac.uk/scholarships/the-rhodes-scholarship/",
   "summary": "Fully funded postgraduate study at the University of Oxford, selected on academic excellence alongside energy to use one's talents to the full.",
-  "disciplines": ["any"],
-  "geography": ["US", "CA", "AU", "IN", "ZA", "other"],
-  "career_stage": ["student", "emerging"],
-  "award": { "min": null, "max": null, "currency": "GBP", "basis": "estimated", "note": "Covers university and college fees plus a personal stipend. ⟦FILL: current stipend figure⟧" },
+  "disciplines": [
+    "any"
+  ],
+  "geography": [
+    "US",
+    "CA",
+    "AU",
+    "IN",
+    "ZA",
+    "other"
+  ],
+  "career_stage": [
+    "student",
+    "emerging"
+  ],
+  "award": {
+    "min": null,
+    "max": null,
+    "currency": "GBP",
+    "basis": "none",
+    "note": "⟦FILL: award figure not sourced⟧"
+  },
   "effort": "high",
   "cycle": "annual",
-  "opens": "2026-06-01",
-  "closes": "2026-10-01",
-  "date_basis": "estimated",
+  "opens": null,
+  "closes": "2026-10-07",
+  "date_basis": "sourced",
+  "cycle_note": "US constituency, 2027 entry, 23:59 ET. Other constituencies differ, and an endorsing university will set an earlier internal deadline.",
+  "sourced_from": "https://www.rhodeshouse.ox.ac.uk/scholarships/applications/united-states/",
   "stage": "discovered",
-  "register": "V",
-  "verified": null,
+  "drafts": [],
+  "register": "D",
+  "verified": "2026-08-29",
   "source": "https://www.rhodeshouse.ox.ac.uk/scholarships/the-rhodes-scholarship/"
 }

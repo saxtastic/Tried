@@ -5,16 +5,32 @@
   "kind": "grant",
   "url": "https://foundation.mozilla.org/",
   "summary": "Grants to open-source technology projects working in the public interest, with a theme that changes from cycle to cycle.",
-  "disciplines": ["technology", "social-impact"],
-  "geography": ["any"],
-  "career_stage": ["any"],
-  "award": { "min": null, "max": null, "currency": "USD", "basis": "estimated", "note": "⟦FILL: current cycle theme and award ceiling⟧" },
+  "disciplines": [
+    "technology",
+    "social-impact"
+  ],
+  "geography": [
+    "any"
+  ],
+  "career_stage": [
+    "any"
+  ],
+  "award": {
+    "min": null,
+    "max": null,
+    "currency": "USD",
+    "basis": "none",
+    "note": "⟦FILL: award figure not sourced⟧"
+  },
   "effort": "medium",
   "cycle": "annual",
-  "opens": "2026-10-01",
-  "closes": "2026-12-27",
-  "date_basis": "estimated",
+  "opens": null,
+  "closes": null,
+  "date_basis": "none",
+  "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
+  "sourced_from": null,
   "stage": "discovered",
+  "drafts": [],
   "register": "V",
   "verified": null,
   "source": "https://foundation.mozilla.org/"

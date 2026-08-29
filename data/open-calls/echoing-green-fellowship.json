@@ -5,16 +5,34 @@
   "kind": "fellowship",
   "url": "https://echoinggreen.org/fellowship/",
   "summary": "Seed funding and leadership development for early-stage social entrepreneurs building organisations that address racial and economic inequity.",
-  "disciplines": ["social-impact", "technology", "education"],
-  "geography": ["any"],
-  "career_stage": ["emerging", "mid"],
-  "award": { "min": null, "max": null, "currency": "USD", "basis": "estimated", "note": "Stipend over two years plus health and professional development support. ⟦FILL: current stipend⟧" },
+  "disciplines": [
+    "social-impact",
+    "technology",
+    "education"
+  ],
+  "geography": [
+    "any"
+  ],
+  "career_stage": [
+    "emerging",
+    "mid"
+  ],
+  "award": {
+    "min": null,
+    "max": null,
+    "currency": "USD",
+    "basis": "none",
+    "note": "⟦FILL: award figure not sourced⟧"
+  },
   "effort": "high",
   "cycle": "annual",
-  "opens": "2026-09-01",
-  "closes": "2026-10-28",
-  "date_basis": "estimated",
+  "opens": null,
+  "closes": null,
+  "date_basis": "none",
+  "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
+  "sourced_from": null,
   "stage": "discovered",
+  "drafts": [],
   "register": "V",
   "verified": null,
   "source": "https://echoinggreen.org/fellowship/"

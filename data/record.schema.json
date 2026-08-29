@@ -1,25 +1,35 @@
 {
   "$comment": "The open-call record contract. Enforced by scripts/build-registry.mjs, which is the only validator — there is no JSON Schema runtime in this repository and no dependency is added for one.",
-  "id": "kebab-case, unique, stable. Renaming an id breaks nothing but loses the record's identity across commits.",
+
+  "$rule": "A blank field is a finding; a fabricated one is a defect. Nothing in a record may be filled in from memory or inferred from a programme's usual cycle. If it was not read off a named source, it is null and it is marked.",
+
   "required": [
     "id", "name", "org", "kind", "url", "summary",
     "disciplines", "geography", "career_stage",
-    "award", "effort", "cycle", "closes", "date_basis",
-    "stage", "register", "verified", "source"
+    "award", "effort", "cycle", "opens", "closes",
+    "date_basis", "cycle_note", "sourced_from",
+    "stage", "drafts", "register", "verified", "source"
   ],
+
   "enums": {
     "kind": ["fellowship", "grant", "residency", "prize", "scholarship", "accelerator"],
     "effort": ["low", "medium", "high"],
     "cycle": ["annual", "biannual", "rolling", "one-off"],
-    "date_basis": ["confirmed", "estimated"],
+    "date_basis": ["confirmed", "sourced", "none"],
     "register": ["O", "D", "I", "V"],
     "career_stage": ["student", "emerging", "mid", "established", "any"]
   },
+
   "notes": {
-    "date_basis": "confirmed means a human opened `source` and read the date off it on the day recorded in `verified`. estimated means the date is a placeholder derived from the programme's usual cycle and MUST NOT be relied on. The Vantage module marks every estimated date in the interface.",
-    "verified": "ISO date a human last checked this record against `source`, or null if never. A null `verified` forces `register` to V.",
-    "register": "O observed in this repository, D documented against a named source, I inferred, V unverified. Same register marks the README uses.",
-    "award": "min/max may be null when the programme does not publish a figure. `basis` follows the same rule as date_basis.",
-    "stage": "The workflow stage this record currently sits in. Must be a stage id declared in data/workflow.json. The engine owns every transition out of it."
+    "date_basis": "confirmed — a human read the date off the organisation's own page. sourced — the date was read off a named third party recorded in sourced_from, and primary confirmation is still owed. none — there is no date on this record, either because the programme is between cycles or because nobody has looked yet. The two are told apart by `verified`.",
+    "closes": "Non-null only when date_basis is confirmed or sourced. Never a guess, never carried over from last year's cycle.",
+    "opens": "Same rule as closes. Blank across the seed set because no open date was sourced.",
+    "cycle_note": "Required whenever closes is null: says why there is no date, and carries the ⟦FILL⟧ marker naming what is still owed. Also used on dated records to carry the cycle's terms (time zone, constituency, field-specific variants).",
+    "sourced_from": "The URL actually read to obtain closes, or the one that established there is no open call. Null only when nobody has looked.",
+    "verified": "ISO date a human last checked this record against a source, or null if never. A null verified forces register to V. A non-null verified requires sourced_from.",
+    "register": "O observed in this repository, D documented against a named source, I inferred, V unverified. Same register marks the README uses. I is not a legal value for a date — inference is what this contract exists to prevent.",
+    "award": "min/max null when no figure was sourced. `basis` follows the same three values as date_basis; when it is not `none`, a figure must be present.",
+    "stage": "The workflow stage this record currently sits in. Must be a stage id declared in data/workflow.json. The engine owns every transition out of it.",
+    "drafts": "Materials attached to this opportunity: [{ label, href, state }]. Empty is the honest default — a draft is attached when one exists. No applicant-identifying content belongs in a record; a draft is a label and a link, never a person."
   }
 }

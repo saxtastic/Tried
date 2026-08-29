@@ -262,38 +262,40 @@
     }
   },
   "vantage": {
-    "$comment": "CONFIGURATION INPUT FOR THE SINGULAR VANTAGE MODULE. One module, no tabs. Everything the module shows — which signals appear, at which screen sizes, in what order, in what colour — is declared here. public/vantage.js names no field, no band and no colour of its own; it reads this file and renders whatever it finds. Change this file and the interface re-forms with no code change. Same rule venue.css keeps for --tier, moved up a level.",
+    "$comment": "CONFIGURATION INPUT FOR THE SINGULAR VANTAGE MODULE. One module, no tabs. Everything the module shows — which signals appear, at which screen sizes, on which line of the card, in what order, in what colour — is declared here. public/fellowships/vantage.js names no field, no band and no colour of its own; it reads this file and renders whatever it finds. Change this file and the interface re-forms with no code change. Same rule venue.css keeps for --tier, moved up a level.",
+    "$ritual": "These are the ranking inputs for the re-survey ritual. A scheduled re-survey rewrites data/open-calls/ and may retune the weights and bands below; neither touches the page. Nothing here is hardcoded in markup.",
     "module": {
       "id": "vantage",
       "title": "Vantage",
-      "lede": "Every open call in the reference, on one surface, ordered by what runs out first."
+      "lede": "Every open call in the reference on one surface, grouped by how long is left and ranked by what it returns for the effort it costs."
     },
     "horizon_days": 420,
+    "$bands_comment": "Deadline foresight is the primary lens. The horizon is 7 / 30 / 90 days, then everything beyond it. Two bands sit outside the horizon entirely: a call whose date has passed, and a call that has no sourced date at all — the second is the reference telling you what work it still owes.",
     "bands": [
       {
-        "id": "now",
-        "label": "Closing",
+        "id": "week",
+        "label": "Within 7 days",
         "max_days": 7,
         "hue": 8,
         "chroma": 0.16
       },
       {
-        "id": "near",
-        "label": "Near",
+        "id": "month",
+        "label": "Within 30 days",
         "max_days": 30,
         "hue": 46,
         "chroma": 0.14
       },
       {
-        "id": "planned",
-        "label": "Planned",
+        "id": "quarter",
+        "label": "Within 90 days",
         "max_days": 90,
         "hue": 268,
         "chroma": 0.13
       },
       {
-        "id": "distant",
-        "label": "Distant",
+        "id": "beyond",
+        "label": "Beyond 90 days",
         "max_days": null,
         "hue": 232,
         "chroma": 0.07
@@ -305,24 +307,59 @@
         "hue": 0,
         "chroma": 0,
         "when_past": true
+      },
+      {
+        "id": "undated",
+        "label": "No sourced date",
+        "max_days": null,
+        "hue": 150,
+        "chroma": 0.05,
+        "when_undated": true
       }
     ],
+    "$rank_comment": "Return on effort. Within each horizon band the top of the list is the best return for the effort it costs: award value and eligibility fit weighed against effort to submit. An award figure nobody has sourced scores at `unknown_award` rather than zero, so a missing figure neither flatters nor punishes a call — and the card marks it as missing either way.",
+    "rank": {
+      "effort_cost": {
+        "low": 1,
+        "medium": 1.6,
+        "high": 2.4
+      },
+      "award_value": [
+        {
+          "up_to": 10000,
+          "value": 0.35
+        },
+        {
+          "up_to": 50000,
+          "value": 0.7
+        },
+        {
+          "up_to": null,
+          "value": 1
+        }
+      ],
+      "unknown_award": 0.5,
+      "weights": {
+        "award": 2,
+        "fit": 3
+      }
+    },
     "order": [
       {
         "key": "derived.band_order",
         "dir": "asc"
       },
       {
-        "key": "derived.days",
-        "dir": "asc"
+        "key": "derived.ret",
+        "dir": "desc"
       },
       {
-        "key": "derived.fit",
-        "dir": "desc"
+        "key": "derived.days",
+        "dir": "asc"
       }
     ],
     "profile": {
-      "$comment": "What fit is scored against. This is the one place the reader describes themselves; nothing here is transmitted anywhere.",
+      "$comment": "What eligibility fit is scored against. Preferences only — disciplines, regions, career stage, appetite for effort. No name, no institution, no identifier, and nothing that could identify a student or any other individual belongs here or anywhere else in this repository. Nothing in it is transmitted anywhere.",
       "disciplines": [
         "film",
         "technology",
@@ -368,7 +405,7 @@
         }
       ]
     },
-    "$fields_comment": "Each field declares WHAT it shows (from), WHAT KIND of thing it is (role), WHICH floors get it (tiers) and WHICH line of the item it sits on (line). Line grouping is configuration, not layout code: the module builds one row per distinct line value, in the order the values first appear here. Move a field to another line and the item re-forms.",
+    "$fields_comment": "Each field declares WHAT it shows (from), WHAT KIND of thing it is (role), WHICH floors get it (tiers) and WHICH line of the card it sits on (line). Line grouping is configuration, not layout code: the module builds one row per distinct line value, in the order the values first appear here. Move a field to another line and the card re-forms.",
     "fields": [
       {
         "id": "name",
@@ -395,20 +432,21 @@
         ]
       },
       {
-        "id": "org",
-        "role": "meta",
-        "from": "call.org",
+        "id": "return",
+        "role": "meter",
+        "from": "derived.ret",
         "line": "signals",
         "tiers": [
           "phone",
           "pad",
           "desk"
-        ]
+        ],
+        "label": "return"
       },
       {
-        "id": "stage",
-        "role": "stage",
-        "from": "derived.stage_label",
+        "id": "org",
+        "role": "meta",
+        "from": "call.org",
         "line": "signals",
         "tiers": [
           "phone",
@@ -450,18 +488,20 @@
       {
         "id": "effort",
         "role": "tag",
-        "from": "call.effort",
+        "from": "derived.effort_label",
         "line": "signals",
         "tiers": [
+          "pad",
           "desk"
         ]
       },
       {
-        "id": "cycle",
-        "role": "tag",
-        "from": "call.cycle",
+        "id": "awardfig",
+        "role": "amount",
+        "from": "derived.award_label",
         "line": "signals",
         "tiers": [
+          "pad",
           "desk"
         ]
       },
@@ -471,6 +511,39 @@
         "from": "call.summary",
         "line": "detail",
         "tiers": [
+          "desk"
+        ]
+      },
+      {
+        "id": "terms",
+        "role": "terms",
+        "from": "call.cycle_note",
+        "line": "detail",
+        "tiers": [
+          "pad",
+          "desk"
+        ]
+      },
+      {
+        "id": "drafts",
+        "role": "drafts",
+        "from": "call.drafts",
+        "line": "drafts",
+        "tiers": [
+          "phone",
+          "pad",
+          "desk"
+        ],
+        "label": "drafts"
+      },
+      {
+        "id": "stage",
+        "role": "stage",
+        "from": "derived.stage_label",
+        "line": "foot",
+        "tiers": [
+          "phone",
+          "pad",
           "desk"
         ]
       },
@@ -500,7 +573,7 @@
       }
     ],
     "density": {
-      "$comment": "How much of the surface survives at each floor. max_rows null means all of them. The module reads its floor from --tier, exactly as venue.js does; it never measures a width.",
+      "$comment": "How much of the surface survives at each floor. max_rows null means all of them. The module reads its floor from --tier, exactly as venue.js does; it never measures a width. Pad and desk both get the card unit: the relay asked for prominent visual cards, and a pad has the room for them.",
       "watch": {
         "max_rows": 3,
         "band_headings": false,
@@ -517,7 +590,7 @@
         "max_rows": null,
         "band_headings": true,
         "actions": true,
-        "unit": "row"
+        "unit": "card"
       },
       "desk": {
         "max_rows": null,
@@ -551,15 +624,18 @@
         "min": null,
         "max": null,
         "currency": "USD",
-        "basis": "estimated",
-        "note": "Stipend is needs-based and time-limited rather than a fixed prize. ⟦FILL: current stipend policy⟧"
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
       },
       "effort": "high",
       "cycle": "rolling",
-      "opens": "2026-01-01",
-      "closes": "2027-06-30",
-      "date_basis": "estimated",
+      "opens": null,
+      "closes": null,
+      "date_basis": "none",
+      "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
+      "sourced_from": null,
       "stage": "discovered",
+      "drafts": [],
       "register": "V",
       "verified": null,
       "source": "https://www.ashoka.org/en-us/program/ashoka-venture-and-fellowship"
@@ -590,17 +666,20 @@
         "min": null,
         "max": null,
         "currency": "USD",
-        "basis": "estimated",
-        "note": "Project grant plus career development services. ⟦FILL: current award figure⟧"
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
       },
       "effort": "high",
       "cycle": "annual",
-      "opens": "2027-01-04",
-      "closes": "2027-03-01",
-      "date_basis": "estimated",
+      "opens": null,
+      "closes": null,
+      "date_basis": "none",
+      "cycle_note": "The 2027 open call closed 2 April 2026. The next cycle has not been announced. ⟦FILL: next open call deadline when announced⟧",
+      "sourced_from": "https://creative-capital.org/creative-capital-award/award-application/",
       "stage": "discovered",
-      "register": "V",
-      "verified": null,
+      "drafts": [],
+      "register": "D",
+      "verified": "2026-08-29",
       "source": "https://creative-capital.org/"
     },
     {
@@ -626,15 +705,18 @@
         "min": null,
         "max": null,
         "currency": "USD",
-        "basis": "estimated",
-        "note": "Stipend over two years plus health and professional development support. ⟦FILL: current stipend⟧"
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
       },
       "effort": "high",
       "cycle": "annual",
-      "opens": "2026-09-01",
-      "closes": "2026-10-28",
-      "date_basis": "estimated",
+      "opens": null,
+      "closes": null,
+      "date_basis": "none",
+      "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
+      "sourced_from": null,
       "stage": "discovered",
+      "drafts": [],
       "register": "V",
       "verified": null,
       "source": "https://echoinggreen.org/fellowship/"
@@ -664,17 +746,20 @@
         "min": null,
         "max": null,
         "currency": "USD",
-        "basis": "estimated",
-        "note": "Varies per country award; stipend plus travel. ⟦FILL: award-specific figures⟧"
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
       },
       "effort": "high",
       "cycle": "annual",
-      "opens": "2026-02-01",
-      "closes": "2026-09-23",
-      "date_basis": "estimated",
+      "opens": null,
+      "closes": "2026-09-15",
+      "date_basis": "sourced",
+      "cycle_note": "2027–2028 competition, 5:00pm ET. Over 380 awards across 130+ countries; each country award has its own terms.",
+      "sourced_from": "https://fulbrightscholars.org/us-scholar-awards",
       "stage": "screening",
-      "register": "V",
-      "verified": null,
+      "drafts": [],
+      "register": "D",
+      "verified": "2026-08-29",
       "source": "https://fulbrightscholars.org/"
     },
     {
@@ -702,17 +787,20 @@
         "min": null,
         "max": null,
         "currency": "USD",
-        "basis": "estimated",
-        "note": "Amount varies by fellow; the foundation does not publish a fixed figure. ⟦FILL: current typical award range⟧"
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
       },
       "effort": "high",
       "cycle": "annual",
-      "opens": "2026-07-01",
+      "opens": null,
       "closes": "2026-09-15",
-      "date_basis": "estimated",
+      "date_basis": "sourced",
+      "cycle_note": "2027 competition. Work samples are due two weeks after the portal closes; decisions late April 2027.",
+      "sourced_from": "https://www.gf.org/program/how-to-apply",
       "stage": "drafting",
-      "register": "V",
-      "verified": null,
+      "drafts": [],
+      "register": "D",
+      "verified": "2026-08-29",
       "source": "https://www.gf.org/applicants/"
     },
     {
@@ -739,15 +827,18 @@
         "min": null,
         "max": null,
         "currency": "USD",
-        "basis": "estimated",
-        "note": "Unrestricted, paid across the fellowship term. ⟦FILL: current figure and term length⟧"
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
       },
       "effort": "high",
       "cycle": "biannual",
-      "opens": "2026-10-01",
-      "closes": "2027-01-08",
-      "date_basis": "estimated",
+      "opens": null,
+      "closes": null,
+      "date_basis": "none",
+      "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
+      "sourced_from": null,
       "stage": "discovered",
+      "drafts": [],
       "register": "V",
       "verified": null,
       "source": "https://www.jeromefdn.org/"
@@ -776,15 +867,18 @@
         "min": null,
         "max": null,
         "currency": "USD",
-        "basis": "estimated",
-        "note": "⟦FILL: current award figure and whether the cycle is open call or nomination⟧"
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
       },
       "effort": "medium",
       "cycle": "annual",
-      "opens": "2026-09-01",
-      "closes": "2026-11-06",
-      "date_basis": "estimated",
+      "opens": null,
+      "closes": null,
+      "date_basis": "none",
+      "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
+      "sourced_from": null,
       "stage": "discovered",
+      "drafts": [],
       "register": "V",
       "verified": null,
       "source": "https://knightfoundation.org/"
@@ -815,17 +909,20 @@
         "min": null,
         "max": null,
         "currency": "USD",
-        "basis": "estimated",
-        "note": "Residency in kind rather than cash; stipends available on request. ⟦FILL: current stipend policy⟧"
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
       },
       "effort": "medium",
       "cycle": "biannual",
-      "opens": "2026-07-15",
+      "opens": null,
       "closes": "2026-09-10",
-      "date_basis": "estimated",
+      "date_basis": "sourced",
+      "cycle_note": "Spring–Summer 2027 residency cycle. MacDowell runs multiple cycles a year; the next after this one closes in February.",
+      "sourced_from": "https://www.macdowell.org/apply/apply-for-fellowship",
       "stage": "eligible",
-      "register": "V",
-      "verified": null,
+      "drafts": [],
+      "register": "D",
+      "verified": "2026-08-29",
       "source": "https://www.macdowell.org/apply"
     },
     {
@@ -849,15 +946,18 @@
         "min": null,
         "max": null,
         "currency": "USD",
-        "basis": "estimated",
-        "note": "⟦FILL: current cycle theme and award ceiling⟧"
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
       },
       "effort": "medium",
       "cycle": "annual",
-      "opens": "2026-10-01",
-      "closes": "2026-12-27",
-      "date_basis": "estimated",
+      "opens": null,
+      "closes": null,
+      "date_basis": "none",
+      "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
+      "sourced_from": null,
       "stage": "discovered",
+      "drafts": [],
       "register": "V",
       "verified": null,
       "source": "https://foundation.mozilla.org/"
@@ -887,17 +987,20 @@
         "min": null,
         "max": null,
         "currency": "USD",
-        "basis": "estimated",
-        "note": "Matching grant; applicant must supply cost share. ⟦FILL: current minimum and maximum⟧"
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
       },
       "effort": "high",
       "cycle": "biannual",
-      "opens": "2026-11-01",
-      "closes": "2027-02-11",
-      "date_basis": "estimated",
+      "opens": null,
+      "closes": null,
+      "date_basis": "none",
+      "cycle_note": "FY2027 deadlines (12 Feb and 9 Jul 2026) have passed. FY2028 guidelines are expected late December 2026; deadlines not yet announced. ⟦FILL: FY2028 deadlines when published⟧",
+      "sourced_from": "https://www.arts.gov/grants/grants-for-arts-projects/application-calendar",
       "stage": "discovered",
-      "register": "V",
-      "verified": null,
+      "drafts": [],
+      "register": "D",
+      "verified": "2026-08-29",
       "source": "https://www.arts.gov/grants"
     },
     {
@@ -923,17 +1026,20 @@
         "min": null,
         "max": null,
         "currency": "USD",
-        "basis": "estimated",
-        "note": "Annual stipend plus cost-of-education allowance to the institution. ⟦FILL: current stipend⟧"
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
       },
       "effort": "high",
       "cycle": "annual",
-      "opens": "2026-08-01",
-      "closes": "2026-10-19",
-      "date_basis": "estimated",
+      "opens": null,
+      "closes": "2026-10-20",
+      "date_basis": "sourced",
+      "cycle_note": "Deadline is field-specific across 19–23 October 2026; this record carries the earliest that applies to its listed disciplines. Reference letters due 16 October.",
+      "sourced_from": "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program/nsf26-526/solicitation",
       "stage": "discovered",
-      "register": "V",
-      "verified": null,
+      "drafts": [],
+      "register": "D",
+      "verified": "2026-08-29",
       "source": "https://www.nsfgrfp.org/"
     },
     {
@@ -955,19 +1061,22 @@
       ],
       "award": {
         "min": null,
-        "max": null,
+        "max": 90000,
         "currency": "USD",
-        "basis": "estimated",
-        "note": "Tuition support plus stipend across up to two years. ⟦FILL: current figures⟧"
+        "basis": "sourced",
+        "note": "Up to $90,000 over two years."
       },
       "effort": "high",
       "cycle": "annual",
-      "opens": "2026-06-01",
+      "opens": null,
       "closes": "2026-10-29",
-      "date_basis": "estimated",
+      "date_basis": "sourced",
+      "cycle_note": "2027 cycle, 2:00pm ET. 77 finalists interview in Jan–Feb 2027; 30 selected.",
+      "sourced_from": "https://pdsoros.org/application-process/",
       "stage": "discovered",
-      "register": "V",
-      "verified": null,
+      "drafts": [],
+      "register": "D",
+      "verified": "2026-08-29",
       "source": "https://www.pdsoros.org/"
     },
     {
@@ -996,17 +1105,20 @@
         "min": null,
         "max": null,
         "currency": "GBP",
-        "basis": "estimated",
-        "note": "Covers university and college fees plus a personal stipend. ⟦FILL: current stipend figure⟧"
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
       },
       "effort": "high",
       "cycle": "annual",
-      "opens": "2026-06-01",
-      "closes": "2026-10-01",
-      "date_basis": "estimated",
+      "opens": null,
+      "closes": "2026-10-07",
+      "date_basis": "sourced",
+      "cycle_note": "US constituency, 2027 entry, 23:59 ET. Other constituencies differ, and an endorsing university will set an earlier internal deadline.",
+      "sourced_from": "https://www.rhodeshouse.ox.ac.uk/scholarships/applications/united-states/",
       "stage": "discovered",
-      "register": "V",
-      "verified": null,
+      "drafts": [],
+      "register": "D",
+      "verified": "2026-08-29",
       "source": "https://www.rhodeshouse.ox.ac.uk/scholarships/the-rhodes-scholarship/"
     },
     {
@@ -1032,17 +1144,20 @@
         "min": null,
         "max": null,
         "currency": "USD",
-        "basis": "estimated",
-        "note": "⟦FILL: current grant bands for the open cycle⟧"
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
       },
       "effort": "high",
       "cycle": "biannual",
-      "opens": "2026-07-01",
-      "closes": "2026-09-03",
-      "date_basis": "estimated",
+      "opens": null,
+      "closes": null,
+      "date_basis": "none",
+      "cycle_note": "Last cycle closed 15 June 2026. The next open call is announced in early 2027; no date published yet. ⟦FILL: next cycle deadline when announced⟧",
+      "sourced_from": "https://www.sundance.org/documentary-fund/",
       "stage": "review",
-      "register": "V",
-      "verified": null,
+      "drafts": [],
+      "register": "D",
+      "verified": "2026-08-29",
       "source": "https://www.sundance.org/programs/documentary-film/"
     },
     {
@@ -1066,15 +1181,18 @@
         "min": null,
         "max": null,
         "currency": "USD",
-        "basis": "estimated",
-        "note": "Primarily in kind — conference attendance, coaching, speaking slot. ⟦FILL: whether a stipend is attached⟧"
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
       },
       "effort": "medium",
       "cycle": "annual",
-      "opens": "2026-08-15",
-      "closes": "2026-11-22",
-      "date_basis": "estimated",
+      "opens": null,
+      "closes": null,
+      "date_basis": "none",
+      "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
+      "sourced_from": null,
       "stage": "discovered",
+      "drafts": [],
       "register": "V",
       "verified": null,
       "source": "https://www.ted.com/participate/ted-fellows-program"
@@ -1105,15 +1223,18 @@
         "min": null,
         "max": null,
         "currency": "USD",
-        "basis": "estimated",
-        "note": "Unrestricted cash award. ⟦FILL: current award figure⟧"
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
       },
       "effort": "medium",
       "cycle": "annual",
-      "opens": "2026-08-01",
-      "closes": "2026-10-13",
-      "date_basis": "estimated",
+      "opens": null,
+      "closes": null,
+      "date_basis": "none",
+      "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
+      "sourced_from": null,
       "stage": "discovered",
+      "drafts": [],
       "register": "V",
       "verified": null,
       "source": "https://www.unitedstatesartists.org/fellowship"

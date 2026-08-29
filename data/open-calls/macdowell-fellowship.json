@@ -5,17 +5,38 @@
   "kind": "residency",
   "url": "https://www.macdowell.org/apply",
   "summary": "Residency of up to eight weeks in Peterborough, New Hampshire, with private studio, room and board, for artists across disciplines. No fee to attend.",
-  "disciplines": ["arts", "writing", "music", "film", "architecture"],
-  "geography": ["any"],
-  "career_stage": ["emerging", "mid", "established"],
-  "award": { "min": null, "max": null, "currency": "USD", "basis": "estimated", "note": "Residency in kind rather than cash; stipends available on request. ⟦FILL: current stipend policy⟧" },
+  "disciplines": [
+    "arts",
+    "writing",
+    "music",
+    "film",
+    "architecture"
+  ],
+  "geography": [
+    "any"
+  ],
+  "career_stage": [
+    "emerging",
+    "mid",
+    "established"
+  ],
+  "award": {
+    "min": null,
+    "max": null,
+    "currency": "USD",
+    "basis": "none",
+    "note": "⟦FILL: award figure not sourced⟧"
+  },
   "effort": "medium",
   "cycle": "biannual",
-  "opens": "2026-07-15",
+  "opens": null,
   "closes": "2026-09-10",
-  "date_basis": "estimated",
+  "date_basis": "sourced",
+  "cycle_note": "Spring–Summer 2027 residency cycle. MacDowell runs multiple cycles a year; the next after this one closes in February.",
+  "sourced_from": "https://www.macdowell.org/apply/apply-for-fellowship",
   "stage": "eligible",
-  "register": "V",
-  "verified": null,
+  "drafts": [],
+  "register": "D",
+  "verified": "2026-08-29",
   "source": "https://www.macdowell.org/apply"
 }

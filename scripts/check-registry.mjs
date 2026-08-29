@@ -15,12 +15,12 @@ import vm from "node:vm";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
-const registry = JSON.parse(fs.readFileSync(path.join(ROOT, "public", "registry.json"), "utf8"));
+const registry = JSON.parse(fs.readFileSync(path.join(ROOT, "public", "fellowships", "registry.json"), "utf8"));
 
 /* Load the engine exactly as the browser does — same file, no shim. */
 const sandbox = {};
 vm.createContext(sandbox);
-new vm.Script(fs.readFileSync(path.join(ROOT, "public", "workflow.js"), "utf8")).runInContext(sandbox);
+new vm.Script(fs.readFileSync(path.join(ROOT, "public", "fellowships", "workflow.js"), "utf8")).runInContext(sandbox);
 const Workflow = sandbox.Workflow;
 
 const { workflow, vantage, calls } = registry;
@@ -43,21 +43,21 @@ const ok = (name, cond, detail) => {
 /* ------------------------------------------------------------- engine -- */
 
 ok("engine has no eval", !/\beval\s*\(|new Function/.test(
-  strip(fs.readFileSync(path.join(ROOT, "public", "workflow.js"), "utf8"))));
+  strip(fs.readFileSync(path.join(ROOT, "public", "fellowships", "workflow.js"), "utf8"))));
 
 ok("engine names no stage id of its own", (() => {
-  const src = strip(fs.readFileSync(path.join(ROOT, "public", "workflow.js"), "utf8"));
+  const src = strip(fs.readFileSync(path.join(ROOT, "public", "fellowships", "workflow.js"), "utf8"));
   return !workflow.stages.some((s) => src.includes(`"${s.id}"`));
 })(), "a stage id is hard-coded in the engine");
 
 ok("module names no field or band id of its own", (() => {
-  const src = strip(fs.readFileSync(path.join(ROOT, "public", "vantage.js"), "utf8"));
+  const src = strip(fs.readFileSync(path.join(ROOT, "public", "fellowships", "vantage.js"), "utf8"));
   const ids = [...vantage.fields.map((f) => f.id), ...vantage.bands.map((b) => b.id)];
   return !ids.some((id) => src.includes(`"${id}"`));
 })(), "a field or band id is hard-coded in vantage.js");
 
 ok("module compares no width", (() => {
-  const src = strip(fs.readFileSync(path.join(ROOT, "public", "vantage.js"), "utf8"));
+  const src = strip(fs.readFileSync(path.join(ROOT, "public", "fellowships", "vantage.js"), "utf8"));
   return !/innerWidth|max-width|min-width/.test(src);
 })(), "vantage.js measures a width instead of reading --tier");
 
@@ -121,8 +121,27 @@ for (const t of workflow.transitions.filter((x) => x.mode === "auto")) {
   ok("no record claims a register it has not earned", lying.length === 0,
     lying.map((c) => c.id).join(", "));
 
-  const unmarked = calls.filter((c) => c.date_basis !== "estimated" && c.date_basis !== "confirmed");
+  const LEGAL = ["sourced", "confirmed", "none"];
+  const unmarked = calls.filter((c) => !LEGAL.includes(c.date_basis));
   ok("every record declares a date basis", unmarked.length === 0, unmarked.map((c) => c.id).join(", "));
+
+  /* The rule the whole reference rests on, asserted against the shipped data
+     rather than trusted from the build. */
+  const fabricated = calls.filter((c) => c.closes && c.date_basis === "none");
+  ok("no record carries a date without a source", fabricated.length === 0,
+    fabricated.map((c) => c.id).join(", "));
+
+  const undocumented = calls.filter((c) => c.closes && !c.sourced_from);
+  ok("every dated record records what was read", undocumented.length === 0,
+    undocumented.map((c) => c.id).join(", "));
+
+  const silent = calls.filter((c) => !c.closes && !/⟦FILL/.test(c.cycle_note || ""));
+  ok("every undated record names what is owed", silent.length === 0,
+    silent.map((c) => c.id).join(", "));
+
+  const fakeAward = calls.filter((c) => c.award.basis === "none" && (c.award.min !== null || c.award.max !== null));
+  ok("no record carries an award figure without a source", fakeAward.length === 0,
+    fakeAward.map((c) => c.id).join(", "));
 
   const provField = vantage.fields.find((f) => f.role === "provenance");
   ok("provenance renders on every floor", provField &&
@@ -141,20 +160,35 @@ for (const t of workflow.transitions.filter((x) => x.mode === "auto")) {
   ok("every floor renders a title", bare.length === 0, bare.join(", "));
 
   const roles = new Set(vantage.fields.map((f) => f.role));
-  const src = strip(fs.readFileSync(path.join(ROOT, "public", "vantage.js"), "utf8"));
+  const src = strip(fs.readFileSync(path.join(ROOT, "public", "fellowships", "vantage.js"), "utf8"));
   const missing = [...roles].filter((r) => !new RegExp(`\\b${r}:\\s*function`).test(src));
   ok("every configured role has a renderer", missing.length === 0, missing.join(", "));
 
   const past = vantage.bands.filter((b) => b.when_past);
   ok("exactly one band claims the past", past.length === 1, `${past.length} found`);
 
-  const ordered = vantage.bands.filter((b) => !b.when_past && b.max_days !== null);
+  const undatedBands = vantage.bands.filter((b) => b.when_undated);
+  ok("exactly one band claims the undated", undatedBands.length === 1, `${undatedBands.length} found`);
+
+  const ordered = vantage.bands.filter((b) => !b.when_past && !b.when_undated && b.max_days !== null);
   const ascending = ordered.every((b, i) => i === 0 || b.max_days > ordered[i - 1].max_days);
   ok("band ceilings ascend", ascending, "a band is unreachable behind a wider one");
 
-  ok("order keys resolve", vantage.order.every((o) =>
-    Workflow.read({ call: calls[0], derived: { days: 1, fit: 1, band_order: 0 } }, o.key) !== undefined),
-    "an order key names a path nothing produces");
+  const probe = { days: 1, fit: 1, ret: 1, band_order: 0 };
+  const unresolved = vantage.order.filter((o) =>
+    Workflow.read({ call: calls[0], derived: probe }, o.key) === undefined);
+  ok("order keys resolve", unresolved.length === 0,
+    unresolved.map((o) => o.key).join(", "));
+
+  const rank = vantage.rank || {};
+  ok("return-on-effort inputs are declared", !!(rank.effort_cost && rank.award_value && rank.weights),
+    "data/vantage.config.json is missing rank inputs");
+  ok("every effort level has a cost", ["low", "medium", "high"].every((e) => rank.effort_cost[e] > 0),
+    "an effort level has no cost, so it would divide by the default");
+  ok("return is ranked before the deadline within a band",
+    vantage.order[0].key === "derived.band_order" &&
+    vantage.order[1].key === "derived.ret" && vantage.order[1].dir === "desc",
+    "the horizon band must group first and return must rank inside it");
 
   const weights = (vantage.fit.criteria || []).reduce((n, c) => n + c.weight, 0);
   ok("fit weights sum above zero", weights > 0, `${weights}`);

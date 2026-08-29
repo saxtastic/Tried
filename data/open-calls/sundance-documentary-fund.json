@@ -5,17 +5,35 @@
   "kind": "grant",
   "url": "https://www.sundance.org/programs/documentary-film/",
   "summary": "Production and post-production grants to independent nonfiction filmmakers working on feature documentaries worldwide.",
-  "disciplines": ["film", "journalism"],
-  "geography": ["any"],
-  "career_stage": ["emerging", "mid", "established"],
-  "award": { "min": null, "max": null, "currency": "USD", "basis": "estimated", "note": "⟦FILL: current grant bands for the open cycle⟧" },
+  "disciplines": [
+    "film",
+    "journalism"
+  ],
+  "geography": [
+    "any"
+  ],
+  "career_stage": [
+    "emerging",
+    "mid",
+    "established"
+  ],
+  "award": {
+    "min": null,
+    "max": null,
+    "currency": "USD",
+    "basis": "none",
+    "note": "⟦FILL: award figure not sourced⟧"
+  },
   "effort": "high",
   "cycle": "biannual",
-  "opens": "2026-07-01",
-  "closes": "2026-09-03",
-  "date_basis": "estimated",
+  "opens": null,
+  "closes": null,
+  "date_basis": "none",
+  "cycle_note": "Last cycle closed 15 June 2026. The next open call is announced in early 2027; no date published yet. ⟦FILL: next cycle deadline when announced⟧",
+  "sourced_from": "https://www.sundance.org/documentary-fund/",
   "stage": "review",
-  "register": "V",
-  "verified": null,
+  "drafts": [],
+  "register": "D",
+  "verified": "2026-08-29",
   "source": "https://www.sundance.org/programs/documentary-film/"
 }

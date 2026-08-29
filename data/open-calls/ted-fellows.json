@@ -5,16 +5,32 @@
   "kind": "fellowship",
   "url": "https://www.ted.com/participate/ted-fellows-program",
   "summary": "A cohort programme for early-career innovators, offering a TED stage, coaching and a global peer network rather than a large cash award.",
-  "disciplines": ["any"],
-  "geography": ["any"],
-  "career_stage": ["emerging", "mid"],
-  "award": { "min": null, "max": null, "currency": "USD", "basis": "estimated", "note": "Primarily in kind — conference attendance, coaching, speaking slot. ⟦FILL: whether a stipend is attached⟧" },
+  "disciplines": [
+    "any"
+  ],
+  "geography": [
+    "any"
+  ],
+  "career_stage": [
+    "emerging",
+    "mid"
+  ],
+  "award": {
+    "min": null,
+    "max": null,
+    "currency": "USD",
+    "basis": "none",
+    "note": "⟦FILL: award figure not sourced⟧"
+  },
   "effort": "medium",
   "cycle": "annual",
-  "opens": "2026-08-15",
-  "closes": "2026-11-22",
-  "date_basis": "estimated",
+  "opens": null,
+  "closes": null,
+  "date_basis": "none",
+  "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
+  "sourced_from": null,
   "stage": "discovered",
+  "drafts": [],
   "register": "V",
   "verified": null,
   "source": "https://www.ted.com/participate/ted-fellows-program"

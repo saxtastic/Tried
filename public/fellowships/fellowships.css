@@ -1,22 +1,12 @@
-/* ayeyoty.co — Vantage, the open-calls module.
+/* Fellowships subtree — Vantage, the open-calls module.
    Loaded after venue.css and built entirely on its tokens: no new colour, no
-   new font, no new radius invented here.
+   new font, no new breakpoint invented here. The four tiers come from the shell.
 
    FORM LIVES HERE. SEMANTICS LIVE IN data/vantage.config.json.
    The stylesheet knows what a "row", a "band" and a "meter" look like. It does
    not know which fields exist, which bands there are, or what colour a band
    is — those arrive as custom properties the module sets through the CSSOM.
    Adding a band or a field to the configuration needs no rule in this file. */
-
-/* ------------------------------------------------------------- heading -- */
-
-.dash-head {
-  padding-block: clamp(1.5rem, 6vh, 3rem) 1rem;
-  display: grid;
-  gap: 0.6rem;
-  justify-items: start;
-}
-.dash-head h1 { font-size: clamp(1.6rem, 4.5vw, 2.75rem); }
 
 /* -------------------------------------------------------------- module -- */
 
@@ -306,10 +296,112 @@
 .module-surface[data-unit="line"] .f-countdown { font-size: 0.72rem; }
 
 @media (max-width: 319px) {
-  .dash-head { padding-block: 0.75rem 0.5rem; gap: 0.3rem; }
-  .dash-head .lede { display: none; }
   .module-strip { gap: 0.25rem; }
   .tally { padding: 0.2rem 0.5rem; font-size: 0.66rem; }
   .provenance { display: none; }
   .module-note { display: none; }
 }
+
+/* ---------------------------------------------------- roles added later -- */
+
+.f-amount {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--fg-2);
+  white-space: nowrap;
+}
+
+/* The cycle's terms. On an undated record this carries the ⟦FILL⟧ marker, so
+   it is styled as a finding rather than as small print. */
+.f-terms {
+  font-size: 0.8rem;
+  color: var(--fg-3);
+  max-width: 62ch;
+  overflow-wrap: anywhere;
+}
+.f-terms[data-owed="true"] {
+  color: var(--fg-2);
+  padding-left: 0.6rem;
+  border-left: 2px solid var(--hairline-strong);
+}
+
+/* Drafts attached to the opportunity. The empty state still renders: the
+   attach point is what tells a reader nothing has been started. */
+.f-drafts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3rem 0.5rem;
+  min-width: 0;
+}
+.f-drafts-label {
+  font-family: var(--font-rounded);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+.f-drafts-none { font-size: 0.76rem; color: var(--fg-3); font-style: italic; }
+.f-draft {
+  font-size: 0.76rem;
+  color: var(--fg-2);
+  padding: 0.1rem 0.45rem;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.f-draft[data-state="submitted"] { border-color: var(--accent); color: var(--accent); }
+
+.prov--sourced   { color: oklch(0.62 0.12 250); }
+.prov--unsourced { color: oklch(0.62 0.13 68); }
+.prov--nocall    { color: var(--fg-3); }
+
+/* Programme names, organisation names and cycle notes carry no break
+   opportunity of their own. Without this the watch tier scrolls sideways —
+   caught by `npm run check`. */
+.item, .item-line, .item-line > * { min-width: 0; }
+.f-title, .f-meta, .f-prose, .f-terms, .f-link { overflow-wrap: anywhere; }
+
+@media (max-width: 319px) {
+  .f-terms, .f-drafts { display: none; }
+}
+
+/* --------------------------------------------------------------- glance -- */
+/* The shell reserves a second hero column for artwork at the desk tier. This
+   subtree has no artwork; it has a provenance count, which is the more useful
+   thing to put in a column that would otherwise sit empty.
+
+   The fleet subtree solves the same problem with a panel of the same name in
+   its own stylesheet. The two are never loaded together, so this is a parallel
+   solution rather than an override — and like fleet's, it invents no token. */
+
+.glance {
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--surface);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow);
+  color: var(--fg);            /* the shell tints .hero-art with the accent */
+}
+.glance dl {
+  margin: 0.6rem 0 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+.glance dt,
+.glance dd {
+  margin: 0;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--hairline);
+}
+.glance dt { color: var(--fg-3); }
+.glance dd { text-align: right; color: var(--fg); font-variant-numeric: tabular-nums; }
+.glance dl > dt:nth-last-of-type(1),
+.glance dl > dd:nth-last-of-type(1) { border-bottom: 0; }

@@ -5,16 +5,37 @@
   "kind": "fellowship",
   "url": "https://www.unitedstatesartists.org/fellowship",
   "summary": "Unrestricted awards to artists and collectives across ten disciplines. Nomination-based rather than open application in most cycles.",
-  "disciplines": ["arts", "music", "film", "writing", "dance", "architecture"],
-  "geography": ["US"],
-  "career_stage": ["mid", "established"],
-  "award": { "min": null, "max": null, "currency": "USD", "basis": "estimated", "note": "Unrestricted cash award. ⟦FILL: current award figure⟧" },
+  "disciplines": [
+    "arts",
+    "music",
+    "film",
+    "writing",
+    "dance",
+    "architecture"
+  ],
+  "geography": [
+    "US"
+  ],
+  "career_stage": [
+    "mid",
+    "established"
+  ],
+  "award": {
+    "min": null,
+    "max": null,
+    "currency": "USD",
+    "basis": "none",
+    "note": "⟦FILL: award figure not sourced⟧"
+  },
   "effort": "medium",
   "cycle": "annual",
-  "opens": "2026-08-01",
-  "closes": "2026-10-13",
-  "date_basis": "estimated",
+  "opens": null,
+  "closes": null,
+  "date_basis": "none",
+  "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
+  "sourced_from": null,
   "stage": "discovered",
+  "drafts": [],
   "register": "V",
   "verified": null,
   "source": "https://www.unitedstatesartists.org/fellowship"

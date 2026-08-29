@@ -5,17 +5,37 @@
   "kind": "grant",
   "url": "https://www.arts.gov/grants",
   "summary": "Project-based matching grants to nonprofit organisations across artistic disciplines. Individuals are generally not eligible except in specific literature categories.",
-  "disciplines": ["arts", "music", "film", "writing", "dance", "architecture"],
-  "geography": ["US"],
-  "career_stage": ["any"],
-  "award": { "min": null, "max": null, "currency": "USD", "basis": "estimated", "note": "Matching grant; applicant must supply cost share. ⟦FILL: current minimum and maximum⟧" },
+  "disciplines": [
+    "arts",
+    "music",
+    "film",
+    "writing",
+    "dance",
+    "architecture"
+  ],
+  "geography": [
+    "US"
+  ],
+  "career_stage": [
+    "any"
+  ],
+  "award": {
+    "min": null,
+    "max": null,
+    "currency": "USD",
+    "basis": "none",
+    "note": "⟦FILL: award figure not sourced⟧"
+  },
   "effort": "high",
   "cycle": "biannual",
-  "opens": "2026-11-01",
-  "closes": "2027-02-11",
-  "date_basis": "estimated",
+  "opens": null,
+  "closes": null,
+  "date_basis": "none",
+  "cycle_note": "FY2027 deadlines (12 Feb and 9 Jul 2026) have passed. FY2028 guidelines are expected late December 2026; deadlines not yet announced. ⟦FILL: FY2028 deadlines when published⟧",
+  "sourced_from": "https://www.arts.gov/grants/grants-for-arts-projects/application-calendar",
   "stage": "discovered",
-  "register": "V",
-  "verified": null,
+  "drafts": [],
+  "register": "D",
+  "verified": "2026-08-29",
   "source": "https://www.arts.gov/grants"
 }

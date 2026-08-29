@@ -1,11 +1,14 @@
 # ayeyoty.co — open calls
 
-A repository reference for applications and fellowships: grants, residencies,
-prizes and scholarships, held as flat files, moved through a declarative
-workflow, and read on one configurable surface called **Vantage**.
+The **fellowships subtree**: a repository reference for applications and
+fellowships — grants, residencies, prizes and scholarships — held as flat
+files, moved through a declarative workflow, and read on one configurable
+surface called **Vantage** at [`/fellowships/`](public/fellowships/).
 
-Served from Cloudflare Workers Static Assets, on the four-floor device tiering
-this repository already had. Same domain, same worker, same deployment path.
+It is a room in this building, not a second building. It opens from the venue's
+Subtrees section, runs on the venue's four tiers, uses the venue's tokens, and
+holds the venue's constraints. It adds no colour, no font and no breakpoint of
+its own.
 
 Claims below carry a register mark: **[O]** observed in this repository, **[D]**
 documented against a named source, **[I]** inferred, **[V]** unverified. Records
@@ -15,28 +18,37 @@ in the reference carry the same marks, for the same reason.
 
 ## The one thing to read before using this
 
-**No date or award figure in this reference has been confirmed against its
-source.** Every programme in `data/open-calls/` is real and every
-*Guidelines* link goes to the organisation that runs it — but the deadlines are
-placeholders derived from each programme's usual cycle, not readings taken off
-the page. All sixteen records are `date_basis: "estimated"`, `verified: null`,
-`register: "V"`, and the Vantage module marks every one of them in the
-interface. **[O]** — asserted by `npm run check`.
+**A blank field is a finding. A fabricated one is a defect.**
 
-Confirm a record before you plan against it:
+No deadline in this reference was carried over from a programme's usual cycle or
+filled in from memory. A record carries a date only when something was actually
+read to obtain it, and the URL that was read is in `sourced_from`. As it stands:
+
+| | Count | What that means |
+|---|---|---|
+| sourced deadline | 6 | read off a named third party on 2026-08-29 — **primary confirmation still owed** |
+| confirmed deadline | 0 | read off the organisation's own page. None yet: the container this was built in cannot reach most of those pages |
+| checked, between cycles | 3 | the programme's last cycle closed and the next is unannounced |
+| not sourced | 7 | nobody has looked. Blank, and marked `⟦FILL⟧` |
+
+The module gives undated records their own band rather than hiding them, so the
+reference shows you the work it still owes. **[O]** — asserted by `npm run check`.
+
+Raising a record is a small, checked edit:
 
 ```jsonc
 // data/open-calls/<id>.json
-"closes":     "2026-09-15",   // read off the guidelines page
-"date_basis": "confirmed",    // was "estimated"
-"verified":   "2026-08-29",   // the day you read it
-"register":   "D"             // was "V"
+"closes":       "2026-09-15",
+"date_basis":   "confirmed",                 // was "sourced" or "none"
+"sourced_from": "https://…",                 // what you actually read
+"verified":     "2026-08-29",                // the day you read it
+"register":     "D"
 ```
 
-The build refuses any record that claims verification it does not have: a null
-`verified` with a register above `V` fails `npm run build`. **[O]**
-
----
+The build refuses any record that claims more than it can show — a date with no
+source, a register above `V` with nothing verified, an award figure with no
+basis, or `register: "I"`, since inference is the thing this contract exists to
+prevent. `data/README.md` has the full ladder. **[O]**
 
 ## Three files decide everything
 
@@ -44,11 +56,14 @@ The build refuses any record that claims verification it does not have: a null
 |---|---|---|
 | `public/venue.css` | the device floor, via `:root { --tier }` | compare a width in JavaScript |
 | `data/workflow.json` | stages, transitions, guards | name a stage in engine code |
-| `data/vantage.config.json` | which signals render, where, in what order and colour | name a field or band in module code |
+| `data/vantage.config.json` | which signals render, where, on which line, in what order and colour, and how return on effort is scored | name a field or band in module code |
 
 Each of these is the same rule at a different level: **declared once, read
 back, never duplicated.** The three assertions that hold it are in
 `scripts/check-registry.mjs` and they scan the shipped source, not a copy. **[O]**
+
+The module lives at `public/fellowships/`; the shell it runs on lives at the root
+and belongs to the venue.
 
 ---
 
@@ -69,20 +84,24 @@ back, never duplicated.** The three assertions that hold it are in
   "disciplines": ["arts", "writing", "music", "film", "architecture"],
   "geography": ["any"],
   "career_stage": ["emerging", "mid", "established"],
-  "award": { "min": null, "max": null, "currency": "USD", "basis": "estimated", "note": "…" },
-  "effort": "medium",                    // low | medium | high
-  "cycle": "biannual",                   // annual | biannual | rolling | one-off
-  "opens": "2026-07-15",
+  "award": { "min": null, "max": null, "currency": "USD",
+             "basis": "none", "note": "⟦FILL: award figure not sourced⟧" },
+  "effort": "medium",                    // low | medium | high — the denominator of return on effort
+  "cycle": "biannual",
+  "opens": null,
   "closes": "2026-09-10",
-  "date_basis": "estimated",             // estimated | confirmed
+  "date_basis": "sourced",               // confirmed | sourced | none
+  "cycle_note": "Spring–Summer 2027 residency cycle. …",
+  "sourced_from": "https://www.macdowell.org/apply/apply-for-fellowship",
   "stage": "eligible",                   // must be a stage id in data/workflow.json
-  "register": "V",
-  "verified": null,
+  "drafts": [],                          // { label, href, state } — a label and a link, never a person
+  "register": "D",
+  "verified": "2026-08-29",
   "source": "https://www.macdowell.org/apply"
 }
 ```
 
-`npm run build` validates every record and compiles `public/registry.json`.
+`npm run build` validates every record and compiles `public/fellowships/registry.json`.
 The output is deterministic — records sorted by id, fixed key order, no build
 timestamp — which is what makes `npm run build -- --check` a real assertion
 rather than a diff against the clock. **[O]**
@@ -94,7 +113,7 @@ one field.
 ## The workflow
 
 `data/workflow.json` declares twelve stages and twelve transitions.
-`public/workflow.js` executes it and contains no stage id of its own. **[O]**
+`public/fellowships/workflow.js` executes it and contains no stage id of its own. **[O]**
 
 ```
 discovered → screening → eligible → drafting → review → submitted → decision → awarded
@@ -142,9 +161,9 @@ so the interface re-forms from configuration alone:
 | Floor | Unit | Rows | Fields built | Actions |
 |---|---|---|---|---|
 | `watch` | line | 3 | title, countdown, provenance | withheld |
-| `phone` | row | 12 | + org, stage, guidelines | shown |
-| `pad` | row | all | + close date, kind, fit meter | shown |
-| `desk` | card | all | + effort, cycle, summary | shown |
+| `phone` | row | 12 | + return meter, org, drafts, stage, guidelines | shown |
+| `pad` | card | all | + close date, kind, fit meter, effort, award, cycle terms | shown |
+| `desk` | card | all | + summary | shown |
 
 A field the configuration does not list for a floor is **not built**, not built
 and hidden — the watch floor pays nothing for it. **[O]** — the browser check
@@ -155,11 +174,38 @@ module sets them as custom properties, and the stylesheet says only *where*
 colour goes, never *which*:
 
 ```json
-{ "id": "now", "label": "Closing", "max_days": 7, "hue": 8, "chroma": 0.16 }
+{ "id": "week", "label": "Within 7 days", "max_days": 7, "hue": 8, "chroma": 0.16 }
 ```
 
 Add a band, move a field to another line, change the ordering keys or reweight
 fit — none of it touches a line of JavaScript or CSS.
+
+### Return on effort
+
+Deadline foresight is the primary lens: calls are grouped by a 7 / 30 / 90-day
+horizon, and **inside each band the top of the list is the best return for the
+effort it costs**. Award value and eligibility fit are weighed against effort to
+submit, all from `rank` in the configuration:
+
+```json
+"rank": {
+  "effort_cost": { "low": 1, "medium": 1.6, "high": 2.4 },
+  "award_value": [ { "up_to": 10000, "value": 0.35 },
+                   { "up_to": 50000, "value": 0.7 },
+                   { "up_to": null,  "value": 1.0 } ],
+  "unknown_award": 0.5,
+  "weights": { "award": 2, "fit": 3 }
+}
+```
+
+An award figure nobody has sourced scores at `unknown_award` rather than zero,
+so a missing number neither flatters nor punishes a call — and the card marks it
+missing either way. Two bands sit outside the horizon: a call whose date has
+passed, and a call with no sourced date at all. **[O]** — `npm run check`
+asserts the band groups first and return ranks inside it.
+
+Pipeline stages are secondary to the radar: the stage is a foot-line field, not
+the thing the surface is organised around.
 
 ### Fit
 
@@ -195,38 +241,46 @@ is running on. **[I]**
 
 | Claim | Register | Basis |
 |---|---|---|
-| Four viewports resolve to four distinct tiers, no horizontal scroll, clean console | **[O]** | `npm run check:tiers`, Chromium 1194 |
+| Four viewports resolve to four distinct tiers on `/`, `/fleet/` and `/fellowships/`, no horizontal scroll, clean console | **[O]** | `npm run check:tiers`, Chromium 1194 |
 | The module renders at all four floors with the configured unit, row cap, line grouping and field set | **[O]** | `npm run check:vantage`, four fixed viewports |
 | No tab control and exactly one module on the page, at every floor | **[O]** | same |
 | Every rendered record carries a title and a provenance marker | **[O]** | same |
+| Fields are counted by role, so the check itself names no field id | **[O]** | same |
 | A workflow action moves a record to the stage the spec names, with no reload | **[O]** | same, driven end to end |
 | `settle()` is idempotent, never stalls, and every stage can reach a terminal stage | **[O]** | `npm run check:data` |
-| The engine names no stage; the module names no field, band or width | **[O]** | source scan over the shipped files, comments stripped |
-| No record claims a register it has not earned | **[O]** | `npm run build` and `npm run check:data` |
-| Every deadline in the reference | **[V]** | placeholders from each programme's usual cycle — see the top of this file |
-| Every award figure in the reference | **[V]** | not published or not read; each carries a `⟦FILL⟧` note |
+| The engine names no stage; the module names no field, band, colour or width | **[O]** | source scan over the shipped files, comments stripped |
+| No record carries a date, or an award figure, without a source | **[O]** | `npm run build` and `npm run check:data`; the guard was tested by planting a sourceless date and watching the build reject it |
+| Every undated record names what is owed with a `⟦FILL⟧` marker | **[O]** | `npm run check:data` |
+| The horizon band groups first and return on effort ranks inside it | **[O]** | `npm run check:data` |
+| The six sourced deadlines | **[D]** | read on 2026-08-29 off the third party recorded in each record's `sourced_from` |
+| That three programmes are between cycles with nothing to record | **[D]** | same |
+| Every award figure except one | **[V]** | not published, or not read. Each carries a `⟦FILL⟧` note |
+| The seven unsourced deadlines | **[V]** | nobody has looked. Blank, and grouped into their own band in the interface |
 | `font: -apple-system-body` opts the page into Dynamic Type | **[V]** | documented Safari behaviour, not reachable from Chromium |
 | `env(safe-area-inset-*)` is non-zero on a notched iPhone | **[V]** | probes read `0 / 0 / 0 / 0` in Chromium — correct there, unproven on device |
-| Add to Home Screen / Add to Dock produce a standalone window | **[V]** | manifest and `apple-touch-icon` in place; the install flow is untested here |
 | Cloudflare Workers Static Assets applies `public/_headers` at deploy | **[V]** | no deploy was run from this container |
 
 ## Open items
 
-- ⟦FILL: the real close date for all sixteen records⟧ — the single thing that
-  turns this from a structure into a usable reference. Confirm them one at a
-  time against `source`; each one is a four-line edit.
+- ⟦FILL: the seven unsourced deadlines⟧ — `ashoka-fellowship`,
+  `echoing-green-fellowship`, `jerome-hill-artist-fellowship`,
+  `knight-arts-tech-fellowship`, `mozilla-technology-fund`, `ted-fellows`,
+  `united-states-artists-fellowship`. `npm run build` lists them every run.
+- ⟦FILL: primary confirmation for the six sourced deadlines⟧ — each was read off
+  a third party, not the organisation's own page. Raising one to `confirmed` is
+  a four-line edit.
+- ⟦FILL: award figures⟧ — fifteen of sixteen records carry no sourced figure, so
+  the ranking scores them at the configured `unknown_award`.
 - ⟦FILL: the CSS viewport width Apple Watch actually reports for web content⟧ —
   `319px` is a floor chosen to sit under every iPhone, not a fitted breakpoint.
-- ⟦FILL: measured Dynamic Type behaviour at the accessibility sizes⟧ — the
-  module is built to hold at the large accessibility sizes; that has not been
-  seen on a device.
+- ⟦FILL: measured Dynamic Type behaviour at the accessibility sizes⟧.
 
 ## Local development
 
 ```bash
 npm install
 npm run dev            # wrangler dev
-npm run build          # validate data/ and compile public/registry.json
+npm run build          # validate data/ and compile the registry
 npm run check          # data + tiers + module, all of it
 npm run check:data     # engine and configuration assertions, no browser
 npm run check:tiers    # the four floors
@@ -259,22 +313,25 @@ data/
 ├── open-calls/*.json      one record per open call — the reference
 ├── record.schema.json     the record contract, in prose
 ├── workflow.json          stages, transitions, guards
-└── vantage.config.json    the module's configuration input
-public/
-├── index.html             the venue
-├── dashboard.html         the dashboard holding the singular module
-├── registry.json          GENERATED — do not edit
+├── vantage.config.json    the module's configuration input and ranking inputs
+└── README.md              the provenance ladder and the re-survey ritual
+public/                    the venue shell — owned by the venue, not this subtree
+├── index.html             the venue, with the Subtrees section this opens from
 ├── venue.css · venue.js   tokens, tiers, the four floors
-├── vantage.css            the module's form
-├── vantage.js             the module's runtime
-├── workflow.js            the workflow engine
 ├── _headers               CSP, cache, transport headers
-└── icons/ · robots.txt · sitemap.xml · app.webmanifest · 404.html
+├── fleet/                 the other subtree
+└── fellowships/           THIS SUBTREE
+    ├── index.html         the page
+    ├── fellowships.css    its form — no token, font or breakpoint of its own
+    ├── vantage.js         the module's runtime
+    ├── workflow.js        the workflow engine
+    └── registry.json      GENERATED — do not edit
 scripts/
-├── build-registry.mjs     validate data/ → public/registry.json
-├── check-registry.mjs     engine and configuration assertions
+├── build-registry.mjs     validate data/ → public/fellowships/registry.json
+├── check-registry.mjs     engine, provenance and configuration assertions
 ├── check-vantage.mjs      the module at four viewports
-├── check-tiers.mjs        the tier assertions
+├── check-tiers.mjs        the tier assertions for the shell and both subtrees
+├── fleet.mjs              the fleet subtree's own renderer
 └── make-icons.py          renders the mark to PNG — stdlib only
 ```
 
@@ -346,7 +403,7 @@ Carried over and still held:
   surface, stay in the reader's own browser.
 
 One relaxation was made against the original `default-src 'none'`:
-`connect-src 'self'`, so the module can read `/registry.json` at runtime instead
+`connect-src 'self'`, so the module can read `/fellowships/registry.json` at runtime instead
 of having the reference baked into a script. It is a same-origin GET and opens
 no third-party request; the constraint above is intact. The reason is written
 into `public/_headers` beside the policy. **[O]**

@@ -5,16 +5,34 @@
   "kind": "fellowship",
   "url": "https://www.ashoka.org/en-us/program/ashoka-venture-and-fellowship",
   "summary": "Lifetime fellowship for social entrepreneurs with a system-changing idea, including a living stipend during the launch phase. Nominations and applications are accepted on a rolling basis.",
-  "disciplines": ["social-impact", "education", "technology"],
-  "geography": ["any"],
-  "career_stage": ["mid", "established"],
-  "award": { "min": null, "max": null, "currency": "USD", "basis": "estimated", "note": "Stipend is needs-based and time-limited rather than a fixed prize. ⟦FILL: current stipend policy⟧" },
+  "disciplines": [
+    "social-impact",
+    "education",
+    "technology"
+  ],
+  "geography": [
+    "any"
+  ],
+  "career_stage": [
+    "mid",
+    "established"
+  ],
+  "award": {
+    "min": null,
+    "max": null,
+    "currency": "USD",
+    "basis": "none",
+    "note": "⟦FILL: award figure not sourced⟧"
+  },
   "effort": "high",
   "cycle": "rolling",
-  "opens": "2026-01-01",
-  "closes": "2027-06-30",
-  "date_basis": "estimated",
+  "opens": null,
+  "closes": null,
+  "date_basis": "none",
+  "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
+  "sourced_from": null,
   "stage": "discovered",
+  "drafts": [],
   "register": "V",
   "verified": null,
   "source": "https://www.ashoka.org/en-us/program/ashoka-venture-and-fellowship"

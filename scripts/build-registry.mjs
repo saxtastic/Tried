@@ -1,6 +1,6 @@
-/* Compiles data/ into public/registry.json.
+/* Compiles data/ into public/fellowships/registry.json.
  *
- *   npm run build          write public/registry.json
+ *   npm run build          write public/fellowships/registry.json
  *   npm run build -- --check   fail if the committed file is out of date
  *
  * The output is deterministic: records are sorted by id, keys are emitted in a
@@ -18,7 +18,7 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CALLS = path.join(ROOT, "data", "open-calls");
-const OUT = path.join(ROOT, "public", "registry.json");
+const OUT = path.join(ROOT, "public", "fellowships", "registry.json");
 
 const read = (p) => JSON.parse(fs.readFileSync(p, "utf8"));
 
@@ -80,13 +80,48 @@ for (const file of files) {
     note(file, `opens (${rec.opens}) is after closes (${rec.closes})`);
   }
 
-  /* The honesty rule the reference is built around: a record nobody has
-     checked against its source cannot claim a register above V. */
+  /* The rule this reference is built around, enforced rather than asked for:
+     a blank field is a finding, a fabricated one is a defect. A date exists
+     only when something was actually read to obtain it. */
+  const dated = rec.date_basis === "sourced" || rec.date_basis === "confirmed";
+
+  if (dated) {
+    if (!rec.closes) note(file, `date_basis "${rec.date_basis}" but closes is blank`);
+    if (!rec.sourced_from) note(file, `date_basis "${rec.date_basis}" but nothing is recorded in sourced_from`);
+    if (!rec.verified) note(file, `date_basis "${rec.date_basis}" but verified is null — nobody read it`);
+    if (rec.register === "V") note(file, `a sourced date cannot sit on register V`);
+  } else {
+    if (rec.closes) note(file, `closes "${rec.closes}" is set with date_basis "none" — a date with no source is a fabrication`);
+    if (!rec.cycle_note) note(file, `closes is blank, so cycle_note must say why and carry a ⟦FILL⟧ marker`);
+    if (rec.cycle_note && !/⟦FILL/.test(rec.cycle_note)) {
+      note(file, `cycle_note on an undated record must name what is still owed with a ⟦FILL⟧ marker`);
+    }
+  }
+
   if (!rec.verified && rec.register !== "V") {
     note(file, `register "${rec.register}" claims verification but verified is null`);
   }
-  if (rec.verified && rec.date_basis === "estimated" && rec.register !== "V") {
-    note(file, `dates are estimated, so register must stay V until date_basis is confirmed`);
+  if (rec.verified && !rec.sourced_from) {
+    note(file, `verified "${rec.verified}" but nothing is recorded in sourced_from`);
+  }
+  if (rec.register === "I") {
+    note(file, `register I (inferred) is not legal on a record — inference is what this contract prevents`);
+  }
+
+  const aw = rec.award || {};
+  if (!["sourced", "confirmed", "none"].includes(aw.basis)) {
+    note(file, `award.basis "${aw.basis}" is not one of sourced, confirmed, none`);
+  }
+  if (aw.basis !== "none" && aw.min === null && aw.max === null) {
+    note(file, `award.basis "${aw.basis}" claims a sourced figure but none is recorded`);
+  }
+  if (aw.basis === "none" && (aw.min !== null || aw.max !== null)) {
+    note(file, `award figure is set with basis "none" — a figure with no source is a fabrication`);
+  }
+
+  if (!Array.isArray(rec.drafts)) note(file, `drafts must be an array`);
+  for (const d of rec.drafts || []) {
+    if (!d || typeof d.label !== "string" || !d.label) note(file, `every draft needs a label`);
   }
   if (!/^https:\/\//.test(rec.url || "")) note(file, `url must be https`);
   if (!/^https:\/\//.test(rec.source || "")) note(file, `source must be https`);
@@ -148,7 +183,7 @@ const serialised = JSON.stringify(registry, null, 2) + "\n";
 if (process.argv.includes("--check")) {
   const current = fs.existsSync(OUT) ? fs.readFileSync(OUT, "utf8") : "";
   if (current !== serialised) {
-    console.error("build-registry: public/registry.json is out of date. Run `npm run build`.");
+    console.error("build-registry: public/fellowships/registry.json is out of date. Run `npm run build`.");
     process.exit(1);
   }
   console.log(`PASS  registry in sync — ${calls.length} calls, ${workflow.stages.length} stages`);
@@ -157,8 +192,15 @@ if (process.argv.includes("--check")) {
 
 fs.writeFileSync(OUT, serialised);
 
-const unverified = calls.filter((c) => !c.verified).length;
-const estimated = calls.filter((c) => c.date_basis === "estimated").length;
-console.log(`wrote public/registry.json — ${calls.length} calls, ${workflow.stages.length} stages, ${vantage.fields.length} fields`);
-console.log(`provenance: ${unverified}/${calls.length} unverified, ${estimated}/${calls.length} carry estimated dates`);
-if (unverified) console.log("every unverified record is marked in the interface and must be confirmed against its source before it is acted on.");
+const dated = calls.filter((c) => c.closes).length;
+const betweenCycles = calls.filter((c) => !c.closes && c.verified).length;
+const unsourced = calls.filter((c) => !c.closes && !c.verified).length;
+const primary = calls.filter((c) => c.date_basis === "confirmed").length;
+
+console.log(`wrote public/fellowships/registry.json — ${calls.length} calls, ${workflow.stages.length} stages, ${vantage.fields.length} fields`);
+console.log(`  ${dated} with a sourced deadline (${primary} confirmed against the organisation's own page)`);
+console.log(`  ${betweenCycles} checked, between cycles — no open deadline to record`);
+console.log(`  ${unsourced} not yet sourced — blank and marked ⟦FILL⟧`);
+if (unsourced) {
+  console.log(`\nowed: ${calls.filter((c) => !c.closes && !c.verified).map((c) => c.id).join(", ")}`);
+}

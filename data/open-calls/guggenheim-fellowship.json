@@ -5,17 +5,37 @@
   "kind": "fellowship",
   "url": "https://www.gf.org/applicants/",
   "summary": "Unrestricted fellowships to mid-career individuals who have already demonstrated exceptional capacity for productive scholarship or exceptional creative ability in the arts.",
-  "disciplines": ["arts", "humanities", "writing", "social-science"],
-  "geography": ["US", "CA"],
-  "career_stage": ["mid", "established"],
-  "award": { "min": null, "max": null, "currency": "USD", "basis": "estimated", "note": "Amount varies by fellow; the foundation does not publish a fixed figure. ⟦FILL: current typical award range⟧" },
+  "disciplines": [
+    "arts",
+    "humanities",
+    "writing",
+    "social-science"
+  ],
+  "geography": [
+    "US",
+    "CA"
+  ],
+  "career_stage": [
+    "mid",
+    "established"
+  ],
+  "award": {
+    "min": null,
+    "max": null,
+    "currency": "USD",
+    "basis": "none",
+    "note": "⟦FILL: award figure not sourced⟧"
+  },
   "effort": "high",
   "cycle": "annual",
-  "opens": "2026-07-01",
+  "opens": null,
   "closes": "2026-09-15",
-  "date_basis": "estimated",
+  "date_basis": "sourced",
+  "cycle_note": "2027 competition. Work samples are due two weeks after the portal closes; decisions late April 2027.",
+  "sourced_from": "https://www.gf.org/program/how-to-apply",
   "stage": "drafting",
-  "register": "V",
-  "verified": null,
+  "drafts": [],
+  "register": "D",
+  "verified": "2026-08-29",
   "source": "https://www.gf.org/applicants/"
 }
