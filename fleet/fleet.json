@@ -32,6 +32,12 @@
       "by": "session_01GvNCLtH3R2cqohRaUwqKek",
       "method": "scheduled check-in: git fetch --prune, branch ancestry, commit inspection",
       "register": "O"
+    },
+    {
+      "at": "2026-08-29T20:08:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "scheduled check-in: git fetch --prune, get_session on both targets, controlled re-fire",
+      "register": "O"
     }
   ],
   "environments": [
@@ -191,7 +197,7 @@
         "irl_contingency": "runs offline; the corpus is bundled into the page rather than fetched",
         "produces_artifact": false
       },
-      "partial_compliance": "104eb5f fixed the CSP finding by bundling the corpus into corpus.bundle.js rather than fetching it — default-src 'none' blocks fetch, which the relay did not spell out and the session worked out itself. It has NOT merged the shell, and still changes all three disputed files. P7 and P8 both stand."
+      "partial_compliance": "104eb5f fixed the CSP finding by bundling the corpus into corpus.bundle.js rather than fetching it — default-src 'none' blocks fetch, which the relay did not spell out and the session worked out itself. It has NOT merged the shell, and still changes all three disputed files. P7 and P8 both stand. Since then eb94e40 verified the model against frameworks in other trades and corrected it — 42 tests passing. Still has not merged the shell; P7 and P8 stand."
     }
   ],
   "coworkers": [
@@ -408,6 +414,20 @@
       "target": "claude/apps-fellowships-repository-zlwbft, claude/governance-corpus-simulator-m2sjkw",
       "result": "Fellowships merged c9d77fc and self-declared under P8. Simulator fixed the CSP defect independently but has not merged. A local merge of the fellowships branch into the venue branch was made and reset without pushing: it fast-forwarded, which would have collapsed PR #2 into PR #1 and destroyed the stack.",
       "register": "O"
+    },
+    {
+      "at": "2026-08-29T19:15:00Z",
+      "action": "create_trigger + fire_trigger (with text) — FAILED",
+      "target": "session_01GR1Ut4PmfsRVZo96RJZVJu, session_01HCcyjiDYBhyRWFnL1qrKWB",
+      "result": "Non-delivery. Neither session received the core questions. Fellowships' updated_at was 19:09:32, six minutes before the fire, and never moved; the simulator's 19:15 commit was its own cross-domain verification work already in flight. Both returned cse_ ids unrelated to their targets.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T20:08:00Z",
+      "action": "create_trigger + fire_trigger (bare) + delete_trigger",
+      "target": "session_01GR1Ut4PmfsRVZo96RJZVJu, session_01HCcyjiDYBhyRWFnL1qrKWB",
+      "result": "Re-sent the same four questions with the ff9ca54 pointer folded into the prompt and no `text` argument. Both fires returned cse_ ids matching their targets. Concurrent broadcast now actually out.",
+      "register": "O"
     }
   ],
   "mechanisms": [
@@ -422,10 +442,12 @@
       "constraints": [
         "ListAgents does not reach cloud siblings; there is no direct peer channel.",
         "update_trigger cannot edit the prompt of a routine that fires into another session — a correction is a new trigger, not an edit.",
-        "The target cannot reply. Read its state with get_session instead of expecting an answer."
+        "The target cannot reply. Read its state with get_session instead of expecting an answer.",
+        "fire_trigger with a `text` argument does not deliver into the bound session. Established by controlled comparison on 2026-08-29: three fires without `text` returned session_id = cse_ + the target's own suffix and the target acted; two fires with `text` returned unrelated cse_ ids and neither target was touched — one had not been updated since six minutes BEFORE the fire. Put everything in the prompt and fire bare. The returned session_id is the delivery receipt: if its suffix does not match the target, nothing arrived."
       ],
       "register": "O",
-      "note": "Established by use on 2026-08-29; each constraint was hit, not read."
+      "note": "Established by use on 2026-08-29; each constraint was hit, not read.",
+      "verification": "Do not treat a fire as delivered because the call returned 200. Check the returned session_id suffix, and check the target's updated_at moved. A relay that silently no-ops looks exactly like a coworker choosing not to answer."
     }
   ],
   "vantages": {
