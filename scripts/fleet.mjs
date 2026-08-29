@@ -87,6 +87,16 @@ function check() {
     }
   }
 
+  // P13 — a stacked pull request targets the branch it stacks on
+  for (const p of fleet.projects) {
+    if (!p.inherits || !p.pull_request) continue;
+    const up = project(p.inherits);
+    if (up && p.pull_request_base && p.pull_request_base !== up.branch) {
+      add("P13", "error", `${p.id} → PR #${p.pull_request}`,
+        `targets ${p.pull_request_base} but stacks on ${up.id} (${up.branch}); its diff shows ${up.id}'s work as its own`);
+    }
+  }
+
   // P9 — no product claim without a record behind it
   for (const p of fleet.projects) {
     const sells = (p.vantages_held ?? []).includes("content-marketing") || p.survival?.produces_artifact;
@@ -132,10 +142,17 @@ function check() {
   for (const p of fleet.projects) {
     for (const f of p.claims_disputed ?? []) {
       const holder = owner.get(f);
-      if (holder && holder !== p.id) {
-        add("P8", "error", `${p.id} → ${f}`,
-          `owned by ${holder}; ${p.id} changes it too, so whichever of PR #${project(holder).pull_request} / PR #${p.pull_request} merges second conflicts`);
-      }
+      if (!holder || holder === p.id) continue;
+      // A declared claim is the compliant state, so it does not fail the build.
+      // What decides severity is whether the merge order is settled: a project
+      // stacked on the owner merges second by construction and the stack
+      // resolves the file. A project running parallel to the owner leaves
+      // "whichever merges second" to chance, which is the case worth failing on.
+      const stacked = p.inherits === holder && p.pull_request_base === project(holder).branch;
+      add("P8", stacked ? "warn" : "error", `${p.id} → ${f}`,
+        stacked
+          ? `owned by ${holder} and changed here too, declared; PR #${p.pull_request} is stacked on PR #${project(holder).pull_request}, so the stack settles the order`
+          : `owned by ${holder}; ${p.id} changes it too and is not stacked on it, so whichever of PR #${project(holder).pull_request} / PR #${p.pull_request} merges second conflicts`);
     }
   }
 
@@ -262,6 +279,15 @@ function plan(findings) {
         tool: "create_trigger",
         args: { name: `${p.id} re-survey`, persistent_session_id: "<the builder session>", cron_expression: "<cadence, UTC>" },
         note: "Bind after the subtree exists; a Routine firing into an empty surface is noise.",
+      });
+    }
+    if (f.rule === "P13") {
+      const p = project(f.subject.split(" \u2192 ")[0]);
+      actions.push({
+        why: f.detail,
+        tool: "update_pull_request — the owning session's call, not the operator's",
+        args: { pullNumber: p.pull_request, base: project(p.inherits).branch },
+        note: "One field. Retargeting someone else's PR changes what their reviewers see, so relay it rather than doing it.",
       });
     }
     if (f.rule === "P1" || f.rule === "P2") {
