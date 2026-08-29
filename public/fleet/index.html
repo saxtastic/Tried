@@ -29,10 +29,10 @@
   <section class="shell hero">
     <div class="hero-copy">
       <p class="eyebrow">subtree · fleet</p>
-      <h1><span class="wide-only">3 live coworkers. <em>One environment.</em></span><span class="watch-only">Fleet</span></h1>
+      <h1><span class="wide-only">4 live coworkers. <em>One environment.</em></span><span class="watch-only">Fleet</span></h1>
       <p class="lede">Every Claude session working this repository, what it owns, what it is
         blocked on, and what the policy says is owed. Generated from
-        <code>fleet/fleet.json</code> — surveyed 2026-08-29T14:36:00Z, never edited by hand.</p>
+        <code>fleet/fleet.json</code> — surveyed 2026-08-29T15:45:00Z, never edited by hand.</p>
       <div class="actions">
         <a class="btn btn--primary" href="#crew">The roster</a>
         <a class="btn btn--quiet wide-only" href="#plan">What is owed</a>
@@ -42,12 +42,12 @@
     <div class="hero-art glance" aria-label="Fleet at a glance">
       <p class="eyebrow">at a glance</p>
       <dl>
-          <dt>running</dt><dd>2</dd>
+          <dt>running</dt><dd>1</dd>
+          <dt>idle</dt><dd>3</dd>
           <dt>archived</dt><dd>2</dd>
-          <dt>idle</dt><dd>1</dd>
-          <dt>projects</dt><dd>4</dd>
+          <dt>projects</dt><dd>5</dd>
           <dt>routines</dt><dd>0</dd>
-          <dt>findings</dt><dd>0 err / 3 warn</dd>
+          <dt>findings</dt><dd>3 err / 3 warn</dd>
       </dl>
     </div>
   </section>
@@ -72,8 +72,8 @@
           
           
         </article>
-        <article class="crew" data-status="running">
-          <span class="crew-status">running</span>
+        <article class="crew" data-status="idle">
+          <span class="crew-status">idle</span>
           <h3>Repository reference for applications and fellowships</h3>
           <p class="crew-role">Applications and fellowships subtree · builder</p>
           <dl>
@@ -93,6 +93,19 @@
             <dt>model</dt><dd>claude-sonnet-5</dd>
             <dt>branch</dt><dd>—</dd>
             <dt>last active</dt><dd>2026-08-08</dd>
+          </dl>
+          
+          
+          
+        </article>
+        <article class="crew" data-status="idle">
+          <span class="crew-status">idle</span>
+          <h3>Governance and corpus legal simulator</h3>
+          <p class="crew-role">Governance and corpus legal simulator · builder</p>
+          <dl>
+            <dt>model</dt><dd>claude-opus-5</dd>
+            <dt>branch</dt><dd>claude/governance-corpus-simulator-m2sjkw</dd>
+            <dt>last active</dt><dd>2026-08-29</dd>
           </dl>
           
           
@@ -130,11 +143,17 @@
   <section class="shell" id="findings">
     <div class="section-head">
       <h2>Policy</h2>
-      <p>No errors. 3 warnings against 7 rules.</p>
+      <p>3 error, 3 warnings against 8 rules.</p>
     </div>
     <ul class="findings">
+        <li data-severity="error"><span class="tag">P8</span>
+          <strong>simulator → public/index.html</strong> — owned by venue; simulator changes it too, so whichever of PR #1 / PR #3 merges second conflicts</li>
+        <li data-severity="error"><span class="tag">P8</span>
+          <strong>simulator → package.json</strong> — owned by venue; simulator changes it too, so whichever of PR #1 / PR #3 merges second conflicts</li>
+        <li data-severity="error"><span class="tag">P8</span>
+          <strong>simulator → README.md</strong> — owned by venue; simulator changes it too, so whichever of PR #1 / PR #3 merges second conflicts</li>
         <li data-severity="warn"><span class="tag">P7</span>
-          <strong>fellowships</strong> — declares inherits: venue but was checked out from claude/cloudflare-ayeyoty-setup-uq8pl9; claude/ios-macos-code-repurpose-ofm9ks has to be merged into claude/apps-fellowships-repository-zlwbft before it pushes</li>
+          <strong>simulator</strong> — declares inherits: venue but was checked out from claude/cloudflare-ayeyoty-setup-uq8pl9; claude/ios-macos-code-repurpose-ofm9ks has to be merged into claude/governance-corpus-simulator-m2sjkw before it pushes</li>
         <li data-severity="warn"><span class="tag">P4</span>
           <strong>session_01QrtdqCnyErpcgysUbPKytp</strong> — idle on a stalled project — nothing has read it, and it holds no repository</li>
         <li data-severity="warn"><span class="tag">P5</span>
@@ -151,28 +170,38 @@
     <ul class="plan">
         <li><span class="tag">1</span>
           <strong>create_trigger + fire_trigger</strong>
-          <span class="act-why">declares inherits: venue but was checked out from claude/cloudflare-ayeyoty-setup-uq8pl9; claude/ios-macos-code-repurpose-ofm9ks has to be merged into claude/apps-fellowships-repository-zlwbft before it pushes</span>
+          <span class="act-why">simulator changes public/index.html, package.json, README.md, all owned by another project</span>
+          <code>{&quot;persistent_session_id&quot;:&quot;&lt;the claiming session&gt;&quot;,&quot;prompt&quot;:&quot;merge the owning branch, then re-apply your changes to public/index.html, package.json, README.md on top&quot;}</code>
+          <span class="act-note">PR #3 and the owning PR both touch these; whichever merges second conflicts. Cheaper now than after.</span></li>
+        <li><span class="tag">2</span>
+          <strong>create_trigger + fire_trigger</strong>
+          <span class="act-why">declares inherits: venue but was checked out from claude/cloudflare-ayeyoty-setup-uq8pl9; claude/ios-macos-code-repurpose-ofm9ks has to be merged into claude/governance-corpus-simulator-m2sjkw before it pushes</span>
           <code>{&quot;persistent_session_id&quot;:&quot;&lt;the builder session&gt;&quot;,&quot;prompt&quot;:&quot;git fetch origin claude/ios-macos-code-repurpose-ofm9ks &amp;&amp; git merge origin/claude/ios-macos-code-repurpose-ofm9ks&quot;}</code>
           <span class="act-note">Relay it; the session cannot change the source it was created against.</span></li>
-        <li><span class="tag">2</span>
+        <li><span class="tag">3</span>
           <strong>decision required — no tool</strong>
           <span class="act-why">Build AI stock options trading dashboard with predictive intelligence is review-ready and unread since 2026-08-08</span>
           <code>{&quot;session_id&quot;:&quot;session_01QrtdqCnyErpcgysUbPKytp&quot;}</code>
           <span class="act-note">Adopt it into an environment and a repo, or archive it. Leaving it idle is the one option that loses the work.</span></li>
-        <li><span class="tag">3</span>
+        <li><span class="tag">4</span>
           <strong>create_trigger</strong>
           <span class="act-why">Applications and fellowships subtree is declared a ritual and nothing recurs</span>
           <code>{&quot;name&quot;:&quot;fellowships re-survey&quot;,&quot;persistent_session_id&quot;:&quot;&lt;the builder session&gt;&quot;,&quot;cron_expression&quot;:&quot;&lt;cadence, UTC&gt;&quot;}</code>
           <span class="act-note">Bind after the subtree exists; a Routine firing into an empty surface is noise.</span></li>
-        <li><span class="tag">4</span>
+        <li><span class="tag">5</span>
           <strong>set_session_tags</strong>
           <span class="act-why">the roster is only legible if venue sessions carry their project</span>
           <code>{&quot;session_ids&quot;:[&quot;session_01GvNCLtH3R2cqohRaUwqKek&quot;],&quot;add&quot;:[&quot;project:venue&quot;]}</code>
           <span class="act-note">Tags are how a later survey groups sessions without reading every transcript.</span></li>
-        <li><span class="tag">5</span>
+        <li><span class="tag">6</span>
           <strong>set_session_tags</strong>
           <span class="act-why">the roster is only legible if fellowships sessions carry their project</span>
           <code>{&quot;session_ids&quot;:[&quot;session_01GR1Ut4PmfsRVZo96RJZVJu&quot;],&quot;add&quot;:[&quot;project:fellowships&quot;]}</code>
+          <span class="act-note">Tags are how a later survey groups sessions without reading every transcript.</span></li>
+        <li><span class="tag">7</span>
+          <strong>set_session_tags</strong>
+          <span class="act-why">the roster is only legible if simulator sessions carry their project</span>
+          <code>{&quot;session_ids&quot;:[&quot;session_01HCcyjiDYBhyRWFnL1qrKWB&quot;],&quot;add&quot;:[&quot;project:simulator&quot;]}</code>
           <span class="act-note">Tags are how a later survey groups sessions without reading every transcript.</span></li>
     </ul>
   </section>
