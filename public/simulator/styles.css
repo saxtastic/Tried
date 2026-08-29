@@ -130,3 +130,41 @@ details[open] summary { margin-bottom: .5rem; color: var(--fg); }
 .note { color: var(--warn); font-size: .82rem; }
 .disclaimer { font-size: .8rem; color: var(--dim); border: 1px dashed var(--line); border-radius: 8px; padding: .6rem .8rem; margin-top: 1rem; }
 .loading { color: var(--dim); padding: 2rem 0; }
+
+/* Narrow viewports.
+   Condition ids, statutory citations and coverage tags are long unbroken
+   strings. On a watch-sized screen (208px) they would otherwise push the page
+   into horizontal scroll, so they are allowed to break anywhere. */
+.tag, .unlocks, .st, td.num, .because, ol.vectors b, .gap b { overflow-wrap: anywhere; }
+section.card > h2 { overflow-wrap: anywhere; }
+table { table-layout: fixed; }
+th, td { overflow-wrap: anywhere; }
+
+@media (max-width: 520px) {
+  .wrap { padding: 0 .75rem; }
+  section.card { padding: .85rem .9rem; }
+  header { padding: 1.25rem .75rem 1rem; }
+  /* Wide content scrolls inside its own box rather than the page body. */
+  section.card table { display: block; overflow-x: auto; }
+}
+
+.spaced { margin-top: .8rem; }
+aside h2.spaced { margin-top: 1.2rem; }
+
+/* Grid and flex children default to min-width:auto, which refuses to shrink
+   below their content. On a 208px viewport that is what pushes the page into
+   horizontal scroll, so every track is allowed to collapse. */
+.layout, .cols, .scale { min-width: 0; }
+.layout > *, .cols > *, .side, main, aside, section.card { min-width: 0; }
+.scale .bar { min-width: 0; }
+select { max-width: 100%; text-overflow: ellipsis; }
+
+@media (max-width: 320px) {
+  body { font-size: 13px; }
+  header h1 { font-size: 1.1rem; }
+  .wrap { padding: 0 .5rem; }
+  aside, section.card { padding: .6rem; border-radius: 8px; }
+  .scale { flex-wrap: wrap; }
+  /* Element statements and citations are the longest strings on the page. */
+  ul.elements li, .defeater, .gap { word-break: break-word; }
+}

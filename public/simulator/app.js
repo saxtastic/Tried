@@ -3,23 +3,21 @@
 
 import { fullReport } from './engine/simulate.js';
 import { INTERPRETIVE_REGIMES, REGIME_GLOSS, POLICY_REGIMES, glossOf } from './engine/index.js';
+import { corpus } from './corpus.bundle.js';
 
-const FILES = ['lexicon', 'provisions', 'precedents', 'conditions'];
-
-async function loadCorpus() {
-  const [lexicon, provisions, precedents, conditions, claim, institution] = await Promise.all([
-    ...FILES.map((f) => fetch(`./corpus/${f}.json`).then((r) => r.json())),
-    fetch('./corpus/case.template.json').then((r) => r.json()),
-    fetch('./corpus/institution.template.json').then((r) => r.json()),
-  ]);
-  return { lexicon, provisions, precedents, conditions, claim, institution };
-}
+// The corpus arrives as a module rather than over fetch: the venue's
+// Content-Security-Policy is `default-src 'none'` with no connect-src, so fetch
+// and XHR are refused. corpus.bundle.js is generated from corpus/*.json by
+// `npm run build:corpus`, and `npm test` asserts the two stay in step.
 
 const el = (tag, attrs = {}, ...kids) => {
   const n = document.createElement(tag);
   for (const [k, v] of Object.entries(attrs)) {
     if (k === 'class') n.className = v;
-    else if (k === 'html') n.innerHTML = v;
+    // Styles go through CSSOM. A `style` attribute is inline style, which the
+    // venue's Content-Security-Policy refuses; assigning through the CSSOM is
+    // not covered by style-src and applies normally.
+    else if (k === 'style') { if (v) n.style.cssText = v; }
     else if (v !== null && v !== undefined) n.setAttribute(k, v);
   }
   for (const kid of kids.flat()) {
@@ -37,7 +35,6 @@ const OUTCOME_TAG = {
   barred: 'warn',
 };
 
-const corpus = await loadCorpus();
 const state = {
   regime: 'contemporary',
   policyRegime: '',
@@ -195,7 +192,7 @@ function sweepCard(report) {
       el('td', {}, r.regime), el('td', {}, REGIME_GLOSS[r.regime]), el('td', { class: 'num' }, r.established), el('td', { class: 'num' }, r.barred)));
   }
   t.append(tb);
-  card.append(t, el('p', { class: 'sub', style: 'margin-top:.8rem' }, s.finding));
+  card.append(t, el('p', { class: 'sub spaced' }, s.finding));
   return card;
 }
 
@@ -212,7 +209,7 @@ function institutionCard(report) {
       el('td', {}, r.label), el('td', {}, r.gloss), el('td', {}, r.claimant_theory.replace(/_/g, ' ')), el('td', { class: 'num' }, r.established)));
   }
   t.append(tb);
-  card.append(t, el('p', { class: 'sub', style: 'margin-top:.8rem' }, s.finding));
+  card.append(t, el('p', { class: 'sub spaced' }, s.finding));
 
   const port = el('details', {}, el('summary', {}, 'Theory portability — what survives a change of venue'));
   for (const row of s.translation.rows) {
