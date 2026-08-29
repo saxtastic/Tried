@@ -44,6 +44,12 @@
       "by": "session_01GvNCLtH3R2cqohRaUwqKek",
       "method": "scheduled check-in: answers collected off both branches, three questions arbitrated",
       "register": "O"
+    },
+    {
+      "at": "2026-08-29T21:58:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "scheduled check-in: verified the simulator's correction against the tree at 0f82a58",
+      "register": "O"
     }
   ],
   "environments": [
@@ -373,6 +379,13 @@
       "detail": "Engineering and product are different registers with different truth conditions. An engineering claim is true if it works; a product claim is true if a record backs it. Any catalogue field — a listing, a description, a spec sheet, a Shopify product body — extracts from a named record: a tech spec, a patent filing, a production note, a measurement. Where no record exists the field stays blank and is marked. Generated copy is not extracted copy, and a blank field is a finding while a fabricated one is a defect.",
       "severity": "error",
       "applies_to": "any project whose vantages_held include content-marketing, or that declares produces_artifact"
+    },
+    {
+      "id": "P12",
+      "rule": "A subtree registers itself in its own pull request.",
+      "detail": "The shell owns public/index.html, but the card announcing a subtree belongs to the subtree's PR, not the shell's. If the shell carries the card, the shell merging alone ships a dead link on the front page. Enforced structurally in scripts/check-tiers.mjs: every .card--link href must resolve to an index.html present on the branch.",
+      "severity": "error",
+      "established": "2026-08-29. The simulator session re-added its own card to the shell's file to close a gap this file had raised against it — the right instinct, filed one branch too early. Taking it onto the shell branch produced a front page linking /simulator/, which does not exist there."
     }
   ],
   "stale_after_days": 14,
@@ -438,6 +451,13 @@
       "action": "collect + arbitrate",
       "target": "Q1-ORDER, Q3-REGISTER, Q4-PROVENANCE",
       "result": "Both coworkers answered from their own vantages and both found against their own work. Q1, Q3 and Q4 arbitrated with held_opposition recorded. Q2 left open: the venue holds the missing vantage and asked the question, so it cannot be both party and judge. Q5 remains the owner's.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T21:58:00Z",
+      "action": "verify + correct",
+      "target": "Q1-ORDER arbitration",
+      "result": "The simulator raised a factual correction against the arbitration's held_opposition. Verified independently against its branch: README.md carried the simulator section (line 187, 39 lines) and package.json carried sim, test, build:corpus and verify alongside the shell's scripts — both survived as a union merge. Only the front-page nav entry was genuinely lost, and the simulator has since re-added it. The arbitration overstated by two of three files; amended, with the correction recorded beside it rather than over it.",
       "register": "O"
     }
   ],
