@@ -62,6 +62,12 @@
       "by": "session_01GvNCLtH3R2cqohRaUwqKek",
       "method": "check-in: verified the P9 close in a detached worktree by running the sibling's own checks",
       "register": "O"
+    },
+    {
+      "at": "2026-08-29T23:20:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "built the officer corpora and the proposal evaluator; ran both new checks",
+      "register": "O"
     }
   ],
   "environments": [
@@ -411,6 +417,20 @@
       "detail": "A project that declares inherits must open its PR against the inherited project's branch, not against the branch that branch came from. Otherwise the PR's diff shows the upstream's work as its own, a reviewer cannot see what the project actually changed, and merging it lands the upstream through the wrong door — which silently overrides whatever merge order was arbitrated.",
       "severity": "error",
       "established": "2026-08-29. PR #3 targets the placeholder base while its branch already carries the shell, so its diff is 55 files of which 20+ are the shell's. PR #2, targeting the venue branch, shows only its own work. The difference is one field on the pull request."
+    },
+    {
+      "id": "P14",
+      "rule": "An officer owns one corpus and writes nowhere else.",
+      "detail": "Each officer holds corpus/<officer>/ — its integrity declaration, its de-aggregated premises, its proposals. Nothing outside writes there and it writes nowhere else. This replaces the shared project record, which two branches each held a copy of and which diverged on every push. Integrity means the officer declares what it will NOT assert and what it declines; an officer that refuses nothing is not a vantage, it is a rubber stamp.",
+      "severity": "error",
+      "enforced_by": "scripts/check-propose.mjs"
+    },
+    {
+      "id": "P15",
+      "rule": "A hypothesis resolves three ways, and an untraceable assumption gets no number.",
+      "detail": "A proposal states a hypothesis, names its assumptions, and points each at de-aggregated premises. It resolves in_favor, nullified, or test_retest and never anything else. test_retest is the honest verdict when the premises do not separate the outcomes, and it names the measurement that would. An assumption resting only on basis `none` withholds the number entirely rather than averaging over it, and a broad claim may not stand on a narrower premise. Seed, run count and thresholds are declared in the proposal; re-running is byte-identical; sensitivity ships beside the point estimate or the result is incomplete.",
+      "severity": "error",
+      "enforced_by": "scripts/check-propose.mjs, including a two-run byte comparison"
     }
   ],
   "stale_after_days": 14,
@@ -497,6 +517,13 @@
       "action": "verify + revise",
       "target": "fellowships fbf5fae, and P8",
       "result": "The P9 close is real, not a stub — verified by running their checks, not by reading their declaration. effort is now derived at read time from sourced requirements and the build rejects a stored effort field, which resolves the Q4 held_opposition rather than dodging it: the derivation RULE moved to config as an editorial weight while the CLAIM stayed sourced. Their branch also exposed a flaw in P8 — it fired three errors at a project for declaring its claims, which is what the rule asks for. Severity now depends on whether the stack settles the order.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T23:20:00Z",
+      "action": "build",
+      "target": "corpus/, scripts/propose.mjs, scripts/check-propose.mjs",
+      "result": "Officer corpora replace the shared project record that was diverging across branches. Eleven premises, all drawn from what was actually established in this session rather than invented — including three at basis `none` carrying what is owed. Two proposals evaluated: one withholds its number because an assumption rests on the unmeasured watch width, the other reports 0.2842 and its sensitivity independently reproduces the producer's own judgement that everything turns on how many records carry sourced obligations.",
       "register": "O"
     }
   ],

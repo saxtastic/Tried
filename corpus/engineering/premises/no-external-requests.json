@@ -1,0 +1,12 @@
+{
+  "id": "ENG-P1",
+  "officer": "engineering",
+  "specificity": "instance",
+  "statement": "The simulator surface issues 14 requests, all same-origin: no font, no CDN, no analytics, no API.",
+  "basis": "confirmed",
+  "measured_by": "session_01HCcyjiDYBhyRWFnL1qrKWB, reported in its Q2-SURVIVAL answer",
+  "reproduce": "load /simulator/ and count network entries by origin",
+  "derived_from": null,
+  "confidence": [0.9, 1.0],
+  "register": "D"
+}

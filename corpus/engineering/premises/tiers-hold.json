@@ -1,0 +1,13 @@
+{
+  "id": "ENG-P3",
+  "officer": "engineering",
+  "specificity": "local",
+  "statement": "Four viewports resolve to four distinct tiers on every discovered subtree, with no horizontal overflow and no console error.",
+  "basis": "confirmed",
+  "measured_by": "session_01GvNCLtH3R2cqohRaUwqKek",
+  "reproduce": "npm run check",
+  "derived_from": null,
+  "confidence": [0.85, 1.0],
+  "note": "Chromium, not Safari. The tier logic is proven; WebKit behaviour is not.",
+  "register": "O"
+}

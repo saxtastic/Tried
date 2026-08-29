@@ -1,0 +1,12 @@
+{
+  "id": "CM-P2",
+  "officer": "content-marketing",
+  "specificity": "local",
+  "statement": "Removing unsourced copy is cheap to execute: sixteen summaries were blanked and every downstream check stayed green.",
+  "basis": "confirmed",
+  "measured_by": "session_01GvNCLtH3R2cqohRaUwqKek, verified in a worktree at fbf5fae",
+  "reproduce": "node scripts/check-registry.mjs on the fellowships branch",
+  "derived_from": null,
+  "confidence": [0.9, 1.0],
+  "register": "O"
+}

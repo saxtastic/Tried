@@ -9,7 +9,9 @@
     "check": "node scripts/check-tiers.mjs",
     "fleet": "node scripts/fleet.mjs all",
     "fleet:render": "node scripts/fleet.mjs render",
-    "icons": "python3 scripts/make-icons.py"
+    "icons": "python3 scripts/make-icons.py",
+    "propose": "node scripts/propose.mjs",
+    "check:propose": "node scripts/check-propose.mjs"
   },
   "devDependencies": {
     "wrangler": "^4.0.0"
