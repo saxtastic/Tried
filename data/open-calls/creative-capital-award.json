@@ -4,22 +4,14 @@
   "org": "Creative Capital",
   "kind": "grant",
   "url": "https://creative-capital.org/",
-  "summary": "Project grants plus advisory services for adventurous artists across visual, performing, film and technology-driven practice. Open call, no nomination required.",
-  "disciplines": [
-    "arts",
-    "film",
-    "music",
-    "technology",
-    "dance"
-  ],
-  "geography": [
-    "US"
-  ],
-  "career_stage": [
-    "emerging",
-    "mid",
-    "established"
-  ],
+  "summary": null,
+  "eligibility": {
+    "stated": null,
+    "disciplines": null,
+    "geography": null,
+    "career_stage": null
+  },
+  "requirements": null,
   "award": {
     "min": null,
     "max": null,
@@ -27,16 +19,46 @@
     "basis": "none",
     "note": "⟦FILL: award figure not sourced⟧"
   },
-  "effort": "high",
   "cycle": "annual",
   "opens": null,
   "closes": null,
-  "date_basis": "none",
   "cycle_note": "The 2027 open call closed 2 April 2026. The next cycle has not been announced. ⟦FILL: next open call deadline when announced⟧",
-  "sourced_from": "https://creative-capital.org/creative-capital-award/award-application/",
   "stage": "discovered",
   "drafts": [],
-  "register": "D",
-  "verified": "2026-08-29",
+  "provenance": {
+    "closes": {
+      "basis": "none",
+      "from": "https://creative-capital.org/creative-capital-award/award-application/",
+      "read": "2026-08-29",
+      "why": "The 2027 open call closed 2 April 2026. The next cycle has not been announced. ⟦FILL: next open call deadline when announced⟧"
+    },
+    "summary": {
+      "basis": "none",
+      "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+    },
+    "eligibility": {
+      "basis": "none",
+      "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+    },
+    "requirements": {
+      "basis": "none",
+      "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+    },
+    "award": {
+      "basis": "none",
+      "why": "⟦FILL: no award figure was read.⟧"
+    },
+    "kind": {
+      "basis": "derived",
+      "from": "https://creative-capital.org/",
+      "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+    },
+    "cycle": {
+      "basis": "derived",
+      "from": "https://creative-capital.org/creative-capital-award/award-application/",
+      "read": "2026-08-29",
+      "rule": "inferred from the cycle the deadline sits in."
+    }
+  },
   "source": "https://creative-capital.org/"
 }

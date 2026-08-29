@@ -4,22 +4,33 @@
   "org": "MacDowell",
   "kind": "residency",
   "url": "https://www.macdowell.org/apply",
-  "summary": "Residency of up to eight weeks in Peterborough, New Hampshire, with private studio, room and board, for artists across disciplines. No fee to attend.",
-  "disciplines": [
-    "arts",
-    "writing",
-    "music",
-    "film",
-    "architecture"
-  ],
-  "geography": [
-    "any"
-  ],
-  "career_stage": [
-    "emerging",
-    "mid",
-    "established"
-  ],
+  "summary": null,
+  "eligibility": {
+    "stated": "Artists in architecture, film/video, interdisciplinary arts, literature, music composition, theatre and visual arts. At least 21 years old and not enrolled in a degree programme during the residency season; doctoral candidates who have completed coursework may apply.",
+    "disciplines": [
+      "architecture",
+      "film",
+      "writing",
+      "music",
+      "arts"
+    ],
+    "geography": [
+      "any"
+    ],
+    "career_stage": [
+      "emerging",
+      "mid",
+      "established"
+    ]
+  },
+  "requirements": {
+    "essays": 1,
+    "recommendations": 0,
+    "work_sample": true,
+    "endorsement": false,
+    "fee_usd": 30,
+    "stated": "Project proposal, a list of professional achievements, and a current work sample completed within the past four years. Reference letters are temporarily suspended. USD 30 processing fee, waivable on request."
+  },
   "award": {
     "min": null,
     "max": null,
@@ -27,16 +38,48 @@
     "basis": "none",
     "note": "⟦FILL: award figure not sourced⟧"
   },
-  "effort": "medium",
   "cycle": "biannual",
   "opens": null,
   "closes": "2026-09-10",
-  "date_basis": "sourced",
   "cycle_note": "Spring–Summer 2027 residency cycle. MacDowell runs multiple cycles a year; the next after this one closes in February.",
-  "sourced_from": "https://www.macdowell.org/apply/apply-for-fellowship",
   "stage": "eligible",
   "drafts": [],
-  "register": "D",
-  "verified": "2026-08-29",
+  "provenance": {
+    "closes": {
+      "basis": "sourced",
+      "from": "https://www.macdowell.org/apply/apply-for-fellowship",
+      "read": "2026-08-29"
+    },
+    "summary": {
+      "basis": "none",
+      "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+    },
+    "eligibility": {
+      "basis": "derived",
+      "from": "https://www.macdowell.org/apply/application-guidelines",
+      "read": "2026-08-29",
+      "rule": "stated is read from the source; the three enum arrays are mapped from it into this schema's vocabulary, which the source does not use."
+    },
+    "requirements": {
+      "basis": "sourced",
+      "from": "https://www.macdowell.org/apply/application-guidelines",
+      "read": "2026-08-29"
+    },
+    "award": {
+      "basis": "none",
+      "why": "⟦FILL: no award figure was read.⟧"
+    },
+    "kind": {
+      "basis": "derived",
+      "from": "https://www.macdowell.org/apply",
+      "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+    },
+    "cycle": {
+      "basis": "derived",
+      "from": "https://www.macdowell.org/apply/apply-for-fellowship",
+      "read": "2026-08-29",
+      "rule": "inferred from the cycle the deadline sits in."
+    }
+  },
   "source": "https://www.macdowell.org/apply"
 }

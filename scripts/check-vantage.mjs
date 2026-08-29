@@ -125,13 +125,34 @@ for (const vp of VIEWPORTS) {
   if (!density.actions && got.actions) problems.push("workflow actions built where configuration withholds them");
 
   /* Counted by role, not by field id — naming a field here would be the same
-     hard-coding this check exists to catch. Both roles read values that are
-     always present, so the count is exactly items x fields-for-this-floor. */
+     hard-coding this check exists to catch.
+
+     Presence can no longer be assumed: a field whose provenance basis is "none"
+     is blank by contract, so the module must not build it. For fields reading a
+     `call.` path the expected count is computed from the registry exactly; for a
+     `derived.` path the module owns the value, so the assertion is the bound. */
+  const resolve = (obj, path) => path.split(".").reduce((o, k) => (o == null ? o : o[k]), obj);
+  const present = (v) => !(v === null || v === undefined || v === "");
+
   for (const [role, seen] of [["meter", got.meters], ["prose", got.prose]]) {
-    const listed = config.fields.filter((f) => f.role === role && f.tiers.includes(vp.expect)).length;
-    const want = listed * got.items;
-    if (seen !== want) {
-      problems.push(`${seen} ${role} field(s) built, configuration lists ${listed} per item over ${got.items} items (${want})`);
+    const listed = config.fields.filter((f) => f.role === role && f.tiers.includes(vp.expect));
+    if (!listed.length) {
+      if (seen) problems.push(`${seen} ${role} field(s) built where configuration lists none for this floor`);
+      continue;
+    }
+    let exact = 0, bounded = 0;
+    for (const f of listed) {
+      if (f.from.startsWith("call.")) {
+        exact += registry.calls.filter((c) => present(resolve(c, f.from.slice(5)))).length;
+      } else {
+        bounded += got.items;
+      }
+    }
+    if (seen > exact + bounded) {
+      problems.push(`${seen} ${role} field(s) built, at most ${exact + bounded} have a value`);
+    }
+    if (seen < exact) {
+      problems.push(`${seen} ${role} field(s) built, but ${exact} records carry a value for the call-path fields`);
     }
   }
 

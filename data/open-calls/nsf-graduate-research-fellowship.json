@@ -4,19 +4,14 @@
   "org": "National Science Foundation",
   "kind": "fellowship",
   "url": "https://www.nsfgrfp.org/",
-  "summary": "Three years of support for graduate students pursuing research-based master's and doctoral degrees in NSF-supported fields.",
-  "disciplines": [
-    "technology",
-    "engineering",
-    "social-science",
-    "mathematics"
-  ],
-  "geography": [
-    "US"
-  ],
-  "career_stage": [
-    "student"
-  ],
+  "summary": null,
+  "eligibility": {
+    "stated": null,
+    "disciplines": null,
+    "geography": null,
+    "career_stage": null
+  },
+  "requirements": null,
   "award": {
     "min": null,
     "max": null,
@@ -24,16 +19,45 @@
     "basis": "none",
     "note": "⟦FILL: award figure not sourced⟧"
   },
-  "effort": "high",
   "cycle": "annual",
   "opens": null,
   "closes": "2026-10-20",
-  "date_basis": "sourced",
   "cycle_note": "Deadline is field-specific across 19–23 October 2026; this record carries the earliest that applies to its listed disciplines. Reference letters due 16 October.",
-  "sourced_from": "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program/nsf26-526/solicitation",
   "stage": "discovered",
   "drafts": [],
-  "register": "D",
-  "verified": "2026-08-29",
+  "provenance": {
+    "closes": {
+      "basis": "sourced",
+      "from": "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program/nsf26-526/solicitation",
+      "read": "2026-08-29"
+    },
+    "summary": {
+      "basis": "none",
+      "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+    },
+    "eligibility": {
+      "basis": "none",
+      "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+    },
+    "requirements": {
+      "basis": "none",
+      "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+    },
+    "award": {
+      "basis": "none",
+      "why": "⟦FILL: no award figure was read.⟧"
+    },
+    "kind": {
+      "basis": "derived",
+      "from": "https://www.nsfgrfp.org/",
+      "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+    },
+    "cycle": {
+      "basis": "derived",
+      "from": "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program/nsf26-526/solicitation",
+      "read": "2026-08-29",
+      "rule": "inferred from the cycle the deadline sits in."
+    }
+  },
   "source": "https://www.nsfgrfp.org/"
 }

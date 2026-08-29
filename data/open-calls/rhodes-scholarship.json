@@ -4,22 +4,14 @@
   "org": "Rhodes Trust",
   "kind": "scholarship",
   "url": "https://www.rhodeshouse.ox.ac.uk/scholarships/the-rhodes-scholarship/",
-  "summary": "Fully funded postgraduate study at the University of Oxford, selected on academic excellence alongside energy to use one's talents to the full.",
-  "disciplines": [
-    "any"
-  ],
-  "geography": [
-    "US",
-    "CA",
-    "AU",
-    "IN",
-    "ZA",
-    "other"
-  ],
-  "career_stage": [
-    "student",
-    "emerging"
-  ],
+  "summary": null,
+  "eligibility": {
+    "stated": null,
+    "disciplines": null,
+    "geography": null,
+    "career_stage": null
+  },
+  "requirements": null,
   "award": {
     "min": null,
     "max": null,
@@ -27,16 +19,45 @@
     "basis": "none",
     "note": "⟦FILL: award figure not sourced⟧"
   },
-  "effort": "high",
   "cycle": "annual",
   "opens": null,
   "closes": "2026-10-07",
-  "date_basis": "sourced",
   "cycle_note": "US constituency, 2027 entry, 23:59 ET. Other constituencies differ, and an endorsing university will set an earlier internal deadline.",
-  "sourced_from": "https://www.rhodeshouse.ox.ac.uk/scholarships/applications/united-states/",
   "stage": "discovered",
   "drafts": [],
-  "register": "D",
-  "verified": "2026-08-29",
+  "provenance": {
+    "closes": {
+      "basis": "sourced",
+      "from": "https://www.rhodeshouse.ox.ac.uk/scholarships/applications/united-states/",
+      "read": "2026-08-29"
+    },
+    "summary": {
+      "basis": "none",
+      "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+    },
+    "eligibility": {
+      "basis": "none",
+      "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+    },
+    "requirements": {
+      "basis": "none",
+      "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+    },
+    "award": {
+      "basis": "none",
+      "why": "⟦FILL: no award figure was read.⟧"
+    },
+    "kind": {
+      "basis": "derived",
+      "from": "https://www.rhodeshouse.ox.ac.uk/scholarships/the-rhodes-scholarship/",
+      "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+    },
+    "cycle": {
+      "basis": "derived",
+      "from": "https://www.rhodeshouse.ox.ac.uk/scholarships/applications/united-states/",
+      "read": "2026-08-29",
+      "rule": "inferred from the cycle the deadline sits in."
+    }
+  },
   "source": "https://www.rhodeshouse.ox.ac.uk/scholarships/the-rhodes-scholarship/"
 }

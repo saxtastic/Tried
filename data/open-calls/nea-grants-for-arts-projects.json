@@ -4,21 +4,14 @@
   "org": "National Endowment for the Arts",
   "kind": "grant",
   "url": "https://www.arts.gov/grants",
-  "summary": "Project-based matching grants to nonprofit organisations across artistic disciplines. Individuals are generally not eligible except in specific literature categories.",
-  "disciplines": [
-    "arts",
-    "music",
-    "film",
-    "writing",
-    "dance",
-    "architecture"
-  ],
-  "geography": [
-    "US"
-  ],
-  "career_stage": [
-    "any"
-  ],
+  "summary": null,
+  "eligibility": {
+    "stated": null,
+    "disciplines": null,
+    "geography": null,
+    "career_stage": null
+  },
+  "requirements": null,
   "award": {
     "min": null,
     "max": null,
@@ -26,16 +19,46 @@
     "basis": "none",
     "note": "⟦FILL: award figure not sourced⟧"
   },
-  "effort": "high",
   "cycle": "biannual",
   "opens": null,
   "closes": null,
-  "date_basis": "none",
   "cycle_note": "FY2027 deadlines (12 Feb and 9 Jul 2026) have passed. FY2028 guidelines are expected late December 2026; deadlines not yet announced. ⟦FILL: FY2028 deadlines when published⟧",
-  "sourced_from": "https://www.arts.gov/grants/grants-for-arts-projects/application-calendar",
   "stage": "discovered",
   "drafts": [],
-  "register": "D",
-  "verified": "2026-08-29",
+  "provenance": {
+    "closes": {
+      "basis": "none",
+      "from": "https://www.arts.gov/grants/grants-for-arts-projects/application-calendar",
+      "read": "2026-08-29",
+      "why": "FY2027 deadlines (12 Feb and 9 Jul 2026) have passed. FY2028 guidelines are expected late December 2026; deadlines not yet announced. ⟦FILL: FY2028 deadlines when published⟧"
+    },
+    "summary": {
+      "basis": "none",
+      "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+    },
+    "eligibility": {
+      "basis": "none",
+      "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+    },
+    "requirements": {
+      "basis": "none",
+      "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+    },
+    "award": {
+      "basis": "none",
+      "why": "⟦FILL: no award figure was read.⟧"
+    },
+    "kind": {
+      "basis": "derived",
+      "from": "https://www.arts.gov/grants",
+      "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+    },
+    "cycle": {
+      "basis": "derived",
+      "from": "https://www.arts.gov/grants/grants-for-arts-projects/application-calendar",
+      "read": "2026-08-29",
+      "rule": "inferred from the cycle the deadline sits in."
+    }
+  },
   "source": "https://www.arts.gov/grants"
 }

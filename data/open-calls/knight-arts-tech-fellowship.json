@@ -4,20 +4,14 @@
   "org": "John S. and James L. Knight Foundation",
   "kind": "fellowship",
   "url": "https://knightfoundation.org/",
-  "summary": "Support for artists working at the intersection of art and emerging technology, concentrated in the communities where Knight invests.",
-  "disciplines": [
-    "arts",
-    "technology",
-    "film",
-    "music"
-  ],
-  "geography": [
-    "US"
-  ],
-  "career_stage": [
-    "mid",
-    "established"
-  ],
+  "summary": null,
+  "eligibility": {
+    "stated": null,
+    "disciplines": null,
+    "geography": null,
+    "career_stage": null
+  },
+  "requirements": null,
   "award": {
     "min": null,
     "max": null,
@@ -25,16 +19,44 @@
     "basis": "none",
     "note": "⟦FILL: award figure not sourced⟧"
   },
-  "effort": "medium",
-  "cycle": "annual",
+  "cycle": null,
   "opens": null,
   "closes": null,
-  "date_basis": "none",
   "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
-  "sourced_from": null,
   "stage": "discovered",
   "drafts": [],
-  "register": "V",
-  "verified": null,
+  "provenance": {
+    "closes": {
+      "basis": "none",
+      "from": null,
+      "read": null,
+      "why": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧"
+    },
+    "summary": {
+      "basis": "none",
+      "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+    },
+    "eligibility": {
+      "basis": "none",
+      "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+    },
+    "requirements": {
+      "basis": "none",
+      "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+    },
+    "award": {
+      "basis": "none",
+      "why": "⟦FILL: no award figure was read.⟧"
+    },
+    "kind": {
+      "basis": "derived",
+      "from": "https://knightfoundation.org/",
+      "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+    },
+    "cycle": {
+      "basis": "none",
+      "why": "⟦FILL: cycle not established from a source.⟧"
+    }
+  },
   "source": "https://knightfoundation.org/"
 }

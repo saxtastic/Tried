@@ -318,11 +318,36 @@
       }
     ],
     "$rank_comment": "Return on effort. Within each horizon band the top of the list is the best return for the effort it costs: award value and eligibility fit weighed against effort to submit. An award figure nobody has sourced scores at `unknown_award` rather than zero, so a missing figure neither flatters nor punishes a call — and the card marks it as missing either way.",
+    "$effort_comment": "effort is DERIVED from a record's sourced requirements, never stored on the record and never asserted. An effort grading with nothing behind it is an opinion, and it is the denominator of the ranking — which is what the Q4 audit found. Where requirements were never read, effort is unknown and the ranking uses effort_cost.unknown, which the card states.",
+    "effort_from_requirements": {
+      "weights": {
+        "essay": 1,
+        "recommendation": 1.5,
+        "work_sample": 2,
+        "endorsement": 3,
+        "fee": 0.5
+      },
+      "bands": [
+        {
+          "up_to": 3,
+          "id": "low"
+        },
+        {
+          "up_to": 7,
+          "id": "medium"
+        },
+        {
+          "up_to": null,
+          "id": "high"
+        }
+      ]
+    },
     "rank": {
       "effort_cost": {
         "low": 1,
         "medium": 1.6,
-        "high": 2.4
+        "high": 2.4,
+        "unknown": 1.8
       },
       "award_value": [
         {
@@ -339,6 +364,7 @@
         }
       ],
       "unknown_award": 0.5,
+      "unknown_fit": 0.5,
       "weights": {
         "award": 2,
         "fit": 3
@@ -377,31 +403,26 @@
       ]
     },
     "fit": {
-      "$comment": "Each criterion names a key on the profile above and a key on the record, so the module can score fit without knowing what any of them mean. Add a criterion here and it is scored; the meter re-weights itself. \"any\" on either side is a wildcard.",
+      "$comment": "Each criterion names a key on the profile above and a path on the record, so the module can score fit without knowing what any of them mean. Add a criterion here and it is scored; the meter re-weights itself. \"any\" on either side is a wildcard. A record with no sourced eligibility scores null rather than zero — never asked is not the same as poor match.",
+      "$removed": "effort_tolerance was a criterion until 2026-08-29. It was double-counted: effort is already the denominator of return-on-effort, so weighting it in the numerator too moved the same fact twice. It also pointed at call.effort, which no longer exists now that effort is derived.",
       "criteria": [
         {
           "id": "discipline",
           "profile": "disciplines",
-          "call": "disciplines",
+          "call": "eligibility.disciplines",
           "weight": 3
         },
         {
           "id": "geography",
           "profile": "geography",
-          "call": "geography",
+          "call": "eligibility.geography",
           "weight": 2
         },
         {
           "id": "career stage",
           "profile": "career_stage",
-          "call": "career_stage",
+          "call": "eligibility.career_stage",
           "weight": 2
-        },
-        {
-          "id": "effort",
-          "profile": "effort_tolerance",
-          "call": "effort",
-          "weight": 1
         }
       ]
     },
@@ -492,6 +513,24 @@
         "line": "signals",
         "tiers": [
           "pad",
+          "desk"
+        ]
+      },
+      {
+        "id": "eligible",
+        "role": "terms",
+        "from": "call.eligibility.stated",
+        "line": "detail",
+        "tiers": [
+          "desk"
+        ]
+      },
+      {
+        "id": "asks",
+        "role": "terms",
+        "from": "call.requirements.stated",
+        "line": "detail",
+        "tiers": [
           "desk"
         ]
       },
@@ -607,19 +646,14 @@
       "org": "Ashoka",
       "kind": "fellowship",
       "url": "https://www.ashoka.org/en-us/program/ashoka-venture-and-fellowship",
-      "summary": "Lifetime fellowship for social entrepreneurs with a system-changing idea, including a living stipend during the launch phase. Nominations and applications are accepted on a rolling basis.",
-      "disciplines": [
-        "social-impact",
-        "education",
-        "technology"
-      ],
-      "geography": [
-        "any"
-      ],
-      "career_stage": [
-        "mid",
-        "established"
-      ],
+      "summary": null,
+      "eligibility": {
+        "stated": null,
+        "disciplines": null,
+        "geography": null,
+        "career_stage": null
+      },
+      "requirements": null,
       "award": {
         "min": null,
         "max": null,
@@ -627,17 +661,45 @@
         "basis": "none",
         "note": "⟦FILL: award figure not sourced⟧"
       },
-      "effort": "high",
-      "cycle": "rolling",
+      "cycle": null,
       "opens": null,
       "closes": null,
-      "date_basis": "none",
       "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
-      "sourced_from": null,
       "stage": "discovered",
       "drafts": [],
-      "register": "V",
-      "verified": null,
+      "provenance": {
+        "closes": {
+          "basis": "none",
+          "from": null,
+          "read": null,
+          "why": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "none",
+          "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+        },
+        "requirements": {
+          "basis": "none",
+          "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://www.ashoka.org/en-us/program/ashoka-venture-and-fellowship",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "none",
+          "why": "⟦FILL: cycle not established from a source.⟧"
+        }
+      },
       "source": "https://www.ashoka.org/en-us/program/ashoka-venture-and-fellowship"
     },
     {
@@ -646,22 +708,14 @@
       "org": "Creative Capital",
       "kind": "grant",
       "url": "https://creative-capital.org/",
-      "summary": "Project grants plus advisory services for adventurous artists across visual, performing, film and technology-driven practice. Open call, no nomination required.",
-      "disciplines": [
-        "arts",
-        "film",
-        "music",
-        "technology",
-        "dance"
-      ],
-      "geography": [
-        "US"
-      ],
-      "career_stage": [
-        "emerging",
-        "mid",
-        "established"
-      ],
+      "summary": null,
+      "eligibility": {
+        "stated": null,
+        "disciplines": null,
+        "geography": null,
+        "career_stage": null
+      },
+      "requirements": null,
       "award": {
         "min": null,
         "max": null,
@@ -669,17 +723,47 @@
         "basis": "none",
         "note": "⟦FILL: award figure not sourced⟧"
       },
-      "effort": "high",
       "cycle": "annual",
       "opens": null,
       "closes": null,
-      "date_basis": "none",
       "cycle_note": "The 2027 open call closed 2 April 2026. The next cycle has not been announced. ⟦FILL: next open call deadline when announced⟧",
-      "sourced_from": "https://creative-capital.org/creative-capital-award/award-application/",
       "stage": "discovered",
       "drafts": [],
-      "register": "D",
-      "verified": "2026-08-29",
+      "provenance": {
+        "closes": {
+          "basis": "none",
+          "from": "https://creative-capital.org/creative-capital-award/award-application/",
+          "read": "2026-08-29",
+          "why": "The 2027 open call closed 2 April 2026. The next cycle has not been announced. ⟦FILL: next open call deadline when announced⟧"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "none",
+          "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+        },
+        "requirements": {
+          "basis": "none",
+          "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://creative-capital.org/",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "derived",
+          "from": "https://creative-capital.org/creative-capital-award/award-application/",
+          "read": "2026-08-29",
+          "rule": "inferred from the cycle the deadline sits in."
+        }
+      },
       "source": "https://creative-capital.org/"
     },
     {
@@ -688,19 +772,14 @@
       "org": "Echoing Green",
       "kind": "fellowship",
       "url": "https://echoinggreen.org/fellowship/",
-      "summary": "Seed funding and leadership development for early-stage social entrepreneurs building organisations that address racial and economic inequity.",
-      "disciplines": [
-        "social-impact",
-        "technology",
-        "education"
-      ],
-      "geography": [
-        "any"
-      ],
-      "career_stage": [
-        "emerging",
-        "mid"
-      ],
+      "summary": null,
+      "eligibility": {
+        "stated": null,
+        "disciplines": null,
+        "geography": null,
+        "career_stage": null
+      },
+      "requirements": null,
       "award": {
         "min": null,
         "max": null,
@@ -708,17 +787,45 @@
         "basis": "none",
         "note": "⟦FILL: award figure not sourced⟧"
       },
-      "effort": "high",
-      "cycle": "annual",
+      "cycle": null,
       "opens": null,
       "closes": null,
-      "date_basis": "none",
       "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
-      "sourced_from": null,
       "stage": "discovered",
       "drafts": [],
-      "register": "V",
-      "verified": null,
+      "provenance": {
+        "closes": {
+          "basis": "none",
+          "from": null,
+          "read": null,
+          "why": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "none",
+          "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+        },
+        "requirements": {
+          "basis": "none",
+          "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://echoinggreen.org/fellowship/",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "none",
+          "why": "⟦FILL: cycle not established from a source.⟧"
+        }
+      },
       "source": "https://echoinggreen.org/fellowship/"
     },
     {
@@ -727,21 +834,14 @@
       "org": "Institute of International Education / U.S. Department of State",
       "kind": "fellowship",
       "url": "https://fulbrightscholars.org/",
-      "summary": "Teaching, research and combined awards placing U.S. academics and professionals at host institutions abroad, across a large annual catalogue of country-specific awards.",
-      "disciplines": [
-        "humanities",
-        "social-science",
-        "arts",
-        "technology",
-        "education"
-      ],
-      "geography": [
-        "US"
-      ],
-      "career_stage": [
-        "mid",
-        "established"
-      ],
+      "summary": null,
+      "eligibility": {
+        "stated": null,
+        "disciplines": null,
+        "geography": null,
+        "career_stage": null
+      },
+      "requirements": null,
       "award": {
         "min": null,
         "max": null,
@@ -749,17 +849,46 @@
         "basis": "none",
         "note": "⟦FILL: award figure not sourced⟧"
       },
-      "effort": "high",
       "cycle": "annual",
       "opens": null,
       "closes": "2026-09-15",
-      "date_basis": "sourced",
       "cycle_note": "2027–2028 competition, 5:00pm ET. Over 380 awards across 130+ countries; each country award has its own terms.",
-      "sourced_from": "https://fulbrightscholars.org/us-scholar-awards",
       "stage": "screening",
       "drafts": [],
-      "register": "D",
-      "verified": "2026-08-29",
+      "provenance": {
+        "closes": {
+          "basis": "sourced",
+          "from": "https://fulbrightscholars.org/us-scholar-awards",
+          "read": "2026-08-29"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "none",
+          "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+        },
+        "requirements": {
+          "basis": "none",
+          "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://fulbrightscholars.org/",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "derived",
+          "from": "https://fulbrightscholars.org/us-scholar-awards",
+          "read": "2026-08-29",
+          "rule": "inferred from the cycle the deadline sits in."
+        }
+      },
       "source": "https://fulbrightscholars.org/"
     },
     {
@@ -768,21 +897,32 @@
       "org": "John Simon Guggenheim Memorial Foundation",
       "kind": "fellowship",
       "url": "https://www.gf.org/applicants/",
-      "summary": "Unrestricted fellowships to mid-career individuals who have already demonstrated exceptional capacity for productive scholarship or exceptional creative ability in the arts.",
-      "disciplines": [
-        "arts",
-        "humanities",
-        "writing",
-        "social-science"
-      ],
-      "geography": [
-        "US",
-        "CA"
-      ],
-      "career_stage": [
-        "mid",
-        "established"
-      ],
+      "summary": null,
+      "eligibility": {
+        "stated": "Citizens or permanent residents of the US or Canada at time of application, who have made significant recognised contributions to their field. Mid-career is defined by professional output, not age. Previous Guggenheim Fellows are not eligible.",
+        "disciplines": [
+          "arts",
+          "humanities",
+          "writing",
+          "social-science"
+        ],
+        "geography": [
+          "US",
+          "CA"
+        ],
+        "career_stage": [
+          "mid",
+          "established"
+        ]
+      },
+      "requirements": {
+        "essays": 3,
+        "recommendations": 3,
+        "work_sample": true,
+        "endorsement": false,
+        "fee_usd": 0,
+        "stated": "Three supplementary PDF statements including a career narrative of up to 1000 words; three references required, four maximum; work examples depending on field."
+      },
       "award": {
         "min": null,
         "max": null,
@@ -790,17 +930,49 @@
         "basis": "none",
         "note": "⟦FILL: award figure not sourced⟧"
       },
-      "effort": "high",
       "cycle": "annual",
       "opens": null,
       "closes": "2026-09-15",
-      "date_basis": "sourced",
       "cycle_note": "2027 competition. Work samples are due two weeks after the portal closes; decisions late April 2027.",
-      "sourced_from": "https://www.gf.org/program/how-to-apply",
       "stage": "drafting",
       "drafts": [],
-      "register": "D",
-      "verified": "2026-08-29",
+      "provenance": {
+        "closes": {
+          "basis": "sourced",
+          "from": "https://www.gf.org/program/how-to-apply",
+          "read": "2026-08-29"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "derived",
+          "from": "https://www.gf.org/faq",
+          "read": "2026-08-29",
+          "rule": "stated is read from the source; the three enum arrays are mapped from it into this schema's vocabulary, which the source does not use."
+        },
+        "requirements": {
+          "basis": "sourced",
+          "from": "https://www.gf.org/program/how-to-apply",
+          "read": "2026-08-29"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://www.gf.org/applicants/",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "derived",
+          "from": "https://www.gf.org/program/how-to-apply",
+          "read": "2026-08-29",
+          "rule": "inferred from the cycle the deadline sits in."
+        }
+      },
       "source": "https://www.gf.org/applicants/"
     },
     {
@@ -809,20 +981,14 @@
       "org": "Jerome Foundation",
       "kind": "fellowship",
       "url": "https://www.jeromefdn.org/",
-      "summary": "Multi-year unrestricted fellowships for early-career artists based in Minnesota and New York City.",
-      "disciplines": [
-        "arts",
-        "film",
-        "music",
-        "writing",
-        "dance"
-      ],
-      "geography": [
-        "US"
-      ],
-      "career_stage": [
-        "emerging"
-      ],
+      "summary": null,
+      "eligibility": {
+        "stated": null,
+        "disciplines": null,
+        "geography": null,
+        "career_stage": null
+      },
+      "requirements": null,
       "award": {
         "min": null,
         "max": null,
@@ -830,17 +996,45 @@
         "basis": "none",
         "note": "⟦FILL: award figure not sourced⟧"
       },
-      "effort": "high",
-      "cycle": "biannual",
+      "cycle": null,
       "opens": null,
       "closes": null,
-      "date_basis": "none",
       "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
-      "sourced_from": null,
       "stage": "discovered",
       "drafts": [],
-      "register": "V",
-      "verified": null,
+      "provenance": {
+        "closes": {
+          "basis": "none",
+          "from": null,
+          "read": null,
+          "why": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "none",
+          "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+        },
+        "requirements": {
+          "basis": "none",
+          "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://www.jeromefdn.org/",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "none",
+          "why": "⟦FILL: cycle not established from a source.⟧"
+        }
+      },
       "source": "https://www.jeromefdn.org/"
     },
     {
@@ -849,20 +1043,14 @@
       "org": "John S. and James L. Knight Foundation",
       "kind": "fellowship",
       "url": "https://knightfoundation.org/",
-      "summary": "Support for artists working at the intersection of art and emerging technology, concentrated in the communities where Knight invests.",
-      "disciplines": [
-        "arts",
-        "technology",
-        "film",
-        "music"
-      ],
-      "geography": [
-        "US"
-      ],
-      "career_stage": [
-        "mid",
-        "established"
-      ],
+      "summary": null,
+      "eligibility": {
+        "stated": null,
+        "disciplines": null,
+        "geography": null,
+        "career_stage": null
+      },
+      "requirements": null,
       "award": {
         "min": null,
         "max": null,
@@ -870,17 +1058,45 @@
         "basis": "none",
         "note": "⟦FILL: award figure not sourced⟧"
       },
-      "effort": "medium",
-      "cycle": "annual",
+      "cycle": null,
       "opens": null,
       "closes": null,
-      "date_basis": "none",
       "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
-      "sourced_from": null,
       "stage": "discovered",
       "drafts": [],
-      "register": "V",
-      "verified": null,
+      "provenance": {
+        "closes": {
+          "basis": "none",
+          "from": null,
+          "read": null,
+          "why": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "none",
+          "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+        },
+        "requirements": {
+          "basis": "none",
+          "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://knightfoundation.org/",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "none",
+          "why": "⟦FILL: cycle not established from a source.⟧"
+        }
+      },
       "source": "https://knightfoundation.org/"
     },
     {
@@ -889,22 +1105,33 @@
       "org": "MacDowell",
       "kind": "residency",
       "url": "https://www.macdowell.org/apply",
-      "summary": "Residency of up to eight weeks in Peterborough, New Hampshire, with private studio, room and board, for artists across disciplines. No fee to attend.",
-      "disciplines": [
-        "arts",
-        "writing",
-        "music",
-        "film",
-        "architecture"
-      ],
-      "geography": [
-        "any"
-      ],
-      "career_stage": [
-        "emerging",
-        "mid",
-        "established"
-      ],
+      "summary": null,
+      "eligibility": {
+        "stated": "Artists in architecture, film/video, interdisciplinary arts, literature, music composition, theatre and visual arts. At least 21 years old and not enrolled in a degree programme during the residency season; doctoral candidates who have completed coursework may apply.",
+        "disciplines": [
+          "architecture",
+          "film",
+          "writing",
+          "music",
+          "arts"
+        ],
+        "geography": [
+          "any"
+        ],
+        "career_stage": [
+          "emerging",
+          "mid",
+          "established"
+        ]
+      },
+      "requirements": {
+        "essays": 1,
+        "recommendations": 0,
+        "work_sample": true,
+        "endorsement": false,
+        "fee_usd": 30,
+        "stated": "Project proposal, a list of professional achievements, and a current work sample completed within the past four years. Reference letters are temporarily suspended. USD 30 processing fee, waivable on request."
+      },
       "award": {
         "min": null,
         "max": null,
@@ -912,17 +1139,49 @@
         "basis": "none",
         "note": "⟦FILL: award figure not sourced⟧"
       },
-      "effort": "medium",
       "cycle": "biannual",
       "opens": null,
       "closes": "2026-09-10",
-      "date_basis": "sourced",
       "cycle_note": "Spring–Summer 2027 residency cycle. MacDowell runs multiple cycles a year; the next after this one closes in February.",
-      "sourced_from": "https://www.macdowell.org/apply/apply-for-fellowship",
       "stage": "eligible",
       "drafts": [],
-      "register": "D",
-      "verified": "2026-08-29",
+      "provenance": {
+        "closes": {
+          "basis": "sourced",
+          "from": "https://www.macdowell.org/apply/apply-for-fellowship",
+          "read": "2026-08-29"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "derived",
+          "from": "https://www.macdowell.org/apply/application-guidelines",
+          "read": "2026-08-29",
+          "rule": "stated is read from the source; the three enum arrays are mapped from it into this schema's vocabulary, which the source does not use."
+        },
+        "requirements": {
+          "basis": "sourced",
+          "from": "https://www.macdowell.org/apply/application-guidelines",
+          "read": "2026-08-29"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://www.macdowell.org/apply",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "derived",
+          "from": "https://www.macdowell.org/apply/apply-for-fellowship",
+          "read": "2026-08-29",
+          "rule": "inferred from the cycle the deadline sits in."
+        }
+      },
       "source": "https://www.macdowell.org/apply"
     },
     {
@@ -931,17 +1190,14 @@
       "org": "Mozilla Foundation",
       "kind": "grant",
       "url": "https://foundation.mozilla.org/",
-      "summary": "Grants to open-source technology projects working in the public interest, with a theme that changes from cycle to cycle.",
-      "disciplines": [
-        "technology",
-        "social-impact"
-      ],
-      "geography": [
-        "any"
-      ],
-      "career_stage": [
-        "any"
-      ],
+      "summary": null,
+      "eligibility": {
+        "stated": null,
+        "disciplines": null,
+        "geography": null,
+        "career_stage": null
+      },
+      "requirements": null,
       "award": {
         "min": null,
         "max": null,
@@ -949,17 +1205,45 @@
         "basis": "none",
         "note": "⟦FILL: award figure not sourced⟧"
       },
-      "effort": "medium",
-      "cycle": "annual",
+      "cycle": null,
       "opens": null,
       "closes": null,
-      "date_basis": "none",
       "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
-      "sourced_from": null,
       "stage": "discovered",
       "drafts": [],
-      "register": "V",
-      "verified": null,
+      "provenance": {
+        "closes": {
+          "basis": "none",
+          "from": null,
+          "read": null,
+          "why": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "none",
+          "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+        },
+        "requirements": {
+          "basis": "none",
+          "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://foundation.mozilla.org/",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "none",
+          "why": "⟦FILL: cycle not established from a source.⟧"
+        }
+      },
       "source": "https://foundation.mozilla.org/"
     },
     {
@@ -968,21 +1252,14 @@
       "org": "National Endowment for the Arts",
       "kind": "grant",
       "url": "https://www.arts.gov/grants",
-      "summary": "Project-based matching grants to nonprofit organisations across artistic disciplines. Individuals are generally not eligible except in specific literature categories.",
-      "disciplines": [
-        "arts",
-        "music",
-        "film",
-        "writing",
-        "dance",
-        "architecture"
-      ],
-      "geography": [
-        "US"
-      ],
-      "career_stage": [
-        "any"
-      ],
+      "summary": null,
+      "eligibility": {
+        "stated": null,
+        "disciplines": null,
+        "geography": null,
+        "career_stage": null
+      },
+      "requirements": null,
       "award": {
         "min": null,
         "max": null,
@@ -990,17 +1267,47 @@
         "basis": "none",
         "note": "⟦FILL: award figure not sourced⟧"
       },
-      "effort": "high",
       "cycle": "biannual",
       "opens": null,
       "closes": null,
-      "date_basis": "none",
       "cycle_note": "FY2027 deadlines (12 Feb and 9 Jul 2026) have passed. FY2028 guidelines are expected late December 2026; deadlines not yet announced. ⟦FILL: FY2028 deadlines when published⟧",
-      "sourced_from": "https://www.arts.gov/grants/grants-for-arts-projects/application-calendar",
       "stage": "discovered",
       "drafts": [],
-      "register": "D",
-      "verified": "2026-08-29",
+      "provenance": {
+        "closes": {
+          "basis": "none",
+          "from": "https://www.arts.gov/grants/grants-for-arts-projects/application-calendar",
+          "read": "2026-08-29",
+          "why": "FY2027 deadlines (12 Feb and 9 Jul 2026) have passed. FY2028 guidelines are expected late December 2026; deadlines not yet announced. ⟦FILL: FY2028 deadlines when published⟧"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "none",
+          "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+        },
+        "requirements": {
+          "basis": "none",
+          "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://www.arts.gov/grants",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "derived",
+          "from": "https://www.arts.gov/grants/grants-for-arts-projects/application-calendar",
+          "read": "2026-08-29",
+          "rule": "inferred from the cycle the deadline sits in."
+        }
+      },
       "source": "https://www.arts.gov/grants"
     },
     {
@@ -1009,19 +1316,14 @@
       "org": "National Science Foundation",
       "kind": "fellowship",
       "url": "https://www.nsfgrfp.org/",
-      "summary": "Three years of support for graduate students pursuing research-based master's and doctoral degrees in NSF-supported fields.",
-      "disciplines": [
-        "technology",
-        "engineering",
-        "social-science",
-        "mathematics"
-      ],
-      "geography": [
-        "US"
-      ],
-      "career_stage": [
-        "student"
-      ],
+      "summary": null,
+      "eligibility": {
+        "stated": null,
+        "disciplines": null,
+        "geography": null,
+        "career_stage": null
+      },
+      "requirements": null,
       "award": {
         "min": null,
         "max": null,
@@ -1029,17 +1331,46 @@
         "basis": "none",
         "note": "⟦FILL: award figure not sourced⟧"
       },
-      "effort": "high",
       "cycle": "annual",
       "opens": null,
       "closes": "2026-10-20",
-      "date_basis": "sourced",
       "cycle_note": "Deadline is field-specific across 19–23 October 2026; this record carries the earliest that applies to its listed disciplines. Reference letters due 16 October.",
-      "sourced_from": "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program/nsf26-526/solicitation",
       "stage": "discovered",
       "drafts": [],
-      "register": "D",
-      "verified": "2026-08-29",
+      "provenance": {
+        "closes": {
+          "basis": "sourced",
+          "from": "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program/nsf26-526/solicitation",
+          "read": "2026-08-29"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "none",
+          "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+        },
+        "requirements": {
+          "basis": "none",
+          "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://www.nsfgrfp.org/",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "derived",
+          "from": "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program/nsf26-526/solicitation",
+          "read": "2026-08-29",
+          "rule": "inferred from the cycle the deadline sits in."
+        }
+      },
       "source": "https://www.nsfgrfp.org/"
     },
     {
@@ -1048,17 +1379,28 @@
       "org": "The Paul & Daisy Soros Fellowships for New Americans",
       "kind": "fellowship",
       "url": "https://www.pdsoros.org/",
-      "summary": "Graduate school funding for immigrants and children of immigrants in the United States, across any field of graduate study.",
-      "disciplines": [
-        "any"
-      ],
-      "geography": [
-        "US"
-      ],
-      "career_stage": [
-        "student",
-        "emerging"
-      ],
+      "summary": null,
+      "eligibility": {
+        "stated": "Aged 30 or younger at the deadline. Naturalised US citizen, green card holder, born to non-citizen parents, born abroad and adopted by American parents, or DACA-eligible. Starting or continuing a full-time accredited graduate or professional degree in the US, and not past the second year of it.",
+        "disciplines": [
+          "any"
+        ],
+        "geography": [
+          "US"
+        ],
+        "career_stage": [
+          "student",
+          "emerging"
+        ]
+      },
+      "requirements": {
+        "essays": 2,
+        "recommendations": 3,
+        "work_sample": false,
+        "endorsement": false,
+        "fee_usd": 0,
+        "stated": "Transcripts, a resume or CV, two essays, and three to five recommendations, plus eligibility and background questions."
+      },
       "award": {
         "min": null,
         "max": 90000,
@@ -1066,17 +1408,50 @@
         "basis": "sourced",
         "note": "Up to $90,000 over two years."
       },
-      "effort": "high",
       "cycle": "annual",
       "opens": null,
       "closes": "2026-10-29",
-      "date_basis": "sourced",
       "cycle_note": "2027 cycle, 2:00pm ET. 77 finalists interview in Jan–Feb 2027; 30 selected.",
-      "sourced_from": "https://pdsoros.org/application-process/",
       "stage": "discovered",
       "drafts": [],
-      "register": "D",
-      "verified": "2026-08-29",
+      "provenance": {
+        "closes": {
+          "basis": "sourced",
+          "from": "https://pdsoros.org/application-process/",
+          "read": "2026-08-29"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "derived",
+          "from": "https://pdsoros.org/eligibility/",
+          "read": "2026-08-29",
+          "rule": "stated is read from the source; the three enum arrays are mapped from it into this schema's vocabulary, which the source does not use."
+        },
+        "requirements": {
+          "basis": "sourced",
+          "from": "https://pdsoros.org/application-process/",
+          "read": "2026-08-29"
+        },
+        "award": {
+          "basis": "sourced",
+          "from": "https://pdsoros.org/application-process/",
+          "read": "2026-08-29"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://www.pdsoros.org/",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "derived",
+          "from": "https://pdsoros.org/application-process/",
+          "read": "2026-08-29",
+          "rule": "inferred from the cycle the deadline sits in."
+        }
+      },
       "source": "https://www.pdsoros.org/"
     },
     {
@@ -1085,22 +1460,14 @@
       "org": "Rhodes Trust",
       "kind": "scholarship",
       "url": "https://www.rhodeshouse.ox.ac.uk/scholarships/the-rhodes-scholarship/",
-      "summary": "Fully funded postgraduate study at the University of Oxford, selected on academic excellence alongside energy to use one's talents to the full.",
-      "disciplines": [
-        "any"
-      ],
-      "geography": [
-        "US",
-        "CA",
-        "AU",
-        "IN",
-        "ZA",
-        "other"
-      ],
-      "career_stage": [
-        "student",
-        "emerging"
-      ],
+      "summary": null,
+      "eligibility": {
+        "stated": null,
+        "disciplines": null,
+        "geography": null,
+        "career_stage": null
+      },
+      "requirements": null,
       "award": {
         "min": null,
         "max": null,
@@ -1108,17 +1475,46 @@
         "basis": "none",
         "note": "⟦FILL: award figure not sourced⟧"
       },
-      "effort": "high",
       "cycle": "annual",
       "opens": null,
       "closes": "2026-10-07",
-      "date_basis": "sourced",
       "cycle_note": "US constituency, 2027 entry, 23:59 ET. Other constituencies differ, and an endorsing university will set an earlier internal deadline.",
-      "sourced_from": "https://www.rhodeshouse.ox.ac.uk/scholarships/applications/united-states/",
       "stage": "discovered",
       "drafts": [],
-      "register": "D",
-      "verified": "2026-08-29",
+      "provenance": {
+        "closes": {
+          "basis": "sourced",
+          "from": "https://www.rhodeshouse.ox.ac.uk/scholarships/applications/united-states/",
+          "read": "2026-08-29"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "none",
+          "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+        },
+        "requirements": {
+          "basis": "none",
+          "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://www.rhodeshouse.ox.ac.uk/scholarships/the-rhodes-scholarship/",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "derived",
+          "from": "https://www.rhodeshouse.ox.ac.uk/scholarships/applications/united-states/",
+          "read": "2026-08-29",
+          "rule": "inferred from the cycle the deadline sits in."
+        }
+      },
       "source": "https://www.rhodeshouse.ox.ac.uk/scholarships/the-rhodes-scholarship/"
     },
     {
@@ -1127,19 +1523,14 @@
       "org": "Sundance Institute",
       "kind": "grant",
       "url": "https://www.sundance.org/programs/documentary-film/",
-      "summary": "Production and post-production grants to independent nonfiction filmmakers working on feature documentaries worldwide.",
-      "disciplines": [
-        "film",
-        "journalism"
-      ],
-      "geography": [
-        "any"
-      ],
-      "career_stage": [
-        "emerging",
-        "mid",
-        "established"
-      ],
+      "summary": null,
+      "eligibility": {
+        "stated": null,
+        "disciplines": null,
+        "geography": null,
+        "career_stage": null
+      },
+      "requirements": null,
       "award": {
         "min": null,
         "max": null,
@@ -1147,17 +1538,47 @@
         "basis": "none",
         "note": "⟦FILL: award figure not sourced⟧"
       },
-      "effort": "high",
       "cycle": "biannual",
       "opens": null,
       "closes": null,
-      "date_basis": "none",
       "cycle_note": "Last cycle closed 15 June 2026. The next open call is announced in early 2027; no date published yet. ⟦FILL: next cycle deadline when announced⟧",
-      "sourced_from": "https://www.sundance.org/documentary-fund/",
       "stage": "review",
       "drafts": [],
-      "register": "D",
-      "verified": "2026-08-29",
+      "provenance": {
+        "closes": {
+          "basis": "none",
+          "from": "https://www.sundance.org/documentary-fund/",
+          "read": "2026-08-29",
+          "why": "Last cycle closed 15 June 2026. The next open call is announced in early 2027; no date published yet. ⟦FILL: next cycle deadline when announced⟧"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "none",
+          "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+        },
+        "requirements": {
+          "basis": "none",
+          "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://www.sundance.org/programs/documentary-film/",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "derived",
+          "from": "https://www.sundance.org/documentary-fund/",
+          "read": "2026-08-29",
+          "rule": "inferred from the cycle the deadline sits in."
+        }
+      },
       "source": "https://www.sundance.org/programs/documentary-film/"
     },
     {
@@ -1166,17 +1587,14 @@
       "org": "TED",
       "kind": "fellowship",
       "url": "https://www.ted.com/participate/ted-fellows-program",
-      "summary": "A cohort programme for early-career innovators, offering a TED stage, coaching and a global peer network rather than a large cash award.",
-      "disciplines": [
-        "any"
-      ],
-      "geography": [
-        "any"
-      ],
-      "career_stage": [
-        "emerging",
-        "mid"
-      ],
+      "summary": null,
+      "eligibility": {
+        "stated": null,
+        "disciplines": null,
+        "geography": null,
+        "career_stage": null
+      },
+      "requirements": null,
       "award": {
         "min": null,
         "max": null,
@@ -1184,17 +1602,45 @@
         "basis": "none",
         "note": "⟦FILL: award figure not sourced⟧"
       },
-      "effort": "medium",
-      "cycle": "annual",
+      "cycle": null,
       "opens": null,
       "closes": null,
-      "date_basis": "none",
       "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
-      "sourced_from": null,
       "stage": "discovered",
       "drafts": [],
-      "register": "V",
-      "verified": null,
+      "provenance": {
+        "closes": {
+          "basis": "none",
+          "from": null,
+          "read": null,
+          "why": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "none",
+          "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+        },
+        "requirements": {
+          "basis": "none",
+          "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://www.ted.com/participate/ted-fellows-program",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "none",
+          "why": "⟦FILL: cycle not established from a source.⟧"
+        }
+      },
       "source": "https://www.ted.com/participate/ted-fellows-program"
     },
     {
@@ -1203,22 +1649,14 @@
       "org": "United States Artists",
       "kind": "fellowship",
       "url": "https://www.unitedstatesartists.org/fellowship",
-      "summary": "Unrestricted awards to artists and collectives across ten disciplines. Nomination-based rather than open application in most cycles.",
-      "disciplines": [
-        "arts",
-        "music",
-        "film",
-        "writing",
-        "dance",
-        "architecture"
-      ],
-      "geography": [
-        "US"
-      ],
-      "career_stage": [
-        "mid",
-        "established"
-      ],
+      "summary": null,
+      "eligibility": {
+        "stated": null,
+        "disciplines": null,
+        "geography": null,
+        "career_stage": null
+      },
+      "requirements": null,
       "award": {
         "min": null,
         "max": null,
@@ -1226,17 +1664,45 @@
         "basis": "none",
         "note": "⟦FILL: award figure not sourced⟧"
       },
-      "effort": "medium",
-      "cycle": "annual",
+      "cycle": null,
       "opens": null,
       "closes": null,
-      "date_basis": "none",
       "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
-      "sourced_from": null,
       "stage": "discovered",
       "drafts": [],
-      "register": "V",
-      "verified": null,
+      "provenance": {
+        "closes": {
+          "basis": "none",
+          "from": null,
+          "read": null,
+          "why": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "none",
+          "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+        },
+        "requirements": {
+          "basis": "none",
+          "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://www.unitedstatesartists.org/fellowship",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "none",
+          "why": "⟦FILL: cycle not established from a source.⟧"
+        }
+      },
       "source": "https://www.unitedstatesartists.org/fellowship"
     }
   ]

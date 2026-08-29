@@ -9,30 +9,42 @@ enforcement. `npm run build` validates every record and compiles
 
 **A blank field is a finding. A fabricated one is a defect.**
 
-Nothing in a record may be filled in from memory, inferred from a programme's
-usual cycle, or carried over from last year. A record carries a deadline only
-when something was actually read to obtain it, and the URL that was read goes
-in `sourced_from`. The build refuses:
+Every product field carries its own entry in the record's `provenance` block
+naming where it came from, or it is blank and says what is owed. The build
+refuses:
 
-- a `closes` date on a record whose `date_basis` is `none`
-- a `date_basis` of `sourced`/`confirmed` without `sourced_from` and `verified`
-- an undated record whose `cycle_note` does not carry a `⟦FILL⟧` marker
-- a `register` above `V` on a record nobody has verified
-- an award figure whose `basis` is `none`
-- `register: "I"` anywhere — inference is what this contract exists to prevent
+- a populated field whose provenance basis is `none`
+- a populated field whose `from` names no https source
+- a blank field whose `why` carries no `⟦FILL⟧` marker
+- a `derived` field that states no transformation rule
+- an `eligibility` claiming basis `sourced` — its enum arrays are a mapping into
+  this schema's vocabulary, which the source does not use, so `derived` is the
+  honest basis
+- any record that stores `effort` — it is derived from `requirements`
 
-## Provenance ladder
+## The four bases
 
-| `date_basis` | Means | `closes` | `verified` | `register` |
-|---|---|---|---|---|
-| `confirmed` | read off the organisation's own page | a date | the day it was read | `D` |
-| `sourced` | read off a named third party in `sourced_from` | a date | the day it was read | `D` |
-| `none` + `verified` set | checked; the programme is between cycles | `null` | the day it was checked | `D` |
-| `none` + `verified` null | nobody has looked yet | `null` | `null` | `V` |
+| Basis | Means | Field |
+|---|---|---|
+| `confirmed` | read off the organisation's own page | populated |
+| `sourced` | read off the named third party in `from` | populated; primary confirmation still owed |
+| `derived` | transformed from a named source, with `rule` stating the transformation | populated |
+| `none` | no record exists | **blank**, with `why` carrying `⟦FILL⟧` |
 
-Raising a record from `sourced` to `confirmed` is the standing work: open its
-`source`, read the deadline, and set `date_basis`, `closes`, `verified` and
-`sourced_from` to match.
+## Why effort is derived
+
+`effort` is the denominator of return-on-effort, so an effort grading with
+nothing behind it moves what the surface promotes on the strength of an opinion.
+It is computed at read time from `requirements` — essays, recommendations, work
+sample, endorsement, fee — through the weights and bands in
+`../data/vantage.config.json`. The inputs are sourced facts on the record; the
+weighting is an editorial position and lives in config, where it is visible as
+one. A record whose requirements were never read has no effort and the ranking
+uses the configured unknown cost.
+
+This was the Q4-PROVENANCE finding: the earlier contract guarded dates and money
+and left `summary`, `eligibility`, `effort`, `kind` and `cycle` unguarded — four
+of them enum-checked, which made them read as validated.
 
 ## Adding a record
 

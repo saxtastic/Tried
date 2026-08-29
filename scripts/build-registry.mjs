@@ -55,13 +55,15 @@ for (const file of files) {
   if (seen.has(rec.id)) note(file, `duplicate id "${rec.id}"`);
   seen.add(rec.id);
 
-  for (const [field, allowed] of Object.entries(contract.enums)) {
-    if (!(field in rec)) continue;
-    const values = Array.isArray(rec[field]) ? rec[field] : [rec[field]];
-    for (const v of values) {
-      if (v !== "any" && !allowed.includes(v)) {
-        note(file, `${field} "${v}" is not one of ${allowed.join(", ")}`);
-      }
+  for (const field of ["kind", "cycle"]) {
+    const v = rec[field];
+    if (v !== null && v !== undefined && !contract.enums[field].includes(v)) {
+      note(file, `${field} "${v}" is not one of ${contract.enums[field].join(", ")}`);
+    }
+  }
+  for (const v of (rec.eligibility && rec.eligibility.career_stage) || []) {
+    if (!contract.enums.career_stage.includes(v)) {
+      note(file, `eligibility.career_stage "${v}" is not legal`);
     }
   }
 
@@ -69,7 +71,7 @@ for (const file of files) {
     note(file, `stage "${rec.stage}" is not declared in data/workflow.json`);
   }
 
-  for (const key of ["opens", "closes", "verified"]) {
+  for (const key of ["opens", "closes"]) {
     const v = rec[key];
     if (v === null || v === undefined) continue;
     if (!/^\d{4}-\d{2}-\d{2}$/.test(v) || Number.isNaN(Date.parse(v + "T00:00:00Z"))) {
@@ -80,43 +82,83 @@ for (const file of files) {
     note(file, `opens (${rec.opens}) is after closes (${rec.closes})`);
   }
 
-  /* The rule this reference is built around, enforced rather than asked for:
-     a blank field is a finding, a fabricated one is a defect. A date exists
-     only when something was actually read to obtain it. */
-  const dated = rec.date_basis === "sourced" || rec.date_basis === "confirmed";
+  /* ------------------------------------------------------- provenance ---- */
+  /* Enforced per field rather than only on dates and money. That narrowness was
+     the gap this project's own Q4-PROVENANCE audit found: summary, eligibility,
+     effort, kind and cycle rendered as fact with nothing behind them, and four
+     of them passed an enum check, which made them read as validated.
 
-  if (dated) {
-    if (!rec.closes) note(file, `date_basis "${rec.date_basis}" but closes is blank`);
-    if (!rec.sourced_from) note(file, `date_basis "${rec.date_basis}" but nothing is recorded in sourced_from`);
-    if (!rec.verified) note(file, `date_basis "${rec.date_basis}" but verified is null — nobody read it`);
-    if (rec.register === "V") note(file, `a sourced date cannot sit on register V`);
-  } else {
-    if (rec.closes) note(file, `closes "${rec.closes}" is set with date_basis "none" — a date with no source is a fabrication`);
-    if (!rec.cycle_note) note(file, `closes is blank, so cycle_note must say why and carry a ⟦FILL⟧ marker`);
-    if (rec.cycle_note && !/⟦FILL/.test(rec.cycle_note)) {
-      note(file, `cycle_note on an undated record must name what is still owed with a ⟦FILL⟧ marker`);
+     A field is populated only if its provenance entry names where it came from.
+     A field whose basis is "none" must be blank and must say what is owed. */
+
+  const prov = rec.provenance || {};
+
+  /* "Blank" means something different for a string, a date and a sub-object, so
+     each group states its own predicate rather than sharing a loose one. */
+  const populated = {
+    closes: () => Boolean(rec.closes),
+    summary: () => Boolean(rec.summary),
+    eligibility: () => {
+      const e = rec.eligibility || {};
+      return Boolean(e.stated || e.disciplines || e.geography || e.career_stage);
+    },
+    requirements: () => Boolean(rec.requirements),
+    award: () => (rec.award || {}).min !== null || (rec.award || {}).max !== null,
+    kind: () => Boolean(rec.kind),
+    cycle: () => Boolean(rec.cycle),
+  };
+
+  for (const field of contract.provenance_required_for) {
+    const e = prov[field];
+    if (!e) {
+      note(file, `provenance.${field} is missing — every product field declares where it came from`);
+      continue;
+    }
+    if (!contract.enums.basis.includes(e.basis)) {
+      note(file, `provenance.${field}.basis "${e.basis}" is not legal`);
+      continue;
+    }
+
+    const isSet = populated[field]();
+
+    if (e.basis === "none") {
+      if (isSet) {
+        note(file, `${field} is populated but its basis is "none" — a value with no record behind it is a fabrication`);
+      }
+      if (!/⟦FILL/.test(e.why || "")) {
+        note(file, `provenance.${field} has basis "none", so why must carry a FILL marker naming what is owed`);
+      }
+    } else {
+      if (!isSet) {
+        note(file, `provenance.${field}.basis is "${e.basis}" but ${field} is blank`);
+      }
+      if (!/^https:\/\//.test(e.from || "")) {
+        note(file, `provenance.${field}.basis is "${e.basis}" but from names no https source`);
+      }
+      if (e.basis === "derived" && !e.rule) {
+        note(file, `provenance.${field} is "derived" but states no transformation rule`);
+      }
+      if (e.basis !== "derived" && !e.read) {
+        note(file, `provenance.${field} is "${e.basis}" but records no read date`);
+      }
     }
   }
 
-  if (!rec.verified && rec.register !== "V") {
-    note(file, `register "${rec.register}" claims verification but verified is null`);
+  /* The eligibility enum arrays are this repository's vocabulary, not the
+     source's, so they may never claim to be quoted from it. */
+  if (prov.eligibility && prov.eligibility.basis === "sourced") {
+    note(file, `provenance.eligibility may not be "sourced" — the enum arrays map into this schema's vocabulary, so the honest basis is "derived"`);
   }
-  if (rec.verified && !rec.sourced_from) {
-    note(file, `verified "${rec.verified}" but nothing is recorded in sourced_from`);
-  }
-  if (rec.register === "I") {
-    note(file, `register I (inferred) is not legal on a record — inference is what this contract prevents`);
+
+  /* effort is derived from requirements at read time and must not be stored. A
+     stored grading is an opinion, and it is the denominator of the ranking. */
+  if ("effort" in rec) {
+    note(file, `effort must not be stored on a record — it is derived from requirements`);
   }
 
   const aw = rec.award || {};
-  if (!["sourced", "confirmed", "none"].includes(aw.basis)) {
-    note(file, `award.basis "${aw.basis}" is not one of sourced, confirmed, none`);
-  }
-  if (aw.basis !== "none" && aw.min === null && aw.max === null) {
-    note(file, `award.basis "${aw.basis}" claims a sourced figure but none is recorded`);
-  }
-  if (aw.basis === "none" && (aw.min !== null || aw.max !== null)) {
-    note(file, `award figure is set with basis "none" — a figure with no source is a fabrication`);
+  if (!contract.enums.basis.includes(aw.basis)) {
+    note(file, `award.basis "${aw.basis}" is not legal`);
   }
 
   if (!Array.isArray(rec.drafts)) note(file, `drafts must be an array`);
@@ -192,15 +234,19 @@ if (process.argv.includes("--check")) {
 
 fs.writeFileSync(OUT, serialised);
 
-const dated = calls.filter((c) => c.closes).length;
-const betweenCycles = calls.filter((c) => !c.closes && c.verified).length;
-const unsourced = calls.filter((c) => !c.closes && !c.verified).length;
-const primary = calls.filter((c) => c.date_basis === "confirmed").length;
+const basis = (c, f) => ((c.provenance || {})[f] || {}).basis;
+const groups = ["closes", "summary", "eligibility", "requirements", "award", "cycle"];
+
+const tally = {};
+for (const g of groups) {
+  tally[g] = calls.filter((c) => basis(c, g) !== "none").length;
+}
+const owed = calls.filter((c) => basis(c, "closes") === "none").map((c) => c.id);
 
 console.log(`wrote public/fellowships/registry.json — ${calls.length} calls, ${workflow.stages.length} stages, ${vantage.fields.length} fields`);
-console.log(`  ${dated} with a sourced deadline (${primary} confirmed against the organisation's own page)`);
-console.log(`  ${betweenCycles} checked, between cycles — no open deadline to record`);
-console.log(`  ${unsourced} not yet sourced — blank and marked ⟦FILL⟧`);
-if (unsourced) {
-  console.log(`\nowed: ${calls.filter((c) => !c.closes && !c.verified).map((c) => c.id).join(", ")}`);
+console.log("\nprovenance, per product field-group (populated / total):");
+for (const g of groups) {
+  const bar = "#".repeat(tally[g]).padEnd(calls.length, ".");
+  console.log(`  ${g.padEnd(13)} ${String(tally[g]).padStart(2)}/${calls.length}  ${bar}`);
 }
+console.log(`\n${owed.length} record(s) owe a deadline: ${owed.join(", ")}`);

@@ -24,31 +24,35 @@ No deadline in this reference was carried over from a programme's usual cycle or
 filled in from memory. A record carries a date only when something was actually
 read to obtain it, and the URL that was read is in `sourced_from`. As it stands:
 
-| | Count | What that means |
+| Field group | Populated | Basis |
 |---|---|---|
-| sourced deadline | 6 | read off a named third party on 2026-08-29 — **primary confirmation still owed** |
-| confirmed deadline | 0 | read off the organisation's own page. None yet: the container this was built in cannot reach most of those pages |
-| checked, between cycles | 3 | the programme's last cycle closed and the next is unannounced |
-| not sourced | 7 | nobody has looked. Blank, and marked `⟦FILL⟧` |
+| `closes` | 6/16 | `sourced` — read off a named third party on 2026-08-29. **Primary confirmation still owed on all of them.** |
+| `eligibility` | 3/16 | `derived` — `stated` is read from the source; the enum arrays map it into this schema's vocabulary |
+| `requirements` | 3/16 | `sourced` — what an application actually costs to assemble. `effort` derives from this |
+| `award` | 1/16 | `sourced` |
+| `cycle` | 9/16 | `derived` |
+| `summary` | 0/16 | **all blank.** No description was ever read verbatim; the previous text was written from general knowledge and has been removed |
 
 The module gives undated records their own band rather than hiding them, so the
 reference shows you the work it still owes. **[O]** — asserted by `npm run check`.
 
-Raising a record is a small, checked edit:
+Raising a record is a small, checked edit — set the field and its provenance
+entry together:
 
 ```jsonc
 // data/open-calls/<id>.json
-"closes":       "2026-09-15",
-"date_basis":   "confirmed",                 // was "sourced" or "none"
-"sourced_from": "https://…",                 // what you actually read
-"verified":     "2026-08-29",                // the day you read it
-"register":     "D"
+"closes": "2026-09-15",
+"provenance": {
+  "closes": { "basis": "confirmed", "from": "https://…", "read": "2026-08-29" }
+}
 ```
 
-The build refuses any record that claims more than it can show — a date with no
-source, a register above `V` with nothing verified, an award figure with no
-basis, or `register: "I"`, since inference is the thing this contract exists to
-prevent. `data/README.md` has the full ladder. **[O]**
+The build refuses a populated field whose basis is `none`, a populated field
+whose `from` names no https source, a blank field whose `why` carries no `⟦FILL⟧`
+marker, an `eligibility` claiming basis `sourced` when its enum arrays are a
+mapping, and any record that stores `effort`. Those five guards were tested by
+planting violations and watching the build reject them. `data/README.md` has the
+full ladder.
 
 ## Three files decide everything
 
@@ -75,31 +79,49 @@ and belongs to the venue.
 
 ```jsonc
 {
-  "id": "macdowell-fellowship",          // must match the filename
+  "id": "macdowell-fellowship",
   "name": "MacDowell Fellowship",
   "org": "MacDowell",
-  "kind": "residency",                   // fellowship | grant | residency | prize | scholarship | accelerator
+  "kind": "residency",
   "url": "https://www.macdowell.org/apply",
-  "summary": "…",
-  "disciplines": ["arts", "writing", "music", "film", "architecture"],
-  "geography": ["any"],
-  "career_stage": ["emerging", "mid", "established"],
-  "award": { "min": null, "max": null, "currency": "USD",
-             "basis": "none", "note": "⟦FILL: award figure not sourced⟧" },
-  "effort": "medium",                    // low | medium | high — the denominator of return on effort
+  "summary": null,                       // blank: nothing was read verbatim
+  "eligibility": {
+    "stated": "Artists in architecture, film/video, … at least 21 …",
+    "disciplines": ["architecture", "film", "writing", "music", "arts"],
+    "geography": ["any"],
+    "career_stage": ["emerging", "mid", "established"]
+  },
+  "requirements": {                      // what effort derives from
+    "essays": 1, "recommendations": 0, "work_sample": true,
+    "endorsement": false, "fee_usd": 30,
+    "stated": "Project proposal, a list of professional achievements, and a current work sample …"
+  },
+  "award": { "min": null, "max": null, "currency": "USD", "basis": "none", "note": "⟦FILL: …⟧" },
   "cycle": "biannual",
   "opens": null,
   "closes": "2026-09-10",
-  "date_basis": "sourced",               // confirmed | sourced | none
   "cycle_note": "Spring–Summer 2027 residency cycle. …",
-  "sourced_from": "https://www.macdowell.org/apply/apply-for-fellowship",
-  "stage": "eligible",                   // must be a stage id in data/workflow.json
-  "drafts": [],                          // { label, href, state } — a label and a link, never a person
-  "register": "D",
-  "verified": "2026-08-29",
+  "stage": "eligible",
+  "drafts": [],
+  "provenance": {                        // one entry per product field
+    "closes":       { "basis": "sourced", "from": "https://…", "read": "2026-08-29" },
+    "summary":      { "basis": "none", "why": "⟦FILL: no verbatim description was read⟧" },
+    "eligibility":  { "basis": "derived", "from": "https://…", "read": "2026-08-29",
+                      "rule": "stated is read from the source; the enum arrays map it into this schema's vocabulary" },
+    "requirements": { "basis": "sourced", "from": "https://…", "read": "2026-08-29" },
+    "award":        { "basis": "none", "why": "⟦FILL: no award figure was read⟧" },
+    "kind":         { "basis": "derived", "from": "https://…", "rule": "classified from the programme's own description" },
+    "cycle":        { "basis": "derived", "from": "https://…", "read": "2026-08-29", "rule": "…" }
+  },
   "source": "https://www.macdowell.org/apply"
 }
 ```
+
+There is no `effort` field. Effort is **derived** from `requirements` at read
+time through the rule in `data/vantage.config.json`, because a stored grading is
+an opinion and it is the denominator of the ranking. The build rejects any record
+that stores one. A record whose requirements were never read has no effort, and
+the ranking uses the configured unknown cost rather than a silent middle value.
 
 `npm run build` validates every record and compiles `public/fellowships/registry.json`.
 The output is deterministic — records sorted by id, fixed key order, no build
@@ -249,31 +271,30 @@ is running on. **[I]**
 | A workflow action moves a record to the stage the spec names, with no reload | **[O]** | same, driven end to end |
 | `settle()` is idempotent, never stalls, and every stage can reach a terminal stage | **[O]** | `npm run check:data` |
 | The engine names no stage; the module names no field, band, colour or width | **[O]** | source scan over the shipped files, comments stripped |
-| No record carries a date, or an award figure, without a source | **[O]** | `npm run build` and `npm run check:data`; the guard was tested by planting a sourceless date and watching the build reject it |
-| Every undated record names what is owed with a `⟦FILL⟧` marker | **[O]** | `npm run check:data` |
-| The horizon band groups first and return on effort ranks inside it | **[O]** | `npm run check:data` |
-| The six sourced deadlines | **[D]** | read on 2026-08-29 off the third party recorded in each record's `sourced_from` |
+| Every product field names the record it came from, or is blank and says what is owed | **[O]** | `npm run build` and `npm run check:data`, enforced per field rather than only on dates and money |
+| A populated field with no source, an over-claimed `eligibility` basis, and a stored `effort` are all rejected | **[O]** | each planted as a violation and observed failing the build |
+| `effort` is derived from sourced requirements and never stored | **[O]** | `npm run check:data` |
+| The six sourced deadlines, and the eligibility and requirements for three records | **[D]** | read on 2026-08-29 off the third party named in each field's provenance entry |
 | That three programmes are between cycles with nothing to record | **[D]** | same |
-| Every award figure except one | **[V]** | not published, or not read. Each carries a `⟦FILL⟧` note |
-| The seven unsourced deadlines | **[V]** | nobody has looked. Blank, and grouped into their own band in the interface |
+| Every `summary` | **[V]** | blank. None was read verbatim, so none is published |
+| The ten unsourced deadlines and thirteen unsourced eligibilities | **[V]** | nobody has looked. Blank, marked, and grouped into their own band in the interface |
 | `font: -apple-system-body` opts the page into Dynamic Type | **[V]** | documented Safari behaviour, not reachable from Chromium |
 | `env(safe-area-inset-*)` is non-zero on a notched iPhone | **[V]** | probes read `0 / 0 / 0 / 0` in Chromium — correct there, unproven on device |
 | Cloudflare Workers Static Assets applies `public/_headers` at deploy | **[V]** | no deploy was run from this container |
 
 ## Open items
 
-- ⟦FILL: the seven unsourced deadlines⟧ — `ashoka-fellowship`,
-  `echoing-green-fellowship`, `jerome-hill-artist-fellowship`,
-  `knight-arts-tech-fellowship`, `mozilla-technology-fund`, `ted-fellows`,
-  `united-states-artists-fellowship`. `npm run build` lists them every run.
-- ⟦FILL: primary confirmation for the six sourced deadlines⟧ — each was read off
-  a third party, not the organisation's own page. Raising one to `confirmed` is
-  a four-line edit.
-- ⟦FILL: award figures⟧ — fifteen of sixteen records carry no sourced figure, so
-  the ranking scores them at the configured `unknown_award`.
-- ⟦FILL: the CSS viewport width Apple Watch actually reports for web content⟧ —
-  `319px` is a floor chosen to sit under every iPhone, not a fitted breakpoint.
-- ⟦FILL: measured Dynamic Type behaviour at the accessibility sizes⟧.
+- ⟦FILL: ten unsourced deadlines⟧ — `npm run build` lists them every run.
+- ⟦FILL: eligibility and requirements for thirteen records⟧ — until these are
+  read, those records score no fit and no derived effort, and the ranking uses
+  the configured unknown values for both.
+- ⟦FILL: primary confirmation for the six sourced deadlines⟧ — every one is
+  `sourced`, none is `confirmed`; this container cannot reach most organisation
+  pages directly.
+- ⟦FILL: award figures⟧ — fifteen of sixteen records carry none.
+- ⟦FILL: every `summary`⟧ — all blank. A description is a claim about the
+  programme, so it is quoted with a source or it is not published.
+- ⟦FILL: the CSS viewport width Apple Watch actually reports for web content⟧.
 
 ## Local development
 

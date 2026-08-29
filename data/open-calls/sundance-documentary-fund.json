@@ -4,19 +4,14 @@
   "org": "Sundance Institute",
   "kind": "grant",
   "url": "https://www.sundance.org/programs/documentary-film/",
-  "summary": "Production and post-production grants to independent nonfiction filmmakers working on feature documentaries worldwide.",
-  "disciplines": [
-    "film",
-    "journalism"
-  ],
-  "geography": [
-    "any"
-  ],
-  "career_stage": [
-    "emerging",
-    "mid",
-    "established"
-  ],
+  "summary": null,
+  "eligibility": {
+    "stated": null,
+    "disciplines": null,
+    "geography": null,
+    "career_stage": null
+  },
+  "requirements": null,
   "award": {
     "min": null,
     "max": null,
@@ -24,16 +19,46 @@
     "basis": "none",
     "note": "⟦FILL: award figure not sourced⟧"
   },
-  "effort": "high",
   "cycle": "biannual",
   "opens": null,
   "closes": null,
-  "date_basis": "none",
   "cycle_note": "Last cycle closed 15 June 2026. The next open call is announced in early 2027; no date published yet. ⟦FILL: next cycle deadline when announced⟧",
-  "sourced_from": "https://www.sundance.org/documentary-fund/",
   "stage": "review",
   "drafts": [],
-  "register": "D",
-  "verified": "2026-08-29",
+  "provenance": {
+    "closes": {
+      "basis": "none",
+      "from": "https://www.sundance.org/documentary-fund/",
+      "read": "2026-08-29",
+      "why": "Last cycle closed 15 June 2026. The next open call is announced in early 2027; no date published yet. ⟦FILL: next cycle deadline when announced⟧"
+    },
+    "summary": {
+      "basis": "none",
+      "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+    },
+    "eligibility": {
+      "basis": "none",
+      "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+    },
+    "requirements": {
+      "basis": "none",
+      "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+    },
+    "award": {
+      "basis": "none",
+      "why": "⟦FILL: no award figure was read.⟧"
+    },
+    "kind": {
+      "basis": "derived",
+      "from": "https://www.sundance.org/programs/documentary-film/",
+      "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+    },
+    "cycle": {
+      "basis": "derived",
+      "from": "https://www.sundance.org/documentary-fund/",
+      "read": "2026-08-29",
+      "rule": "inferred from the cycle the deadline sits in."
+    }
+  },
   "source": "https://www.sundance.org/programs/documentary-film/"
 }

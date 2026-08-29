@@ -24,14 +24,26 @@
 
   "$rank_comment": "Return on effort. Within each horizon band the top of the list is the best return for the effort it costs: award value and eligibility fit weighed against effort to submit. An award figure nobody has sourced scores at `unknown_award` rather than zero, so a missing figure neither flatters nor punishes a call — and the card marks it as missing either way.",
 
+  "$effort_comment": "effort is DERIVED from a record's sourced requirements, never stored on the record and never asserted. An effort grading with nothing behind it is an opinion, and it is the denominator of the ranking — which is what the Q4 audit found. Where requirements were never read, effort is unknown and the ranking uses effort_cost.unknown, which the card states.",
+
+  "effort_from_requirements": {
+    "weights": { "essay": 1, "recommendation": 1.5, "work_sample": 2, "endorsement": 3, "fee": 0.5 },
+    "bands": [
+      { "up_to": 3,    "id": "low" },
+      { "up_to": 7,    "id": "medium" },
+      { "up_to": null, "id": "high" }
+    ]
+  },
+
   "rank": {
-    "effort_cost": { "low": 1, "medium": 1.6, "high": 2.4 },
+    "effort_cost": { "low": 1, "medium": 1.6, "high": 2.4, "unknown": 1.8 },
     "award_value": [
       { "up_to": 10000, "value": 0.35 },
       { "up_to": 50000, "value": 0.7 },
       { "up_to": null,  "value": 1.0 }
     ],
     "unknown_award": 0.5,
+    "unknown_fit": 0.5,
     "weights": { "award": 2, "fit": 3 }
   },
 
@@ -50,12 +62,12 @@
   },
 
   "fit": {
-    "$comment": "Each criterion names a key on the profile above and a key on the record, so the module can score fit without knowing what any of them mean. Add a criterion here and it is scored; the meter re-weights itself. \"any\" on either side is a wildcard.",
+    "$comment": "Each criterion names a key on the profile above and a path on the record, so the module can score fit without knowing what any of them mean. Add a criterion here and it is scored; the meter re-weights itself. \"any\" on either side is a wildcard. A record with no sourced eligibility scores null rather than zero — never asked is not the same as poor match.",
+    "$removed": "effort_tolerance was a criterion until 2026-08-29. It was double-counted: effort is already the denominator of return-on-effort, so weighting it in the numerator too moved the same fact twice. It also pointed at call.effort, which no longer exists now that effort is derived.",
     "criteria": [
-      { "id": "discipline",   "profile": "disciplines",      "call": "disciplines",  "weight": 3 },
-      { "id": "geography",    "profile": "geography",        "call": "geography",    "weight": 2 },
-      { "id": "career stage", "profile": "career_stage",     "call": "career_stage", "weight": 2 },
-      { "id": "effort",       "profile": "effort_tolerance", "call": "effort",       "weight": 1 }
+      { "id": "discipline",   "profile": "disciplines",      "call": "eligibility.disciplines",  "weight": 3 },
+      { "id": "geography",    "profile": "geography",        "call": "eligibility.geography",    "weight": 2 },
+      { "id": "career stage", "profile": "career_stage",     "call": "eligibility.career_stage", "weight": 2 }
     ]
   },
 
@@ -70,6 +82,8 @@
     { "id": "kind",      "role": "tag",        "from": "call.kind",           "line": "signals", "tiers": ["pad", "desk"] },
     { "id": "fit",       "role": "meter",      "from": "derived.fit",         "line": "signals", "tiers": ["pad", "desk"], "label": "fit" },
     { "id": "effort",    "role": "tag",        "from": "derived.effort_label","line": "signals", "tiers": ["pad", "desk"] },
+    { "id": "eligible",  "role": "terms",      "from": "call.eligibility.stated", "line": "detail", "tiers": ["desk"] },
+    { "id": "asks",      "role": "terms",      "from": "call.requirements.stated","line": "detail", "tiers": ["desk"] },
     { "id": "awardfig",  "role": "amount",     "from": "derived.award_label", "line": "signals", "tiers": ["pad", "desk"] },
     { "id": "summary",   "role": "prose",      "from": "call.summary",        "line": "detail",  "tiers": ["desk"] },
     { "id": "terms",     "role": "terms",      "from": "call.cycle_note",     "line": "detail",  "tiers": ["pad", "desk"] },

@@ -115,38 +115,65 @@ for (const t of workflow.transitions.filter((x) => x.mode === "auto")) {
 }
 
 /* --------------------------------------------------------- provenance -- */
+/* Asserted against the shipped registry, not trusted from the build. */
 
 {
-  const lying = calls.filter((c) => !c.verified && c.register !== "V");
-  ok("no record claims a register it has not earned", lying.length === 0,
-    lying.map((c) => c.id).join(", "));
+  const groups = registry.$contract_groups ||
+    ["closes", "summary", "eligibility", "requirements", "award", "kind", "cycle"];
+  const basis = (c, f) => ((c.provenance || {})[f] || {}).basis;
 
-  const LEGAL = ["sourced", "confirmed", "none"];
-  const unmarked = calls.filter((c) => !LEGAL.includes(c.date_basis));
-  ok("every record declares a date basis", unmarked.length === 0, unmarked.map((c) => c.id).join(", "));
+  const missing = calls.filter((c) => groups.some((g) => !basis(c, g)));
+  ok("every record declares a basis for every product field", missing.length === 0,
+    missing.map((c) => c.id).join(", "));
 
-  /* The rule the whole reference rests on, asserted against the shipped data
-     rather than trusted from the build. */
-  const fabricated = calls.filter((c) => c.closes && c.date_basis === "none");
-  ok("no record carries a date without a source", fabricated.length === 0,
-    fabricated.map((c) => c.id).join(", "));
+  const present = {
+    closes: (c) => Boolean(c.closes),
+    summary: (c) => Boolean(c.summary),
+    eligibility: (c) => Boolean((c.eligibility || {}).stated),
+    requirements: (c) => Boolean(c.requirements),
+    award: (c) => (c.award || {}).min !== null || (c.award || {}).max !== null,
+    kind: (c) => Boolean(c.kind),
+    cycle: (c) => Boolean(c.cycle),
+  };
 
-  const undocumented = calls.filter((c) => c.closes && !c.sourced_from);
-  ok("every dated record records what was read", undocumented.length === 0,
-    undocumented.map((c) => c.id).join(", "));
+  const fabricated = [];
+  for (const c of calls) {
+    for (const g of groups) {
+      if (basis(c, g) === "none" && present[g](c)) fabricated.push(`${c.id}.${g}`);
+    }
+  }
+  ok("no field is populated with basis none", fabricated.length === 0, fabricated.join(", "));
 
-  const silent = calls.filter((c) => !c.closes && !/⟦FILL/.test(c.cycle_note || ""));
-  ok("every undated record names what is owed", silent.length === 0,
-    silent.map((c) => c.id).join(", "));
+  const undocumented = [];
+  for (const c of calls) {
+    for (const g of groups) {
+      const e = c.provenance[g];
+      if (e.basis !== "none" && !/^https:\/\//.test(e.from || "")) undocumented.push(`${c.id}.${g}`);
+    }
+  }
+  ok("every populated field names an https source", undocumented.length === 0, undocumented.join(", "));
 
-  const fakeAward = calls.filter((c) => c.award.basis === "none" && (c.award.min !== null || c.award.max !== null));
-  ok("no record carries an award figure without a source", fakeAward.length === 0,
-    fakeAward.map((c) => c.id).join(", "));
+  const silent = [];
+  for (const c of calls) {
+    for (const g of groups) {
+      const e = c.provenance[g];
+      if (e.basis === "none" && !/⟦FILL/.test(e.why || "")) silent.push(`${c.id}.${g}`);
+    }
+  }
+  ok("every blank field names what is owed", silent.length === 0, silent.join(", "));
+
+  /* The two rules the Q4 audit produced, asserted rather than assumed. */
+  const stored = calls.filter((c) => "effort" in c);
+  ok("effort is never stored on a record", stored.length === 0, stored.map((c) => c.id).join(", "));
+
+  const overclaimed = calls.filter((c) => basis(c, "eligibility") === "sourced");
+  ok("eligibility is derived, never claimed as quoted", overclaimed.length === 0,
+    overclaimed.map((c) => c.id).join(", "));
 
   const provField = vantage.fields.find((f) => f.role === "provenance");
   ok("provenance renders on every floor", provField &&
     keys(vantage.density).every((t) => provField.tiers.includes(t)),
-    "a floor exists where an unverified date shows without its marker");
+    "a floor exists where an unsourced record shows without its marker");
 }
 
 /* ------------------------------------------------------------- config -- */
@@ -183,8 +210,12 @@ for (const t of workflow.transitions.filter((x) => x.mode === "auto")) {
   const rank = vantage.rank || {};
   ok("return-on-effort inputs are declared", !!(rank.effort_cost && rank.award_value && rank.weights),
     "data/vantage.config.json is missing rank inputs");
-  ok("every effort level has a cost", ["low", "medium", "high"].every((e) => rank.effort_cost[e] > 0),
-    "an effort level has no cost, so it would divide by the default");
+  ok("every effort level has a cost, including unknown",
+    ["low", "medium", "high", "unknown"].every((e) => rank.effort_cost[e] > 0),
+    "an effort level has no cost, so it would silently divide by the default");
+  ok("effort is derived from declared requirement weights",
+    Boolean(vantage.effort_from_requirements && vantage.effort_from_requirements.bands),
+    "effort has no derivation rule, so it would have to be asserted");
   ok("return is ranked before the deadline within a band",
     vantage.order[0].key === "derived.band_order" &&
     vantage.order[1].key === "derived.ret" && vantage.order[1].dir === "desc",
@@ -193,8 +224,10 @@ for (const t of workflow.transitions.filter((x) => x.mode === "auto")) {
   const weights = (vantage.fit.criteria || []).reduce((n, c) => n + c.weight, 0);
   ok("fit weights sum above zero", weights > 0, `${weights}`);
 
+  const readPath = (o, path) => path.split(".").reduce((x, k) => (x == null ? x : x[k]), o);
   const badCriteria = (vantage.fit.criteria || []).filter((c) =>
-    !(c.profile in vantage.profile) || !calls.some((call) => c.call in call));
+    !(c.profile in vantage.profile) ||
+    !calls.some((call) => readPath(call, c.call) !== undefined));
   ok("every fit criterion names a real profile and record key", badCriteria.length === 0,
     badCriteria.map((c) => c.id).join(", "));
 }

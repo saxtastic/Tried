@@ -99,17 +99,23 @@
   /* Fit is scored from config.fit.criteria against config.profile. The module
      does not know what "geography" means; it compares two lists it was told
      to compare and divides by the weights it was given. */
+  /* Returns null, not zero, when the record has no sourced eligibility to score
+     against. Zero would rank an unread record below a genuinely poor match; null
+     says the question was never asked. */
   function fitFor(config, call) {
     var criteria = (config.fit && config.fit.criteria) || [];
-    var total = 0, got = 0;
+    var total = 0, got = 0, scored = 0;
     for (var i = 0; i < criteria.length; i++) {
       var c = criteria[i];
       var w = c.weight || 0;
       total += w;
       var mine = toArray(config.profile && config.profile[c.profile]);
-      var theirs = toArray(call[c.call]);
-      if (mine.length && theirs.length && intersects(mine, theirs)) got += w;
+      var theirs = toArray(Workflow.read({ call: call }, "call." + c.call));
+      if (!theirs.length) continue;
+      scored += w;
+      if (mine.length && intersects(mine, theirs)) got += w;
     }
+    if (!scored) return null;
     return total ? got / total : 0;
   }
 
@@ -128,15 +134,45 @@
     return bands.length ? bands[bands.length - 1].value : 0;
   }
 
+  /* Effort is derived from the record's sourced requirements, never read off
+     the record — a stored grading is an opinion, and this is the denominator of
+     the ranking. A record whose requirements were never read has no effort, and
+     says so rather than being given a middling one silently. */
+  function effortFor(config, call) {
+    var spec = config.effort_from_requirements || {};
+    var w = spec.weights || {};
+    var req = call.requirements;
+    if (!req) return null;
+
+    var score =
+      (req.essays || 0) * (w.essay || 0) +
+      (req.recommendations || 0) * (w.recommendation || 0) +
+      (req.work_sample ? (w.work_sample || 0) : 0) +
+      (req.endorsement ? (w.endorsement || 0) : 0) +
+      (req.fee_usd ? (w.fee || 0) : 0);
+
+    var bands = spec.bands || [];
+    for (var i = 0; i < bands.length; i++) {
+      if (bands[i].up_to === null || bands[i].up_to === undefined) return bands[i].id;
+      if (score <= bands[i].up_to) return bands[i].id;
+    }
+    return null;
+  }
+
   /* Return on effort: what the configuration says this call is worth, divided
      by what it says the call costs to enter. The module supplies neither. */
-  function returnOnEffort(config, call, fit) {
+  function returnOnEffort(config, call, fit, effort) {
     var rank = config.rank || {};
     var w = rank.weights || {};
     var total = (w.award || 0) + (w.fit || 0);
     if (!total) return 0;
-    var worth = ((w.award || 0) * awardValue(rank, call) + (w.fit || 0) * fit) / total;
-    var cost = (rank.effort_cost || {})[call.effort];
+    /* An unread eligibility scores at the configured unknown value, exactly as an
+       unread award does: a missing record neither flatters nor punishes a call,
+       and the card marks it missing either way. */
+    var fitScore = fit === null ? (rank.unknown_fit || 0) : fit;
+    var worth = ((w.award || 0) * awardValue(rank, call) + (w.fit || 0) * fitScore) / total;
+    var costs = rank.effort_cost || {};
+    var cost = effort ? costs[effort] : costs.unknown;
     if (!cost) cost = 1;
     return worth / cost;
   }
@@ -152,19 +188,26 @@
      things rather than one: read off the organisation, read off a named third
      party, or nobody has looked. */
   function provenanceFor(call) {
-    /* `kind` drives the styling hook, `group` is what a reader is shown when
+    /* Reads the record's own per-field provenance rather than a single flag.
+       `kind` drives the styling hook, `group` is what a reader is shown when
        records are counted, `label` is what the card itself says. */
-    if (call.date_basis === "confirmed") {
-      return { kind: "confirmed", group: "confirmed", label: "confirmed " + call.verified };
+    var prov = call.provenance || {};
+    var d = prov.closes || {};
+
+    if (d.basis === "confirmed") {
+      return { kind: "confirmed", group: "confirmed", label: "confirmed " + d.read };
     }
-    if (call.date_basis === "sourced") {
-      return { kind: "sourced", group: "sourced", label: "sourced " + call.verified };
+    if (d.basis === "sourced") {
+      return { kind: "sourced", group: "sourced", label: "sourced " + d.read };
     }
-    if (call.verified) {
+    /* No date. Distinguish "checked, the programme has no open call" from
+       "nobody has looked", because they owe different work. */
+    if (d.from) {
       return { kind: "nocall", group: "no open call", label: "no open call" };
     }
     return { kind: "unsourced", group: "not sourced", label: "date not sourced" };
   }
+
 
   /* Everything the configuration can read through a "derived.*" path. */
   function derive(config, engine, call) {
@@ -177,14 +220,16 @@
     var stage = engine.stage(settled.stage);
 
     var fit = fitFor(config, call);
+    var effort = effortFor(config, call);
 
     return {
       days: days,
       band: band,
       band_order: bandIndex,
       fit: fit,
-      ret: returnOnEffort(config, call, fit),
-      effort_label: call.effort ? call.effort + " effort" : null,
+      ret: returnOnEffort(config, call, fit, effort),
+      effort: effort,
+      effort_label: effort ? effort + " effort" : "effort not derived — requirements not read",
       award_label: awardLabel(call),
       stage_id: settled.stage,
       stage_label: stage ? stage.label : settled.stage,
