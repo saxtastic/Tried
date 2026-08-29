@@ -87,6 +87,16 @@ function check() {
     }
   }
 
+  // P13 — a stacked pull request targets the branch it stacks on
+  for (const p of fleet.projects) {
+    if (!p.inherits || !p.pull_request) continue;
+    const up = project(p.inherits);
+    if (up && p.pull_request_base && p.pull_request_base !== up.branch) {
+      add("P13", "error", `${p.id} → PR #${p.pull_request}`,
+        `targets ${p.pull_request_base} but stacks on ${up.id} (${up.branch}); its diff shows ${up.id}'s work as its own`);
+    }
+  }
+
   // P9 — no product claim without a record behind it
   for (const p of fleet.projects) {
     const sells = (p.vantages_held ?? []).includes("content-marketing") || p.survival?.produces_artifact;
@@ -262,6 +272,15 @@ function plan(findings) {
         tool: "create_trigger",
         args: { name: `${p.id} re-survey`, persistent_session_id: "<the builder session>", cron_expression: "<cadence, UTC>" },
         note: "Bind after the subtree exists; a Routine firing into an empty surface is noise.",
+      });
+    }
+    if (f.rule === "P13") {
+      const p = project(f.subject.split(" \u2192 ")[0]);
+      actions.push({
+        why: f.detail,
+        tool: "update_pull_request — the owning session's call, not the operator's",
+        args: { pullNumber: p.pull_request, base: project(p.inherits).branch },
+        note: "One field. Retargeting someone else's PR changes what their reviewers see, so relay it rather than doing it.",
       });
     }
     if (f.rule === "P1" || f.rule === "P2") {
