@@ -80,6 +80,12 @@
       "by": "session_01GvNCLtH3R2cqohRaUwqKek",
       "method": "check-in: repeat measurement 4x in this harness, PR base check via API, local merge-tree on both siblings",
       "register": "O"
+    },
+    {
+      "at": "2026-08-30T15:58:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "check-in: local merge-tree on both siblings, fleet check and check-propose run in a worktree on the fellowships branch",
+      "register": "O"
     }
   ],
   "environments": [
@@ -425,6 +431,13 @@
       "action": "build — owner chose per-project fragments",
       "target": "fleet/projects/, package.json",
       "result": "Projects split into five fragments assembled at read time; verified byte-equivalent to the array it replaced. package.json scripts sorted with an assertion to keep them so. Honest limit: this does NOT clear the current PR #2 conflict. Both siblings still carry the old array, so the migration merge conflicts once more on fleet.json — the split makes that the LAST conflict on that file, not the zeroth. Relayed to both.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-30T15:58:00Z",
+      "action": "verify — migration complete",
+      "target": "per-project fragments",
+      "result": "Both siblings merged c789eae and dropped the projects array within the hour. Both pull requests now merge CLEAN against the venue head — the migration conflict was the last one on that file, which is what the split was bought for. Verified in a worktree on the fellowships branch: ZERO errors, P9 cleared through its own merge with the catalogue_provenance carried into fleet/projects/fellowships.json, P8 now correctly a warning because PR #2 is stacked, and all check-propose assertions pass there including the two-run byte comparison. The simulator's fragments are byte-identical to the venue's; only the fellowships fragment diverges, carrying its own declaration, and under P16 that is theirs to hold. It was not copied here — P9 stays red on this branch until PR #2 merges, which is the same call made and honoured three times now.",
       "register": "O"
     }
   ],
