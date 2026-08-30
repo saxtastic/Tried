@@ -1,0 +1,40 @@
+{
+  "id": "PROP-CATALOGUE",
+  "title": "Generate catalogue listings from the open-calls records",
+  "industry": "arts and fellowship funding",
+  "design": "A listing per opportunity, extracted from its record, published to a storefront.",
+  "officer": "producer",
+  "specificity": "local",
+  "hypothesis": "A catalogue can be generated from these records today without publishing a claim that cannot be traced.",
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "Every published field extracts from a named record or is emitted blank.",
+      "premises": ["CM-P1", "CM-P2"],
+      "prior": 0.9,
+      "range": [0.8, 0.97]
+    },
+    {
+      "id": "A2",
+      "statement": "The cost of a blank field stays bounded to one conversation.",
+      "premises": ["PRD-P2"],
+      "prior": 0.8,
+      "range": [0.6, 0.95]
+    },
+    {
+      "id": "A3",
+      "statement": "Enough records carry sourced obligations for a listing to be worth publishing at all.",
+      "premises": ["PRD-P1"],
+      "prior": 0.4,
+      "range": [0.3, 0.55],
+      "note": "6 of 16. This is the assumption the whole proposal turns on and it is the weakest."
+    }
+  ],
+  "simulation": {
+    "seed": 20260829,
+    "runs": 20000,
+    "thresholds": { "in_favor": 0.8, "nullified": 0.2 }
+  },
+  "verdict": null,
+  "register": "A"
+}

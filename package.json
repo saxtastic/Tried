@@ -4,16 +4,18 @@
   "version": "0.1.0",
   "description": "ayeyoty.co — the venue and its subtrees: fleet, and the fellowships open-calls reference",
   "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "npm run build && wrangler deploy",
     "build": "node scripts/build-registry.mjs",
-    "icons": "python3 scripts/make-icons.py",
+    "check": "npm run check:data && npm run check:tiers && npm run check:vantage && npm run check:propose",
+    "check:data": "node scripts/build-registry.mjs --check && node scripts/check-registry.mjs",
+    "check:propose": "node scripts/check-propose.mjs",
+    "check:tiers": "node scripts/check-tiers.mjs",
+    "check:vantage": "node scripts/check-vantage.mjs",
+    "deploy": "npm run build && wrangler deploy",
+    "dev": "wrangler dev",
     "fleet": "node scripts/fleet.mjs all",
     "fleet:render": "node scripts/fleet.mjs render",
-    "check": "npm run check:data && npm run check:tiers && npm run check:vantage",
-    "check:data": "node scripts/build-registry.mjs --check && node scripts/check-registry.mjs",
-    "check:tiers": "node scripts/check-tiers.mjs",
-    "check:vantage": "node scripts/check-vantage.mjs"
+    "icons": "python3 scripts/make-icons.py",
+    "propose": "node scripts/propose.mjs"
   },
   "devDependencies": {
     "playwright": "1.56.0",

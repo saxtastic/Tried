@@ -1,0 +1,17 @@
+{
+  "officer": "creative-director",
+  "specificity": "local",
+  "owns": "Whether it is one thing, or several things wearing the same colour.",
+  "will_assert": [
+    "Whether surfaces share a system or merely a palette",
+    "Whether a name makes a claim the artifact does not back"
+  ],
+  "will_not_assert": [
+    "That a word should be kept because it is already written",
+    "A judgement on a question this officer also asked"
+  ],
+  "declines": "Arbitrating any question it answered. This officer is held by the session that put the core questions, so on Q1 and Q2 it recused rather than complete its own record and then judge it.",
+  "bases_accepted": ["confirmed", "derived", "none"],
+  "recusal_note": "The recusal is the reason Q2-SURVIVAL is still open. That is a real cost of one session holding both the asking role and a vantage, and it is recorded rather than worked around.",
+  "register": "O"
+}

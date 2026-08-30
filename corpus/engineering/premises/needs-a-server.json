@@ -1,0 +1,13 @@
+{
+  "id": "ENG-P2",
+  "officer": "engineering",
+  "specificity": "instance",
+  "statement": "The simulator does not run from file:// and requires a static file server.",
+  "basis": "confirmed",
+  "measured_by": "session_01HCcyjiDYBhyRWFnL1qrKWB",
+  "reproduce": "open public/simulator/index.html directly from disk",
+  "derived_from": null,
+  "confidence": [0.9, 1.0],
+  "corrects": "An earlier fleet.json entry claimed the simulator runs offline. It does not.",
+  "register": "D"
+}
