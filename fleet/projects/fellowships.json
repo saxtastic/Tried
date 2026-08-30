@@ -1,0 +1,36 @@
+{
+  "id": "fellowships",
+  "name": "Applications and fellowships subtree",
+  "repo": "saxtastic/Tried",
+  "base_branch": "claude/ios-macos-code-repurpose-ofm9ks",
+  "branch": "claude/apps-fellowships-repository-zlwbft",
+  "pull_request": 2,
+  "owns": [
+    "public/fellowships/*",
+    "fellowships/*"
+  ],
+  "ritual": true,
+  "ritual_note": "Open calls are re-surveyed and re-ranked on a cadence. Requires a Routine; none exists yet.",
+  "state": "review",
+  "register": "D",
+  "note": "Subtree opening from the main module. Deadline foresight is the primary lens, ranked by return on effort. Base branch was redirected from the placeholder to the venue branch on 2026-08-29 so it inherits the shell rather than conflicting with it.",
+  "inherits": "venue",
+  "source_revision": "claude/cloudflare-ayeyoty-setup-uq8pl9",
+  "source_note": "Resolved. The session merged the venue branch rather than rebasing onto it, which is what the fixed source revision allows. PR #2 is stacked on PR #1.",
+  "merged_upstream": "ceed090 — merged the venue branch including the arbitrations and P13",
+  "vantages_held": [
+    "producer",
+    "content-marketing"
+  ],
+  "survival": {
+    "duration": "recurring — deadlines re-survey on a cadence, so it outlives any one cycle",
+    "survives_gallery": "yes — a deadline exists whether or not anything is on a wall",
+    "irl_contingency": "the calls are external and dated; the surface can go dark without the opportunities disappearing",
+    "produces_artifact": false
+  },
+  "claims_note": "Declared by the fellowships session itself under P8 at b13d6bb, with its own reasoning: PR #2 is stacked on PR #1 so the venue merges first by construction, and it deliberately reverted an earlier change to public/venue.css rather than claim it.",
+  "pull_request_base": "claude/ios-macos-code-repurpose-ofm9ks",
+  "conflict": "PR #2 head 773781d conflicts with its base at b40289d on fleet/questions.json. Textual, not semantic: the venue's copy is a strict superset — every PR #2 answer object present verbatim, rules/vantages/note/question text byte-identical. Relayed 2026-08-29T22:32Z with the resolution (take the base copy).",
+  "catalogue_provenance_status": "Closed by the fellowships session at fbf5fae and verified in a worktree: P9 no longer fires, `check-registry` asserts 'effort is derived from declared requirement weights', no record stores an effort field, and all 16 summaries are blanked rather than kept as unsourced prose.",
+  "_owner_note": "This file is owned by the project it describes. The venue assembles it and never edits another project's copy; a sibling edits only its own. That is the whole point of the split."
+}

@@ -4,17 +4,17 @@
   "version": "0.1.0",
   "description": "ayeyoty.co technovenue \u2014 an Apple-device-first static site on Cloudflare Workers",
   "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy",
+    "build:corpus": "node scripts/build-corpus.mjs",
     "check": "node scripts/check-tiers.mjs",
+    "check:propose": "node scripts/check-propose.mjs",
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
     "fleet": "node scripts/fleet.mjs all",
     "fleet:render": "node scripts/fleet.mjs render",
     "icons": "python3 scripts/make-icons.py",
     "propose": "node scripts/propose.mjs",
-    "check:propose": "node scripts/check-propose.mjs",
     "sim": "node sim/cli.mjs",
     "test": "node --test \"test/**/*.test.mjs\"",
-    "build:corpus": "node scripts/build-corpus.mjs",
     "verify": "node sim/verify.mjs"
   },
   "devDependencies": {

@@ -27,6 +27,18 @@ const SPINE = path.join(ROOT, "fleet", "fleet.json");
 const OUT = path.join(ROOT, "public", "fleet", "index.html");
 
 const fleet = JSON.parse(fs.readFileSync(SPINE, "utf8"));
+
+/* Projects are assembled from fleet/projects/, one file per project, rather
+   than held as an array in the spine. They were an array until three merge
+   conflicts landed on it in a row: two branches each holding a copy of the same
+   record diverge on every push, and resolving by ownership each time is a cost
+   that recurs forever. Split, a sibling touches only its own file and there is
+   nothing to conflict on. Sorted by filename so assembly order is stable. */
+const PROJECTS = path.join(ROOT, "fleet", "projects");
+fleet.projects = fs.existsSync(PROJECTS)
+  ? fs.readdirSync(PROJECTS).filter((f) => f.endsWith(".json")).sort()
+      .map((f) => JSON.parse(fs.readFileSync(path.join(PROJECTS, f), "utf8")))
+  : (fleet.projects ?? []);
 const QUESTIONS = path.join(ROOT, "fleet", "questions.json");
 const core = fs.existsSync(QUESTIONS) ? JSON.parse(fs.readFileSync(QUESTIONS, "utf8")) : { questions: [], vantages: {}, rules: [] };
 
@@ -84,6 +96,22 @@ function check() {
     if (upstream && p.inherits !== upstream.id) {
       add("P2", "error", p.id,
         `base branch ${p.base_branch} is still being pushed to by ${upstream.id}; declare "inherits": "${upstream.id}"`);
+    }
+  }
+
+  // P16 — a project fragment is named for the project it describes
+  if (fs.existsSync(PROJECTS)) {
+    for (const f of fs.readdirSync(PROJECTS).filter((x) => x.endsWith(".json"))) {
+      const id = f.replace(/\.json$/, "");
+      const data = JSON.parse(fs.readFileSync(path.join(PROJECTS, f), "utf8"));
+      if (data.id !== id) {
+        add("P16", "error", f, `declares id "${data.id}"; a fragment is written only by the project it names, and the filename is how that is enforced`);
+      }
+    }
+    const seen = new Set();
+    for (const p of fleet.projects) {
+      if (seen.has(p.id)) add("P16", "error", p.id, "two fragments describe the same project — the split exists so exactly one does");
+      seen.add(p.id);
     }
   }
 

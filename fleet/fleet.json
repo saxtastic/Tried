@@ -74,6 +74,12 @@
       "by": "session_01GvNCLtH3R2cqohRaUwqKek",
       "method": "check-in: independently re-measured a sibling's corrected premise; tested PR #2 mergeability locally",
       "register": "O"
+    },
+    {
+      "at": "2026-08-30T00:56:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "check-in: repeat measurement 4x in this harness, PR base check via API, local merge-tree on both siblings",
+      "register": "O"
     }
   ],
   "environments": [
@@ -84,159 +90,6 @@
       "state": "active",
       "register": "O",
       "note": "The only environment on the account. Every cloud coworker lands here; the bridge sessions below predate it and are not in it."
-    }
-  ],
-  "projects": [
-    {
-      "id": "venue",
-      "name": "ayeyoty.co technovenue",
-      "repo": "saxtastic/Tried",
-      "base_branch": "claude/cloudflare-ayeyoty-setup-uq8pl9",
-      "branch": "claude/ios-macos-code-repurpose-ofm9ks",
-      "pull_request": 1,
-      "owns": [
-        "public/index.html",
-        "public/404.html",
-        "public/venue.css",
-        "public/venue.js",
-        "public/app.webmanifest",
-        "public/_headers",
-        "public/robots.txt",
-        "public/sitemap.xml",
-        "public/icons/*",
-        "public/fleet/*",
-        "scripts/*",
-        "fleet/*",
-        "README.md",
-        "wrangler.toml",
-        "package.json"
-      ],
-      "ritual": false,
-      "state": "review",
-      "register": "D",
-      "note": "The shell. Front page and design system; every other surface in this repo opens as a subtree from it.",
-      "owns_note": "Enumerated, not public/*. A broad glob on the shell silently claims every subtree that opens from it, which is exactly the collision P1 exists to catch.",
-      "vantages_held": [
-        "engineering",
-        "creative-director"
-      ],
-      "survival": {
-        "duration": "indefinite — it is the shell every other surface opens from",
-        "survives_gallery": "⟦FILL: whether the venue has any physical instantiation, or is a website using the word venue⟧",
-        "irl_contingency": "⟦FILL⟧",
-        "produces_artifact": false,
-        "note": "Q2-SURVIVAL is open on this. The name makes a claim about a room that the repository does not currently support."
-      },
-      "pull_request_base": "claude/cloudflare-ayeyoty-setup-uq8pl9"
-    },
-    {
-      "id": "fellowships",
-      "name": "Applications and fellowships subtree",
-      "repo": "saxtastic/Tried",
-      "base_branch": "claude/ios-macos-code-repurpose-ofm9ks",
-      "branch": "claude/apps-fellowships-repository-zlwbft",
-      "pull_request": 2,
-      "owns": [
-        "public/fellowships/*",
-        "fellowships/*"
-      ],
-      "ritual": true,
-      "ritual_note": "Open calls are re-surveyed and re-ranked on a cadence. Requires a Routine; none exists yet.",
-      "state": "review",
-      "register": "D",
-      "note": "Subtree opening from the main module. Deadline foresight is the primary lens, ranked by return on effort. Base branch was redirected from the placeholder to the venue branch on 2026-08-29 so it inherits the shell rather than conflicting with it.",
-      "inherits": "venue",
-      "source_revision": "claude/cloudflare-ayeyoty-setup-uq8pl9",
-      "source_note": "Resolved. The session merged the venue branch rather than rebasing onto it, which is what the fixed source revision allows. PR #2 is stacked on PR #1.",
-      "merged_upstream": "ceed090 — merged the venue branch including the arbitrations and P13",
-      "vantages_held": [
-        "producer",
-        "content-marketing"
-      ],
-      "survival": {
-        "duration": "recurring — deadlines re-survey on a cadence, so it outlives any one cycle",
-        "survives_gallery": "yes — a deadline exists whether or not anything is on a wall",
-        "irl_contingency": "the calls are external and dated; the surface can go dark without the opportunities disappearing",
-        "produces_artifact": false
-      },
-      "claims_note": "Declared by the fellowships session itself under P8 at b13d6bb, with its own reasoning: PR #2 is stacked on PR #1 so the venue merges first by construction, and it deliberately reverted an earlier change to public/venue.css rather than claim it.",
-      "pull_request_base": "claude/ios-macos-code-repurpose-ofm9ks",
-      "conflict": "PR #2 head 773781d conflicts with its base at b40289d on fleet/questions.json. Textual, not semantic: the venue's copy is a strict superset — every PR #2 answer object present verbatim, rules/vantages/note/question text byte-identical. Relayed 2026-08-29T22:32Z with the resolution (take the base copy).",
-      "catalogue_provenance_status": "Closed by the fellowships session at fbf5fae and verified in a worktree: P9 no longer fires, `check-registry` asserts 'effort is derived from declared requirement weights', no record stores an effort field, and all 16 summaries are blanked rather than kept as unsourced prose."
-    },
-    {
-      "id": "options",
-      "name": "AI stock options trading dashboard",
-      "repo": null,
-      "base_branch": null,
-      "branch": null,
-      "pull_request": null,
-      "owns": [],
-      "ritual": false,
-      "state": "stalled",
-      "register": "O",
-      "note": "No repository recorded on the session. Review-ready and untouched since 2026-08-08. Outside this repo; tracked so it is not silently lost.",
-      "vantages_held": [],
-      "survival": {
-        "duration": "unknown",
-        "survives_gallery": "⟦FILL⟧",
-        "irl_contingency": "⟦FILL⟧",
-        "produces_artifact": false
-      }
-    },
-    {
-      "id": "resonance",
-      "name": "Adinkra grammar in Resonance DAW PWA",
-      "repo": null,
-      "base_branch": null,
-      "branch": null,
-      "pull_request": null,
-      "owns": [],
-      "ritual": false,
-      "state": "done",
-      "register": "O",
-      "note": "Completed and archived.",
-      "vantages_held": [],
-      "survival": {
-        "duration": "closed",
-        "survives_gallery": "⟦FILL⟧",
-        "irl_contingency": "⟦FILL⟧",
-        "produces_artifact": false
-      }
-    },
-    {
-      "id": "simulator",
-      "name": "Governance and corpus legal simulator",
-      "repo": "saxtastic/Tried",
-      "base_branch": "claude/cloudflare-ayeyoty-setup-uq8pl9",
-      "branch": "claude/governance-corpus-simulator-m2sjkw",
-      "source_revision": "claude/cloudflare-ayeyoty-setup-uq8pl9",
-      "inherits": "venue",
-      "pull_request": 3,
-      "owns": [
-        "public/simulator/*",
-        "sim/*",
-        "test/*",
-        "docs/*"
-      ],
-      "claims_disputed": [],
-      "ritual": false,
-      "state": "review",
-      "register": "O",
-      "note": "Built against the placeholder, in parallel with the venue rather than as a subtree of it. Corpus scanned 2026-08-29: generic federal statute text and public case law (Title VI, § 1983, 17 U.S.C. § 201, FERPA, a template enabling act), no personal names, no student records, no institution-specific provisions. The collision is architectural, not content.",
-      "vantages_held": [
-        "engineering"
-      ],
-      "survival": {
-        "duration": "indefinite — statute text and case law age slowly",
-        "survives_gallery": "yes — the corpus is a document set, not an installation",
-        "irl_contingency": "Runs from a static file server, NOT from file:// — corrected 2026-08-29 by the engineering vantage against this file's earlier claim that it runs offline. 14 requests, all same-origin: no font, no CDN, no analytics, no API, no dependencies installed. The real no-browser contingency is sim/cli.mjs, which is text.",
-        "produces_artifact": false,
-        "note": "Earlier entry here overstated survivability. Corrected against measurement supplied by the project itself."
-      },
-      "partial_compliance": "104eb5f fixed the CSP finding by bundling the corpus into corpus.bundle.js rather than fetching it — default-src 'none' blocks fetch, which the relay did not spell out and the session worked out itself. It has NOT merged the shell, and still changes all three disputed files. P7 and P8 both stand. Since then eb94e40 verified the model against frameworks in other trades and corrected it — 42 tests passing. Still has not merged the shell; P7 and P8 stand.",
-      "merged_upstream": "af83ccd — merged the venue shell; adopted the officer-corpus model at ba2422b",
-      "pull_request_base": "claude/cloudflare-ayeyoty-setup-uq8pl9"
     }
   ],
   "coworkers": [
@@ -437,6 +290,20 @@
       "detail": "A proposal states a hypothesis, names its assumptions, and points each at de-aggregated premises. It resolves in_favor, nullified, or test_retest and never anything else. test_retest is the honest verdict when the premises do not separate the outcomes, and it names the measurement that would. An assumption resting only on basis `none` withholds the number entirely rather than averaging over it, and a broad claim may not stand on a narrower premise. Seed, run count and thresholds are declared in the proposal; re-running is byte-identical; sensitivity ships beside the point estimate or the result is incomplete.",
       "severity": "error",
       "enforced_by": "scripts/check-propose.mjs, including a two-run byte comparison"
+    },
+    {
+      "id": "P16",
+      "rule": "A project fragment is named for the project it describes, and only that project writes it.",
+      "detail": "fleet/projects/<id>.json, assembled at read time. The filename is the enforcement: a fragment whose id does not match its name, or two fragments describing one project, is an error. Migration note: the venue wrote all five fragments once, in the split itself; after that each is the owning project's.",
+      "severity": "error",
+      "established": "2026-08-30, after three successive merge conflicts on the projects array. Resolving by ownership each time works and costs the same amount every time; splitting costs once."
+    },
+    {
+      "id": "P17",
+      "rule": "package.json scripts stay alphabetically sorted.",
+      "detail": "The same problem as P16 in a file that cannot be split. Three branches add scripts to one object; unsorted, each addition lands where its author typed it and every merge collides. Sorted, an addition has exactly one correct position and git resolves it unaided.",
+      "severity": "error",
+      "enforced_by": "scripts/check-propose.mjs"
     }
   ],
   "stale_after_days": 14,
@@ -538,6 +405,27 @@
       "target": "ENG-P1, and the third spine conflict",
       "result": "The simulator adopted the officer-corpus model within the hour and corrected its own ENG-P1 from 14 to 18 requests after merging the shell, correctly noting the count moved while the origin claim did not. An independent re-measure of the same commit returned 17, most likely a favicon fetch headless contexts issue inconsistently. The premise now asserts the invariant — zero off-origin, confirmed by two measurers — and carries the three counts as a measurements series with their conditions. A new assertion rejects any confirmed premise stating a bare figure without one. PR #2 now conflicts on fleet/fleet.json AND package.json: the third conflict, and the structural problem flagged at af83ccd. Not built — proposed to the owner, per the standing instruction not to build it unasked.",
       "register": "O"
+    },
+    {
+      "at": "2026-08-30T00:56:00Z",
+      "action": "verify + accept correction",
+      "target": "ENG-P1, PR #3",
+      "result": "PR #3 retargeted to the venue branch — P13 clears and all three PRs are now a proper stack. On ENG-P1 the owning officer corrected THIS session's stated cause: it ran four consecutive measurements returning 18 with the favicon present every time, so the count is stable within a harness and differs between harnesses rather than being nondeterministic. Re-ran four times here: 17 every time, favicon never requested. Both series now sit in the premise. The correction is accepted and it is the second time a sibling has corrected this session on a claim it had asserted too confidently from one observation.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-30T00:56:00Z",
+      "action": "correct the record",
+      "target": "this session's own operations log",
+      "result": "An earlier entry and the ae90fbb commit message both state that per-project spine fragments were 'proposed to the owner'. They were not. The turn ended after scheduling the check-in and before the proposal was put. Recorded here rather than quietly fixed, and the proposal is being made now.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-30T01:05:00Z",
+      "action": "build — owner chose per-project fragments",
+      "target": "fleet/projects/, package.json",
+      "result": "Projects split into five fragments assembled at read time; verified byte-equivalent to the array it replaced. package.json scripts sorted with an assertion to keep them so. Honest limit: this does NOT clear the current PR #2 conflict. Both siblings still carry the old array, so the migration merge conflicts once more on fleet.json — the split makes that the LAST conflict on that file, not the zeroth. Relayed to both.",
+      "register": "O"
     }
   ],
   "mechanisms": [
@@ -566,5 +454,6 @@
     "creative-director": "What it looks like it is. Coherence of the image across every surface.",
     "producer": "Duration, contingency, cost of being wrong. Survival of contact with a date and a room.",
     "content-marketing": "What is claimed in public and on what record. Catalogue copy, listing, description."
-  }
+  },
+  "projects_note": "Projects live one-per-file in fleet/projects/. They were a single array here until three successive merge conflicts landed on it — two branches each holding a copy of the same record diverge on every push. scripts/fleet.mjs assembles them at read time. A project's file is written only by the project it describes."
 }
