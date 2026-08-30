@@ -195,7 +195,70 @@ tally in any source. The field exists because leaving them out would let the
 book's own structure — one entry, one incident, one disposition — do the same
 work of erasure that the tallies do.
 
-## 6. "Unpunished" is derived, not asserted
+## 6. Transmitted harm
+
+`harmed.interstitial` records what falls between events within one generation.
+`harmed.transmitted` records what outlives it.
+
+These are different, and the second is the hardest thing in this book to
+establish and the easiest to overstate. So the standing of the claim is recorded
+**on the claim itself**:
+
+| Standing | Meaning |
+| --- | --- |
+| `documented` | Established by record: title transferred and never disturbed, a population displaced and kept out, wealth destroyed and not rebuilt, measured effects in later research. |
+| `argued_in_literature` | Advanced in a scholarly or clinical framework. Recorded as an argument, with its proponents named, and **never converted into a finding**. |
+| `contested` | The literature is in open disagreement. |
+
+Anything other than `documented` requires a note saying whose argument it is and
+that the book does not adopt it. The validator enforces that, and further
+requires that a claim standing as `argued_in_literature` actually cite a
+`clinical_research` vantage — the argument must be attributable to someone.
+
+Five entries carry documented transmission. One carries an argued one.
+
+### Post Traumatic Slave Syndrome
+
+Joy DeGruy's *Post Traumatic Slave Syndrome: America's Legacy of Enduring Injury
+and Healing* (2005; revised 2017) is the framework this field was added to hold.
+Her argument is that multigenerational trauma from chattel slavery together with
+continuing oppression, absent any opportunity to heal, produces adaptive survival
+behaviours that outlive the conditions requiring them — she names vacant esteem,
+ever-present anger, and racist socialisation.
+
+It is entered on the chattel enslavement complaint as `argued_in_literature`,
+with a `clinical_research` vantage, and the note says plainly what it is: an
+influential and widely taught framework, used in clinical and community practice,
+which is **not** a diagnostic category in the DSM, and which draws on an
+intergenerational-transmission literature that is in part actively contested.
+
+That is not a hedge and it is not a demotion. It is the same rule that governs
+every other entry, applied to the hardest case. The book records an established
+killing as a killing because the evidence establishes it, and records a
+theoretical framework as a framework because that is what it is. A record that
+inflated the second would forfeit the standing that lets it insist on the first.
+
+The value of the framework to this instrument is that it names an injury the
+rest of the schema could not see. Every other field here assumes a harm with a
+date, a place, and a person it happened to. DeGruy's subject is the harm that has
+none of those and is real anyway — which is exactly the harm a claimant is least
+able to plead and a forum least able to hear.
+
+### What could not be retrieved
+
+The bibliography of the monograph, and a complete list of DeGruy's published
+articles and instruments, **could not be retrieved**: this session has no network
+egress and every host returns 403 at the proxy, NARA's catalogue API included.
+
+`SRC-HISTORICAL-TRAUMA-LIT` records the scholarly field her work sits within —
+Brave Heart on historical trauma, Duran and Duran on the soul wound, Danieli's
+handbook of multigenerational legacies, Yehuda on biological correlates, Akbar,
+the Clarks, Du Bois, Fanon. **That entry is a lineage, not a bibliography.** It
+was assembled from knowledge of the field, not retrieved, and it is not a
+reconstruction of what DeGruy cites. It is marked as such in the manifest and
+must not be presented otherwise. Pull the actual citations from the book's notes.
+
+## 7. "Unpunished" is derived, not asserted
 
 `process.outcome` records what the legal system actually did:
 
@@ -220,7 +283,7 @@ injuries while leaving the other untouched, and the book counts it that way.
 `scripts/validate.mjs` recomputes the field and fails the build on any
 disagreement, so the claim in the title of this book cannot drift from its data.
 
-## 7. Identity: who is in the register, and on what terms
+## 8. Identity: who is in the register, and on what terms
 
 The hardest question this book answers is what to do with a person whose injury
 is recorded and whose name is not.
@@ -270,7 +333,7 @@ carries them with its own citation. These are quotations from documents, not
 reconstructions. **The book never composes speech for the dead.** If no words
 survive, the field is absent — an absence that is itself part of the record.
 
-## 8. Impediments
+## 9. Impediments
 
 `data/impediments.json` catalogs the mechanisms that converted a crime into a
 non-crime: doctrines of personhood and jurisdiction, immunities, evidentiary and
@@ -289,7 +352,7 @@ book exists to show becomes legible: the same handful of doctrines, mostly about
 who may hear a claim rather than whether the injury occurred, recurring across a
 century and a half.
 
-## 9. Officials acting beyond their role
+## 10. Officials acting beyond their role
 
 A recurring classification is `official_participation` — conduct by sheriffs,
 deputies, jailers, guardsmen, and physicians acting under color of law and
@@ -301,7 +364,7 @@ defenses, and immunities differ, and because an officer exceeding the statute of
 their role is the case in which the state is both the injurer and the only
 available forum.
 
-## 10. Sources
+## 11. Sources
 
 `data/archives.json` is a manifest of the corpora this work draws on, with
 locator URLs and access terms. Public-domain texts can be fetched on demand with

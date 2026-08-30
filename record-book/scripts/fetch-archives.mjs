@@ -7,6 +7,9 @@
 //   node record-book/scripts/fetch-archives.mjs SRC-WELLS-RED-RECORD
 //   node record-book/scripts/fetch-archives.mjs --list
 //   node record-book/scripts/fetch-archives.mjs --check    # resolve locators only
+//
+// The National Archives catalogue is a JSON API. Set NARA_API_KEY for sustained
+// use and NARA_QUERY to change the search; results are saved as .json.
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -58,7 +61,10 @@ for (const a of targets) {
     continue;
   }
 
-  const dest = join(CORPUS, `${a.id}.html`);
+  // The NARA catalogue is a JSON API, not a page: save it as .json and pass a
+  // query through so the fetch returns records rather than an empty envelope.
+  const isApi = a.kind === 'catalog_api';
+  const dest = join(CORPUS, `${a.id}.${isApi ? 'json' : 'html'}`);
   if (!check && existsSync(dest)) {
     console.log(`  have   ${a.id}`);
     ok++;
@@ -66,10 +72,16 @@ for (const a of targets) {
   }
 
   try {
-    const res = await fetch(a.url, {
+    const target = isApi
+      ? `${a.url}?q=${encodeURIComponent(process.env.NARA_QUERY ?? 'Freedmen\'s Bureau')}&limit=25`
+      : a.url;
+    const res = await fetch(target, {
       method: check ? 'HEAD' : 'GET',
       redirect: 'follow',
-      headers: { 'user-agent': 'record-book/0.1 (archival research; contact via repository)' },
+      headers: {
+        'user-agent': 'record-book/0.1 (archival research; contact via repository)',
+        ...(isApi && process.env.NARA_API_KEY ? { 'x-api-key': process.env.NARA_API_KEY } : {}),
+      },
     });
     if (!res.ok) {
       console.log(`  FAIL   ${a.id} — HTTP ${res.status} ${a.url}`);
@@ -77,7 +89,7 @@ for (const a of targets) {
       continue;
     }
     if (check) {
-      console.log(`  ok     ${a.id} — ${res.status} ${a.url}`);
+      console.log(`  ok     ${a.id} — ${res.status} ${target}`);
       ok++;
       continue;
     }

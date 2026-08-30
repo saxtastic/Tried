@@ -22,7 +22,7 @@ export const OUTCOMES = {
   unresolved: 'Investigation opened and never closed',
 };
 
-// METHODOLOGY.md section 6: unpunished is derived. Only a sustained criminal
+// METHODOLOGY.md section 7: unpunished is derived. Only a sustained criminal
 // conviction of a perpetrator counts as punishment. Settlements, apologies and
 // exonerations of the victim do not.
 export const isUnpunished = (outcome) => outcome !== 'convicted';
@@ -73,6 +73,22 @@ export const VANTAGE = {
   statistical_series: 'A maintained tally.',
   memoir: 'Recollection, written later.',
   scholarship: 'Later research.',
+  government_record: 'Held by the agency that produced it.',
+  congressional_testimony: 'Sworn testimony taken by a legislature.',
+  oral_history: 'Collected later from those who lived it.',
+  material_record: 'The object, site, or memorial itself.',
+  genealogical_record: 'Descent reconstructed from records of sale, census, and probate.',
+  clinical_research: 'Clinical or psychological research. A framework, not a finding - see TRANSMISSION.',
+};
+
+// TRANSMISSION: harm that outlives the harmed generation. Distinct from
+// interstitial harm, which falls between events within one. The standing of a
+// transmission claim is recorded on the claim itself, because this is the
+// hardest thing in the book to establish and the easiest to overstate.
+export const TRANSMISSION = {
+  documented: 'Established by record: title transferred, population displaced, wealth destroyed, measured effects.',
+  argued_in_literature: 'Advanced in a scholarly or clinical framework. Recorded as an argument with its proponents named, never converted into a finding.',
+  contested: 'The literature is in open disagreement.',
 };
 
 // Naming: the book reports whom the sources accuse, with provenance. It never
@@ -170,6 +186,24 @@ export function validate() {
     }
     if (!c.conduct) err(at, 'missing conduct');
 
+    const tr = c.harmed?.transmitted;
+    if (tr) {
+      if (!(tr.standing in TRANSMISSION)) {
+        err(at, `harmed.transmitted.standing "${tr.standing}" is not one of ` +
+                Object.keys(TRANSMISSION).join(', '));
+      }
+      if (!tr.description) err(at, 'harmed.transmitted must describe the harm');
+      // An argued claim must say who argues it and that it is not a finding.
+      if (tr.standing !== 'documented' && !tr.note) {
+        err(at, `harmed.transmitted.standing is "${tr.standing}" but no note states ` +
+                'whose argument it is and that the book does not adopt it');
+      }
+      const hasClinical = (c.citations ?? []).some((x) => x.vantage === 'clinical_research');
+      if (tr.standing === 'argued_in_literature' && !hasClinical) {
+        err(at, 'transmitted harm is argued_in_literature but no clinical_research vantage is cited');
+      }
+    }
+
     ref(at, 'harmed.persons', c.harmed?.persons, personIds, 'person');
     ref(at, 'impediments', c.impediments, impedimentIds, 'impediment');
     ref(at, 'citations', (c.citations ?? []).map((x) => x.source), archiveIds, 'archive');
@@ -228,7 +262,7 @@ export function validate() {
     if (!STANDING.includes(p.standing)) {
       err(at, `standing "${p.standing}" is not one of ${STANDING.join(', ')}`);
     }
-    // METHODOLOGY.md section 7: a count is a count and must say so; an
+    // METHODOLOGY.md section 8: a count is a count and must say so; an
     // individuated person is never carried as a number.
     if (p.identity_status === 'collectively_recorded' && !p.count) {
       err(at, 'collectively_recorded rows must carry a count');
@@ -243,7 +277,7 @@ export function validate() {
       err(at, 'name_unrecorded rows must state what attests the person\'s existence');
     }
     if (!p.consent_note) {
-      err(at, 'missing consent_note (METHODOLOGY.md section 7)');
+      err(at, 'missing consent_note (METHODOLOGY.md section 8)');
     }
     if (p.voice?.source && !archiveIds.has(p.voice.source)) {
       err(at, `voice.source references unknown archive "${p.voice.source}"`);
@@ -310,6 +344,9 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const restored = complaints.filter((c) => isMateriallyRestored(c.restoration.forms)).length;
   const nothing = complaints.filter((c) => !c.restoration.forms.length).length;
   const named = complaints.filter((c) => (c.respondents?.named ?? []).length).length;
+  const transmitted = complaints.filter((c) => c.harmed?.transmitted).length;
+  const argued = complaints.filter(
+    (c) => c.harmed?.transmitted && c.harmed.transmitted.standing !== 'documented').length;
 
   for (const w of warnings) console.warn(`  warn  ${w}`);
   for (const e of errors) console.error(`  ERROR ${e}`);
@@ -329,6 +366,10 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     `harmed, ${nothing} produced nothing at all, 0 produced full restitution`
   );
   console.log(`${named} entries name a respondent the sources accuse, each with its provenance`);
+  console.log(
+    `${transmitted} entries record harm that outlives the harmed generation ` +
+    `(${transmitted - argued} documented, ${argued} recorded as argued and not adopted)`
+  );
   console.log(`${errors.length} error(s), ${warnings.length} warning(s)`);
   process.exit(errors.length ? 1 : 0);
 }

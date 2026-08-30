@@ -6,7 +6,7 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { validate, isUnpunished, isMateriallyRestored, OUTCOMES, ACT, ATTRIBUTION,
-         RESTORATION, VANTAGE } from './validate.mjs';
+         RESTORATION, VANTAGE, TRANSMISSION } from './validate.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const OUT = join(ROOT, 'public', 'record-book');
@@ -163,6 +163,14 @@ function renderComplaints({ complaints, persons, impediments }) {
   ${c.harmed?.interstitial ? `<div class="field"><h3>Interstitial harm</h3>
     <p>${esc(c.harmed.interstitial)}</p>
     <p class="meta">What falls between the recorded events, and is counted nowhere.</p>
+  </div>` : ''}
+
+  ${c.harmed?.transmitted ? `<div class="field transmitted"><h3>Transmitted harm
+    <span class="flag flag-trans-${esc(c.harmed.transmitted.standing)}">${
+      esc(c.harmed.transmitted.standing.replace(/_/g, ' '))}</span></h3>
+    <p>${esc(c.harmed.transmitted.description)}</p>
+    <p class="meta">${esc(TRANSMISSION[c.harmed.transmitted.standing])}</p>
+    ${c.harmed.transmitted.note ? `<p class="note">${esc(c.harmed.transmitted.note)}</p>` : ''}
   </div>` : ''}
 
   <div class="field"><h3>Respondents</h3><p>${esc(c.respondents.described)}</p></div>
@@ -468,6 +476,11 @@ main, .masthead, footer { max-width: 46rem; margin: 0 auto; padding: 0 1.25rem; 
 .axis-rest-none { color: var(--accent); font-weight: 600; }
 .axis-rest-material { color: #2f5d3f; font-weight: 600; }
 @media (prefers-color-scheme: dark) { .axis-rest-material { color: #7fb894; } }
+.transmitted { border-left: 3px solid var(--rule); padding-left: .9rem; }
+.transmitted h3 { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+.flag-trans-argued_in_literature, .flag-trans-contested {
+  outline: 1px dashed var(--warn); color: var(--warn);
+}
 .restoration { border-left: 3px solid var(--rule); padding-left: .9rem; }
 .restoration-none { border-left-color: var(--accent); }
 .restoration ul { margin: .3rem 0; padding-left: 1.2rem; }

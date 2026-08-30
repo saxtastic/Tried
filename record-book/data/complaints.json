@@ -1,5 +1,5 @@
 {
-  "$comment": "Complaint log. process.unpunished is DERIVED - see METHODOLOGY.md section 6 - and is recomputed and checked by scripts/validate.mjs.",
+  "$comment": "Complaint log. process.unpunished is DERIVED - see METHODOLOGY.md section 7 - and is recomputed and checked by scripts/validate.mjs.",
   "complaints": [
     {
       "id": "CL-1857-DRED-SCOTT",
@@ -133,7 +133,12 @@
           "note": "Approximately 3.9 million persons were enslaved in the United States at the 1860 census. The number of persons enslaved across the full period is larger by an order that this book does not estimate."
         },
         "collective": "Enslaved persons in North America and their descendants",
-        "interstitial": "Wealth transferred and still held. Names not preserved and now unrecoverable. Kinship lines severed by sale, which is why descendants of this entry frequently cannot document the ancestry that a claim would require of them."
+        "interstitial": "Wealth transferred and still held. Names not preserved and now unrecoverable. Kinship lines severed by sale, which is why descendants of this entry frequently cannot document the ancestry that a claim would require of them.",
+        "transmitted": {
+          "standing": "argued_in_literature",
+          "description": "Kinship lines severed by sale, so descent cannot be documented by people from whom documentation is now demanded. Wealth transferred and compounding for a further eight generations. And the claim this book cannot itself establish: that trauma sustained across generations without opportunity to heal produces adaptive behaviours that outlive the conditions that required them - DeGruy's vacant esteem, ever-present anger, and racist socialisation.",
+          "note": "Standing is argued_in_literature, not documented. Post Traumatic Slave Syndrome is an influential and widely taught framework and is not a diagnostic category; parts of the transmission literature it draws on are actively contested. The book records the argument and its status, and does not convert it into a finding."
+        }
       },
       "respondents": {
         "described": "Slaveholders; slave traders; sheriffs, patrols, and courts enforcing the slave codes; legislatures enacting them; insurers, banks, and shippers financing the trade",
@@ -205,6 +210,30 @@
         {
           "source": "SRC-FREEDMENS-BUREAU",
           "vantage": "official_investigation"
+        },
+        {
+          "source": "SRC-DEGRUY-PTSS",
+          "vantage": "clinical_research"
+        },
+        {
+          "source": "SRC-HISTORICAL-TRAUMA-LIT",
+          "vantage": "clinical_research"
+        },
+        {
+          "source": "SRC-BEHIND-THE-VEIL",
+          "vantage": "oral_history"
+        },
+        {
+          "source": "SRC-WHITNEY-PLANTATION",
+          "vantage": "material_record"
+        },
+        {
+          "source": "SRC-IAAM-FAMILY-HISTORY",
+          "vantage": "genealogical_record"
+        },
+        {
+          "source": "SRC-NMAAHC",
+          "vantage": "material_record"
         }
       ]
     },
@@ -410,6 +439,14 @@
         {
           "source": "SRC-US-REPORTS",
           "vantage": "judicial_record"
+        },
+        {
+          "source": "SRC-NARA-RG21",
+          "vantage": "government_record"
+        },
+        {
+          "source": "SRC-NARA-KKK-HEARINGS",
+          "vantage": "congressional_testimony"
         }
       ]
     },
@@ -501,6 +538,10 @@
         {
           "source": "SRC-CHRONICLING-AMERICA",
           "vantage": "contemporaneous_press"
+        },
+        {
+          "source": "SRC-NATIONAL-CIVIL-RIGHTS-MUSEUM",
+          "vantage": "material_record"
         }
       ]
     },
@@ -586,6 +627,10 @@
         {
           "source": "SRC-WELLS-CRUSADE",
           "vantage": "memoir"
+        },
+        {
+          "source": "SRC-NATIONAL-CIVIL-RIGHTS-MUSEUM",
+          "vantage": "material_record"
         }
       ]
     },
@@ -626,7 +671,11 @@
           "note": "The 2006 state commission was unable to fix a figure; contemporary and later estimates diverge widely."
         },
         "collective": "Black residents of Wilmington and the elected officials removed",
-        "interstitial": "Property abandoned under threat and never recovered. A Black professional and political class that did not re-form in Wilmington. The statewide disenfranchisement campaign this was staged to deliver, which succeeded."
+        "interstitial": "Property abandoned under threat and never recovered. A Black professional and political class that did not re-form in Wilmington. The statewide disenfranchisement campaign this was staged to deliver, which succeeded.",
+        "transmitted": {
+          "standing": "documented",
+          "description": "A Black professional and political class that did not re-form in Wilmington. The statewide disenfranchisement the coup was staged to deliver, which succeeded and structured North Carolina politics for six decades."
+        }
       },
       "respondents": {
         "described": "Leaders of the Democratic Party campaign, the Wilmington Light Infantry, and Red Shirts; several participants held or subsequently took public office",
@@ -795,6 +844,10 @@
         {
           "source": "SRC-CHRONICLING-AMERICA",
           "vantage": "contemporaneous_press"
+        },
+        {
+          "source": "SRC-BEHIND-THE-VEIL",
+          "vantage": "oral_history"
         }
       ]
     },
@@ -937,7 +990,11 @@
           "note": "Estimates diverge sharply; no official count was made."
         },
         "collective": "The Black community of Ocoee, permanently displaced",
-        "interstitial": "Title to the land of the displaced passed to white owners and was never recovered. Ocoee's Black population fell to effectively zero and stayed there for decades, which means the harm continued to be inflicted on people who were never present at the event."
+        "interstitial": "Title to the land of the displaced passed to white owners and was never recovered. Ocoee's Black population fell to effectively zero and stayed there for decades, which means the harm continued to be inflicted on people who were never present at the event.",
+        "transmitted": {
+          "standing": "documented",
+          "description": "Title to the expropriated land passed to white owners and was never disturbed. Ocoee's Black population stood at effectively zero for decades, so the exclusion continued to be enforced against people born long after the killings."
+        }
       },
       "respondents": {
         "described": "Members of the mob, including Ku Klux Klan participants; a deputy sheriff took Perry from custody",
@@ -1032,7 +1089,11 @@
           "note": "The 2001 Commission recorded 39 confirmed deaths and reviewed estimates ranging to 300. More than 1,250 homes were destroyed and roughly 6,000 people were detained."
         },
         "collective": "Residents and property owners of the Greenwood District",
-        "interstitial": "Insurance denied under riot clauses, converting destruction into total uncompensated loss. Deeds and records burned with the district, so the proof of ownership that a later claim would require was destroyed by the same act that created the claim."
+        "interstitial": "Insurance denied under riot clauses, converting destruction into total uncompensated loss. Deeds and records burned with the district, so the proof of ownership that a later claim would require was destroyed by the same act that created the claim.",
+        "transmitted": {
+          "standing": "documented",
+          "description": "Greenwood's accumulated commercial wealth was destroyed in a night and never rebuilt to its prior extent. Deeds burned with the district, so descendants cannot produce the proof of ownership a claim requires - the same act created the claim and destroyed its evidence."
+        }
       },
       "respondents": {
         "described": "Members of the mob; city officials who deputized them and issued arms; National Guard units",
@@ -1134,7 +1195,11 @@
           "note": "Six Black and two white deaths were confirmed by the 1993 study; survivor accounts describe a considerably higher toll."
         },
         "collective": "The residents and landowners of Rosewood",
-        "interstitial": "A town that ceased to exist. Survivors dispersed under conditions that made them unlocatable for seventy years, which is why the 1994 compensation reached so few of them."
+        "interstitial": "A town that ceased to exist. Survivors dispersed under conditions that made them unlocatable for seventy years, which is why the 1994 compensation reached so few of them.",
+        "transmitted": {
+          "standing": "documented",
+          "description": "Survivors dispersed under conditions that made them unlocatable for seventy years, which is why the 1994 compensation reached so few. Several families concealed their Rosewood origins for generations."
+        }
       },
       "respondents": {
         "described": "Members of the mob drawn from surrounding counties; the Levy County sheriff, who declined to intervene",
@@ -1228,7 +1293,11 @@
           "note": "399 men with syphilis and 201 controls. Wives and children were infected in consequence; the exact number was never established."
         },
         "collective": "The enrolled men, their wives, and children born with congenital syphilis",
-        "interstitial": "Wives infected and children born with congenital syphilis, never fully enumerated. A documented and persisting withdrawal of trust in public medicine among Black Americans, which is a harm to people who were never enrolled."
+        "interstitial": "Wives infected and children born with congenital syphilis, never fully enumerated. A documented and persisting withdrawal of trust in public medicine among Black Americans, which is a harm to people who were never enrolled.",
+        "transmitted": {
+          "standing": "documented",
+          "description": "Wives infected and children born with congenital syphilis, never enumerated. A measured and persisting withdrawal of trust in public medicine among Black Americans, documented in health-services research - a harm falling on people who were never enrolled and were not born when the study ended."
+        }
       },
       "respondents": {
         "described": "Officers and physicians of the United States Public Health Service, acting in official capacity over forty years",
@@ -1287,6 +1356,10 @@
         {
           "source": "SRC-CHRONICLING-AMERICA",
           "vantage": "contemporaneous_press"
+        },
+        {
+          "source": "SRC-DEGRUY-PTSS",
+          "vantage": "clinical_research"
         }
       ]
     },
@@ -1379,6 +1452,14 @@
         {
           "source": "SRC-CRRJ",
           "vantage": "scholarship"
+        },
+        {
+          "source": "SRC-NARA-RG65",
+          "vantage": "government_record"
+        },
+        {
+          "source": "SRC-NARA-RG60",
+          "vantage": "government_record"
         }
       ]
     },
@@ -1455,7 +1536,7 @@
         "outstanding": "No criminal accountability for any officer. Exoneration corrected the state's injury to the victims and left the perpetrators' conduct unaddressed."
       },
       "verification": "documented",
-      "status_note": "Outcome is recorded as posthumous_exoneration and therefore still counts as unpunished. See METHODOLOGY.md section 6 for why.",
+      "status_note": "Outcome is recorded as posthumous_exoneration and therefore still counts as unpunished. See METHODOLOGY.md section 7 for why.",
       "finding": {
         "act": "established",
         "attribution": "named_in_sources"
@@ -1489,6 +1570,10 @@
         {
           "source": "SRC-CRRJ",
           "vantage": "scholarship"
+        },
+        {
+          "source": "SRC-NARA-RG65",
+          "vantage": "government_record"
         }
       ]
     },
@@ -1604,6 +1689,10 @@
         {
           "source": "SRC-NAACP-PAPERS",
           "vantage": "investigative"
+        },
+        {
+          "source": "SRC-TILL-CENTER",
+          "vantage": "material_record"
         }
       ]
     },
@@ -1768,7 +1857,7 @@
         "outstanding": "The apology came eighty-seven years after the compilation was published. This entry stands for every killing in it that has no entry of its own."
       },
       "verification": "documented",
-      "status_note": "An aggregate entry, entered under the rule in METHODOLOGY.md section 7: where sources preserve only a count, the count is recorded as a count and is not permitted to stand in for individuated persons.",
+      "status_note": "An aggregate entry, entered under the rule in METHODOLOGY.md section 8: where sources preserve only a count, the count is recorded as a count and is not permitted to stand in for individuated persons.",
       "finding": {
         "act": "established",
         "attribution": "unattributed"
@@ -1800,6 +1889,10 @@
         {
           "source": "SRC-EJI-LYNCHING",
           "vantage": "scholarship"
+        },
+        {
+          "source": "SRC-LEGACY-MUSEUM",
+          "vantage": "material_record"
         }
       ]
     }

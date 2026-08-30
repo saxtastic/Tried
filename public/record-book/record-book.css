@@ -103,6 +103,11 @@ main, .masthead, footer { max-width: 46rem; margin: 0 auto; padding: 0 1.25rem; 
 .axis-rest-none { color: var(--accent); font-weight: 600; }
 .axis-rest-material { color: #2f5d3f; font-weight: 600; }
 @media (prefers-color-scheme: dark) { .axis-rest-material { color: #7fb894; } }
+.transmitted { border-left: 3px solid var(--rule); padding-left: .9rem; }
+.transmitted h3 { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+.flag-trans-argued_in_literature, .flag-trans-contested {
+  outline: 1px dashed var(--warn); color: var(--warn);
+}
 .restoration { border-left: 3px solid var(--rule); padding-left: .9rem; }
 .restoration-none { border-left-color: var(--accent); }
 .restoration ul { margin: .3rem 0; padding-left: 1.2rem; }

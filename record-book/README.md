@@ -89,6 +89,25 @@ that field is a finding of guilt, and the pages say so above every list.
    the injury occurred, where, and that it went unanswered. Standing to demand
    belongs to the living who choose to assert it.
 
+**3b. Harm that outlives the harmed generation is recorded, with its standing.**
+`harmed.transmitted` is separate from interstitial harm and carries a `standing`:
+`documented` (title transferred and never disturbed, a population kept out,
+wealth destroyed and not rebuilt, measured effects), `argued_in_literature`
+(advanced in a scholarly or clinical framework, recorded as an argument with its
+proponents named and never converted into a finding), or `contested`. Anything
+but `documented` requires a note saying whose argument it is and that the book
+does not adopt it — and an `argued_in_literature` claim must cite a
+`clinical_research` vantage, so the argument is attributable to someone.
+
+Joy DeGruy's *Post Traumatic Slave Syndrome* is entered this way on the chattel
+enslavement complaint. It is an influential and widely taught framework, used in
+practice, that is not a DSM diagnostic category and draws on a transmission
+literature partly in open dispute — and the entry says so. That is not a
+demotion; it is the same rule that lets the book insist an established killing is
+a killing. Its value here is that it names an injury the rest of the schema
+could not see: every other field assumes a harm with a date, a place, and a
+person it happened to.
+
 **4. What falls between the events is recorded too.** `harmed.interstitial`
 carries the harm with no date, no forum and no tally anywhere: property abandoned
 under threat, exile, testimony never given, kinship severed by sale, title
@@ -128,14 +147,16 @@ anything under `public/record-book/`; it is overwritten.
 
 ## Current state
 
-18 complaint entries, 38 register rows, 10 impediments, 27 archives.
+18 complaint entries, 38 register rows, 10 impediments, 47 archives.
 
 In all 18 the act is **established** on the evidence. In 3 no participant is
 identified in any source. In all 18 no perpetrator was ever convicted. 7 name a
 respondent the sources accuse, each with its provenance.
 
 On the axis that matters: **3 of 18 produced anything material for the harmed. 4
-produced nothing at all. None produced full restitution.** Those numbers are the
+produced nothing at all. None produced full restitution.** 6 record harm that
+outlives the harmed generation — 5 documented, 1 recorded as argued and not
+adopted. Those numbers are the
 shape of the corpus and the reason the axes are kept apart — the established act
 is not diminished by the absent conviction, and neither is answered by an
 apology.
@@ -171,6 +192,29 @@ individuated row. Producing those rows means archival work in the collections
 listed in `data/archives.json`, county by county. That work is the reason this
 repository holds data rather than prose, and it is not finished.
 
+## The archives
+
+47 collections. Beyond the lynching and slavery corpora, the manifest carries:
+
+- **National Archives** — the catalogue API (`SRC-NARA-CATALOG`, a real public
+  JSON endpoint the fetch script can query directly), plus RG 60 (Justice, where
+  the file explaining a non-prosecution usually is), RG 65 (FBI investigative
+  files), RG 21 (federal trial courts), and the 1872 Ku Klux Klan hearings —
+  thirteen volumes of sworn testimony from freedpeople, almost none of which
+  produced a prosecution.
+- **Institutions whose function is preserving narrative** — NMAAHC, the Legacy
+  Museum and National Memorial for Peace and Justice, Whitney Plantation,
+  Schomburg, Moorland-Spingarn, Amistad, Avery, the IAAM Center for Family
+  History, the Emmett Till Interpretive Center. The EJI memorial matters
+  particularly to this repository: 800 county monuments naming over 4,400
+  victims is the same conversion of a tally back into people that this
+  register's standing task describes.
+- **Behind the Veil** (Duke) — roughly 1,300 interviews with people who lived
+  under segregation. After the WPA narratives, the most important corpus here:
+  first-person testimony about the period most of these entries fall in, from
+  people who were never asked at the time.
+- **Joy DeGruy's work** and the historical trauma field it sits in.
+
 ## A note on the locators
 
 URLs in `data/archives.json` were written from knowledge of the collections and
@@ -180,3 +224,16 @@ this was built in has no general outbound network access, and every host returns
 egress, then set `verified: true` for the ids that resolve. Until then, treat an
 unverified locator as a lead, not a citation — which is what the rendered
 Archives page says on each one.
+
+Two things specifically **could not be retrieved and were not reconstructed**:
+the bibliography of *Post Traumatic Slave Syndrome*, and a complete list of
+DeGruy's articles and instruments. `SRC-HISTORICAL-TRAUMA-LIT` records the
+scholarly field her work sits within — Brave Heart, Duran and Duran, Danieli,
+Yehuda, Akbar, the Clarks, Du Bois, Fanon. **That is a lineage, not a
+bibliography.** It was assembled from knowledge of the field and is not a
+reconstruction of what she cites; the manifest says so, and it must not be
+presented otherwise. Pull the real citations from the book's notes.
+
+The NARA catalogue is a JSON API rather than a page. `SRC-NARA-CATALOG` is
+handled accordingly — results save as `.json`, `NARA_API_KEY` is sent when set,
+and `NARA_QUERY` changes the search.

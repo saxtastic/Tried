@@ -114,6 +114,32 @@
         "interstitial": {
           "type": "string",
           "description": "Harm that falls between the recorded events and is counted nowhere: displacement, exile, abandoned property, suppressed testimony, severed kinship, continuing effects on people who were never present at the event."
+        },
+        "transmitted": {
+          "type": "object",
+          "required": [
+            "description",
+            "standing"
+          ],
+          "additionalProperties": false,
+          "description": "Harm that outlives the harmed generation. Distinct from interstitial harm, which falls between events within one. The standing of the claim is recorded on the claim itself, because transmission is the hardest thing in this book to establish and the easiest to overstate.",
+          "properties": {
+            "description": {
+              "type": "string"
+            },
+            "standing": {
+              "enum": [
+                "documented",
+                "argued_in_literature",
+                "contested"
+              ],
+              "description": "documented: established by record - title transferred, population displaced, wealth destroyed, measured effects. argued_in_literature: advanced in a scholarly or clinical framework, recorded as an argument with its proponents named and never converted into a finding. contested: the literature is in open disagreement."
+            },
+            "note": {
+              "type": "string",
+              "description": "Required unless standing is documented: whose argument this is, and that the book does not adopt it."
+            }
+          }
         }
       }
     },
@@ -131,7 +157,7 @@
         },
         "official_capacity": {
           "type": "boolean",
-          "description": "True where a respondent acted under colour of law. See METHODOLOGY.md section 9."
+          "description": "True where a respondent acted under colour of law. See METHODOLOGY.md section 10."
         },
         "named": {
           "type": "array",
@@ -372,7 +398,13 @@
               "administrative_record",
               "statistical_series",
               "memoir",
-              "scholarship"
+              "scholarship",
+              "government_record",
+              "congressional_testimony",
+              "oral_history",
+              "material_record",
+              "clinical_research",
+              "genealogical_record"
             ]
           },
           "note": {
@@ -510,6 +542,47 @@
             "required": [
               "none_note"
             ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "harmed": {
+            "properties": {
+              "transmitted": {
+                "properties": {
+                  "standing": {
+                    "not": {
+                      "const": "documented"
+                    }
+                  }
+                },
+                "required": [
+                  "standing"
+                ]
+              }
+            },
+            "required": [
+              "transmitted"
+            ]
+          }
+        },
+        "required": [
+          "harmed"
+        ]
+      },
+      "then": {
+        "properties": {
+          "harmed": {
+            "properties": {
+              "transmitted": {
+                "required": [
+                  "note"
+                ]
+              }
+            }
           }
         }
       }

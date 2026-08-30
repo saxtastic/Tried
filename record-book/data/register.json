@@ -1,5 +1,5 @@
 {
-  "$comment": "Victim and claimant register. identity_status and standing are independent; see METHODOLOGY.md section 7. Recording a person here does not make them a claimant.",
+  "$comment": "Victim and claimant register. identity_status and standing are independent; see METHODOLOGY.md section 8. Recording a person here does not make them a claimant.",
   "persons": [
     {
       "id": "PR-SCOTT-DRED",
@@ -22,7 +22,7 @@
         "SRC-DLAS"
       ],
       "note": "Standing is recorded as claimant because Scott actually asserted a claim, for eleven years, in his own name. He is one of the few people in this register who did.",
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-SCOTT-HARRIET",
@@ -45,7 +45,7 @@
         "SRC-DLAS"
       ],
       "note": "Her separate action is frequently omitted from accounts of the case. It is recorded here because it was filed.",
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-COLLECTIVE-ENSLAVED-US",
@@ -73,7 +73,7 @@
       ],
       "attestation": "Existence attested in aggregate by census, probate, bill of sale, ship manifest, plantation ledger, and Freedmen's Bureau record. The individuating sources - narrative, petition, register - reach a small fraction of those recorded.",
       "note": "This row is a count and is marked as one. It does not stand for individuals and must not be read as a person. Named individuals appear below where a source preserved a name. The disproportion between this number and that list is the principal finding of this register.",
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-DOUGLASS-FREDERICK",
@@ -100,7 +100,7 @@
       "sources": [
         "SRC-DOCSOUTH"
       ],
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-JACOBS-HARRIET",
@@ -128,7 +128,7 @@
         "SRC-DOCSOUTH"
       ],
       "note": "Her narrative records a category of crime for which no forum has ever existed in any entry of this book: sexual violence against an enslaved woman was not an offense in any slaveholding state, because the law recognized no injury to property from its owner.",
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-TRUTH-SOJOURNER",
@@ -156,7 +156,7 @@
         "SRC-DOCSOUTH"
       ],
       "note": "Standing is recorded as claimant because she sued in 1828 to recover Peter and won, one of the earliest instances of a Black woman prevailing against a white man in an American court. The voice field is left contested rather than filled with the familiar text: the book does not print a reconstruction as a quotation. That the most quoted words attributed to her are probably not hers is itself a record of how testimony survives.",
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-NORTHUP-SOLOMON",
@@ -180,7 +180,7 @@
         "SRC-DOCSOUTH"
       ],
       "note": "Standing is claimant: he prosecuted, in his own name, and lost on a rule of evidence. The date and circumstances of his death are unknown, which is the ordinary condition of this register and worth stating even for its most documented member.",
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-COLLECTIVE-COLFAX",
@@ -204,7 +204,7 @@
       "sources": [
         "SRC-CHRONICLING-AMERICA"
       ],
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-MOSS-THOMAS",
@@ -232,7 +232,7 @@
         "SRC-WELLS-CRUSADE"
       ],
       "note": "Wells was godmother to his daughter Maurine. He left a wife, Betty, and a second child born after his death.",
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-MCDOWELL-CALVIN",
@@ -253,7 +253,7 @@
       "sources": [
         "SRC-WELLS-SOUTHERN-HORRORS"
       ],
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-STEWART-WILLIAM",
@@ -275,7 +275,7 @@
         "SRC-WELLS-SOUTHERN-HORRORS"
       ],
       "note": "Appears in some sources as Will Stewart and in others as Henry Stewart. The variance is recorded rather than resolved.",
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-WELLS-IDA",
@@ -305,7 +305,7 @@
         "SRC-WELLS-CRUSADE"
       ],
       "note": "Standing is claimant: she asserted, in print, continuously, for forty years. The method of this record book is hers - count the killings, name them, and set the alleged cause against the investigated one.",
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-COLLECTIVE-WILMINGTON",
@@ -329,7 +329,7 @@
       "sources": [
         "SRC-WILMINGTON-COMMISSION"
       ],
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-TURNER-MARY",
@@ -353,7 +353,7 @@
         "SRC-NAACP-PAPERS"
       ],
       "note": "She was twenty-one or thereabouts. The precise manner of the killing is documented in Walter White's NAACP investigation and is not reproduced here; the citation is sufficient and the detail is not owed to the reader.",
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-TURNER-HAYES",
@@ -373,7 +373,7 @@
       "sources": [
         "SRC-NAACP-30-YEARS"
       ],
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-UNNAMED-TURNER-CHILD",
@@ -395,8 +395,8 @@
         "SRC-NAACP-30-YEARS",
         "SRC-NAACP-PAPERS"
       ],
-      "note": "This row exists to demonstrate the rule in METHODOLOGY.md section 7. A distinct person, attested by the sources, without a name, gets a row. Folding this death into the count for Brooks and Lowndes would record it a second time as a loss. No pronoun is recorded for this child, and none is supplied.",
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "note": "This row exists to demonstrate the rule in METHODOLOGY.md section 8. A distinct person, attested by the sources, without a name, gets a row. Folding this death into the count for Brooks and Lowndes would record it a second time as a loss. No pronoun is recorded for this child, and none is supplied.",
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-COLLECTIVE-BROOKS-LOWNDES",
@@ -420,7 +420,7 @@
         "SRC-NAACP-PAPERS"
       ],
       "note": "Several hundred Black residents left the two counties in the following weeks. Their losses are not enumerated anywhere.",
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-MOORE-FRANK",
@@ -439,7 +439,7 @@
         "SRC-MOORE-DEMPSEY"
       ],
       "note": "Standing is claimant. He is the named party in a decision that established federal habeas review of mob-dominated trials, and he was one of the people the state tried to execute for having survived.",
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-COLLECTIVE-ELAINE",
@@ -464,7 +464,7 @@
         "SRC-NAACP-PAPERS",
         "SRC-CHRONICLING-AMERICA"
       ],
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-PERRY-JULY",
@@ -486,7 +486,7 @@
         "SRC-EJI-LYNCHING"
       ],
       "note": "He was buried in Greenwood Cemetery, Orlando, in an unmarked grave; a marker was placed in 2002.",
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-COLLECTIVE-OCOEE",
@@ -510,7 +510,7 @@
       "sources": [
         "SRC-EJI-LYNCHING"
       ],
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-COLLECTIVE-GREENWOOD",
@@ -535,7 +535,7 @@
         "SRC-TULSA-COMMISSION"
       ],
       "note": "This is the one entry in the register where the count may still decrease in favour of names. The identification project is the only active effort in this book to convert a number back into people.",
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-CARRIER-SARAH",
@@ -555,7 +555,7 @@
       "sources": [
         "SRC-ROSEWOOD-REPORT"
       ],
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-CARRIER-SYLVESTER",
@@ -575,7 +575,7 @@
       "sources": [
         "SRC-ROSEWOOD-REPORT"
       ],
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-COLLECTIVE-ROSEWOOD",
@@ -599,7 +599,7 @@
       "sources": [
         "SRC-ROSEWOOD-REPORT"
       ],
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-COLLECTIVE-TUSKEGEE-STUDY",
@@ -622,7 +622,7 @@
         "SRC-TUSKEGEE-LYNCHING"
       ],
       "note": "This register entry is recorded as collective for privacy, not for want of names. The men are individually identified in the surviving federal records. The last surviving participant died in 2004.",
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-DORSEY-GEORGE",
@@ -644,7 +644,7 @@
         "SRC-DOJ-TILL-ACT",
         "SRC-CRRJ"
       ],
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-DORSEY-MAE-MURRAY",
@@ -666,7 +666,7 @@
         "SRC-DOJ-TILL-ACT",
         "SRC-CRRJ"
       ],
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-MALCOM-ROGER",
@@ -688,7 +688,7 @@
         "SRC-DOJ-TILL-ACT",
         "SRC-CRRJ"
       ],
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-MALCOM-DOROTHY",
@@ -710,7 +710,7 @@
         "SRC-DOJ-TILL-ACT",
         "SRC-CRRJ"
       ],
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-THOMAS-ERNEST",
@@ -731,7 +731,7 @@
         "SRC-LDF",
         "SRC-CRRJ"
       ],
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-SHEPHERD-SAMUEL",
@@ -754,7 +754,7 @@
         "SRC-CRRJ"
       ],
       "note": "Exonerated posthumously in 2021, seventy years after the sheriff who killed him was cleared by a coroner's inquest.",
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-IRVIN-WALTER",
@@ -782,7 +782,7 @@
         "SRC-CRRJ"
       ],
       "note": "Standing is claimant. He is the rare person in this register who was shot by an officer, survived, and then testified against him - and was convicted anyway. He was paroled in 1968 and died the following year.",
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-GREENLEE-CHARLES",
@@ -806,7 +806,7 @@
         "SRC-CRRJ"
       ],
       "note": "He lived to be denied clemency repeatedly and died seven years before the pardons issued.",
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-TILL-EMMETT",
@@ -830,7 +830,7 @@
         "SRC-DOJ-TILL-ACT"
       ],
       "note": "His killers described the killing in print, for a fee, after their acquittal. The record of what happened to him is unusually complete and produced no punishment. He is the reason the word unpunished in this book's title cannot be read as unproven.",
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-TILL-MOBLEY-MAMIE",
@@ -859,7 +859,7 @@
         "SRC-NAACP-PAPERS"
       ],
       "note": "Standing is claimant, asserted by her, for forty-eight years. She insisted on the open casket and permitted the photographs. Every entry in this book depends on someone having made that decision, and she is the one who made it in public.",
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-KENNARD-CLYDE",
@@ -883,7 +883,7 @@
         "SRC-NRE"
       ],
       "note": "Standing is claimant: he applied, was refused, applied again, and was imprisoned for it. Exonerated in 2006, forty-three years after his death.",
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     },
     {
       "id": "PR-COLLECTIVE-NAACP-3224",
@@ -908,7 +908,7 @@
         "SRC-EJI-LYNCHING"
       ],
       "note": "This row is the register's largest count and its plainest statement of what the register cannot do. Each of these 3,224 is entitled under this book's own rule to an individuated row. Producing them requires archival work in the sources listed, county by county, and is the standing task this repository exists to hold.",
-      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 7."
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 8."
     }
   ]
 }
