@@ -205,7 +205,7 @@
       "rights": "open_access",
       "fetchable": false,
       "verified": false,
-      "note": "Includes the African Origins name database, which restores given names to individuals recorded in registers of liberated Africans. Directly relevant to the identity problem in METHODOLOGY.md section 6."
+      "note": "Includes the African Origins name database, which restores given names to individuals recorded in registers of liberated Africans. Directly relevant to the identity problem in METHODOLOGY.md section 7."
     },
     {
       "id": "SRC-DLAS",
@@ -270,6 +270,38 @@
       "fetchable": false,
       "verified": false,
       "note": "Paid confession by Bryant and Milam after their acquittal. Double jeopardy barred retrial. The single clearest document of impunity in this book."
+    },
+    {
+      "id": "SRC-US-REPORTS",
+      "title": "United States Reports",
+      "kind": "judicial_opinion",
+      "holder": "Supreme Court of the United States",
+      "url": "https://www.loc.gov/collections/united-states-reports/",
+      "rights": "public_domain",
+      "fetchable": true,
+      "verified": false,
+      "note": "The Court's own record of its holdings. Cited here for Dred Scott v. Sandford, 60 U.S. 393 (1857) and United States v. Cruikshank, 92 U.S. 542 (1876). A judicial vantage on entries where the holding is itself the act complained of."
+    },
+    {
+      "id": "SRC-PHS-STUDY-RECORDS",
+      "title": "Records of the United States Public Health Service Study of Untreated Syphilis in the Negro Male",
+      "kind": "government_records",
+      "holder": "U.S. National Archives, Southeast Region; Centers for Disease Control and Prevention",
+      "rights": "mixed",
+      "fetchable": false,
+      "verified": false,
+      "note": "The perpetrating agency's own forty-year record: enrolment, examination and autopsy files kept meticulously because the men were regarded as subjects rather than as parties who might one day read them. The strongest vantage on that entry belongs to those who ran the study."
+    },
+    {
+      "id": "SRC-MSSC-FILES",
+      "title": "Mississippi State Sovereignty Commission Records",
+      "kind": "government_records",
+      "holder": "Mississippi Department of Archives and History",
+      "url": "https://da.mdah.ms.gov/sovcom/",
+      "rights": "public_domain",
+      "fetchable": true,
+      "verified": false,
+      "note": "Opened by federal court order in 1998 over the state's objection. A perpetrator record in which a state agency documented its own arrangement of prosecutions, including Clyde Kennard's. The rare case where the impediment kept the evidence against itself."
     }
   ]
 }

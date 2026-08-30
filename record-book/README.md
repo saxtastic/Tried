@@ -25,15 +25,14 @@ gets cited in them.
 
 ## The rules
 
-**0. The crime is captured on its own evidence.** Whether the violence happened,
-who did it, and what a forum said about it are three separate questions, held in
-three separate fields:
+**0. Four questions, four fields, never collapsed.**
 
 | Axis | Field | Answers |
 | --- | --- | --- |
 | **Act** | `finding.act` | Did it occur? |
 | **Actor** | `finding.attribution` | Who did it? |
 | **Forum** | `process.outcome` | What did a court do about it? |
+| **Restoration** | `restoration.forms` | What reached the harmed? |
 
 The act is answered by bodies, ruins, death records and contemporaneous account —
 not by a forum, and not by this book's opinion. The ordinary entry here reads
@@ -44,10 +43,38 @@ that declined to look, and let a failure to prosecute retroactively unmake the
 fact of the violence. `offense` names what the conduct constitutes on its face —
 a characterisation of conduct, never a verdict on a person.
 
+**0b. The resolve is restoration, not adjudication.** Punishing an offender was
+never the remedy for an injury — it is the state answering an affront to itself,
+and it leaves the harmed where it found them. So restoration is its own axis with
+its own derivation, and `restoration.reached` is required, because a remedy
+enacted is not a remedy delivered. Rosewood's compensation reached a small number
+of located survivors; the Tuskegee settlement could not reach wives and children
+who were never enumerated. `remedy.outstanding` renders as **Still owed**, which
+is the live figure a legislature would need.
+
+**0c. The record shows from where each account was observed.** Every source is
+cited with a `vantage` — victim testimony, perpetrator record, hostile
+contemporaneous press, official commission, and so on — and `concurrence` states
+on every entry where the vantages agree and where they diverge. Divergence is
+described, never resolved silently: where death tolls differ by an order of
+magnitude, that spread is evidence about who was counting. An act established on
+a single vantage cannot be checked against anything, and the validator warns on
+it. The strongest entries here are the ones whose vantages are most hostile to
+each other — Tuskegee's most damning record is the study's own, Kennard's
+exoneration rests on the files of the agency that framed him, and Till's killers
+confessed for a fee after their acquittal.
+
 **1. The book never attributes conduct to a person on its own authority.** The
 restraint is on the *actor* axis, not the *act* axis. An actor is named only
 where the sources name one; an entry whose record is `unverified` cannot carry
 an established act, and the validator rejects the combination.
+
+`respondents.named` records **whom the sources accuse**, with the source that
+made the accusation and a status (`confessed_after_acquittal`, `charged_acquitted`,
+`named_in_source`, `names_withheld_in_source`, …). The book reports the naming; it
+does not join it. Every name requires a source and the validator rejects one
+without, because an unsourced name would be an accusation by this book. Nothing in
+that field is a finding of guilt, and the pages say so above every list.
 
 2. **"Unpunished" is derived, never typed.** `process.unpunished` is computed
    from the recorded disposition and is checked on every build. A civil
@@ -101,12 +128,17 @@ anything under `public/record-book/`; it is overwritten.
 
 ## Current state
 
-18 complaint entries, 38 register rows, 10 impediments, 24 archives.
+18 complaint entries, 38 register rows, 10 impediments, 27 archives.
 
 In all 18 the act is **established** on the evidence. In 3 no participant is
-identified in any source. In all 18 no perpetrator was ever convicted. Those
-three numbers are the shape of the corpus, and the reason the axes are kept
-apart: the first is not diminished by the third.
+identified in any source. In all 18 no perpetrator was ever convicted. 7 name a
+respondent the sources accuse, each with its provenance.
+
+On the axis that matters: **3 of 18 produced anything material for the harmed. 4
+produced nothing at all. None produced full restitution.** Those numbers are the
+shape of the corpus and the reason the axes are kept apart — the established act
+is not diminished by the absent conviction, and neither is answered by an
+apology.
 
 Every complaint being unpunished is a finding about the corpus, not a selection
 rule — an entry with a conviction is in scope and would render with a different

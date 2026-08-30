@@ -100,6 +100,17 @@ main, .masthead, footer { max-width: 46rem; margin: 0 auto; padding: 0 1.25rem; 
   font-size: .72rem; letter-spacing: .02em;
 }
 .offense-caveat { font-size: .76rem; margin-top: .1rem; }
+.axis-rest-none { color: var(--accent); font-weight: 600; }
+.axis-rest-material { color: #2f5d3f; font-weight: 600; }
+@media (prefers-color-scheme: dark) { .axis-rest-material { color: #7fb894; } }
+.restoration { border-left: 3px solid var(--rule); padding-left: .9rem; }
+.restoration-none { border-left-color: var(--accent); }
+.restoration ul { margin: .3rem 0; padding-left: 1.2rem; }
+.named { list-style: none; padding: 0; margin: .6rem 0 0; }
+.named > li { padding: .6rem 0; border-top: 1px solid var(--rule); font-size: .92rem; }
+.flag-resp-confessed_after_acquittal, .flag-resp-confessed {
+  background: var(--accent); color: #fff; text-transform: none; font-weight: 600;
+}
 
 .field { margin: 1.1rem 0; }
 .field h3 {

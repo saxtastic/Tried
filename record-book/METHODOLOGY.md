@@ -19,17 +19,20 @@ substitute for them.
 The distinction matters practically. A log that overstates its own authority
 gets excluded. A log that documents carefully gets cited.
 
-## 2. Three axes, kept apart
+## 2. Four axes, kept apart
 
 The single most important rule in this book is that **whether the violence
-happened, who did it, and what a forum said about it are three separate
-questions.** Collapsing them is how a killing becomes an allegation.
+happened, who did it, what a forum said about it, and what ever reached the
+harmed are four separate questions.** Collapsing the first three is how a killing
+becomes an allegation. Collapsing the last into the third is how punishing an
+offender gets mistaken for repairing an injury.
 
 | Axis | Field | Answers |
 | --- | --- | --- |
 | **Act** | `finding.act` | Did it occur? |
 | **Actor** | `finding.attribution` | Who did it? |
 | **Forum** | `process.outcome` | What did a court or commission do? |
+| **Restoration** | `restoration.forms` | What reached the harmed? |
 
 `finding.act` takes `established`, `contested`, or `unestablished`. It is
 answered by bodies, ruins, death records, burned deeds, and contemporaneous
@@ -56,6 +59,40 @@ record wait on an authority that never came, and lets the failure to prosecute
 retroactively unmake the fact of the violence. The act is captured on its own
 evidence. The absence of an actor and the absence of a forum are then recorded
 as two further injuries, in their own fields, where they can be counted.
+
+### The fourth axis is the one that matters
+
+Punishing an offender was never the remedy for an injury. It is the state
+answering an affront to itself, and it leaves the harmed exactly where it found
+them. **The resolve this book measures is restoration to victims, not
+adjudication of offenders** — so `restoration` is a separate axis, derived
+separately, and neither it nor `process.outcome` is permitted to stand in for
+the other.
+
+`restoration.forms` takes any of:
+
+| Form | What it actually does |
+| --- | --- |
+| `full_restitution` | The harmed are made whole. Occurs nowhere in this corpus. |
+| `partial_compensation` | Money or property reaches some of the harmed. |
+| `restoration_of_status` | Vacatur, pardon, exoneration. Corrects the state's injury to the victim; touches nothing the perpetrator did. |
+| `institutional_reform` | The law changes. Reaches future persons, not these ones. |
+| `symbolic` | Apology, marker, resolution, renaming. Costs nothing and returns nothing. |
+
+Only the first two are material, and `isMateriallyRestored` derives from that.
+Three entries of eighteen clear it. Four produced nothing whatever. None produced
+full restitution.
+
+`restoration.reached` is required and is the field that does the real work: **a
+remedy enacted is not a remedy delivered.** Rosewood's compensation reached a
+small number of located survivors because most of the dispersed were never found.
+The Tuskegee settlement could not reach the wives and children because they were
+never enumerated. Recording the form without recording who received it would
+reproduce the press release rather than the outcome.
+
+`remedy.outstanding` renders as **Still owed**. That is the live figure — the one
+a legislature or commission would need — and it is why the book is worth keeping
+even though every entry in it is closed.
 
 ### Offences
 
@@ -88,7 +125,67 @@ forum's permission required. A register that named offenders on its own authorit
 would be a rumour with formatting. A register that refused to call an established
 killing a killing would be a coroner's jury.
 
-## 4. Interstitial harm
+## 4. Vantages, and the conundrum of the record
+
+A record assembled from one position can be defeated by an official finding from
+another. The county coroner's jury returned *death at the hands of persons
+unknown* and that was the only inquiry that would ever occur. Ida B. Wells did
+not argue with those findings. She added a vantage: she read the white
+newspapers' own accounts of the killings back against the verdicts written to
+excuse them, and the hostile source convicted the finding.
+
+So sources are not a flat list here. Every entry carries `citations`, and each
+citation records the **vantage** the account was observed from — `victim_testimony`,
+`witness`, `perpetrator_record`, `contemporaneous_press`, `investigative`,
+`official_investigation`, `official_commission`, `judicial_record`,
+`litigation_record`, `administrative_record`, `statistical_series`, `memoir`,
+`scholarship`.
+
+**An act established on a single vantage cannot be checked against anything**,
+and the validator warns on it. That warning is not pedantry: it found six entries
+whose divergences were described in prose while only one kind of source was
+actually cited.
+
+The strongest entries are the ones where the vantages are most hostile to each
+other. The Tuskegee study's most damning record is the study's own. Clyde
+Kennard's exoneration rests on the files of the state agency that framed him. Roy
+Bryant and J. W. Milam were acquitted and then described the killing for a fee.
+In each, the perpetrator's own vantage is the one that establishes the act.
+
+### Concurrence
+
+`concurrence` is required on every entry and states two things: where the
+vantages **agree**, and where they **diverge**. Divergence is described, never
+resolved silently, because its shape is itself evidence — and in this corpus it
+is almost always evidence about who was counting.
+
+Where the death tolls diverge by an order of magnitude — Colfax, Wilmington,
+Elaine, Ocoee, Tulsa — the divergence does not mean the sources are unreliable.
+It means no official count was attempted, and the reason no count was attempted
+is the same reason no prosecution followed. The three lynching tallies diverge
+because they diverge in definition and all three state that they undercount; the
+spread between them measures the reporting, not the killing.
+
+### Naming
+
+`respondents.named` records **whom the sources accuse**, with the source that
+made the accusation and a status: `confessed`, `confessed_after_acquittal`,
+`charged_acquitted`, `charged_no_conviction`, `named_in_source`,
+`names_withheld_in_source`, `never_identified`.
+
+The book reports the naming. It does not join it. Every name requires a source,
+and the validator rejects one without — because an unsourced name is an
+accusation by this book, which it does not make. Nothing in that field is a
+finding of guilt, and the rendered pages say so above every list.
+
+`names_withheld_in_source` carries a fact worth its own value. Walter White's
+NAACP investigation obtained the names of Mary Turner's killers and transmitted
+them to the Governor of Georgia. The names were not published and no prosecution
+followed. The record therefore holds an accusation whose subjects were identified
+to the state and never charged, which is a different thing from an unsolved
+killing, and the schema keeps them different.
+
+## 5. Interstitial harm
 
 `harmed.interstitial` records what falls between the events and is counted
 nowhere: property abandoned under threat, exile, testimony never given, kinship
@@ -98,7 +195,7 @@ tally in any source. The field exists because leaving them out would let the
 book's own structure — one entry, one incident, one disposition — do the same
 work of erasure that the tallies do.
 
-## 5. "Unpunished" is derived, not asserted
+## 6. "Unpunished" is derived, not asserted
 
 `process.outcome` records what the legal system actually did:
 
@@ -123,7 +220,7 @@ injuries while leaving the other untouched, and the book counts it that way.
 `scripts/validate.mjs` recomputes the field and fails the build on any
 disagreement, so the claim in the title of this book cannot drift from its data.
 
-## 6. Identity: who is in the register, and on what terms
+## 7. Identity: who is in the register, and on what terms
 
 The hardest question this book answers is what to do with a person whose injury
 is recorded and whose name is not.
@@ -173,7 +270,7 @@ carries them with its own citation. These are quotations from documents, not
 reconstructions. **The book never composes speech for the dead.** If no words
 survive, the field is absent — an absence that is itself part of the record.
 
-## 7. Impediments
+## 8. Impediments
 
 `data/impediments.json` catalogs the mechanisms that converted a crime into a
 non-crime: doctrines of personhood and jurisdiction, immunities, evidentiary and
@@ -192,7 +289,7 @@ book exists to show becomes legible: the same handful of doctrines, mostly about
 who may hear a claim rather than whether the injury occurred, recurring across a
 century and a half.
 
-## 8. Officials acting beyond their role
+## 9. Officials acting beyond their role
 
 A recurring classification is `official_participation` — conduct by sheriffs,
 deputies, jailers, guardsmen, and physicians acting under color of law and
@@ -204,7 +301,7 @@ defenses, and immunities differ, and because an officer exceeding the statute of
 their role is the case in which the state is both the injurer and the only
 available forum.
 
-## 9. Sources
+## 10. Sources
 
 `data/archives.json` is a manifest of the corpora this work draws on, with
 locator URLs and access terms. Public-domain texts can be fetched on demand with

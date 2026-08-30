@@ -15,6 +15,9 @@
     "harmed",
     "respondents",
     "process",
+    "restoration",
+    "concurrence",
+    "citations",
     "verification"
   ],
   "additionalProperties": false,
@@ -128,7 +131,50 @@
         },
         "official_capacity": {
           "type": "boolean",
-          "description": "True where a respondent acted under colour of law. See METHODOLOGY.md section 8."
+          "description": "True where a respondent acted under colour of law. See METHODOLOGY.md section 9."
+        },
+        "named": {
+          "type": "array",
+          "description": "Whom the SOURCES accuse. The book reports the naming and its provenance; it never adds an accusation of its own, and every name requires the source that made it. No entry here is a finding of guilt.",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "role",
+              "status",
+              "source"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "role": {
+                "type": "string"
+              },
+              "status": {
+                "enum": [
+                  "confessed",
+                  "confessed_after_acquittal",
+                  "charged_acquitted",
+                  "charged_no_conviction",
+                  "convicted_vacated",
+                  "convicted",
+                  "named_in_source",
+                  "names_withheld_in_source",
+                  "never_identified"
+                ]
+              },
+              "source": {
+                "type": "string",
+                "pattern": "^SRC-[A-Z0-9-]+$",
+                "description": "The source that names them. Required: an unsourced name is an accusation by this book, which it does not make."
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          }
         }
       }
     },
@@ -195,13 +241,6 @@
         }
       }
     },
-    "sources": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "pattern": "^SRC-[A-Z0-9-]+$"
-      }
-    },
     "verification": {
       "enum": [
         "documented",
@@ -254,31 +293,96 @@
     "conduct": {
       "type": "string",
       "description": "What was done. Stated as conduct, not as an allegation: whether it occurred is finding.act, and whether anyone answered for it is process.outcome."
+    },
+    "restoration": {
+      "type": "object",
+      "required": [
+        "forms",
+        "reached"
+      ],
+      "additionalProperties": false,
+      "description": "What reached the harmed. The resolve this book measures is restoration to victims, not punishment of offenders, so this axis is recorded and derived separately from process.outcome and neither may stand in for the other.",
+      "properties": {
+        "forms": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "full_restitution",
+              "partial_compensation",
+              "restoration_of_status",
+              "institutional_reform",
+              "symbolic"
+            ]
+          },
+          "description": "Only full_restitution and partial_compensation put anything material into the hands of the harmed. Institutional reform reaches future persons; symbolic forms cost nothing and return nothing. Empty where nothing was restored, which requires none_note."
+        },
+        "reached": {
+          "type": "string",
+          "description": "Who actually received it, or that nobody did. A remedy enacted is not a remedy delivered."
+        },
+        "none_note": {
+          "type": "string"
+        }
+      }
+    },
+    "concurrence": {
+      "type": "object",
+      "required": [
+        "agree",
+        "diverge"
+      ],
+      "additionalProperties": false,
+      "description": "Where the independent vantages agree and where they do not. Divergence is described, never resolved silently, because the shape of the divergence is itself evidence - most often about who was counting and who was not.",
+      "properties": {
+        "agree": {
+          "type": "string"
+        },
+        "diverge": {
+          "type": "string"
+        }
+      }
+    },
+    "citations": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Sources with the vantage each observed from. An act established on a single vantage cannot be checked against anything; the validator warns on it. Wells's method was to add an independent vantage, not to argue with the coroner.",
+      "items": {
+        "type": "object",
+        "required": [
+          "source",
+          "vantage"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "source": {
+            "type": "string",
+            "pattern": "^SRC-[A-Z0-9-]+$"
+          },
+          "vantage": {
+            "enum": [
+              "victim_testimony",
+              "witness",
+              "perpetrator_record",
+              "contemporaneous_press",
+              "investigative",
+              "official_investigation",
+              "official_commission",
+              "judicial_record",
+              "litigation_record",
+              "administrative_record",
+              "statistical_series",
+              "memoir",
+              "scholarship"
+            ]
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "allOf": [
-    {
-      "if": {
-        "properties": {
-          "verification": {
-            "const": "documented"
-          }
-        },
-        "required": [
-          "verification"
-        ]
-      },
-      "then": {
-        "properties": {
-          "sources": {
-            "minItems": 1
-          }
-        },
-        "required": [
-          "sources"
-        ]
-      }
-    },
     {
       "if": {
         "properties": {
@@ -294,25 +398,6 @@
         "required": [
           "status_note"
         ]
-      }
-    },
-    {
-      "if": {
-        "properties": {
-          "verification": {
-            "const": "unverified"
-          }
-        },
-        "required": [
-          "verification"
-        ]
-      },
-      "then": {
-        "properties": {
-          "sources": {
-            "maxItems": 0
-          }
-        }
       }
     },
     {
@@ -356,6 +441,75 @@
             "not": {
               "const": "unverified"
             }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "verification": {
+            "const": "documented"
+          }
+        },
+        "required": [
+          "verification"
+        ]
+      },
+      "then": {
+        "properties": {
+          "citations": {
+            "minItems": 1
+          }
+        },
+        "required": [
+          "citations"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "verification": {
+            "const": "unverified"
+          }
+        },
+        "required": [
+          "verification"
+        ]
+      },
+      "then": {
+        "properties": {
+          "citations": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "restoration": {
+            "properties": {
+              "forms": {
+                "maxItems": 0
+              }
+            },
+            "required": [
+              "forms"
+            ]
+          }
+        },
+        "required": [
+          "restoration"
+        ]
+      },
+      "then": {
+        "properties": {
+          "restoration": {
+            "required": [
+              "none_note"
+            ]
           }
         }
       }

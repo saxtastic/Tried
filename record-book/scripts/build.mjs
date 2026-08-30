@@ -5,7 +5,8 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { validate, isUnpunished, OUTCOMES, ACT, ATTRIBUTION } from './validate.mjs';
+import { validate, isUnpunished, isMateriallyRestored, OUTCOMES, ACT, ATTRIBUTION,
+         RESTORATION, VANTAGE } from './validate.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const OUT = join(ROOT, 'public', 'record-book');
@@ -105,11 +106,13 @@ function renderComplaints({ complaints, persons, impediments }) {
 
   const entries = complaints.map((c) => {
     const unpunished = isUnpunished(c.process.outcome);
+    const restored = isMateriallyRestored(c.restoration.forms);
     const harmed = (c.harmed?.persons ?? []).map((id) => {
       const p = personById.get(id);
       return `<a href="register.html#${id}">${esc(p ? p.name.display : id)}</a>`;
     }).join(', ');
 
+    const named = c.respondents?.named ?? null;
     const imps = (c.impediments ?? []).map((id) =>
       `<a class="chip" href="impediments.html#${id}">${esc(impById.get(id)?.name ?? id)}</a>`
     ).join('');
@@ -128,6 +131,10 @@ function renderComplaints({ complaints, persons, impediments }) {
         esc(ATTRIBUTION[c.finding.attribution])}">${
         esc(c.finding.attribution.replace(/_/g, ' '))}</dd></div>
       <div><dt>Forum</dt><dd class="axis-outcome">${esc(OUTCOMES[c.process.outcome])}</dd></div>
+      <div><dt>Restoration</dt><dd class="axis-rest-${restored ? 'material' : 'none'}">${
+        c.restoration.forms.length
+          ? esc(c.restoration.forms.map((f) => f.replace(/_/g, ' ')).join(', '))
+          : 'none'}</dd></div>
     </dl>
     <p class="flags">
       <span class="flag ${unpunished ? 'flag-unpunished' : 'flag-punished'}">${
@@ -167,31 +174,60 @@ function renderComplaints({ complaints, persons, impediments }) {
 
   ${imps ? `<div class="field"><h3>Impediments</h3><p class="chips">${imps}</p></div>` : ''}
 
-  ${(c.remedy?.sought?.length || c.remedy?.granted?.length || c.remedy?.outstanding)
-    ? `<div class="field"><h3>Remedy</h3>
-        ${c.remedy.sought?.length ? `<p class="meta">Sought</p>${list(c.remedy.sought)}` : ''}
-        ${c.remedy.granted?.length ? `<p class="meta">Granted</p>${list(c.remedy.granted)}` : ''}
-        ${c.remedy.outstanding ? `<p class="meta">Outstanding</p><p>${esc(c.remedy.outstanding)}</p>` : ''}
-      </div>` : ''}
+  ${named ? `<div class="field"><h3>Named in the sources</h3>
+    <p class="meta">Whom the sources accuse, with the source that made the accusation. The book
+    reports the naming; it does not join it. Nothing here is a finding of guilt.</p>
+    <ul class="named">${named.map((r) => `<li>
+      <strong>${esc(r.name)}</strong> <span class="flag flag-resp-${esc(r.status)}">${
+        esc(r.status.replace(/_/g, ' '))}</span>
+      <br><span class="meta">${esc(r.role)}</span>
+      ${r.note ? `<br>${esc(r.note)}` : ''}
+      <br><span class="meta">Named by <a href="archives.html#${r.source}">${esc(r.source)}</a></span>
+    </li>`).join('')}</ul>
+  </div>` : ''}
+
+  <div class="field"><h3>Concurrence of vantages</h3>
+    <p><span class="meta">Agree —</span> ${esc(c.concurrence.agree)}</p>
+    <p><span class="meta">Diverge —</span> ${esc(c.concurrence.diverge)}</p>
+  </div>
+
+  <div class="field restoration ${restored ? '' : 'restoration-none'}"><h3>Restoration</h3>
+    ${c.restoration.forms.length
+      ? `<ul>${c.restoration.forms.map((f) =>
+          `<li><strong>${esc(f.replace(/_/g, ' '))}</strong> — ${esc(RESTORATION[f])}</li>`).join('')}</ul>`
+      : `<p><strong>${esc(c.restoration.none_note)}</strong></p>`}
+    <p class="meta">Reached</p><p>${esc(c.restoration.reached)}</p>
+    ${c.remedy?.sought?.length ? `<p class="meta">Sought</p>${list(c.remedy.sought)}` : ''}
+    ${c.remedy?.outstanding ? `<p class="meta">Still owed</p><p>${esc(c.remedy.outstanding)}</p>` : ''}
+  </div>
 
   ${c.status_note ? `<div class="field note"><p>${esc(c.status_note)}</p></div>` : ''}
 
-  <p class="sources">Sources: ${
-    (c.sources ?? []).map((s) => `<a href="archives.html#${s}">${esc(s)}</a>`).join(', ')
-    || 'none on file'}</p>
+  <p class="sources">Vantages: ${
+    (c.citations ?? []).map((x) =>
+      `<a href="archives.html#${x.source}" title="${esc(VANTAGE[x.vantage])}">${
+        esc(x.vantage.replace(/_/g, ' '))}</a>`).join(' &middot; ') || 'none on file'}</p>
 </article>`;
   }).join('\n');
 
   const established = complaints.filter((c) => c.finding.act === 'established').length;
   const unpunishedCount = complaints.filter((c) => isUnpunished(c.process.outcome)).length;
   const unattributed = complaints.filter((c) => c.finding.attribution === 'unattributed').length;
+  const material = complaints.filter((c) => isMateriallyRestored(c.restoration.forms)).length;
+  const none = complaints.filter((c) => !c.restoration.forms.length).length;
   const lede = `${complaints.length} entries. Each is read on three independent axes.
     <strong>Act</strong>: did the violence occur — answered by bodies, ruins and records, not by a
     forum. <strong>Actor</strong>: who did it. <strong>Forum</strong>: what a court or commission
     did about it. In ${established} entries the act is established on the evidence; in
     ${unattributed} no participant is identified in any source; in ${unpunishedCount} no
     perpetrator was ever convicted. The crime is captured whether or not anyone was ever
-    made to answer for it, because those are not the same question.`;
+    made to answer for it, because those are not the same question.
+    <br><br>A fourth axis records the only resolve that reaches the harmed.
+    <strong>${material} of ${complaints.length}</strong> entries produced anything material for
+    the victims; <strong>${none}</strong> produced nothing at all; <strong>none</strong> produced
+    full restitution. Punishing an offender was never the remedy for an injury, and this book
+    measures the remedy separately from the punishment so that neither can stand in for the
+    other.`;
 
   const toc = `<nav class="toc"><h2>Entries</h2><ol>${complaints.map((c) =>
     `<li><a href="#${c.id}">${esc(c.title)}</a> <span>${esc(dateLabel(c.incident.date))}</span></li>`
@@ -429,6 +465,17 @@ main, .masthead, footer { max-width: 46rem; margin: 0 auto; padding: 0 1.25rem; 
   font-size: .72rem; letter-spacing: .02em;
 }
 .offense-caveat { font-size: .76rem; margin-top: .1rem; }
+.axis-rest-none { color: var(--accent); font-weight: 600; }
+.axis-rest-material { color: #2f5d3f; font-weight: 600; }
+@media (prefers-color-scheme: dark) { .axis-rest-material { color: #7fb894; } }
+.restoration { border-left: 3px solid var(--rule); padding-left: .9rem; }
+.restoration-none { border-left-color: var(--accent); }
+.restoration ul { margin: .3rem 0; padding-left: 1.2rem; }
+.named { list-style: none; padding: 0; margin: .6rem 0 0; }
+.named > li { padding: .6rem 0; border-top: 1px solid var(--rule); font-size: .92rem; }
+.flag-resp-confessed_after_acquittal, .flag-resp-confessed {
+  background: var(--accent); color: #fff; text-transform: none; font-weight: 600;
+}
 
 .field { margin: 1.1rem 0; }
 .field h3 {

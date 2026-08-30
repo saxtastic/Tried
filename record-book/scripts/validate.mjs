@@ -22,7 +22,7 @@ export const OUTCOMES = {
   unresolved: 'Investigation opened and never closed',
 };
 
-// METHODOLOGY.md section 5: unpunished is derived. Only a sustained criminal
+// METHODOLOGY.md section 6: unpunished is derived. Only a sustained criminal
 // conviction of a perpetrator counts as punishment. Settlements, apologies and
 // exonerations of the victim do not.
 export const isUnpunished = (outcome) => outcome !== 'convicted';
@@ -42,6 +42,46 @@ export const ATTRIBUTION = {
   unattributed: 'No participant is identified in any source located.',
   contested: 'Sources conflict as to who acted.',
 };
+
+// RESTORATION: what reached the victims. The resolve this book measures is not
+// punishment of offenders but restoration to the harmed, so this axis is derived
+// and reported alongside the disposition, never folded into it.
+export const RESTORATION = {
+  full_restitution: 'The harmed were made whole.',
+  partial_compensation: 'Money or property reached some of the harmed.',
+  restoration_of_status: 'A conviction vacated, a pardon, an exoneration. Corrects the state\'s injury to the victim.',
+  institutional_reform: 'The law or practice changed. Reaches future persons, not the harmed.',
+  symbolic: 'Apology, marker, resolution, renaming. Costs nothing and returns nothing.',
+};
+// Only these forms put anything material back into the hands of the harmed.
+const MATERIAL = ['full_restitution', 'partial_compensation'];
+export const isMateriallyRestored = (forms) => (forms ?? []).some((f) => MATERIAL.includes(f));
+
+// How a source came to observe. Independent vantages are what let a record
+// survive a hostile official finding; see METHODOLOGY.md section 4.
+export const VANTAGE = {
+  victim_testimony: 'Given by a person harmed.',
+  witness: 'Given by a witness who was not harmed.',
+  perpetrator_record: 'Kept or given by those who did it.',
+  contemporaneous_press: 'Reported at the time.',
+  investigative: 'Produced by a private investigation.',
+  official_investigation: 'Produced by a state or federal investigation.',
+  official_commission: 'Produced by a later commission of inquiry.',
+  judicial_record: 'Produced by a court.',
+  litigation_record: 'Produced by counsel in the course of litigation.',
+  administrative_record: 'Ledgers, registers, manifests, censuses.',
+  statistical_series: 'A maintained tally.',
+  memoir: 'Recollection, written later.',
+  scholarship: 'Later research.',
+};
+
+// Naming: the book reports whom the sources accuse, with provenance. It never
+// adds an accusation of its own, and every name requires the source that made it.
+const RESPONDENT_STATUS = [
+  'confessed', 'confessed_after_acquittal', 'charged_acquitted', 'charged_no_conviction',
+  'convicted_vacated', 'convicted', 'named_in_source', 'names_withheld_in_source',
+  'never_identified',
+];
 
 const IDENTITY = ['named', 'name_unrecorded', 'collectively_recorded'];
 const STANDING = ['claimant', 'decedent_of_record', 'collective'];
@@ -102,11 +142,11 @@ export function validate() {
         warn(at, 'process.unpunished is stored in the data; it is derived and should be omitted');
       }
     }
-    if (c.verification === 'unverified' && c.sources?.length) {
-      err(at, 'marked unverified but carries sources; use documented or contested');
+    if (c.verification === 'unverified' && c.citations?.length) {
+      err(at, 'marked unverified but carries citations; use documented or contested');
     }
-    if (c.verification === 'documented' && !c.sources?.length) {
-      err(at, 'marked documented but carries no sources');
+    if (c.verification === 'documented' && !c.citations?.length) {
+      err(at, 'marked documented but carries no citations');
     }
     if (c.verification === 'contested' && !c.status_note) {
       err(at, 'marked contested but status_note does not describe the conflict');
@@ -132,7 +172,52 @@ export function validate() {
 
     ref(at, 'harmed.persons', c.harmed?.persons, personIds, 'person');
     ref(at, 'impediments', c.impediments, impedimentIds, 'impediment');
-    ref(at, 'sources', c.sources, archiveIds, 'archive');
+    ref(at, 'citations', (c.citations ?? []).map((x) => x.source), archiveIds, 'archive');
+
+    for (const cit of c.citations ?? []) {
+      if (!(cit.vantage in VANTAGE)) {
+        err(at, `citation ${cit.source} has vantage "${cit.vantage}", not one of ` +
+                Object.keys(VANTAGE).join(', '));
+      }
+    }
+    // A record resting on a single vantage cannot survive a hostile official
+    // finding. Wells's method was to add one, not to argue with the coroner.
+    const vantages = new Set((c.citations ?? []).map((x) => x.vantage));
+    if (c.finding?.act === 'established' && vantages.size < 2) {
+      warn(at, `act is established on ${vantages.size} vantage(s); a single vantage ` +
+               'cannot be checked against anything');
+    }
+    if (!c.concurrence?.agree || !c.concurrence?.diverge) {
+      err(at, 'concurrence must state both where the vantages agree and where they diverge');
+    }
+
+    if (!Array.isArray(c.restoration?.forms)) {
+      err(at, 'restoration.forms must be an array (empty where nothing was restored)');
+    } else {
+      for (const f of c.restoration.forms) {
+        if (!(f in RESTORATION)) {
+          err(at, `restoration form "${f}" is not one of ${Object.keys(RESTORATION).join(', ')}`);
+        }
+      }
+      if (!c.restoration.forms.length && !c.restoration.none_note) {
+        err(at, 'restoration.forms is empty; say so in restoration.none_note');
+      }
+      if (!c.restoration.reached) {
+        err(at, 'restoration.reached must say who actually received it, or that nobody did');
+      }
+    }
+
+    for (const r of c.respondents?.named ?? []) {
+      // The accusation belongs to the source, never to this book.
+      if (!r.source) err(at, `named respondent "${r.name}" has no source for the naming`);
+      else if (!archiveIds.has(r.source)) {
+        err(at, `named respondent "${r.name}" cites unknown archive "${r.source}"`);
+      }
+      if (!RESPONDENT_STATUS.includes(r.status)) {
+        err(at, `named respondent "${r.name}" has status "${r.status}", not one of ` +
+                RESPONDENT_STATUS.join(', '));
+      }
+    }
   }
 
   for (const p of persons) {
@@ -143,7 +228,7 @@ export function validate() {
     if (!STANDING.includes(p.standing)) {
       err(at, `standing "${p.standing}" is not one of ${STANDING.join(', ')}`);
     }
-    // METHODOLOGY.md section 6: a count is a count and must say so; an
+    // METHODOLOGY.md section 7: a count is a count and must say so; an
     // individuated person is never carried as a number.
     if (p.identity_status === 'collectively_recorded' && !p.count) {
       err(at, 'collectively_recorded rows must carry a count');
@@ -158,7 +243,7 @@ export function validate() {
       err(at, 'name_unrecorded rows must state what attests the person\'s existence');
     }
     if (!p.consent_note) {
-      err(at, 'missing consent_note (METHODOLOGY.md section 6)');
+      err(at, 'missing consent_note (METHODOLOGY.md section 7)');
     }
     if (p.voice?.source && !archiveIds.has(p.voice.source)) {
       err(at, `voice.source references unknown archive "${p.voice.source}"`);
@@ -181,10 +266,17 @@ export function validate() {
     }
   }
 
+  const allCited = new Set([
+    ...complaints.flatMap((c) => (c.citations ?? []).map((x) => x.source)),
+    ...complaints.flatMap((c) => (c.respondents?.named ?? []).map((r) => r.source)),
+    ...persons.flatMap((p) => p.sources ?? []),
+  ]);
+
   for (const a of archives) {
     const at = `archives/${a.id}`;
     if (a.fetchable && !a.url) err(at, 'marked fetchable but has no url');
     if (a.url && a.verified !== true) warn(at, 'locator not yet resolved (verified:false)');
+    if (!allCited.has(a.id)) warn(at, 'in the manifest but cited by nothing');
   }
 
   // Orphan checks: a person nobody claims, an impediment nothing invokes.
@@ -215,6 +307,9 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     (c) => c.finding.act === 'established' && isUnpunished(c.process.outcome)).length;
   const unattributed = complaints.filter(
     (c) => c.finding.attribution === 'unattributed').length;
+  const restored = complaints.filter((c) => isMateriallyRestored(c.restoration.forms)).length;
+  const nothing = complaints.filter((c) => !c.restoration.forms.length).length;
+  const named = complaints.filter((c) => (c.respondents?.named ?? []).length).length;
 
   for (const w of warnings) console.warn(`  warn  ${w}`);
   for (const e of errors) console.error(`  ERROR ${e}`);
@@ -229,6 +324,11 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     `${captured} entries record an act established on the evidence for which no ` +
     `perpetrator was convicted; ${unattributed} have no participant identified in any source`
   );
+  console.log(
+    `restoration: ${restored} of ${complaints.length} produced anything material for the ` +
+    `harmed, ${nothing} produced nothing at all, 0 produced full restitution`
+  );
+  console.log(`${named} entries name a respondent the sources accuse, each with its provenance`);
   console.log(`${errors.length} error(s), ${warnings.length} warning(s)`);
   process.exit(errors.length ? 1 : 0);
 }
