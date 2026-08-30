@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ayeyoty.co/record-book/schema/source.schema.json",
+  "title": "Archive entry",
+  "description": "A corpus, collection, report, or document this book draws on. verified is false until the locator has actually been resolved; an unverified locator is a lead, not a citation.",
+  "type": "object",
+  "required": ["id", "title", "kind", "holder", "rights", "fetchable", "verified"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^SRC-[A-Z0-9-]+$" },
+    "title": { "type": "string" },
+    "author": { "type": "string" },
+    "year": { "type": "integer" },
+    "kind": { "type": "string" },
+    "holder": { "type": "string" },
+    "url": { "type": "string", "format": "uri" },
+    "rights": { "enum": ["public_domain", "open_access", "in_copyright", "mixed"] },
+    "fetchable": {
+      "type": "boolean",
+      "description": "True only for public-domain or open-access texts that scripts/fetch-archives.mjs may retrieve. Nothing large is committed to the repository."
+    },
+    "verified": { "type": "boolean" },
+    "note": { "type": "string" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "fetchable": { "const": true } }, "required": ["fetchable"] },
+      "then": { "required": ["url"] }
+    }
+  ]
+}

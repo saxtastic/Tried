@@ -1,0 +1,914 @@
+{
+  "$comment": "Victim and claimant register. identity_status and standing are independent; see METHODOLOGY.md section 4. Recording a person here does not make them a claimant.",
+  "persons": [
+    {
+      "id": "PR-SCOTT-DRED",
+      "name": {
+        "display": "Dred Scott"
+      },
+      "identity_status": "named",
+      "standing": "claimant",
+      "complaints": [
+        "CL-1857-DRED-SCOTT"
+      ],
+      "life": {
+        "born": "c. 1799",
+        "died": "1858-09-17"
+      },
+      "place": "St. Louis, Missouri",
+      "role": "Plaintiff; enslaved, freed by his owners in 1857 after the decision",
+      "harm": "Held to be incapable of invoking the jurisdiction of any federal court by reason of ancestry",
+      "sources": [
+        "SRC-DLAS"
+      ],
+      "note": "Standing is recorded as claimant because Scott actually asserted a claim, for eleven years, in his own name. He is one of the few people in this register who did.",
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-SCOTT-HARRIET",
+      "name": {
+        "display": "Harriet Robinson Scott"
+      },
+      "identity_status": "named",
+      "standing": "claimant",
+      "complaints": [
+        "CL-1857-DRED-SCOTT"
+      ],
+      "life": {
+        "born": "c. 1815",
+        "died": "1876-06-17"
+      },
+      "place": "St. Louis, Missouri",
+      "role": "Co-plaintiff; her separate suit was consolidated with her husband's",
+      "harm": "Same as PR-SCOTT-DRED",
+      "sources": [
+        "SRC-DLAS"
+      ],
+      "note": "Her separate action is frequently omitted from accounts of the case. It is recorded here because it was filed.",
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-COLLECTIVE-ENSLAVED-US",
+      "name": {
+        "display": "Enslaved persons in the United States and its colonial predecessors"
+      },
+      "identity_status": "collectively_recorded",
+      "standing": "collective",
+      "complaints": [
+        "CL-CHATTEL-ENSLAVEMENT"
+      ],
+      "count": {
+        "documented": null,
+        "estimated_low": 3900000,
+        "estimated_high": 4000000,
+        "basis": "Persons enslaved in the United States at the 1860 census. Not a figure for the whole period."
+      },
+      "place": "The slaveholding colonies and states",
+      "harm": "Enslavement and its constituent offenses; see CL-CHATTEL-ENSLAVEMENT",
+      "sources": [
+        "SRC-LOC-SLAVE-NARRATIVES",
+        "SRC-DOCSOUTH",
+        "SRC-SLAVE-VOYAGES",
+        "SRC-DLAS"
+      ],
+      "attestation": "Existence attested in aggregate by census, probate, bill of sale, ship manifest, plantation ledger, and Freedmen's Bureau record. The individuating sources - narrative, petition, register - reach a small fraction of those recorded.",
+      "note": "This row is a count and is marked as one. It does not stand for individuals and must not be read as a person. Named individuals appear below where a source preserved a name. The disproportion between this number and that list is the principal finding of this register.",
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-DOUGLASS-FREDERICK",
+      "name": {
+        "display": "Frederick Douglass"
+      },
+      "identity_status": "named",
+      "standing": "decedent_of_record",
+      "complaints": [
+        "CL-CHATTEL-ENSLAVEMENT"
+      ],
+      "life": {
+        "born": "c. February 1818",
+        "died": "1895-02-20"
+      },
+      "place": "Talbot County, Maryland; later Massachusetts, New York, and Washington, D.C.",
+      "role": "Narrator; formerly enslaved; abolitionist, editor, and United States Marshal for the District of Columbia",
+      "harm": "Enslavement from birth; separation from his mother in infancy; whipping and hiring out; denial of literacy by law",
+      "voice": {
+        "words": "You have seen how a man was made a slave; you shall see how a slave was made a man.",
+        "source": "SRC-DOCSOUTH",
+        "citation": "Narrative of the Life of Frederick Douglass, an American Slave (1845), ch. X"
+      },
+      "sources": [
+        "SRC-DOCSOUTH"
+      ],
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-JACOBS-HARRIET",
+      "name": {
+        "display": "Harriet Ann Jacobs"
+      },
+      "identity_status": "named",
+      "standing": "decedent_of_record",
+      "complaints": [
+        "CL-CHATTEL-ENSLAVEMENT"
+      ],
+      "life": {
+        "born": "1813",
+        "died": "1897-03-07"
+      },
+      "place": "Edenton, North Carolina",
+      "role": "Narrator; formerly enslaved; writing as Linda Brent",
+      "harm": "Enslavement; sustained sexual coercion by her enslaver, an offense not cognizable at law because she was property; seven years concealed in a crawlspace to escape him",
+      "voice": {
+        "words": "Slavery is terrible for men; but it is far more terrible for women.",
+        "source": "SRC-DOCSOUTH",
+        "citation": "Incidents in the Life of a Slave Girl (1861), ch. XIV"
+      },
+      "sources": [
+        "SRC-DOCSOUTH"
+      ],
+      "note": "Her narrative records a category of crime for which no forum has ever existed in any entry of this book: sexual violence against an enslaved woman was not an offense in any slaveholding state, because the law recognized no injury to property from its owner.",
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-TRUTH-SOJOURNER",
+      "name": {
+        "display": "Sojourner Truth"
+      },
+      "identity_status": "named",
+      "standing": "claimant",
+      "complaints": [
+        "CL-CHATTEL-ENSLAVEMENT"
+      ],
+      "life": {
+        "born": "c. 1797",
+        "died": "1883-11-26"
+      },
+      "place": "Ulster County, New York",
+      "role": "Narrator; formerly enslaved; litigant",
+      "harm": "Enslavement; her son Peter was sold illegally out of New York to Alabama in violation of the state's emancipation statute",
+      "voice": {
+        "words": "[Text contested - see note]",
+        "source": null,
+        "citation": "The widely reproduced 'Ar'n't I a Woman' text of the 1851 Akron speech is Frances Dana Gage's 1863 reconstruction. Marius Robinson's contemporaneous 1851 report differs materially and contains no such refrain."
+      },
+      "sources": [
+        "SRC-DOCSOUTH"
+      ],
+      "note": "Standing is recorded as claimant because she sued in 1828 to recover Peter and won, one of the earliest instances of a Black woman prevailing against a white man in an American court. The voice field is left contested rather than filled with the familiar text: the book does not print a reconstruction as a quotation. That the most quoted words attributed to her are probably not hers is itself a record of how testimony survives.",
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-NORTHUP-SOLOMON",
+      "name": {
+        "display": "Solomon Northup"
+      },
+      "identity_status": "named",
+      "standing": "claimant",
+      "complaints": [
+        "CL-1841-NORTHUP",
+        "CL-CHATTEL-ENSLAVEMENT"
+      ],
+      "life": {
+        "born": "July 1807 or 1808",
+        "died": "after 1857, date and place unknown"
+      },
+      "place": "Saratoga Springs, New York; kidnapped in Washington, D.C.; held in Rapides and Avoyelles Parishes, Louisiana",
+      "role": "Free citizen of New York; violinist and farmer; narrator",
+      "harm": "Kidnapped while free, sold into slavery, and held twelve years",
+      "sources": [
+        "SRC-DOCSOUTH"
+      ],
+      "note": "Standing is claimant: he prosecuted, in his own name, and lost on a rule of evidence. The date and circumstances of his death are unknown, which is the ordinary condition of this register and worth stating even for its most documented member.",
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-COLLECTIVE-COLFAX",
+      "name": {
+        "display": "Black residents of Grant Parish killed at Colfax"
+      },
+      "identity_status": "collectively_recorded",
+      "standing": "collective",
+      "complaints": [
+        "CL-1873-COLFAX"
+      ],
+      "count": {
+        "documented": null,
+        "estimated_low": 60,
+        "estimated_high": 150,
+        "basis": "Sources diverge. Most of the dead were killed after surrendering."
+      },
+      "place": "Colfax, Grant Parish, Louisiana",
+      "harm": "Killed defending the parish courthouse; most after surrender",
+      "attestation": "Existence attested by contemporaneous press, congressional inquiry, and the federal indictments. No complete list of names was ever compiled.",
+      "sources": [
+        "SRC-CHRONICLING-AMERICA"
+      ],
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-MOSS-THOMAS",
+      "name": {
+        "display": "Thomas Moss"
+      },
+      "identity_status": "named",
+      "standing": "decedent_of_record",
+      "complaints": [
+        "CL-1892-MEMPHIS-PEOPLES-GROCERY"
+      ],
+      "life": {
+        "died": "1892-03-09"
+      },
+      "place": "Memphis, Shelby County, Tennessee",
+      "role": "Letter carrier; co-owner of the People's Grocery at the Curve",
+      "harm": "Taken from the Shelby County jail by a mob while in lawful custody, and killed",
+      "voice": {
+        "words": "Tell my people to go West - there is no justice for them here.",
+        "source": "SRC-WELLS-CRUSADE",
+        "citation": "Reported as his last words in Ida B. Wells's account. Recorded second-hand; no transcript exists."
+      },
+      "sources": [
+        "SRC-WELLS-SOUTHERN-HORRORS",
+        "SRC-WELLS-CRUSADE"
+      ],
+      "note": "Wells was godmother to his daughter Maurine. He left a wife, Betty, and a second child born after his death.",
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-MCDOWELL-CALVIN",
+      "name": {
+        "display": "Calvin McDowell"
+      },
+      "identity_status": "named",
+      "standing": "decedent_of_record",
+      "complaints": [
+        "CL-1892-MEMPHIS-PEOPLES-GROCERY"
+      ],
+      "life": {
+        "died": "1892-03-09"
+      },
+      "place": "Memphis, Shelby County, Tennessee",
+      "role": "Clerk, People's Grocery",
+      "harm": "Taken from the Shelby County jail by a mob while in lawful custody, and killed. Sources record that he was mutilated.",
+      "sources": [
+        "SRC-WELLS-SOUTHERN-HORRORS"
+      ],
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-STEWART-WILLIAM",
+      "name": {
+        "display": "William Stewart"
+      },
+      "identity_status": "named",
+      "standing": "decedent_of_record",
+      "complaints": [
+        "CL-1892-MEMPHIS-PEOPLES-GROCERY"
+      ],
+      "life": {
+        "died": "1892-03-09"
+      },
+      "place": "Memphis, Shelby County, Tennessee",
+      "role": "Stockholder, People's Grocery",
+      "harm": "Taken from the Shelby County jail by a mob while in lawful custody, and killed",
+      "sources": [
+        "SRC-WELLS-SOUTHERN-HORRORS"
+      ],
+      "note": "Appears in some sources as Will Stewart and in others as Henry Stewart. The variance is recorded rather than resolved.",
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-WELLS-IDA",
+      "name": {
+        "display": "Ida Bell Wells-Barnett"
+      },
+      "identity_status": "named",
+      "standing": "claimant",
+      "complaints": [
+        "CL-1892-FREE-SPEECH"
+      ],
+      "life": {
+        "born": "1862-07-16",
+        "died": "1931-03-25"
+      },
+      "place": "Holly Springs, Mississippi; Memphis, Tennessee; Chicago, Illinois",
+      "role": "Editor and part owner of the Memphis Free Speech and Headlight; investigator; co-founder of the NAACP",
+      "harm": "Her press and office destroyed; her life threatened; permanently exiled from Memphis",
+      "voice": {
+        "words": "The way to right wrongs is to turn the light of truth upon them.",
+        "source": "SRC-WELLS-SOUTHERN-HORRORS",
+        "citation": "Attributed to Wells; widely reproduced."
+      },
+      "sources": [
+        "SRC-WELLS-SOUTHERN-HORRORS",
+        "SRC-WELLS-RED-RECORD",
+        "SRC-WELLS-CRUSADE"
+      ],
+      "note": "Standing is claimant: she asserted, in print, continuously, for forty years. The method of this record book is hers - count the killings, name them, and set the alleged cause against the investigated one.",
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-COLLECTIVE-WILMINGTON",
+      "name": {
+        "display": "Black residents of Wilmington killed or banished"
+      },
+      "identity_status": "collectively_recorded",
+      "standing": "collective",
+      "complaints": [
+        "CL-1898-WILMINGTON"
+      ],
+      "count": {
+        "documented": null,
+        "estimated_low": 60,
+        "estimated_high": 300,
+        "basis": "The 2006 state commission declined to fix a figure. Banishment lists name individuals; the dead were never enumerated."
+      },
+      "place": "Wilmington, New Hanover County, North Carolina",
+      "harm": "Killed, or driven from the city under threat, with property abandoned",
+      "attestation": "The banishment of named individuals is documented. The killings were not counted, and bodies were reportedly disposed of in the Cape Fear River.",
+      "sources": [
+        "SRC-WILMINGTON-COMMISSION"
+      ],
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-TURNER-MARY",
+      "name": {
+        "display": "Mary Turner"
+      },
+      "identity_status": "named",
+      "standing": "decedent_of_record",
+      "complaints": [
+        "CL-1918-TURNER"
+      ],
+      "life": {
+        "born": "c. 1899",
+        "died": "1918-05-19"
+      },
+      "place": "Brooks County, Georgia; killed near Barney, Lowndes County",
+      "role": "Farm worker; wife of Hayes Turner",
+      "harm": "Seized and killed by a mob the day after publicly denouncing her husband's lynching and stating she would swear out warrants against those responsible. She was eight months pregnant; the child was killed also.",
+      "sources": [
+        "SRC-NAACP-30-YEARS",
+        "SRC-NAACP-PAPERS"
+      ],
+      "note": "She was twenty-one or thereabouts. The precise manner of the killing is documented in Walter White's NAACP investigation and is not reproduced here; the citation is sufficient and the detail is not owed to the reader.",
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-TURNER-HAYES",
+      "name": {
+        "display": "Hayes Turner"
+      },
+      "identity_status": "named",
+      "standing": "decedent_of_record",
+      "complaints": [
+        "CL-1918-TURNER"
+      ],
+      "life": {
+        "died": "1918-05-18"
+      },
+      "place": "Brooks County, Georgia",
+      "harm": "Taken from custody and lynched. His body was left hanging for two days.",
+      "sources": [
+        "SRC-NAACP-30-YEARS"
+      ],
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-UNNAMED-TURNER-CHILD",
+      "name": {
+        "display": "Name unrecorded - the unborn child of Mary Turner"
+      },
+      "identity_status": "name_unrecorded",
+      "standing": "decedent_of_record",
+      "complaints": [
+        "CL-1918-TURNER"
+      ],
+      "life": {
+        "died": "1918-05-19"
+      },
+      "place": "near Barney, Lowndes County, Georgia",
+      "harm": "Killed in the course of their mother's killing",
+      "attestation": "Existence attested by every account of the event, including the NAACP field investigation. No name was given and none could have been. The child was at or near term.",
+      "sources": [
+        "SRC-NAACP-30-YEARS",
+        "SRC-NAACP-PAPERS"
+      ],
+      "note": "This row exists to demonstrate the rule in METHODOLOGY.md section 4. A distinct person, attested by the sources, without a name, gets a row. Folding this death into the count for Brooks and Lowndes would record it a second time as a loss. No pronoun is recorded for this child, and none is supplied.",
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-COLLECTIVE-BROOKS-LOWNDES",
+      "name": {
+        "display": "Persons killed in the Brooks and Lowndes County lynchings, May 1918"
+      },
+      "identity_status": "collectively_recorded",
+      "standing": "collective",
+      "complaints": [
+        "CL-1918-TURNER"
+      ],
+      "count": {
+        "documented": 11,
+        "basis": "At least eleven killed over one week. Sources differ on the total and on some identities."
+      },
+      "place": "Brooks and Lowndes Counties, Georgia",
+      "harm": "Killed by mobs over approximately one week",
+      "attestation": "Several of the dead are named in the NAACP investigation. Others are recorded only as having been killed.",
+      "sources": [
+        "SRC-NAACP-30-YEARS",
+        "SRC-NAACP-PAPERS"
+      ],
+      "note": "Several hundred Black residents left the two counties in the following weeks. Their losses are not enumerated anywhere.",
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-MOORE-FRANK",
+      "name": {
+        "display": "Frank Moore"
+      },
+      "identity_status": "named",
+      "standing": "claimant",
+      "complaints": [
+        "CL-1919-ELAINE"
+      ],
+      "place": "Phillips County, Arkansas",
+      "role": "Sharecropper; named petitioner in Moore v. Dempsey",
+      "harm": "Sentenced to death after a trial lasting minutes before an all-white jury, on a confession obtained by torture, following a massacre in which he was among the survivors",
+      "sources": [
+        "SRC-MOORE-DEMPSEY"
+      ],
+      "note": "Standing is claimant. He is the named party in a decision that established federal habeas review of mob-dominated trials, and he was one of the people the state tried to execute for having survived.",
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-COLLECTIVE-ELAINE",
+      "name": {
+        "display": "Black residents of Phillips County killed, September-October 1919"
+      },
+      "identity_status": "collectively_recorded",
+      "standing": "collective",
+      "complaints": [
+        "CL-1919-ELAINE"
+      ],
+      "count": {
+        "documented": null,
+        "estimated_low": 100,
+        "estimated_high": 240,
+        "basis": "No official count was made or attempted. Estimates rest on survivor testimony and contemporary reporting."
+      },
+      "place": "Elaine, Hoop Spur, and Phillips County, Arkansas",
+      "harm": "Killed by posses and troops over several days",
+      "attestation": "The absence of a count is itself documented: no coroner's inquest was held for any of the dead, and burials were unrecorded.",
+      "sources": [
+        "SRC-NAACP-PAPERS",
+        "SRC-CHRONICLING-AMERICA"
+      ],
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-PERRY-JULY",
+      "name": {
+        "display": "July Perry"
+      },
+      "identity_status": "named",
+      "standing": "decedent_of_record",
+      "complaints": [
+        "CL-1920-OCOEE"
+      ],
+      "life": {
+        "died": "1920-11-03"
+      },
+      "place": "Ocoee, Orange County, Florida",
+      "role": "Labor foreman and landowner; organizer of Black voter registration in Ocoee",
+      "harm": "Taken from custody by a mob and lynched after Black residents attempted to vote",
+      "sources": [
+        "SRC-EJI-LYNCHING"
+      ],
+      "note": "He was buried in Greenwood Cemetery, Orlando, in an unmarked grave; a marker was placed in 2002.",
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-COLLECTIVE-OCOEE",
+      "name": {
+        "display": "Black residents of Ocoee killed or driven out"
+      },
+      "identity_status": "collectively_recorded",
+      "standing": "collective",
+      "complaints": [
+        "CL-1920-OCOEE"
+      ],
+      "count": {
+        "documented": null,
+        "estimated_low": 6,
+        "estimated_high": 60,
+        "basis": "No official count. Estimates diverge by an order of magnitude."
+      },
+      "place": "Ocoee, Orange County, Florida",
+      "harm": "Killed; or driven from the town permanently, with homes, a church, a lodge, and land lost",
+      "attestation": "The displacement is documented by the census: Ocoee's Black population fell to effectively zero and remained there for decades.",
+      "sources": [
+        "SRC-EJI-LYNCHING"
+      ],
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-COLLECTIVE-GREENWOOD",
+      "name": {
+        "display": "Residents and property owners of the Greenwood District"
+      },
+      "identity_status": "collectively_recorded",
+      "standing": "collective",
+      "complaints": [
+        "CL-1921-TULSA"
+      ],
+      "count": {
+        "documented": 39,
+        "estimated_low": 75,
+        "estimated_high": 300,
+        "basis": "39 deaths confirmed by the 2001 Oklahoma Commission, which reviewed estimates up to 300. More than 1,250 homes destroyed; approximately 6,000 people detained."
+      },
+      "place": "Greenwood District, Tulsa, Oklahoma",
+      "harm": "Killed; detained; dispossessed of homes, businesses, churches, a hospital, schools, and land",
+      "attestation": "Searches for mass graves under the direction of the City of Tulsa have recovered remains that are being examined and, where possible, identified by DNA. Identification work is ongoing.",
+      "sources": [
+        "SRC-TULSA-COMMISSION"
+      ],
+      "note": "This is the one entry in the register where the count may still decrease in favour of names. The identification project is the only active effort in this book to convert a number back into people.",
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-CARRIER-SARAH",
+      "name": {
+        "display": "Sarah Carrier"
+      },
+      "identity_status": "named",
+      "standing": "decedent_of_record",
+      "complaints": [
+        "CL-1923-ROSEWOOD"
+      ],
+      "life": {
+        "died": "1923-01-04"
+      },
+      "place": "Rosewood, Levy County, Florida",
+      "harm": "Shot and killed in her home during the attack",
+      "sources": [
+        "SRC-ROSEWOOD-REPORT"
+      ],
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-CARRIER-SYLVESTER",
+      "name": {
+        "display": "Sylvester Carrier"
+      },
+      "identity_status": "named",
+      "standing": "decedent_of_record",
+      "complaints": [
+        "CL-1923-ROSEWOOD"
+      ],
+      "life": {
+        "died": "1923-01-04"
+      },
+      "place": "Rosewood, Levy County, Florida",
+      "harm": "Killed defending the Carrier house, in which women and children had taken shelter",
+      "sources": [
+        "SRC-ROSEWOOD-REPORT"
+      ],
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-COLLECTIVE-ROSEWOOD",
+      "name": {
+        "display": "Residents and landowners of Rosewood"
+      },
+      "identity_status": "collectively_recorded",
+      "standing": "collective",
+      "complaints": [
+        "CL-1923-ROSEWOOD"
+      ],
+      "count": {
+        "documented": 8,
+        "estimated_low": 8,
+        "estimated_high": 150,
+        "basis": "Six Black and two white deaths confirmed by the 1993 legislative study; survivor accounts describe a substantially higher toll."
+      },
+      "place": "Rosewood, Levy County, Florida",
+      "harm": "Killed; or driven into the swamps and permanently displaced, with the town burned and land lost",
+      "attestation": "Survivors were located and gave testimony to the Florida Legislature in 1993 and 1994. This is the only entry in the book where the surviving victims were heard by a legislature in their own voices while living.",
+      "sources": [
+        "SRC-ROSEWOOD-REPORT"
+      ],
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-COLLECTIVE-TUSKEGEE-STUDY",
+      "name": {
+        "display": "Men enrolled in the United States Public Health Service study at Tuskegee, and their families"
+      },
+      "identity_status": "collectively_recorded",
+      "standing": "collective",
+      "complaints": [
+        "CL-1932-TUSKEGEE-STUDY"
+      ],
+      "count": {
+        "documented": 623,
+        "basis": "399 men with latent syphilis and 201 controls. Wives infected and children born with congenital syphilis were never fully enumerated."
+      },
+      "place": "Macon County, Alabama",
+      "harm": "Deceived as to their diagnosis; denied treatment that existed; observed to autopsy",
+      "attestation": "Individually named in the study's own records, which the Public Health Service maintained meticulously for forty years. The identities exist because the perpetrators kept them.",
+      "sources": [
+        "SRC-TUSKEGEE-LYNCHING"
+      ],
+      "note": "This register entry is recorded as collective for privacy, not for want of names. The men are individually identified in the surviving federal records. The last surviving participant died in 2004.",
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-DORSEY-GEORGE",
+      "name": {
+        "display": "George W. Dorsey"
+      },
+      "identity_status": "named",
+      "standing": "decedent_of_record",
+      "complaints": [
+        "CL-1946-MOORES-FORD"
+      ],
+      "life": {
+        "died": "1946-07-25"
+      },
+      "place": "Walton and Oconee Counties, Georgia",
+      "role": "Farm worker; veteran of the Second World War, recently returned after five years' service",
+      "harm": "Shot and killed by a mob at Moore's Ford Bridge",
+      "sources": [
+        "SRC-DOJ-TILL-ACT",
+        "SRC-CRRJ"
+      ],
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-DORSEY-MAE-MURRAY",
+      "name": {
+        "display": "Mae Murray Dorsey"
+      },
+      "identity_status": "named",
+      "standing": "decedent_of_record",
+      "complaints": [
+        "CL-1946-MOORES-FORD"
+      ],
+      "life": {
+        "died": "1946-07-25"
+      },
+      "place": "Walton and Oconee Counties, Georgia",
+      "role": "Farm worker; wife of George Dorsey",
+      "harm": "Shot and killed by a mob at Moore's Ford Bridge",
+      "sources": [
+        "SRC-DOJ-TILL-ACT",
+        "SRC-CRRJ"
+      ],
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-MALCOM-ROGER",
+      "name": {
+        "display": "Roger Malcom"
+      },
+      "identity_status": "named",
+      "standing": "decedent_of_record",
+      "complaints": [
+        "CL-1946-MOORES-FORD"
+      ],
+      "life": {
+        "died": "1946-07-25"
+      },
+      "place": "Walton and Oconee Counties, Georgia",
+      "role": "Farm worker; held in the Walton County jail until bonded out hours before the killings",
+      "harm": "Shot and killed by a mob at Moore's Ford Bridge",
+      "sources": [
+        "SRC-DOJ-TILL-ACT",
+        "SRC-CRRJ"
+      ],
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-MALCOM-DOROTHY",
+      "name": {
+        "display": "Dorothy Dorsey Malcom"
+      },
+      "identity_status": "named",
+      "standing": "decedent_of_record",
+      "complaints": [
+        "CL-1946-MOORES-FORD"
+      ],
+      "life": {
+        "died": "1946-07-25"
+      },
+      "place": "Walton and Oconee Counties, Georgia",
+      "role": "Farm worker; sister of George Dorsey; wife of Roger Malcom",
+      "harm": "Shot and killed by a mob at Moore's Ford Bridge. She was seven months pregnant.",
+      "sources": [
+        "SRC-DOJ-TILL-ACT",
+        "SRC-CRRJ"
+      ],
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-THOMAS-ERNEST",
+      "name": {
+        "display": "Ernest Thomas"
+      },
+      "identity_status": "named",
+      "standing": "decedent_of_record",
+      "complaints": [
+        "CL-1949-GROVELAND"
+      ],
+      "life": {
+        "died": "1949-07-26"
+      },
+      "place": "Lake County, Florida",
+      "harm": "Pursued by a posse of several hundred men and shot dead. A coroner's jury found the killing justified.",
+      "sources": [
+        "SRC-LDF",
+        "SRC-CRRJ"
+      ],
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-SHEPHERD-SAMUEL",
+      "name": {
+        "display": "Samuel Shepherd"
+      },
+      "identity_status": "named",
+      "standing": "decedent_of_record",
+      "complaints": [
+        "CL-1949-GROVELAND"
+      ],
+      "life": {
+        "died": "1951-11-06"
+      },
+      "place": "Lake County, Florida",
+      "role": "Veteran of the Second World War",
+      "harm": "Beaten in custody to obtain a confession; convicted; conviction reversed by the Supreme Court; then shot dead in handcuffs by the county sheriff while being transported for retrial",
+      "sources": [
+        "SRC-LDF",
+        "SRC-CRRJ"
+      ],
+      "note": "Exonerated posthumously in 2021, seventy years after the sheriff who killed him was cleared by a coroner's inquest.",
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-IRVIN-WALTER",
+      "name": {
+        "display": "Walter Irvin"
+      },
+      "identity_status": "named",
+      "standing": "claimant",
+      "complaints": [
+        "CL-1949-GROVELAND"
+      ],
+      "life": {
+        "died": "1969-02-09"
+      },
+      "place": "Lake County, Florida",
+      "role": "Veteran of the Second World War",
+      "harm": "Beaten in custody; convicted; shot in handcuffs by the sheriff and left for dead; survived, contradicted the sheriff's account, was retried and convicted again",
+      "voice": {
+        "words": "[Survived and testified. Testimony is in the record of the second trial and in the FBI file; no quotation is reproduced here without a verified transcript.]",
+        "source": null,
+        "citation": "Second trial record, Lake County; FBI investigative file."
+      },
+      "sources": [
+        "SRC-LDF",
+        "SRC-CRRJ"
+      ],
+      "note": "Standing is claimant. He is the rare person in this register who was shot by an officer, survived, and then testified against him - and was convicted anyway. He was paroled in 1968 and died the following year.",
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-GREENLEE-CHARLES",
+      "name": {
+        "display": "Charles Greenlee"
+      },
+      "identity_status": "named",
+      "standing": "claimant",
+      "complaints": [
+        "CL-1949-GROVELAND"
+      ],
+      "life": {
+        "born": "c. 1933",
+        "died": "2012"
+      },
+      "place": "Lake County, Florida",
+      "role": "Sixteen years old at the time of arrest",
+      "harm": "Beaten in custody; sentenced to life imprisonment; paroled in 1962",
+      "sources": [
+        "SRC-LDF",
+        "SRC-CRRJ"
+      ],
+      "note": "He lived to be denied clemency repeatedly and died seven years before the pardons issued.",
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-TILL-EMMETT",
+      "name": {
+        "display": "Emmett Louis Till"
+      },
+      "identity_status": "named",
+      "standing": "decedent_of_record",
+      "complaints": [
+        "CL-1955-TILL"
+      ],
+      "life": {
+        "born": "1941-07-25",
+        "died": "1955-08-28"
+      },
+      "place": "Chicago, Illinois; killed near Money, Leflore County, Mississippi",
+      "role": "Fourteen years old; visiting relatives in Mississippi",
+      "harm": "Abducted at night, beaten, shot, and sunk in the Tallahatchie River",
+      "sources": [
+        "SRC-LOOK-CONFESSION",
+        "SRC-DOJ-TILL-ACT"
+      ],
+      "note": "His killers described the killing in print, for a fee, after their acquittal. The record of what happened to him is unusually complete and produced no punishment. He is the reason the word unpunished in this book's title cannot be read as unproven.",
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-TILL-MOBLEY-MAMIE",
+      "name": {
+        "display": "Mamie Till-Mobley"
+      },
+      "identity_status": "named",
+      "standing": "claimant",
+      "complaints": [
+        "CL-1955-TILL"
+      ],
+      "life": {
+        "born": "1921-11-23",
+        "died": "2003-01-06"
+      },
+      "place": "Chicago, Illinois",
+      "role": "Mother of Emmett Till; teacher",
+      "harm": "Loss of her only child; obliged to litigate, testify, and campaign for the remainder of her life to obtain a record",
+      "voice": {
+        "words": "I wanted the world to see what they did to my baby.",
+        "source": "SRC-DOJ-TILL-ACT",
+        "citation": "Widely attributed to Mamie Till-Mobley in accounts of her decision to hold an open-casket funeral."
+      },
+      "sources": [
+        "SRC-DOJ-TILL-ACT",
+        "SRC-NAACP-PAPERS"
+      ],
+      "note": "Standing is claimant, asserted by her, for forty-eight years. She insisted on the open casket and permitted the photographs. Every entry in this book depends on someone having made that decision, and she is the one who made it in public.",
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-KENNARD-CLYDE",
+      "name": {
+        "display": "Clyde Kennard"
+      },
+      "identity_status": "named",
+      "standing": "claimant",
+      "complaints": [
+        "CL-1960-KENNARD"
+      ],
+      "life": {
+        "born": "1927-06-12",
+        "died": "1963-07-04"
+      },
+      "place": "Hattiesburg, Forrest County, Mississippi",
+      "role": "Farmer; veteran of the Korean War; applicant for admission to Mississippi Southern College",
+      "harm": "Prosecuted on a charge arranged by a state agency; sentenced to seven years at hard labor for a twenty-five dollar theft; denied adequate treatment for colon cancer while imprisoned; died at thirty-six",
+      "sources": [
+        "SRC-CRRJ",
+        "SRC-NRE"
+      ],
+      "note": "Standing is claimant: he applied, was refused, applied again, and was imprisoned for it. Exonerated in 2006, forty-three years after his death.",
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    },
+    {
+      "id": "PR-COLLECTIVE-NAACP-3224",
+      "name": {
+        "display": "Persons recorded as lynched in the United States, 1889-1918"
+      },
+      "identity_status": "collectively_recorded",
+      "standing": "collective",
+      "complaints": [
+        "CL-1919-NAACP-AGGREGATE"
+      ],
+      "count": {
+        "documented": 3224,
+        "basis": "NAACP compilation, 1919. 702 of those recorded were white. The compilers state that the count is incomplete because it depends on press reporting."
+      },
+      "place": "The United States, concentrated in the former Confederate states",
+      "harm": "Killed by mobs outside any legal process",
+      "attestation": "The NAACP compilation names a substantial portion of the dead, by date, place, and alleged cause. Where it does not, no source does.",
+      "sources": [
+        "SRC-NAACP-30-YEARS",
+        "SRC-TUSKEGEE-LYNCHING",
+        "SRC-EJI-LYNCHING"
+      ],
+      "note": "This row is the register's largest count and its plainest statement of what the register cannot do. Each of these 3,224 is entitled under this book's own rule to an individuated row. Producing them requires archival work in the sources listed, county by county, and is the standing task this repository exists to hold.",
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 4."
+    }
+  ]
+}

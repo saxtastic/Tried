@@ -1,0 +1,101 @@
+{
+  "$comment": "Mechanisms by which documented injury was converted into non-cognizable claim. See METHODOLOGY.md section 5.",
+  "impediments": [
+    {
+      "id": "IMP-NO-PERSONHOOD",
+      "name": "Denial of legal personhood",
+      "kind": "written",
+      "authority": "Dred Scott v. Sandford, 60 U.S. (19 How.) 393 (1857); antebellum slave codes of the several states",
+      "mechanism": "Held that persons of African descent were not and could not be citizens within the meaning of the Constitution, and so could not sue in federal court. Under the state slave codes an enslaved person was property, could not testify against a white person, could not contract, and could not be the victim of most offenses at law.",
+      "effect": "No forum existed. The injury was not merely unpunished; it was not cognizable. This is the foundational impediment: every complaint arising before 1865 confronts it first.",
+      "status": "repudiated",
+      "repudiated_by": "U.S. Const. amends. XIII (1865), XIV (1868); Civil Rights Act of 1866"
+    },
+    {
+      "id": "IMP-STATE-ACTION",
+      "name": "State action doctrine",
+      "kind": "written",
+      "authority": "United States v. Cruikshank, 92 U.S. 542 (1876); Civil Rights Cases, 109 U.S. 3 (1883)",
+      "mechanism": "The Fourteenth Amendment was read to restrain states only, not private persons. Federal prosecutions of private mob violence were held to be beyond the enumerated federal power, leaving such conduct to the states that had declined to prosecute it.",
+      "effect": "Created the impunity gap that defines the lynching era: the state would not prosecute, and the federal government was held to lack the power to. Cruikshank overturned the only convictions obtained for the Colfax killings.",
+      "status": "superseded",
+      "repudiated_by": "Narrowed by later Commerce Clause and Thirteenth Amendment enforcement doctrine; Emmett Till Antilynching Act, Pub. L. 117-107 (2022)"
+    },
+    {
+      "id": "IMP-SEPARATE-BUT-EQUAL",
+      "name": "Separate but equal",
+      "kind": "written",
+      "authority": "Plessy v. Ferguson, 163 U.S. 537 (1896)",
+      "mechanism": "Constitutionalized state-mandated racial separation, and with it the differential enforcement, differential punishment, and differential access to courts that separation carried.",
+      "effect": "Legitimated the legal architecture within which most entries in this book occurred.",
+      "status": "repudiated",
+      "repudiated_by": "Brown v. Board of Education, 347 U.S. 483 (1954)"
+    },
+    {
+      "id": "IMP-JURY-EXCLUSION",
+      "name": "Exclusion of Black jurors",
+      "kind": "unwritten",
+      "authority": "Formally prohibited by Strauder v. West Virginia, 100 U.S. 303 (1880); accomplished thereafter by facially neutral means",
+      "mechanism": "After Strauder, exclusion proceeded through property and literacy qualifications for jury service, discretionary selection by white commissioners, and peremptory strikes. Grand juries that declined to indict and petit juries that acquitted in minutes were drawn from the population least likely to convict.",
+      "effect": "Where a prosecution occurred at all, the composition of the jury made its outcome close to predetermined. This is the most common proximate cause of acquittal in the entries below.",
+      "status": "operative",
+      "note": "Batson v. Kentucky, 476 U.S. 79 (1986) addressed peremptory strikes but left a burden of proof that remains difficult to carry."
+    },
+    {
+      "id": "IMP-PERSONS-UNKNOWN",
+      "name": "Coroner's finding of death at the hands of persons unknown",
+      "kind": "unwritten",
+      "authority": "Practice of county coroners' juries; no statutory basis",
+      "mechanism": "A coroner's jury drawn from the same community as the mob returned a finding that the deceased died at the hands of parties unknown, notwithstanding public participation, photographs, newspaper accounts naming participants, and advance notice of the event in the press.",
+      "effect": "Closed the only official inquiry that would ever occur, and produced a written record affirmatively stating that no perpetrator could be identified. Ida B. Wells's method — reading white newspapers' own accounts back against these findings — was developed precisely to defeat this device.",
+      "status": "repudiated",
+      "repudiated_by": "Superseded by modern medical examiner systems; the underlying practice has no contemporary formal analogue"
+    },
+    {
+      "id": "IMP-SOL",
+      "name": "Statute of limitations",
+      "kind": "written",
+      "authority": "State and federal limitations statutes generally; for civil rights claims, borrowed state personal-injury periods",
+      "mechanism": "Time bars run from the injury, not from the date the facts became provable. Where the impediments above suppressed investigation for decades, the limitations period expired during the suppression.",
+      "effect": "The principal formal obstacle to present-day claims. Murder is generally not time-barred; nearly everything else is. This is why so many entries below record a civil settlement or an apology rather than a prosecution.",
+      "status": "operative"
+    },
+    {
+      "id": "IMP-IMMUNITY",
+      "name": "Sovereign and qualified immunity",
+      "kind": "written",
+      "authority": "Sovereign immunity generally; qualified immunity as stated in Harlow v. Fitzgerald, 457 U.S. 800 (1982) and Pearson v. Callahan, 555 U.S. 223 (2009)",
+      "mechanism": "Governments are immune from suit absent waiver. Individual officials sued under 42 U.S.C. § 1983 are immune from damages unless the right violated was clearly established by closely analogous precedent at the time.",
+      "effect": "Bars most civil recovery against officials who acted beyond the authority of their office — the precise conduct classified here as official_participation.",
+      "status": "operative"
+    },
+    {
+      "id": "IMP-EXPIRED-JURISDICTION",
+      "name": "Lapse of federal cold-case jurisdiction",
+      "kind": "written",
+      "authority": "Emmett Till Unsolved Civil Rights Crime Act of 2007, Pub. L. 110-344; reauthorized by Pub. L. 114-325 (2016)",
+      "mechanism": "Federal authority to reopen civil rights homicides reaches deaths occurring before December 31, 1979. The Department of Justice has closed most reviewed matters without prosecution, generally because every identified subject is deceased.",
+      "effect": "The forum now exists and the defendants do not. This is the characteristic modern posture of the entries in this book: jurisdiction arrived after mortality removed its object.",
+      "status": "operative"
+    },
+    {
+      "id": "IMP-INSURANCE-RIOT-CLAUSE",
+      "name": "Riot exclusion in property insurance",
+      "kind": "written",
+      "authority": "Standard riot and civil commotion exclusions in early twentieth century fire policies",
+      "mechanism": "Policies excluded loss arising from riot. Insurers denied substantially all claims arising from the destruction of Greenwood on that basis.",
+      "effect": "Converted destruction of a district into an uncompensated total loss, transferring the entire cost to the dispossessed. Property claims failed on the same ground the criminal claims failed: the scale of the participation was itself the defense.",
+      "status": "operative",
+      "note": "The Oklahoma Commission of 2001 found that claims by Black claimants were denied while at least one claim by a white claimant for weapons losses was paid."
+    },
+    {
+      "id": "IMP-NO-STANDING-DESCENDANT",
+      "name": "Absence of descendant standing",
+      "kind": "written",
+      "authority": "Article III standing doctrine; see e.g. Alexander v. Oklahoma, 382 F.3d 1206 (10th Cir. 2004), cert. denied",
+      "mechanism": "A descendant asserting an ancestor's injury generally cannot show the particularized, personal injury standing requires, and inherited claims are time-barred independently.",
+      "effect": "The doctrinal reason reparative claims are directed to legislatures rather than courts. Rosewood and Tulsa diverge here: Florida legislated a remedy; Oklahoma litigation was dismissed.",
+      "status": "operative"
+    }
+  ]
+}

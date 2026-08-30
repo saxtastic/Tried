@@ -1,0 +1,1214 @@
+{
+  "$comment": "Complaint log. process.unpunished is DERIVED - see METHODOLOGY.md section 3 - and is recomputed and checked by scripts/validate.mjs.",
+  "complaints": [
+    {
+      "id": "CL-1857-DRED-SCOTT",
+      "title": "Closure of the federal forum to persons of African descent",
+      "incident": {
+        "date": {
+          "start": "1857-03-06",
+          "precision": "day"
+        },
+        "place": {
+          "locality": "Washington",
+          "state": "District of Columbia",
+          "country": "US"
+        },
+        "jurisdiction": [
+          "Supreme Court of the United States"
+        ]
+      },
+      "classification": [
+        "jurisdictional_bar",
+        "official_participation"
+      ],
+      "conduct_alleged": "The Court held that persons of African descent, whether enslaved or free, were not and could not become citizens within the meaning of Article III, and therefore could not invoke the jurisdiction of the federal courts; and further that Congress lacked power to prohibit slavery in the territories.",
+      "harmed": {
+        "persons": [
+          "PR-SCOTT-DRED",
+          "PR-SCOTT-HARRIET"
+        ],
+        "count": {
+          "documented": 2,
+          "collective_note": "Formally, every person of African descent then living in the United States, free or enslaved."
+        },
+        "collective": "Persons of African descent within the United States"
+      },
+      "respondents": {
+        "described": "Chief Justice Roger B. Taney and the concurring majority, acting in judicial capacity",
+        "named_in_sources": true,
+        "official_capacity": true
+      },
+      "process": {
+        "forum": "Supreme Court of the United States",
+        "outcome": "no_process",
+        "narrative": "No process was possible, because the holding was itself the act complained of. It is entered first in this book because it establishes the condition every earlier complaint was decided under and every later one had to overcome: not that the injury was excused, but that no forum would hear it."
+      },
+      "impediments": [
+        "IMP-NO-PERSONHOOD"
+      ],
+      "remedy": {
+        "granted": [
+          "Superseded by the Thirteenth and Fourteenth Amendments and the Civil Rights Act of 1866"
+        ],
+        "outstanding": "The decision was never overruled by the Court; it was displaced by constitutional amendment."
+      },
+      "sources": [
+        "SRC-DLAS"
+      ],
+      "verification": "documented",
+      "status_note": "Citation: Dred Scott v. Sandford, 60 U.S. (19 How.) 393 (1857)."
+    },
+    {
+      "id": "CL-CHATTEL-ENSLAVEMENT",
+      "title": "Chattel enslavement in the United States and its colonial predecessors",
+      "incident": {
+        "date": {
+          "start": "1619",
+          "end": "1865-12-06",
+          "precision": "era"
+        },
+        "place": {
+          "country": "US",
+          "note": "The slaveholding colonies and states, and the domestic trade between them"
+        },
+        "jurisdiction": [
+          "Colonial assemblies",
+          "State legislatures and courts",
+          "United States"
+        ]
+      },
+      "classification": [
+        "enslavement",
+        "forced_labor",
+        "sexual_violence",
+        "family_separation",
+        "jurisdictional_bar"
+      ],
+      "conduct_alleged": "Holding of persons as property; compelled uncompensated labor; sale and separation of families; sexual violence without cognizable offense; killing and maiming under statutes that graded such acts as damage to property or excused them entirely; and denial of the legal capacity to testify, contract, marry, or sue.",
+      "harmed": {
+        "persons": [
+          "PR-COLLECTIVE-ENSLAVED-US",
+          "PR-DOUGLASS-FREDERICK",
+          "PR-JACOBS-HARRIET",
+          "PR-TRUTH-SOJOURNER",
+          "PR-NORTHUP-SOLOMON"
+        ],
+        "count": {
+          "documented": null,
+          "estimated_low": 3900000,
+          "estimated_high": 4000000,
+          "note": "Approximately 3.9 million persons were enslaved in the United States at the 1860 census. The number of persons enslaved across the full period is larger by an order that this book does not estimate."
+        },
+        "collective": "Enslaved persons in North America and their descendants"
+      },
+      "respondents": {
+        "described": "Slaveholders; slave traders; sheriffs, patrols, and courts enforcing the slave codes; legislatures enacting them; insurers, banks, and shippers financing the trade",
+        "named_in_sources": true,
+        "official_capacity": true
+      },
+      "process": {
+        "forum": null,
+        "outcome": "no_process",
+        "narrative": "There was no forum. The conduct was lawful where it occurred and its victims lacked the legal capacity to complain of it. This entry exists because a log of unpunished crimes that omitted it on the ground that it was not then a crime would be reproducing the impediment rather than recording it."
+      },
+      "impediments": [
+        "IMP-NO-PERSONHOOD",
+        "IMP-SOL",
+        "IMP-NO-STANDING-DESCENDANT"
+      ],
+      "remedy": {
+        "sought": [
+          "General Orders No. 15 (Special Field Orders No. 15), 1865, rescinded the same year",
+          "H.R. 40, introduced in every Congress since 1989, never enacted"
+        ],
+        "granted": [
+          "Abolition by the Thirteenth Amendment, which is not compensation"
+        ],
+        "outstanding": "No compensation was ever paid to any enslaved person by the United States. Compensation was paid to slaveholders in the District of Columbia under the Compensated Emancipation Act of 1862."
+      },
+      "sources": [
+        "SRC-LOC-SLAVE-NARRATIVES",
+        "SRC-DOCSOUTH",
+        "SRC-SLAVE-VOYAGES",
+        "SRC-DLAS",
+        "SRC-FREEDMENS-BUREAU"
+      ],
+      "verification": "documented",
+      "status_note": "The register cannot be completed for this entry and never will be. Named individuals appear where a narrative, register, petition, or bill of sale preserved a name; the overwhelming majority did not. See PR-COLLECTIVE-ENSLAVED-US."
+    },
+    {
+      "id": "CL-1841-NORTHUP",
+      "title": "Kidnapping of Solomon Northup and the failure of the prosecution",
+      "incident": {
+        "date": {
+          "start": "1841-04",
+          "end": "1853-01-03",
+          "precision": "range"
+        },
+        "place": {
+          "locality": "Washington",
+          "state": "District of Columbia",
+          "country": "US",
+          "note": "Kidnapped in Washington; held in Rapides and Avoyelles Parishes, Louisiana"
+        },
+        "jurisdiction": [
+          "District of Columbia",
+          "New York (Saratoga and Washington Counties)",
+          "Louisiana"
+        ]
+      },
+      "classification": [
+        "kidnapping",
+        "enslavement",
+        "forced_labor",
+        "jurisdictional_bar"
+      ],
+      "conduct_alleged": "Solomon Northup, a free citizen of New York, was drugged, seized, held in a slave pen within sight of the Capitol, and sold south. He was held in slavery for twelve years until his identity was established and he was recovered by an agent of the Governor of New York.",
+      "harmed": {
+        "persons": [
+          "PR-NORTHUP-SOLOMON"
+        ],
+        "count": {
+          "documented": 1
+        },
+        "collective": "Free Black citizens of the northern states, of whom an unknown number were kidnapped and sold and never recovered"
+      },
+      "respondents": {
+        "described": "James H. Birch, the trader who sold him in Washington; Alexander Merrill and Joseph Russell, charged in New York with the kidnapping",
+        "named_in_sources": true,
+        "official_capacity": false
+      },
+      "process": {
+        "forum": "Criminal court, District of Columbia (1853); Saratoga and Washington County courts, New York (1854-1857)",
+        "outcome": "charged_acquitted",
+        "narrative": "Birch was charged in Washington and acquitted. The reason is the whole of this entry: Northup, the only witness to his own kidnapping, was barred by District law from testifying against a white man. Birch was permitted to testify in his own defence. The subsequent New York prosecution of Merrill and Russell was obstructed for years by contests over jurisdiction between the two states and ended without a conviction."
+      },
+      "impediments": [
+        "IMP-NO-PERSONHOOD",
+        "IMP-JURY-EXCLUSION"
+      ],
+      "remedy": {
+        "sought": [
+          "Criminal prosecution in the District of Columbia, 1853",
+          "Criminal prosecution in New York, 1854-1857"
+        ],
+        "granted": [
+          "Recovery of his liberty, by executive action of the Governor of New York under an 1840 statute"
+        ],
+        "outstanding": "No conviction. No compensation for twelve years of uncompensated labour. Northup's own date and place of death are unknown."
+      },
+      "sources": [
+        "SRC-DOCSOUTH",
+        "SRC-CHRONICLING-AMERICA"
+      ],
+      "verification": "documented",
+      "status_note": "Entered as the cleanest single illustration of the difference this book records. The crime was documented, the perpetrator was named, the forum was open, and the victim was silenced by a rule of evidence. Twelve Years a Slave (1853) is the complaint he filed instead, and it is the one that survived."
+    },
+    {
+      "id": "CL-1873-COLFAX",
+      "title": "Colfax massacre and the reversal of the convictions",
+      "incident": {
+        "date": {
+          "start": "1873-04-13",
+          "precision": "day"
+        },
+        "place": {
+          "locality": "Colfax",
+          "county": "Grant Parish",
+          "state": "Louisiana",
+          "country": "US"
+        },
+        "jurisdiction": [
+          "Grant Parish",
+          "Louisiana",
+          "United States (Circuit Court, District of Louisiana)"
+        ]
+      },
+      "classification": [
+        "mass_killing",
+        "political_violence",
+        "official_participation"
+      ],
+      "conduct_alleged": "An armed white force attacked Black state militia and freedmen defending the Grant Parish courthouse following the disputed 1872 Louisiana election, and killed a large number of them, most after they had surrendered.",
+      "harmed": {
+        "persons": [
+          "PR-COLLECTIVE-COLFAX"
+        ],
+        "count": {
+          "documented": null,
+          "estimated_low": 60,
+          "estimated_high": 150,
+          "note": "Counts vary by source. Most of the dead were killed after surrender."
+        },
+        "collective": "Black residents of Grant Parish"
+      },
+      "respondents": {
+        "described": "Members of the attacking force, including former Confederate soldiers and members of the White League",
+        "named_in_sources": true,
+        "official_capacity": false
+      },
+      "process": {
+        "forum": "United States Circuit Court, District of Louisiana; Supreme Court of the United States",
+        "outcome": "convictions_vacated",
+        "narrative": "Federal prosecutions under the Enforcement Act of 1870 produced three convictions. In United States v. Cruikshank, 92 U.S. 542 (1876), the Supreme Court set them aside, holding that the Fourteenth Amendment reached only state action and that the indictment failed to charge a federal offense. No one was ever punished for the killings."
+      },
+      "impediments": [
+        "IMP-STATE-ACTION",
+        "IMP-JURY-EXCLUSION"
+      ],
+      "remedy": {
+        "granted": [],
+        "outstanding": "None sought or obtained. A Louisiana state marker erected in 1950 described the event as a riot and was removed in 2021."
+      },
+      "sources": [
+        "SRC-CHRONICLING-AMERICA"
+      ],
+      "verification": "documented",
+      "status_note": "The controlling entry for the state action impediment: the case that created the doctrine is the case in which the only convictions were lost."
+    },
+    {
+      "id": "CL-1892-MEMPHIS-PEOPLES-GROCERY",
+      "title": "Killing of Thomas Moss, Calvin McDowell, and William Stewart",
+      "incident": {
+        "date": {
+          "start": "1892-03-09",
+          "precision": "day"
+        },
+        "place": {
+          "locality": "Memphis",
+          "county": "Shelby",
+          "state": "Tennessee",
+          "country": "US"
+        },
+        "jurisdiction": [
+          "Shelby County",
+          "Tennessee"
+        ]
+      },
+      "classification": [
+        "lynching",
+        "official_participation",
+        "economic_motive"
+      ],
+      "conduct_alleged": "Three Black grocers, held in the Shelby County jail after a confrontation arising from white competitors' hostility to their store, were taken from the jail by a mob and killed. The competing grocer's business interest in eliminating the People's Grocery is documented as the motive.",
+      "harmed": {
+        "persons": [
+          "PR-MOSS-THOMAS",
+          "PR-MCDOWELL-CALVIN",
+          "PR-STEWART-WILLIAM"
+        ],
+        "count": {
+          "documented": 3
+        },
+        "collective": "The Black business community of the Curve, Memphis"
+      },
+      "respondents": {
+        "described": "Members of the mob; the sheriff and jailers who surrendered custody of prisoners in their charge",
+        "named_in_sources": false,
+        "official_capacity": true
+      },
+      "process": {
+        "forum": "Shelby County",
+        "outcome": "no_process",
+        "narrative": "No one was charged. Prisoners in lawful state custody were handed over to a mob by the officers responsible for them, which is the paradigm case of an official acting beyond the authority of the office."
+      },
+      "impediments": [
+        "IMP-PERSONS-UNKNOWN",
+        "IMP-JURY-EXCLUSION",
+        "IMP-STATE-ACTION"
+      ],
+      "remedy": {
+        "granted": [],
+        "outstanding": "None. The killings caused a mass departure of Black residents from Memphis and began Ida B. Wells's investigative work."
+      },
+      "sources": [
+        "SRC-WELLS-SOUTHERN-HORRORS",
+        "SRC-WELLS-CRUSADE",
+        "SRC-CHRONICLING-AMERICA"
+      ],
+      "verification": "documented",
+      "status_note": "Wells was godmother to Thomas Moss's daughter. Her investigation of these killings produced the analytical method this record book uses."
+    },
+    {
+      "id": "CL-1892-FREE-SPEECH",
+      "title": "Destruction of the Memphis Free Speech and banishment of its editor",
+      "incident": {
+        "date": {
+          "start": "1892-05-27",
+          "precision": "day"
+        },
+        "place": {
+          "locality": "Memphis",
+          "county": "Shelby",
+          "state": "Tennessee",
+          "country": "US"
+        },
+        "jurisdiction": [
+          "Shelby County",
+          "Tennessee"
+        ]
+      },
+      "classification": [
+        "destruction_of_property",
+        "suppression_of_press",
+        "threat_to_life"
+      ],
+      "conduct_alleged": "After the Free Speech published an editorial disputing the rape pretext offered for lynchings, a mob destroyed the newspaper's press and office and threatened the life of its editor, who was then travelling. She was warned not to return to Memphis and did not return for decades.",
+      "harmed": {
+        "persons": [
+          "PR-WELLS-IDA"
+        ],
+        "count": {
+          "documented": 1
+        },
+        "collective": "The Black press"
+      },
+      "respondents": {
+        "described": "Members of the mob, organized following publication of a call to action in a Memphis daily newspaper",
+        "named_in_sources": false,
+        "official_capacity": false
+      },
+      "process": {
+        "forum": "Shelby County",
+        "outcome": "no_process",
+        "narrative": "No charges. No compensation for the destroyed property. The exile was effective and permanent."
+      },
+      "impediments": [
+        "IMP-PERSONS-UNKNOWN",
+        "IMP-STATE-ACTION"
+      ],
+      "remedy": {
+        "granted": [],
+        "outstanding": "None. Wells was awarded a posthumous Pulitzer Prize special citation in 2020."
+      },
+      "sources": [
+        "SRC-WELLS-SOUTHERN-HORRORS",
+        "SRC-WELLS-CRUSADE"
+      ],
+      "verification": "documented",
+      "status_note": "Entered because the suppression of the record is itself an injury this book is in the business of recording."
+    },
+    {
+      "id": "CL-1898-WILMINGTON",
+      "title": "Wilmington massacre and overthrow of the municipal government",
+      "incident": {
+        "date": {
+          "start": "1898-11-10",
+          "precision": "day"
+        },
+        "place": {
+          "locality": "Wilmington",
+          "county": "New Hanover",
+          "state": "North Carolina",
+          "country": "US"
+        },
+        "jurisdiction": [
+          "New Hanover County",
+          "North Carolina"
+        ]
+      },
+      "classification": [
+        "mass_killing",
+        "coup",
+        "destruction_of_property",
+        "forced_displacement",
+        "official_participation"
+      ],
+      "conduct_alleged": "An armed white force killed Black residents, destroyed the offices of the Daily Record, forced the elected biracial municipal government to resign at gunpoint, installed replacements, and banished named Black and white residents from the city.",
+      "harmed": {
+        "persons": [
+          "PR-COLLECTIVE-WILMINGTON"
+        ],
+        "count": {
+          "documented": null,
+          "estimated_low": 60,
+          "estimated_high": 300,
+          "note": "The 2006 state commission was unable to fix a figure; contemporary and later estimates diverge widely."
+        },
+        "collective": "Black residents of Wilmington and the elected officials removed"
+      },
+      "respondents": {
+        "described": "Leaders of the Democratic Party campaign, the Wilmington Light Infantry, and Red Shirts; several participants held or subsequently took public office",
+        "named_in_sources": true,
+        "official_capacity": true
+      },
+      "process": {
+        "forum": "New Hanover County; North Carolina",
+        "outcome": "no_process",
+        "narrative": "No one was charged. The leaders held office afterward. It is the only successful overthrow of a municipal government in United States history, and it produced no prosecution."
+      },
+      "impediments": [
+        "IMP-STATE-ACTION",
+        "IMP-JURY-EXCLUSION",
+        "IMP-SOL"
+      ],
+      "remedy": {
+        "granted": [
+          "State commission report, 2006, acknowledging the events"
+        ],
+        "outstanding": "No compensation. The commission's recommendations for economic redress were not enacted."
+      },
+      "sources": [
+        "SRC-WILMINGTON-COMMISSION",
+        "SRC-CHRONICLING-AMERICA"
+      ],
+      "verification": "documented"
+    },
+    {
+      "id": "CL-1918-TURNER",
+      "title": "Killing of Mary Turner and the Brooks-Lowndes lynchings",
+      "incident": {
+        "date": {
+          "start": "1918-05-17",
+          "end": "1918-05-24",
+          "precision": "range"
+        },
+        "place": {
+          "locality": "Barney, near the Little River",
+          "county": "Lowndes and Brooks",
+          "state": "Georgia",
+          "country": "US"
+        },
+        "jurisdiction": [
+          "Brooks County",
+          "Lowndes County",
+          "Georgia"
+        ]
+      },
+      "classification": [
+        "lynching",
+        "torture",
+        "reprisal_for_speech"
+      ],
+      "conduct_alleged": "During a week of lynchings following the killing of a plantation owner, Mary Turner publicly denounced the killing of her husband Hayes Turner and said she would seek warrants against those responsible. A mob seized her the next day and killed her. She was in the eighth month of pregnancy; her unborn child was killed as well.",
+      "harmed": {
+        "persons": [
+          "PR-TURNER-MARY",
+          "PR-TURNER-HAYES",
+          "PR-UNNAMED-TURNER-CHILD",
+          "PR-COLLECTIVE-BROOKS-LOWNDES"
+        ],
+        "count": {
+          "documented": 11,
+          "note": "At least eleven people were killed over the week; sources differ on the total."
+        },
+        "collective": "Black residents of Brooks and Lowndes Counties, several hundred of whom left the area"
+      },
+      "respondents": {
+        "described": "Members of the mob. Walter White's investigation for the NAACP obtained the names of participants and transmitted them to the Governor of Georgia.",
+        "named_in_sources": true,
+        "official_capacity": false
+      },
+      "process": {
+        "forum": "Brooks County; Lowndes County; Georgia",
+        "outcome": "no_process",
+        "narrative": "No one was charged, notwithstanding that the NAACP delivered a list of named participants to the state. The Department of Justice declined to act. This entry is the clearest demonstration that the impediment was not the difficulty of identification."
+      },
+      "impediments": [
+        "IMP-PERSONS-UNKNOWN",
+        "IMP-JURY-EXCLUSION",
+        "IMP-STATE-ACTION"
+      ],
+      "remedy": {
+        "granted": [
+          "Georgia historical marker, 2010, later repeatedly vandalized and removed in 2020"
+        ],
+        "outstanding": "None."
+      },
+      "sources": [
+        "SRC-NAACP-30-YEARS",
+        "SRC-NAACP-PAPERS"
+      ],
+      "verification": "documented",
+      "status_note": "Mary Turner was killed for announcing an intention to use the courts. The record book notes this without comment."
+    },
+    {
+      "id": "CL-1919-ELAINE",
+      "title": "Elaine massacre and the capital convictions of the survivors",
+      "incident": {
+        "date": {
+          "start": "1919-09-30",
+          "end": "1919-10-07",
+          "precision": "range"
+        },
+        "place": {
+          "locality": "Elaine and Hoop Spur",
+          "county": "Phillips",
+          "state": "Arkansas",
+          "country": "US"
+        },
+        "jurisdiction": [
+          "Phillips County",
+          "Arkansas",
+          "United States"
+        ]
+      },
+      "classification": [
+        "mass_killing",
+        "official_participation",
+        "wrongful_conviction",
+        "labor_suppression"
+      ],
+      "conduct_alleged": "Black sharecroppers meeting to organize the Progressive Farmers and Household Union of America were attacked; posses and federal troops killed a large number of Black residents across the county over several days. Survivors were arrested, and confessions were obtained by torture.",
+      "harmed": {
+        "persons": [
+          "PR-MOORE-FRANK",
+          "PR-COLLECTIVE-ELAINE"
+        ],
+        "count": {
+          "documented": null,
+          "estimated_low": 100,
+          "estimated_high": 240,
+          "note": "No official count was made. Five white men also died."
+        },
+        "collective": "Black sharecroppers and residents of Phillips County"
+      },
+      "respondents": {
+        "described": "Members of posses drawn from Phillips and surrounding counties; United States Army troops; county officers conducting the interrogations",
+        "named_in_sources": false,
+        "official_capacity": true
+      },
+      "process": {
+        "forum": "Phillips County Circuit Court; Supreme Court of the United States",
+        "outcome": "convictions_vacated",
+        "narrative": "No participant in the killings was charged. Instead, 122 Black residents were indicted and twelve were sentenced to death after trials lasting minutes before all-white juries surrounded by a mob. In Moore v. Dempsey, 261 U.S. 86 (1923), the Supreme Court held that a trial dominated by mob pressure denies due process, and the convictions were eventually undone. The outcome recorded here is the vacatur of the victims' convictions; no perpetrator was ever tried."
+      },
+      "impediments": [
+        "IMP-JURY-EXCLUSION",
+        "IMP-STATE-ACTION",
+        "IMP-SOL"
+      ],
+      "remedy": {
+        "granted": [
+          "Release of the twelve condemned men by 1925",
+          "Moore v. Dempsey established federal habeas review of mob-dominated trials"
+        ],
+        "outstanding": "No compensation to any victim or descendant. No count of the dead was ever made."
+      },
+      "sources": [
+        "SRC-MOORE-DEMPSEY",
+        "SRC-NAACP-PAPERS",
+        "SRC-CHRONICLING-AMERICA"
+      ],
+      "verification": "documented",
+      "status_note": "Records the inversion this book exists to document: the survivors were the only people prosecuted."
+    },
+    {
+      "id": "CL-1920-OCOEE",
+      "title": "Ocoee election day massacre",
+      "incident": {
+        "date": {
+          "start": "1920-11-02",
+          "end": "1920-11-03",
+          "precision": "range"
+        },
+        "place": {
+          "locality": "Ocoee",
+          "county": "Orange",
+          "state": "Florida",
+          "country": "US"
+        },
+        "jurisdiction": [
+          "Orange County",
+          "Florida"
+        ]
+      },
+      "classification": [
+        "mass_killing",
+        "lynching",
+        "destruction_of_property",
+        "forced_displacement",
+        "voter_suppression"
+      ],
+      "conduct_alleged": "After Black residents attempted to vote, a white mob attacked the Black district of Ocoee, burned homes, a church, and a lodge, killed residents, and lynched July Perry. The surviving Black population was driven out and did not return.",
+      "harmed": {
+        "persons": [
+          "PR-PERRY-JULY",
+          "PR-COLLECTIVE-OCOEE"
+        ],
+        "count": {
+          "documented": null,
+          "estimated_low": 6,
+          "estimated_high": 60,
+          "note": "Estimates diverge sharply; no official count was made."
+        },
+        "collective": "The Black community of Ocoee, permanently displaced"
+      },
+      "respondents": {
+        "described": "Members of the mob, including Ku Klux Klan participants; a deputy sheriff took Perry from custody",
+        "named_in_sources": true,
+        "official_capacity": true
+      },
+      "process": {
+        "forum": "Orange County; Florida",
+        "outcome": "no_process",
+        "narrative": "No charges. Ocoee remained effectively closed to Black residents for decades."
+      },
+      "impediments": [
+        "IMP-PERSONS-UNKNOWN",
+        "IMP-JURY-EXCLUSION",
+        "IMP-STATE-ACTION",
+        "IMP-SEPARATE-BUT-EQUAL"
+      ],
+      "remedy": {
+        "granted": [
+          "Florida legislation in 2020 requiring instruction on the massacre in public schools"
+        ],
+        "outstanding": "No compensation for the land and homes lost. Title to much of the expropriated property passed to white owners and was never recovered."
+      },
+      "sources": [
+        "SRC-EJI-LYNCHING",
+        "SRC-CHRONICLING-AMERICA"
+      ],
+      "verification": "documented"
+    },
+    {
+      "id": "CL-1921-TULSA",
+      "title": "Destruction of the Greenwood District, Tulsa",
+      "incident": {
+        "date": {
+          "start": "1921-05-31",
+          "end": "1921-06-01",
+          "precision": "range"
+        },
+        "place": {
+          "locality": "Tulsa, Greenwood District",
+          "county": "Tulsa",
+          "state": "Oklahoma",
+          "country": "US"
+        },
+        "jurisdiction": [
+          "Tulsa County",
+          "Oklahoma",
+          "United States (10th Circuit)"
+        ]
+      },
+      "classification": [
+        "mass_killing",
+        "destruction_of_property",
+        "official_participation",
+        "mass_detention"
+      ],
+      "conduct_alleged": "A white mob, including men deputized by city officials and armed from public and private stocks, destroyed the thirty-five block Greenwood District, killed residents, and detained thousands of survivors in internment camps. Aircraft were used over the district.",
+      "harmed": {
+        "persons": [
+          "PR-COLLECTIVE-GREENWOOD"
+        ],
+        "count": {
+          "documented": 39,
+          "estimated_low": 75,
+          "estimated_high": 300,
+          "note": "The 2001 Commission recorded 39 confirmed deaths and reviewed estimates ranging to 300. More than 1,250 homes were destroyed and roughly 6,000 people were detained."
+        },
+        "collective": "Residents and property owners of the Greenwood District"
+      },
+      "respondents": {
+        "described": "Members of the mob; city officials who deputized them and issued arms; National Guard units",
+        "named_in_sources": true,
+        "official_capacity": true
+      },
+      "process": {
+        "forum": "Tulsa County; Oklahoma; United States District Court, Northern District of Oklahoma",
+        "outcome": "no_process",
+        "narrative": "No one was convicted of any killing or of the destruction. A grand jury convened in 1921 attributed the cause to Black residents. Federal litigation by survivors was dismissed as time-barred and certiorari was denied in Alexander v. Oklahoma, 382 F.3d 1206 (10th Cir. 2004). A later state public nuisance action brought by survivors was dismissed by the Oklahoma Supreme Court in 2024."
+      },
+      "impediments": [
+        "IMP-JURY-EXCLUSION",
+        "IMP-SOL",
+        "IMP-NO-STANDING-DESCENDANT",
+        "IMP-INSURANCE-RIOT-CLAUSE",
+        "IMP-IMMUNITY"
+      ],
+      "remedy": {
+        "sought": [
+          "Compensation recommended by the Oklahoma Commission, 2001",
+          "Alexander v. Oklahoma",
+          "Oklahoma public nuisance action, dismissed 2024"
+        ],
+        "granted": [
+          "State commission report and scholarships; no direct compensation to survivors or descendants"
+        ],
+        "outstanding": "Property losses were never compensated by insurers or by the state. Survivors of the massacre were still living when the 2024 dismissal was entered."
+      },
+      "sources": [
+        "SRC-TULSA-COMMISSION",
+        "SRC-CHRONICLING-AMERICA"
+      ],
+      "verification": "documented",
+      "status_note": "The entry in which every impediment in this book operates at once: no prosecution, no insurance, no standing, no timeliness, no immunity waiver."
+    },
+    {
+      "id": "CL-1923-ROSEWOOD",
+      "title": "Destruction of Rosewood, Florida",
+      "incident": {
+        "date": {
+          "start": "1923-01-01",
+          "end": "1923-01-07",
+          "precision": "range"
+        },
+        "place": {
+          "locality": "Rosewood",
+          "county": "Levy",
+          "state": "Florida",
+          "country": "US"
+        },
+        "jurisdiction": [
+          "Levy County",
+          "Florida"
+        ]
+      },
+      "classification": [
+        "mass_killing",
+        "destruction_of_property",
+        "forced_displacement"
+      ],
+      "conduct_alleged": "Following an allegation by a white woman in nearby Sumner, a white mob attacked the Black town of Rosewood over several days, killed residents, and burned the town. Survivors fled into the swamps and the town ceased to exist.",
+      "harmed": {
+        "persons": [
+          "PR-CARRIER-SARAH",
+          "PR-CARRIER-SYLVESTER",
+          "PR-COLLECTIVE-ROSEWOOD"
+        ],
+        "count": {
+          "documented": 8,
+          "estimated_low": 8,
+          "estimated_high": 150,
+          "note": "Six Black and two white deaths were confirmed by the 1993 study; survivor accounts describe a considerably higher toll."
+        },
+        "collective": "The residents and landowners of Rosewood"
+      },
+      "respondents": {
+        "described": "Members of the mob drawn from surrounding counties; the Levy County sheriff, who declined to intervene",
+        "named_in_sources": true,
+        "official_capacity": true
+      },
+      "process": {
+        "forum": "Levy County; Florida Legislature",
+        "outcome": "legislative_remedy",
+        "narrative": "A 1923 grand jury returned no indictments. No one was ever prosecuted. Seventy-one years later the Florida Legislature enacted the Rosewood Compensation Act of 1994, providing payments to survivors, a property-loss claims process, and a scholarship fund for descendants."
+      },
+      "impediments": [
+        "IMP-JURY-EXCLUSION",
+        "IMP-SOL"
+      ],
+      "remedy": {
+        "sought": [
+          "Claim bill before the Florida Legislature, 1993-1994"
+        ],
+        "granted": [
+          "Rosewood Compensation Act of 1994: payments to survivors, a property claims process, and the Rosewood Family Scholarship Fund"
+        ],
+        "outstanding": "No criminal accountability. Compensation was partial and reached a small number of claimants."
+      },
+      "sources": [
+        "SRC-ROSEWOOD-REPORT"
+      ],
+      "verification": "documented",
+      "status_note": "The precedent entry. Rosewood is the clearest American instance of legislative reparation for a specific massacre, and it demonstrates the route that Tulsa litigation could not take. Note the outcome value: legislative_remedy is still unpunished, because no perpetrator was tried."
+    },
+    {
+      "id": "CL-1932-TUSKEGEE-STUDY",
+      "title": "United States Public Health Service Untreated Syphilis Study at Tuskegee",
+      "incident": {
+        "date": {
+          "start": "1932",
+          "end": "1972-11",
+          "precision": "range"
+        },
+        "place": {
+          "locality": "Tuskegee",
+          "county": "Macon",
+          "state": "Alabama",
+          "country": "US"
+        },
+        "jurisdiction": [
+          "United States Public Health Service",
+          "Alabama"
+        ]
+      },
+      "classification": [
+        "medical_experimentation",
+        "official_participation",
+        "fraud",
+        "deprivation_of_treatment"
+      ],
+      "conduct_alleged": "The Public Health Service enrolled approximately 600 Black men, 399 with latent syphilis, under the representation that they were being treated for bad blood. They were not treated. When penicillin became the standard of care in the 1940s, the Service acted to keep participants from receiving it, including through arrangements with local physicians and draft boards, in order to observe the untreated course of the disease to autopsy.",
+      "harmed": {
+        "persons": [
+          "PR-COLLECTIVE-TUSKEGEE-STUDY"
+        ],
+        "count": {
+          "documented": 623,
+          "note": "399 men with syphilis and 201 controls. Wives and children were infected in consequence; the exact number was never established."
+        },
+        "collective": "The enrolled men, their wives, and children born with congenital syphilis"
+      },
+      "respondents": {
+        "described": "Officers and physicians of the United States Public Health Service, acting in official capacity over forty years",
+        "named_in_sources": true,
+        "official_capacity": true
+      },
+      "process": {
+        "forum": "United States District Court, Middle District of Alabama; congressional oversight",
+        "outcome": "civil_settlement",
+        "narrative": "No one was criminally prosecuted. The study ended in 1972 after press disclosure. A class action settled in 1974 for approximately $10 million with lifetime medical benefits for participants and affected family members. A presidential apology followed in 1997."
+      },
+      "impediments": [
+        "IMP-IMMUNITY",
+        "IMP-SOL"
+      ],
+      "remedy": {
+        "sought": [
+          "Class action, 1973"
+        ],
+        "granted": [
+          "1974 settlement, approximately $10 million",
+          "Tuskegee Health Benefit Program",
+          "Presidential apology, 16 May 1997"
+        ],
+        "outstanding": "No criminal accountability for any officer. The study prompted the National Research Act of 1974 and the Belmont Report."
+      },
+      "sources": [
+        "SRC-TUSKEGEE-LYNCHING"
+      ],
+      "verification": "documented",
+      "status_note": "Source id is the Tuskegee University Archives generally; the study records are held by NARA Southeast and the CDC. Entered as the clearest instance of officials acting beyond the statute of their role over a forty-year span with no criminal consequence."
+    },
+    {
+      "id": "CL-1946-MOORES-FORD",
+      "title": "Moore's Ford Bridge killings",
+      "incident": {
+        "date": {
+          "start": "1946-07-25",
+          "precision": "day"
+        },
+        "place": {
+          "locality": "Moore's Ford Bridge, Apalachee River",
+          "county": "Walton and Oconee",
+          "state": "Georgia",
+          "country": "US"
+        },
+        "jurisdiction": [
+          "Walton County",
+          "Georgia",
+          "United States (FBI)"
+        ]
+      },
+      "classification": [
+        "lynching",
+        "mass_killing"
+      ],
+      "conduct_alleged": "A mob stopped a car carrying two Black couples and shot all four at close range. Dorothy Malcom was pregnant.",
+      "harmed": {
+        "persons": [
+          "PR-DORSEY-GEORGE",
+          "PR-DORSEY-MAE-MURRAY",
+          "PR-MALCOM-ROGER",
+          "PR-MALCOM-DOROTHY"
+        ],
+        "count": {
+          "documented": 4
+        },
+        "collective": "Black farm workers of Walton County"
+      },
+      "respondents": {
+        "described": "Members of the mob, estimated in the dozens; participants were reportedly known within the county",
+        "named_in_sources": false,
+        "official_capacity": false
+      },
+      "process": {
+        "forum": "Walton County; United States (FBI investigation, 1946; DOJ review under the Till Act, 2000s)",
+        "outcome": "unresolved",
+        "narrative": "President Truman ordered an FBI investigation. Agents interviewed some 2,790 people over four months. The federal grand jury returned no indictments. The case was reopened under the Emmett Till Unsolved Civil Rights Crime Act and closed again without charges. It remains the last mass lynching in the United States and it is unsolved."
+      },
+      "impediments": [
+        "IMP-JURY-EXCLUSION",
+        "IMP-STATE-ACTION",
+        "IMP-EXPIRED-JURISDICTION"
+      ],
+      "remedy": {
+        "granted": [
+          "Federal investigation; no charges"
+        ],
+        "outstanding": "Everything. Litigation over release of the sealed 1946 grand jury records was rejected by the Eleventh Circuit en banc in 2020."
+      },
+      "sources": [
+        "SRC-DOJ-TILL-ACT",
+        "SRC-NAACP-PAPERS",
+        "SRC-CRRJ"
+      ],
+      "verification": "documented",
+      "status_note": "The killings contributed directly to Truman's Executive Order 9808 establishing the President's Committee on Civil Rights."
+    },
+    {
+      "id": "CL-1949-GROVELAND",
+      "title": "Groveland Four",
+      "incident": {
+        "date": {
+          "start": "1949-07-16",
+          "end": "1951-11-06",
+          "precision": "range"
+        },
+        "place": {
+          "locality": "Groveland and Lake County",
+          "county": "Lake",
+          "state": "Florida",
+          "country": "US"
+        },
+        "jurisdiction": [
+          "Lake County",
+          "Florida",
+          "Supreme Court of the United States"
+        ]
+      },
+      "classification": [
+        "wrongful_conviction",
+        "official_participation",
+        "torture",
+        "extrajudicial_killing"
+      ],
+      "conduct_alleged": "Four young Black men were accused of rape on evidence later found to be without foundation. Ernest Thomas was pursued and killed by a posse. The three others were beaten in custody to obtain confessions. After the Supreme Court reversed the convictions in Shepherd v. Florida, 341 U.S. 50 (1951), Sheriff Willis McCall shot Samuel Shepherd and Walter Irvin while transporting them in handcuffs; Shepherd died and Irvin survived and contradicted the sheriff's account.",
+      "harmed": {
+        "persons": [
+          "PR-THOMAS-ERNEST",
+          "PR-SHEPHERD-SAMUEL",
+          "PR-IRVIN-WALTER",
+          "PR-GREENLEE-CHARLES"
+        ],
+        "count": {
+          "documented": 4
+        }
+      },
+      "respondents": {
+        "described": "Sheriff Willis V. McCall and deputies of Lake County, acting under color of law",
+        "named_in_sources": true,
+        "official_capacity": true
+      },
+      "process": {
+        "forum": "Lake County Circuit Court; Supreme Court of the United States; Florida Clemency Board; Lake County Circuit Court (2021)",
+        "outcome": "posthumous_exoneration",
+        "narrative": "A coroner's inquest cleared McCall of the shooting; he was never prosecuted and remained sheriff until 1972. Irvin was retried, convicted again, and later paroled. Florida issued posthumous pardons in 2019, and in 2021 a court formally exonerated all four and dismissed the indictments. No officer was ever charged for the shooting or for the beatings."
+      },
+      "impediments": [
+        "IMP-JURY-EXCLUSION",
+        "IMP-IMMUNITY",
+        "IMP-SOL",
+        "IMP-SEPARATE-BUT-EQUAL"
+      ],
+      "remedy": {
+        "granted": [
+          "Posthumous pardons, 2019",
+          "Judicial exoneration and dismissal of indictments, 2021",
+          "Florida claim bill compensating the families, 2023"
+        ],
+        "outstanding": "No criminal accountability for any officer. Exoneration corrected the state's injury to the victims and left the perpetrators' conduct unaddressed."
+      },
+      "sources": [
+        "SRC-LDF",
+        "SRC-NAACP-PAPERS",
+        "SRC-CRRJ"
+      ],
+      "verification": "documented",
+      "status_note": "Outcome is recorded as posthumous_exoneration and therefore still counts as unpunished. See METHODOLOGY.md section 3 for why."
+    },
+    {
+      "id": "CL-1955-TILL",
+      "title": "Killing of Emmett Till",
+      "incident": {
+        "date": {
+          "start": "1955-08-28",
+          "precision": "day"
+        },
+        "place": {
+          "locality": "Money and Drew",
+          "county": "Leflore and Tallahatchie and Sunflower",
+          "state": "Mississippi",
+          "country": "US"
+        },
+        "jurisdiction": [
+          "Tallahatchie County",
+          "Leflore County",
+          "Mississippi",
+          "United States"
+        ]
+      },
+      "classification": [
+        "lynching",
+        "abduction",
+        "torture",
+        "child_victim"
+      ],
+      "conduct_alleged": "A fourteen-year-old boy visiting from Chicago was taken from his great-uncle's house at night, beaten, shot, and sunk in the Tallahatchie River, following an allegation about an encounter at a store in Money.",
+      "harmed": {
+        "persons": [
+          "PR-TILL-EMMETT",
+          "PR-TILL-MOBLEY-MAMIE"
+        ],
+        "count": {
+          "documented": 1
+        }
+      },
+      "respondents": {
+        "described": "Roy Bryant and J.W. Milam, tried and acquitted; other participants named in later scholarship were never charged",
+        "named_in_sources": true,
+        "official_capacity": false
+      },
+      "process": {
+        "forum": "Circuit Court of Tallahatchie County; federal grand jury, 2006-2007; DOJ review closed 2021",
+        "outcome": "charged_acquitted",
+        "narrative": "An all-white, all-male jury acquitted Bryant and Milam after deliberating slightly over an hour. Months later, protected by double jeopardy, both described committing the killing in a paid interview published in Look magazine. The Department of Justice reopened the matter twice and closed it in December 2021 without charges."
+      },
+      "impediments": [
+        "IMP-JURY-EXCLUSION",
+        "IMP-EXPIRED-JURISDICTION",
+        "IMP-SOL",
+        "IMP-SEPARATE-BUT-EQUAL"
+      ],
+      "remedy": {
+        "granted": [
+          "Emmett Till Unsolved Civil Rights Crime Act of 2007",
+          "Emmett Till Antilynching Act, Pub. L. 117-107 (2022), making lynching a federal hate crime",
+          "Emmett Till and Mamie Till-Mobley National Monument, 2023"
+        ],
+        "outstanding": "No one was ever punished. Mamie Till-Mobley's decision to hold an open-casket funeral, and to permit the photographs to be published, is the reason the record exists at all."
+      },
+      "sources": [
+        "SRC-LOOK-CONFESSION",
+        "SRC-DOJ-TILL-ACT",
+        "SRC-NAACP-PAPERS"
+      ],
+      "verification": "documented",
+      "status_note": "The confession is documented and the acquittal is final. This is the entry that demonstrates that in this book unpunished never means unproven."
+    },
+    {
+      "id": "CL-1960-KENNARD",
+      "title": "Framing and imprisonment of Clyde Kennard",
+      "incident": {
+        "date": {
+          "start": "1959",
+          "end": "1963-07-04",
+          "precision": "range"
+        },
+        "place": {
+          "locality": "Hattiesburg",
+          "county": "Forrest",
+          "state": "Mississippi",
+          "country": "US"
+        },
+        "jurisdiction": [
+          "Forrest County",
+          "Mississippi"
+        ]
+      },
+      "classification": [
+        "wrongful_conviction",
+        "official_participation",
+        "deprivation_of_treatment",
+        "reprisal_for_speech"
+      ],
+      "conduct_alleged": "After Clyde Kennard applied repeatedly to enroll at Mississippi Southern College, state officials, acting through the Mississippi State Sovereignty Commission, arranged his prosecution for accessory to the theft of chicken feed valued at twenty-five dollars. He was sentenced to seven years at hard labor. He developed colon cancer in prison and was denied adequate care.",
+      "harmed": {
+        "persons": [
+          "PR-KENNARD-CLYDE"
+        ],
+        "count": {
+          "documented": 1
+        }
+      },
+      "respondents": {
+        "described": "Officials of the Mississippi State Sovereignty Commission, a state agency, and cooperating local law enforcement and prosecutors",
+        "named_in_sources": true,
+        "official_capacity": true
+      },
+      "process": {
+        "forum": "Forrest County Circuit Court; Forrest County Circuit Court (2006)",
+        "outcome": "posthumous_exoneration",
+        "narrative": "The conviction was vacated in 2006 after the sole witness recanted and the Sovereignty Commission's own files, opened by court order in 1998, documented the arrangement. Kennard died in 1963. No official was ever prosecuted for procuring the conviction."
+      },
+      "impediments": [
+        "IMP-IMMUNITY",
+        "IMP-SOL",
+        "IMP-JURY-EXCLUSION"
+      ],
+      "remedy": {
+        "granted": [
+          "Vacatur of conviction, 2006"
+        ],
+        "outstanding": "No accountability for any official. The agency that arranged it was a lawfully constituted arm of the State of Mississippi, funded by the legislature."
+      },
+      "sources": [
+        "SRC-CRRJ",
+        "SRC-NRE"
+      ],
+      "verification": "documented",
+      "status_note": "The Sovereignty Commission files are the rare case where the impediment documented itself. Held by the Mississippi Department of Archives and History."
+    },
+    {
+      "id": "CL-1919-NAACP-AGGREGATE",
+      "title": "Aggregate record: 3,224 lynchings, 1889-1918",
+      "incident": {
+        "date": {
+          "start": "1889",
+          "end": "1918",
+          "precision": "era"
+        },
+        "place": {
+          "country": "US",
+          "note": "Recorded across the United States, concentrated in the former Confederate states"
+        },
+        "jurisdiction": [
+          "The several states"
+        ]
+      },
+      "classification": [
+        "lynching",
+        "aggregate_entry"
+      ],
+      "conduct_alleged": "Killing of persons by mobs outside any legal process, as enumerated by the NAACP's compilation of press and investigative records over thirty years.",
+      "harmed": {
+        "persons": [
+          "PR-COLLECTIVE-NAACP-3224"
+        ],
+        "count": {
+          "documented": 3224,
+          "note": "702 of those recorded were white. The compilation is acknowledged by its own authors to undercount, as it depends on press reporting."
+        },
+        "collective": "Persons lynched in the United States, 1889-1918"
+      },
+      "respondents": {
+        "described": "Mobs, in the great majority of cases never identified in any official record; officers who surrendered custody in a substantial number of cases",
+        "named_in_sources": false,
+        "official_capacity": true
+      },
+      "process": {
+        "forum": "The several states",
+        "outcome": "no_process",
+        "narrative": "Prosecutions were exceptional and convictions nearly unknown. Federal anti-lynching legislation was introduced repeatedly from 1918 and was defeated by filibuster on every occasion until 2022."
+      },
+      "impediments": [
+        "IMP-PERSONS-UNKNOWN",
+        "IMP-JURY-EXCLUSION",
+        "IMP-STATE-ACTION"
+      ],
+      "remedy": {
+        "sought": [
+          "Dyer Anti-Lynching Bill, passed the House in 1922, filibustered in the Senate",
+          "Approximately 200 subsequent bills, all defeated"
+        ],
+        "granted": [
+          "Senate resolution of apology, 2005",
+          "Emmett Till Antilynching Act, 2022"
+        ],
+        "outstanding": "The apology came eighty-seven years after the compilation was published. This entry stands for every killing in it that has no entry of its own."
+      },
+      "sources": [
+        "SRC-NAACP-30-YEARS",
+        "SRC-TUSKEGEE-LYNCHING",
+        "SRC-EJI-LYNCHING"
+      ],
+      "verification": "documented",
+      "status_note": "An aggregate entry, entered under the rule in METHODOLOGY.md section 4: where sources preserve only a count, the count is recorded as a count and is not permitted to stand in for individuated persons."
+    }
+  ]
+}

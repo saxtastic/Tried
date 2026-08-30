@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ayeyoty.co/record-book/schema/complaint.schema.json",
+  "title": "Complaint entry",
+  "description": "One documented injury and the disposition of the legal process, if any, that followed it. process.unpunished is derived at build time and must not appear in stored data.",
+  "type": "object",
+  "required": ["id", "title", "incident", "classification", "conduct_alleged", "harmed", "respondents", "process", "verification"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^CL-[A-Z0-9-]+$" },
+    "title": { "type": "string" },
+    "incident": {
+      "type": "object",
+      "required": ["date", "place"],
+      "properties": {
+        "date": {
+          "type": "object",
+          "required": ["start", "precision"],
+          "properties": {
+            "start": { "type": "string" },
+            "end": { "type": "string" },
+            "precision": { "enum": ["day", "month", "year", "range", "era"] }
+          }
+        },
+        "place": {
+          "type": "object",
+          "properties": {
+            "locality": { "type": "string" },
+            "county": { "type": "string" },
+            "state": { "type": "string" },
+            "country": { "type": "string" },
+            "note": { "type": "string" }
+          }
+        },
+        "jurisdiction": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "classification": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "conduct_alleged": {
+      "type": "string",
+      "description": "What is alleged. Never a finding by this book. See METHODOLOGY.md section 2."
+    },
+    "harmed": {
+      "type": "object",
+      "properties": {
+        "persons": { "type": "array", "items": { "type": "string", "pattern": "^PR-[A-Z0-9-]+$" } },
+        "count": { "$ref": "#/$defs/count" },
+        "collective": { "type": "string" }
+      }
+    },
+    "respondents": {
+      "type": "object",
+      "required": ["described"],
+      "properties": {
+        "described": { "type": "string" },
+        "named_in_sources": { "type": "boolean" },
+        "official_capacity": {
+          "type": "boolean",
+          "description": "True where a respondent acted under colour of law. See METHODOLOGY.md section 6."
+        }
+      }
+    },
+    "process": {
+      "type": "object",
+      "required": ["outcome", "narrative"],
+      "properties": {
+        "forum": { "type": ["string", "null"] },
+        "outcome": {
+          "enum": ["no_process", "investigated_no_charge", "charged_acquitted", "convictions_vacated", "convicted", "civil_settlement", "legislative_remedy", "posthumous_exoneration", "unresolved"]
+        },
+        "narrative": { "type": "string" }
+      },
+      "not": { "required": ["unpunished"] }
+    },
+    "impediments": { "type": "array", "items": { "type": "string", "pattern": "^IMP-[A-Z0-9-]+$" } },
+    "remedy": {
+      "type": "object",
+      "properties": {
+        "sought": { "type": "array", "items": { "type": "string" } },
+        "granted": { "type": "array", "items": { "type": "string" } },
+        "outstanding": { "type": "string" }
+      }
+    },
+    "sources": { "type": "array", "items": { "type": "string", "pattern": "^SRC-[A-Z0-9-]+$" } },
+    "verification": { "enum": ["documented", "contested", "unverified"] },
+    "status_note": { "type": "string" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "verification": { "const": "documented" } }, "required": ["verification"] },
+      "then": { "properties": { "sources": { "minItems": 1 } }, "required": ["sources"] }
+    },
+    {
+      "if": { "properties": { "verification": { "const": "contested" } }, "required": ["verification"] },
+      "then": { "required": ["status_note"] }
+    },
+    {
+      "if": { "properties": { "verification": { "const": "unverified" } }, "required": ["verification"] },
+      "then": { "properties": { "sources": { "maxItems": 0 } } }
+    }
+  ],
+  "$defs": {
+    "count": {
+      "type": "object",
+      "properties": {
+        "documented": { "type": ["integer", "null"] },
+        "estimated_low": { "type": "integer" },
+        "estimated_high": { "type": "integer" },
+        "note": { "type": "string" },
+        "collective_note": { "type": "string" }
+      }
+    }
+  }
+}
