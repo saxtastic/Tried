@@ -107,6 +107,19 @@ for (const { file, data } of allProposals) {
 }
 if (!undeclared) ok("every proposal declares its own seed, run count and thresholds");
 
+// 7b. package.json scripts stay alphabetically sorted. Three branches add
+//     scripts to one object; unsorted, each addition lands wherever its author
+//     happened to type it and every merge collides. Sorted, an addition has one
+//     correct position and git usually resolves it without help. This is the
+//     package.json half of the same problem the project fragments solve.
+{
+  const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, "package.json"), "utf8"));
+  const keys = Object.keys(pkg.scripts ?? {});
+  const sorted = [...keys].sort();
+  if (keys.join() !== sorted.join()) bad(`package.json scripts are not sorted — merges will collide on ordering (${keys.join(", ")})`);
+  else ok(`package.json scripts are sorted (${keys.length})`);
+}
+
 // 8. THE ONE THAT MATTERS: two runs, byte for byte.
 const run = () => execFileSync(process.execPath, [path.join(ROOT, "scripts", "propose.mjs")], { encoding: "utf8" });
 const a = run(), b = run();
