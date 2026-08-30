@@ -78,6 +78,29 @@ main, .masthead, footer { max-width: 46rem; margin: 0 auto; padding: 0 1.25rem; 
 .flag-unverified, .flag-contested { outline: 1px dashed var(--warn); color: var(--warn); }
 .flag-standing-claimant { outline: 1px solid var(--accent); }
 
+.axes {
+  display: flex; flex-wrap: wrap; gap: 0; margin: .9rem 0 .8rem;
+  border: 1px solid var(--rule); border-radius: 2px; overflow: hidden;
+}
+.axes > div { flex: 1 1 9rem; min-width: 9rem; padding: .5rem .7rem;
+  border-right: 1px solid var(--rule); }
+.axes > div:last-child { border-right: 0; }
+.axes dt {
+  font-family: ui-sans-serif, system-ui, sans-serif; font-size: .62rem;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft);
+}
+.axes dd { margin: .2rem 0 0; font-size: .9rem; }
+.axis-established { color: var(--accent); font-weight: 600; }
+.axis-contested, .axis-unestablished { color: var(--warn); }
+.axis-unattributed { font-style: italic; color: var(--ink-soft); }
+.offenses { display: flex; flex-wrap: wrap; gap: .3rem; margin: .6rem 0 .3rem; }
+.offense {
+  padding: .14rem .5rem; border: 1px solid var(--accent); border-radius: 2px;
+  color: var(--accent); font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: .72rem; letter-spacing: .02em;
+}
+.offense-caveat { font-size: .76rem; margin-top: .1rem; }
+
 .field { margin: 1.1rem 0; }
 .field h3 {
   margin: 0 0 .25rem; font-family: ui-sans-serif, system-ui, sans-serif;

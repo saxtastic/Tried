@@ -2,9 +2,12 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://ayeyoty.co/record-book/schema/impediment.schema.json",
   "title": "Impediment entry",
-  "description": "A mechanism by which documented injury was converted into non-cognizable claim. See METHODOLOGY.md section 5.",
+  "description": "A mechanism by which documented injury was converted into non-cognizable claim. See METHODOLOGY.md section 7.",
   "type": "object",
-  "required": ["id", "name", "kind", "authority", "mechanism", "effect", "status"],
+  "required": [
+    "id",
+    "name",
+    "kind", "authority", "mechanism", "effect", "status"],
   "additionalProperties": false,
   "properties": {
     "id": { "type": "string", "pattern": "^IMP-[A-Z0-9-]+$" },

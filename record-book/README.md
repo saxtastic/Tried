@@ -23,12 +23,31 @@ That distinction is load-bearing. A log that overstates its own authority gets
 excluded from the proceedings it was built for. A log that documents carefully
 gets cited in them.
 
-## The three rules
+## The rules
 
-1. **The book never converts an allegation into a finding.** An entry marked
-   `unverified` records that someone alleged something. It does not record that
-   the thing happened. Only a court, a commission, or a documented confession
-   moves an entry, and the mover is named in the entry.
+**0. The crime is captured on its own evidence.** Whether the violence happened,
+who did it, and what a forum said about it are three separate questions, held in
+three separate fields:
+
+| Axis | Field | Answers |
+| --- | --- | --- |
+| **Act** | `finding.act` | Did it occur? |
+| **Actor** | `finding.attribution` | Who did it? |
+| **Forum** | `process.outcome` | What did a court do about it? |
+
+The act is answered by bodies, ruins, death records and contemporaneous account —
+not by a forum, and not by this book's opinion. The ordinary entry here reads
+*act established, actor unattributed, forum no process*, and that is not an
+inconsistency to resolve; it is the thing being documented. Framing an
+established killing as merely "alleged" would adopt the posture of the county
+that declined to look, and let a failure to prosecute retroactively unmake the
+fact of the violence. `offense` names what the conduct constitutes on its face —
+a characterisation of conduct, never a verdict on a person.
+
+**1. The book never attributes conduct to a person on its own authority.** The
+restraint is on the *actor* axis, not the *act* axis. An actor is named only
+where the sources name one; an entry whose record is `unverified` cannot carry
+an established act, and the validator rejects the combination.
 
 2. **"Unpunished" is derived, never typed.** `process.unpunished` is computed
    from the recorded disposition and is checked on every build. A civil
@@ -42,6 +61,13 @@ gets cited in them.
    consent to a claim. What they establish is not a demand — it is the site: that
    the injury occurred, where, and that it went unanswered. Standing to demand
    belongs to the living who choose to assert it.
+
+**4. What falls between the events is recorded too.** `harmed.interstitial`
+carries the harm with no date, no forum and no tally anywhere: property abandoned
+under threat, exile, testimony never given, kinship severed by sale, title
+transferred, and effects that continue to fall on people who were never present.
+Without it, the book's own one-entry-one-incident structure would do the same
+work of erasure the tallies do.
 
 `METHODOLOGY.md` sets all of this out in full, including how the register handles
 a person whose injury survives and whose name does not.
@@ -75,10 +101,15 @@ anything under `public/record-book/`; it is overwritten.
 
 ## Current state
 
-18 complaint entries, 38 register rows, 10 impediments, 24 archives. Every
-complaint currently in the log is unpunished — none records a sustained criminal
-conviction of a perpetrator. That is a finding about the corpus, not a selection
-rule: an entry with a conviction is in scope and would render with a different
+18 complaint entries, 38 register rows, 10 impediments, 24 archives.
+
+In all 18 the act is **established** on the evidence. In 3 no participant is
+identified in any source. In all 18 no perpetrator was ever convicted. Those
+three numbers are the shape of the corpus, and the reason the axes are kept
+apart: the first is not diminished by the third.
+
+Every complaint being unpunished is a finding about the corpus, not a selection
+rule — an entry with a conviction is in scope and would render with a different
 flag.
 
 Coverage runs from *Dred Scott* (1857) to the Sovereignty Commission's
@@ -90,10 +121,12 @@ rather than allowed to masquerade as individuated records.
 
 1. Add to `data/complaints.json`. Everyone harmed gets a row in
    `data/register.json`; every source gets a row in `data/archives.json`.
-2. Set `verification` honestly. `documented` requires at least one source on
-   file. `contested` requires `status_note` to describe the conflict, not resolve
-   it silently. `unverified` must carry no sources — it is an allegation, and the
-   validator enforces that it stays one.
+2. Answer the three axes independently. `finding.act` is what the evidence
+   establishes; `finding.attribution` is never inferred from it. Set
+   `verification` — which describes the *record*, not the event — honestly:
+   `documented` requires a source on file, `contested` requires `status_note` to
+   describe the conflict rather than resolve it silently, and `unverified` must
+   carry no sources and cannot accompany an established act.
 3. Do not write `process.unpunished`. It is derived, and the validator rejects a
    stored value that disagrees with the derivation.
 4. Run `npm run record-book:validate`, then `npm run record-book:build`.

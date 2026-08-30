@@ -1,5 +1,5 @@
 {
-  "$comment": "Complaint log. process.unpunished is DERIVED - see METHODOLOGY.md section 3 - and is recomputed and checked by scripts/validate.mjs.",
+  "$comment": "Complaint log. process.unpunished is DERIVED - see METHODOLOGY.md section 5 - and is recomputed and checked by scripts/validate.mjs.",
   "complaints": [
     {
       "id": "CL-1857-DRED-SCOTT",
@@ -22,7 +22,6 @@
         "jurisdictional_bar",
         "official_participation"
       ],
-      "conduct_alleged": "The Court held that persons of African descent, whether enslaved or free, were not and could not become citizens within the meaning of Article III, and therefore could not invoke the jurisdiction of the federal courts; and further that Congress lacked power to prohibit slavery in the territories.",
       "harmed": {
         "persons": [
           "PR-SCOTT-DRED",
@@ -32,7 +31,8 @@
           "documented": 2,
           "collective_note": "Formally, every person of African descent then living in the United States, free or enslaved."
         },
-        "collective": "Persons of African descent within the United States"
+        "collective": "Persons of African descent within the United States",
+        "interstitial": "Every injury suffered by a person of African descent between 1857 and 1868 that went unheard because this holding closed the forum. Those injuries have no entries anywhere, and cannot be counted."
       },
       "respondents": {
         "described": "Chief Justice Roger B. Taney and the concurring majority, acting in judicial capacity",
@@ -57,7 +57,14 @@
         "SRC-DLAS"
       ],
       "verification": "documented",
-      "status_note": "Citation: Dred Scott v. Sandford, 60 U.S. (19 How.) 393 (1857)."
+      "status_note": "Citation: Dred Scott v. Sandford, 60 U.S. (19 How.) 393 (1857).",
+      "finding": {
+        "act": "established",
+        "attribution": "named_in_sources"
+      },
+      "offense": [],
+      "offense_note": "Not a violent act. The entry records a lawful judicial holding that operated as the precondition for the violence in every entry below. It is carried here because a log that recorded only the blows and not the rule that made them unanswerable would be incomplete.",
+      "conduct": "The Court held that persons of African descent, whether enslaved or free, were not and could not become citizens within the meaning of Article III, and therefore could not invoke the jurisdiction of the federal courts; and further that Congress lacked power to prohibit slavery in the territories."
     },
     {
       "id": "CL-CHATTEL-ENSLAVEMENT",
@@ -85,7 +92,6 @@
         "family_separation",
         "jurisdictional_bar"
       ],
-      "conduct_alleged": "Holding of persons as property; compelled uncompensated labor; sale and separation of families; sexual violence without cognizable offense; killing and maiming under statutes that graded such acts as damage to property or excused them entirely; and denial of the legal capacity to testify, contract, marry, or sue.",
       "harmed": {
         "persons": [
           "PR-COLLECTIVE-ENSLAVED-US",
@@ -100,7 +106,8 @@
           "estimated_high": 4000000,
           "note": "Approximately 3.9 million persons were enslaved in the United States at the 1860 census. The number of persons enslaved across the full period is larger by an order that this book does not estimate."
         },
-        "collective": "Enslaved persons in North America and their descendants"
+        "collective": "Enslaved persons in North America and their descendants",
+        "interstitial": "Wealth transferred and still held. Names not preserved and now unrecoverable. Kinship lines severed by sale, which is why descendants of this entry frequently cannot document the ancestry that a claim would require of them."
       },
       "respondents": {
         "described": "Slaveholders; slave traders; sheriffs, patrols, and courts enforcing the slave codes; legislatures enacting them; insurers, banks, and shippers financing the trade",
@@ -135,7 +142,21 @@
         "SRC-FREEDMENS-BUREAU"
       ],
       "verification": "documented",
-      "status_note": "The register cannot be completed for this entry and never will be. Named individuals appear where a narrative, register, petition, or bill of sale preserved a name; the overwhelming majority did not. See PR-COLLECTIVE-ENSLAVED-US."
+      "status_note": "The register cannot be completed for this entry and never will be. Named individuals appear where a narrative, register, petition, or bill of sale preserved a name; the overwhelming majority did not. See PR-COLLECTIVE-ENSLAVED-US.",
+      "finding": {
+        "act": "established",
+        "attribution": "named_in_sources"
+      },
+      "offense": [
+        "enslavement",
+        "forced_labour",
+        "rape",
+        "kidnapping",
+        "homicide",
+        "mayhem",
+        "family_separation"
+      ],
+      "conduct": "Holding of persons as property; compelled uncompensated labor; sale and separation of families; sexual violence without cognizable offense; killing and maiming under statutes that graded such acts as damage to property or excused them entirely; and denial of the legal capacity to testify, contract, marry, or sue."
     },
     {
       "id": "CL-1841-NORTHUP",
@@ -164,7 +185,6 @@
         "forced_labor",
         "jurisdictional_bar"
       ],
-      "conduct_alleged": "Solomon Northup, a free citizen of New York, was drugged, seized, held in a slave pen within sight of the Capitol, and sold south. He was held in slavery for twelve years until his identity was established and he was recovered by an agent of the Governor of New York.",
       "harmed": {
         "persons": [
           "PR-NORTHUP-SOLOMON"
@@ -172,7 +192,8 @@
         "count": {
           "documented": 1
         },
-        "collective": "Free Black citizens of the northern states, of whom an unknown number were kidnapped and sold and never recovered"
+        "collective": "Free Black citizens of the northern states, of whom an unknown number were kidnapped and sold and never recovered",
+        "interstitial": "Twelve years of a life. An unknown number of other free Black northerners kidnapped in the same trade who were never recovered and so left no narrative, no prosecution, and no entry."
       },
       "respondents": {
         "described": "James H. Birch, the trader who sold him in Washington; Alexander Merrill and Joseph Russell, charged in New York with the kidnapping",
@@ -203,7 +224,18 @@
         "SRC-CHRONICLING-AMERICA"
       ],
       "verification": "documented",
-      "status_note": "Entered as the cleanest single illustration of the difference this book records. The crime was documented, the perpetrator was named, the forum was open, and the victim was silenced by a rule of evidence. Twelve Years a Slave (1853) is the complaint he filed instead, and it is the one that survived."
+      "status_note": "Entered as the cleanest single illustration of the difference this book records. The crime was documented, the perpetrator was named, the forum was open, and the victim was silenced by a rule of evidence. Twelve Years a Slave (1853) is the complaint he filed instead, and it is the one that survived.",
+      "finding": {
+        "act": "established",
+        "attribution": "named_in_sources"
+      },
+      "offense": [
+        "kidnapping",
+        "false_imprisonment",
+        "enslavement",
+        "forced_labour"
+      ],
+      "conduct": "Solomon Northup, a free citizen of New York, was drugged, seized, held in a slave pen within sight of the Capitol, and sold south. He was held in slavery for twelve years until his identity was established and he was recovered by an agent of the Governor of New York."
     },
     {
       "id": "CL-1873-COLFAX",
@@ -230,7 +262,6 @@
         "political_violence",
         "official_participation"
       ],
-      "conduct_alleged": "An armed white force attacked Black state militia and freedmen defending the Grant Parish courthouse following the disputed 1872 Louisiana election, and killed a large number of them, most after they had surrendered.",
       "harmed": {
         "persons": [
           "PR-COLLECTIVE-COLFAX"
@@ -241,7 +272,8 @@
           "estimated_high": 150,
           "note": "Counts vary by source. Most of the dead were killed after surrender."
         },
-        "collective": "Black residents of Grant Parish"
+        "collective": "Black residents of Grant Parish",
+        "interstitial": "The collapse of Reconstruction enforcement in Louisiana. Cruikshank's holding then travelled outward from these dead and disposed of prosecutions in states that had nothing to do with Grant Parish."
       },
       "respondents": {
         "described": "Members of the attacking force, including former Confederate soldiers and members of the White League",
@@ -265,7 +297,16 @@
         "SRC-CHRONICLING-AMERICA"
       ],
       "verification": "documented",
-      "status_note": "The controlling entry for the state action impediment: the case that created the doctrine is the case in which the only convictions were lost."
+      "status_note": "The controlling entry for the state action impediment: the case that created the doctrine is the case in which the only convictions were lost.",
+      "finding": {
+        "act": "established",
+        "attribution": "named_in_sources"
+      },
+      "offense": [
+        "mass_homicide",
+        "homicide_after_surrender"
+      ],
+      "conduct": "An armed white force attacked Black state militia and freedmen defending the Grant Parish courthouse following the disputed 1872 Louisiana election, and killed a large number of them, most after they had surrendered."
     },
     {
       "id": "CL-1892-MEMPHIS-PEOPLES-GROCERY",
@@ -291,7 +332,6 @@
         "official_participation",
         "economic_motive"
       ],
-      "conduct_alleged": "Three Black grocers, held in the Shelby County jail after a confrontation arising from white competitors' hostility to their store, were taken from the jail by a mob and killed. The competing grocer's business interest in eliminating the People's Grocery is documented as the motive.",
       "harmed": {
         "persons": [
           "PR-MOSS-THOMAS",
@@ -301,7 +341,8 @@
         "count": {
           "documented": 3
         },
-        "collective": "The Black business community of the Curve, Memphis"
+        "collective": "The Black business community of the Curve, Memphis",
+        "interstitial": "The People's Grocery was sold at a fraction of its value to the competitor whose hostility produced the killings. Several thousand Black residents left Memphis. Neither the transfer nor the exodus appears in any register of loss."
       },
       "respondents": {
         "described": "Members of the mob; the sheriff and jailers who surrendered custody of prisoners in their charge",
@@ -328,7 +369,17 @@
         "SRC-CHRONICLING-AMERICA"
       ],
       "verification": "documented",
-      "status_note": "Wells was godmother to Thomas Moss's daughter. Her investigation of these killings produced the analytical method this record book uses."
+      "status_note": "Wells was godmother to Thomas Moss's daughter. Her investigation of these killings produced the analytical method this record book uses.",
+      "finding": {
+        "act": "established",
+        "attribution": "described_unidentified"
+      },
+      "offense": [
+        "homicide",
+        "abduction_from_lawful_custody",
+        "dereliction_by_custodian"
+      ],
+      "conduct": "Three Black grocers, held in the Shelby County jail after a confrontation arising from white competitors' hostility to their store, were taken from the jail by a mob and killed. The competing grocer's business interest in eliminating the People's Grocery is documented as the motive."
     },
     {
       "id": "CL-1892-FREE-SPEECH",
@@ -354,7 +405,6 @@
         "suppression_of_press",
         "threat_to_life"
       ],
-      "conduct_alleged": "After the Free Speech published an editorial disputing the rape pretext offered for lynchings, a mob destroyed the newspaper's press and office and threatened the life of its editor, who was then travelling. She was warned not to return to Memphis and did not return for decades.",
       "harmed": {
         "persons": [
           "PR-WELLS-IDA"
@@ -362,7 +412,8 @@
         "count": {
           "documented": 1
         },
-        "collective": "The Black press"
+        "collective": "The Black press",
+        "interstitial": "The issues the Free Speech would have printed. Every killing in west Tennessee that went uninvestigated in the decades after its only investigator was driven out."
       },
       "respondents": {
         "described": "Members of the mob, organized following publication of a call to action in a Memphis daily newspaper",
@@ -387,7 +438,17 @@
         "SRC-WELLS-CRUSADE"
       ],
       "verification": "documented",
-      "status_note": "Entered because the suppression of the record is itself an injury this book is in the business of recording."
+      "status_note": "Entered because the suppression of the record is itself an injury this book is in the business of recording.",
+      "finding": {
+        "act": "established",
+        "attribution": "unattributed"
+      },
+      "offense": [
+        "destruction_of_property",
+        "criminal_threat",
+        "suppression_of_the_press"
+      ],
+      "conduct": "After the Free Speech published an editorial disputing the rape pretext offered for lynchings, a mob destroyed the newspaper's press and office and threatened the life of its editor, who was then travelling. She was warned not to return to Memphis and did not return for decades."
     },
     {
       "id": "CL-1898-WILMINGTON",
@@ -415,7 +476,6 @@
         "forced_displacement",
         "official_participation"
       ],
-      "conduct_alleged": "An armed white force killed Black residents, destroyed the offices of the Daily Record, forced the elected biracial municipal government to resign at gunpoint, installed replacements, and banished named Black and white residents from the city.",
       "harmed": {
         "persons": [
           "PR-COLLECTIVE-WILMINGTON"
@@ -426,7 +486,8 @@
           "estimated_high": 300,
           "note": "The 2006 state commission was unable to fix a figure; contemporary and later estimates diverge widely."
         },
-        "collective": "Black residents of Wilmington and the elected officials removed"
+        "collective": "Black residents of Wilmington and the elected officials removed",
+        "interstitial": "Property abandoned under threat and never recovered. A Black professional and political class that did not re-form in Wilmington. The statewide disenfranchisement campaign this was staged to deliver, which succeeded."
       },
       "respondents": {
         "described": "Leaders of the Democratic Party campaign, the Wilmington Light Infantry, and Red Shirts; several participants held or subsequently took public office",
@@ -453,7 +514,18 @@
         "SRC-WILMINGTON-COMMISSION",
         "SRC-CHRONICLING-AMERICA"
       ],
-      "verification": "documented"
+      "verification": "documented",
+      "finding": {
+        "act": "established",
+        "attribution": "named_in_sources"
+      },
+      "offense": [
+        "mass_homicide",
+        "arson",
+        "forcible_removal_of_elected_officials",
+        "banishment"
+      ],
+      "conduct": "An armed white force killed Black residents, destroyed the offices of the Daily Record, forced the elected biracial municipal government to resign at gunpoint, installed replacements, and banished named Black and white residents from the city."
     },
     {
       "id": "CL-1918-TURNER",
@@ -481,7 +553,6 @@
         "torture",
         "reprisal_for_speech"
       ],
-      "conduct_alleged": "During a week of lynchings following the killing of a plantation owner, Mary Turner publicly denounced the killing of her husband Hayes Turner and said she would seek warrants against those responsible. A mob seized her the next day and killed her. She was in the eighth month of pregnancy; her unborn child was killed as well.",
       "harmed": {
         "persons": [
           "PR-TURNER-MARY",
@@ -493,7 +564,8 @@
           "documented": 11,
           "note": "At least eleven people were killed over the week; sources differ on the total."
         },
-        "collective": "Black residents of Brooks and Lowndes Counties, several hundred of whom left the area"
+        "collective": "Black residents of Brooks and Lowndes Counties, several hundred of whom left the area",
+        "interstitial": "Several hundred Black residents left Brooks and Lowndes Counties in the following weeks, abandoning crops mid-season. Mary Turner's stated intention to swear out warrants is the last recorded attempt by anyone to use a court in that county for these killings."
       },
       "respondents": {
         "described": "Members of the mob. Walter White's investigation for the NAACP obtained the names of participants and transmitted them to the Governor of Georgia.",
@@ -521,7 +593,17 @@
         "SRC-NAACP-PAPERS"
       ],
       "verification": "documented",
-      "status_note": "Mary Turner was killed for announcing an intention to use the courts. The record book notes this without comment."
+      "status_note": "Mary Turner was killed for announcing an intention to use the courts. The record book notes this without comment.",
+      "finding": {
+        "act": "established",
+        "attribution": "named_in_sources"
+      },
+      "offense": [
+        "homicide",
+        "torture",
+        "killing_of_an_unborn_child"
+      ],
+      "conduct": "During a week of lynchings following the killing of a plantation owner, Mary Turner publicly denounced the killing of her husband Hayes Turner and said she would seek warrants against those responsible. A mob seized her the next day and killed her. She was in the eighth month of pregnancy; her unborn child was killed as well."
     },
     {
       "id": "CL-1919-ELAINE",
@@ -550,7 +632,6 @@
         "wrongful_conviction",
         "labor_suppression"
       ],
-      "conduct_alleged": "Black sharecroppers meeting to organize the Progressive Farmers and Household Union of America were attacked; posses and federal troops killed a large number of Black residents across the county over several days. Survivors were arrested, and confessions were obtained by torture.",
       "harmed": {
         "persons": [
           "PR-MOORE-FRANK",
@@ -562,7 +643,8 @@
           "estimated_high": 240,
           "note": "No official count was made. Five white men also died."
         },
-        "collective": "Black sharecroppers and residents of Phillips County"
+        "collective": "Black sharecroppers and residents of Phillips County",
+        "interstitial": "The union that the meeting was called to form. No coroner's inquest was held for any of the dead and no burial was recorded, so the absence of a count is not a gap in this book's research but a fact about what was done."
       },
       "respondents": {
         "described": "Members of posses drawn from Phillips and surrounding counties; United States Army troops; county officers conducting the interrogations",
@@ -592,7 +674,17 @@
         "SRC-CHRONICLING-AMERICA"
       ],
       "verification": "documented",
-      "status_note": "Records the inversion this book exists to document: the survivors were the only people prosecuted."
+      "status_note": "Records the inversion this book exists to document: the survivors were the only people prosecuted.",
+      "finding": {
+        "act": "established",
+        "attribution": "described_unidentified"
+      },
+      "offense": [
+        "mass_homicide",
+        "torture_to_obtain_confession",
+        "malicious_prosecution"
+      ],
+      "conduct": "Black sharecroppers meeting to organize the Progressive Farmers and Household Union of America were attacked; posses and federal troops killed a large number of Black residents across the county over several days. Survivors were arrested, and confessions were obtained by torture."
     },
     {
       "id": "CL-1920-OCOEE",
@@ -621,7 +713,6 @@
         "forced_displacement",
         "voter_suppression"
       ],
-      "conduct_alleged": "After Black residents attempted to vote, a white mob attacked the Black district of Ocoee, burned homes, a church, and a lodge, killed residents, and lynched July Perry. The surviving Black population was driven out and did not return.",
       "harmed": {
         "persons": [
           "PR-PERRY-JULY",
@@ -633,7 +724,8 @@
           "estimated_high": 60,
           "note": "Estimates diverge sharply; no official count was made."
         },
-        "collective": "The Black community of Ocoee, permanently displaced"
+        "collective": "The Black community of Ocoee, permanently displaced",
+        "interstitial": "Title to the land of the displaced passed to white owners and was never recovered. Ocoee's Black population fell to effectively zero and stayed there for decades, which means the harm continued to be inflicted on people who were never present at the event."
       },
       "respondents": {
         "described": "Members of the mob, including Ku Klux Klan participants; a deputy sheriff took Perry from custody",
@@ -661,7 +753,18 @@
         "SRC-EJI-LYNCHING",
         "SRC-CHRONICLING-AMERICA"
       ],
-      "verification": "documented"
+      "verification": "documented",
+      "finding": {
+        "act": "established",
+        "attribution": "named_in_sources"
+      },
+      "offense": [
+        "homicide",
+        "arson",
+        "forcible_displacement",
+        "interference_with_the_franchise"
+      ],
+      "conduct": "After Black residents attempted to vote, a white mob attacked the Black district of Ocoee, burned homes, a church, and a lodge, killed residents, and lynched July Perry. The surviving Black population was driven out and did not return."
     },
     {
       "id": "CL-1921-TULSA",
@@ -690,7 +793,6 @@
         "official_participation",
         "mass_detention"
       ],
-      "conduct_alleged": "A white mob, including men deputized by city officials and armed from public and private stocks, destroyed the thirty-five block Greenwood District, killed residents, and detained thousands of survivors in internment camps. Aircraft were used over the district.",
       "harmed": {
         "persons": [
           "PR-COLLECTIVE-GREENWOOD"
@@ -701,7 +803,8 @@
           "estimated_high": 300,
           "note": "The 2001 Commission recorded 39 confirmed deaths and reviewed estimates ranging to 300. More than 1,250 homes were destroyed and roughly 6,000 people were detained."
         },
-        "collective": "Residents and property owners of the Greenwood District"
+        "collective": "Residents and property owners of the Greenwood District",
+        "interstitial": "Insurance denied under riot clauses, converting destruction into total uncompensated loss. Deeds and records burned with the district, so the proof of ownership that a later claim would require was destroyed by the same act that created the claim."
       },
       "respondents": {
         "described": "Members of the mob; city officials who deputized them and issued arms; National Guard units",
@@ -736,7 +839,18 @@
         "SRC-CHRONICLING-AMERICA"
       ],
       "verification": "documented",
-      "status_note": "The entry in which every impediment in this book operates at once: no prosecution, no insurance, no standing, no timeliness, no immunity waiver."
+      "status_note": "The entry in which every impediment in this book operates at once: no prosecution, no insurance, no standing, no timeliness, no immunity waiver.",
+      "finding": {
+        "act": "established",
+        "attribution": "named_in_sources"
+      },
+      "offense": [
+        "mass_homicide",
+        "arson",
+        "mass_unlawful_detention",
+        "destruction_of_property"
+      ],
+      "conduct": "A white mob, including men deputized by city officials and armed from public and private stocks, destroyed the thirty-five block Greenwood District, killed residents, and detained thousands of survivors in internment camps. Aircraft were used over the district."
     },
     {
       "id": "CL-1923-ROSEWOOD",
@@ -763,7 +877,6 @@
         "destruction_of_property",
         "forced_displacement"
       ],
-      "conduct_alleged": "Following an allegation by a white woman in nearby Sumner, a white mob attacked the Black town of Rosewood over several days, killed residents, and burned the town. Survivors fled into the swamps and the town ceased to exist.",
       "harmed": {
         "persons": [
           "PR-CARRIER-SARAH",
@@ -776,7 +889,8 @@
           "estimated_high": 150,
           "note": "Six Black and two white deaths were confirmed by the 1993 study; survivor accounts describe a considerably higher toll."
         },
-        "collective": "The residents and landowners of Rosewood"
+        "collective": "The residents and landowners of Rosewood",
+        "interstitial": "A town that ceased to exist. Survivors dispersed under conditions that made them unlocatable for seventy years, which is why the 1994 compensation reached so few of them."
       },
       "respondents": {
         "described": "Members of the mob drawn from surrounding counties; the Levy County sheriff, who declined to intervene",
@@ -805,7 +919,17 @@
         "SRC-ROSEWOOD-REPORT"
       ],
       "verification": "documented",
-      "status_note": "The precedent entry. Rosewood is the clearest American instance of legislative reparation for a specific massacre, and it demonstrates the route that Tulsa litigation could not take. Note the outcome value: legislative_remedy is still unpunished, because no perpetrator was tried."
+      "status_note": "The precedent entry. Rosewood is the clearest American instance of legislative reparation for a specific massacre, and it demonstrates the route that Tulsa litigation could not take. Note the outcome value: legislative_remedy is still unpunished, because no perpetrator was tried.",
+      "finding": {
+        "act": "established",
+        "attribution": "named_in_sources"
+      },
+      "offense": [
+        "homicide",
+        "arson",
+        "forcible_displacement"
+      ],
+      "conduct": "Following an allegation by a white woman in nearby Sumner, a white mob attacked the Black town of Rosewood over several days, killed residents, and burned the town. Survivors fled into the swamps and the town ceased to exist."
     },
     {
       "id": "CL-1932-TUSKEGEE-STUDY",
@@ -833,7 +957,6 @@
         "fraud",
         "deprivation_of_treatment"
       ],
-      "conduct_alleged": "The Public Health Service enrolled approximately 600 Black men, 399 with latent syphilis, under the representation that they were being treated for bad blood. They were not treated. When penicillin became the standard of care in the 1940s, the Service acted to keep participants from receiving it, including through arrangements with local physicians and draft boards, in order to observe the untreated course of the disease to autopsy.",
       "harmed": {
         "persons": [
           "PR-COLLECTIVE-TUSKEGEE-STUDY"
@@ -842,7 +965,8 @@
           "documented": 623,
           "note": "399 men with syphilis and 201 controls. Wives and children were infected in consequence; the exact number was never established."
         },
-        "collective": "The enrolled men, their wives, and children born with congenital syphilis"
+        "collective": "The enrolled men, their wives, and children born with congenital syphilis",
+        "interstitial": "Wives infected and children born with congenital syphilis, never fully enumerated. A documented and persisting withdrawal of trust in public medicine among Black Americans, which is a harm to people who were never enrolled."
       },
       "respondents": {
         "described": "Officers and physicians of the United States Public Health Service, acting in official capacity over forty years",
@@ -873,7 +997,18 @@
         "SRC-TUSKEGEE-LYNCHING"
       ],
       "verification": "documented",
-      "status_note": "Source id is the Tuskegee University Archives generally; the study records are held by NARA Southeast and the CDC. Entered as the clearest instance of officials acting beyond the statute of their role over a forty-year span with no criminal consequence."
+      "status_note": "Source id is the Tuskegee University Archives generally; the study records are held by NARA Southeast and the CDC. Entered as the clearest instance of officials acting beyond the statute of their role over a forty-year span with no criminal consequence.",
+      "finding": {
+        "act": "established",
+        "attribution": "named_in_sources"
+      },
+      "offense": [
+        "fraud",
+        "battery",
+        "non_consensual_human_experimentation",
+        "deprivation_of_treatment"
+      ],
+      "conduct": "The Public Health Service enrolled approximately 600 Black men, 399 with latent syphilis, under the representation that they were being treated for bad blood. They were not treated. When penicillin became the standard of care in the 1940s, the Service acted to keep participants from receiving it, including through arrangements with local physicians and draft boards, in order to observe the untreated course of the disease to autopsy."
     },
     {
       "id": "CL-1946-MOORES-FORD",
@@ -899,7 +1034,6 @@
         "lynching",
         "mass_killing"
       ],
-      "conduct_alleged": "A mob stopped a car carrying two Black couples and shot all four at close range. Dorothy Malcom was pregnant.",
       "harmed": {
         "persons": [
           "PR-DORSEY-GEORGE",
@@ -910,7 +1044,8 @@
         "count": {
           "documented": 4
         },
-        "collective": "Black farm workers of Walton County"
+        "collective": "Black farm workers of Walton County",
+        "interstitial": "The 1946 grand jury records remain sealed. Participants were reportedly known within the county and are now dead, so the identification that 2,790 interviews did not produce can no longer be produced at all."
       },
       "respondents": {
         "described": "Members of the mob, estimated in the dozens; participants were reportedly known within the county",
@@ -939,7 +1074,15 @@
         "SRC-CRRJ"
       ],
       "verification": "documented",
-      "status_note": "The killings contributed directly to Truman's Executive Order 9808 establishing the President's Committee on Civil Rights."
+      "status_note": "The killings contributed directly to Truman's Executive Order 9808 establishing the President's Committee on Civil Rights.",
+      "finding": {
+        "act": "established",
+        "attribution": "unattributed"
+      },
+      "offense": [
+        "mass_homicide"
+      ],
+      "conduct": "A mob stopped a car carrying two Black couples and shot all four at close range. Dorothy Malcom was pregnant."
     },
     {
       "id": "CL-1949-GROVELAND",
@@ -968,7 +1111,6 @@
         "torture",
         "extrajudicial_killing"
       ],
-      "conduct_alleged": "Four young Black men were accused of rape on evidence later found to be without foundation. Ernest Thomas was pursued and killed by a posse. The three others were beaten in custody to obtain confessions. After the Supreme Court reversed the convictions in Shepherd v. Florida, 341 U.S. 50 (1951), Sheriff Willis McCall shot Samuel Shepherd and Walter Irvin while transporting them in handcuffs; Shepherd died and Irvin survived and contradicted the sheriff's account.",
       "harmed": {
         "persons": [
           "PR-THOMAS-ERNEST",
@@ -978,7 +1120,8 @@
         ],
         "count": {
           "documented": 4
-        }
+        },
+        "interstitial": "Sheriff McCall remained in office for twenty-one years after the shooting and the deaths in his custody during that period are separately documented. Charles Greenlee lived to be refused clemency repeatedly and died seven years before the pardons issued."
       },
       "respondents": {
         "described": "Sheriff Willis V. McCall and deputies of Lake County, acting under color of law",
@@ -1010,7 +1153,17 @@
         "SRC-CRRJ"
       ],
       "verification": "documented",
-      "status_note": "Outcome is recorded as posthumous_exoneration and therefore still counts as unpunished. See METHODOLOGY.md section 3 for why."
+      "status_note": "Outcome is recorded as posthumous_exoneration and therefore still counts as unpunished. See METHODOLOGY.md section 5 for why.",
+      "finding": {
+        "act": "established",
+        "attribution": "named_in_sources"
+      },
+      "offense": [
+        "homicide_under_colour_of_law",
+        "torture",
+        "malicious_prosecution"
+      ],
+      "conduct": "Four young Black men were accused of rape on evidence later found to be without foundation. Ernest Thomas was pursued and killed by a posse. The three others were beaten in custody to obtain confessions. After the Supreme Court reversed the convictions in Shepherd v. Florida, 341 U.S. 50 (1951), Sheriff Willis McCall shot Samuel Shepherd and Walter Irvin while transporting them in handcuffs; Shepherd died and Irvin survived and contradicted the sheriff's account."
     },
     {
       "id": "CL-1955-TILL",
@@ -1039,7 +1192,6 @@
         "torture",
         "child_victim"
       ],
-      "conduct_alleged": "A fourteen-year-old boy visiting from Chicago was taken from his great-uncle's house at night, beaten, shot, and sunk in the Tallahatchie River, following an allegation about an encounter at a store in Money.",
       "harmed": {
         "persons": [
           "PR-TILL-EMMETT",
@@ -1047,7 +1199,8 @@
         ],
         "count": {
           "documented": 1
-        }
+        },
+        "interstitial": "Bryant and Milam were paid for the confession. Mamie Till-Mobley spent the remaining forty-eight years of her life producing the record that the acquittal had refused to produce."
       },
       "respondents": {
         "described": "Roy Bryant and J.W. Milam, tried and acquitted; other participants named in later scholarship were never charged",
@@ -1079,7 +1232,17 @@
         "SRC-NAACP-PAPERS"
       ],
       "verification": "documented",
-      "status_note": "The confession is documented and the acquittal is final. This is the entry that demonstrates that in this book unpunished never means unproven."
+      "status_note": "The confession is documented and the acquittal is final. This is the entry that demonstrates that in this book unpunished never means unproven.",
+      "finding": {
+        "act": "established",
+        "attribution": "named_in_sources"
+      },
+      "offense": [
+        "abduction",
+        "torture",
+        "homicide_of_a_child"
+      ],
+      "conduct": "A fourteen-year-old boy visiting from Chicago was taken from his great-uncle's house at night, beaten, shot, and sunk in the Tallahatchie River, following an allegation about an encounter at a store in Money."
     },
     {
       "id": "CL-1960-KENNARD",
@@ -1107,14 +1270,14 @@
         "deprivation_of_treatment",
         "reprisal_for_speech"
       ],
-      "conduct_alleged": "After Clyde Kennard applied repeatedly to enroll at Mississippi Southern College, state officials, acting through the Mississippi State Sovereignty Commission, arranged his prosecution for accessory to the theft of chicken feed valued at twenty-five dollars. He was sentenced to seven years at hard labor. He developed colon cancer in prison and was denied adequate care.",
       "harmed": {
         "persons": [
           "PR-KENNARD-CLYDE"
         ],
         "count": {
           "documented": 1
-        }
+        },
+        "interstitial": "The degree awarded to nobody. The Sovereignty Commission operated for a further seventeen years on legislative appropriation, and its files record other arrangements of the same kind."
       },
       "respondents": {
         "described": "Officials of the Mississippi State Sovereignty Commission, a state agency, and cooperating local law enforcement and prosecutors",
@@ -1142,7 +1305,17 @@
         "SRC-NRE"
       ],
       "verification": "documented",
-      "status_note": "The Sovereignty Commission files are the rare case where the impediment documented itself. Held by the Mississippi Department of Archives and History."
+      "status_note": "The Sovereignty Commission files are the rare case where the impediment documented itself. Held by the Mississippi Department of Archives and History.",
+      "finding": {
+        "act": "established",
+        "attribution": "named_in_sources"
+      },
+      "offense": [
+        "malicious_prosecution",
+        "procurement_of_perjury",
+        "deprivation_of_medical_care"
+      ],
+      "conduct": "After Clyde Kennard applied repeatedly to enroll at Mississippi Southern College, state officials, acting through the Mississippi State Sovereignty Commission, arranged his prosecution for accessory to the theft of chicken feed valued at twenty-five dollars. He was sentenced to seven years at hard labor. He developed colon cancer in prison and was denied adequate care."
     },
     {
       "id": "CL-1919-NAACP-AGGREGATE",
@@ -1165,7 +1338,6 @@
         "lynching",
         "aggregate_entry"
       ],
-      "conduct_alleged": "Killing of persons by mobs outside any legal process, as enumerated by the NAACP's compilation of press and investigative records over thirty years.",
       "harmed": {
         "persons": [
           "PR-COLLECTIVE-NAACP-3224"
@@ -1174,7 +1346,8 @@
           "documented": 3224,
           "note": "702 of those recorded were white. The compilation is acknowledged by its own authors to undercount, as it depends on press reporting."
         },
-        "collective": "Persons lynched in the United States, 1889-1918"
+        "collective": "Persons lynched in the United States, 1889-1918",
+        "interstitial": "The departures, the crops left, the businesses sold under duress, and the testimony never given, none of which any of the three competing tallies attempted to count."
       },
       "respondents": {
         "described": "Mobs, in the great majority of cases never identified in any official record; officers who surrendered custody in a substantial number of cases",
@@ -1208,7 +1381,15 @@
         "SRC-EJI-LYNCHING"
       ],
       "verification": "documented",
-      "status_note": "An aggregate entry, entered under the rule in METHODOLOGY.md section 4: where sources preserve only a count, the count is recorded as a count and is not permitted to stand in for individuated persons."
+      "status_note": "An aggregate entry, entered under the rule in METHODOLOGY.md section 6: where sources preserve only a count, the count is recorded as a count and is not permitted to stand in for individuated persons.",
+      "finding": {
+        "act": "established",
+        "attribution": "unattributed"
+      },
+      "offense": [
+        "homicide"
+      ],
+      "conduct": "Killing of persons by mobs outside any legal process, as enumerated by the NAACP's compilation of press and investigative records over thirty years."
     }
   ]
 }

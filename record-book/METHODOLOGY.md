@@ -19,9 +19,56 @@ substitute for them.
 The distinction matters practically. A log that overstates its own authority
 gets excluded. A log that documents carefully gets cited.
 
-## 2. The evidentiary standard
+## 2. Three axes, kept apart
 
-Every entry carries a `verification` value:
+The single most important rule in this book is that **whether the violence
+happened, who did it, and what a forum said about it are three separate
+questions.** Collapsing them is how a killing becomes an allegation.
+
+| Axis | Field | Answers |
+| --- | --- | --- |
+| **Act** | `finding.act` | Did it occur? |
+| **Actor** | `finding.attribution` | Who did it? |
+| **Forum** | `process.outcome` | What did a court or commission do? |
+
+`finding.act` takes `established`, `contested`, or `unestablished`. It is
+answered by bodies, ruins, death records, burned deeds, and contemporaneous
+account — **not by a forum, and not by this book's opinion.** An act is
+established when the evidence establishes it, whether or not anyone was ever
+charged, and whether or not a coroner's jury said the deceased died at the hands
+of persons unknown.
+
+`finding.attribution` takes `named_in_sources`, `described_unidentified`,
+`unattributed`, or `contested`. It is never inferred from the act. That an
+established killing has no identified killer is a fact about the record, and
+recording it as such is the opposite of doubting the killing.
+
+The ordinary entry in this book reads: **act established, actor unattributed,
+forum no process.** That is not an inconsistency to be resolved. It is the thing
+being documented.
+
+### Why this matters
+
+The victim is not the party who has to determine whether a crime occurred, and
+neither is a county that declined to look. Framing an established killing as
+merely "alleged" adopts the posture of the forum that failed — it makes the
+record wait on an authority that never came, and lets the failure to prosecute
+retroactively unmake the fact of the violence. The act is captured on its own
+evidence. The absence of an actor and the absence of a forum are then recorded
+as two further injuries, in their own fields, where they can be counted.
+
+### Offences
+
+`offense` names the offences the conduct constitutes on its face — homicide,
+arson, kidnapping, mayhem, malicious prosecution. This is a **characterisation
+of conduct, never a verdict on a person.** Naming an offence is not naming an
+offender; that is what the Actor axis is for, and the rendered pages say so under
+every entry. Where no offence is named, `offense_note` must say why.
+
+## 3. The evidentiary standard
+
+`verification` describes the quality of the **documentary record**, which is a
+different question again from the three axes above. Every entry carries one:
 
 | Value | Meaning |
 | --- | --- |
@@ -29,15 +76,29 @@ Every entry carries a `verification` value:
 | `contested` | Sources conflict on a material fact. The conflict is described in `status_note`, not resolved silently. |
 | `unverified` | Recorded as an allegation only. No source on file. Carries no assertion that the conduct occurred. |
 
-**The book never converts an allegation into a finding.** An `unverified` entry
-states that someone alleged something; it does not state that the thing
-happened. Only a court, a commission, or a documented confession moves an entry,
-and the mover is named in `process.narrative`.
+**The book never attributes conduct to a person on its own authority.** An entry
+whose record is `unverified` cannot carry an established act — the validator
+rejects the combination, because nothing on file can establish anything. And an
+actor is named only where the sources name one.
 
-This rule is the reason the book is worth anything. A register that pronounces
-guilt on its own authority is a rumor with formatting.
+Note what this rule does and does not restrain. It restrains *attribution*: the
+book will not pronounce a named person guilty. It does not restrain the *act*: a
+documented killing is recorded as a killing on the evidence, immediately, with no
+forum's permission required. A register that named offenders on its own authority
+would be a rumour with formatting. A register that refused to call an established
+killing a killing would be a coroner's jury.
 
-## 3. "Unpunished" is derived, not asserted
+## 4. Interstitial harm
+
+`harmed.interstitial` records what falls between the events and is counted
+nowhere: property abandoned under threat, exile, testimony never given, kinship
+severed by sale, title transferred, and effects that continue to fall on people
+who were never present at the event. These harms have no date, no forum, and no
+tally in any source. The field exists because leaving them out would let the
+book's own structure — one entry, one incident, one disposition — do the same
+work of erasure that the tallies do.
+
+## 5. "Unpunished" is derived, not asserted
 
 `process.outcome` records what the legal system actually did:
 
@@ -62,7 +123,7 @@ injuries while leaving the other untouched, and the book counts it that way.
 `scripts/validate.mjs` recomputes the field and fails the build on any
 disagreement, so the claim in the title of this book cannot drift from its data.
 
-## 4. Identity: who is in the register, and on what terms
+## 6. Identity: who is in the register, and on what terms
 
 The hardest question this book answers is what to do with a person whose injury
 is recorded and whose name is not.
@@ -112,7 +173,7 @@ carries them with its own citation. These are quotations from documents, not
 reconstructions. **The book never composes speech for the dead.** If no words
 survive, the field is absent — an absence that is itself part of the record.
 
-## 5. Impediments
+## 7. Impediments
 
 `data/impediments.json` catalogs the mechanisms that converted a crime into a
 non-crime: doctrines of personhood and jurisdiction, immunities, evidentiary and
@@ -131,7 +192,7 @@ book exists to show becomes legible: the same handful of doctrines, mostly about
 who may hear a claim rather than whether the injury occurred, recurring across a
 century and a half.
 
-## 6. Officials acting beyond their role
+## 8. Officials acting beyond their role
 
 A recurring classification is `official_participation` — conduct by sheriffs,
 deputies, jailers, guardsmen, and physicians acting under color of law and
@@ -143,7 +204,7 @@ defenses, and immunities differ, and because an officer exceeding the statute of
 their role is the case in which the state is both the injurer and the only
 available forum.
 
-## 7. Sources
+## 9. Sources
 
 `data/archives.json` is a manifest of the corpora this work draws on, with
 locator URLs and access terms. Public-domain texts can be fetched on demand with

@@ -5,7 +5,7 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { validate, isUnpunished, OUTCOMES } from './validate.mjs';
+import { validate, isUnpunished, OUTCOMES, ACT, ATTRIBUTION } from './validate.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const OUT = join(ROOT, 'public', 'record-book');
@@ -121,17 +121,30 @@ function renderComplaints({ complaints, persons, impediments }) {
     <h2>${esc(c.title)}</h2>
     <p class="where">${esc(dateLabel(c.incident.date))}${
       placeLabel(c.incident.place) ? ' &middot; ' + esc(placeLabel(c.incident.place)) : ''}</p>
+    <dl class="axes">
+      <div><dt>Act</dt><dd class="axis-${esc(c.finding.act)}" title="${esc(ACT[c.finding.act])}">${
+        esc(c.finding.act)}</dd></div>
+      <div><dt>Actor</dt><dd class="axis-${esc(c.finding.attribution)}" title="${
+        esc(ATTRIBUTION[c.finding.attribution])}">${
+        esc(c.finding.attribution.replace(/_/g, ' '))}</dd></div>
+      <div><dt>Forum</dt><dd class="axis-outcome">${esc(OUTCOMES[c.process.outcome])}</dd></div>
+    </dl>
     <p class="flags">
       <span class="flag ${unpunished ? 'flag-unpunished' : 'flag-punished'}">${
         unpunished ? 'Unpunished' : 'Conviction sustained'}</span>
-      <span class="flag">${esc(OUTCOMES[c.process.outcome])}</span>
-      <span class="flag flag-${esc(c.verification)}">${esc(c.verification)}</span>
+      <span class="flag flag-${esc(c.verification)}">record: ${esc(c.verification)}</span>
       ${c.respondents?.official_capacity
         ? '<span class="flag flag-official">Acting under colour of law</span>' : ''}
     </p>
+    ${c.offense.length
+      ? `<p class="offenses">${c.offense.map((o) =>
+          `<span class="offense">${esc(o.replace(/_/g, ' '))}</span>`).join('')}</p>
+         <p class="meta offense-caveat">Offences named characterise the conduct. Naming an
+         offence is not naming an offender: that is the Actor axis above.</p>`
+      : `<p class="meta">${esc(c.offense_note ?? '')}</p>`}
   </header>
 
-  <div class="field"><h3>Conduct alleged</h3><p>${esc(c.conduct_alleged)}</p></div>
+  <div class="field"><h3>Conduct</h3><p>${esc(c.conduct)}</p></div>
 
   <div class="field"><h3>Harmed</h3>
     ${harmed ? `<p>${harmed}</p>` : ''}
@@ -139,6 +152,11 @@ function renderComplaints({ complaints, persons, impediments }) {
       c.harmed.count.note ? ' — ' + esc(c.harmed.count.note) : ''}</p>` : ''}
     ${c.harmed?.collective ? `<p class="meta">Collective: ${esc(c.harmed.collective)}</p>` : ''}
   </div>
+
+  ${c.harmed?.interstitial ? `<div class="field"><h3>Interstitial harm</h3>
+    <p>${esc(c.harmed.interstitial)}</p>
+    <p class="meta">What falls between the recorded events, and is counted nowhere.</p>
+  </div>` : ''}
 
   <div class="field"><h3>Respondents</h3><p>${esc(c.respondents.described)}</p></div>
 
@@ -164,11 +182,16 @@ function renderComplaints({ complaints, persons, impediments }) {
 </article>`;
   }).join('\n');
 
+  const established = complaints.filter((c) => c.finding.act === 'established').length;
   const unpunishedCount = complaints.filter((c) => isUnpunished(c.process.outcome)).length;
-  const lede = `${complaints.length} entries. <strong>${unpunishedCount}</strong> record conduct
-    for which no perpetrator was ever criminally convicted. The flag is derived from the
-    recorded disposition, not asserted: a settlement, an apology, or the exoneration of the
-    victim leaves an entry unpunished.`;
+  const unattributed = complaints.filter((c) => c.finding.attribution === 'unattributed').length;
+  const lede = `${complaints.length} entries. Each is read on three independent axes.
+    <strong>Act</strong>: did the violence occur — answered by bodies, ruins and records, not by a
+    forum. <strong>Actor</strong>: who did it. <strong>Forum</strong>: what a court or commission
+    did about it. In ${established} entries the act is established on the evidence; in
+    ${unattributed} no participant is identified in any source; in ${unpunishedCount} no
+    perpetrator was ever convicted. The crime is captured whether or not anyone was ever
+    made to answer for it, because those are not the same question.`;
 
   const toc = `<nav class="toc"><h2>Entries</h2><ol>${complaints.map((c) =>
     `<li><a href="#${c.id}">${esc(c.title)}</a> <span>${esc(dateLabel(c.incident.date))}</span></li>`
@@ -383,6 +406,29 @@ main, .masthead, footer { max-width: 46rem; margin: 0 auto; padding: 0 1.25rem; 
 .flag-official, .flag-status-operative { outline: 1px solid var(--accent); }
 .flag-unverified, .flag-contested { outline: 1px dashed var(--warn); color: var(--warn); }
 .flag-standing-claimant { outline: 1px solid var(--accent); }
+
+.axes {
+  display: flex; flex-wrap: wrap; gap: 0; margin: .9rem 0 .8rem;
+  border: 1px solid var(--rule); border-radius: 2px; overflow: hidden;
+}
+.axes > div { flex: 1 1 9rem; min-width: 9rem; padding: .5rem .7rem;
+  border-right: 1px solid var(--rule); }
+.axes > div:last-child { border-right: 0; }
+.axes dt {
+  font-family: ui-sans-serif, system-ui, sans-serif; font-size: .62rem;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft);
+}
+.axes dd { margin: .2rem 0 0; font-size: .9rem; }
+.axis-established { color: var(--accent); font-weight: 600; }
+.axis-contested, .axis-unestablished { color: var(--warn); }
+.axis-unattributed { font-style: italic; color: var(--ink-soft); }
+.offenses { display: flex; flex-wrap: wrap; gap: .3rem; margin: .6rem 0 .3rem; }
+.offense {
+  padding: .14rem .5rem; border: 1px solid var(--accent); border-radius: 2px;
+  color: var(--accent); font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: .72rem; letter-spacing: .02em;
+}
+.offense-caveat { font-size: .76rem; margin-top: .1rem; }
 
 .field { margin: 1.1rem 0; }
 .field h3 {

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://ayeyoty.co/record-book/schema/person.schema.json",
   "title": "Register entry",
-  "description": "A person, or an explicitly labelled count where sources preserve no individuation. identity_status and standing are independent: recording a person does not make them a claimant. See METHODOLOGY.md section 4.",
+  "description": "A person, or an explicitly labelled count where sources preserve no individuation. identity_status and standing are independent: recording a person does not make them a claimant. See METHODOLOGY.md section 6.",
   "type": "object",
   "required": ["id", "name", "identity_status", "standing", "consent_note"],
   "additionalProperties": false,

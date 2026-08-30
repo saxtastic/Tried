@@ -22,10 +22,26 @@ export const OUTCOMES = {
   unresolved: 'Investigation opened and never closed',
 };
 
-// METHODOLOGY.md section 3: unpunished is derived. Only a sustained criminal
+// METHODOLOGY.md section 5: unpunished is derived. Only a sustained criminal
 // conviction of a perpetrator counts as punishment. Settlements, apologies and
 // exonerations of the victim do not.
 export const isUnpunished = (outcome) => outcome !== 'convicted';
+
+// The three questions are independent, and the book keeps them apart.
+// ACT: did the violence occur? Answered by bodies, ruins, death records,
+// contemporaneous reporting - not by a forum, and not by this book's opinion.
+export const ACT = {
+  established: 'The act occurred. Attested by physical evidence, records, or contemporaneous account.',
+  contested: 'Sources conflict on whether, or in what form, the act occurred.',
+  unestablished: 'Asserted only. Nothing on file establishes that the act occurred.',
+};
+// ATTRIBUTION: who did it? A separate question, and a harder one.
+export const ATTRIBUTION = {
+  named_in_sources: 'Participants are named in the sources.',
+  described_unidentified: 'Participants are described by role or office but not named.',
+  unattributed: 'No participant is identified in any source located.',
+  contested: 'Sources conflict as to who acted.',
+};
 
 const IDENTITY = ['named', 'name_unrecorded', 'collectively_recorded'];
 const STANDING = ['claimant', 'decedent_of_record', 'collective'];
@@ -95,6 +111,25 @@ export function validate() {
     if (c.verification === 'contested' && !c.status_note) {
       err(at, 'marked contested but status_note does not describe the conflict');
     }
+    // The act does not wait on a forum. An established act with no process is
+    // the ordinary case in this book, not an inconsistency.
+    if (!(c.finding?.act in ACT)) {
+      err(at, `finding.act "${c.finding?.act}" is not one of ${Object.keys(ACT).join(', ')}`);
+    }
+    if (!(c.finding?.attribution in ATTRIBUTION)) {
+      err(at, `finding.attribution "${c.finding?.attribution}" is not one of ` +
+              Object.keys(ATTRIBUTION).join(', '));
+    }
+    if (c.finding?.act === 'established' && c.verification === 'unverified') {
+      err(at, 'finding.act is established but verification is unverified; nothing on file can establish an act');
+    }
+    if (!Array.isArray(c.offense)) {
+      err(at, 'offense must be an array of offence characterisations (may be empty with offense_note)');
+    } else if (!c.offense.length && !c.offense_note) {
+      err(at, 'offense is empty; say why in offense_note');
+    }
+    if (!c.conduct) err(at, 'missing conduct');
+
     ref(at, 'harmed.persons', c.harmed?.persons, personIds, 'person');
     ref(at, 'impediments', c.impediments, impedimentIds, 'impediment');
     ref(at, 'sources', c.sources, archiveIds, 'archive');
@@ -108,7 +143,7 @@ export function validate() {
     if (!STANDING.includes(p.standing)) {
       err(at, `standing "${p.standing}" is not one of ${STANDING.join(', ')}`);
     }
-    // METHODOLOGY.md section 4: a count is a count and must say so; an
+    // METHODOLOGY.md section 6: a count is a count and must say so; an
     // individuated person is never carried as a number.
     if (p.identity_status === 'collectively_recorded' && !p.count) {
       err(at, 'collectively_recorded rows must carry a count');
@@ -123,7 +158,7 @@ export function validate() {
       err(at, 'name_unrecorded rows must state what attests the person\'s existence');
     }
     if (!p.consent_note) {
-      err(at, 'missing consent_note (METHODOLOGY.md section 4)');
+      err(at, 'missing consent_note (METHODOLOGY.md section 6)');
     }
     if (p.voice?.source && !archiveIds.has(p.voice.source)) {
       err(at, `voice.source references unknown archive "${p.voice.source}"`);
@@ -176,6 +211,10 @@ export function validate() {
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const { complaints, persons, impediments, archives, errors, warnings } = validate();
   const unpunished = complaints.filter((c) => isUnpunished(c.process.outcome)).length;
+  const captured = complaints.filter(
+    (c) => c.finding.act === 'established' && isUnpunished(c.process.outcome)).length;
+  const unattributed = complaints.filter(
+    (c) => c.finding.attribution === 'unattributed').length;
 
   for (const w of warnings) console.warn(`  warn  ${w}`);
   for (const e of errors) console.error(`  ERROR ${e}`);
@@ -185,6 +224,10 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     `${complaints.length - unpunished} with a sustained conviction), ` +
     `${persons.length} register entries, ${impediments.length} impediments, ` +
     `${archives.length} archives`
+  );
+  console.log(
+    `${captured} entries record an act established on the evidence for which no ` +
+    `perpetrator was convicted; ${unattributed} have no participant identified in any source`
   );
   console.log(`${errors.length} error(s), ${warnings.length} warning(s)`);
   process.exit(errors.length ? 1 : 0);
