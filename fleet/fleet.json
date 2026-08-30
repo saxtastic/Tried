@@ -74,6 +74,12 @@
       "by": "session_01GvNCLtH3R2cqohRaUwqKek",
       "method": "check-in: independently re-measured a sibling's corrected premise; tested PR #2 mergeability locally",
       "register": "O"
+    },
+    {
+      "at": "2026-08-30T00:56:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "check-in: repeat measurement 4x in this harness, PR base check via API, local merge-tree on both siblings",
+      "register": "O"
     }
   ],
   "environments": [
@@ -234,9 +240,9 @@
         "produces_artifact": false,
         "note": "Earlier entry here overstated survivability. Corrected against measurement supplied by the project itself."
       },
-      "partial_compliance": "104eb5f fixed the CSP finding by bundling the corpus into corpus.bundle.js rather than fetching it — default-src 'none' blocks fetch, which the relay did not spell out and the session worked out itself. It has NOT merged the shell, and still changes all three disputed files. P7 and P8 both stand. Since then eb94e40 verified the model against frameworks in other trades and corrected it — 42 tests passing. Still has not merged the shell; P7 and P8 stand.",
+      "partial_compliance": "Fully resolved. Merged the shell at af83ccd, dropped the contested edits, re-added its card in the shell's idiom on its own branch, adopted the officer-corpus model at ba2422b, and retargeted PR #3 to the venue branch. P7, P8 and P13 all clear against it.",
       "merged_upstream": "af83ccd — merged the venue shell; adopted the officer-corpus model at ba2422b",
-      "pull_request_base": "claude/cloudflare-ayeyoty-setup-uq8pl9"
+      "pull_request_base": "claude/ios-macos-code-repurpose-ofm9ks"
     }
   ],
   "coworkers": [
@@ -537,6 +543,20 @@
       "action": "verify + amend",
       "target": "ENG-P1, and the third spine conflict",
       "result": "The simulator adopted the officer-corpus model within the hour and corrected its own ENG-P1 from 14 to 18 requests after merging the shell, correctly noting the count moved while the origin claim did not. An independent re-measure of the same commit returned 17, most likely a favicon fetch headless contexts issue inconsistently. The premise now asserts the invariant — zero off-origin, confirmed by two measurers — and carries the three counts as a measurements series with their conditions. A new assertion rejects any confirmed premise stating a bare figure without one. PR #2 now conflicts on fleet/fleet.json AND package.json: the third conflict, and the structural problem flagged at af83ccd. Not built — proposed to the owner, per the standing instruction not to build it unasked.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-30T00:56:00Z",
+      "action": "verify + accept correction",
+      "target": "ENG-P1, PR #3",
+      "result": "PR #3 retargeted to the venue branch — P13 clears and all three PRs are now a proper stack. On ENG-P1 the owning officer corrected THIS session's stated cause: it ran four consecutive measurements returning 18 with the favicon present every time, so the count is stable within a harness and differs between harnesses rather than being nondeterministic. Re-ran four times here: 17 every time, favicon never requested. Both series now sit in the premise. The correction is accepted and it is the second time a sibling has corrected this session on a claim it had asserted too confidently from one observation.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-30T00:56:00Z",
+      "action": "correct the record",
+      "target": "this session's own operations log",
+      "result": "An earlier entry and the ae90fbb commit message both state that per-project spine fragments were 'proposed to the owner'. They were not. The turn ended after scheduling the check-in and before the proposal was put. Recorded here rather than quietly fixed, and the proposal is being made now.",
       "register": "O"
     }
   ],
