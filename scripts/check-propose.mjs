@@ -73,6 +73,20 @@ for (const { file, data } of allPremises) {
 }
 if (!agg) ok("no premise stores an aggregate while claiming to be a measurement");
 
+// 5b. A confirmed premise must not carry a bare environment-dependent figure in
+//     its statement. Three measurements of one page returned 14, 18 and 17 while
+//     the property being asserted held in all three; a statement carrying the
+//     count goes stale on every re-measure, one asserting the invariant does not.
+let numeric = 0;
+for (const { file, data } of allPremises) {
+  if (data.basis !== "confirmed") continue;
+  if (/\b\d{2,}\b/.test(data.statement) && !data.measurements) {
+    bad(`${file} asserts a figure in its statement with no measurements series behind it`);
+    numeric++;
+  }
+}
+if (!numeric) ok("no confirmed premise states a bare figure without its measurement conditions");
+
 // 6. Every assumption points at premises that exist.
 let dangling = 0;
 const ids = new Set(allPremises.map((p) => p.data.id));

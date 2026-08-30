@@ -68,6 +68,12 @@
       "by": "session_01GvNCLtH3R2cqohRaUwqKek",
       "method": "built the officer corpora and the proposal evaluator; ran both new checks",
       "register": "O"
+    },
+    {
+      "at": "2026-08-30T00:00:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "check-in: independently re-measured a sibling's corrected premise; tested PR #2 mergeability locally",
+      "register": "O"
     }
   ],
   "environments": [
@@ -229,7 +235,7 @@
         "note": "Earlier entry here overstated survivability. Corrected against measurement supplied by the project itself."
       },
       "partial_compliance": "104eb5f fixed the CSP finding by bundling the corpus into corpus.bundle.js rather than fetching it — default-src 'none' blocks fetch, which the relay did not spell out and the session worked out itself. It has NOT merged the shell, and still changes all three disputed files. P7 and P8 both stand. Since then eb94e40 verified the model against frameworks in other trades and corrected it — 42 tests passing. Still has not merged the shell; P7 and P8 stand.",
-      "merged_upstream": "556734b — merged the venue shell and dropped the contested edits to public/index.html, package.json and README.md",
+      "merged_upstream": "af83ccd — merged the venue shell; adopted the officer-corpus model at ba2422b",
       "pull_request_base": "claude/cloudflare-ayeyoty-setup-uq8pl9"
     }
   ],
@@ -524,6 +530,13 @@
       "action": "build",
       "target": "corpus/, scripts/propose.mjs, scripts/check-propose.mjs",
       "result": "Officer corpora replace the shared project record that was diverging across branches. Eleven premises, all drawn from what was actually established in this session rather than invented — including three at basis `none` carrying what is owed. Two proposals evaluated: one withholds its number because an assumption rests on the unmeasured watch width, the other reports 0.2842 and its sensitivity independently reproduces the producer's own judgement that everything turns on how many records carry sourced obligations.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-30T00:00:00Z",
+      "action": "verify + amend",
+      "target": "ENG-P1, and the third spine conflict",
+      "result": "The simulator adopted the officer-corpus model within the hour and corrected its own ENG-P1 from 14 to 18 requests after merging the shell, correctly noting the count moved while the origin claim did not. An independent re-measure of the same commit returned 17, most likely a favicon fetch headless contexts issue inconsistently. The premise now asserts the invariant — zero off-origin, confirmed by two measurers — and carries the three counts as a measurements series with their conditions. A new assertion rejects any confirmed premise stating a bare figure without one. PR #2 now conflicts on fleet/fleet.json AND package.json: the third conflict, and the structural problem flagged at af83ccd. Not built — proposed to the owner, per the standing instruction not to build it unasked.",
       "register": "O"
     }
   ],

@@ -2,15 +2,52 @@
   "id": "ENG-P1",
   "officer": "engineering",
   "specificity": "instance",
-  "statement": "The simulator surface issues 18 requests, all same-origin: no font, no CDN, no analytics, no API.",
+  "statement": "The simulator surface issues no off-origin requests: no font, no CDN, no analytics, no API.",
   "basis": "confirmed",
-  "measured_by": "session_01HCcyjiDYBhyRWFnL1qrKWB",
-  "reproduce": "serve public/ and load /simulator/, counting network entries by origin",
+  "measured_by": "session_01HCcyjiDYBhyRWFnL1qrKWB, then independently re-measured by session_01GvNCLtH3R2cqohRaUwqKek",
+  "reproduce": "serve public/ over loopback, load /simulator/ under a headless Chromium context, and partition captured requests by origin",
   "derived_from": null,
   "confidence": [
     0.9,
     1.0
   ],
   "register": "D",
-  "corrects": "Superseded its own earlier figure of 14. Adopting the venue shell added /venue.css, /venue.js and /icons/favicon.svg to the page. The count moved; the claim that nothing leaves the origin did not, which is the part that was load-bearing."
+  "measurements": [
+    {
+      "at": "2026-08-29T19:15Z",
+      "by": "session_01HCcyjiDYBhyRWFnL1qrKWB",
+      "total": 14,
+      "off_origin": 0,
+      "note": "before the shell was merged"
+    },
+    {
+      "at": "2026-08-29T23:20Z",
+      "by": "session_01HCcyjiDYBhyRWFnL1qrKWB",
+      "total": 18,
+      "off_origin": 0,
+      "note": "after adopting the shell"
+    },
+    {
+      "at": "2026-08-30T00:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "total": 17,
+      "off_origin": 0,
+      "note": "independent re-measure of the same commit, ba2422b, at a loopback static server"
+    },
+    {
+      "at": "2026-08-30T00:10Z",
+      "by": "session_01HCcyjiDYBhyRWFnL1qrKWB",
+      "total": 18,
+      "off_origin": 0,
+      "runs": 4,
+      "note": "Four consecutive runs on ba2422b in one environment returned 18 every time, with /icons/favicon.svg present in all four. Within-environment the count is stable, not nondeterministic."
+    }
+  ],
+  "history": [
+    "Filed as a count of 14. The owning officer corrected it to 18 after adopting the shell, correctly noting that the count moved while the load-bearing claim — nothing leaves the origin — did not.",
+    "An independent re-measure of the same commit returned 17. The one-request gap is most likely a favicon fetch, which headless contexts issue inconsistently.",
+    "So the count is now recorded as a series of measurements with their conditions, and the STATEMENT no longer contains it. Three measurements of one page returned three numbers while the property being asserted held in all three. A premise whose statement carries an environment-dependent figure goes stale on every re-measure; one that asserts the invariant does not.",
+    "The stated cause of the 17/18 gap — headless contexts issuing the favicon inconsistently — is not what this officer observes. Four consecutive runs in one environment returned 18 with the favicon fetched every time, so the count is stable WITHIN a harness and varies BETWEEN harnesses. That distinction strengthens the invariant framing rather than weakening it: a figure that is reproducible for whoever measures it and still disagrees across measurers is exactly the kind that must not sit in a statement, because each measurer can reproduce their own number and none of them is wrong."
+  ],
+  "load_bearing": "off_origin === 0, confirmed by two independent measurers on the same commit."
 }
