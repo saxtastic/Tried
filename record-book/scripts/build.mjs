@@ -7,7 +7,8 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { validate, isUnpunished, isMateriallyRestored, OUTCOMES, ACT, ATTRIBUTION,
          RESTORATION, VANTAGE, TRANSMISSION, DOMAINS, harmWeb,
-         ECHELON, DISPOSITION, rungOf, routes, routeFinding } from './validate.mjs';
+         ECHELON, DISPOSITION, rungOf, routes, routeFinding,
+         ERAS, childrenAcrossEras } from './validate.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const OUT = join(ROOT, 'public', 'record-book');
@@ -19,6 +20,7 @@ const NAV = [
   ['index.html', 'Complaint log'],
   ['web.html', 'Web of harm'],
   ['routes.html', 'Route of authority'],
+  ['children.html', 'The child'],
   ['register.html', 'Register'],
   ['impediments.html', 'Impediments'],
   ['archives.html', 'Archives'],
@@ -169,6 +171,13 @@ function renderComplaints({ complaints, persons, impediments }) {
   ${c.harmed?.interstitial ? `<div class="field"><h3>Interstitial harm</h3>
     <p>${esc(c.harmed.interstitial)}</p>
     <p class="meta">What falls between the recorded events, and is counted nowhere.</p>
+  </div>` : ''}
+
+  ${c.harmed?.children ? `<div class="field children"><h3>Reached as a child</h3>
+    <p class="chips">${c.harmed.children.mechanism.map((m) =>
+      `<span class="chip">${esc(m.replace(/_/g, ' '))}</span>`).join('')}</p>
+    <p>${esc(c.harmed.children.carried_into_adulthood)}</p>
+    <p class="meta">What the child carried into adulthood.</p>
   </div>` : ''}
 
   ${c.harmed?.transmitted ? `<div class="field transmitted"><h3>Transmitted harm
@@ -551,6 +560,75 @@ function renderRoutes({ complaints }) {
   return page('routes.html', 'Route of authority', lede, finding + ceilings + inversion + ladder);
 }
 
+
+// ------------------------------------------------------------------ children
+function renderChildren({ complaints }) {
+  const k = childrenAcrossEras(complaints);
+  const byId = new Map(complaints.map((c) => [c.id, c]));
+  const populated = k.rows.filter((r) => r.entries > 0);
+  const maxE = Math.max(...populated.map((r) => r.entries));
+
+  const across = `<section class="group"><h2>Across the eras</h2>
+    <p class="gloss">Entries in each period, and how many record harm reaching children as
+    children. The question this answers is whether that is a feature of one era or the constant.</p>
+    <table class="bars"><tbody>${populated.map((r) => `<tr>
+      <th scope="row">${esc(r.era.replace(/_/g, ' '))}</th>
+      <td class="bar-cell">
+        <span class="bar" style="width:${(r.children / maxE) * 100}%"></span>
+        <span class="bar-value">${r.children} of ${r.entries}</span></td>
+      <td class="meta domain-def">${r.children
+        ? esc([...new Set(r.mechanisms)].slice(0, 4).map((m) => m.replace(/_/g, ' ')).join(', '))
+        : 'no entry in this period records a child harm — a gap in the corpus, not a claim about the period'}</td>
+    </tr>`).join('')}</tbody></table></section>`;
+
+  const entries = `<section class="group"><h2>The entries</h2>
+    <p class="gloss">Each entry that reached a child, what it did, and what the child carried
+    into adulthood. This last column is the point: the injury is inflicted on a child and
+    collected from an adult, often by an institution that appears nowhere in the entry.</p>
+    ${k.ids.map((id) => {
+      const c = byId.get(id);
+      return `<div class="domain-block">
+        <h3><a href="index.html#${id}">${esc(c.title)}</a>
+          <span class="tally">${esc((c.era ?? []).join(', ').replace(/_/g, ' '))}</span></h3>
+        <p class="chips">${c.harmed.children.mechanism.map((m) =>
+          `<span class="chip">${esc(m.replace(/_/g, ' '))}</span>`).join('')}</p>
+        <p>${esc(c.harmed.children.carried_into_adulthood)}</p>
+      </div>`;
+    }).join('')}</section>`;
+
+  const ed = complaints.filter((c) => (c.harm_domains ?? []).includes('educational'));
+  const systems = `<section class="group finding"><h2>The two systems</h2>
+    <p>Two institutions reach a child before any court does, and this book now carries
+    ${ed.length} entries in which one of them is the actor rather than the setting.</p>
+    <ul>
+      <li><strong>Schooling.</strong> The anti-literacy statutes made teaching a child a crime,
+        and were enacted directly after revolts on the express reasoning that literacy made a
+        person ungovernable. Prince Edward County closed every public school for five years
+        rather than admit Black children to them. Clyde Kennard was imprisoned for applying to
+        a college. In each the actor is a legislature, a county board, or a state agency.</li>
+      <li><strong>Medicine.</strong> The Public Health Service ran a forty-year study on men it
+        deceived. Eugenics boards and federally funded programmes sterilised women and girls,
+        two of them aged fourteen and twelve, on a consent their mother could not read.</li>
+    </ul>
+    <p class="note">The two meet. The classification that selected many of those sterilised —
+    feeblemindedness — was manufactured by intelligence testing applied to Black children in
+    schools, and the operation was then performed by a health system acting on that
+    classification. The child passed from one institution to the other, and the record of the
+    first became the warrant for the second.</p>
+  </section>`;
+
+  const lede = `Harm to children is not a category of entry in this book. It is a stage in most
+    of them. <strong>${k.total} of ${complaints.length}</strong> entries record an injury that
+    reached a child as a child, in ${populated.filter((r) => r.children).length} of the
+    ${populated.length} periods the log covers.
+    <br><br>Every other field here assumes an adult with capacity — a claimant who can assert,
+    a forum that can hear. <code>harmed.children</code> exists because that assumption fails at
+    exactly the point where most of these injuries begin, and because the field it requires —
+    <em>what the child carried into adulthood</em> — is where the harm is actually collected.`;
+
+  return page('children.html', 'The child', lede, across + systems + entries);
+}
+
 // ------------------------------------------------------------------ archives
 
 function renderArchives({ archives, complaints, persons }) {
@@ -784,6 +862,7 @@ main, .masthead, footer { max-width: 46rem; margin: 0 auto; padding: 0 1.25rem; 
 .domain-block ul { margin: .4rem 0 0; padding-left: 1.2rem; font-size: .9rem; }
 .domain-block li { margin: .2rem 0; }
 
+.children { border-left: 3px solid var(--accent); padding-left: .9rem; }
 .transmitted { border-left: 3px solid var(--rule); padding-left: .9rem; }
 .transmitted h3 { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
 .flag-trans-argued_in_literature, .flag-trans-contested {
@@ -850,6 +929,7 @@ const files = {
   'impediments.html': renderImpediments(data),
   'web.html': renderWeb(data),
   'routes.html': renderRoutes(data),
+  'children.html': renderChildren(data),
   'archives.html': renderArchives(data),
   'record-book.css': CSS,
 };

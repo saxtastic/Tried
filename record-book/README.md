@@ -98,17 +98,21 @@ perpetrators from the one the state ran **against the harmed**.
 
 That yields the nearest thing here to an appeal route, and one finding:
 
-| Actor stood at | Heard above the actor's own rung |
+| Actor at county level or above | Heard above their own rung |
 | --- | --- |
-| County level or above | **0 of 4** |
-| Below county level | **13 of 13** |
+| Before the civil rights era | **0 of 3** |
+| Civil rights era or later | **2 of 4** |
 
-When a mob did it, the matter sometimes climbed. When an organ of the state did
-it, the matter never once got above the body that did it — the forum and the
-actor were the same institution. Three of the four inverted tracks climbed higher
-than their own perpetrator track, and three reached the Supreme Court; the only
-perpetrator track that ever reached that rung went there to be undone. Computed
-on every build with its n reported, so the small denominator is never hidden.
+At eighteen entries this read **0 of 4** against **13 of 13**, and the docs said
+it "predicts completely." Adding civil-rights-era entries broke that: Prince
+Edward County reached the Supreme Court, the sterilisation entry reached a
+federal court. The split was measuring **era**, not echelon — the forums that
+could hear a matter against a state actor largely did not exist for most of this
+corpus's span. Tuskegee is the exception the other way: a federal actor into the
+1970s whose matter still never left the federal rung.
+
+Computed on every build with its n reported. **It has moved once already, which
+is why it is computed rather than written down.**
 
 **2c. The perpetrator's own paperwork is the strongest evidence here.**
 A bill of sale exists because title had to be provable against third parties, so
@@ -125,6 +129,25 @@ because they were lawful: `finding.act` records that the conduct occurred,
 separately that no forum treated it as an offence. And it fails outright for the
 Clotilda, where the conduct was a capital crime *when committed*, the
 perpetrators are named, and nobody was punished.
+
+**2d. The child is a stage in most entries, not a category of them.**
+`era` places every entry in one or more periods (`atlantic_trade`,
+`domestic_trade`, `reconstruction`, `jim_crow`, `civil_rights`, `modern`), which
+is what lets a harm appear as a continuity rather than a series of incidents.
+`harmed.children` records how a child was reached and requires
+**`carried_into_adulthood`** — where the harm is actually collected. **11 of 25
+entries, across 5 of 6 periods.**
+
+The field exists because every other field here assumes an adult with capacity: a
+claimant who can assert, a forum that can hear. That assumption fails exactly
+where most of these injuries begin.
+
+Two institutions reach a child before any court does, and they meet: the
+classification that selected many of those sterilised — feeblemindedness — was
+manufactured by intelligence testing applied to Black children in schools, and
+the operation was performed by a health system acting on that classification. The
+record of the first became the warrant for the second, which is why they are one
+entry.
 
 **3a. Entries are classified by what was injured, not by who was injured.**
 `harm_domains` carries as many of eight as apply: `physiological`, `spiritual`,
@@ -207,7 +230,7 @@ anything under `public/record-book/`; it is overwritten.
 
 ## Current state
 
-22 complaint entries, 45 register rows, 6 organisations, 10 impediments, 53 archives.
+25 complaint entries, 52 register rows, 6 organisations, 10 impediments, 53 archives.
 
 In all 18 the act is **established** on the evidence. In 3 no participant is
 identified in any source. In all 18 no perpetrator was ever convicted. 7 name a

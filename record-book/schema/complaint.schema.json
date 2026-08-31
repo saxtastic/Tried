@@ -8,6 +8,7 @@
     "id",
     "title",
     "incident",
+    "era",
     "classification",
     "harm_domains",
     "conduct",
@@ -141,6 +142,32 @@
               "description": "Required unless standing is documented: whose argument this is, and that the book does not adopt it."
             }
           }
+        },
+        "children": {
+          "type": "object",
+          "required": [
+            "harmed_as_children",
+            "mechanism",
+            "carried_into_adulthood"
+          ],
+          "additionalProperties": false,
+          "description": "How the injury reached a child as a child. Recorded because every other field here assumes an adult with capacity - a claimant who can assert, a forum that can hear - and that assumption fails at the point where most of these injuries begin.",
+          "properties": {
+            "harmed_as_children": {
+              "const": true
+            },
+            "mechanism": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              }
+            },
+            "carried_into_adulthood": {
+              "type": "string",
+              "description": "Required. Where the harm is actually collected: what the child carried forward, and often which institution collected it."
+            }
+          }
         }
       }
     },
@@ -159,7 +186,7 @@
         },
         "official_capacity": {
           "type": "boolean",
-          "description": "True where a respondent acted under colour of law. See METHODOLOGY.md section 14."
+          "description": "True where a respondent acted under colour of law. See METHODOLOGY.md section 15."
         },
         "named": {
           "type": "array",
@@ -513,6 +540,21 @@
           "educational",
           "interpersonal",
           "intrapersonal"
+        ]
+      }
+    },
+    "era": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Periods the entry falls in. Periodisation lets the log show a harm as a continuity rather than a series of incidents, which is the only way the injury to children becomes visible - it is the same injury arriving in different institutions.",
+      "items": {
+        "enum": [
+          "atlantic_trade",
+          "domestic_trade",
+          "reconstruction",
+          "jim_crow",
+          "civil_rights",
+          "modern"
         ]
       }
     }

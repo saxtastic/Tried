@@ -319,25 +319,41 @@ corpus's only convictions were vacated in *Cruikshank*.
 
 ### The finding
 
-Of the 17 matters running against a perpetrator, the height of the actor
-predicts whether anything above them ever heard it, and in this corpus it
-predicts it completely:
+Of the matters running against a perpetrator, the height of the actor bears on
+whether anything above them ever heard it — but the corpus has already corrected
+this finding once, and the correction is worth keeping in view.
 
-| Actor stood at | Heard above the actor's own rung |
+At eighteen entries, ending in 1960, the separation was total: **0 of 4** matters
+against an actor at county level or above were ever heard above that level, and
+**13 of 13** below it were. The methodology said it "predicts it completely."
+
+Adding entries from the civil rights era and after broke that. Prince Edward
+County was a county actor and the matter reached the Supreme Court; the
+sterilisation entry has a state actor and reached a federal court. The current
+figures are **2 of 7** and **16 of 17**.
+
+The sharper reading is that the original split was measuring era, not echelon:
+
+| Actor at county level or above | Heard above their own rung |
 | --- | --- |
-| County level or above | **0 of 4** |
-| Below county level | **13 of 13** |
+| Before the civil rights era | **0 of 3** |
+| Civil rights era or later | **2 of 4** |
 
-When a mob or a private holder did it, the matter sometimes climbed. When an
-organ of the state did it — a county's own officers at Elaine, a county sheriff
-at Groveland, a state agency in Kennard's case, a federal service at Tuskegee —
-the matter never once got above the level of the body that did it. The forum and
-the actor were the same institution.
+The forums that could hear a matter against a state actor largely did not exist
+for most of this corpus's span. Where an actor was an organ of the state and the
+period was Jim Crow or earlier, nothing above it ever heard the matter — the
+forum and the actor were the same institution. Where federal civil rights
+jurisdiction existed, sometimes something did.
 
-This is computed on every build from the escalation recorded in each entry. It
-moves as entries are added, and it is a statement about this corpus, not a claim
-about cases outside it. `routes.html` renders it, and `routeFinding()` reports
-the n alongside the result so the small denominator is never hidden.
+Tuskegee is the instructive exception in the other direction. A federal actor,
+running into the 1970s, and the matter still never got above the federal rung: no
+criminal process at any level, and a civil settlement in a federal court, which
+is the same rung the actor stood on.
+
+All of this is computed on every build by `routeFinding()`, which reports its n.
+The n is small and the finding will move again. **It has moved once already, and
+the fact that adding entries changed it is the reason the figures are computed
+rather than written down.**
 
 One entry carries no perpetrator track at all — *Dred Scott* — because the
 conduct was lawful judicial action and there was nothing to prosecute. That is
@@ -357,7 +373,7 @@ notice, disguise or conversely a uniform, published platform, advance notice of
 an election it intended to decide by force, and in one case a deliberated
 sentence carried out on a stranger because a jury had acquitted someone else.
 
-This is the mirror of the book's other recurring finding. Section 14 records
+This is the mirror of the book's other recurring finding. Section 15 records
 officials acting *beyond* the statute of their role. These are private bodies
 claiming the role entirely. Both are the same displacement of authority, from
 opposite directions, and in several entries they meet: a sheriff surrenders
@@ -436,7 +452,64 @@ against a given bar is likely to work against it again.
 Run `--gaps` and the corpus ranks itself by how much is still open. That ranking
 is the work plan.
 
-## 9. Interstitial harm
+## 9. The child
+
+Harm to children is not a category of entry in this book. It is a stage in most
+of them — **11 of 25 entries, in 5 of the 6 periods the log covers.**
+
+`era` places every entry in one or more periods: `atlantic_trade`,
+`domestic_trade`, `reconstruction`, `jim_crow`, `civil_rights`, `modern`.
+Periodisation is what lets a harm appear as a continuity rather than a series of
+incidents, and for children that is the only way it is visible at all, because it
+is the same injury arriving in different institutions.
+
+`harmed.children` records how a child was reached, and requires a field the rest
+of the schema has no place for: **`carried_into_adulthood`**. That is where the
+harm is actually collected. A child kept from literacy could not read a labour
+contract at thirty. A child who lost five years of schooling in Prince Edward
+County did not get them back and carried lower attainment and earnings for a
+working life. A girl sterilised at twelve carries the whole of it into an
+adulthood she did not consent to enter that way.
+
+The field exists because **every other field in this book assumes an adult with
+capacity** — a claimant who can assert, a forum that can hear. That assumption
+fails precisely where most of these injuries begin.
+
+### The two systems
+
+Two institutions reach a child before any court does.
+
+**Schooling.** The anti-literacy statutes made teaching a child a crime, enacted
+directly after revolts on the express reasoning that literacy made a person
+ungovernable. Prince Edward County closed every public school for five years
+rather than admit Black children. Clyde Kennard was imprisoned for applying to a
+college. In each the actor is a legislature, a county board, or a state agency —
+not a mob.
+
+**Medicine.** The Public Health Service ran a forty-year study on men it
+deceived. Eugenics boards and federally funded programmes sterilised women and
+girls, two of them aged fourteen and twelve, on a consent their mother could not
+read.
+
+**The two meet.** The classification that selected many of those sterilised —
+feeblemindedness — was manufactured by intelligence testing applied to Black
+children in schools, and the operation was then performed by a health system
+acting on that classification. The child passed from one institution to the
+other, and the record of the first became the warrant for the second. That is why
+they are one entry and not two.
+
+### Where the corpus is still thin
+
+Reconstruction carries two entries and neither records a child harm. That is a
+gap in this corpus, not a claim about the period, and `children.html` says so on
+the row rather than leaving the zero to be read as a finding.
+
+Adding the three educational and medical entries also corrected a number the book
+had reported on itself: `educational` stood at 2 of 22 and the methodology said
+the honest response was to write the missing entries rather than broaden the
+tagging. That is what these are.
+
+## 10. Interstitial harm
 
 `harmed.interstitial` records what falls between the events and is counted
 nowhere: property abandoned under threat, exile, testimony never given, kinship
@@ -446,7 +519,7 @@ tally in any source. The field exists because leaving them out would let the
 book's own structure — one entry, one incident, one disposition — do the same
 work of erasure that the tallies do.
 
-## 10. Transmitted harm
+## 11. Transmitted harm
 
 `harmed.interstitial` records what falls between events within one generation.
 `harmed.transmitted` records what outlives it.
@@ -509,7 +582,7 @@ was assembled from knowledge of the field, not retrieved, and it is not a
 reconstruction of what DeGruy cites. It is marked as such in the manifest and
 must not be presented otherwise. Pull the actual citations from the book's notes.
 
-## 11. "Unpunished" is derived, not asserted
+## 12. "Unpunished" is derived, not asserted
 
 `process.outcome` records what the legal system actually did:
 
@@ -534,7 +607,7 @@ injuries while leaving the other untouched, and the book counts it that way.
 `scripts/validate.mjs` recomputes the field and fails the build on any
 disagreement, so the claim in the title of this book cannot drift from its data.
 
-## 12. Identity: who is in the register, and on what terms
+## 13. Identity: who is in the register, and on what terms
 
 The hardest question this book answers is what to do with a person whose injury
 is recorded and whose name is not.
@@ -584,7 +657,7 @@ carries them with its own citation. These are quotations from documents, not
 reconstructions. **The book never composes speech for the dead.** If no words
 survive, the field is absent — an absence that is itself part of the record.
 
-## 13. Impediments
+## 14. Impediments
 
 `data/impediments.json` catalogs the mechanisms that converted a crime into a
 non-crime: doctrines of personhood and jurisdiction, immunities, evidentiary and
@@ -603,7 +676,7 @@ book exists to show becomes legible: the same handful of doctrines, mostly about
 who may hear a claim rather than whether the injury occurred, recurring across a
 century and a half.
 
-## 14. Officials acting beyond their role
+## 15. Officials acting beyond their role
 
 A recurring classification is `official_participation` — conduct by sheriffs,
 deputies, jailers, guardsmen, and physicians acting under color of law and
@@ -615,7 +688,7 @@ defenses, and immunities differ, and because an officer exceeding the statute of
 their role is the case in which the state is both the injurer and the only
 available forum.
 
-## 15. Sources
+## 16. Sources
 
 `data/archives.json` is a manifest of the corpora this work draws on, with
 locator URLs and access terms. Public-domain texts can be fetched on demand with

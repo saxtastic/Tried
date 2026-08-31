@@ -1,5 +1,5 @@
 {
-  "$comment": "Complaint log. process.unpunished is DERIVED - see METHODOLOGY.md section 11 - and is recomputed and checked by scripts/validate.mjs.",
+  "$comment": "Complaint log. process.unpunished is DERIVED - see METHODOLOGY.md section 12 - and is recomputed and checked by scripts/validate.mjs.",
   "complaints": [
     {
       "id": "CL-1857-DRED-SCOTT",
@@ -118,7 +118,140 @@
         "political",
         "intrapersonal",
         "social"
+      ],
+      "era": [
+        "domestic_trade"
       ]
+    },
+    {
+      "id": "CL-1740-ANTI-LITERACY",
+      "title": "The anti-literacy statutes: making the teaching of a child a crime",
+      "era": [
+        "atlantic_trade",
+        "domestic_trade"
+      ],
+      "incident": {
+        "date": {
+          "start": "1740",
+          "end": "1865",
+          "precision": "era"
+        },
+        "place": {
+          "country": "US",
+          "note": "South Carolina from 1740, Georgia, North Carolina from 1830, Louisiana and Alabama from the 1830s, Virginia from 1831"
+        },
+        "jurisdiction": [
+          "Colonial assemblies",
+          "State legislatures"
+        ]
+      },
+      "classification": [
+        "statutory_deprivation",
+        "denial_of_education",
+        "official_participation"
+      ],
+      "harm_domains": [
+        "educational",
+        "intrapersonal",
+        "social",
+        "spiritual",
+        "political"
+      ],
+      "conduct": "Colonial and state legislatures made it a criminal offence to teach an enslaved person, and in several states any free Black person, to read or write. The statutes punished the teacher and, where the teacher was Black, the teacher's body: fines and imprisonment for white offenders, whipping for Black ones. Several were enacted directly after revolts - South Carolina's in 1740 after Stono, Virginia's in 1831 after Nat Turner - on the express reasoning that literacy made a person ungovernable.",
+      "finding": {
+        "act": "established",
+        "attribution": "named_in_sources"
+      },
+      "offense": [],
+      "offense_note": "No offence is named. The conduct WAS the law: legislatures enacting statutes within their power. The entry records that the deprivation was deliberate, statutory, and aimed at children, and that no forum has ever been asked to answer for it.",
+      "harmed": {
+        "persons": [
+          "PR-COLLECTIVE-ANTI-LITERACY",
+          "PR-DOUGLASS-FREDERICK"
+        ],
+        "count": {
+          "documented": null,
+          "note": "Every enslaved child in the enacting states for the duration of the statutes, and free Black children in several of them. No figure is meaningful; the deprivation was universal within its jurisdictions."
+        },
+        "collective": "Enslaved and free Black children in the enacting states",
+        "children": {
+          "harmed_as_children": true,
+          "mechanism": [
+            "denied_schooling",
+            "punished_for_learning",
+            "taught_in_secret_at_risk"
+          ],
+          "carried_into_adulthood": "A person kept from literacy as a child could not read a bill of sale, a labour contract, a ballot, or a summons as an adult. The statutes therefore reached forward into every later transaction that required reading, which is most of the ones this book records - including the sharecropping contracts of the Elaine entry and the mother's mark on the consent form in the sterilisation entry."
+        },
+        "interstitial": "The clandestine schools kept anyway - in kitchens, at night, in pits - and the risk borne by whoever taught. Frederick Douglass's account of Sophia Auld being ordered to stop, and of Hugh Auld's reasoning that literacy would forever unfit him to be a slave, is the clearest statement in the corpus of what the statutes were for.",
+        "transmitted": {
+          "standing": "documented",
+          "description": "Emancipation found a population that had been kept from reading by law for a century and a half, and then held that population's literacy against it as a qualification for voting. Literacy tests in the disfranchising constitutions of the 1890s tested for a deficit the same legislatures had created."
+        }
+      },
+      "respondents": {
+        "described": "Colonial assemblies and state legislatures; the courts that enforced the statutes and the officers who administered the whippings",
+        "named_in_sources": true,
+        "official_capacity": true,
+        "echelon": "state"
+      },
+      "process": {
+        "forum": null,
+        "outcome": "no_process",
+        "narrative": "No forum, then or since. The statutes were lawful exercises of legislative power and were displaced by emancipation rather than repudiated. No state that enacted one has treated it as a wrong requiring an answer, and no proceeding has ever been brought about them.",
+        "escalation": [
+          {
+            "rung": "state",
+            "forum": "The enacting legislatures",
+            "disposition": "no_process",
+            "track": "against_perpetrators",
+            "note": "The legislature was the actor. There was no rung above it that would hear a complaint about its own statutes, and the people affected had no capacity to bring one."
+          },
+          {
+            "rung": "county",
+            "forum": "County courts enforcing the statutes",
+            "disposition": "no_process",
+            "track": "against_the_harmed",
+            "note": "The only proceedings that ever arose under these laws ran against the teachers and the learners."
+          }
+        ]
+      },
+      "impediments": [
+        "IMP-NO-PERSONHOOD",
+        "IMP-SOL"
+      ],
+      "restoration": {
+        "forms": [],
+        "reached": "Nobody. The statutes lapsed with emancipation; nothing was restored and no state has acknowledged them as an injury.",
+        "none_note": "No form of restoration was ever made."
+      },
+      "remedy": {
+        "outstanding": "Everything. The freedpeople's own response - the immediate, mass establishment of schools after 1865, often before anything else - is the measure of what had been withheld."
+      },
+      "concurrence": {
+        "agree": "The statute books, the court records enforcing them, and the narratives agree completely. The legislatures wrote down what they were doing and why.",
+        "diverge": "They do not diverge on the fact. They diverge on the reason offered: the statutes cite public safety, the narratives describe the withholding of a capacity."
+      },
+      "citations": [
+        {
+          "source": "SRC-DLAS",
+          "vantage": "government_record"
+        },
+        {
+          "source": "SRC-DOCSOUTH",
+          "vantage": "victim_testimony"
+        },
+        {
+          "source": "SRC-LOC-SLAVE-NARRATIVES",
+          "vantage": "victim_testimony"
+        },
+        {
+          "source": "SRC-FREEDMENS-BUREAU",
+          "vantage": "official_investigation"
+        }
+      ],
+      "verification": "documented",
+      "status_note": "Entered to correct a gap this book reported on itself: educational harm appeared in two entries of twenty-two, which was a deficiency in the corpus rather than in the history. This is the foundational one, and it is aimed at children by design."
     },
     {
       "id": "CL-CHATTEL-ENSLAVEMENT",
@@ -164,8 +297,18 @@
         "interstitial": "Wealth transferred and still held. Names not preserved and now unrecoverable. Kinship lines severed by sale, which is why descendants of this entry frequently cannot document the ancestry that a claim would require of them.",
         "transmitted": {
           "standing": "argued_in_literature",
-          "description": "Kinship lines severed by sale, so descent cannot be documented by people from whom documentation is now demanded. Wealth transferred and compounding for a further eight generations. And the claim this book cannot itself establish: that trauma sustained across generations without opportunity to heal produces adaptive behaviours that outlive the conditions that required them - DeGruy's vacant esteem, ever-present anger, and racist socialisation.",
-          "note": "Standing is argued_in_literature, not documented. Post Traumatic Slave Syndrome is an influential and widely taught framework and is not a diagnostic category; parts of the transmission literature it draws on are actively contested. The book records the argument and its status, and does not convert it into a finding."
+          "description": "Kinship lines severed by sale, so descent cannot be documented by people from whom documentation is now demanded. Wealth transferred and compounding for a further eight generations. And the claim this book cannot itself establish: that trauma sustained across generations without opportunity to heal produces adaptive behaviours that outlive the conditions that required them - DeGruy's vacant esteem, ever-present anger, and racist socialisation. Her illustration is a mother who disparages her own child in front of a white observer, which reads as cruelty and originates as protection: under slavery and after it, a Black child who was visibly valued was a child in danger, so the parent learned to make the child appear worthless in order to keep them safe. DeGruy's point is that the behaviour survived the danger. The white parent in the same room is not performing that calculation and cannot see it being performed, which is why the two parents are described as raising children under conditions that look identical and are not.",
+          "note": "Standing is argued_in_literature, not documented. Post Traumatic Slave Syndrome is an influential and widely taught framework and is not a diagnostic category; parts of the transmission literature it draws on are actively contested. The book records the argument, names whose it is, and does not convert it into a finding. Note what is being recorded and what is not: that Black parents have described this protective calculation, and that DeGruy theorises its origin, are both matters of record. Whether the mechanism operates as she describes is her argument, and it is left as one."
+        },
+        "children": {
+          "harmed_as_children": true,
+          "mechanism": [
+            "sold_from_parent",
+            "born_into_the_condition",
+            "denied_schooling",
+            "laboured_from_infancy"
+          ],
+          "carried_into_adulthood": "A child sold from a parent lost the line of descent as well as the parent, and enters the record twice: once as property and once as an ancestor who cannot be traced. The condition was heritable through the mother by statute, so the injury began before birth."
         }
       },
       "respondents": {
@@ -290,6 +433,10 @@
         "educational",
         "interpersonal",
         "intrapersonal"
+      ],
+      "era": [
+        "atlantic_trade",
+        "domestic_trade"
       ]
     },
     {
@@ -351,6 +498,14 @@
         "transmitted": {
           "standing": "documented",
           "description": "Descent lines severed at the point of sale. A person sold from Maryland to Louisiana appears in two counties' records under two owners and often two names, so the genealogical thread breaks exactly where the trade cut it - which is why descendants today frequently cannot document the ancestry that a claim would require of them."
+        },
+        "children": {
+          "harmed_as_children": true,
+          "mechanism": [
+            "sold_from_parent",
+            "transported"
+          ],
+          "carried_into_adulthood": "Children were a substantial share of those sold, and the post-emancipation advertisements placed by adults searching for parents and siblings sold decades earlier are the record of what that did to them across a lifetime."
         }
       },
       "respondents": {
@@ -444,7 +599,10 @@
         }
       ],
       "verification": "documented",
-      "status_note": "Entered separately from chattel enslavement because the trade is a distinct course of conduct with a distinct and unusually complete documentary record. It is the entry in which the perpetrators' own instruments carry the proof: a bill of sale exists because title had to be provable, and it proves the transaction to us for the same reason it proved it to them."
+      "status_note": "Entered separately from chattel enslavement because the trade is a distinct course of conduct with a distinct and unusually complete documentary record. It is the entry in which the perpetrators' own instruments carry the proof: a bill of sale exists because title had to be provable, and it proves the transaction to us for the same reason it proved it to them.",
+      "era": [
+        "domestic_trade"
+      ]
     },
     {
       "id": "CL-1860-CLOTILDA",
@@ -501,7 +659,15 @@
           "note": "Approximately 110 people; accounts differ by a few either way."
         },
         "collective": "The people carried on the Clotilda and the Africatown community they founded",
-        "interstitial": "Survivors who had been taken as adults spent the rest of their lives among people who did not share their language, and several are recorded as wanting to return and never being able to afford passage."
+        "interstitial": "Survivors who had been taken as adults spent the rest of their lives among people who did not share their language, and several are recorded as wanting to return and never being able to afford passage.",
+        "children": {
+          "harmed_as_children": true,
+          "mechanism": [
+            "trafficked",
+            "separated_from_kin_and_language"
+          ],
+          "carried_into_adulthood": "Matilda McCrear was about two years old when she was carried to Alabama. She lived to 1940 and sought compensation in the 1930s; she was refused."
+        }
       },
       "respondents": {
         "described": "Timothy Meaher, who financed the voyage on a wager, and William Foster, who captained the vessel and burned it",
@@ -582,7 +748,10 @@
         }
       ],
       "verification": "documented",
-      "status_note": "Held against the rest of the corpus, this entry disposes of the objection that slavery's harms cannot be counted as crimes because they were lawful. Here the conduct was a capital crime when it was done, it was documented by its own perpetrators, and it was still unpunished."
+      "status_note": "Held against the rest of the corpus, this entry disposes of the objection that slavery's harms cannot be counted as crimes because they were lawful. Here the conduct was a capital crime when it was done, it was documented by its own perpetrators, and it was still unpunished.",
+      "era": [
+        "domestic_trade"
+      ]
     },
     {
       "id": "CL-1838-GU272",
@@ -637,6 +806,14 @@
         "transmitted": {
           "standing": "documented",
           "description": "Because the sellers recorded the names, the descent lines survive. Several thousand descendants have been identified and constitute an organised community - the inverse of the ordinary case in this book, where the absence of a name ends the line."
+        },
+        "children": {
+          "harmed_as_children": true,
+          "mechanism": [
+            "sold_from_parent",
+            "transported"
+          ],
+          "carried_into_adulthood": "Families were separated in the execution of the sale notwithstanding the order's own stated conditions."
         }
       },
       "respondents": {
@@ -722,7 +899,10 @@
         }
       ],
       "verification": "documented",
-      "status_note": "The clearest demonstration in the corpus of the point the domestic trade entry makes generally: the ledger kept to prove title is the evidence, and where the names survive, the claim survives with them. This is the only entry here in which a perpetrator institution's own record produced material restoration. Note on tagging: the proceeds financed a college, but that is the institution's gain rather than an educational injury to the people sold, so this entry does not carry the educational domain. Broadening it would have improved a coverage number the methodology says to fix by writing the missing entries instead."
+      "status_note": "The clearest demonstration in the corpus of the point the domestic trade entry makes generally: the ledger kept to prove title is the evidence, and where the names survive, the claim survives with them. This is the only entry here in which a perpetrator institution's own record produced material restoration. Note on tagging: the proceeds financed a college, but that is the institution's gain rather than an educational injury to the people sold, so this entry does not carry the educational domain. Broadening it would have improved a coverage number the methodology says to fix by writing the missing entries instead.",
+      "era": [
+        "domestic_trade"
+      ]
     },
     {
       "id": "CL-1841-NORTHUP",
@@ -864,6 +1044,9 @@
         "political",
         "interpersonal",
         "intrapersonal"
+      ],
+      "era": [
+        "domestic_trade"
       ]
     },
     {
@@ -989,6 +1172,9 @@
         "physiological",
         "political",
         "social"
+      ],
+      "era": [
+        "reconstruction"
       ]
     },
     {
@@ -1100,6 +1286,9 @@
         "economic",
         "social",
         "interpersonal"
+      ],
+      "era": [
+        "jim_crow"
       ]
     },
     {
@@ -1205,6 +1394,9 @@
         "political",
         "social",
         "intrapersonal"
+      ],
+      "era": [
+        "jim_crow"
       ]
     },
     {
@@ -1335,6 +1527,9 @@
         "political",
         "economic",
         "social"
+      ],
+      "era": [
+        "jim_crow"
       ]
     },
     {
@@ -1375,7 +1570,14 @@
           "note": "At least eleven people were killed over the week; sources differ on the total."
         },
         "collective": "Black residents of Brooks and Lowndes Counties, several hundred of whom left the area",
-        "interstitial": "Several hundred Black residents left Brooks and Lowndes Counties in the following weeks, abandoning crops mid-season. Mary Turner's stated intention to swear out warrants is the last recorded attempt by anyone to use a court in that county for these killings."
+        "interstitial": "Several hundred Black residents left Brooks and Lowndes Counties in the following weeks, abandoning crops mid-season. Mary Turner's stated intention to swear out warrants is the last recorded attempt by anyone to use a court in that county for these killings.",
+        "children": {
+          "harmed_as_children": true,
+          "mechanism": [
+            "killed"
+          ],
+          "carried_into_adulthood": "Mary Turner's child was killed at or near term and has no name in any source."
+        }
       },
       "respondents": {
         "described": "Members of the mob. Walter White's investigation for the NAACP obtained the names of participants and transmitted them to the Governor of Georgia.",
@@ -1476,6 +1678,9 @@
         "spiritual",
         "interpersonal",
         "social"
+      ],
+      "era": [
+        "jim_crow"
       ]
     },
     {
@@ -1612,6 +1817,9 @@
         "economic",
         "political",
         "social"
+      ],
+      "era": [
+        "jim_crow"
       ]
     },
     {
@@ -1736,6 +1944,9 @@
         "political",
         "economic",
         "social"
+      ],
+      "era": [
+        "jim_crow"
       ]
     },
     {
@@ -1884,6 +2095,9 @@
         "economic",
         "social",
         "spiritual"
+      ],
+      "era": [
+        "jim_crow"
       ]
     },
     {
@@ -2008,6 +2222,9 @@
         "economic",
         "social",
         "interpersonal"
+      ],
+      "era": [
+        "jim_crow"
       ]
     },
     {
@@ -2142,6 +2359,11 @@
         "interpersonal",
         "intrapersonal",
         "social"
+      ],
+      "era": [
+        "jim_crow",
+        "civil_rights",
+        "modern"
       ]
     },
     {
@@ -2278,6 +2500,9 @@
         "interpersonal",
         "spiritual",
         "social"
+      ],
+      "era": [
+        "jim_crow"
       ]
     },
     {
@@ -2317,7 +2542,15 @@
         "count": {
           "documented": 4
         },
-        "interstitial": "Sheriff McCall remained in office for twenty-one years after the shooting and the deaths in his custody during that period are separately documented. Charles Greenlee lived to be refused clemency repeatedly and died seven years before the pardons issued."
+        "interstitial": "Sheriff McCall remained in office for twenty-one years after the shooting and the deaths in his custody during that period are separately documented. Charles Greenlee lived to be refused clemency repeatedly and died seven years before the pardons issued.",
+        "children": {
+          "harmed_as_children": true,
+          "mechanism": [
+            "prosecuted_as_a_child",
+            "beaten_in_custody"
+          ],
+          "carried_into_adulthood": "Charles Greenlee was sixteen when he was arrested, beaten in custody and sentenced to life. He was paroled in 1962, refused clemency repeatedly across his adult life, and died in 2012, seven years before the pardons."
+        }
       },
       "respondents": {
         "described": "Sheriff Willis V. McCall and deputies of Lake County, acting under color of law",
@@ -2403,7 +2636,7 @@
         "outstanding": "No criminal accountability for any officer. Exoneration corrected the state's injury to the victims and left the perpetrators' conduct unaddressed."
       },
       "verification": "documented",
-      "status_note": "Outcome is recorded as posthumous_exoneration and therefore still counts as unpunished. See METHODOLOGY.md section 11 for why.",
+      "status_note": "Outcome is recorded as posthumous_exoneration and therefore still counts as unpunished. See METHODOLOGY.md section 12 for why.",
       "finding": {
         "act": "established",
         "attribution": "named_in_sources"
@@ -2448,6 +2681,9 @@
         "political",
         "intrapersonal",
         "interpersonal"
+      ],
+      "era": [
+        "jim_crow"
       ]
     },
     {
@@ -2485,7 +2721,14 @@
         "count": {
           "documented": 1
         },
-        "interstitial": "Bryant and Milam were paid for the confession. Mamie Till-Mobley spent the remaining forty-eight years of her life producing the record that the acquittal had refused to produce."
+        "interstitial": "Bryant and Milam were paid for the confession. Mamie Till-Mobley spent the remaining forty-eight years of her life producing the record that the acquittal had refused to produce.",
+        "children": {
+          "harmed_as_children": true,
+          "mechanism": [
+            "killed"
+          ],
+          "carried_into_adulthood": "Emmett Till was fourteen. The record of what was done to him exists because his mother insisted the casket stay open."
+        }
       },
       "respondents": {
         "described": "Roy Bryant and J.W. Milam, tried and acquitted; other participants named in later scholarship were never charged",
@@ -2595,7 +2838,342 @@
         "spiritual",
         "interpersonal",
         "social"
+      ],
+      "era": [
+        "jim_crow"
       ]
+    },
+    {
+      "id": "CL-1927-STERILIZATION",
+      "title": "Compulsory and coerced sterilisation of Black women and girls",
+      "era": [
+        "jim_crow",
+        "civil_rights",
+        "modern"
+      ],
+      "incident": {
+        "date": {
+          "start": "1927",
+          "end": "1974",
+          "precision": "range"
+        },
+        "place": {
+          "country": "US",
+          "note": "Statutory eugenics programmes in some thirty states; documented concentrations in North Carolina, Virginia, Alabama and Mississippi"
+        },
+        "jurisdiction": [
+          "State eugenics boards",
+          "Federally funded family planning programmes",
+          "Supreme Court of the United States"
+        ]
+      },
+      "classification": [
+        "medical_experimentation",
+        "denial_of_consent",
+        "official_participation",
+        "child_victim"
+      ],
+      "harm_domains": [
+        "physiological",
+        "intrapersonal",
+        "interpersonal",
+        "spiritual",
+        "social"
+      ],
+      "conduct": "State eugenics boards and, later, federally funded family planning programmes sterilised women and girls without meaningful consent. Buck v. Bell (1927) upheld compulsory sterilisation and was never overruled. North Carolina's Eugenics Board operated from 1929 to 1974 and sterilised some 7,600 people, with Black women and girls sharply over-represented in its later decades. In Alabama in 1973 two Black girls aged fourteen and twelve were sterilised under a federally funded programme after their mother, who could not read, marked an X on a form she was given to understand authorised continued contraceptive injections.",
+      "finding": {
+        "act": "established",
+        "attribution": "named_in_sources"
+      },
+      "offense": [
+        "battery",
+        "non_consensual_sterilisation",
+        "fraud",
+        "deprivation_of_consent"
+      ],
+      "harmed": {
+        "persons": [
+          "PR-RELF-MINNIE-LEE",
+          "PR-RELF-MARY-ALICE",
+          "PR-HAMER-FANNIE-LOU",
+          "PR-COLLECTIVE-STERILIZED"
+        ],
+        "count": {
+          "documented": 7600,
+          "estimated_low": 60000,
+          "estimated_high": 70000,
+          "note": "7,600 is the North Carolina programme alone. Estimates for all state eugenics programmes run to roughly 60,000-70,000 people nationally; the Relf litigation record indicated that federally funded programmes were sterilising on the order of 100,000-150,000 people a year, an unknown share of them coerced."
+        },
+        "collective": "Black women and girls sterilised under state eugenics programmes and federally funded family planning",
+        "children": {
+          "harmed_as_children": true,
+          "mechanism": [
+            "sterilised_as_a_minor",
+            "consent_obtained_from_a_parent_who_could_not_read_it",
+            "institutionalised_as_feebleminded"
+          ],
+          "carried_into_adulthood": "A girl sterilised at twelve or fourteen carries the whole of the injury into an adulthood she did not consent to enter that way. The classification that selected many of them - feebleminded - was itself produced by the intelligence-testing apparatus applied to Black children in schools, so the school and the operating table were connected by a single pedagogy."
+        },
+        "interstitial": "The children not born, and the fact that the paperwork was in order in nearly every case. Consent was documented; it was the comprehension that was withheld.",
+        "transmitted": {
+          "standing": "documented",
+          "description": "Lines of descent ended by operation. Unlike every other transmitted harm in this book, this one was designed to be transmitted by preventing transmission - the explicit object of a eugenics programme is that there be no next generation."
+        }
+      },
+      "respondents": {
+        "described": "State eugenics boards; physicians and social workers who referred and performed; the federal agencies whose programmes funded the operations; and the Supreme Court, whose 1927 judgment authorised compulsory sterilisation and has never been overruled",
+        "named_in_sources": true,
+        "official_capacity": true,
+        "echelon": "state"
+      },
+      "process": {
+        "forum": "U.S. District Court for the District of Columbia; state legislatures",
+        "outcome": "legislative_remedy",
+        "narrative": "No one was prosecuted anywhere. The Relf litigation in 1974 struck down the federal regulations and required genuine informed consent, which changed the practice going forward and returned nothing to the girls. North Carolina enacted a compensation programme in 2013 for surviving victims of its Eugenics Board - the only such programme of consequence - and by then most of those sterilised had died. Buck v. Bell stands.",
+        "escalation": [
+          {
+            "rung": "supreme",
+            "forum": "Buck v. Bell, 274 U.S. 200 (1927)",
+            "disposition": "adverse",
+            "track": "against_the_harmed",
+            "note": "Upheld compulsory sterilisation. Never overruled; the highest rung authorised the conduct rather than reviewing it."
+          },
+          {
+            "rung": "state",
+            "forum": "State eugenics boards",
+            "disposition": "no_process",
+            "track": "against_perpetrators",
+            "note": "The boards were lawfully constituted and acted within their statutes."
+          },
+          {
+            "rung": "federal",
+            "forum": "Relf v. Weinberger, U.S. District Court, District of Columbia, 1974",
+            "disposition": "adverse",
+            "track": "against_perpetrators",
+            "note": "Struck down the federal regulations and required informed consent. Prospective only; no damages, no penalty."
+          },
+          {
+            "rung": "state",
+            "forum": "North Carolina compensation programme, 2013",
+            "disposition": "legislated",
+            "track": "against_perpetrators",
+            "note": "Payments to verified living victims of the state's Eugenics Board, thirty-nine years after it closed."
+          }
+        ]
+      },
+      "impediments": [
+        "IMP-IMMUNITY",
+        "IMP-SOL",
+        "IMP-SEPARATE-BUT-EQUAL"
+      ],
+      "restoration": {
+        "forms": [
+          "partial_compensation",
+          "institutional_reform",
+          "symbolic"
+        ],
+        "reached": "Verified living victims of the North Carolina programme, under the 2013 statute - a small fraction of those sterilised, because the programme required survival to 2013 and proof. Nothing reached the Relf sisters, or anyone sterilised under any other state's programme, or anyone sterilised under federal funding."
+      },
+      "remedy": {
+        "sought": [
+          "Relf v. Weinberger, 1973-74",
+          "North Carolina compensation legislation",
+          "Virginia compensation, 2015"
+        ],
+        "granted": [
+          "Federal informed-consent regulations",
+          "North Carolina payments, 2013",
+          "Virginia payments, 2015"
+        ],
+        "outstanding": "Buck v. Bell has never been overruled. Most states that ran programmes have paid nothing."
+      },
+      "concurrence": {
+        "agree": "The boards' own case files, the litigation record, and the survivors' accounts agree on the operations, the classifications used to select people, and the consent practices.",
+        "diverge": "They diverge on totals and on the racial composition of the earlier decades, because the boards' own records are incomplete on race before mid-century. The divergence measures the record-keeping, not the practice."
+      },
+      "citations": [
+        {
+          "source": "SRC-NARA-RG60",
+          "vantage": "government_record"
+        },
+        {
+          "source": "SRC-LDF",
+          "vantage": "litigation_record"
+        },
+        {
+          "source": "SRC-NRE",
+          "vantage": "scholarship"
+        },
+        {
+          "source": "SRC-DEGRUY-PTSS",
+          "vantage": "clinical_research"
+        },
+        {
+          "source": "SRC-CHRONICLING-AMERICA",
+          "vantage": "contemporaneous_press"
+        }
+      ],
+      "verification": "documented",
+      "status_note": "The entry where the educational and medical systems meet. The classification that selected many of those sterilised was manufactured by intelligence testing applied to Black children in schools; the operation was performed by a health system acting on that classification. Both are recorded here as one course of conduct because the child passed from one to the other."
+    },
+    {
+      "id": "CL-1959-PRINCE-EDWARD",
+      "title": "Prince Edward County closes every public school for five years",
+      "era": [
+        "civil_rights"
+      ],
+      "incident": {
+        "date": {
+          "start": "1959",
+          "end": "1964",
+          "precision": "range"
+        },
+        "place": {
+          "locality": "Farmville",
+          "county": "Prince Edward",
+          "state": "Virginia",
+          "country": "US"
+        },
+        "jurisdiction": [
+          "Prince Edward County",
+          "Virginia",
+          "Supreme Court of the United States"
+        ]
+      },
+      "classification": [
+        "denial_of_education",
+        "official_participation",
+        "massive_resistance"
+      ],
+      "harm_domains": [
+        "educational",
+        "intrapersonal",
+        "social",
+        "economic",
+        "political"
+      ],
+      "conduct": "Rather than desegregate, the Prince Edward County Board of Supervisors refused to appropriate any money for public schools and closed the entire system for five years. White children continued their education at a private academy supported by tuition grants and tax credits. Black children in the county had no public schooling at all. Some were sent to relatives in other states, some were reached by improvised programmes, and many received no formal education for the whole period.",
+      "finding": {
+        "act": "established",
+        "attribution": "named_in_sources"
+      },
+      "offense": [
+        "denial_of_education",
+        "discrimination_under_colour_of_law"
+      ],
+      "harmed": {
+        "persons": [
+          "PR-JOHNS-BARBARA",
+          "PR-COLLECTIVE-PRINCE-EDWARD"
+        ],
+        "count": {
+          "documented": null,
+          "estimated_low": 1700,
+          "estimated_high": 2700,
+          "note": "Roughly two thousand Black children of school age in the county over the five years. Precise figures vary with how partial schooling elsewhere is counted."
+        },
+        "collective": "The Black schoolchildren of Prince Edward County, known since as the Lost Generation",
+        "children": {
+          "harmed_as_children": true,
+          "mechanism": [
+            "denied_schooling",
+            "separated_from_family_to_obtain_schooling",
+            "aged_out_of_schooling"
+          ],
+          "carried_into_adulthood": "Children who lost five years of schooling did not get them back. Many never completed secondary education, and the county's Black adults carried measurably lower attainment and earnings for the rest of their working lives. This is the clearest single demonstration in the corpus of the point that the injury begins in childhood and is collected in adulthood."
+        },
+        "interstitial": "The children sent away to relatives in other states, who lost their families in order to keep their schooling, and those who stayed and lost the schooling instead. Neither loss appears in any tally."
+      },
+      "respondents": {
+        "described": "The Prince Edward County Board of Supervisors, which refused the appropriation; the Commonwealth of Virginia, whose Massive Resistance programme and tuition-grant scheme financed the private alternative",
+        "named_in_sources": true,
+        "official_capacity": true,
+        "echelon": "county"
+      },
+      "process": {
+        "forum": "U.S. District Court, Eastern District of Virginia; Supreme Court of the United States",
+        "outcome": "legislative_remedy",
+        "narrative": "The county's original school case was one of the five consolidated into Brown, and it began with a student strike led by a sixteen-year-old. After Brown the county closed the schools instead. In Griffin v. County School Board (1964) the Supreme Court held that the closure denied equal protection and ordered the schools reopened - nine years after Brown, and five years into the closure. No official was penalised. In 2004 Virginia created a scholarship programme for those denied schooling, and in 2008 the General Assembly expressed regret.",
+        "escalation": [
+          {
+            "rung": "county",
+            "forum": "Prince Edward County Board of Supervisors",
+            "disposition": "declined",
+            "track": "against_perpetrators",
+            "note": "The board was the actor; it declined to appropriate and continued to decline."
+          },
+          {
+            "rung": "federal",
+            "forum": "U.S. District Court, Eastern District of Virginia",
+            "disposition": "adverse",
+            "track": "against_perpetrators",
+            "note": "Litigation ran for years while the schools stayed shut."
+          },
+          {
+            "rung": "supreme",
+            "forum": "Griffin v. County School Board of Prince Edward County, 377 U.S. 218 (1964)",
+            "disposition": "convicted",
+            "track": "against_perpetrators",
+            "note": "Held the closure unconstitutional and ordered the schools reopened. A finding against the county - but no penalty on any official, and five years already gone."
+          },
+          {
+            "rung": "state",
+            "forum": "Virginia General Assembly, 2004 and 2008",
+            "disposition": "legislated",
+            "track": "against_perpetrators",
+            "note": "Scholarship programme for those denied schooling; expression of regret. Forty years later, when most of the Lost Generation were past fifty."
+          }
+        ]
+      },
+      "impediments": [
+        "IMP-SEPARATE-BUT-EQUAL",
+        "IMP-IMMUNITY",
+        "IMP-SOL"
+      ],
+      "restoration": {
+        "forms": [
+          "partial_compensation",
+          "symbolic"
+        ],
+        "reached": "Some of the Lost Generation, through the Brown v. Board of Education Scholarship Program created in 2004 - tuition for adults returning to education, decades after the years that were taken. Nothing reached those who had died, and nothing compensated the lost earnings of a working life."
+      },
+      "remedy": {
+        "sought": [
+          "Davis v. County School Board, consolidated into Brown",
+          "Griffin v. County School Board",
+          "Legislative claim, Virginia, 2004"
+        ],
+        "granted": [
+          "Schools ordered reopened, 1964",
+          "Scholarship programme, 2004",
+          "Expression of regret, 2008"
+        ],
+        "outstanding": "The five years. Every measure granted was educational access offered to adults in place of the childhood schooling withheld."
+      },
+      "concurrence": {
+        "agree": "The county's own minutes and appropriation records, the litigation record through the Supreme Court, the state's later legislation, and the accounts of those affected agree on the closure, its duration, its purpose and its effect.",
+        "diverge": "They diverge on how many children received any schooling elsewhere during the five years, which is why the count is a range."
+      },
+      "citations": [
+        {
+          "source": "SRC-NARA-RG21",
+          "vantage": "judicial_record"
+        },
+        {
+          "source": "SRC-LDF",
+          "vantage": "litigation_record"
+        },
+        {
+          "source": "SRC-CHRONICLING-AMERICA",
+          "vantage": "contemporaneous_press"
+        },
+        {
+          "source": "SRC-BEHIND-THE-VEIL",
+          "vantage": "oral_history"
+        }
+      ],
+      "verification": "documented",
+      "status_note": "The rare entry where a forum did find against the actor - and where the finding, arriving five years in, could not return what it was about. It is also the entry that shows the harm's whole arc inside one lifetime: withheld from the child, collected from the adult, and answered with a scholarship at fifty."
     },
     {
       "id": "CL-1960-KENNARD",
@@ -2727,6 +3305,9 @@
         "physiological",
         "political",
         "intrapersonal"
+      ],
+      "era": [
+        "civil_rights"
       ]
     },
     {
@@ -2812,7 +3393,7 @@
         "outstanding": "The apology came eighty-seven years after the compilation was published. This entry stands for every killing in it that has no entry of its own."
       },
       "verification": "documented",
-      "status_note": "An aggregate entry, entered under the rule in METHODOLOGY.md section 12: where sources preserve only a count, the count is recorded as a count and is not permitted to stand in for individuated persons.",
+      "status_note": "An aggregate entry, entered under the rule in METHODOLOGY.md section 13: where sources preserve only a count, the count is recorded as a count and is not permitted to stand in for individuated persons.",
       "finding": {
         "act": "established",
         "attribution": "unattributed"
@@ -2855,6 +3436,10 @@
         "social",
         "political",
         "spiritual"
+      ],
+      "era": [
+        "reconstruction",
+        "jim_crow"
       ]
     },
     {
@@ -2908,7 +3493,14 @@
           "documented": 1
         },
         "collective": "Black residents of Mobile, and every community the organisation operated in",
-        "interstitial": "Mobile police initially pursued a theory that the killing was a drug dispute, which the family rejected and which delayed the investigation by months."
+        "interstitial": "Mobile police initially pursued a theory that the killing was a drug dispute, which the family rejected and which delayed the investigation by months.",
+        "children": {
+          "harmed_as_children": true,
+          "mechanism": [
+            "killed"
+          ],
+          "carried_into_adulthood": "Michael Donald was nineteen, walking home."
+        }
       },
       "respondents": {
         "described": "James Knowles and Henry Hays, members of the United Klans of America, acting on the direction and in the culture of the organisation; Bennie Jack Hays, a UKA officer",
@@ -3019,7 +3611,10 @@
         }
       ],
       "verification": "documented",
-      "status_note": "Entered deliberately as the corpus's counterexample. It is the only entry here whose process.outcome is convicted, and its presence is what makes the other twenty a finding rather than a selection. Note what actually ended the organisation: not the prosecutions, which reached two men, but a tort claim brought by the victim's mother."
+      "status_note": "Entered deliberately as the corpus's counterexample. It is the only entry here whose process.outcome is convicted, and its presence is what makes the other twenty a finding rather than a selection. Note what actually ended the organisation: not the prosecutions, which reached two men, but a tort claim brought by the victim's mother.",
+      "era": [
+        "modern"
+      ]
     }
   ]
 }

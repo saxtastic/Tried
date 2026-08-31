@@ -23,7 +23,7 @@ export const OUTCOMES = {
   unresolved: 'Investigation opened and never closed',
 };
 
-// METHODOLOGY.md section 11: unpunished is derived. Only a sustained criminal
+// METHODOLOGY.md section 12: unpunished is derived. Only a sustained criminal
 // conviction of a perpetrator counts as punishment. Settlements, apologies and
 // exonerations of the victim do not.
 export const isUnpunished = (outcome) => outcome !== 'convicted';
@@ -82,6 +82,31 @@ export const VANTAGE = {
   genealogical_record: 'Descent reconstructed from records of sale, census, and probate.',
   clinical_research: 'Clinical or psychological research. A framework, not a finding - see TRANSMISSION.',
 };
+
+// ERAS, in order. Periodisation lets the log show a harm as a continuity rather
+// than a series of incidents - which is the only way the injury to children is
+// visible, because it is the same injury arriving in different institutions.
+export const ERAS = [
+  'atlantic_trade',   // to 1808
+  'domestic_trade',   // 1808-1865
+  'reconstruction',   // 1865-1877
+  'jim_crow',         // 1877-1954
+  'civil_rights',     // 1954-1968
+  'modern',           // 1968-
+];
+
+// How a child was reached. Recorded because the book's other fields assume an
+// adult with capacity, and the harms that begin in childhood are collected in
+// adulthood by institutions that never appear in the entry at all.
+export const CHILD_MECHANISM = [
+  'killed', 'sold_from_parent', 'separated_from_family_to_obtain_schooling',
+  'separated_from_kin_and_language', 'born_into_the_condition', 'laboured_from_infancy',
+  'transported', 'trafficked', 'denied_schooling', 'punished_for_learning',
+  'taught_in_secret_at_risk', 'aged_out_of_schooling', 'prosecuted_as_a_child',
+  'beaten_in_custody', 'sterilised_as_a_minor',
+  'consent_obtained_from_a_parent_who_could_not_read_it', 'institutionalised_as_feebleminded',
+  'medical_experimentation_without_consent',
+];
 
 // ECHELON: the ladder of authority, lowest rung first. An actor operates at a
 // rung; a matter travels up the rungs, or fails to. The ordering is what makes
@@ -238,12 +263,48 @@ export function routeFinding(complaints) {
   const OFFICIAL = rungOf('county'); // county and above: the actor IS an organ of the state
   const high = rt.filter((r) => r.actorRung >= OFFICIAL);
   const low = rt.filter((r) => r.actorRung < OFFICIAL);
+  // The echelon split alone stopped separating cleanly once entries from the
+  // civil rights era and later were added. The era split is what survives, and
+  // it says something sharper: the forums that could hear a matter against a
+  // state actor did not exist for most of this corpus's span.
+  const byId = new Map(complaints.map((c) => [c.id, c]));
+  const LATE = ['civil_rights', 'modern'];
+  const isLate = (r) => (byId.get(r.id).era ?? []).some((e) => LATE.includes(e));
+  const early = high.filter((r) => !isLate(r));
+  const late = high.filter(isLate);
   return {
     n: rt.length,
-    high: { n: high.length, escaped: high.filter((r) => r.escaped).length, ids: high.map((r) => r.id) },
+    high: { n: high.length, escaped: high.filter((r) => r.escaped).length, ids: high.map((r) => r.id),
+      stuck: high.filter((r) => !r.escaped).map((r) => r.id) },
     low: { n: low.length, escaped: low.filter((r) => r.escaped).length },
+    era: {
+      early: { n: early.length, escaped: early.filter((r) => r.escaped).length },
+      late: { n: late.length, escaped: late.filter((r) => r.escaped).length,
+        climbed: late.filter((r) => r.escaped).map((r) => r.id) },
+    },
     noTrack: routes(complaints).filter((r) => !r.against).map((r) => r.id),
   };
+}
+
+// The child across the eras. The user-facing question this answers: is harm to
+// children a feature of one period, or the constant?
+export function childrenAcrossEras(complaints) {
+  const rows = ERAS.map((era) => {
+    const inEra = complaints.filter((c) => (c.era ?? []).includes(era));
+    const withKids = inEra.filter((c) => c.harmed?.children);
+    return {
+      era,
+      entries: inEra.length,
+      children: withKids.length,
+      ids: withKids.map((c) => c.id),
+      mechanisms: [...new Set(withKids.flatMap((c) => c.harmed.children.mechanism))],
+      educational: inEra.filter((c) => (c.harm_domains ?? []).includes('educational')).length,
+      physiological: inEra.filter((c) => (c.harm_domains ?? []).includes('physiological')).length,
+    };
+  });
+  const total = complaints.filter((c) => c.harmed?.children);
+  return { rows, total: total.length, ids: total.map((c) => c.id),
+    everyEra: rows.every((r) => r.entries === 0 || r.children > 0) };
 }
 
 export function validate() {
@@ -337,6 +398,27 @@ export function validate() {
     const cs = c.respondents?.claimed_sanction;
     if (cs && (!cs.asserted || !Array.isArray(cs.expressed_through) || !cs.expressed_through.length)) {
       err(at, 'claimed_sanction must state what authority was asserted and how it was expressed');
+    }
+    if (!Array.isArray(c.era) || !c.era.length) {
+      err(at, 'era must name at least one period');
+    } else {
+      for (const e of c.era) {
+        if (!ERAS.includes(e)) err(at, `era "${e}" is not one of ${ERAS.join(', ')}`);
+      }
+    }
+    const kids = c.harmed?.children;
+    if (kids) {
+      if (kids.harmed_as_children !== true) {
+        err(at, 'harmed.children is present but harmed_as_children is not true; omit the field instead');
+      }
+      for (const m of kids.mechanism ?? []) {
+        if (!CHILD_MECHANISM.includes(m)) err(at, `child mechanism "${m}" is not a recorded mechanism`);
+      }
+      if (!kids.mechanism?.length) err(at, 'harmed.children must record how the child was reached');
+      // The whole point of the field: the harm does not stop at childhood.
+      if (!kids.carried_into_adulthood) {
+        err(at, 'harmed.children must state what the child carried into adulthood');
+      }
     }
     if (!ECHELON.includes(c.respondents?.echelon)) {
       err(at, `respondents.echelon "${c.respondents?.echelon}" is not one of ${ECHELON.join(', ')}`);
@@ -456,7 +538,7 @@ export function validate() {
     if (!STANDING.includes(p.standing)) {
       err(at, `standing "${p.standing}" is not one of ${STANDING.join(', ')}`);
     }
-    // METHODOLOGY.md section 12: a count is a count and must say so; an
+    // METHODOLOGY.md section 13: a count is a count and must say so; an
     // individuated person is never carried as a number.
     if (p.identity_status === 'collectively_recorded' && !p.count) {
       err(at, 'collectively_recorded rows must carry a count');
@@ -471,7 +553,7 @@ export function validate() {
       err(at, 'name_unrecorded rows must state what attests the person\'s existence');
     }
     if (!p.consent_note) {
-      err(at, 'missing consent_note (METHODOLOGY.md section 12)');
+      err(at, 'missing consent_note (METHODOLOGY.md section 13)');
     }
     if (p.voice?.source && !archiveIds.has(p.voice.source)) {
       err(at, `voice.source references unknown archive "${p.voice.source}"`);
@@ -633,10 +715,21 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     `where the actor stood at county level or above (n=${f.high.n}), ${f.high.escaped} matters ` +
     `were heard above that level; where the actor stood below it (n=${f.low.n}), ${f.low.escaped} were`
   );
+  console.log(
+    `  of those official actors: ${f.era.early.escaped} of ${f.era.early.n} climbed before the ` +
+    `civil rights era, ${f.era.late.escaped} of ${f.era.late.n} in that era or after`
+  );
   const suppressed = organizations.filter((o) => o.state_response.suppressed);
   console.log(
     `organisations claiming sanction: ${organizations.length}; ` +
     `${suppressed.length} were ever stopped by anything (${suppressed.map((o) => o.id).join(', ')})`
+  );
+  const kids = childrenAcrossEras(complaints);
+  const populated = kids.rows.filter((r) => r.entries > 0);
+  console.log(
+    `children: ${kids.total} of ${complaints.length} entries record harm reaching children as ` +
+    `children, in ${populated.filter((r) => r.children).length} of ${populated.length} populated eras` +
+    (kids.everyEra ? ' — every era in the corpus' : '')
   );
   console.log(`${errors.length} error(s), ${warnings.length} warning(s)`);
   process.exit(errors.length ? 1 : 0);
