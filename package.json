@@ -9,6 +9,7 @@
     "check:propose": "node scripts/check-propose.mjs",
     "deploy": "wrangler deploy",
     "dev": "wrangler dev",
+    "enoch": "node scripts/enoch.mjs",
     "fleet": "node scripts/fleet.mjs all",
     "fleet:render": "node scripts/fleet.mjs render",
     "icons": "python3 scripts/make-icons.py",
