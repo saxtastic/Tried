@@ -186,6 +186,34 @@ standing. `npm run record-book:interrogate -- --live` runs the whole query.
 bill, or an institution acting on its own record. None came from a court applying
 existing law to a historical claim.**
 
+**2f. Legislation with disparate effect is its own file.**
+Impediments blocked a remedy; these statutes **were the injury**, working through
+the ordinary machinery of law. `data/legislation.json` records 9 — **5 name no
+race at all**, 3 remain in force.
+
+`disparate_effect.mechanism` is **required**, and the validator rejects an entry
+without it: a disparate outcome is not by itself an indictment of a statute, so
+the channel has to be nameable. The disfranchising constitutions tested for a
+literacy deficit the same legislatures had created by statute. The Social
+Security Act and NLRA excluded agricultural and domestic workers — occupational
+categories containing roughly three in five Black workers, demanded by Southern
+delegations as the price of passage. The GI Bill's mechanism is *delegation*: a
+neutral entitlement administered through segregated institutions.
+
+The 1994 Crime Bill is `contested`, because the causal share genuinely is —
+entering it as documented for pointing the expected way would be the error the
+book refuses elsewhere.
+
+**One entry is `asserted_not_verified`** — contemporary federal employment
+changes affecting Black women. It carries no sources by design, renders behind a
+warning in its own colour, and says it must not be cited. The *structural
+exposure* is documented (federal-workforce over-representation, public employment
+as a route to the Black middle class, prior austerity effects); the asserted
+effect is not. The entry names what would settle it: BLS CPS microdata by race
+and sex, OPM FedScope, EEOC reports, and identification of the instrument.
+**It becomes documented when a named instrument and a measured series are both on
+file, and not before.**
+
 **3a. Entries are classified by what was injured, not by who was injured.**
 `harm_domains` carries as many of eight as apply: `physiological`, `spiritual`,
 `social`, `political`, `economic`, `educational`, `interpersonal`,
@@ -267,7 +295,7 @@ anything under `public/record-book/`; it is overwritten.
 
 ## Current state
 
-25 complaint entries, 52 register rows, 21 rights, 6 organisations, 10 impediments, 53 archives.
+25 complaint entries, 52 register rows, 21 rights, 9 statutes, 6 organisations, 10 impediments, 53 archives.
 
 In all 18 the act is **established** on the evidence. In 3 no participant is
 identified in any source. In all 18 no perpetrator was ever convicted. 7 name a

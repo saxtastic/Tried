@@ -23,7 +23,7 @@ export const OUTCOMES = {
   unresolved: 'Investigation opened and never closed',
 };
 
-// METHODOLOGY.md section 13: unpunished is derived. Only a sustained criminal
+// METHODOLOGY.md section 14: unpunished is derived. Only a sustained criminal
 // conviction of a perpetrator counts as punishment. Settlements, apologies and
 // exonerations of the victim do not.
 export const isUnpunished = (outcome) => outcome !== 'convicted';
@@ -81,6 +81,16 @@ export const VANTAGE = {
   material_record: 'The object, site, or memorial itself.',
   genealogical_record: 'Descent reconstructed from records of sale, census, and probate.',
   clinical_research: 'Clinical or psychological research. A framework, not a finding - see TRANSMISSION.',
+};
+
+// INTENT of a statute whose operation fell disproportionately. The middle value
+// is the one that matters: a facially neutral text can be selected FOR a known
+// result, which is why the mechanism must always be stated.
+export const LEG_INTENT = ['explicit', 'facially_neutral', 'unstated'];
+export const LEG_STATUS = {
+  documented: 'The disparate effect is established on evidence.',
+  contested: 'The literature is in open disagreement about the effect or its causal share.',
+  asserted_not_verified: 'Recorded as an assertion. No source on file. Carries no finding whatever.',
 };
 
 // ERAS, in order. Periodisation lets the log show a harm as a continuity rather
@@ -311,6 +321,7 @@ export function validate() {
   const complaints = read('complaints.json').complaints;
   const organizations = read('organizations.json').organizations;
   const rights = read('rights.json').rights;
+  const legislation = read('legislation.json').legislation;
   const persons = read('register.json').persons;
   const impediments = read('impediments.json').impediments;
   const archives = read('archives.json').archives;
@@ -330,7 +341,8 @@ export function validate() {
   };
 
   [[complaints, 'complaints'], [persons, 'register'], [organizations, 'organizations'],
-   [rights, 'rights'], [impediments, 'impediments'], [archives, 'archives']]
+   [rights, 'rights'], [legislation, 'legislation'],
+   [impediments, 'impediments'], [archives, 'archives']]
     .forEach(([rows, label]) => dupes(rows, label));
 
   const personIds = ids(persons);
@@ -557,7 +569,7 @@ export function validate() {
     if (!STANDING.includes(p.standing)) {
       err(at, `standing "${p.standing}" is not one of ${STANDING.join(', ')}`);
     }
-    // METHODOLOGY.md section 14: a count is a count and must say so; an
+    // METHODOLOGY.md section 15: a count is a count and must say so; an
     // individuated person is never carried as a number.
     if (p.identity_status === 'collectively_recorded' && !p.count) {
       err(at, 'collectively_recorded rows must carry a count');
@@ -572,7 +584,7 @@ export function validate() {
       err(at, 'name_unrecorded rows must state what attests the person\'s existence');
     }
     if (!p.consent_note) {
-      err(at, 'missing consent_note (METHODOLOGY.md section 14)');
+      err(at, 'missing consent_note (METHODOLOGY.md section 15)');
     }
     if (p.voice?.source && !archiveIds.has(p.voice.source)) {
       err(at, `voice.source references unknown archive "${p.voice.source}"`);
@@ -582,6 +594,41 @@ export function validate() {
     }
     ref(at, 'complaints', p.complaints, complaintIds, 'complaint');
     ref(at, 'sources', p.sources, archiveIds, 'archive');
+  }
+
+  for (const l of legislation) {
+    const at = `legislation/${l.id}`;
+    if (!LEG_INTENT.includes(l.intent)) {
+      err(at, `intent "${l.intent}" is not one of ${LEG_INTENT.join(', ')}`);
+    }
+    const de = l.disparate_effect;
+    if (!(de?.status in LEG_STATUS)) {
+      err(at, `disparate_effect.status "${de?.status}" is not one of ${Object.keys(LEG_STATUS).join(', ')}`);
+    }
+    if (!de?.described) err(at, 'disparate_effect.described is required');
+    // The rule this file exists for. A facially neutral statute produces a
+    // racial result through some specific channel; naming it is what separates
+    // a record from an accusation.
+    if (!de?.mechanism) {
+      err(at, 'disparate_effect.mechanism must state HOW the text produced the result; ' +
+              'without it this is an assertion rather than a record');
+    }
+    if (de?.status === 'asserted_not_verified') {
+      if (l.sources?.length) {
+        err(at, 'marked asserted_not_verified but carries sources; if sourced it is not unverified');
+      }
+      if (!l.note) {
+        err(at, 'an unverified entry must carry a note saying it must not be cited and what would establish it');
+      }
+    }
+    if (de?.status === 'contested' && !l.note) {
+      err(at, 'a contested entry must say in a note what the disagreement is');
+    }
+    if (de?.status === 'documented' && !l.sources?.length) {
+      err(at, 'marked documented but carries no sources');
+    }
+    ref(at, 'sources', l.sources, archiveIds, 'archive');
+    ref(at, 'complaints', l.complaints, complaintIds, 'complaint');
   }
 
   for (const r of rights) {
@@ -657,6 +704,41 @@ export function validate() {
     }
   }
   const usedImpediments = new Set(complaints.flatMap((c) => c.impediments ?? []));
+  for (const l of legislation) {
+    const at = `legislation/${l.id}`;
+    if (!LEG_INTENT.includes(l.intent)) {
+      err(at, `intent "${l.intent}" is not one of ${LEG_INTENT.join(', ')}`);
+    }
+    const de = l.disparate_effect;
+    if (!(de?.status in LEG_STATUS)) {
+      err(at, `disparate_effect.status "${de?.status}" is not one of ${Object.keys(LEG_STATUS).join(', ')}`);
+    }
+    if (!de?.described) err(at, 'disparate_effect.described is required');
+    // The rule this file exists for. A facially neutral statute produces a
+    // racial result through some specific channel; naming it is what separates
+    // a record from an accusation.
+    if (!de?.mechanism) {
+      err(at, 'disparate_effect.mechanism must state HOW the text produced the result; ' +
+              'without it this is an assertion rather than a record');
+    }
+    if (de?.status === 'asserted_not_verified') {
+      if (l.sources?.length) {
+        err(at, 'marked asserted_not_verified but carries sources; if sourced it is not unverified');
+      }
+      if (!l.note) {
+        err(at, 'an unverified entry must carry a note saying it must not be cited and what would establish it');
+      }
+    }
+    if (de?.status === 'contested' && !l.note) {
+      err(at, 'a contested entry must say in a note what the disagreement is');
+    }
+    if (de?.status === 'documented' && !l.sources?.length) {
+      err(at, 'marked documented but carries no sources');
+    }
+    ref(at, 'sources', l.sources, archiveIds, 'archive');
+    ref(at, 'complaints', l.complaints, complaintIds, 'complaint');
+  }
+
   for (const r of rights) {
     const at = `rights/${r.id}`;
     if (!['enumerated', 'unenumerated'].includes(r.status)) {
@@ -693,11 +775,13 @@ export function validate() {
     if (!usedImpediments.has(i.id)) warn(`impediments/${i.id}`, 'not invoked by any complaint');
   }
 
-  return { complaints, persons, organizations, rights, impediments, archives, errors, warnings };
+  return { complaints, persons, organizations, rights, legislation, impediments, archives,
+    errors, warnings };
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const { complaints, persons, organizations, rights, impediments, archives, errors, warnings } = validate();
+  const { complaints, persons, organizations, rights, legislation, impediments, archives,
+    errors, warnings } = validate();
   const unpunished = complaints.filter((c) => isUnpunished(c.process.outcome)).length;
   const captured = complaints.filter(
     (c) => c.finding.act === 'established' && isUnpunished(c.process.outcome)).length;
@@ -794,6 +878,14 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   console.log(
     `foreclosed contribution recorded on ${fc.length} entries; ` +
     `${fc.filter((c) => c.foreclosed_contribution.quantifiable === false).length} state the input and none the output`
+  );
+  const neutral = legislation.filter((l) => l.intent === 'facially_neutral');
+  const live = legislation.filter((l) => l.still_operative === true);
+  const unver = legislation.filter((l) => l.disparate_effect.status === 'asserted_not_verified');
+  console.log(
+    `legislation: ${legislation.length} statutes with disparate effect; ` +
+    `${neutral.length} facially neutral, ${live.length} still operative, ` +
+    `${unver.length} asserted and unverified (${unver.map((l) => l.id).join(', ') || 'none'})`
   );
   console.log(`${errors.length} error(s), ${warnings.length} warning(s)`);
   process.exit(errors.length ? 1 : 0);

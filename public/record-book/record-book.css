@@ -198,6 +198,16 @@ main, .masthead, footer { max-width: 46rem; margin: 0 auto; padding: 0 1.25rem; 
 
 .children { border-left: 3px solid var(--accent); padding-left: .9rem; }
 .foreclosed { border-left: 3px solid var(--accent); padding-left: .9rem; }
+.mechanism { border-left: 3px solid var(--accent); padding-left: .9rem; }
+.flag-intent-facially_neutral { outline: 1px solid var(--accent); }
+.flag-legstatus-contested, .flag-legstatus-asserted_not_verified {
+  outline: 1px dashed var(--warn); color: var(--warn);
+}
+.leg-asserted_not_verified { border-style: dashed; border-color: var(--warn); }
+.leg-contested { border-left: 3px solid var(--warn); }
+.unverified-warning { border: 2px dashed var(--warn); }
+.unverified-warning h2 { color: var(--warn); }
+.note-block { background: var(--flag-bg); padding: .8rem; border-radius: 2px; font-size: .9rem; }
 .chip-warn { border-color: var(--warn); color: var(--warn); }
 .transmitted { border-left: 3px solid var(--rule); padding-left: .9rem; }
 .transmitted h3 { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }

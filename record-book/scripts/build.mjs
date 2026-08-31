@@ -23,6 +23,7 @@ const NAV = [
   ['routes.html', 'Route of authority'],
   ['children.html', 'The child'],
   ['rights.html', 'Rights'],
+  ['legislation.html', 'Legislation'],
   ['register.html', 'Register'],
   ['impediments.html', 'Impediments'],
   ['archives.html', 'Archives'],
@@ -727,6 +728,78 @@ function renderRights({ complaints, rights, impediments }) {
     fc + repeal);
 }
 
+
+// --------------------------------------------------------------- legislation
+function renderLegislation({ legislation, complaints }) {
+  const byId = new Map(complaints.map((c) => [c.id, c]));
+  const documented = legislation.filter((l) => l.disparate_effect.status === 'documented');
+  const contested = legislation.filter((l) => l.disparate_effect.status === 'contested');
+  const unverified = legislation.filter((l) => l.disparate_effect.status === 'asserted_not_verified');
+  const neutral = legislation.filter((l) => l.intent === 'facially_neutral');
+  const live = legislation.filter((l) => l.still_operative === true);
+
+  const card = (l) => `<article class="entry leg-${esc(l.disparate_effect.status)}" id="${l.id}">
+    <header>
+      <p class="docket">${esc(l.id)}</p>
+      <h2>${esc(l.name)}</h2>
+      <p class="where">${esc(l.citation)}${l.enacted ? ` &middot; ${esc(l.enacted)}` : ''}</p>
+      <p class="flags">
+        <span class="flag flag-intent-${esc(l.intent)}">${esc(l.intent.replace(/_/g, ' '))}</span>
+        <span class="flag flag-legstatus-${esc(l.disparate_effect.status)}">${
+          esc(l.disparate_effect.status.replace(/_/g, ' '))}</span>
+        ${l.still_operative === true ? '<span class="flag flag-official">still operative</span>' : ''}
+        ${l.population ? `<span class="flag">${esc(l.population)}</span>` : ''}
+      </p>
+    </header>
+    <div class="field"><h3>Effect</h3><p>${esc(l.disparate_effect.described)}</p></div>
+    <div class="field mechanism"><h3>Mechanism</h3>
+      <p>${esc(l.disparate_effect.mechanism)}</p>
+      <p class="meta">How the text produced the result. Required on every entry: without it this
+      would be an accusation rather than a record.</p>
+    </div>
+    ${l.amended_or_repealed ? `<div class="field"><h3>Since</h3>
+      <p>${esc(l.amended_or_repealed)}</p></div>` : ''}
+    ${l.note ? `<div class="field note-block"><p>${esc(l.note)}</p></div>` : ''}
+    <p class="sources">${(l.complaints ?? []).length
+      ? 'Linked entries: ' + l.complaints.map((id) =>
+          `<a href="index.html#${id}">${esc(byId.get(id)?.title ?? id)}</a>`).join(' &middot; ')
+      : ''}${(l.sources ?? []).length
+      ? `${(l.complaints ?? []).length ? '<br>' : ''}Sources: ` + l.sources.map((sid) =>
+          `<a href="archives.html#${sid}">${esc(sid)}</a>`).join(', ')
+      : (l.disparate_effect.status === 'asserted_not_verified' ? 'No sources on file — by design.' : '')}</p>
+  </article>`;
+
+  const warn = unverified.length ? `<section class="group unverified-warning">
+    <h2>One entry here is unverified and must not be cited</h2>
+    ${unverified.map((l) => `<p><strong>${esc(l.name)}</strong> — ${esc(l.note)}</p>`).join('')}
+    <p class="meta">It is kept in the file rather than dropped because the assertion is worth
+    testing and the test is worth writing down. It is rendered below with every other entry, in
+    its own colour, carrying no sources, because an entry that looked like the others would be
+    mistaken for one.</p>
+  </section>` : '';
+
+  const lede = `Impediments blocked a remedy. These statutes <strong>were the injury</strong>,
+    working through the ordinary machinery of law. ${legislation.length} are recorded:
+    ${documented.length} documented, ${contested.length} contested, ${unverified.length} asserted
+    and unverified. <strong>${neutral.length} name no race at all</strong>, and
+    ${live.length} remain in force.
+    <br><br>Every entry must state its <strong>mechanism</strong> — how a text that names no race
+    produced a racial result. That field is required by the validator, because without it this
+    page would be a list of accusations rather than a record.`;
+
+  return page('legislation.html', 'Legislation with disparate effect', lede,
+    warn +
+    `<section class="group"><h2>Documented</h2><p class="gloss">The effect is established on
+      evidence, and each names the channel it worked through.</p></section>` +
+    documented.map(card).join('') +
+    (contested.length ? `<section class="group"><h2>Contested</h2><p class="gloss">The literature
+      is in open disagreement about the effect or its causal share. Recorded as contested rather
+      than documented, because adopting a disputed finding for pointing the expected way is the
+      same error this book refuses everywhere else.</p></section>` + contested.map(card).join('') : '') +
+    (unverified.length ? `<section class="group"><h2>Asserted, not verified</h2><p class="gloss">
+      No source on file. Carries no finding.</p></section>` + unverified.map(card).join('') : ''));
+}
+
 // ------------------------------------------------------------------ archives
 
 function renderArchives({ archives, complaints, persons }) {
@@ -962,6 +1035,16 @@ main, .masthead, footer { max-width: 46rem; margin: 0 auto; padding: 0 1.25rem; 
 
 .children { border-left: 3px solid var(--accent); padding-left: .9rem; }
 .foreclosed { border-left: 3px solid var(--accent); padding-left: .9rem; }
+.mechanism { border-left: 3px solid var(--accent); padding-left: .9rem; }
+.flag-intent-facially_neutral { outline: 1px solid var(--accent); }
+.flag-legstatus-contested, .flag-legstatus-asserted_not_verified {
+  outline: 1px dashed var(--warn); color: var(--warn);
+}
+.leg-asserted_not_verified { border-style: dashed; border-color: var(--warn); }
+.leg-contested { border-left: 3px solid var(--warn); }
+.unverified-warning { border: 2px dashed var(--warn); }
+.unverified-warning h2 { color: var(--warn); }
+.note-block { background: var(--flag-bg); padding: .8rem; border-radius: 2px; font-size: .9rem; }
 .chip-warn { border-color: var(--warn); color: var(--warn); }
 .transmitted { border-left: 3px solid var(--rule); padding-left: .9rem; }
 .transmitted h3 { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
@@ -1032,6 +1115,7 @@ const files = {
   'routes.html': renderRoutes(data),
   'children.html': renderChildren(data),
   'rights.html': renderRights(data),
+  'legislation.html': renderLegislation(data),
   'archives.html': renderArchives(data),
   'record-book.css': CSS,
 };

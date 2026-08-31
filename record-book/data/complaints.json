@@ -1,5 +1,5 @@
 {
-  "$comment": "Complaint log. process.unpunished is DERIVED - see METHODOLOGY.md section 13 - and is recomputed and checked by scripts/validate.mjs.",
+  "$comment": "Complaint log. process.unpunished is DERIVED - see METHODOLOGY.md section 14 - and is recomputed and checked by scripts/validate.mjs.",
   "complaints": [
     {
       "id": "CL-1857-DRED-SCOTT",
@@ -2843,7 +2843,7 @@
         "outstanding": "No criminal accountability for any officer. Exoneration corrected the state's injury to the victims and left the perpetrators' conduct unaddressed."
       },
       "verification": "documented",
-      "status_note": "Outcome is recorded as posthumous_exoneration and therefore still counts as unpunished. See METHODOLOGY.md section 13 for why.",
+      "status_note": "Outcome is recorded as posthumous_exoneration and therefore still counts as unpunished. See METHODOLOGY.md section 14 for why.",
       "finding": {
         "act": "established",
         "attribution": "named_in_sources"
@@ -3659,7 +3659,7 @@
         "outstanding": "The apology came eighty-seven years after the compilation was published. This entry stands for every killing in it that has no entry of its own."
       },
       "verification": "documented",
-      "status_note": "An aggregate entry, entered under the rule in METHODOLOGY.md section 14: where sources preserve only a count, the count is recorded as a count and is not permitted to stand in for individuated persons.",
+      "status_note": "An aggregate entry, entered under the rule in METHODOLOGY.md section 15: where sources preserve only a count, the count is recorded as a count and is not permitted to stand in for individuated persons.",
       "finding": {
         "act": "established",
         "attribution": "unattributed"

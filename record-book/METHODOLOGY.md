@@ -373,7 +373,7 @@ notice, disguise or conversely a uniform, published platform, advance notice of
 an election it intended to decide by force, and in one case a deliberated
 sentence carried out on a stranger because a jury had acquitted someone else.
 
-This is the mirror of the book's other recurring finding. Section 16 records
+This is the mirror of the book's other recurring finding. Section 17 records
 officials acting *beyond* the statute of their role. These are private bodies
 claiming the role entirely. Both are the same displacement of authority, from
 opposite directions, and in several entries they meet: a sheriff surrenders
@@ -605,7 +605,79 @@ answer is that **every material restoration in this corpus came through a
 legislature, a claim bill, or an institution acting on its own record. None came
 from a court applying existing law to a historical claim.**
 
-## 11. Interstitial harm
+## 11. Legislation with disparate effect
+
+Impediments blocked a remedy. These statutes **were the injury**, working through
+the ordinary machinery of law. `data/legislation.json` records nine.
+
+`intent` takes `explicit`, `facially_neutral`, or `unstated`. The middle value is
+the one that matters, because **five of the nine name no race at all** and three
+remain in force.
+
+### The mechanism is required
+
+Every entry must state `disparate_effect.mechanism`: **how a text that names no
+race produced a racial result.** The validator rejects an entry without it.
+
+That rule is what separates this file from a list of grievances. A disparate
+outcome is not by itself an indictment of a statute; the channel has to be
+nameable. Where it is, the record is strong:
+
+- **The disfranchising constitutions** tested for literacy in a population that
+  anti-literacy statutes had spent a century and a half preventing from becoming
+  literate. The mechanism was to test for a deficit the same legislatures had
+  created — which is why that entry links directly to `CL-1740-ANTI-LITERACY`.
+- **The Social Security Act and the NLRA** excluded agricultural and domestic
+  workers. Occupational categories, not racial ones — but roughly three in five
+  Black workers nationally were in exactly those two, the exclusion was demanded
+  by Southern delegations as the price of passage, and the categories were
+  therefore selected knowing what they contained. This is the canonical American
+  instance of a facially neutral classification chosen for a known result.
+- **The GI Bill** is race-neutral in text and was administered by states, banks
+  and universities. The mechanism is *delegation*: a neutral entitlement running
+  through segregated institutions produces a segregated result without a single
+  discriminatory word in the statute.
+- **The 100:1 crack and powder ratio** attached a hundredfold sentencing
+  difference to a difference in preparation rather than in conduct. It is still
+  in force at 18:1.
+
+### Contested is a value, not a hedge
+
+The 1994 Crime Bill is recorded as `contested`, because the causal share is
+genuinely disputed: most incarceration growth was at state level and much of it
+predates the Act. Entering it as `documented` because it points the expected way
+would be the same error the book refuses everywhere else, and the note says so.
+
+### The unverified entry
+
+One entry — contemporary federal employment changes affecting Black women — is
+`asserted_not_verified`. It carries **no sources by design**, is rendered in its
+own colour behind a warning, and its note says it must not be cited.
+
+It is kept rather than dropped because the assertion is worth testing and **the
+test is worth writing down**. What is documented is the *structural exposure*:
+Black women have been over-represented in federal civilian employment for
+decades, public employment has been a principal route into the Black middle
+class, public-sector contraction has previously fallen disproportionately on
+Black workers, and Black women complete bachelor's degrees at higher rates than
+Black men. None of that establishes the asserted effect. It establishes that the
+exposure exists and that the mechanism would be occupational concentration rather
+than any racial term.
+
+What is **not** established: any employment figure, any named statute, any causal
+attribution. The assistant that built this file has a May 2026 knowledge cutoff
+and no network access, so no current series could be consulted.
+
+The entry names what would settle it: BLS Current Population Survey microdata
+disaggregated by race and sex, OPM FedScope for federal workforce composition and
+separations, EEOC federal workforce reports, and identification of the specific
+instrument alleged to have caused it. **It becomes documented when a named
+instrument and a measured series are both on file, and not before.**
+
+This is the schema working on live material, which is what it was built for. The
+book records the assertion, its mechanism, and its test. It does not adopt it.
+
+## 12. Interstitial harm
 
 `harmed.interstitial` records what falls between the events and is counted
 nowhere: property abandoned under threat, exile, testimony never given, kinship
@@ -615,7 +687,7 @@ tally in any source. The field exists because leaving them out would let the
 book's own structure — one entry, one incident, one disposition — do the same
 work of erasure that the tallies do.
 
-## 12. Transmitted harm
+## 13. Transmitted harm
 
 `harmed.interstitial` records what falls between events within one generation.
 `harmed.transmitted` records what outlives it.
@@ -678,7 +750,7 @@ was assembled from knowledge of the field, not retrieved, and it is not a
 reconstruction of what DeGruy cites. It is marked as such in the manifest and
 must not be presented otherwise. Pull the actual citations from the book's notes.
 
-## 13. "Unpunished" is derived, not asserted
+## 14. "Unpunished" is derived, not asserted
 
 `process.outcome` records what the legal system actually did:
 
@@ -703,7 +775,7 @@ injuries while leaving the other untouched, and the book counts it that way.
 `scripts/validate.mjs` recomputes the field and fails the build on any
 disagreement, so the claim in the title of this book cannot drift from its data.
 
-## 14. Identity: who is in the register, and on what terms
+## 15. Identity: who is in the register, and on what terms
 
 The hardest question this book answers is what to do with a person whose injury
 is recorded and whose name is not.
@@ -753,7 +825,7 @@ carries them with its own citation. These are quotations from documents, not
 reconstructions. **The book never composes speech for the dead.** If no words
 survive, the field is absent — an absence that is itself part of the record.
 
-## 15. Impediments
+## 16. Impediments
 
 `data/impediments.json` catalogs the mechanisms that converted a crime into a
 non-crime: doctrines of personhood and jurisdiction, immunities, evidentiary and
@@ -772,7 +844,7 @@ book exists to show becomes legible: the same handful of doctrines, mostly about
 who may hear a claim rather than whether the injury occurred, recurring across a
 century and a half.
 
-## 16. Officials acting beyond their role
+## 17. Officials acting beyond their role
 
 A recurring classification is `official_participation` — conduct by sheriffs,
 deputies, jailers, guardsmen, and physicians acting under color of law and
@@ -784,7 +856,7 @@ defenses, and immunities differ, and because an officer exceeding the statute of
 their role is the case in which the state is both the injurer and the only
 available forum.
 
-## 17. Sources
+## 18. Sources
 
 `data/archives.json` is a manifest of the corpora this work draws on, with
 locator URLs and access terms. Public-domain texts can be fetched on demand with
