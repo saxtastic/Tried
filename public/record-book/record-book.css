@@ -167,6 +167,30 @@ main, .masthead, footer { max-width: 46rem; margin: 0 auto; padding: 0 1.25rem; 
 .matrix tbody tr:hover th { color: var(--accent); }
 .matrix td:hover { outline: 2px solid var(--accent); }
 
+.ladder { list-style: none; counter-reset: rung; padding: 0; margin: .5rem 0 0; }
+.ladder .rung { display: flex; gap: .8rem; padding: .45rem 0;
+  border-top: 1px solid var(--rule); font-size: .9rem; }
+.rung-name { flex: 0 0 7.5rem; font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft);
+  padding-top: .18rem; }
+.rung-body { flex: 1; }
+.rung-disp { display: inline-block; margin-left: .4rem; padding: .05rem .45rem;
+  border: 1px solid var(--rule); border-radius: 2px;
+  font-family: ui-sans-serif, system-ui, sans-serif; font-size: .68rem; color: var(--ink-soft); }
+.rung-track { display: inline-block; margin-left: .35rem; padding: .05rem .45rem;
+  border-radius: 2px; background: var(--accent); color: #fff;
+  font-family: ui-sans-serif, system-ui, sans-serif; font-size: .66rem; }
+.rung-inverted .rung-name { color: var(--accent); }
+.ladder-key .rung-name { flex: 0 0 9rem; }
+.finding { border-left: 3px solid var(--accent); }
+.routes { width: 100%; border-collapse: collapse; font-size: .88rem; }
+.routes th, .routes td { text-align: left; vertical-align: top; padding: .5rem .6rem .5rem 0;
+  border-bottom: 1px solid var(--rule); }
+.routes th { font-family: ui-sans-serif, system-ui, sans-serif; font-size: .68rem;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
+.routes .stuck { color: var(--accent); font-weight: 600; }
+.disp { font-family: ui-sans-serif, system-ui, sans-serif; font-size: .74rem; }
+
 .domain-block { padding: .9rem 0; border-top: 1px solid var(--rule); }
 .domain-block h3 { margin: 0 0 .2rem; font-size: 1rem; }
 .domain-block ul { margin: .4rem 0 0; padding-left: 1.2rem; font-size: .9rem; }

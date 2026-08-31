@@ -243,7 +243,58 @@ The validator reports thinly covered domains on every run, and the honest
 response is to add the missing entries rather than to broaden the tagging on the
 existing ones until the number looks better.
 
-## 6. Interstitial harm
+## 6. The route of authority
+
+Every actor stood somewhere on a ladder: the holder and the overseer, the mob
+acting as their proxy, the town, the county, the district, the state, the
+federal government, and the Supreme Court above all of it. `respondents.echelon`
+records where the actor stood. `process.escalation` records every rung the matter
+reached — or failed to — with the forum that sat there and what it did.
+
+This is the nearest thing the book has to an **appeal route**, and it is what
+lets the log ask the question the ladder exists for: *was the matter ever heard
+above the level of the person who caused it?*
+
+### The two tracks
+
+`track` separates the route running **against the perpetrators** from the route
+the state ran **against the harmed** — the survivors of Elaine tried for
+surviving, the Groveland men convicted and reconvicted, Clyde Kennard imprisoned
+for applying to a college.
+
+They are kept apart because in this corpus the inverted track routinely climbs
+higher. Three of the four entries carrying one climbed above their own
+perpetrator track, and three reached the Supreme Court. Only one perpetrator
+track ever reached that rung, and it went there to be undone: Colfax, where the
+corpus's only convictions were vacated in *Cruikshank*.
+
+### The finding
+
+Of the 17 matters running against a perpetrator, the height of the actor
+predicts whether anything above them ever heard it, and in this corpus it
+predicts it completely:
+
+| Actor stood at | Heard above the actor's own rung |
+| --- | --- |
+| County level or above | **0 of 4** |
+| Below county level | **13 of 13** |
+
+When a mob or a private holder did it, the matter sometimes climbed. When an
+organ of the state did it — a county's own officers at Elaine, a county sheriff
+at Groveland, a state agency in Kennard's case, a federal service at Tuskegee —
+the matter never once got above the level of the body that did it. The forum and
+the actor were the same institution.
+
+This is computed on every build from the escalation recorded in each entry. It
+moves as entries are added, and it is a statement about this corpus, not a claim
+about cases outside it. `routes.html` renders it, and `routeFinding()` reports
+the n alongside the result so the small denominator is never hidden.
+
+One entry carries no perpetrator track at all — *Dred Scott* — because the
+conduct was lawful judicial action and there was nothing to prosecute. That is
+recorded rather than papered over, and the page says so.
+
+## 7. Interstitial harm
 
 `harmed.interstitial` records what falls between the events and is counted
 nowhere: property abandoned under threat, exile, testimony never given, kinship
@@ -253,7 +304,7 @@ tally in any source. The field exists because leaving them out would let the
 book's own structure — one entry, one incident, one disposition — do the same
 work of erasure that the tallies do.
 
-## 7. Transmitted harm
+## 8. Transmitted harm
 
 `harmed.interstitial` records what falls between events within one generation.
 `harmed.transmitted` records what outlives it.
@@ -316,7 +367,7 @@ was assembled from knowledge of the field, not retrieved, and it is not a
 reconstruction of what DeGruy cites. It is marked as such in the manifest and
 must not be presented otherwise. Pull the actual citations from the book's notes.
 
-## 8. "Unpunished" is derived, not asserted
+## 9. "Unpunished" is derived, not asserted
 
 `process.outcome` records what the legal system actually did:
 
@@ -341,7 +392,7 @@ injuries while leaving the other untouched, and the book counts it that way.
 `scripts/validate.mjs` recomputes the field and fails the build on any
 disagreement, so the claim in the title of this book cannot drift from its data.
 
-## 9. Identity: who is in the register, and on what terms
+## 10. Identity: who is in the register, and on what terms
 
 The hardest question this book answers is what to do with a person whose injury
 is recorded and whose name is not.
@@ -391,7 +442,7 @@ carries them with its own citation. These are quotations from documents, not
 reconstructions. **The book never composes speech for the dead.** If no words
 survive, the field is absent — an absence that is itself part of the record.
 
-## 10. Impediments
+## 11. Impediments
 
 `data/impediments.json` catalogs the mechanisms that converted a crime into a
 non-crime: doctrines of personhood and jurisdiction, immunities, evidentiary and
@@ -410,7 +461,7 @@ book exists to show becomes legible: the same handful of doctrines, mostly about
 who may hear a claim rather than whether the injury occurred, recurring across a
 century and a half.
 
-## 11. Officials acting beyond their role
+## 12. Officials acting beyond their role
 
 A recurring classification is `official_participation` — conduct by sheriffs,
 deputies, jailers, guardsmen, and physicians acting under color of law and
@@ -422,7 +473,7 @@ defenses, and immunities differ, and because an officer exceeding the statute of
 their role is the case in which the state is both the injurer and the only
 available forum.
 
-## 12. Sources
+## 13. Sources
 
 `data/archives.json` is a manifest of the corpora this work draws on, with
 locator URLs and access terms. Public-domain texts can be fetched on demand with

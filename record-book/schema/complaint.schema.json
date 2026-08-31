@@ -147,7 +147,8 @@
     "respondents": {
       "type": "object",
       "required": [
-        "described"
+        "described",
+        "echelon"
       ],
       "properties": {
         "described": {
@@ -158,7 +159,7 @@
         },
         "official_capacity": {
           "type": "boolean",
-          "description": "True where a respondent acted under colour of law. See METHODOLOGY.md section 11."
+          "description": "True where a respondent acted under colour of law. See METHODOLOGY.md section 12."
         },
         "named": {
           "type": "array",
@@ -202,6 +203,20 @@
               }
             }
           }
+        },
+        "echelon": {
+          "enum": [
+            "private_holder",
+            "proxy",
+            "municipal",
+            "county",
+            "district",
+            "state",
+            "regional",
+            "federal",
+            "supreme"
+          ],
+          "description": "The rung of authority the actor operated at, lowest first: private_holder (plantation, holder, overseer), proxy (patrol, posse, mob acting for the holder or community), municipal, county, district, state, regional, federal, supreme."
         }
       }
     },
@@ -209,7 +224,8 @@
       "type": "object",
       "required": [
         "outcome",
-        "narrative"
+        "narrative",
+        "escalation"
       ],
       "properties": {
         "forum": {
@@ -233,6 +249,72 @@
         },
         "narrative": {
           "type": "string"
+        },
+        "escalation": {
+          "type": "array",
+          "minItems": 1,
+          "description": "The route the matter actually travelled: each rung it reached, or failed to, with the forum and what that forum did. This is the book's nearest thing to an appeal route, and it is what lets the log ask whether a matter was ever heard above the level of the actor who caused it.",
+          "items": {
+            "type": "object",
+            "required": [
+              "rung",
+              "forum",
+              "disposition"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "rung": {
+                "enum": [
+                  "private_holder",
+                  "proxy",
+                  "municipal",
+                  "county",
+                  "district",
+                  "state",
+                  "regional",
+                  "federal",
+                  "supreme"
+                ]
+              },
+              "forum": {
+                "type": "string",
+                "description": "The named body. The rung is the analytical level; this carries the precision."
+              },
+              "disposition": {
+                "enum": [
+                  "no_process",
+                  "declined",
+                  "investigated_no_charge",
+                  "no_indictment",
+                  "acquitted",
+                  "no_conviction",
+                  "convicted",
+                  "vacated",
+                  "adverse",
+                  "dismissed_jurisdiction",
+                  "dismissed_time_barred",
+                  "dismissed_no_standing",
+                  "dismissed_immunity",
+                  "settled",
+                  "legislated",
+                  "commission_reported",
+                  "apology",
+                  "exonerated"
+                ]
+              },
+              "track": {
+                "enum": [
+                  "against_perpetrators",
+                  "against_the_harmed"
+                ],
+                "default": "against_perpetrators",
+                "description": "against_the_harmed records the inverted route: the state prosecuting the people it had already injured. Kept separate because in this corpus that track routinely climbs higher than the one against the perpetrators."
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          }
         }
       },
       "not": {

@@ -6,7 +6,8 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { validate, isUnpunished, isMateriallyRestored, OUTCOMES, ACT, ATTRIBUTION,
-         RESTORATION, VANTAGE, TRANSMISSION, DOMAINS, harmWeb } from './validate.mjs';
+         RESTORATION, VANTAGE, TRANSMISSION, DOMAINS, harmWeb,
+         ECHELON, DISPOSITION, rungOf, routes, routeFinding } from './validate.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const OUT = join(ROOT, 'public', 'record-book');
@@ -17,6 +18,7 @@ const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) =>
 const NAV = [
   ['index.html', 'Complaint log'],
   ['web.html', 'Web of harm'],
+  ['routes.html', 'Route of authority'],
   ['register.html', 'Register'],
   ['impediments.html', 'Impediments'],
   ['archives.html', 'Archives'],
@@ -182,6 +184,20 @@ function renderComplaints({ complaints, persons, impediments }) {
   <div class="field"><h3>Process and disposition</h3>
     ${c.process.forum ? `<p class="meta">Forum: ${esc(c.process.forum)}</p>` : ''}
     <p>${esc(c.process.narrative)}</p>
+  </div>
+
+  <div class="field"><h3>Route of authority</h3>
+    <p class="meta">The actor stood at <strong>${esc(c.respondents.echelon.replace(/_/g, ' '))}</strong>.
+    Each rung the matter reached, or failed to.</p>
+    <ol class="ladder">${(c.process.escalation ?? []).map((r) => `<li class="rung ${
+      (r.track ?? 'against_perpetrators') === 'against_the_harmed' ? 'rung-inverted' : ''}">
+      <span class="rung-name">${esc(r.rung.replace(/_/g, ' '))}</span>
+      <span class="rung-body"><strong>${esc(r.forum)}</strong>
+        <span class="rung-disp">${esc(r.disposition.replace(/_/g, ' '))}</span>
+        ${(r.track ?? 'against_perpetrators') === 'against_the_harmed'
+          ? '<span class="rung-track">run against the harmed</span>' : ''}
+        ${r.note ? `<br><span class="meta">${esc(r.note)}</span>` : ''}</span>
+    </li>`).join('')}</ol>
   </div>
 
   ${imps ? `<div class="field"><h3>Impediments</h3><p class="chips">${imps}</p></div>` : ''}
@@ -434,6 +450,107 @@ function renderWeb({ complaints }) {
   return page('web.html', 'Web of harm', lede, bars + joins + matrix + index);
 }
 
+
+// ------------------------------------------------------- route of authority
+function renderRoutes({ complaints }) {
+  const rt = routes(complaints);
+  const f = routeFinding(complaints);
+  const byRung = (r) => rungOf(r);
+
+  const finding = `<section class="group finding"><h2>The finding</h2>
+    <p>Of the ${f.n} matters in this log that ran against a perpetrator, the height of the actor
+    predicts whether anything above them ever heard it — and it predicts it completely.</p>
+    <table class="bars"><tbody>
+      <tr><th scope="row">Actor at county level or above</th>
+        <td class="bar-cell"><span class="bar" style="width:${
+          f.high.n ? (f.high.escaped / f.high.n) * 100 : 0}%"></span>
+          <span class="bar-value">${f.high.escaped} of ${f.high.n}</span></td>
+        <td class="meta domain-def">heard above the actor's own rung</td></tr>
+      <tr><th scope="row">Actor below county level</th>
+        <td class="bar-cell"><span class="bar" style="width:${
+          f.low.n ? (f.low.escaped / f.low.n) * 100 : 0}%"></span>
+          <span class="bar-value">${f.low.escaped} of ${f.low.n}</span></td>
+        <td class="meta domain-def">heard above the actor's own rung</td></tr>
+    </tbody></table>
+    <p class="note">When a mob or a private holder did it, the matter sometimes climbed. When an
+    organ of the state did it — a county's own officers, a state agency, a federal service — the
+    matter never once got above the level of the body that did it. The forum and the actor were
+    the same institution. ${f.high.ids.map((id) =>
+      `<a href="index.html#${id}">${esc(rt.find((r) => r.id === id).title)}</a>`).join('; ')}.</p>
+    <p class="meta">n = ${f.n}. Computed on every build from the escalation recorded in each entry;
+    it moves as entries are added, and is not a claim about cases outside this corpus.${
+      f.noTrack.length ? ` ${f.noTrack.length} entry carries no perpetrator track at all —
+      <a href="index.html#${f.noTrack[0]}">${esc(rt.find((r) => r.id === f.noTrack[0]).title)}</a>,
+      where the conduct was lawful judicial action and there was nothing to prosecute.` : ''}</p>
+  </section>`;
+
+  const ceilings = `<section class="group"><h2>Where each matter stopped</h2>
+    <p class="gloss">The highest rung reached on the track against perpetrators, and the
+    disposition that ended it. Sorted by how high the matter climbed.</p>
+    <div class="table-scroll"><table class="routes">
+    <thead><tr><th>Entry</th><th>Actor stood at</th><th>Climbed to</th><th>Ended in</th></tr></thead>
+    <tbody>${rt.filter((r) => r.against)
+      .sort((a, b) => byRung(b.against.ceiling.rung) - byRung(a.against.ceiling.rung))
+      .map((r) => `<tr>
+        <td><a href="index.html#${r.id}">${esc(r.title)}</a></td>
+        <td class="meta">${esc(r.actor.replace(/_/g, ' '))}</td>
+        <td class="${r.escaped ? '' : 'stuck'}">${esc(r.against.ceiling.rung.replace(/_/g, ' '))}${
+          r.escaped ? '' : ' <span class="meta">(no higher than the actor)</span>'}</td>
+        <td><span class="disp">${esc(r.against.terminal.disposition.replace(/_/g, ' '))}</span></td>
+      </tr>`).join('')}</tbody></table></div></section>`;
+
+  const inverted = rt.filter((r) => r.harmed);
+  // Computed, not asserted: an earlier draft claimed every inverted track
+  // climbed higher, and Kennard's does not.
+  const higher = inverted.filter(
+    (r) => !r.against || byRung(r.harmed.ceiling.rung) > byRung(r.against.ceiling.rung));
+  const higherCount = higher.length;
+  const toSupreme = inverted.filter((r) => r.harmed.ceiling.rung === 'supreme').length;
+  const lower = inverted.filter((r) => !higher.includes(r));
+  const lowerNote = lower.length
+    ? ` The exception${lower.length === 1 ? ' is' : 's are'} ${lower.map((r) =>
+        `<a href="index.html#${r.id}">${esc(r.title)}</a>`).join('; ')}, where the actor was
+      itself an organ of the state and neither track left that level.`
+    : '';
+  const inversion = `<section class="group"><h2>The inverted track</h2>
+    <p class="gloss">${inverted.length} entries carry a second route: the one the state ran
+    <em>against the people it had already injured</em>. ${higherCount} of ${inverted.length} climbed
+    higher than the same entry's track against the perpetrators${
+      toSupreme ? `, and ${toSupreme} reached the Supreme Court` : ''}. Only one perpetrator track
+    ever reached that rung, and it went there to be undone:
+    <a href="index.html#CL-1873-COLFAX">Colfax</a>, where the corpus's only convictions were
+    vacated.${lowerNote}</p>
+    ${inverted.map((r) => `<div class="domain-block">
+      <h3><a href="index.html#${r.id}">${esc(r.title)}</a></h3>
+      <p class="meta">Against perpetrators: climbed to
+        <strong>${esc(r.against ? r.against.ceiling.rung.replace(/_/g, ' ') : 'nothing')}</strong>,
+        ended in ${esc(r.against ? r.against.terminal.disposition.replace(/_/g, ' ') : '—')}.
+        <br>Against the harmed: climbed to
+        <strong>${esc(r.harmed.ceiling.rung.replace(/_/g, ' '))}</strong>,
+        ended in ${esc(r.harmed.terminal.disposition.replace(/_/g, ' '))}.</p>
+    </div>`).join('')}</section>`;
+
+  const ladder = `<section class="group"><h2>The ladder</h2>
+    <p class="gloss">Rungs in order of authority. An actor stands on one; a matter climbs, or does not.</p>
+    <ol class="ladder ladder-key">${ECHELON.map((e) => {
+      const actors = complaints.filter((c) => c.respondents.echelon === e).length;
+      const reached = complaints.filter(
+        (c) => (c.process.escalation ?? []).some((r) => r.rung === e)).length;
+      return `<li class="rung"><span class="rung-name">${esc(e.replace(/_/g, ' '))}</span>
+        <span class="rung-body"><span class="meta">${actors} ${
+          actors === 1 ? 'entry has an actor' : 'entries have actors'} at this level;
+          ${reached} ${reached === 1 ? 'matter reached' : 'matters reached'} it</span></span></li>`;
+    }).join('')}</ol></section>`;
+
+  const lede = `Every actor stood somewhere on a ladder of authority — the holder and the overseer,
+    the mob acting as their proxy, the town, the county, the state, and above them the federal
+    government and the Supreme Court. Every matter either climbed that ladder or stopped.
+    <strong>This page records where each one stopped and what stopped it</strong>, which is the
+    nearest thing this book has to an appeal route.`;
+
+  return page('routes.html', 'Route of authority', lede, finding + ceilings + inversion + ladder);
+}
+
 // ------------------------------------------------------------------ archives
 
 function renderArchives({ archives, complaints, persons }) {
@@ -638,6 +755,30 @@ main, .masthead, footer { max-width: 46rem; margin: 0 auto; padding: 0 1.25rem; 
 .matrix tbody tr:hover th { color: var(--accent); }
 .matrix td:hover { outline: 2px solid var(--accent); }
 
+.ladder { list-style: none; counter-reset: rung; padding: 0; margin: .5rem 0 0; }
+.ladder .rung { display: flex; gap: .8rem; padding: .45rem 0;
+  border-top: 1px solid var(--rule); font-size: .9rem; }
+.rung-name { flex: 0 0 7.5rem; font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft);
+  padding-top: .18rem; }
+.rung-body { flex: 1; }
+.rung-disp { display: inline-block; margin-left: .4rem; padding: .05rem .45rem;
+  border: 1px solid var(--rule); border-radius: 2px;
+  font-family: ui-sans-serif, system-ui, sans-serif; font-size: .68rem; color: var(--ink-soft); }
+.rung-track { display: inline-block; margin-left: .35rem; padding: .05rem .45rem;
+  border-radius: 2px; background: var(--accent); color: #fff;
+  font-family: ui-sans-serif, system-ui, sans-serif; font-size: .66rem; }
+.rung-inverted .rung-name { color: var(--accent); }
+.ladder-key .rung-name { flex: 0 0 9rem; }
+.finding { border-left: 3px solid var(--accent); }
+.routes { width: 100%; border-collapse: collapse; font-size: .88rem; }
+.routes th, .routes td { text-align: left; vertical-align: top; padding: .5rem .6rem .5rem 0;
+  border-bottom: 1px solid var(--rule); }
+.routes th { font-family: ui-sans-serif, system-ui, sans-serif; font-size: .68rem;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
+.routes .stuck { color: var(--accent); font-weight: 600; }
+.disp { font-family: ui-sans-serif, system-ui, sans-serif; font-size: .74rem; }
+
 .domain-block { padding: .9rem 0; border-top: 1px solid var(--rule); }
 .domain-block h3 { margin: 0 0 .2rem; font-size: 1rem; }
 .domain-block ul { margin: .4rem 0 0; padding-left: 1.2rem; font-size: .9rem; }
@@ -708,6 +849,7 @@ const files = {
   'register.html': renderRegister(data),
   'impediments.html': renderImpediments(data),
   'web.html': renderWeb(data),
+  'routes.html': renderRoutes(data),
   'archives.html': renderArchives(data),
   'record-book.css': CSS,
 };

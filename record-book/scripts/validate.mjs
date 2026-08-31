@@ -22,7 +22,7 @@ export const OUTCOMES = {
   unresolved: 'Investigation opened and never closed',
 };
 
-// METHODOLOGY.md section 8: unpunished is derived. Only a sustained criminal
+// METHODOLOGY.md section 9: unpunished is derived. Only a sustained criminal
 // conviction of a perpetrator counts as punishment. Settlements, apologies and
 // exonerations of the victim do not.
 export const isUnpunished = (outcome) => outcome !== 'convicted';
@@ -80,6 +80,52 @@ export const VANTAGE = {
   genealogical_record: 'Descent reconstructed from records of sale, census, and probate.',
   clinical_research: 'Clinical or psychological research. A framework, not a finding - see TRANSMISSION.',
 };
+
+// ECHELON: the ladder of authority, lowest rung first. An actor operates at a
+// rung; a matter travels up the rungs, or fails to. The ordering is what makes
+// the analysis possible - it lets the book ask whether a matter ever got above
+// the level of the person who caused it.
+export const ECHELON = [
+  'private_holder',  // plantation, holder, overseer, master
+  'proxy',           // patrol, posse, mob, private agent for holder or community
+  'municipal',       // city, town, council
+  'county',          // sheriff, coroner, county court, grand jury
+  'district',        // judicial or administrative district
+  'state',           // legislature, governor, state agency, state high court
+  'regional',        // federal circuit
+  'federal',         // department, bureau, Congress, federal trial court
+  'supreme',         // Supreme Court of the United States
+];
+export const rungOf = (e) => ECHELON.indexOf(e);
+
+// What a rung did when the matter reached it.
+export const DISPOSITION = {
+  no_process: 'Never opened at this level.',
+  declined: 'Reached this level and it declined to act.',
+  investigated_no_charge: 'Investigated; no charge.',
+  no_indictment: 'A grand jury refused to indict.',
+  acquitted: 'Tried and acquitted.',
+  no_conviction: 'Prosecuted; ended without conviction.',
+  convicted: 'Convicted at this level.',
+  vacated: 'A conviction set aside here.',
+  adverse: 'Decided against the party who brought it.',
+  dismissed_jurisdiction: 'Dismissed for want of jurisdiction or cognizable offence.',
+  dismissed_time_barred: 'Dismissed as time-barred.',
+  dismissed_no_standing: 'Dismissed for want of standing.',
+  dismissed_immunity: 'Dismissed on immunity.',
+  settled: 'Money paid; no finding.',
+  legislated: 'A legislature acted.',
+  commission_reported: 'A commission of inquiry reported.',
+  apology: 'An apology issued.',
+  exonerated: 'A wrongly convicted person cleared.',
+};
+
+// Dispositions that end a matter without any adverse finding against an actor.
+const TERMINAL_WITHOUT_FINDING = [
+  'no_process', 'declined', 'investigated_no_charge', 'no_indictment', 'acquitted',
+  'no_conviction', 'vacated', 'dismissed_jurisdiction', 'dismissed_time_barred',
+  'dismissed_no_standing', 'dismissed_immunity',
+];
 
 // HARM DOMAINS: what was injured, as distinct from what kind of event it was.
 // Classification says "lynching"; a domain says "the body", "the franchise",
@@ -147,6 +193,55 @@ export function harmWeb(complaints) {
   }
   joins.sort((x, y) => y.n - x.n);
   return { names, frequency, entriesByDomain, pairs, joins };
+}
+
+// The route. For each entry: how high the matter climbed, where it stopped, and
+// - the question the ladder exists to ask - whether it ever got above the rung
+// the actor was standing on.
+export function routes(complaints) {
+  return complaints.map((c) => {
+    const all = c.process?.escalation ?? [];
+    const actorRung = rungOf(c.respondents?.echelon);
+    const track = (t) => all.filter((r) => (r.track ?? 'against_perpetrators') === t);
+
+    const summarise = (rungs) => {
+      if (!rungs.length) return null;
+      const ceiling = rungs.reduce((a, b) => (rungOf(b.rung) > rungOf(a.rung) ? b : a));
+      const terminal = rungs[rungs.length - 1];
+      return { ceiling, terminal, steps: rungs.length };
+    };
+
+    const against = summarise(track('against_perpetrators'));
+    const harmed = summarise(track('against_the_harmed'));
+
+    return {
+      id: c.id, title: c.title, actor: c.respondents?.echelon, actorRung,
+      against, harmed,
+      // Did anything against the actor get heard above the actor's own level?
+      escaped: against ? rungOf(against.ceiling.rung) > actorRung : false,
+      // Did any rung ever make an adverse finding against an actor?
+      everFound: track('against_perpetrators').some(
+        (r) => !TERMINAL_WITHOUT_FINDING.includes(r.disposition)
+          && ['convicted', 'legislated', 'settled', 'commission_reported'].includes(r.disposition)),
+      convicted: track('against_perpetrators').some((r) => r.disposition === 'convicted'),
+    };
+  });
+}
+
+// The finding the ladder exists to produce: whether the height of the actor
+// predicts whether anything above them ever heard it. Computed, with its own n,
+// because a correlation stated in prose outlives the data that produced it.
+export function routeFinding(complaints) {
+  const rt = routes(complaints).filter((r) => r.against);
+  const OFFICIAL = rungOf('county'); // county and above: the actor IS an organ of the state
+  const high = rt.filter((r) => r.actorRung >= OFFICIAL);
+  const low = rt.filter((r) => r.actorRung < OFFICIAL);
+  return {
+    n: rt.length,
+    high: { n: high.length, escaped: high.filter((r) => r.escaped).length, ids: high.map((r) => r.id) },
+    low: { n: low.length, escaped: low.filter((r) => r.escaped).length },
+    noTrack: routes(complaints).filter((r) => !r.against).map((r) => r.id),
+  };
 }
 
 export function validate() {
@@ -229,6 +324,35 @@ export function validate() {
       err(at, 'offense is empty; say why in offense_note');
     }
     if (!c.conduct) err(at, 'missing conduct');
+
+    if (!ECHELON.includes(c.respondents?.echelon)) {
+      err(at, `respondents.echelon "${c.respondents?.echelon}" is not one of ${ECHELON.join(', ')}`);
+    }
+    const esc = c.process?.escalation;
+    if (!Array.isArray(esc) || !esc.length) {
+      err(at, 'process.escalation must record at least one rung the matter reached, or failed to');
+    } else {
+      for (const r of esc) {
+        if (!ECHELON.includes(r.rung)) err(at, `escalation rung "${r.rung}" is not on the ladder`);
+        if (!(r.disposition in DISPOSITION)) {
+          err(at, `escalation disposition "${r.disposition}" is not one of ` +
+                  Object.keys(DISPOSITION).join(', '));
+        }
+        if (r.track && !['against_perpetrators', 'against_the_harmed'].includes(r.track)) {
+          err(at, `escalation track "${r.track}" is not against_perpetrators or against_the_harmed`);
+        }
+        if (!r.forum) err(at, 'each escalation rung must name the forum');
+      }
+      // A conviction on the perpetrator track must agree with the derived
+      // disposition, so the two accounts of the same fact cannot disagree.
+      const conv = esc.some(
+        (r) => (r.track ?? 'against_perpetrators') === 'against_perpetrators'
+          && r.disposition === 'convicted');
+      const sustained = c.process.outcome === 'convicted';
+      if (sustained && !conv) {
+        err(at, 'process.outcome is convicted but no escalation rung records a conviction against a perpetrator');
+      }
+    }
 
     if (!Array.isArray(c.harm_domains) || !c.harm_domains.length) {
       err(at, 'harm_domains must name at least one domain of injury');
@@ -319,7 +443,7 @@ export function validate() {
     if (!STANDING.includes(p.standing)) {
       err(at, `standing "${p.standing}" is not one of ${STANDING.join(', ')}`);
     }
-    // METHODOLOGY.md section 9: a count is a count and must say so; an
+    // METHODOLOGY.md section 10: a count is a count and must say so; an
     // individuated person is never carried as a number.
     if (p.identity_status === 'collectively_recorded' && !p.count) {
       err(at, 'collectively_recorded rows must carry a count');
@@ -334,7 +458,7 @@ export function validate() {
       err(at, 'name_unrecorded rows must state what attests the person\'s existence');
     }
     if (!p.consent_note) {
-      err(at, 'missing consent_note (METHODOLOGY.md section 9)');
+      err(at, 'missing consent_note (METHODOLOGY.md section 10)');
     }
     if (p.voice?.source && !archiveIds.has(p.voice.source)) {
       err(at, `voice.source references unknown archive "${p.voice.source}"`);
@@ -437,6 +561,33 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
       ' — a gap in the corpus, not a gap in the history'
     );
   }
+  const rt = routes(complaints);
+  const stuck = rt.filter((r) => r.against && !r.escaped);
+  const climbed = rt.filter((r) => r.against && r.escaped);
+  const anyFinding = rt.filter((r) => r.everFound);
+  const convictedAnywhere = rt.filter((r) => r.convicted);
+  const harmedTracks = rt.filter((r) => r.harmed);
+  const withTrack = climbed.length + stuck.length;
+  console.log(
+    `route: ${climbed.length} of ${withTrack} matters against perpetrators were heard above ` +
+    `the actor's own rung; ${stuck.length} never got above it` +
+    (complaints.length - withTrack
+      ? ` (${complaints.length - withTrack} entry carries no perpetrator track)` : '')
+  );
+  console.log(
+    `${convictedAnywhere.length} produced a conviction at any rung ` +
+    `(${convictedAnywhere.map((r) => r.id).join(', ') || 'none'}), ` +
+    `${anyFinding.length} produced any adverse finding at all`
+  );
+  console.log(
+    `${harmedTracks.length} entries also carry a track running against the harmed - ` +
+    'the state prosecuting the people it had already injured'
+  );
+  const f = routeFinding(complaints);
+  console.log(
+    `where the actor stood at county level or above (n=${f.high.n}), ${f.high.escaped} matters ` +
+    `were heard above that level; where the actor stood below it (n=${f.low.n}), ${f.low.escaped} were`
+  );
   console.log(`${errors.length} error(s), ${warnings.length} warning(s)`);
   process.exit(errors.length ? 1 : 0);
 }

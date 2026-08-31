@@ -1,5 +1,5 @@
 {
-  "$comment": "Complaint log. process.unpunished is DERIVED - see METHODOLOGY.md section 8 - and is recomputed and checked by scripts/validate.mjs.",
+  "$comment": "Complaint log. process.unpunished is DERIVED - see METHODOLOGY.md section 9 - and is recomputed and checked by scripts/validate.mjs.",
   "complaints": [
     {
       "id": "CL-1857-DRED-SCOTT",
@@ -46,12 +46,35 @@
             "source": "SRC-DLAS",
             "note": "Named as author of the holding. The conduct was lawful judicial action; no offence is charged in this entry."
           }
-        ]
+        ],
+        "echelon": "supreme"
       },
       "process": {
         "forum": "Supreme Court of the United States",
         "outcome": "no_process",
-        "narrative": "No process was possible, because the holding was itself the act complained of. It is entered first in this book because it establishes the condition every earlier complaint was decided under and every later one had to overcome: not that the injury was excused, but that no forum would hear it."
+        "narrative": "No process was possible, because the holding was itself the act complained of. It is entered first in this book because it establishes the condition every earlier complaint was decided under and every later one had to overcome: not that the injury was excused, but that no forum would hear it.",
+        "escalation": [
+          {
+            "rung": "state",
+            "forum": "Missouri circuit and supreme courts, 1846-1852",
+            "disposition": "adverse",
+            "track": "against_the_harmed",
+            "note": "Won at trial, reversed by the Missouri Supreme Court."
+          },
+          {
+            "rung": "federal",
+            "forum": "U.S. Circuit Court, District of Missouri, 1854",
+            "disposition": "adverse",
+            "track": "against_the_harmed"
+          },
+          {
+            "rung": "supreme",
+            "forum": "Supreme Court of the United States, 1857",
+            "disposition": "dismissed_jurisdiction",
+            "track": "against_the_harmed",
+            "note": "Held that he could not invoke the jurisdiction of any federal court. The ladder was climbed to the top rung and the top rung removed the ladder."
+          }
+        ]
       },
       "impediments": [
         "IMP-NO-PERSONHOOD"
@@ -148,12 +171,29 @@
       "respondents": {
         "described": "Slaveholders; slave traders; sheriffs, patrols, and courts enforcing the slave codes; legislatures enacting them; insurers, banks, and shippers financing the trade",
         "named_in_sources": true,
-        "official_capacity": true
+        "official_capacity": true,
+        "echelon": "private_holder"
       },
       "process": {
         "forum": null,
         "outcome": "no_process",
-        "narrative": "There was no forum. The conduct was lawful where it occurred and its victims lacked the legal capacity to complain of it. This entry exists because a log of unpunished crimes that omitted it on the ground that it was not then a crime would be reproducing the impediment rather than recording it."
+        "narrative": "There was no forum. The conduct was lawful where it occurred and its victims lacked the legal capacity to complain of it. This entry exists because a log of unpunished crimes that omitted it on the ground that it was not then a crime would be reproducing the impediment rather than recording it.",
+        "escalation": [
+          {
+            "rung": "private_holder",
+            "forum": "The holder, the overseer, the patrol",
+            "disposition": "no_process",
+            "track": "against_perpetrators",
+            "note": "Discipline and killing were the holder's own prerogative. There was no rung above to appeal to, because the conduct was not an offence."
+          },
+          {
+            "rung": "state",
+            "forum": "Slave codes and state courts",
+            "disposition": "no_process",
+            "track": "against_perpetrators",
+            "note": "No legal capacity to complain, contract, or testify against a white person. The bar was the personhood rule, not a court's discretion."
+          }
+        ]
       },
       "impediments": [
         "IMP-NO-PERSONHOOD",
@@ -315,12 +355,29 @@
             "source": "SRC-DOCSOUTH",
             "note": "As above."
           }
-        ]
+        ],
+        "echelon": "private_holder"
       },
       "process": {
         "forum": "Criminal court, District of Columbia (1853); Saratoga and Washington County courts, New York (1854-1857)",
         "outcome": "charged_acquitted",
-        "narrative": "Birch was charged in Washington and acquitted. The reason is the whole of this entry: Northup, the only witness to his own kidnapping, was barred by District law from testifying against a white man. Birch was permitted to testify in his own defence. The subsequent New York prosecution of Merrill and Russell was obstructed for years by contests over jurisdiction between the two states and ended without a conviction."
+        "narrative": "Birch was charged in Washington and acquitted. The reason is the whole of this entry: Northup, the only witness to his own kidnapping, was barred by District law from testifying against a white man. Birch was permitted to testify in his own defence. The subsequent New York prosecution of Merrill and Russell was obstructed for years by contests over jurisdiction between the two states and ended without a conviction.",
+        "escalation": [
+          {
+            "rung": "federal",
+            "forum": "Criminal court, District of Columbia, 1853",
+            "disposition": "acquitted",
+            "track": "against_perpetrators",
+            "note": "Birch acquitted. Northup, the only witness, was barred by District law from testifying against him; Birch testified in his own defence."
+          },
+          {
+            "rung": "state",
+            "forum": "Saratoga and Washington County courts, New York, 1854-1857",
+            "disposition": "no_conviction",
+            "track": "against_perpetrators",
+            "note": "Obstructed for years by contests over jurisdiction between two states, and abandoned."
+          }
+        ]
       },
       "impediments": [
         "IMP-NO-PERSONHOOD",
@@ -418,12 +475,36 @@
       "respondents": {
         "described": "Members of the attacking force, including former Confederate soldiers and members of the White League",
         "named_in_sources": true,
-        "official_capacity": false
+        "official_capacity": false,
+        "echelon": "proxy"
       },
       "process": {
         "forum": "United States Circuit Court, District of Louisiana; Supreme Court of the United States",
         "outcome": "convictions_vacated",
-        "narrative": "Federal prosecutions under the Enforcement Act of 1870 produced three convictions. In United States v. Cruikshank, 92 U.S. 542 (1876), the Supreme Court set them aside, holding that the Fourteenth Amendment reached only state action and that the indictment failed to charge a federal offense. No one was ever punished for the killings."
+        "narrative": "Federal prosecutions under the Enforcement Act of 1870 produced three convictions. In United States v. Cruikshank, 92 U.S. 542 (1876), the Supreme Court set them aside, holding that the Fourteenth Amendment reached only state action and that the indictment failed to charge a federal offense. No one was ever punished for the killings.",
+        "escalation": [
+          {
+            "rung": "county",
+            "forum": "Grant Parish",
+            "disposition": "no_process",
+            "track": "against_perpetrators",
+            "note": "No state prosecution was attempted."
+          },
+          {
+            "rung": "federal",
+            "forum": "U.S. Circuit Court, District of Louisiana, 1874",
+            "disposition": "convicted",
+            "track": "against_perpetrators",
+            "note": "Three convictions under the Enforcement Act of 1870."
+          },
+          {
+            "rung": "supreme",
+            "forum": "United States v. Cruikshank, 92 U.S. 542 (1876)",
+            "disposition": "vacated",
+            "track": "against_perpetrators",
+            "note": "Convictions set aside: the Fourteenth Amendment reached only state action, and the indictment charged no federal offence. The only convictions in the corpus were undone at the highest rung."
+          }
+        ]
       },
       "impediments": [
         "IMP-STATE-ACTION",
@@ -516,12 +597,22 @@
       "respondents": {
         "described": "Members of the mob; the sheriff and jailers who surrendered custody of prisoners in their charge",
         "named_in_sources": false,
-        "official_capacity": true
+        "official_capacity": true,
+        "echelon": "proxy"
       },
       "process": {
         "forum": "Shelby County",
         "outcome": "no_process",
-        "narrative": "No one was charged. Prisoners in lawful state custody were handed over to a mob by the officers responsible for them, which is the paradigm case of an official acting beyond the authority of the office."
+        "narrative": "No one was charged. Prisoners in lawful state custody were handed over to a mob by the officers responsible for them, which is the paradigm case of an official acting beyond the authority of the office.",
+        "escalation": [
+          {
+            "rung": "county",
+            "forum": "Shelby County",
+            "disposition": "no_process",
+            "track": "against_perpetrators",
+            "note": "Prisoners were surrendered from the county's own jail by the county's own officers. The county was both the custodian and the only available forum."
+          }
+        ]
       },
       "impediments": [
         "IMP-PERSONS-UNKNOWN",
@@ -615,12 +706,22 @@
       "respondents": {
         "described": "Members of the mob, organized following publication of a call to action in a Memphis daily newspaper",
         "named_in_sources": false,
-        "official_capacity": false
+        "official_capacity": false,
+        "echelon": "proxy"
       },
       "process": {
         "forum": "Shelby County",
         "outcome": "no_process",
-        "narrative": "No charges. No compensation for the destroyed property. The exile was effective and permanent."
+        "narrative": "No charges. No compensation for the destroyed property. The exile was effective and permanent.",
+        "escalation": [
+          {
+            "rung": "county",
+            "forum": "Shelby County",
+            "disposition": "no_process",
+            "track": "against_perpetrators",
+            "note": "No charge, and no compensation for the destroyed press."
+          }
+        ]
       },
       "impediments": [
         "IMP-PERSONS-UNKNOWN",
@@ -728,12 +829,29 @@
             "source": "SRC-WILMINGTON-COMMISSION",
             "note": "Named by the state commission as a leader of the coup. Never charged; held the mayoralty afterward."
           }
-        ]
+        ],
+        "echelon": "municipal"
       },
       "process": {
         "forum": "New Hanover County; North Carolina",
         "outcome": "no_process",
-        "narrative": "No one was charged. The leaders held office afterward. It is the only successful overthrow of a municipal government in United States history, and it produced no prosecution."
+        "narrative": "No one was charged. The leaders held office afterward. It is the only successful overthrow of a municipal government in United States history, and it produced no prosecution.",
+        "escalation": [
+          {
+            "rung": "county",
+            "forum": "New Hanover County",
+            "disposition": "no_process",
+            "track": "against_perpetrators",
+            "note": "No charge. The leaders held municipal office afterward."
+          },
+          {
+            "rung": "state",
+            "forum": "1898 Wilmington Race Riot Commission, 2006",
+            "disposition": "commission_reported",
+            "track": "against_perpetrators",
+            "note": "Acknowledgement 108 years later. Its recommendations for economic redress were not enacted."
+          }
+        ]
       },
       "impediments": [
         "IMP-STATE-ACTION",
@@ -837,12 +955,36 @@
             "source": "SRC-NAACP-PAPERS",
             "note": "Walter White's field investigation obtained participants' names and transmitted them to the Governor of Georgia. The NAACP did not publish them and no prosecution followed. The record therefore holds an accusation whose subjects were identified to the state and never charged."
           }
-        ]
+        ],
+        "echelon": "proxy"
       },
       "process": {
         "forum": "Brooks County; Lowndes County; Georgia",
         "outcome": "no_process",
-        "narrative": "No one was charged, notwithstanding that the NAACP delivered a list of named participants to the state. The Department of Justice declined to act. This entry is the clearest demonstration that the impediment was not the difficulty of identification."
+        "narrative": "No one was charged, notwithstanding that the NAACP delivered a list of named participants to the state. The Department of Justice declined to act. This entry is the clearest demonstration that the impediment was not the difficulty of identification.",
+        "escalation": [
+          {
+            "rung": "county",
+            "forum": "Brooks and Lowndes Counties",
+            "disposition": "no_process",
+            "track": "against_perpetrators",
+            "note": "No charge."
+          },
+          {
+            "rung": "state",
+            "forum": "Governor of Georgia",
+            "disposition": "declined",
+            "track": "against_perpetrators",
+            "note": "Walter White's investigation delivered participants' names to the Governor. Nothing followed."
+          },
+          {
+            "rung": "federal",
+            "forum": "U.S. Department of Justice",
+            "disposition": "declined",
+            "track": "against_perpetrators",
+            "note": "Declined to act. The impediment was never the difficulty of identification."
+          }
+        ]
       },
       "impediments": [
         "IMP-PERSONS-UNKNOWN",
@@ -946,12 +1088,42 @@
       "respondents": {
         "described": "Members of posses drawn from Phillips and surrounding counties; United States Army troops; county officers conducting the interrogations",
         "named_in_sources": false,
-        "official_capacity": true
+        "official_capacity": true,
+        "echelon": "county"
       },
       "process": {
         "forum": "Phillips County Circuit Court; Supreme Court of the United States",
         "outcome": "convictions_vacated",
-        "narrative": "No participant in the killings was charged. Instead, 122 Black residents were indicted and twelve were sentenced to death after trials lasting minutes before all-white juries surrounded by a mob. In Moore v. Dempsey, 261 U.S. 86 (1923), the Supreme Court held that a trial dominated by mob pressure denies due process, and the convictions were eventually undone. The outcome recorded here is the vacatur of the victims' convictions; no perpetrator was ever tried."
+        "narrative": "No participant in the killings was charged. Instead, 122 Black residents were indicted and twelve were sentenced to death after trials lasting minutes before all-white juries surrounded by a mob. In Moore v. Dempsey, 261 U.S. 86 (1923), the Supreme Court held that a trial dominated by mob pressure denies due process, and the convictions were eventually undone. The outcome recorded here is the vacatur of the victims' convictions; no perpetrator was ever tried.",
+        "escalation": [
+          {
+            "rung": "county",
+            "forum": "Phillips County",
+            "disposition": "no_process",
+            "track": "against_perpetrators",
+            "note": "No participant in the killings was charged."
+          },
+          {
+            "rung": "county",
+            "forum": "Phillips County Circuit Court, 1919",
+            "disposition": "convicted",
+            "track": "against_the_harmed",
+            "note": "122 indicted, twelve sentenced to death after trials lasting minutes."
+          },
+          {
+            "rung": "state",
+            "forum": "Supreme Court of Arkansas",
+            "disposition": "adverse",
+            "track": "against_the_harmed"
+          },
+          {
+            "rung": "supreme",
+            "forum": "Moore v. Dempsey, 261 U.S. 86 (1923)",
+            "disposition": "vacated",
+            "track": "against_the_harmed",
+            "note": "Mob-dominated trial held to deny due process. The only route that reached the top ran on behalf of the survivors the state had prosecuted, not against anyone who killed."
+          }
+        ]
       },
       "impediments": [
         "IMP-JURY-EXCLUSION",
@@ -1056,12 +1228,29 @@
       "respondents": {
         "described": "Members of the mob, including Ku Klux Klan participants; a deputy sheriff took Perry from custody",
         "named_in_sources": true,
-        "official_capacity": true
+        "official_capacity": true,
+        "echelon": "proxy"
       },
       "process": {
         "forum": "Orange County; Florida",
         "outcome": "no_process",
-        "narrative": "No charges. Ocoee remained effectively closed to Black residents for decades."
+        "narrative": "No charges. Ocoee remained effectively closed to Black residents for decades.",
+        "escalation": [
+          {
+            "rung": "county",
+            "forum": "Orange County",
+            "disposition": "no_process",
+            "track": "against_perpetrators",
+            "note": "No charge."
+          },
+          {
+            "rung": "state",
+            "forum": "Florida Legislature, 2020",
+            "disposition": "legislated",
+            "track": "against_perpetrators",
+            "note": "Required instruction on the massacre in public schools. No compensation; title to the expropriated land was never disturbed."
+          }
+        ]
       },
       "impediments": [
         "IMP-PERSONS-UNKNOWN",
@@ -1161,12 +1350,48 @@
       "respondents": {
         "described": "Members of the mob; city officials who deputized them and issued arms; National Guard units",
         "named_in_sources": true,
-        "official_capacity": true
+        "official_capacity": true,
+        "echelon": "municipal"
       },
       "process": {
         "forum": "Tulsa County; Oklahoma; United States District Court, Northern District of Oklahoma",
         "outcome": "no_process",
-        "narrative": "No one was convicted of any killing or of the destruction. A grand jury convened in 1921 attributed the cause to Black residents. Federal litigation by survivors was dismissed as time-barred and certiorari was denied in Alexander v. Oklahoma, 382 F.3d 1206 (10th Cir. 2004). A later state public nuisance action brought by survivors was dismissed by the Oklahoma Supreme Court in 2024."
+        "narrative": "No one was convicted of any killing or of the destruction. A grand jury convened in 1921 attributed the cause to Black residents. Federal litigation by survivors was dismissed as time-barred and certiorari was denied in Alexander v. Oklahoma, 382 F.3d 1206 (10th Cir. 2004). A later state public nuisance action brought by survivors was dismissed by the Oklahoma Supreme Court in 2024.",
+        "escalation": [
+          {
+            "rung": "county",
+            "forum": "Tulsa County grand jury, 1921",
+            "disposition": "no_indictment",
+            "track": "against_perpetrators",
+            "note": "Attributed the cause to Black residents."
+          },
+          {
+            "rung": "state",
+            "forum": "Oklahoma Commission, 2001",
+            "disposition": "commission_reported",
+            "track": "against_perpetrators",
+            "note": "Recommended compensation; not paid."
+          },
+          {
+            "rung": "federal",
+            "forum": "Alexander v. Oklahoma, 382 F.3d 1206 (10th Cir. 2004)",
+            "disposition": "dismissed_time_barred",
+            "track": "against_perpetrators"
+          },
+          {
+            "rung": "supreme",
+            "forum": "Certiorari denied, 2005",
+            "disposition": "declined",
+            "track": "against_perpetrators"
+          },
+          {
+            "rung": "state",
+            "forum": "Oklahoma Supreme Court, 2024",
+            "disposition": "dismissed_no_standing",
+            "track": "against_perpetrators",
+            "note": "Public nuisance action dismissed while survivors of the massacre were still living."
+          }
+        ]
       },
       "impediments": [
         "IMP-JURY-EXCLUSION",
@@ -1273,12 +1498,29 @@
       "respondents": {
         "described": "Members of the mob drawn from surrounding counties; the Levy County sheriff, who declined to intervene",
         "named_in_sources": true,
-        "official_capacity": true
+        "official_capacity": true,
+        "echelon": "proxy"
       },
       "process": {
         "forum": "Levy County; Florida Legislature",
         "outcome": "legislative_remedy",
-        "narrative": "A 1923 grand jury returned no indictments. No one was ever prosecuted. Seventy-one years later the Florida Legislature enacted the Rosewood Compensation Act of 1994, providing payments to survivors, a property-loss claims process, and a scholarship fund for descendants."
+        "narrative": "A 1923 grand jury returned no indictments. No one was ever prosecuted. Seventy-one years later the Florida Legislature enacted the Rosewood Compensation Act of 1994, providing payments to survivors, a property-loss claims process, and a scholarship fund for descendants.",
+        "escalation": [
+          {
+            "rung": "county",
+            "forum": "Levy County grand jury, 1923",
+            "disposition": "no_indictment",
+            "track": "against_perpetrators",
+            "note": "No indictments."
+          },
+          {
+            "rung": "state",
+            "forum": "Florida Legislature, 1994",
+            "disposition": "legislated",
+            "track": "against_perpetrators",
+            "note": "Rosewood Compensation Act: payments to survivors, a property claims process, a scholarship fund. The only material legislative remedy in the corpus."
+          }
+        ]
       },
       "impediments": [
         "IMP-JURY-EXCLUSION",
@@ -1377,12 +1619,35 @@
       "respondents": {
         "described": "Officers and physicians of the United States Public Health Service, acting in official capacity over forty years",
         "named_in_sources": true,
-        "official_capacity": true
+        "official_capacity": true,
+        "echelon": "federal"
       },
       "process": {
         "forum": "United States District Court, Middle District of Alabama; congressional oversight",
         "outcome": "civil_settlement",
-        "narrative": "No one was criminally prosecuted. The study ended in 1972 after press disclosure. A class action settled in 1974 for approximately $10 million with lifetime medical benefits for participants and affected family members. A presidential apology followed in 1997."
+        "narrative": "No one was criminally prosecuted. The study ended in 1972 after press disclosure. A class action settled in 1974 for approximately $10 million with lifetime medical benefits for participants and affected family members. A presidential apology followed in 1997.",
+        "escalation": [
+          {
+            "rung": "federal",
+            "forum": "U.S. Department of Justice",
+            "disposition": "no_process",
+            "track": "against_perpetrators",
+            "note": "No officer was prosecuted."
+          },
+          {
+            "rung": "federal",
+            "forum": "U.S. District Court, Middle District of Alabama, 1974",
+            "disposition": "settled",
+            "track": "against_perpetrators",
+            "note": "Approximately $10 million and lifetime medical benefits. Money without a finding."
+          },
+          {
+            "rung": "federal",
+            "forum": "Presidential apology, 1997",
+            "disposition": "apology",
+            "track": "against_perpetrators"
+          }
+        ]
       },
       "impediments": [
         "IMP-IMMUNITY",
@@ -1484,12 +1749,42 @@
       "respondents": {
         "described": "Members of the mob, estimated in the dozens; participants were reportedly known within the county",
         "named_in_sources": false,
-        "official_capacity": false
+        "official_capacity": false,
+        "echelon": "proxy"
       },
       "process": {
         "forum": "Walton County; United States (FBI investigation, 1946; DOJ review under the Till Act, 2000s)",
         "outcome": "unresolved",
-        "narrative": "President Truman ordered an FBI investigation. Agents interviewed some 2,790 people over four months. The federal grand jury returned no indictments. The case was reopened under the Emmett Till Unsolved Civil Rights Crime Act and closed again without charges. It remains the last mass lynching in the United States and it is unsolved."
+        "narrative": "President Truman ordered an FBI investigation. Agents interviewed some 2,790 people over four months. The federal grand jury returned no indictments. The case was reopened under the Emmett Till Unsolved Civil Rights Crime Act and closed again without charges. It remains the last mass lynching in the United States and it is unsolved.",
+        "escalation": [
+          {
+            "rung": "county",
+            "forum": "Walton County",
+            "disposition": "no_process",
+            "track": "against_perpetrators"
+          },
+          {
+            "rung": "federal",
+            "forum": "FBI investigation and federal grand jury, 1946",
+            "disposition": "no_indictment",
+            "track": "against_perpetrators",
+            "note": "Some 2,790 interviews over four months; no indictment."
+          },
+          {
+            "rung": "federal",
+            "forum": "DOJ review under the Till Act",
+            "disposition": "investigated_no_charge",
+            "track": "against_perpetrators",
+            "note": "Closed again."
+          },
+          {
+            "rung": "federal",
+            "forum": "Eleventh Circuit en banc, 2020",
+            "disposition": "dismissed_jurisdiction",
+            "track": "against_perpetrators",
+            "note": "Refused release of the sealed 1946 grand jury records."
+          }
+        ]
       },
       "impediments": [
         "IMP-JURY-EXCLUSION",
@@ -1601,12 +1896,62 @@
             "source": "SRC-LDF",
             "note": "Shot Samuel Shepherd and Walter Irvin while they were handcuffed in his custody. Cleared by a coroner's inquest, never charged, remained sheriff until 1972. Irvin survived and contradicted his account."
           }
-        ]
+        ],
+        "echelon": "county"
       },
       "process": {
         "forum": "Lake County Circuit Court; Supreme Court of the United States; Florida Clemency Board; Lake County Circuit Court (2021)",
         "outcome": "posthumous_exoneration",
-        "narrative": "A coroner's inquest cleared McCall of the shooting; he was never prosecuted and remained sheriff until 1972. Irvin was retried, convicted again, and later paroled. Florida issued posthumous pardons in 2019, and in 2021 a court formally exonerated all four and dismissed the indictments. No officer was ever charged for the shooting or for the beatings."
+        "narrative": "A coroner's inquest cleared McCall of the shooting; he was never prosecuted and remained sheriff until 1972. Irvin was retried, convicted again, and later paroled. Florida issued posthumous pardons in 2019, and in 2021 a court formally exonerated all four and dismissed the indictments. No officer was ever charged for the shooting or for the beatings.",
+        "escalation": [
+          {
+            "rung": "county",
+            "forum": "Lake County coroner's inquest, 1951",
+            "disposition": "declined",
+            "track": "against_perpetrators",
+            "note": "Cleared Sheriff McCall of the shooting of two handcuffed prisoners in his custody. He was never charged and remained sheriff until 1972."
+          },
+          {
+            "rung": "county",
+            "forum": "Lake County Circuit Court, 1949",
+            "disposition": "convicted",
+            "track": "against_the_harmed"
+          },
+          {
+            "rung": "supreme",
+            "forum": "Shepherd v. Florida, 341 U.S. 50 (1951)",
+            "disposition": "vacated",
+            "track": "against_the_harmed"
+          },
+          {
+            "rung": "county",
+            "forum": "Retrial, Lake County",
+            "disposition": "convicted",
+            "track": "against_the_harmed",
+            "note": "Irvin convicted again after surviving the sheriff's shooting and contradicting his account."
+          },
+          {
+            "rung": "state",
+            "forum": "Florida Clemency Board, 2019",
+            "disposition": "exonerated",
+            "track": "against_the_harmed",
+            "note": "Posthumous pardons."
+          },
+          {
+            "rung": "county",
+            "forum": "Lake County Circuit Court, 2021",
+            "disposition": "exonerated",
+            "track": "against_the_harmed",
+            "note": "Indictments dismissed."
+          },
+          {
+            "rung": "state",
+            "forum": "Florida claim bill, 2023",
+            "disposition": "settled",
+            "track": "against_the_harmed",
+            "note": "Compensation to the families."
+          }
+        ]
       },
       "impediments": [
         "IMP-JURY-EXCLUSION",
@@ -1623,7 +1968,7 @@
         "outstanding": "No criminal accountability for any officer. Exoneration corrected the state's injury to the victims and left the perpetrators' conduct unaddressed."
       },
       "verification": "documented",
-      "status_note": "Outcome is recorded as posthumous_exoneration and therefore still counts as unpunished. See METHODOLOGY.md section 8 for why.",
+      "status_note": "Outcome is recorded as posthumous_exoneration and therefore still counts as unpunished. See METHODOLOGY.md section 9 for why.",
       "finding": {
         "act": "established",
         "attribution": "named_in_sources"
@@ -1726,12 +2071,34 @@
             "source": "SRC-LOOK-CONFESSION",
             "note": "As above."
           }
-        ]
+        ],
+        "echelon": "proxy"
       },
       "process": {
         "forum": "Circuit Court of Tallahatchie County; federal grand jury, 2006-2007; DOJ review closed 2021",
         "outcome": "charged_acquitted",
-        "narrative": "An all-white, all-male jury acquitted Bryant and Milam after deliberating slightly over an hour. Months later, protected by double jeopardy, both described committing the killing in a paid interview published in Look magazine. The Department of Justice reopened the matter twice and closed it in December 2021 without charges."
+        "narrative": "An all-white, all-male jury acquitted Bryant and Milam after deliberating slightly over an hour. Months later, protected by double jeopardy, both described committing the killing in a paid interview published in Look magazine. The Department of Justice reopened the matter twice and closed it in December 2021 without charges.",
+        "escalation": [
+          {
+            "rung": "county",
+            "forum": "Circuit Court of Tallahatchie County, 1955",
+            "disposition": "acquitted",
+            "track": "against_perpetrators",
+            "note": "All-white, all-male jury; slightly over an hour. The confession followed, protected by double jeopardy."
+          },
+          {
+            "rung": "federal",
+            "forum": "Federal grand jury, 2006-2007",
+            "disposition": "no_indictment",
+            "track": "against_perpetrators"
+          },
+          {
+            "rung": "federal",
+            "forum": "DOJ review closed, December 2021",
+            "disposition": "investigated_no_charge",
+            "track": "against_perpetrators"
+          }
+        ]
       },
       "impediments": [
         "IMP-JURY-EXCLUSION",
@@ -1842,12 +2209,36 @@
             "source": "SRC-CRRJ",
             "note": "The Commission's own files, opened by court order in 1998, document its arrangement of the prosecution. A lawfully constituted state agency funded by the legislature; no officer was charged."
           }
-        ]
+        ],
+        "echelon": "state"
       },
       "process": {
         "forum": "Forrest County Circuit Court; Forrest County Circuit Court (2006)",
         "outcome": "posthumous_exoneration",
-        "narrative": "The conviction was vacated in 2006 after the sole witness recanted and the Sovereignty Commission's own files, opened by court order in 1998, documented the arrangement. Kennard died in 1963. No official was ever prosecuted for procuring the conviction."
+        "narrative": "The conviction was vacated in 2006 after the sole witness recanted and the Sovereignty Commission's own files, opened by court order in 1998, documented the arrangement. Kennard died in 1963. No official was ever prosecuted for procuring the conviction.",
+        "escalation": [
+          {
+            "rung": "state",
+            "forum": "Mississippi State Sovereignty Commission",
+            "disposition": "no_process",
+            "track": "against_perpetrators",
+            "note": "A lawfully constituted state agency arranged the prosecution. No officer was ever charged."
+          },
+          {
+            "rung": "county",
+            "forum": "Forrest County Circuit Court, 1960",
+            "disposition": "convicted",
+            "track": "against_the_harmed",
+            "note": "Seven years at hard labour for a twenty-five dollar theft."
+          },
+          {
+            "rung": "county",
+            "forum": "Forrest County Circuit Court, 2006",
+            "disposition": "exonerated",
+            "track": "against_the_harmed",
+            "note": "Vacated after the sole witness recanted and the Commission's own files were opened by court order. Forty-three years after he died."
+          }
+        ]
       },
       "impediments": [
         "IMP-IMMUNITY",
@@ -1938,12 +2329,36 @@
       "respondents": {
         "described": "Mobs, in the great majority of cases never identified in any official record; officers who surrendered custody in a substantial number of cases",
         "named_in_sources": false,
-        "official_capacity": true
+        "official_capacity": true,
+        "echelon": "proxy"
       },
       "process": {
         "forum": "The several states",
         "outcome": "no_process",
-        "narrative": "Prosecutions were exceptional and convictions nearly unknown. Federal anti-lynching legislation was introduced repeatedly from 1918 and was defeated by filibuster on every occasion until 2022."
+        "narrative": "Prosecutions were exceptional and convictions nearly unknown. Federal anti-lynching legislation was introduced repeatedly from 1918 and was defeated by filibuster on every occasion until 2022.",
+        "escalation": [
+          {
+            "rung": "county",
+            "forum": "The several states",
+            "disposition": "no_process",
+            "track": "against_perpetrators",
+            "note": "Prosecutions exceptional, convictions nearly unknown."
+          },
+          {
+            "rung": "federal",
+            "forum": "Dyer Anti-Lynching Bill and roughly 200 successors",
+            "disposition": "declined",
+            "track": "against_perpetrators",
+            "note": "Passed the House in 1922, filibustered in the Senate; every subsequent bill defeated until 2022."
+          },
+          {
+            "rung": "federal",
+            "forum": "Emmett Till Antilynching Act, 2022",
+            "disposition": "legislated",
+            "track": "against_perpetrators",
+            "note": "One hundred and four years after the compilation was published."
+          }
+        ]
       },
       "impediments": [
         "IMP-PERSONS-UNKNOWN",
@@ -1962,7 +2377,7 @@
         "outstanding": "The apology came eighty-seven years after the compilation was published. This entry stands for every killing in it that has no entry of its own."
       },
       "verification": "documented",
-      "status_note": "An aggregate entry, entered under the rule in METHODOLOGY.md section 9: where sources preserve only a count, the count is recorded as a count and is not permitted to stand in for individuated persons.",
+      "status_note": "An aggregate entry, entered under the rule in METHODOLOGY.md section 10: where sources preserve only a count, the count is recorded as a count and is not permitted to stand in for individuated persons.",
       "finding": {
         "act": "established",
         "attribution": "unattributed"

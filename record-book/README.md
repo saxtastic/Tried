@@ -89,6 +89,27 @@ that field is a finding of guilt, and the pages say so above every list.
    the injury occurred, where, and that it went unanswered. Standing to demand
    belongs to the living who choose to assert it.
 
+**2b. The route each matter travelled is recorded, rung by rung.**
+`respondents.echelon` places the actor on a ladder of authority — private_holder,
+proxy, municipal, county, district, state, regional, federal, supreme.
+`process.escalation` records every rung the matter reached, or failed to, with
+the forum and its disposition. `track` separates the route against the
+perpetrators from the one the state ran **against the harmed**.
+
+That yields the nearest thing here to an appeal route, and one finding:
+
+| Actor stood at | Heard above the actor's own rung |
+| --- | --- |
+| County level or above | **0 of 4** |
+| Below county level | **13 of 13** |
+
+When a mob did it, the matter sometimes climbed. When an organ of the state did
+it, the matter never once got above the body that did it — the forum and the
+actor were the same institution. Three of the four inverted tracks climbed higher
+than their own perpetrator track, and three reached the Supreme Court; the only
+perpetrator track that ever reached that rung went there to be undone. Computed
+on every build with its n reported, so the small denominator is never hidden.
+
 **3a. Entries are classified by what was injured, not by who was injured.**
 `harm_domains` carries as many of eight as apply: `physiological`, `spiritual`,
 `social`, `political`, `economic`, `educational`, `interpersonal`,
