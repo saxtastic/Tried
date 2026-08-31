@@ -110,6 +110,22 @@ than their own perpetrator track, and three reached the Supreme Court; the only
 perpetrator track that ever reached that rung went there to be undone. Computed
 on every build with its n reported, so the small denominator is never hidden.
 
+**2c. The perpetrator's own paperwork is the strongest evidence here.**
+A bill of sale exists because title had to be provable against third parties, so
+it was written, witnessed and recorded — and it proves the transaction now for
+the reason it proved it then. `commercial_record` is a distinct vantage for
+ledgers, manifests, mortgages and policies: not a government record *about* a
+population but the transacting party's own instrument. The Act of 2 March 1807
+required a manifest naming every enslaved person shipped coastwise, so the only
+rung of authority that touched the domestic trade did so to document it.
+
+This answers the objection that slavery's harms cannot be logged as crimes
+because they were lawful: `finding.act` records that the conduct occurred,
+`offense` names what it constitutes on its face, and `process.outcome` records
+separately that no forum treated it as an offence. And it fails outright for the
+Clotilda, where the conduct was a capital crime *when committed*, the
+perpetrators are named, and nobody was punished.
+
 **3a. Entries are classified by what was injured, not by who was injured.**
 `harm_domains` carries as many of eight as apply: `physiological`, `spiritual`,
 `social`, `political`, `economic`, `educational`, `interpersonal`,
@@ -191,7 +207,7 @@ anything under `public/record-book/`; it is overwritten.
 
 ## Current state
 
-18 complaint entries, 38 register rows, 10 impediments, 47 archives.
+21 complaint entries, 43 register rows, 10 impediments, 53 archives.
 
 In all 18 the act is **established** on the evidence. In 3 no participant is
 identified in any source. In all 18 no perpetrator was ever convicted. 7 name a

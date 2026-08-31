@@ -516,6 +516,67 @@
       "note": "The body of work DeGruy's framework sits within and argues alongside. Principal figures: Maria Yellow Horse Brave Heart on historical trauma and historical unresolved grief among the Lakota, which introduced the term to the clinical literature; Eduardo and Bonnie Duran on the soul wound in Native American Postcolonial Psychology (1995); Yael Danieli, ed., International Handbook of Multigenerational Legacies of Trauma (1998); Rachel Yehuda on biological correlates of transmission in offspring of Holocaust survivors; Na'im Akbar, Chains and Images of Psychological Slavery (1984); Kenneth and Mamie Clark's doll studies, cited in Brown v. Board of Education; W.E.B. Du Bois on double consciousness; Frantz Fanon. THIS IS A LINEAGE, NOT A BIBLIOGRAPHY. It records the field, assembled from knowledge of it and not retrieved in this session. It is not a reconstruction of what DeGruy cites, and must not be presented as one. Verify every author, title and date against the works themselves before use.",
       "verified": false,
       "fetchable": false
+    },
+    {
+      "id": "SRC-COASTWISE-MANIFESTS",
+      "title": "Slave manifests of the coastwise trade (Records of the U.S. Customs Service, Record Group 36)",
+      "kind": "government_records",
+      "holder": "U.S. National Archives and Records Administration",
+      "rights": "public_domain",
+      "note": "The Act of 2 March 1807, which ended the international trade from 1808, required a manifest for every enslaved person shipped coastwise: name, age, sex, height, owner, port of departure, port of arrival. The federal government therefore REQUIRED, collected and preserved a passenger record of the domestic trafficking it did not prohibit. These manifests name tens of thousands of individuals and are among the largest bodies of individuating evidence in the entire corpus.",
+      "verified": false,
+      "fetchable": false
+    },
+    {
+      "id": "SRC-COUNTY-DEEDS",
+      "title": "County deed, probate and chattel-mortgage books",
+      "kind": "commercial_records",
+      "holder": "County clerks and state archives, the several slaveholding states",
+      "rights": "mixed",
+      "note": "Bills of sale, estate inventories, division-of-property decrees, and mortgages pledging enslaved people as collateral. Recorded in the public land and probate books because title had to be provable against third parties. The conduct is documented in the transacting party's own hand, under oath or seal, and survives in volume no narrative corpus can match.",
+      "verified": false,
+      "fetchable": false
+    },
+    {
+      "id": "SRC-TRADER-RECORDS",
+      "title": "Slave-trading firm records, incl. Franklin & Armfield",
+      "kind": "commercial_records",
+      "holder": "Various; substantial holdings at the Library of Congress, Chicago History Museum, and state archives",
+      "rights": "mixed",
+      "note": "Franklin & Armfield of Alexandria was the largest firm in the domestic trade, shipping enslaved people coastwise to Natchez and New Orleans through the 1830s. Firm ledgers, correspondence and shipping records document the trade as a business: volumes, routes, prices, and the deliberate targeting of the Upper South as a supply region.",
+      "verified": false,
+      "fetchable": false
+    },
+    {
+      "id": "SRC-SLAVERY-ERA-INSURANCE",
+      "title": "Slavery-era insurance policy registries",
+      "kind": "commercial_records",
+      "holder": "California Department of Insurance; Illinois Department of Insurance",
+      "rights": "public_domain",
+      "note": "Produced under state slavery-era insurance disclosure acts, which required insurers still doing business in those states to search their archives and report policies written on the lives of enslaved people. Names insureds, slaveholders, and underwriters. A record of the trade created by its financiers and surfaced by statute a century and a half later.",
+      "verified": false,
+      "fetchable": false
+    },
+    {
+      "id": "SRC-GEORGETOWN-SLAVERY-ARCHIVE",
+      "title": "Georgetown Slavery Archive",
+      "kind": "institutional_records",
+      "holder": "Georgetown University",
+      "url": "https://slaveryarchive.georgetown.edu/",
+      "rights": "mixed",
+      "fetchable": true,
+      "note": "Documents the 1838 sale of 272 enslaved people by the Maryland Province of the Society of Jesus. The articles of agreement, the ship manifests, and the correspondence are the institution's own records, and they name the people sold - which is why descendants can be identified today, and why this is one of the few entries in this book with a living, named descendant community.",
+      "verified": false
+    },
+    {
+      "id": "SRC-CLOTILDA",
+      "title": "Records of the Clotilda voyage, prosecution, and Africatown",
+      "kind": "mixed_records",
+      "holder": "U.S. District Court for the Southern District of Alabama (RG 21); Alabama Historical Commission; Mobile County",
+      "rights": "mixed",
+      "note": "Federal court papers from the prosecution that followed the 1860 voyage, the Alabama Historical Commission's 2019 confirmation of the wreck, and the community records of Africatown, founded by the survivors. Zora Neale Hurston's interviews with Kossola (Cudjo Lewis), published as Barracoon, are victim testimony taken from a man who had been trafficked in violation of United States law.",
+      "verified": false,
+      "fetchable": false
     }
   ]
 }

@@ -152,6 +152,55 @@ Kennard's exoneration rests on the files of the state agency that framed him. Ro
 Bryant and J. W. Milam were acquitted and then described the killing for a fee.
 In each, the perpetrator's own vantage is the one that establishes the act.
 
+### The perpetrator's commercial record
+
+The strongest evidence in this book is not testimony. It is paperwork the
+perpetrators created for their own purposes and kept because they needed it.
+
+A bill of sale exists because **title had to be provable against third parties**.
+So it was written, witnessed, and entered in the county deed book — and it proves
+the transaction to us now for exactly the reason it proved it to them then. The
+same is true of estate inventories, division-of-property decrees, chattel
+mortgages pledging people as collateral, trading-firm ledgers, and insurance
+policies written on enslaved lives. `commercial_record` is a vantage of its own
+for this reason: it is not an administrative record kept by a government about a
+population, it is *the transacting party's own instrument*.
+
+The federal government's role is worth stating precisely. The Act of 2 March
+1807 ended the international trade from 1808 and required a **manifest for every
+enslaved person shipped coastwise** — name, age, sex, height, owner, port of
+departure, port of arrival. The United States did not prohibit the domestic
+trade; it regulated it, demanded the paperwork, and preserved it. The only rung
+of the ladder of authority that ever touched that trade did so to document it,
+and the document is now the evidence.
+
+This bears directly on an objection the book has to answer. It is often said
+that slavery's harms cannot be entered in a log of crimes because they were
+lawful where they occurred. The four axes already answer it: `finding.act` says
+whether the conduct occurred, `offense` names what it constitutes on its face,
+and `process.outcome` records separately that no forum ever treated it as an
+offence. A bill of sale establishes the act overwhelmingly. That it established
+no crime at the time is a fact about the forum, recorded in its own field, and
+it does not travel backwards to unmake the conduct.
+
+And the objection fails on its own terms in at least one entry. The Clotilda
+carried roughly 110 people to Alabama in 1860, half a century after the trade was
+prohibited and forty years after Congress made participation in it piracy
+punishable by death. The conduct was a capital crime when it was committed, the
+perpetrators are named — one of them wrote his own account of the voyage — the
+wreck was confirmed in 2019, and nobody was ever punished.
+
+The commercial record also carries the only individuation prospect at scale in
+this register. Every other collective row here is a count because no source
+preserved the names. `PR-COLLECTIVE-DOMESTIC-TRADE` is a count only because this
+book has not transcribed them: the deed books, manifests and firm ledgers name
+people in very large numbers. The 272 sold by the Maryland Jesuits in 1838 are
+named in the sellers' own articles of agreement, which is precisely why several
+thousand descendants can identify themselves today and why that entry is the
+only one in the corpus where a perpetrator institution's own record produced
+material restoration. **Where the names survive, the claim survives with them —
+and they survive because someone needed a receipt.**
+
 ### Concurrence
 
 `concurrence` is required on every entry and states two things: where the

@@ -909,6 +909,132 @@
       ],
       "note": "This row is the register's largest count and its plainest statement of what the register cannot do. Each of these 3,224 is entitled under this book's own rule to an individuated row. Producing them requires archival work in the sources listed, county by county, and is the standing task this repository exists to hold.",
       "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 10."
+    },
+    {
+      "id": "PR-COLLECTIVE-DOMESTIC-TRADE",
+      "name": {
+        "display": "People trafficked in the domestic slave trade, 1808-1865"
+      },
+      "identity_status": "collectively_recorded",
+      "standing": "collective",
+      "count": {
+        "documented": null,
+        "estimated_low": 800000,
+        "estimated_high": 1200000,
+        "basis": "Approximately one million people forcibly relocated from the Upper South to the Deep South over the period. Estimates of families broken vary widely and the book records the divergence rather than one figure."
+      },
+      "place": "Virginia, Maryland and Kentucky to Louisiana, Mississippi, Alabama and Texas",
+      "harm": "Bought, transported in coffles or by ship, and sold; separated from spouses, children and parents as an ordinary incident of the business",
+      "attestation": "Individually named, in very large numbers, in the perpetrators' own instruments: bills of sale in county deed books, estate inventories, firm ledgers, insurance policies, and the coastwise manifests the federal government required. This is the one aggregate row in the register whose members are substantially recoverable, because the people who sold them wrote the names down to make title good.",
+      "complaints": [
+        "CL-1808-DOMESTIC-TRADE"
+      ],
+      "sources": [
+        "SRC-COUNTY-DEEDS",
+        "SRC-COASTWISE-MANIFESTS",
+        "SRC-TRADER-RECORDS",
+        "SRC-DLAS"
+      ],
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 10.",
+      "note": "Carried as a count only because the individuating work has not been done here, not because the sources cannot support it. That distinguishes this row from every other collective row in the register, and it is the most tractable individuation task the book has."
+    },
+    {
+      "id": "PR-LEWIS-CUDJO",
+      "name": {
+        "display": "Kossola, known as Cudjo Lewis"
+      },
+      "identity_status": "named",
+      "standing": "claimant",
+      "life": {
+        "born": "c. 1841",
+        "died": "1935"
+      },
+      "place": "Taken from Ouidah, in present-day Benin; lived at Africatown, Mobile County, Alabama",
+      "role": "Survivor of the Clotilda; founder of Africatown",
+      "harm": "Seized, carried to Alabama in violation of United States law, and held in slavery until emancipation",
+      "voice": {
+        "words": "[Extensive first-person testimony recorded in his own words; no line is quoted here without a verified transcript.]",
+        "source": "SRC-DOCSOUTH",
+        "citation": "Interviews given to Zora Neale Hurston in 1927-1928, published as Barracoon: The Story of the Last Black Cargo."
+      },
+      "complaints": [
+        "CL-1860-CLOTILDA"
+      ],
+      "sources": [
+        "SRC-CLOTILDA",
+        "SRC-DOCSOUTH"
+      ],
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 10.",
+      "note": "Standing is claimant: he gave testimony, at length and on the record, about a crime committed against him under a statute that made it punishable by death. He also sued and testified in his own name in later life. Nobody was ever punished, and he outlived the prosecution by seventy-four years."
+    },
+    {
+      "id": "PR-MCCREAR-MATILDA",
+      "name": {
+        "display": "Matilda McCrear"
+      },
+      "identity_status": "named",
+      "standing": "decedent_of_record",
+      "life": {
+        "born": "c. 1857",
+        "died": "1940"
+      },
+      "place": "Taken from West Africa as a small child; lived in Dallas County, Alabama",
+      "role": "Survivor of the Clotilda; identified by later scholarship as the last known survivor of the trans-Atlantic trade to the United States",
+      "harm": "Carried to Alabama as a child of about two, in violation of United States law",
+      "complaints": [
+        "CL-1860-CLOTILDA"
+      ],
+      "sources": [
+        "SRC-CLOTILDA"
+      ],
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 10.",
+      "note": "She sought compensation in the 1930s and was refused. She died in 1940, seventy-five years after emancipation and eighty years after the voyage."
+    },
+    {
+      "id": "PR-COLLECTIVE-CLOTILDA",
+      "name": {
+        "display": "The people carried on the Clotilda"
+      },
+      "identity_status": "collectively_recorded",
+      "standing": "collective",
+      "count": {
+        "documented": 110,
+        "basis": "Approximately 110 people; accounts differ by a few either way. A number of them are individually named in the Africatown records and in later scholarship."
+      },
+      "place": "Ouidah to Mobile Bay; Africatown, Mobile County, Alabama",
+      "harm": "Trafficked in violation of United States law and held in slavery until emancipation",
+      "attestation": "Named in part by the community they founded, which kept its own record. Africatown exists because the survivors organised it, and the naming is theirs rather than their captors'.",
+      "complaints": [
+        "CL-1860-CLOTILDA"
+      ],
+      "sources": [
+        "SRC-CLOTILDA"
+      ],
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 10."
+    },
+    {
+      "id": "PR-COLLECTIVE-GU272",
+      "name": {
+        "display": "The 272 people sold by the Maryland Province of the Society of Jesus in 1838"
+      },
+      "identity_status": "collectively_recorded",
+      "standing": "collective",
+      "count": {
+        "documented": 272,
+        "basis": "Named in the institution's own articles of agreement and associated records."
+      },
+      "place": "Jesuit plantations in Maryland; sold to purchasers in Louisiana",
+      "harm": "Sold south, families separated, to relieve the debts of a college",
+      "attestation": "Individually named in the sellers' own papers. Because the names survive, several thousand descendants have been identified and are organised as a community - the one entry in this register where the naming held.",
+      "complaints": [
+        "CL-1838-GU272"
+      ],
+      "sources": [
+        "SRC-GEORGETOWN-SLAVERY-ARCHIVE",
+        "SRC-COASTWISE-MANIFESTS"
+      ],
+      "consent_note": "Recorded because the injury is recorded. No claim is asserted on this person's behalf by this book. See METHODOLOGY.md section 10.",
+      "note": "Carried as a count here only because this book has not transcribed the roll; the roll exists, in the Georgetown Slavery Archive, and it names them."
     }
   ]
 }

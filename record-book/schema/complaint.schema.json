@@ -239,6 +239,7 @@
             "no_process",
             "investigated_no_charge",
             "charged_acquitted",
+            "charged_no_conviction",
             "convictions_vacated",
             "convicted",
             "civil_settlement",
@@ -487,7 +488,8 @@
               "oral_history",
               "material_record",
               "clinical_research",
-              "genealogical_record"
+              "genealogical_record",
+              "commercial_record"
             ]
           },
           "note": {
