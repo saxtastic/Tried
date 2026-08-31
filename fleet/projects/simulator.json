@@ -31,5 +31,42 @@
   "partial_compliance": "Fully resolved. Merged the shell at af83ccd, dropped the contested edits, re-added its card in the shell's idiom on its own branch, adopted the officer-corpus model at ba2422b, and retargeted PR #3 to the venue branch. P7, P8 and P13 all clear against it.",
   "merged_upstream": "af83ccd — merged the venue shell; adopted the officer-corpus model at ba2422b",
   "pull_request_base": "claude/ios-macos-code-repurpose-ofm9ks",
-  "_owner_note": "This file is owned by the project it describes. The venue assembles it and never edits another project's copy; a sibling edits only its own. That is the whole point of the split."
+  "_owner_note": "This file is owned by the project it describes. The venue assembles it and never edits another project's copy; a sibling edits only its own. That is the whole point of the split.",
+  "awaiting_owner": [
+    {
+      "id": "AO-1",
+      "question": "Add a GitHub Actions workflow so the gates run without a session?",
+      "detail": "The repo has no .github. npm test (77), check, check:propose, verify --strict and outstanding all run only when a session chooses to run them. Offered twice; not answered. A stale premise (ENG-P1) shipped for hours because nothing was watching.",
+      "asked_at": "2026-08-30",
+      "blocking": false
+    },
+    {
+      "id": "AO-2",
+      "question": "Build the four verbs — document / produce / share / perform — as the site's structure?",
+      "detail": "Owner said yes, then the conversation moved to Donald v. UKA. Not built. This replaces the literary/object/performance/relational framing, which the owner corrected as classification rather than action.",
+      "asked_at": "2026-08-30",
+      "blocking": false
+    },
+    {
+      "id": "AO-3",
+      "question": "The artist's statement — which lines survive in the owner's own hand?",
+      "detail": "Drafted from the 2023 bio. Every line touching grief, Blackness, or what the work is for is a placeholder and will read as borrowed until overwritten. 'And now in systems' was flagged as the weakest phrase in it.",
+      "asked_at": "2026-08-30",
+      "blocking": true
+    },
+    {
+      "id": "AO-4",
+      "question": "What is the paralegal role actually called?",
+      "detail": "Transcribed as 'Enochian paralegal' and 'ENaki in paralegal'. Recorded as an unresolved name rather than guessed at. The corpus/paralegal/ officer is filed under the generic name until corrected. Nothing depends on it; the role is built either way.",
+      "asked_at": "2026-08-30",
+      "blocking": false
+    },
+    {
+      "id": "AO-5",
+      "question": "Q3 FORM versus RELIANCE — who owns the test?",
+      "detail": "Unresolved and unowned since the Q3 arbitration declined to pick. Fellowships locates the danger in form (a judgment in a file shaped like a spec); engineering locates it in reliance (a claim a reader is invited to act on). They diverge on real cases and the next straddling file gets classified by whoever finds it.",
+      "asked_at": "2026-08-30",
+      "blocking": false
+    }
+  ]
 }

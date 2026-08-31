@@ -1,0 +1,283 @@
+/* Simulator subtree.
+ *
+ * Takes its palette, type, spacing and tier behaviour from /venue.css and
+ * /venue.js. What is here is only what the simulator needs and the shell has no
+ * reason to carry: the two-sided argument layout, element meters, defeater rows,
+ * and the principled-margin scale.
+ *
+ * The one exception, declared rather than smuggled: venue.css has no status
+ * colours, and this surface is largely a display of met / contested / unmet. So
+ * three tokens are defined here and nowhere else, in both schemes, and every
+ * status colour on the page resolves through them. If the venue ever grows its
+ * own status scale, delete this block and the subtree follows it.
+ */
+
+:root {
+  --sim-ok: #2f7a52;
+  --sim-warn: #9a6b12;
+  --sim-bad: #b03434;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sim-ok: #4ade80;
+    --sim-warn: #fbbf24;
+    --sim-bad: #f87171;
+  }
+}
+
+/* The hero readout.
+ *
+ * Note for the shell: /fleet/ has the same "at a glance" panel under .glance,
+ * defined in fleet.css. Two subtrees needing the identical component is the
+ * signal it belongs in venue.css rather than in either subtree. Not moved here
+ * — venue.css is the shell's file — but recorded so the third subtree does not
+ * write it a third time.
+ */
+
+.readout {
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.readout dl {
+  margin: 0.6rem 0 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+.readout dt,
+.readout dd {
+  margin: 0;
+  padding: 0.4rem 0;
+  border-top: 1px solid var(--hairline);
+  overflow-wrap: anywhere;
+}
+.readout dt { color: var(--fg-2); }
+.readout dd { text-align: right; }
+.readout dt:first-of-type,
+.readout dd:first-of-type { border-top: 0; }
+
+/* -------------------------------------------------------------- controls -- */
+
+.control-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+  gap: var(--gutter);
+  margin-top: var(--gutter);
+}
+.field { margin: 0; min-width: 0; }
+.field > label,
+.field > legend {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--fg-2);
+  margin-bottom: 0.3rem;
+  padding: 0;
+}
+fieldset.field { border: 0; margin: 0; padding: 0; }
+select {
+  width: 100%;
+  max-width: 100%;
+  padding: 0.5rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--surface-solid);
+  color: var(--fg);
+  border: 1px solid var(--hairline);
+  font: inherit;
+  font-size: 0.88rem;
+  text-overflow: ellipsis;
+}
+.toggles { display: flex; flex-wrap: wrap; gap: 0.5rem 0.9rem; }
+.toggles label { display: inline-flex; gap: 0.35rem; align-items: center; font-size: 0.85rem; }
+
+/* ------------------------------------------------------------- the cards -- */
+
+section.debate,
+section.report {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  padding: var(--gutter);
+  margin-bottom: var(--gutter);
+}
+section.debate > h2,
+section.report > h2 {
+  margin: 0 0 0.2rem;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  overflow-wrap: anywhere;
+}
+.sub { color: var(--fg-2); font-size: 0.82rem; margin: 0 0 0.9rem; }
+
+.tag {
+  font: 600 0.68rem/1 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.28rem 0.45rem;
+  border-radius: var(--radius-sm);
+  background: var(--surface-solid);
+  border: 1px solid var(--hairline);
+  color: var(--fg-2);
+  overflow-wrap: anywhere;
+}
+.tag.ok { color: var(--sim-ok); border-color: currentColor; }
+.tag.bad { color: var(--sim-bad); border-color: currentColor; }
+.tag.warn { color: var(--sim-warn); border-color: currentColor; }
+.tag.info { color: var(--accent); border-color: currentColor; }
+
+/* --------------------------------------------------- thesis / antithesis -- */
+
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); }
+.cols > * { min-width: 0; }
+.side {
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem;
+  background: var(--surface-solid);
+  min-width: 0;
+}
+.side.pro { border-left: 3px solid var(--sim-ok); }
+.side.con { border-left: 3px solid var(--sim-bad); }
+.side h3 {
+  margin: 0 0 0.5rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--fg-2);
+}
+.side .lead { font-size: 0.9rem; margin: 0 0 0.7rem; }
+
+ul.elements { list-style: none; padding: 0; margin: 0; }
+ul.elements li {
+  padding: 0.45rem 0;
+  border-top: 1px solid var(--hairline);
+  font-size: 0.86rem;
+  overflow-wrap: anywhere;
+}
+ul.elements li:first-child { border-top: 0; }
+.mark { font-family: var(--font-mono); font-weight: 700; margin-right: 0.4rem; }
+.mark.met { color: var(--sim-ok); }
+.mark.contested { color: var(--sim-warn); }
+.mark.unmet { color: var(--sim-bad); }
+
+.meter {
+  height: 4px;
+  background: var(--hairline);
+  border-radius: 3px;
+  margin-top: 0.35rem;
+  overflow: hidden;
+}
+.meter > i { display: block; height: 100%; background: var(--sim-ok); }
+.meter > i.contested { background: var(--sim-warn); }
+.meter > i.unmet { background: var(--sim-bad); }
+.because { color: var(--fg-2); font-size: 0.78rem; margin: 0.3rem 0 0 1.1rem; overflow-wrap: anywhere; }
+
+.defeater { border-top: 1px solid var(--hairline); padding: 0.55rem 0; font-size: 0.86rem; }
+.defeater:first-of-type { border-top: 0; }
+.defeater .dh { display: flex; justify-content: space-between; gap: 0.5rem; align-items: baseline; }
+.defeater .st { font: 0.72rem var(--font-mono); color: var(--fg-2); }
+.defeater p { margin: 0.25rem 0 0; color: var(--fg-2); font-size: 0.8rem; overflow-wrap: anywhere; }
+
+/* ------------------------------------------------- judgment / synthesis -- */
+
+.judgment { border-left: 3px solid var(--accent); padding-left: 0.9rem; margin-top: var(--gutter); }
+.synthesis { border-left: 3px solid var(--hairline-strong); padding-left: 0.9rem; margin-top: var(--gutter); }
+.judgment h3,
+.synthesis h3 {
+  margin: 0 0 0.35rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--fg-2);
+}
+
+.scale { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.6rem; font: 0.75rem var(--font-mono); color: var(--fg-2); flex-wrap: wrap; min-width: 0; }
+.scale .bar { flex: 1; min-width: 4rem; height: 6px; border-radius: 4px; background: var(--hairline); position: relative; overflow: hidden; }
+.scale .bar > i { position: absolute; top: 0; bottom: 0; }
+.scale .bar > i.p { left: 0; background: var(--sim-ok); }
+.scale .bar > i.c { right: 0; background: var(--sim-bad); }
+
+/* ------------------------------------------------------- tables / detail -- */
+
+table { width: 100%; border-collapse: collapse; font-size: 0.84rem; table-layout: fixed; }
+th, td { text-align: left; padding: 0.45rem 0.5rem; border-bottom: 1px solid var(--hairline); vertical-align: top; overflow-wrap: anywhere; }
+th { color: var(--fg-2); font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.07em; }
+tr.here td { background: var(--surface); }
+td.num { font-family: var(--font-mono); }
+section.debate table,
+section.report table { display: block; overflow-x: auto; }
+
+ol.vectors { padding-left: 1.2rem; margin: 0; }
+ol.vectors li { margin-bottom: 0.8rem; }
+ol.vectors b { display: block; overflow-wrap: anywhere; }
+ol.vectors p { margin: 0.2rem 0 0; color: var(--fg-2); font-size: 0.84rem; }
+.unlocks { font: 0.72rem var(--font-mono); color: var(--fg-2); overflow-wrap: anywhere; }
+
+details {
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.7rem;
+  margin-top: 0.6rem;
+  background: var(--surface-solid);
+}
+details summary { cursor: pointer; font-size: 0.82rem; color: var(--fg-2); }
+details[open] summary { margin-bottom: 0.5rem; color: var(--fg); }
+
+.gap { font-size: 0.84rem; padding: 0.4rem 0; border-top: 1px solid var(--hairline); overflow-wrap: anywhere; }
+.gap:first-child { border-top: 0; }
+.gap p { margin: 0.2rem 0 0; color: var(--fg-2); font-size: 0.8rem; }
+.note { color: var(--sim-warn); font-size: 0.82rem; }
+.disclaimer {
+  font-size: 0.8rem;
+  color: var(--fg-2);
+  border: 1px dashed var(--hairline-strong);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.8rem;
+  margin-top: var(--gutter);
+}
+.loading { color: var(--fg-2); padding: 2rem 0; }
+.spaced { margin-top: 0.8rem; }
+
+/* The one place the simulator needs its own breakpoint: the two-sided argument
+   cannot stay two-sided on a phone, and there is no venue token for that. */
+@media (max-width: 46rem) {
+  .cols { grid-template-columns: 1fr; }
+}
+
+/* --------------------------------------------------------------- passages -- */
+
+.passage { border-top: 1px solid var(--hairline); padding: 0.9rem 0; }
+.passage:first-of-type { border-top: 0; }
+.passage h3 {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  overflow-wrap: anywhere;
+}
+.passage.lost { border-left: 3px solid var(--sim-bad); padding-left: 0.8rem; }
+.passage.held { border-left: 3px solid var(--sim-ok); padding-left: 0.8rem; }
+
+dl.askgot {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.15rem 0.7rem;
+  margin: 0 0 0.6rem;
+  font-size: 0.82rem;
+}
+dl.askgot dt { color: var(--fg-2); font-family: var(--font-mono); font-size: 0.75rem; padding-top: 0.1rem; }
+dl.askgot dd { margin: 0; overflow-wrap: anywhere; }
+dl.askgot dd.nothing { color: var(--sim-bad); font-family: var(--font-mono); }
+
+.connective { margin: 0; font-size: 0.86rem; overflow-wrap: anywhere; }
