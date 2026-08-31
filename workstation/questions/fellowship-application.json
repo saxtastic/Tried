@@ -1,0 +1,47 @@
+{
+  "id": "QS-FELLOWSHIP",
+  "domain": "applications",
+  "produces": "a cover letter and a statement draft, ready to edit",
+  "note": "Five questions, asked once per application. Every field the draft asserts traces to an answer here or to a cited record. Nothing is inferred from the operator's history without saying so.",
+  "questions": [
+    {
+      "id": "Q1",
+      "ask": "What register — formal institutional, plain direct, or in your own voice?",
+      "why": "It determines every sentence, and it is the thing a generated draft gets wrong first.",
+      "type": "one_of",
+      "options": ["formal institutional", "plain and direct", "my own voice"]
+    },
+    {
+      "id": "Q2",
+      "ask": "What are you actually applying with — which work, and is it finished?",
+      "why": "An unfinished work changes the whole pitch from evidence to intention, and the draft has to know which it is making.",
+      "type": "short_text"
+    },
+    {
+      "id": "Q3",
+      "ask": "What is the constraint they will worry about — budget, timeline, eligibility, or venue?",
+      "why": "The strongest paragraph in any application answers the reviewer's objection before it is raised.",
+      "type": "one_of",
+      "options": ["budget", "timeline", "eligibility", "venue or access", "none I can see"]
+    },
+    {
+      "id": "Q4",
+      "ask": "Is there anything you do NOT want said here?",
+      "why": "Cheaper to ask than to retract. Employment matters, unpublished work, anything under embargo.",
+      "type": "short_text",
+      "optional": true
+    },
+    {
+      "id": "Q5",
+      "ask": "Should the draft cite the sourced article we found, or leave it out?",
+      "why": "The citation is real and named. Whether it belongs in this letter is a judgement about the reader, and that judgement is yours.",
+      "type": "one_of",
+      "options": ["cite it", "leave it out", "show me the article first"]
+    }
+  ],
+  "refuses": [
+    "Inventing an eligibility claim the call does not state",
+    "Asserting what will catch a named person's attention as though it were sourced",
+    "Filling Q4 by inference from anything in the archive"
+  ]
+}
