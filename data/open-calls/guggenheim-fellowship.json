@@ -1,0 +1,84 @@
+{
+  "id": "guggenheim-fellowship",
+  "name": "Guggenheim Fellowship",
+  "org": "John Simon Guggenheim Memorial Foundation",
+  "kind": "fellowship",
+  "url": "https://www.gf.org/applicants/",
+  "summary": null,
+  "eligibility": {
+    "stated": "Citizens or permanent residents of the US or Canada at time of application, who have made significant recognised contributions to their field. Mid-career is defined by professional output, not age. Previous Guggenheim Fellows are not eligible.",
+    "disciplines": [
+      "arts",
+      "humanities",
+      "writing",
+      "social-science"
+    ],
+    "geography": [
+      "US",
+      "CA"
+    ],
+    "career_stage": [
+      "mid",
+      "established"
+    ]
+  },
+  "requirements": {
+    "essays": 3,
+    "recommendations": 3,
+    "work_sample": true,
+    "endorsement": false,
+    "fee_usd": 0,
+    "stated": "Three supplementary PDF statements including a career narrative of up to 1000 words; three references required, four maximum; work examples depending on field."
+  },
+  "award": {
+    "min": null,
+    "max": null,
+    "currency": "USD",
+    "basis": "none",
+    "note": "⟦FILL: award figure not sourced⟧"
+  },
+  "cycle": "annual",
+  "opens": null,
+  "closes": "2026-09-15",
+  "cycle_note": "2027 competition. Work samples are due two weeks after the portal closes; decisions late April 2027.",
+  "stage": "drafting",
+  "drafts": [],
+  "provenance": {
+    "closes": {
+      "basis": "sourced",
+      "from": "https://www.gf.org/program/how-to-apply",
+      "read": "2026-08-29"
+    },
+    "summary": {
+      "basis": "none",
+      "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+    },
+    "eligibility": {
+      "basis": "derived",
+      "from": "https://www.gf.org/faq",
+      "read": "2026-08-29",
+      "rule": "stated is read from the source; the three enum arrays are mapped from it into this schema's vocabulary, which the source does not use."
+    },
+    "requirements": {
+      "basis": "sourced",
+      "from": "https://www.gf.org/program/how-to-apply",
+      "read": "2026-08-29"
+    },
+    "award": {
+      "basis": "none",
+      "why": "⟦FILL: no award figure was read.⟧"
+    },
+    "kind": {
+      "basis": "derived",
+      "from": "https://www.gf.org/applicants/",
+      "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+    },
+    "cycle": {
+      "basis": "derived",
+      "from": "https://www.gf.org/program/how-to-apply",
+      "read": "2026-08-29",
+      "rule": "inferred from the cycle the deadline sits in."
+    }
+  },
+  "source": "https://www.gf.org/applicants/"
+}

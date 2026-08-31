@@ -1,0 +1,81 @@
+{
+  "id": "pd-soros-fellowship",
+  "name": "Paul & Daisy Soros Fellowship for New Americans",
+  "org": "The Paul & Daisy Soros Fellowships for New Americans",
+  "kind": "fellowship",
+  "url": "https://www.pdsoros.org/",
+  "summary": null,
+  "eligibility": {
+    "stated": "Aged 30 or younger at the deadline. Naturalised US citizen, green card holder, born to non-citizen parents, born abroad and adopted by American parents, or DACA-eligible. Starting or continuing a full-time accredited graduate or professional degree in the US, and not past the second year of it.",
+    "disciplines": [
+      "any"
+    ],
+    "geography": [
+      "US"
+    ],
+    "career_stage": [
+      "student",
+      "emerging"
+    ]
+  },
+  "requirements": {
+    "essays": 2,
+    "recommendations": 3,
+    "work_sample": false,
+    "endorsement": false,
+    "fee_usd": 0,
+    "stated": "Transcripts, a resume or CV, two essays, and three to five recommendations, plus eligibility and background questions."
+  },
+  "award": {
+    "min": null,
+    "max": 90000,
+    "currency": "USD",
+    "basis": "sourced",
+    "note": "Up to $90,000 over two years."
+  },
+  "cycle": "annual",
+  "opens": null,
+  "closes": "2026-10-29",
+  "cycle_note": "2027 cycle, 2:00pm ET. 77 finalists interview in Jan–Feb 2027; 30 selected.",
+  "stage": "discovered",
+  "drafts": [],
+  "provenance": {
+    "closes": {
+      "basis": "sourced",
+      "from": "https://pdsoros.org/application-process/",
+      "read": "2026-08-29"
+    },
+    "summary": {
+      "basis": "none",
+      "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+    },
+    "eligibility": {
+      "basis": "derived",
+      "from": "https://pdsoros.org/eligibility/",
+      "read": "2026-08-29",
+      "rule": "stated is read from the source; the three enum arrays are mapped from it into this schema's vocabulary, which the source does not use."
+    },
+    "requirements": {
+      "basis": "sourced",
+      "from": "https://pdsoros.org/application-process/",
+      "read": "2026-08-29"
+    },
+    "award": {
+      "basis": "sourced",
+      "from": "https://pdsoros.org/application-process/",
+      "read": "2026-08-29"
+    },
+    "kind": {
+      "basis": "derived",
+      "from": "https://www.pdsoros.org/",
+      "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+    },
+    "cycle": {
+      "basis": "derived",
+      "from": "https://pdsoros.org/application-process/",
+      "read": "2026-08-29",
+      "rule": "inferred from the cycle the deadline sits in."
+    }
+  },
+  "source": "https://www.pdsoros.org/"
+}

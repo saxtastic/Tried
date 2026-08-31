@@ -131,6 +131,18 @@ for (const vp of VIEWPORTS) {
     if (sub.empty) problems.push(`${route} has no main element`);
   }
 
+  // The fellowships subtree runs on the same shell and must behave the same.
+  await page.goto(new URL("/fellowships/", base).href, { waitUntil: "networkidle" });
+  await page.waitForSelector('#vantage[data-state="ready"]', { timeout: 5000 }).catch(() => {});
+  const fel = await page.evaluate(() => ({
+    tier: document.documentElement.dataset.tier,
+    sideways: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
+    cards: document.querySelectorAll("#vantage-surface .item").length,
+  }));
+  if (fel.tier !== vp.expect) problems.push(`/fellowships/ tier ${fel.tier} != ${vp.expect}`);
+  if (fel.sideways) problems.push("/fellowships/ horizontal scroll");
+  if (fel.cards < 1) problems.push("/fellowships/ surface empty");
+
   if (problems.length) failures++;
   console.log(
     `${problems.length ? "FAIL" : "PASS"}  ${vp.name.padEnd(8)} ${vp.width}×${vp.height}` +

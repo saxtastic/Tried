@@ -1,0 +1,40 @@
+{
+  "$comment": "The open-call record contract. Enforced by scripts/build-registry.mjs, which is the only validator — there is no JSON Schema runtime in this repository and no dependency is added for one.",
+
+  "$rule": "A blank field is a finding; a fabricated one is a defect. Every product-register field names the record it came from or it is blank. Nothing is filled in from memory, inferred from a programme's usual cycle, or carried over from last year.",
+
+  "$history": "Until 2026-08-29 this contract governed only closes and award, and left summary, eligibility, effort, kind and cycle unguarded — four of them enum-checked, which made them read as validated. That gap was found by this project's own Q4-PROVENANCE audit and closed here.",
+
+  "required": [
+    "id", "name", "org", "kind", "url", "summary", "eligibility", "requirements",
+    "award", "cycle", "opens", "closes", "cycle_note", "stage", "drafts",
+    "provenance", "source"
+  ],
+
+  "provenance_required_for": ["closes", "summary", "eligibility", "requirements", "award", "kind", "cycle"],
+
+  "enums": {
+    "kind": ["fellowship", "grant", "residency", "prize", "scholarship", "accelerator"],
+    "cycle": ["annual", "biannual", "rolling", "one-off"],
+    "basis": ["confirmed", "sourced", "derived", "none"],
+    "career_stage": ["student", "emerging", "mid", "established", "any"]
+  },
+
+  "basis": {
+    "confirmed": "read off the organisation's own page by a human, on the date in `read`.",
+    "sourced": "read off the named third party in `from`, on the date in `read`. Primary confirmation is still owed.",
+    "derived": "transformed from a named source rather than quoted from it — `rule` states the transformation. Used where this schema's vocabulary does not exist in the source, so the mapping is this repository's and must be visible as such.",
+    "none": "no record exists. The field is blank and `why` carries a ⟦FILL⟧ marker naming what is owed. A populated field with basis none is the defect this contract exists to prevent."
+  },
+
+  "notes": {
+    "summary": "A description of a programme is a claim about it. Quoted from the source with a basis, or null. Every record is currently null: none was ever read verbatim.",
+    "eligibility": "`stated` is the constraint as the source words it. The three enum arrays are a derivation from `stated` into this schema's vocabulary and carry basis `derived`, never `sourced` — the source does not use these categories.",
+    "requirements": "What an application costs to assemble: essays, recommendations, work_sample, endorsement, fee_usd, and `stated` as the source words it. `effort` is DERIVED from this at read time and is never stored on a record — an effort grading with no requirements behind it is an opinion, and it is the denominator of the ranking.",
+    "award": "min/max null when no figure was read. basis follows the same four values.",
+    "kind": "Classification into this schema's vocabulary, so basis is `derived`, not `sourced`.",
+    "cycle": "Blank unless a source established it. Not inferred from the programme's name or reputation.",
+    "stage": "Workflow stage; must be a stage id in data/workflow.json. Internal, not a product claim.",
+    "drafts": "[{ label, href, state }]. A label and a link, never a person. No applicant-identifying content belongs in a record."
+  }
+}

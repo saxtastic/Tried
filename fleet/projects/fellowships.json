@@ -5,10 +5,19 @@
   "base_branch": "claude/ios-macos-code-repurpose-ofm9ks",
   "branch": "claude/apps-fellowships-repository-zlwbft",
   "pull_request": 2,
+  "pull_request_base": "claude/ios-macos-code-repurpose-ofm9ks",
   "owns": [
     "public/fellowships/*",
     "fellowships/*"
   ],
+  "claims_disputed": [
+    "public/index.html",
+    "package.json",
+    "README.md"
+  ],
+  "claims_note": "Declared under P8. All three are changed: one .card--link added inside the venue's own Subtrees section, four check/build scripts plus a pinned playwright devDependency in package.json, and README.md rewritten for the subtree. Lower risk than the simulator's claim because PR #2 is stacked on PR #1 and already carries the venue's head, so the venue merges first by construction — but the files are shared, so the claim is declared rather than assumed harmless. public/venue.css is deliberately NOT claimed: an earlier nav addition to it was reverted and it is byte-identical to the venue's.",
+  "conflict": "PR #2 head 773781d conflicts with its base at b40289d on fleet/questions.json. Textual, not semantic: the venue's copy is a strict superset — every PR #2 answer object present verbatim, rules/vantages/note/question text byte-identical. Relayed 2026-08-29T22:32Z with the resolution (take the base copy).",
+  "conflict_resolved": "2026-08-29 — merged the base and took its fleet/questions.json wholesale at 30bf6ba, as relayed. PR #2 head now carries every arbitration.",
   "ritual": true,
   "ritual_note": "Open calls are re-surveyed and re-ranked on a cadence. Requires a Routine; none exists yet.",
   "state": "review",
@@ -28,9 +37,29 @@
     "irl_contingency": "the calls are external and dated; the surface can go dark without the opportunities disappearing",
     "produces_artifact": false
   },
-  "claims_note": "Declared by the fellowships session itself under P8 at b13d6bb, with its own reasoning: PR #2 is stacked on PR #1 so the venue merges first by construction, and it deliberately reverted an earlier change to public/venue.css rather than claim it.",
-  "pull_request_base": "claude/ios-macos-code-repurpose-ofm9ks",
-  "conflict": "PR #2 head 773781d conflicts with its base at b40289d on fleet/questions.json. Textual, not semantic: the venue's copy is a strict superset — every PR #2 answer object present verbatim, rules/vantages/note/question text byte-identical. Relayed 2026-08-29T22:32Z with the resolution (take the base copy).",
-  "catalogue_provenance_status": "Closed by the fellowships session at fbf5fae and verified in a worktree: P9 no longer fires, `check-registry` asserts 'effort is derived from declared requirement weights', no record stores an effort field, and all 16 summaries are blanked rather than kept as unsourced prose.",
+  "catalogue_provenance_status": "Closed by the fellowships session at fbf5fae and verified in a worktree: P9 no longer fires, `check-registry` asserts 'effort is derived from declared requirement weights', no record stores an effort field, and all 16 summaries are blanked rather than kept as unsourced prose. The declaration itself now lives in this fragment, carried across by the fellowships session in the migration merge rather than ported by the venue — porting a verified declaration to clear a rule is the move P9 exists to prevent.",
+  "catalogue_provenance": {
+    "declared": "2026-08-29",
+    "declared_by": "session_01GR1Ut4PmfsRVZo96RJZVJu",
+    "status": "P9 pass landed. Enforced per field by scripts/build-registry.mjs and asserted by scripts/check-registry.mjs, not held as a principle.",
+    "record_type": "data/open-calls/*.json — 16 records",
+    "rule": "Every product field carries its own provenance entry naming the record it came from, or it is blank and says what is owed. Four bases: confirmed (read off the organisation's own page), sourced (read off a named third party), derived (transformed from a named source, with the transformation stated), none (blank).",
+    "per_field": {
+      "closes": "6/16 populated — none 10, sourced 6",
+      "summary": "0/16 populated — none 16. Every one blanked: no description was ever read verbatim, and the previous text was written from general knowledge.",
+      "eligibility": "3/16 populated — derived 3, none 13. `stated` is read from the source; the enum arrays are a mapping into this schema's vocabulary and may never claim basis `sourced` — the build rejects it.",
+      "requirements": "3/16 populated — none 13, sourced 3. This is what effort derives from.",
+      "award": "1/16 populated — none 15, sourced 1",
+      "kind": "16/16 populated — derived 16. Classification into this schema's vocabulary, so never `sourced`.",
+      "cycle": "9/16 populated — derived 9, none 7"
+    },
+    "effort": "DERIVED, never stored. A stored grading is an opinion and it is the denominator of the ranking — the defect the Q4 audit found. It is now computed at read time from the record's sourced requirements via data/vantage.config.json effort_from_requirements. A record whose requirements were never read has no effort; the ranking uses the configured unknown cost and the card says so. The build rejects any record that stores an `effort` field.",
+    "effort_decision": "Sourced, not moved. The Q4 held_opposition was right that moving effort into data/vantage.config.json would relocate an unsourced claim into the file this project's own Q3 answer named as the dangerous straddle. What moved there is the DERIVATION RULE, which is an editorial weight and belongs in config; the inputs it reads are sourced facts on the record.",
+    "also_fixed": "effort_tolerance was removed from fit.criteria. It was double-counted — effort is already the denominator of return-on-effort, so weighting it in the numerator moved the same fact twice — and it pointed at call.effort, which no longer exists.",
+    "guards_tested": "Three violations were planted and rejected: a summary written with no source, an eligibility claiming basis `sourced` rather than `derived`, and an effort stored back on a record.",
+    "catalogue_ready": false,
+    "blocking": "A listing generated today would carry: name, org, url, a deadline for 6/16, eligibility and requirements for 3/16, an award figure for 1/16. Every other field is blank by contract rather than plausible. That is shippable in shape but thin in coverage; the remaining work is sourcing, not schema.",
+    "owed": "Eligibility and requirements for 13 records; deadlines for 10; award figures for 15; primary confirmation for all 6 sourced deadlines, none of which is `confirmed` because the build container cannot reach most organisation pages directly."
+  },
   "_owner_note": "This file is owned by the project it describes. The venue assembles it and never edits another project's copy; a sibling edits only its own. That is the whole point of the split."
 }
