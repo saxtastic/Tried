@@ -12,6 +12,8 @@ import { profile, necessitySilence, translate, REGIMES as POLICY_REGIMES } from 
 import { reframe } from './paradox.js';
 import { itinerary, sensitivity } from './transitions.js';
 import { reconciliationRoutes, classify } from './forums.js';
+import { register } from './attempts.js';
+import { counterclaims } from './agents.js';
 
 /** Build the evaluation context from a raw corpus + case. */
 export function buildContext(corpus, options = {}) {
@@ -163,6 +165,10 @@ export function fullReport(corpus, options = {}) {
       ...reconciliationRoutes(corpus.claim?.forum_facts ?? {}),
       per_condition: (corpus.conditions ?? []).map(classify),
     },
+    // Which doors have been tried, how far they got, and what stopped them.
+    doors: register(corpus.doors ?? []),
+    // What the respondent can bring back — scored on exposure, not likelihood.
+    counterclaims: counterclaims({ facts: corpus.claim?.facts ?? {} }),
     interpretive_sweep: sweepInterpretations(corpus, options),
     institutional_sweep: sweepInstitutions(corpus, options),
     paradox: reframe(corpus.claim ?? {}),

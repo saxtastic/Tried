@@ -1,0 +1,14 @@
+{
+  "id": "PARA-P2",
+  "officer": "paralegal",
+  "specificity": "instance",
+  "statement": "The date the United Klans of America conveyed its Tuscaloosa headquarters to Beulah Mae Donald is not established here.",
+  "basis": "none",
+  "measured_by": null,
+  "reproduce": null,
+  "derived_from": null,
+  "confidence": null,
+  "owed": "The conveyance date from a primary record. One secondary source dates it to May 1986, which precedes the February 1987 verdict and cannot be right as stated.",
+  "note": "Recorded rather than resolved by preferring whichever source read better. Nothing in the corpus rests on this date; the verdict, the theory and the outcome are sourced separately and are unaffected.",
+  "register": "V"
+}

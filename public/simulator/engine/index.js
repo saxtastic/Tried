@@ -20,7 +20,7 @@ export {
 } from './institution.js';
 export { TREATMENTS, onPoint, entrenchment, movesAgainst, findGaps } from './stare.js';
 export { evaluate } from './predicates.js';
-export { DEFEATERS, proponent, opponent } from './agents.js';
+export { DEFEATERS, COUNTERCLAIMS, proponent, opponent, counterclaims } from './agents.js';
 export { STANDARDS, adjudicate, disposition } from './judge.js';
 export {
   PASSAGE_KINDS,
@@ -32,4 +32,5 @@ export {
   sensitivity,
 } from './transitions.js';
 export { FORUMS, reconciliationRoutes, classify } from './forums.js';
+export { STAGES, STAGE_GLOSS, stratify, register } from './attempts.js';
 export { buildContext, run, sweepInterpretations, sweepInstitutions, fullReport } from './simulate.js';

@@ -1,0 +1,22 @@
+{
+  "officer": "paralegal",
+  "specificity": "instance",
+  "owns": "What has actually been filed, where, how far it got, and what stopped it.",
+  "will_assert": [
+    "That a case exists, with its citation, court and year",
+    "The stage an attempt reached, from the docket",
+    "What is recorded as having stopped it",
+    "That a search was run, with the database, the query and the date it was run"
+  ],
+  "will_not_assert": [
+    "That an untried door will work",
+    "That a pattern across attempts predicts the next outcome",
+    "That the absence of a result in a search is the absence of an attempt",
+    "Anything about the merits of a claim, which is not this officer's vantage"
+  ],
+  "declines": "Prediction. This officer measures what has been attempted and how far it went. Turning that into a likelihood is a different operation with different error, and running the two together is how a register becomes a forecast nobody checks.",
+  "bases_accepted": ["confirmed", "sourced"],
+  "note": "Accepts `sourced` only from a docket, a reported opinion, or a database record — never from a secondary summary alone. A case described in an article is a lead, not a source.",
+  "the_distinction_this_officer_exists_to_hold": "A door with many failed attempts is measured as shut. A door with no attempts is measured as UNSEARCHED. Collapsing the second into the first is the error that turns an empty query into a settled question, and it is the reason this role is separate from the advocate's.",
+  "register": "O"
+}

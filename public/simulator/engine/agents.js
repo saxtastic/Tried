@@ -294,3 +294,89 @@ function lowerFirst(s) {
 function round(n) {
   return Math.round(n * 100) / 100;
 }
+
+// Counterclaims.
+//
+// A defeater says the claim fails. A counterclaim says the respondent has one of
+// its own, and the two are different objects with different consequences: a
+// defeater costs the claimant the case, a counterclaim can cost them more than
+// they came in with. Nothing in this engine modelled that, which made every
+// projection here optimistic by omission.
+//
+// The interaction worth noticing is with the passage model. `public_record` is
+// scored there as a sustain — it holds memory and salience across a long
+// interval, and for many claimants it is the only sustain available. It is also
+// the single act that opens the most exposure. That is a real cost of the term,
+// and a model that scores the benefit without the cost is not measuring, it is
+// encouraging.
+export const COUNTERCLAIMS = {
+  defamation: {
+    label: 'Defamation',
+    trigger: 'the account was published',
+    gloss:
+      'Reaches the published account rather than the claim. Truth is a defence and the burden of proving falsity generally sits with the institution as to matters of public concern, ' +
+      'but the defence is established at trial, and the cost of getting there is the point.',
+    severity: 0.7,
+    interacts_with: 'passage.sustain.public_record',
+    note: 'The sustain that carries a claim across a long interval is the same act that opens this. Both belong in the same sentence when advising anyone.',
+  },
+  breach_of_contract: {
+    label: 'Breach of contract or code of conduct',
+    trigger: 'an enrolment agreement or conduct code exists',
+    gloss: 'The instrument the claimant wants to enforce against the institution binds them too, and the institution drafted it.',
+    severity: 0.5,
+  },
+  fee_shifting: {
+    label: 'Fee-shifting on a claim held frivolous',
+    trigger: 'a fee-shifting statute is invoked',
+    gloss:
+      'Several civil-rights statutes allow a prevailing defendant fees where the action was frivolous, unreasonable or without foundation. ' +
+      'The standard is deliberately asymmetric and rarely met, but the exposure is what a risk-averse claimant actually weighs.',
+    severity: 0.6,
+  },
+  abuse_of_process: {
+    label: 'Abuse of process',
+    trigger: 'proceedings are characterised as brought for a collateral purpose',
+    gloss: 'Reaches the bringing of the claim rather than its merits. Usually weak; usually pleaded anyway.',
+    severity: 0.4,
+  },
+  interference: {
+    label: 'Tortious interference',
+    trigger: 'the claimant contacted the institution\'s counterparties',
+    gloss: 'Reaches the organising and the telling — which is to say, it reaches the community sustain directly.',
+    severity: 0.5,
+    interacts_with: 'passage.sustain.community',
+  },
+};
+
+/**
+ * What the respondent can bring back, given what the claimant has done.
+ * Scored on exposure, not on likelihood of success — the exposure is what
+ * changes a person's decision, and it exists whether or not the counterclaim wins.
+ */
+export function counterclaims(ctx = {}) {
+  const f = ctx.facts ?? {};
+  const raised = [];
+  const add = (id, why) => {
+    const c = COUNTERCLAIMS[id];
+    raised.push({ id, ...c, why });
+  };
+
+  if (f.account_published?.value === true) add('defamation', 'the account is public, so there is something to sue over');
+  if (f.enrolment_agreement?.value === true || f.conduct_code_applies?.value === true) {
+    add('breach_of_contract', 'the institution drafted an instrument that binds the claimant too');
+  }
+  if (f.fee_shifting_statute_invoked?.value === true) add('fee_shifting', 'the statute pleaded carries a prevailing-defendant provision');
+  if (f.contacted_counterparties?.value === true) add('interference', 'third parties were contacted');
+  if (f.claim_characterised_as_collateral?.value === true) add('abuse_of_process', 'a collateral purpose has been alleged');
+
+  const exposure = raised.reduce((a, b) => Math.max(a, b.severity), 0);
+  return {
+    raised,
+    exposure: Math.round(exposure * 100) / 100,
+    finding: raised.length
+      ? 'The respondent is not only defending. What it can bring back is scored on exposure rather than on likelihood, because exposure is what changes a decision and it exists whether or not the counterclaim would win.'
+      : 'Nothing on this record supports a counterclaim. That is a finding about the record as pleaded, and it changes the moment the account is published.',
+    unmodelled_before: true,
+  };
+}

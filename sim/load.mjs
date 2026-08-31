@@ -25,14 +25,15 @@ function at(dir, file) {
  * @param {string} [opts.institution] institution profile file
  */
 export async function loadCorpus({ dir = CORPUS_DIR, caseFile = 'case.template.json', institution = 'institution.template.json' } = {}) {
-  const [lexicon, provisions, precedents, conditions, passages, claim, inst] = await Promise.all([
+  const [lexicon, provisions, precedents, conditions, passages, doors, claim, inst] = await Promise.all([
     readJson(resolve(dir, 'lexicon.json')),
     readJson(resolve(dir, 'provisions.json')),
     readJson(resolve(dir, 'precedents.json')),
     readJson(resolve(dir, 'conditions.json')),
     readJson(resolve(dir, 'passages.json')),
+    readJson(resolve(dir, 'doors.json')),
     readJson(at(dir, caseFile)),
     readJson(at(dir, institution)),
   ]);
-  return { lexicon, provisions, precedents, conditions, passages, claim, institution: inst };
+  return { lexicon, provisions, precedents, conditions, passages, doors, claim, institution: inst };
 }
