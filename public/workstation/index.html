@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Workstation — ayeyoty.co</title>
+<meta name="description" content="One card per domain, ordered by what stops being possible soonest. Ranked, never filtered." />
+<meta name="theme-color" content="#f6f5fa" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0b0c10" media="(prefers-color-scheme: dark)" />
+<link rel="icon" href="/icons/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+<link rel="mask-icon" href="/icons/mask-icon.svg" color="#7c5cff" />
+<link rel="stylesheet" href="/venue.css" />
+<link rel="stylesheet" href="/workstation/workstation.css" />
+<script src="/workstation/data.js" defer></script>
+<script src="/venue.js" defer></script>
+<script src="/workstation/workstation.js" defer></script>
+</head>
+<body>
+
+<a class="skip" href="#stack">Skip to the stack</a>
+
+<header class="chrome">
+  <div class="shell">
+    <a class="wordmark" href="/">aye<span>yoty</span>.co</a>
+    <p class="chip" id="tier-chip" aria-live="polite">tier: <span id="tier-name">—</span></p>
+  </div>
+</header>
+
+<main>
+  <section class="shell hero">
+    <div class="hero-copy">
+      <p class="eyebrow">subtree · workstation</p>
+      <h1>
+        <span class="wide-only"><em id="count">—</em> open, ordered by what stops being possible soonest.</span>
+        <span class="watch-only">Workstation</span>
+      </h1>
+      <p class="lede" id="rule">—</p>
+      <div class="actions">
+        <a class="btn btn--primary" href="#stack">The stack</a>
+        <a class="btn btn--quiet wide-only" href="#how">How it decides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="shell" id="stack-section">
+    <div class="section-head">
+      <h2>The stack</h2>
+      <p>Three gestures. <strong>No</strong> records why and does not return. <strong>Not now</strong> returns
+        when the decay window opens, not tomorrow. <strong>Interview me</strong> opens the questions —
+        it is the only one that ends in something shippable.</p>
+    </div>
+    <div class="stack" id="stack"><p class="card-blank">Loading the stack…</p></div>
+  </section>
+
+  <section class="shell" id="how">
+    <div class="section-head">
+      <h2>How it decides</h2>
+      <p>Two rules, both set by the operator, both visible here rather than buried.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <h3>Ranked, never filtered</h3>
+        <p>Every card renders, including the ones ranked last, each carrying the reason it sits where it
+          does. Two of the five rank low because nothing establishes them — not because the domain matters
+          less. A threshold that hides a card is a decision made where nobody can see it, and a wrong
+          threshold is invisible by construction.</p>
+      </div>
+      <div class="card">
+        <h3>The outcome belongs to the card</h3>
+        <p>One card ends in a draft at a named path. One ends in captured answers and no document. One would
+          end in something addressed and dated but queued, because sending stays a separate deliberate act.
+          The system does not have an output type; each card does.</p>
+      </div>
+      <div class="card">
+        <h3>Blank rather than plausible</h3>
+        <p>Finance and production render with their fields listed as blank and nothing invented to fill them.
+          They have no question set either, because writing five plausible questions would be inventing the
+          domain. The only honest question there is what the card should hold.</p>
+      </div>
+      <div class="card">
+        <h3>Nothing is stored</h3>
+        <p>Answers live in memory for the life of the tab and leave as text you copy. No cookie, no local
+          storage, no third-party request. An interview that survives the tab would be a record, and a
+          record needs somewhere it was decided to keep it.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<nav class="thumbbar" aria-label="Primary">
+  <a class="btn btn--primary" href="#stack">Stack</a>
+  <a class="btn btn--quiet" href="/">Venue</a>
+</nav>
+
+<footer class="footer">
+  <div class="shell">
+    <span>Workstation — a subtree of ayeyoty.co.</span>
+    <span class="wide-only">Cards declared in workstation/cards.json. No cookies. No storage.</span>
+  </div>
+</footer>
+
+</body>
+</html>

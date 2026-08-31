@@ -1,0 +1,11 @@
+{
+  "id": "QS-INQUIRY",
+  "domain": "inquiries",
+  "produces": "captured answers; no document",
+  "questions": [
+    { "id": "Q1", "ask": "Which of the five do you already know how to reach?", "type": "short_text", "why": "Resolving one may resolve the rest — several are held by the same institution." },
+    { "id": "Q2", "ask": "Is a request being made in your own name, or on behalf of the project?", "type": "one_of", "options": ["my own name", "the project", "not yet decided"], "why": "It changes the letter, the standing claimed, and what the archive is permitted to release." },
+    { "id": "Q3", "ask": "Is there anything you do not want disclosed in an inquiry?", "type": "short_text", "optional": true, "why": "Cheaper to ask than to retract." }
+  ],
+  "refuses": ["Contacting an archive", "Asserting standing on your behalf", "Filling Q3 by inference"]
+}

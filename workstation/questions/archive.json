@@ -1,0 +1,10 @@
+{
+  "id": "QS-ARCHIVE",
+  "domain": "archive",
+  "produces": "captured answers; the register itself belongs to the record-book project",
+  "questions": [
+    { "id": "Q1", "ask": "For an attested but unnamed person, do you want the row kept, or folded into a count?", "type": "one_of", "options": ["keep the row", "fold into a count", "decide per entry"], "why": "The record-book already keeps the row. This confirms that is what you want rather than assuming it." },
+    { "id": "Q2", "ask": "Does any of this touch your own family record?", "type": "one_of", "options": ["yes", "no", "not sure yet"], "why": "It changes who may write the entry and whether consent language applies. Never inferred." }
+  ],
+  "refuses": ["Linking an entry to a living family without an explicit answer to Q2", "Writing into the record-book project's files"]
+}

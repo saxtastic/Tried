@@ -11,7 +11,8 @@
     "fleet": "node scripts/fleet.mjs all",
     "fleet:render": "node scripts/fleet.mjs render",
     "icons": "python3 scripts/make-icons.py",
-    "propose": "node scripts/propose.mjs"
+    "propose": "node scripts/propose.mjs",
+    "workstation:build": "node scripts/build-workstation.mjs"
   },
   "devDependencies": {
     "wrangler": "^4.0.0"

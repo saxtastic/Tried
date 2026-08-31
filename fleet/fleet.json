@@ -316,6 +316,13 @@
       "detail": "The same problem as P16 in a file that cannot be split. Three branches add scripts to one object; unsorted, each addition lands where its author typed it and every merge collides. Sorted, an addition has exactly one correct position and git resolves it unaided.",
       "severity": "error",
       "enforced_by": "scripts/check-propose.mjs"
+    },
+    {
+      "id": "P18",
+      "rule": "A surface asks before it synthesises.",
+      "detail": "Where an artifact could be generated from a bounded set of answers, the surface collects the answers and refuses to guess them. A partial interview generates nothing. A domain with no record gets no question set at all, because writing five plausible questions is inventing the domain. Established from the owner's own critique: the sixteen blanked fellowship summaries were not a data failure, they were synthesis standing in for a question.",
+      "severity": "error",
+      "enforced_by": "scripts/check-workstation.mjs"
     }
   ],
   "stale_after_days": 14,
@@ -465,6 +472,13 @@
       "action": "escalate to owner",
       "target": "publication decision",
       "result": "Whether this material is published on ayeyoty.co is the owner's decision, not the fleet's. The work is sound; the domain is theirs. Raised rather than ruled on, and the sibling was told the same — that a merge is not the same thing as the owner having chosen to publish.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-30T20:20:00Z",
+      "action": "build — owner answered three questions",
+      "target": "public/workstation/",
+      "result": "Five cards, one per domain, ranked and never filtered. Outcome type is a property of the card rather than the system, which was the owner's correction to the question as posed. Driven end to end in Chromium: 5 cards render in rank order, the interview opens with 5 questions and 3 declared refusals, a completed interview names its output path and emits a copyable payload, the two unsourced cards refuse to interview and say why, storage is untouched on all three APIs, zero console errors. fetch was blocked by default-src 'none' as it was for the simulator, so data is bundled by scripts/build-workstation.mjs.",
       "register": "O"
     }
   ],
