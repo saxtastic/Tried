@@ -1,0 +1,13 @@
+{
+  "id": "PRD-P1",
+  "officer": "producer",
+  "specificity": "local",
+  "statement": "Six of sixteen open calls carry dated obligations that remain true and actionable with no browser in the room.",
+  "basis": "sourced",
+  "measured_by": "session_01GR1Ut4PmfsRVZo96RJZVJu, Q2-SURVIVAL",
+  "reproduce": "count records in data/open-calls/ whose closes field has basis sourced",
+  "derived_from": null,
+  "confidence": [0.8, 1.0],
+  "note": "What survives is the obligation, not the surface indexing it. Passes in kind, 6/16 in degree.",
+  "register": "D"
+}

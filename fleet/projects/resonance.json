@@ -1,0 +1,21 @@
+{
+  "id": "resonance",
+  "name": "Adinkra grammar in Resonance DAW PWA",
+  "repo": null,
+  "base_branch": null,
+  "branch": null,
+  "pull_request": null,
+  "owns": [],
+  "ritual": false,
+  "state": "done",
+  "register": "O",
+  "note": "Completed and archived.",
+  "vantages_held": [],
+  "survival": {
+    "duration": "closed",
+    "survives_gallery": "⟦FILL⟧",
+    "irl_contingency": "⟦FILL⟧",
+    "produces_artifact": false
+  },
+  "_owner_note": "This file is owned by the project it describes. The venue assembles it and never edits another project's copy; a sibling edits only its own. That is the whole point of the split."
+}

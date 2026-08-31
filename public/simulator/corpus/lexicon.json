@@ -1,0 +1,117 @@
+[
+  {
+    "id": "discrimination",
+    "label": "discrimination",
+    "origin_year": 1866,
+    "senses": [
+      {
+        "from": 1866, "to": 1963,
+        "gloss": "a distinction drawn on the face of a rule or act",
+        "reach": ["facial_classification"]
+      },
+      {
+        "from": 1964, "to": 2000,
+        "gloss": "differential treatment, and practices whose unjustified differential effect is not explained by necessity",
+        "reach": ["facial_classification", "disparate_treatment", "disparate_impact"]
+      },
+      {
+        "from": 2001, "to": null,
+        "gloss": "intentional differential treatment; effects reach the statute only through regulations the individual cannot enforce",
+        "reach": ["facial_classification", "disparate_treatment"],
+        "narrowed_by": "Alexander v. Sandoval (2001)"
+      }
+    ]
+  },
+  {
+    "id": "author",
+    "label": "author",
+    "origin_year": 1790,
+    "senses": [
+      {
+        "from": 1790, "to": 1908,
+        "gloss": "the person from whom the work originates",
+        "reach": ["natural_person", "originator"]
+      },
+      {
+        "from": 1909, "to": 1977,
+        "gloss": "the originator, or an employer for whom the work was made, on an expansive reading of employment",
+        "reach": ["natural_person", "originator", "employer_broad"]
+      },
+      {
+        "from": 1978, "to": null,
+        "gloss": "the originator, unless the work was prepared by an employee in the scope of employment or falls in an enumerated category under a signed writing",
+        "reach": ["natural_person", "originator", "employer_narrow"],
+        "narrowed_by": "1976 Act, effective 1978; CCNV v. Reid (1989)"
+      }
+    ]
+  },
+  {
+    "id": "academic_judgment",
+    "label": "academic judgment",
+    "origin_year": 1900,
+    "senses": [
+      {
+        "from": 1900, "to": 1974,
+        "gloss": "evaluation of scholarly performance by those competent to evaluate it",
+        "reach": ["evaluation"]
+      },
+      {
+        "from": 1975, "to": null,
+        "gloss": "evaluation of scholarly performance, and increasingly any decision an institution characterises as academic rather than disciplinary",
+        "reach": ["evaluation", "characterised_decisions"],
+        "narrowed_by": null
+      }
+    ]
+  },
+  {
+    "id": "discretion",
+    "label": "discretion",
+    "origin_year": 1800,
+    "senses": [
+      {
+        "from": 1800, "to": 1945,
+        "gloss": "a power to choose, granted expressly and bounded by the grant",
+        "reach": ["granted_bounded"]
+      },
+      {
+        "from": 1946, "to": 1970,
+        "gloss": "a power to choose, presumed reviewable unless the statute withdraws review",
+        "reach": ["granted_bounded", "presumptively_reviewable"]
+      },
+      {
+        "from": 1971, "to": null,
+        "gloss": "a power to choose, unreviewable only in the rare case where the instrument supplies no law to apply",
+        "reach": ["granted_bounded", "presumptively_reviewable", "residual_unreviewable"]
+      }
+    ]
+  },
+  {
+    "id": "record",
+    "label": "record",
+    "origin_year": 1900,
+    "senses": [
+      {
+        "from": 1900, "to": 1973,
+        "gloss": "the documents an institution chooses to keep",
+        "reach": ["institutional_file"]
+      },
+      {
+        "from": 1974, "to": null,
+        "gloss": "information directly related to a student and maintained by the institution, subject to inspection and correction",
+        "reach": ["institutional_file", "student_correctable"]
+      }
+    ]
+  },
+  {
+    "id": "good_standing",
+    "label": "good standing",
+    "origin_year": 1900,
+    "senses": [
+      {
+        "from": 1900, "to": null,
+        "gloss": "a status conferred by satisfying published criteria — and, where criteria are unpublished, by whatever the institution says it means",
+        "reach": ["published_criteria", "unpublished_criteria"]
+      }
+    ]
+  }
+]

@@ -1,0 +1,127 @@
+/* Workstation — additions to venue.css. No colour, no font, no breakpoint of
+   its own; the shell owns all three. The only thing this file adds is the card
+   stack and the interview drawer. */
+
+.stack { display: grid; gap: 0.875rem; padding-bottom: 2.5rem; }
+
+.card[data-basis] {
+  position: relative;
+  display: grid;
+  gap: 0.5rem;
+  align-content: start;
+  min-width: 0;
+  padding: 1.1rem;
+  border: 1px solid var(--hairline);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow-wrap: anywhere;
+}
+.card[data-basis="none"] { border-left-color: var(--fg-3); }
+.card[data-set-aside] { opacity: 0.55; }
+
+.card-top { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; }
+.card-domain {
+  font-family: var(--font-rounded);
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--accent);
+}
+.card-rank { font-family: var(--font-mono); font-size: 0.68rem; color: var(--fg-3); }
+.card[data-basis] h3 { font-size: 1.02rem; }
+
+.card-decay { font-size: 0.84rem; color: var(--fg-2); }
+.card-decay-when {
+  font-family: var(--font-mono); font-size: 0.78rem;
+  color: var(--fg); padding-right: 0.35rem;
+}
+.card-why { font-size: 0.84rem; color: var(--fg-2); }
+
+.card-prov { font-size: 0.76rem; color: var(--fg-3); display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: baseline; }
+.basis {
+  font-family: var(--font-mono); font-size: 0.64rem;
+  padding: 0.1rem 0.4rem; border: 1px solid var(--hairline); border-radius: 999px;
+}
+.basis-confirmed, .basis-sourced { color: var(--accent); }
+.basis-none { color: var(--fg-3); }
+
+.card-blank { font-size: 0.78rem; color: var(--fg-3); }
+.card-aside {
+  font-size: 0.8rem; color: var(--fg-2);
+  padding-top: 0.4rem; border-top: 1px solid var(--hairline);
+}
+
+.card-acts { display: flex; flex-wrap: wrap; gap: 0.4rem; padding-top: 0.35rem; }
+.act {
+  min-height: 44px; padding: 0.5rem 0.9rem;
+  border: 1px solid var(--hairline); border-radius: 999px;
+  background: transparent; color: var(--fg-2);
+  font: inherit; font-size: 0.84rem; cursor: pointer;
+}
+.act-right { background: var(--accent); color: #fff; border-color: transparent; font-weight: 600; }
+.act:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) {
+  .act:hover { border-color: var(--hairline-strong); }
+  .act-right:hover { background: color-mix(in oklab, var(--accent) 86%, white); }
+}
+
+/* ------------------------------------------------------------- drawer -- */
+
+.drawer {
+  display: grid; gap: 0.9rem;
+  margin-top: 0.5rem; padding-top: 0.9rem;
+  border-top: 1px solid var(--hairline);
+}
+.drawer-none { font-size: 0.84rem; color: var(--fg-2); }
+
+.q { display: grid; gap: 0.35rem; }
+.q-ask { font-size: 0.9rem; color: var(--fg); font-weight: 600; }
+.q-why { font-size: 0.78rem; color: var(--fg-3); }
+
+.q-opts { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.q-opt {
+  min-height: 44px; padding: 0.4rem 0.8rem;
+  border: 1px solid var(--hairline); border-radius: 999px;
+  background: transparent; color: var(--fg-2); font: inherit; font-size: 0.82rem; cursor: pointer;
+}
+.q-opt[aria-pressed="true"] { background: var(--accent); color: #fff; border-color: transparent; }
+
+.q-text {
+  width: 100%; padding: 0.55rem 0.7rem;
+  border: 1px solid var(--hairline); border-radius: var(--radius-sm);
+  background: var(--surface-solid); color: var(--fg);
+  font: inherit; font-size: 0.88rem; resize: vertical;
+}
+
+.drawer-refuses { display: flex; flex-wrap: wrap; gap: 0.3rem; align-items: baseline; }
+.drawer-refuses-label {
+  font-family: var(--font-rounded); font-size: 0.62rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-3);
+}
+.refusal {
+  font-size: 0.74rem; color: var(--fg-2);
+  padding: 0.1rem 0.45rem; border: 1px solid var(--hairline); border-radius: 999px;
+}
+
+.outcome {
+  display: grid; gap: 0.4rem;
+  padding-top: 0.6rem; border-top: 1px solid var(--hairline);
+}
+.outcome-head { font-size: 0.84rem; color: var(--fg-2); }
+.outcome-note { font-size: 0.8rem; color: var(--fg-3); }
+.outcome-path { font-size: 0.8rem; }
+.outcome-path-label { color: var(--fg-3); }
+.outcome-path code, .outcome-payload { font-family: var(--font-mono); font-size: 0.74rem; }
+.outcome-payload {
+  margin: 0; padding: 0.6rem 0.7rem;
+  background: color-mix(in oklab, var(--fg) 7%, transparent);
+  border-radius: var(--radius-sm);
+  overflow-x: auto; white-space: pre; color: var(--fg-2);
+}
+
+@media (max-width: 319px) {
+  .stack { gap: 0.5rem; padding-bottom: 1.25rem; }
+  .card[data-basis] { padding: 0.75rem; }
+  .card-why, .card-prov, .card-blank, .q-why, .outcome-payload { display: none; }
+  .card-acts { flex-direction: column; }
+  .act { width: 100%; }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "PARA-P1",
+  "officer": "paralegal",
+  "specificity": "instance",
+  "statement": "The attempt register in public/simulator/corpus/doors.json records no docket search. Every attempt in it is drawn from precedents already in the corpus or from secondary sources.",
+  "basis": "confirmed",
+  "measured_by": "session_01HCcyjiDYBhyRWFnL1qrKWB",
+  "reproduce": "node -e \"const d=require('./public/simulator/corpus/doors.json'); console.log(d.flatMap(x=>x.attempts).filter(a=>/courtlistener|pacer|lexis|nexis|westlaw/i.test(a.source||'')).length)\" — returns 0",
+  "derived_from": null,
+  "confidence": [1.0, 1.0],
+  "owed": "A docket search per door. Justia and CourtListener are free and queryable; Lexis and Nexis where available. Per attempt: court, docket number, year, stage reached, what stopped it, and the query and date of the search itself.",
+  "blocked_by": "This session's egress proxy denied law.justia.com, tennessee.edu, tnstate.edu and law.counselstack.com. The instrument is built; the search is not run.",
+  "why_it_matters": "Four doors currently read `untried`. On this basis that word means unsearched, not unattempted, and the register says so in every one of those cells. If it were ever read the other way it would convert an empty query into a settled question.",
+  "register": "D"
+}

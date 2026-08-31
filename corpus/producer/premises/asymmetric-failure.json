@@ -1,0 +1,11 @@
+{
+  "id": "PRD-P2",
+  "officer": "producer",
+  "specificity": "broad",
+  "statement": "Extraction failures are visible and bounded; generation failures are invisible and unbounded. A blank costs one conversation. A wrong eligibility rule costs a submission and discredits the fields that were sourced alongside it.",
+  "basis": "derived",
+  "derived_from": ["CM-P1"],
+  "derivation": "From the audit finding that plausible copy is indistinguishable from sourced copy at the field level: if it cannot be told apart on inspection, it is not caught at publish time.",
+  "confidence": [0.7, 0.95],
+  "register": "I"
+}

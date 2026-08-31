@@ -1,0 +1,13 @@
+{
+  "id": "PRD-P3",
+  "officer": "producer",
+  "specificity": "local",
+  "statement": "The venue shell has no physical instantiation. Four device tiers are a claim about screens, not about a room.",
+  "basis": "confirmed",
+  "measured_by": "session_01GR1Ut4PmfsRVZo96RJZVJu, Q2-SURVIVAL",
+  "reproduce": "inspect the repository for any artifact that exists off a screen",
+  "derived_from": null,
+  "confidence": [0.85, 1.0],
+  "owed": "⟦FILL: whether a booked room with dates exists⟧ — the owner has been asked seven times and has not answered.",
+  "register": "O"
+}

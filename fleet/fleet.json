@@ -1,0 +1,513 @@
+{
+  "schema_version": "1.0",
+  "title": "Coworker fleet — deployment and management spine for saxtastic/Tried",
+  "note": "Declared inputs live here, never in the code. scripts/fleet.mjs validates this file, detects collisions against the policy below, emits a management plan, and renders public/fleet/. Nothing in this file is inferred at runtime; every record carries the register it was established at and the time it was observed.",
+  "registers": {
+    "O": "Observed — read directly from the session API during a survey",
+    "D": "Documented — stated in a repository file or a pull request",
+    "I": "Inference — reasoned from the above",
+    "V": "Unverified — believed, not established"
+  },
+  "surveys": [
+    {
+      "at": "2026-08-29T14:29:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "Claude Code Remote MCP: list_sessions, list_environments, list_triggers",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T14:36:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "Claude Code Remote MCP: get_session after executing the plan",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T15:45:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "scheduled check-in: git fetch --prune, list_sessions, list_pull_requests",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T16:45:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "scheduled check-in: git fetch --prune, branch ancestry, commit inspection",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T20:08:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "scheduled check-in: git fetch --prune, get_session on both targets, controlled re-fire",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T20:58:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "scheduled check-in: answers collected off both branches, three questions arbitrated",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T21:58:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "scheduled check-in: verified the simulator's correction against the tree at 0f82a58",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T22:32:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "verification pass on request: git fetch, local mergeability of all three PRs, re-ran both checks, PR state via API",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T22:57:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "check-in: verified the P9 close in a detached worktree by running the sibling's own checks",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T23:20:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "built the officer corpora and the proposal evaluator; ran both new checks",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-30T00:00:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "check-in: independently re-measured a sibling's corrected premise; tested PR #2 mergeability locally",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-30T00:56:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "check-in: repeat measurement 4x in this harness, PR base check via API, local merge-tree on both siblings",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-30T15:58:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "check-in: local merge-tree on both siblings, fleet check and check-propose run in a worktree on the fellowships branch",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-30T20:00:00Z",
+      "by": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "method": "check-in sweep: new branch discovered, content reviewed, validator run in a worktree",
+      "register": "O"
+    }
+  ],
+  "environments": [
+    {
+      "id": "env_01G7235p3dGNiTfRZcvAouqx",
+      "name": "Ayeyotysaxtastic",
+      "kind": "anthropic_cloud",
+      "state": "active",
+      "register": "O",
+      "note": "The only environment on the account. Every cloud coworker lands here; the bridge sessions below predate it and are not in it."
+    }
+  ],
+  "coworkers": [
+    {
+      "session": "session_01GvNCLtH3R2cqohRaUwqKek",
+      "title": "iOS/macOS code repurposing",
+      "project": "venue",
+      "role": "programmer — fleet deployment and management",
+      "environment": "env_01G7235p3dGNiTfRZcvAouqx",
+      "model": "claude-opus-5",
+      "origin": "ios",
+      "status": "running",
+      "observed_at": "2026-08-29T14:29:00Z",
+      "register": "O",
+      "last_activity": "2026-08-29T16:45:00Z",
+      "tags": [
+        "project:venue"
+      ],
+      "vantages": [
+        "engineering",
+        "creative-director"
+      ]
+    },
+    {
+      "session": "session_01GR1Ut4PmfsRVZo96RJZVJu",
+      "title": "Repository reference for applications and fellowships",
+      "project": "fellowships",
+      "role": "builder",
+      "environment": "env_01G7235p3dGNiTfRZcvAouqx",
+      "model": "claude-opus-5",
+      "origin": "ios",
+      "status": "idle",
+      "unblocked_by": "trig_0161v5EhTNCcD3D4oABVqBJo fired 2026-08-29T14:30Z carrying the decision",
+      "observed_at": "2026-08-29T14:29:00Z",
+      "register": "O",
+      "last_activity": "2026-08-29T16:40:00Z",
+      "was_blocked_on": "AskUserQuestion — repo scope and Vantage UX scope",
+      "tags": [
+        "project:fellowships"
+      ],
+      "note": "Merged the fleet spine and declared its own shared-file claim under P8 at b13d6bb, with reasoning. It is reading the policy file and arguing with it rather than being driven by relays.",
+      "vantages": [
+        "producer",
+        "content-marketing"
+      ]
+    },
+    {
+      "session": "session_015e4JiauJkHf1CyYPwGzX1Q",
+      "title": "Cloudflare setup for Ayeyoty.co",
+      "project": "venue",
+      "role": "originator",
+      "environment": "env_01G7235p3dGNiTfRZcvAouqx",
+      "model": "claude-sonnet-5",
+      "origin": "ios",
+      "status": "archived",
+      "failure": "Model returned a policy error and stopped; the session cannot be continued.",
+      "observed_at": "2026-08-29T14:29:00Z",
+      "register": "O",
+      "note": "Produced the base branch that is currently the repository default. Dead, but its branch is load-bearing — retire the session, never the branch.",
+      "last_activity": "2026-08-29T14:17:57Z",
+      "retired_at": "2026-08-29T14:36:00Z",
+      "retired_by": "archive_session, fleet plan action 2",
+      "vantages": [
+        "engineering",
+        "creative-director"
+      ]
+    },
+    {
+      "session": "session_01QrtdqCnyErpcgysUbPKytp",
+      "title": "Build AI stock options trading dashboard with predictive intelligence",
+      "project": "options",
+      "role": "builder",
+      "environment": null,
+      "model": "claude-sonnet-5",
+      "origin": "claude_code_cli",
+      "status": "idle",
+      "connection": "disconnected",
+      "observed_at": "2026-08-29T14:29:00Z",
+      "register": "O",
+      "note": "Bridge environment, review-ready. Nothing has read its output in three weeks.",
+      "last_activity": "2026-08-08T17:08:33Z",
+      "vantages": []
+    },
+    {
+      "session": "session_01Wxbis3yAZzRo874SXaNjvL",
+      "title": "Integrate Adinkra encoding grammar into Resonance DAW PWA",
+      "project": "resonance",
+      "role": "builder",
+      "environment": null,
+      "model": "claude-sonnet-5",
+      "origin": "claude_code_cli",
+      "status": "archived",
+      "observed_at": "2026-08-29T14:29:00Z",
+      "register": "O",
+      "last_activity": "2026-08-07T08:54:18Z",
+      "vantages": []
+    },
+    {
+      "session": "session_01HCcyjiDYBhyRWFnL1qrKWB",
+      "title": "Governance and corpus legal simulator",
+      "project": "simulator",
+      "role": "builder",
+      "environment": "env_01G7235p3dGNiTfRZcvAouqx",
+      "model": "claude-opus-5",
+      "origin": "ios",
+      "status": "idle",
+      "observed_at": "2026-08-29T15:45:00Z",
+      "last_activity": "2026-08-29T16:40:00Z",
+      "register": "O",
+      "note": "Acted on the CSP finding at 104eb5f. Has not merged the shell; P7 and P8 still stand against it.",
+      "vantages": [
+        "engineering"
+      ]
+    }
+  ],
+  "routines": [],
+  "policy": [
+    {
+      "id": "P1",
+      "rule": "One writer per path.",
+      "detail": "No two coworkers in a non-terminal state may claim overlapping path globs in the same repository. Overlap is a merge conflict that has not happened yet.",
+      "severity": "error"
+    },
+    {
+      "id": "P2",
+      "rule": "A live base branch must be declared as inherited, not assumed.",
+      "detail": "If a project's base_branch is a branch another live project is still pushing to, the dependency is real and must be visible here. Undeclared, it reads as an independent branch and diverges silently.",
+      "severity": "error"
+    },
+    {
+      "id": "P3",
+      "rule": "A blocked coworker is an operator debt.",
+      "detail": "Blocked means something is owed by a person or a sibling session. Every blocked coworker carries either an unblocked_by naming the action taken, or an open plan entry.",
+      "severity": "error"
+    },
+    {
+      "id": "P4",
+      "rule": "Terminal work is retired, not left running.",
+      "detail": "A coworker whose project is done or whose session failed is archived. An idle session nobody has read in over fourteen days is surfaced for a decision rather than left to expire quietly.",
+      "severity": "warn"
+    },
+    {
+      "id": "P5",
+      "rule": "A ritual without a Routine is an intention.",
+      "detail": "Every project marked ritual: true must have a Routine bound to it. Recurring work that depends on somebody remembering is not recurring work.",
+      "severity": "warn"
+    },
+    {
+      "id": "P6",
+      "rule": "Deployment goes to a declared environment.",
+      "detail": "A coworker spawned for a project in this repository lands in the environment named here. Sessions outside it are legacy and are marked so, never silently adopted.",
+      "severity": "warn"
+    },
+    {
+      "id": "P7",
+      "rule": "An inherited base is merged, not assumed.",
+      "detail": "A session's source revision is fixed at creation. If a project declares inherits but its source_revision is not the upstream branch, the inheritance exists only on paper until the upstream branch is merged into the working branch.",
+      "severity": "warn"
+    },
+    {
+      "id": "P8",
+      "rule": "A shared file is owned by one project; the rest declare the claim.",
+      "detail": "public/index.html, package.json and README.md are touched by every subtree. The shell owns them. A project that must change one declares it in claims_disputed so the collision is visible before the second merge, not after. Severity depends on whether the merge order is settled: a project stacked on the owner merges second by construction, so a declared claim there is a warning. A project running parallel to the owner leaves the order to chance, and that is the error. Declaring the claim never fails the build — the declaration is the compliance, and a rule that reddens on compliance teaches projects not to declare.",
+      "severity": "error when unstacked, warn when stacked",
+      "revised": "2026-08-29, after firing three errors against a branch that had done exactly what the rule asked."
+    },
+    {
+      "id": "P9",
+      "rule": "No product claim without a record behind it.",
+      "detail": "Engineering and product are different registers with different truth conditions. An engineering claim is true if it works; a product claim is true if a record backs it. Any catalogue field — a listing, a description, a spec sheet, a Shopify product body — extracts from a named record: a tech spec, a patent filing, a production note, a measurement. Where no record exists the field stays blank and is marked. Generated copy is not extracted copy, and a blank field is a finding while a fabricated one is a defect.",
+      "severity": "error",
+      "applies_to": "any project whose vantages_held include content-marketing, or that declares produces_artifact"
+    },
+    {
+      "id": "P12",
+      "rule": "A subtree registers itself in its own pull request.",
+      "detail": "The shell owns public/index.html, but the card announcing a subtree belongs to the subtree's PR, not the shell's. If the shell carries the card, the shell merging alone ships a dead link on the front page. Enforced structurally in scripts/check-tiers.mjs: every .card--link href must resolve to an index.html present on the branch.",
+      "severity": "error",
+      "established": "2026-08-29. The simulator session re-added its own card to the shell's file to close a gap this file had raised against it — the right instinct, filed one branch too early. Taking it onto the shell branch produced a front page linking /simulator/, which does not exist there."
+    },
+    {
+      "id": "P13",
+      "rule": "A stacked pull request targets the branch it stacks on.",
+      "detail": "A project that declares inherits must open its PR against the inherited project's branch, not against the branch that branch came from. Otherwise the PR's diff shows the upstream's work as its own, a reviewer cannot see what the project actually changed, and merging it lands the upstream through the wrong door — which silently overrides whatever merge order was arbitrated.",
+      "severity": "error",
+      "established": "2026-08-29. PR #3 targets the placeholder base while its branch already carries the shell, so its diff is 55 files of which 20+ are the shell's. PR #2, targeting the venue branch, shows only its own work. The difference is one field on the pull request."
+    },
+    {
+      "id": "P14",
+      "rule": "An officer owns one corpus and writes nowhere else.",
+      "detail": "Each officer holds corpus/<officer>/ — its integrity declaration, its de-aggregated premises, its proposals. Nothing outside writes there and it writes nowhere else. This replaces the shared project record, which two branches each held a copy of and which diverged on every push. Integrity means the officer declares what it will NOT assert and what it declines; an officer that refuses nothing is not a vantage, it is a rubber stamp.",
+      "severity": "error",
+      "enforced_by": "scripts/check-propose.mjs"
+    },
+    {
+      "id": "P15",
+      "rule": "A hypothesis resolves three ways, and an untraceable assumption gets no number.",
+      "detail": "A proposal states a hypothesis, names its assumptions, and points each at de-aggregated premises. It resolves in_favor, nullified, or test_retest and never anything else. test_retest is the honest verdict when the premises do not separate the outcomes, and it names the measurement that would. An assumption resting only on basis `none` withholds the number entirely rather than averaging over it, and a broad claim may not stand on a narrower premise. Seed, run count and thresholds are declared in the proposal; re-running is byte-identical; sensitivity ships beside the point estimate or the result is incomplete.",
+      "severity": "error",
+      "enforced_by": "scripts/check-propose.mjs, including a two-run byte comparison"
+    },
+    {
+      "id": "P16",
+      "rule": "A project fragment is named for the project it describes, and only that project writes it.",
+      "detail": "fleet/projects/<id>.json, assembled at read time. The filename is the enforcement: a fragment whose id does not match its name, or two fragments describing one project, is an error. Migration note: the venue wrote all five fragments once, in the split itself; after that each is the owning project's.",
+      "severity": "error",
+      "established": "2026-08-30, after three successive merge conflicts on the projects array. Resolving by ownership each time works and costs the same amount every time; splitting costs once."
+    },
+    {
+      "id": "P17",
+      "rule": "package.json scripts stay alphabetically sorted.",
+      "detail": "The same problem as P16 in a file that cannot be split. Three branches add scripts to one object; unsorted, each addition lands where its author typed it and every merge collides. Sorted, an addition has exactly one correct position and git resolves it unaided.",
+      "severity": "error",
+      "enforced_by": "scripts/check-propose.mjs"
+    },
+    {
+      "id": "P18",
+      "rule": "A surface asks before it synthesises.",
+      "detail": "Where an artifact could be generated from a bounded set of answers, the surface collects the answers and refuses to guess them. A partial interview generates nothing. A domain with no record gets no question set at all, because writing five plausible questions is inventing the domain. Established from the owner's own critique: the sixteen blanked fellowship summaries were not a data failure, they were synthesis standing in for a question.",
+      "severity": "error",
+      "enforced_by": "scripts/check-workstation.mjs"
+    }
+  ],
+  "stale_after_days": 14,
+  "operations": [
+    {
+      "at": "2026-08-29T14:30:00Z",
+      "action": "create_trigger + fire_trigger",
+      "target": "session_01GR1Ut4PmfsRVZo96RJZVJu",
+      "result": "Unblocked. Session moved from blocked to running and began building.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T14:36:00Z",
+      "action": "set_session_tags",
+      "target": "session_01GvNCLtH3R2cqohRaUwqKek, session_01GR1Ut4PmfsRVZo96RJZVJu",
+      "result": "Tagged project:venue and project:fellowships respectively.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T14:36:00Z",
+      "action": "archive_session",
+      "target": "session_015e4JiauJkHf1CyYPwGzX1Q",
+      "result": "Archived. Branch claude/cloudflare-ayeyoty-setup-uq8pl9 untouched and still the repository default.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T14:38:00Z",
+      "action": "create_trigger + fire_trigger + delete_trigger",
+      "target": "session_01GR1Ut4PmfsRVZo96RJZVJu",
+      "result": "Relayed the P7 merge instruction and the subtree conventions. Both spent relay triggers deleted; the record lives here, not in the Routines list.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T15:46:00Z",
+      "action": "create_trigger + fire_trigger + delete_trigger",
+      "target": "session_01HCcyjiDYBhyRWFnL1qrKWB",
+      "result": "Relayed the P7 merge and the P8 file collisions, plus one defect its own checks cannot see: its nav styling lives in an inline <style> block that the CSP added by PR #1 blocks silently. Confirmed to it that the corpus itself is not in question.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T16:45:00Z",
+      "action": "observation — no tool",
+      "target": "claude/apps-fellowships-repository-zlwbft, claude/governance-corpus-simulator-m2sjkw",
+      "result": "Fellowships merged c9d77fc and self-declared under P8. Simulator fixed the CSP defect independently but has not merged. A local merge of the fellowships branch into the venue branch was made and reset without pushing: it fast-forwarded, which would have collapsed PR #2 into PR #1 and destroyed the stack.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T19:15:00Z",
+      "action": "create_trigger + fire_trigger (with text) — FAILED",
+      "target": "session_01GR1Ut4PmfsRVZo96RJZVJu, session_01HCcyjiDYBhyRWFnL1qrKWB",
+      "result": "Non-delivery. Neither session received the core questions. Fellowships' updated_at was 19:09:32, six minutes before the fire, and never moved; the simulator's 19:15 commit was its own cross-domain verification work already in flight. Both returned cse_ ids unrelated to their targets.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T20:08:00Z",
+      "action": "create_trigger + fire_trigger (bare) + delete_trigger",
+      "target": "session_01GR1Ut4PmfsRVZo96RJZVJu, session_01HCcyjiDYBhyRWFnL1qrKWB",
+      "result": "Re-sent the same four questions with the ff9ca54 pointer folded into the prompt and no `text` argument. Both fires returned cse_ ids matching their targets. Concurrent broadcast now actually out.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T20:58:00Z",
+      "action": "collect + arbitrate",
+      "target": "Q1-ORDER, Q3-REGISTER, Q4-PROVENANCE",
+      "result": "Both coworkers answered from their own vantages and both found against their own work. Q1, Q3 and Q4 arbitrated with held_opposition recorded. Q2 left open: the venue holds the missing vantage and asked the question, so it cannot be both party and judge. Q5 remains the owner's.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T21:58:00Z",
+      "action": "verify + correct",
+      "target": "Q1-ORDER arbitration",
+      "result": "The simulator raised a factual correction against the arbitration's held_opposition. Verified independently against its branch: README.md carried the simulator section (line 187, 39 lines) and package.json carried sim, test, build:corpus and verify alongside the shell's scripts — both survived as a union merge. Only the front-page nav entry was genuinely lost, and the simulator has since re-added it. The arbitration overstated by two of three files; amended, with the correction recorded beside it rather than over it.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T22:32:00Z",
+      "action": "verify",
+      "target": "all three pull requests",
+      "result": "PR #1 merges to its base as a fast-forward — no conflict possible. PR #2 conflicts on fleet/questions.json, textual only, relayed with the resolution. PR #3 is fast-forward-able but targets the wrong base, so its diff carries 20+ shell files as its own. Both local checks re-run green on b40289d. Zero review threads on PR #1. PR #1 body was stale — it listed seven policy rules against twelve and claimed a check that had since been generalised — and has been rewritten to match the diff.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T22:57:00Z",
+      "action": "verify + revise",
+      "target": "fellowships fbf5fae, and P8",
+      "result": "The P9 close is real, not a stub — verified by running their checks, not by reading their declaration. effort is now derived at read time from sourced requirements and the build rejects a stored effort field, which resolves the Q4 held_opposition rather than dodging it: the derivation RULE moved to config as an editorial weight while the CLAIM stayed sourced. Their branch also exposed a flaw in P8 — it fired three errors at a project for declaring its claims, which is what the rule asks for. Severity now depends on whether the stack settles the order.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-29T23:20:00Z",
+      "action": "build",
+      "target": "corpus/, scripts/propose.mjs, scripts/check-propose.mjs",
+      "result": "Officer corpora replace the shared project record that was diverging across branches. Eleven premises, all drawn from what was actually established in this session rather than invented — including three at basis `none` carrying what is owed. Two proposals evaluated: one withholds its number because an assumption rests on the unmeasured watch width, the other reports 0.2842 and its sensitivity independently reproduces the producer's own judgement that everything turns on how many records carry sourced obligations.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-30T00:00:00Z",
+      "action": "verify + amend",
+      "target": "ENG-P1, and the third spine conflict",
+      "result": "The simulator adopted the officer-corpus model within the hour and corrected its own ENG-P1 from 14 to 18 requests after merging the shell, correctly noting the count moved while the origin claim did not. An independent re-measure of the same commit returned 17, most likely a favicon fetch headless contexts issue inconsistently. The premise now asserts the invariant — zero off-origin, confirmed by two measurers — and carries the three counts as a measurements series with their conditions. A new assertion rejects any confirmed premise stating a bare figure without one. PR #2 now conflicts on fleet/fleet.json AND package.json: the third conflict, and the structural problem flagged at af83ccd. Not built — proposed to the owner, per the standing instruction not to build it unasked.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-30T00:56:00Z",
+      "action": "verify + accept correction",
+      "target": "ENG-P1, PR #3",
+      "result": "PR #3 retargeted to the venue branch — P13 clears and all three PRs are now a proper stack. On ENG-P1 the owning officer corrected THIS session's stated cause: it ran four consecutive measurements returning 18 with the favicon present every time, so the count is stable within a harness and differs between harnesses rather than being nondeterministic. Re-ran four times here: 17 every time, favicon never requested. Both series now sit in the premise. The correction is accepted and it is the second time a sibling has corrected this session on a claim it had asserted too confidently from one observation.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-30T00:56:00Z",
+      "action": "correct the record",
+      "target": "this session's own operations log",
+      "result": "An earlier entry and the ae90fbb commit message both state that per-project spine fragments were 'proposed to the owner'. They were not. The turn ended after scheduling the check-in and before the proposal was put. Recorded here rather than quietly fixed, and the proposal is being made now.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-30T01:05:00Z",
+      "action": "build — owner chose per-project fragments",
+      "target": "fleet/projects/, package.json",
+      "result": "Projects split into five fragments assembled at read time; verified byte-equivalent to the array it replaced. package.json scripts sorted with an assertion to keep them so. Honest limit: this does NOT clear the current PR #2 conflict. Both siblings still carry the old array, so the migration merge conflicts once more on fleet.json — the split makes that the LAST conflict on that file, not the zeroth. Relayed to both.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-30T15:58:00Z",
+      "action": "verify — migration complete",
+      "target": "per-project fragments",
+      "result": "Both siblings merged c789eae and dropped the projects array within the hour. Both pull requests now merge CLEAN against the venue head — the migration conflict was the last one on that file, which is what the split was bought for. Verified in a worktree on the fellowships branch: ZERO errors, P9 cleared through its own merge with the catalogue_provenance carried into fleet/projects/fellowships.json, P8 now correctly a warning because PR #2 is stacked, and all check-propose assertions pass there including the two-run byte comparison. The simulator's fragments are byte-identical to the venue's; only the fellowships fragment diverges, carrying its own declaration, and under P16 that is theirs to hold. It was not copied here — P9 stays red on this branch until PR #2 merges, which is the same call made and honoured three times now.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-30T20:00:00Z",
+      "action": "discover + review",
+      "target": "claude/complaint-log-unpunished-crimes-x9cq7k (session_012vYbHAopfcUWnjjzhtqxuP), PR #4",
+      "result": "A fourth coworker appeared. It publishes a documentary complaint log to public/record-book/. Reviewed on CONTENT before conventions, because a branch named for unpunished crimes that publishes to a public domain earns that. Finding: careful and defensible. 18 entries spanning 1841-1960, all extensively documented historical events (Colfax, Wilmington, Elaine, Ocoee, Tulsa, Rosewood, Tuskegee, Moore's Ford, Groveland, Till). 47 citations, none with zero. No living private individual is accused. Its methodology separates act, actor, forum and restoration; refuses to pronounce a named person guilty while recording whom sources accuse with provenance; requires a consent_note; and states it has no legal effect. Its validator was RUN, not read: zero errors. It enforces P9 independently and is stricter in one direction than the venue's — 'marked unverified but carries citations' is an error there and is not here. Worth borrowing with attribution.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-30T20:01:00Z",
+      "action": "relay — BLOCKED",
+      "target": "session_012vYbHAopfcUWnjjzhtqxuP",
+      "result": "The conventions relay (P8, P12, P16, P17, subtree CSS, CSP, PR retarget) was composed and its trigger created as trig_01W83JsGx7RKo9sFjim2mVN5, but fire_trigger was denied by the permission classifier. NOT worked around. The trigger is left in place rather than deleted so the owner can fire it from the Routines UI if they choose. Until it is delivered, that project does not know the conventions and will hit P8, P12 and P16 on its own.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-30T20:01:00Z",
+      "action": "escalate to owner",
+      "target": "publication decision",
+      "result": "Whether this material is published on ayeyoty.co is the owner's decision, not the fleet's. The work is sound; the domain is theirs. Raised rather than ruled on, and the sibling was told the same — that a merge is not the same thing as the owner having chosen to publish.",
+      "register": "O"
+    },
+    {
+      "at": "2026-08-30T20:20:00Z",
+      "action": "build — owner answered three questions",
+      "target": "public/workstation/",
+      "result": "Five cards, one per domain, ranked and never filtered. Outcome type is a property of the card rather than the system, which was the owner's correction to the question as posed. Driven end to end in Chromium: 5 cards render in rank order, the interview opens with 5 questions and 3 declared refusals, a completed interview names its output path and emits a copyable payload, the two unsourced cards refuse to interview and say why, storage is untouched on all three APIs, zero console errors. fetch was blocked by default-src 'none' as it was for the simulator, so data is bundled by scripts/build-workstation.mjs.",
+      "register": "O"
+    }
+  ],
+  "mechanisms": [
+    {
+      "id": "RELAY",
+      "name": "Delivering a message to a sibling cloud session",
+      "steps": [
+        "create_trigger with persistent_session_id and no schedule",
+        "fire_trigger to deliver it immediately",
+        "delete_trigger once delivered; log the operation here instead"
+      ],
+      "constraints": [
+        "ListAgents does not reach cloud siblings; there is no direct peer channel.",
+        "update_trigger cannot edit the prompt of a routine that fires into another session — a correction is a new trigger, not an edit.",
+        "The target cannot reply. Read its state with get_session instead of expecting an answer.",
+        "fire_trigger with a `text` argument does not deliver into the bound session. Established by controlled comparison on 2026-08-29: three fires without `text` returned session_id = cse_ + the target's own suffix and the target acted; two fires with `text` returned unrelated cse_ ids and neither target was touched — one had not been updated since six minutes BEFORE the fire. Put everything in the prompt and fire bare. The returned session_id is the delivery receipt: if its suffix does not match the target, nothing arrived."
+      ],
+      "register": "O",
+      "note": "Established by use on 2026-08-29; each constraint was hit, not read.",
+      "verification": "Do not treat a fire as delivered because the call returned 200. Check the returned session_id suffix, and check the target's updated_at moved. A relay that silently no-ops looks exactly like a coworker choosing not to answer."
+    }
+  ],
+  "vantages": {
+    "note": "A role is a vantage, not a person. One coworker holds several. A vantage with no holder is a gap and is recorded as one, because the questions that vantage would have asked do not get asked by anybody else. Full definitions and the arbitration rules live in fleet/questions.json.",
+    "engineering": "What the thing is and whether it works. Tech specs, retrofit, tolerances.",
+    "creative-director": "What it looks like it is. Coherence of the image across every surface.",
+    "producer": "Duration, contingency, cost of being wrong. Survival of contact with a date and a room.",
+    "content-marketing": "What is claimed in public and on what record. Catalogue copy, listing, description."
+  },
+  "projects_note": "Projects live one-per-file in fleet/projects/. They were a single array here until three successive merge conflicts landed on it — two branches each holding a copy of the same record diverge on every push. scripts/fleet.mjs assembles them at read time. A project's file is written only by the project it describes."
+}

@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0",
+  "note": "Five cards, one per domain, chosen to stress the card shape against content that has nothing in common. Ordering is by decay and the reason is stated on every card. NOTHING IS FILTERED — cards that rank poorly still render, with why. Two of the five have no record behind them and say so rather than showing a plausible number; that is the demonstration, not an omission.",
+  "ordering": {
+    "by": "decay",
+    "rule": "What stops being possible soonest sorts first. Domain is not a sort key.",
+    "filtering": "none. Every card inside the window renders, including ones ranked low, each with its ranking reason."
+  },
+  "outcome_types": {
+    "question_task": "The interview itself is the deliverable — answers captured, no document generated.",
+    "draft": "The interview writes a document to a named path. Unsourced fields render blank and marked.",
+    "scheduled_send": "The interview produces something addressed and dated, queued rather than sent. Sending stays a separate, deliberate act."
+  },
+  "cards": [
+    {
+      "id": "CARD-APP-MACDOWELL",
+      "domain": "applications",
+      "title": "MacDowell Fellowship",
+      "decay": { "type": "fixed_date", "on": "2026-09-10", "what_stops": "the call closes and cannot be reopened" },
+      "rank": 1,
+      "rank_reason": "Nearest hard deadline of any sourced record, and the only outcome here that is irreversible on a date.",
+      "outcome": "draft",
+      "produces": "applications/macdowell-2026/cover-letter.md",
+      "question_set": "QS-FELLOWSHIP",
+      "basis": "sourced",
+      "record": "data/open-calls/macdowell-fellowship.json — closes field, read 2026-08-29 by session_01GR1Ut4PmfsRVZo96RJZVJu",
+      "blank_fields": []
+    },
+    {
+      "id": "CARD-INQ-LOCATORS",
+      "domain": "inquiries",
+      "title": "Five archive locators unresolved in the record book",
+      "decay": { "type": "soft", "window_days": 30, "what_stops": "nothing expires, but every entry citing them stays unverified until they resolve" },
+      "rank": 2,
+      "rank_reason": "No deadline, but it blocks the verification status of entries already published, which is a live claim rather than a pending one.",
+      "outcome": "question_task",
+      "produces": "answers captured against the five sources; no document generated",
+      "question_set": "QS-INQUIRY",
+      "basis": "confirmed",
+      "record": "record-book validate.mjs output — SRC-DLAS, SRC-LDF, SRC-UNCF, SRC-US-REPORTS, SRC-MSSC-FILES all warn 'locator not yet resolved'",
+      "blank_fields": []
+    },
+    {
+      "id": "CARD-ARC-UNNAMED",
+      "domain": "archive",
+      "title": "Register entries attested but unnamed",
+      "decay": { "type": "none", "what_stops": "nothing. This does not decay and will never be urgent, which is why it needs a place that is not urgency" },
+      "rank": 3,
+      "rank_reason": "Ranked below the two above because nothing forecloses. Ranked above the two below because it rests on a record and they do not.",
+      "outcome": "question_task",
+      "produces": "answers captured; the register is the sibling's to write",
+      "question_set": "QS-ARCHIVE",
+      "basis": "confirmed",
+      "record": "record-book register.json — 38 entries, identity_status name_unrecorded on the subset",
+      "blank_fields": []
+    },
+    {
+      "id": "CARD-FIN-UNSOURCED",
+      "domain": "finance",
+      "title": "⟦FILL: no financial record exists in this repository⟧",
+      "decay": { "type": "unknown", "what_stops": "⟦FILL⟧ — cannot be stated without a position, a date or a filing" },
+      "rank": 4,
+      "rank_reason": "Ranked low because nothing establishes it, NOT because finance matters less. A card with no record cannot be ranked against ones that have them, and inventing a rank to place it would be the defect this whole system was built against.",
+      "outcome": "question_task",
+      "produces": "the first record, if the interview establishes one",
+      "question_set": null,
+      "basis": "none",
+      "record": null,
+      "blank_fields": ["decay.on", "amount", "instrument", "position", "counterparty", "filing"],
+      "owed": "Nothing in this repository holds a position, a price, a filing or a tax date. Until one exists, this card can only ask what it should hold. It renders rather than hides, because a domain that is absent is a finding."
+    },
+    {
+      "id": "CARD-PRD-UNSOURCED",
+      "domain": "production",
+      "title": "⟦FILL: no production record exists in this repository⟧",
+      "decay": { "type": "unknown", "what_stops": "⟦FILL⟧ — cannot be stated without a build, a material or a ship date" },
+      "rank": 5,
+      "rank_reason": "Same as finance: unranked in substance, placed last because it rests on nothing. The position is an artefact of the record, not a judgement about the work.",
+      "outcome": "question_task",
+      "produces": "the first record, if the interview establishes one",
+      "question_set": null,
+      "basis": "none",
+      "record": null,
+      "blank_fields": ["decay.on", "materials", "spec", "budget", "fabricator", "ship_date"],
+      "owed": "No tech spec, bill of materials, budget or ship date exists here. The engineering/product line already drawn in Q3 says a spec is engineering and a product claim needs a record; this card has neither yet."
+    }
+  ]
+}
