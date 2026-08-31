@@ -290,6 +290,31 @@ export const provisions = [
     ],
     "supplies_standard": false,
     "note": "Grants the power and supplies no standard for its exercise. This silence is the load-bearing defect in the necessity-silence analysis."
+  },
+  {
+    "id": "tn_divisive_concepts",
+    "kind": "statute",
+    "cite": "Tenn. Code Ann. § 49-6-1019 (prohibited concepts); related provisions in Title 49, Chapter 7, Part 19",
+    "enacted": 2021,
+    "text": "⟦OWED: verbatim text not retrieved. Every legal source was blocked by this environment's egress proxy. What follows is a paraphrase from search summaries, not the statute.⟧",
+    "paraphrase": "Prohibits a course of instruction from including or promoting an enumerated list of concepts, among them: that one race or sex is inherently superior; that an individual is by virtue of race or sex inherently privileged, racist, sexist or oppressive; that an individual bears responsibility for acts committed by other members of the same race or sex; and that an individual should feel discomfort or guilt on account of race or sex. Enforced by withholding state funds from a district that violates it.",
+    "terms": [
+      "divisive_concept",
+      "discomfort"
+    ],
+    "confers_private_right": false,
+    "tracks": [
+      "civil",
+      "admin"
+    ],
+    "reaches": "instruction and training. On the sources available it does not reach exhibition or artistic work, but that boundary is OWED rather than confirmed.",
+    "why_it_is_here": "It regulates by naming concepts. The enumerated list reaches explicitly for an affective state — discomfort, guilt — which means the drafters were aiming at the visceral and could only capture vocabulary. The experience the vocabulary pointed at is interstitial and temporal, and no statute names an interval. That gap is the object of study, not a loophole to exploit.",
+    "provenance": {
+      "basis": "none",
+      "note": "PARAPHRASE, NOT TEXT. Sourced from search-result summaries only. Nothing in the simulator scores against this provision until the verbatim text is in the file.",
+      "owed": "The verbatim enumerated list from a primary source, the exact sections, the amendment history since 2021, and whether any provision reaches beyond instruction and training.",
+      "blocked_by": "egress proxy denied law.justia.com, tennessee.edu, tnstate.edu and law.counselstack.com"
+    }
   }
 ];
 
@@ -510,6 +535,42 @@ export const precedents = [
     "erosion": 0.1,
     "factual_change": 0.15,
     "distinguishable_on": []
+  },
+  {
+    "id": "donald_uka",
+    "short": "Donald v. UKA",
+    "cite": "Beulah Mae Donald v. United Klans of America, Inc. (S.D. Ala. 1987)",
+    "year": 1987,
+    "favours": "claimant",
+    "tracks": [
+      "civil",
+      "governance"
+    ],
+    "covers": [
+      "forum.tort",
+      "governance.warrant",
+      "civil.intent"
+    ],
+    "holding": "An organisation is liable in tort for acts its members commit in furtherance of the organisation's own stated principles. A jury returned $7 million against the United Klans of America; the judgment exceeded its assets and the organisation conveyed the deed to its national headquarters to the claimant.",
+    "rationale": "Agency theory. The defendant's own structure — its hierarchy, its stated principles, its claim to be an organisation at all — is what makes it answerable for what its members did in service of it. The instrument of liability is the respondent's own account of itself.",
+    "rationale_scope": "broad",
+    "reliance": 0.7,
+    "workability": 0.8,
+    "erosion": 0.1,
+    "factual_change": 0.15,
+    "distinguishable_on": [],
+    "why_it_matters_here": "This is the governance paradox answered in practice rather than in theory. A criminal prosecution reached two individuals and left the organisation intact. The tort action reached the organisation and ended it — without asking any authority to concede anything, because a tort judgment does not request a remedy, it executes against assets. The remedy was not a grant. It was a building.",
+    "provenance": {
+      "basis": "sourced",
+      "sources": [
+        "https://www.splcenter.org/resources/civil-rights-case-docket/donald-v-united-klans-america/",
+        "https://www.tortmuseum.org/online-tour/donald-v-united-klans-of-america/",
+        "https://en.wikipedia.org/wiki/Beulah_Mae_Donald"
+      ],
+      "confirmed": "Michael Donald lynched in Mobile, Alabama, March 1981. Civil suit brought by his mother with the Southern Poverty Law Center on an agency theory against the corporate UKA and its Imperial Wizard. Trial February 1987 before Judge Alex Howard; all-white jury; $7 million verdict. Judgment bankrupted the UKA, which conveyed its Tuscaloosa headquarters to Beulah Mae Donald.",
+      "discrepancy": "One secondary source dates the deed transfer to May 1986, which precedes the February 1987 verdict and cannot be right as stated. The transfer date is recorded here as OWED rather than asserted.",
+      "owed": "The docket number, the reported opinion if any, and the actual date of the conveyance, from a primary source. Nothing here rests on the transfer date."
+    }
   }
 ];
 

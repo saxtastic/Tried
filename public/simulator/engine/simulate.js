@@ -11,6 +11,7 @@ import { adjudicate, disposition } from './judge.js';
 import { profile, necessitySilence, translate, REGIMES as POLICY_REGIMES } from './institution.js';
 import { reframe } from './paradox.js';
 import { itinerary, sensitivity } from './transitions.js';
+import { reconciliationRoutes, classify } from './forums.js';
 
 /** Build the evaluation context from a raw corpus + case. */
 export function buildContext(corpus, options = {}) {
@@ -156,6 +157,12 @@ export function fullReport(corpus, options = {}) {
     // scores the intervals, which is where claims are actually lost.
     itinerary: itinerary(corpus.passages ?? []),
     passage_sensitivity: sensitivity(corpus.passages ?? []),
+    // Which body of law each condition is pleaded in, and what that costs
+    // before any fact is argued.
+    forums: {
+      ...reconciliationRoutes(corpus.claim?.forum_facts ?? {}),
+      per_condition: (corpus.conditions ?? []).map(classify),
+    },
     interpretive_sweep: sweepInterpretations(corpus, options),
     institutional_sweep: sweepInstitutions(corpus, options),
     paradox: reframe(corpus.claim ?? {}),

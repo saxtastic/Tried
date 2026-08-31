@@ -31,4 +31,5 @@ export {
   itinerary,
   sensitivity,
 } from './transitions.js';
+export { FORUMS, reconciliationRoutes, classify } from './forums.js';
 export { buildContext, run, sweepInterpretations, sweepInstitutions, fullReport } from './simulate.js';

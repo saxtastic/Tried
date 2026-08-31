@@ -5,9 +5,14 @@
     "cite": "42 U.S.C. § 2000d (Title VI, § 601)",
     "enacted": 1964,
     "text": "No person in the United States shall, on the ground of race, color, or national origin, be excluded from participation in, be denied the benefits of, or be subjected to discrimination under any program or activity receiving Federal financial assistance.",
-    "terms": ["discrimination", "program_or_activity"],
+    "terms": [
+      "discrimination",
+      "program_or_activity"
+    ],
     "confers_private_right": true,
-    "tracks": ["civil"],
+    "tracks": [
+      "civil"
+    ],
     "note": "Rights-creating text. Reaches intentional discrimination."
   },
   {
@@ -16,9 +21,13 @@
     "cite": "42 U.S.C. § 2000d-1 (Title VI, § 602)",
     "enacted": 1964,
     "text": "Each Federal department and agency empowered to extend Federal financial assistance is authorized and directed to effectuate the provisions of section 2000d by issuing rules, regulations, or orders of general applicability.",
-    "terms": ["program_or_activity"],
+    "terms": [
+      "program_or_activity"
+    ],
     "confers_private_right": false,
-    "tracks": ["civil"],
+    "tracks": [
+      "civil"
+    ],
     "note": "Directs agencies. Regulations issued under it reach effects, but the section is not rights-creating for a private claimant."
   },
   {
@@ -27,9 +36,14 @@
     "cite": "42 U.S.C. § 1983",
     "enacted": 1871,
     "text": "Every person who, under color of any statute, ordinance, regulation, custom, or usage, of any State subjects any citizen to the deprivation of any rights, privileges, or immunities secured by the Constitution and laws, shall be liable to the party injured.",
-    "terms": ["discrimination"],
+    "terms": [
+      "discrimination"
+    ],
     "confers_private_right": true,
-    "tracks": ["civil", "governance"],
+    "tracks": [
+      "civil",
+      "governance"
+    ],
     "note": "A vehicle, not a source. It carries only rights another provision already secures."
   },
   {
@@ -38,9 +52,13 @@
     "cite": "17 U.S.C. § 201(a)-(b)",
     "enacted": 1976,
     "text": "Copyright in a work protected under this title vests initially in the author or authors of the work. In the case of a work made for hire, the employer or other person for whom the work was prepared is considered the author, unless the parties have expressly agreed otherwise in a written instrument signed by them.",
-    "terms": ["author"],
+    "terms": [
+      "author"
+    ],
     "confers_private_right": true,
-    "tracks": ["ip"],
+    "tracks": [
+      "ip"
+    ],
     "note": "Default vests in the human author. The exception requires either employment in the agency sense or a signed writing."
   },
   {
@@ -49,9 +67,13 @@
     "cite": "State Administrative Procedure Act § 706(2)(A) analogue",
     "enacted": 1946,
     "text": "The reviewing body shall hold unlawful and set aside action found to be arbitrary, capricious, an abuse of discretion, or otherwise not in accordance with law.",
-    "terms": ["discretion"],
+    "terms": [
+      "discretion"
+    ],
     "confers_private_right": true,
-    "tracks": ["admin"],
+    "tracks": [
+      "admin"
+    ],
     "note": "Template provision. Replace with the actual review statute for the jurisdiction under study."
   },
   {
@@ -60,9 +82,14 @@
     "cite": "20 U.S.C. § 1232g (FERPA)",
     "enacted": 1974,
     "text": "No funds shall be made available to any educational agency or institution which has a policy of denying, or which effectively prevents, parents and students the right to inspect and review the education records of such students.",
-    "terms": ["record"],
+    "terms": [
+      "record"
+    ],
     "confers_private_right": false,
-    "tracks": ["admin", "fiduciary"],
+    "tracks": [
+      "admin",
+      "fiduciary"
+    ],
     "note": "Spending-clause condition on the institution, addressed to the funding agency. Not individually enforceable."
   },
   {
@@ -71,10 +98,41 @@
     "cite": "Institutional enabling act / board charter (template)",
     "enacted": 1969,
     "text": "The governing board shall have authority to establish policies for the admission, retention, discipline, and graduation of students, and to delegate such authority as it deems appropriate.",
-    "terms": ["discretion", "good_standing"],
+    "terms": [
+      "discretion",
+      "good_standing"
+    ],
     "confers_private_right": false,
-    "tracks": ["governance", "admin"],
+    "tracks": [
+      "governance",
+      "admin"
+    ],
     "supplies_standard": false,
     "note": "Grants the power and supplies no standard for its exercise. This silence is the load-bearing defect in the necessity-silence analysis."
+  },
+  {
+    "id": "tn_divisive_concepts",
+    "kind": "statute",
+    "cite": "Tenn. Code Ann. § 49-6-1019 (prohibited concepts); related provisions in Title 49, Chapter 7, Part 19",
+    "enacted": 2021,
+    "text": "⟦OWED: verbatim text not retrieved. Every legal source was blocked by this environment's egress proxy. What follows is a paraphrase from search summaries, not the statute.⟧",
+    "paraphrase": "Prohibits a course of instruction from including or promoting an enumerated list of concepts, among them: that one race or sex is inherently superior; that an individual is by virtue of race or sex inherently privileged, racist, sexist or oppressive; that an individual bears responsibility for acts committed by other members of the same race or sex; and that an individual should feel discomfort or guilt on account of race or sex. Enforced by withholding state funds from a district that violates it.",
+    "terms": [
+      "divisive_concept",
+      "discomfort"
+    ],
+    "confers_private_right": false,
+    "tracks": [
+      "civil",
+      "admin"
+    ],
+    "reaches": "instruction and training. On the sources available it does not reach exhibition or artistic work, but that boundary is OWED rather than confirmed.",
+    "why_it_is_here": "It regulates by naming concepts. The enumerated list reaches explicitly for an affective state — discomfort, guilt — which means the drafters were aiming at the visceral and could only capture vocabulary. The experience the vocabulary pointed at is interstitial and temporal, and no statute names an interval. That gap is the object of study, not a loophole to exploit.",
+    "provenance": {
+      "basis": "none",
+      "note": "PARAPHRASE, NOT TEXT. Sourced from search-result summaries only. Nothing in the simulator scores against this provision until the verbatim text is in the file.",
+      "owed": "The verbatim enumerated list from a primary source, the exact sections, the amendment history since 2021, and whether any provision reaches beyond instruction and training.",
+      "blocked_by": "egress proxy denied law.justia.com, tennessee.edu, tnstate.edu and law.counselstack.com"
+    }
   }
 ]

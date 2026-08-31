@@ -188,6 +188,32 @@ if (!flag('paradox') && !flag('vectors') && !flag('sweep')) {
   }
 }
 
+if (!flag('paradox') && !flag('vectors') && !flag('sweep')) {
+  const fo = report.forums;
+  console.log(rule('FORUMS — which body of law, and what it costs before any fact is argued'));
+  console.log(C.dim('  Ordered by how much the respondent must concede before anything moves —'));
+  console.log(C.dim('  not by likelihood of success. The two get confused, and the confusion favours'));
+  console.log(C.dim('  the institution.\n'));
+  for (const r of fo.routes) {
+    const mark = r.available ? (r.concession_rank <= 2 ? C.g('open') : C.y('open')) : C.r('blocked');
+    console.log(`  ${C.dim(String(r.concession_rank))} ${C.b(r.label.padEnd(30))} ${mark}`);
+    console.log(C.dim(`      concedes: ${r.concession_required}`));
+    console.log(C.dim(`      reaches:  ${r.reaches}`));
+    console.log(C.dim(`      remedy:   ${r.remedy}`));
+    if (!r.available) console.log(C.r(`      blocked:  ${r.unavailable_because}`));
+    else console.log(wrap(r.reconciliation, 76, '      '));
+  }
+  console.log(`\n  ${C.c('least concession')} ${fo.least_concession?.label ?? 'none available'}`);
+  console.log(wrap(fo.finding, 84, '  '));
+  console.log(`\n  ${C.c('on the authority of the premise')}`);
+  console.log(wrap(fo.paradox_note, 84, '  '));
+  console.log(`\n  ${C.c('where this case is currently pleaded')}`);
+  for (const c of fo.per_condition) {
+    const paint = c.concession_rank <= 2 ? C.g : c.concession_rank >= 4 ? C.r : C.y;
+    console.log(`    ${paint(String(c.concession_rank))} ${c.condition.padEnd(24)} ${c.label}`);
+  }
+}
+
 if (!flag('vectors') && !flag('paradox')) {
   const sw = report.interpretive_sweep;
   console.log(rule('INTERPRETIVE SWEEP — does the outcome depend on which sense of the words governs?'));
