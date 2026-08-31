@@ -240,7 +240,40 @@ const args = process.argv.slice(2);
 const asJson = args.includes('--json');
 const rest = args.filter((a) => !a.startsWith('--'));
 
-if (args.includes('--gaps')) {
+if (args.includes('--live')) {
+  // What, if anything, is still actionable. The honest answer is almost nothing
+  // criminally, and the reason is mortality rather than law.
+  const HOMICIDE = ['homicide', 'mass_homicide', 'homicide_of_a_child',
+    'homicide_under_colour_of_law', 'homicide_after_surrender', 'killing_of_an_unborn_child'];
+  const unconvicted = complaints.filter((c) => c.process.outcome !== 'convicted');
+  const killing = unconvicted.filter((c) => (c.offense ?? []).some((o) => HOMICIDE.includes(o)));
+  const named = killing.filter((c) => (c.respondents.named ?? []).length);
+  console.log('\nWhat remains actionable\n' + '='.repeat(23));
+  console.log(`\n${unconvicted.length} of ${complaints.length} entries produced no conviction.`);
+  console.log(`\nCriminal route, in theory: ${killing.length} entries name a homicide offence, and`);
+  console.log('murder is generally not subject to a limitation period. Of those,');
+  console.log(`${named.length} name a respondent at all. In substantially every one, every`);
+  console.log('identified subject is deceased — which is why DOJ closes these matters, and');
+  console.log('why the criminal route is open in law and shut in fact.');
+  for (const c of killing) {
+    const n = (c.respondents.named ?? []).length;
+    console.log(`  ${c.id.padEnd(32)} ${n ? `${n} named` : 'no respondent named'}`);
+  }
+  const ops = impediments.filter((i) => i.status === 'operative');
+  console.log(`\nCivil and legislative route: blocked by ${ops.length} operative impediments.`);
+  console.log('What removing each would actually resolve:\n');
+  for (const i of ops) console.log(`  ${i.name}\n    ${i.if_removed}\n`);
+  const worked = complaints.filter((c) =>
+    (c.restoration.forms ?? []).some((f) => ['partial_compensation', 'full_restitution'].includes(f)));
+  console.log(`Routes that have actually delivered something material (${worked.length}):`);
+  for (const c of worked) {
+    const how = c.process.escalation.filter((r) => ['legislated', 'settled'].includes(r.disposition));
+    console.log(`  ${c.id}`);
+    for (const r of how) console.log(`    ${r.rung}: ${r.forum} — ${r.disposition}`);
+  }
+  console.log('\nEvery one came through a legislature, a claim bill, or an institution acting on');
+  console.log('its own record. None came from a court applying existing law to a historical claim.');
+} else if (args.includes('--gaps')) {
   const ranked = complaints.map((c) => brief(c))
     .sort((a, b) => b.questions.length - a.questions.length);
   console.log('Entries ranked by open research questions:\n');
@@ -285,6 +318,7 @@ if (args.includes('--gaps')) {
   console.log('  interrogate.mjs <CL-ID>            full research brief for one entry');
   console.log('  interrogate.mjs --source <SRC-ID>  what a source can and cannot establish');
   console.log('  interrogate.mjs --gaps            corpus-wide, ranked by open questions');
+  console.log('  interrogate.mjs --live            what remains actionable, and by which route');
   console.log('  interrogate.mjs --json <CL-ID>    machine-readable brief\n');
   console.log(`${complaints.length} entries, ${archives.length} archives.`);
 }

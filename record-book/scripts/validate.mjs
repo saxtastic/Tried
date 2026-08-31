@@ -23,7 +23,7 @@ export const OUTCOMES = {
   unresolved: 'Investigation opened and never closed',
 };
 
-// METHODOLOGY.md section 12: unpunished is derived. Only a sustained criminal
+// METHODOLOGY.md section 13: unpunished is derived. Only a sustained criminal
 // conviction of a perpetrator counts as punishment. Settlements, apologies and
 // exonerations of the victim do not.
 export const isUnpunished = (outcome) => outcome !== 'convicted';
@@ -310,6 +310,7 @@ export function childrenAcrossEras(complaints) {
 export function validate() {
   const complaints = read('complaints.json').complaints;
   const organizations = read('organizations.json').organizations;
+  const rights = read('rights.json').rights;
   const persons = read('register.json').persons;
   const impediments = read('impediments.json').impediments;
   const archives = read('archives.json').archives;
@@ -329,7 +330,7 @@ export function validate() {
   };
 
   [[complaints, 'complaints'], [persons, 'register'], [organizations, 'organizations'],
-   [impediments, 'impediments'], [archives, 'archives']]
+   [rights, 'rights'], [impediments, 'impediments'], [archives, 'archives']]
     .forEach(([rows, label]) => dupes(rows, label));
 
   const personIds = ids(persons);
@@ -337,6 +338,7 @@ export function validate() {
   const impedimentIds = ids(impediments);
   const archiveIds = ids(archives);
   const orgIds = ids(organizations);
+  const rightIds = ids(rights);
 
   const ref = (where, field, values, pool, poolName) => {
     for (const v of values ?? []) {
@@ -398,6 +400,23 @@ export function validate() {
     const cs = c.respondents?.claimed_sanction;
     if (cs && (!cs.asserted || !Array.isArray(cs.expressed_through) || !cs.expressed_through.length)) {
       err(at, 'claimed_sanction must state what authority was asserted and how it was expressed');
+    }
+    ref(at, 'rights_violated', c.rights_violated, rightIds, 'right');
+    if (!c.rights_violated?.length) err(at, 'rights_violated must name at least one right');
+    // RT-REMEDY is violated by every entry by construction; storing it 25 times
+    // would carry no information and would let the count drift.
+    if ((c.rights_violated ?? []).includes('RT-REMEDY')) {
+      err(at, 'RT-REMEDY is derived, not stored: every entry violates it by construction');
+    }
+    const fc = c.foreclosed_contribution;
+    if (fc) {
+      if (!fc.basis) err(at, 'foreclosed_contribution must state the documentable input destroyed');
+      // The single most important guard in this file.
+      if (fc.quantifiable !== false) {
+        err(at, 'foreclosed_contribution.quantifiable must be false; the output is unknowable ' +
+                'and the book never records what would have been made');
+      }
+      if (!fc.note) err(at, 'foreclosed_contribution must carry the note distinguishing input from output');
     }
     if (!Array.isArray(c.era) || !c.era.length) {
       err(at, 'era must name at least one period');
@@ -538,7 +557,7 @@ export function validate() {
     if (!STANDING.includes(p.standing)) {
       err(at, `standing "${p.standing}" is not one of ${STANDING.join(', ')}`);
     }
-    // METHODOLOGY.md section 13: a count is a count and must say so; an
+    // METHODOLOGY.md section 14: a count is a count and must say so; an
     // individuated person is never carried as a number.
     if (p.identity_status === 'collectively_recorded' && !p.count) {
       err(at, 'collectively_recorded rows must carry a count');
@@ -553,7 +572,7 @@ export function validate() {
       err(at, 'name_unrecorded rows must state what attests the person\'s existence');
     }
     if (!p.consent_note) {
-      err(at, 'missing consent_note (METHODOLOGY.md section 13)');
+      err(at, 'missing consent_note (METHODOLOGY.md section 14)');
     }
     if (p.voice?.source && !archiveIds.has(p.voice.source)) {
       err(at, `voice.source references unknown archive "${p.voice.source}"`);
@@ -563,6 +582,22 @@ export function validate() {
     }
     ref(at, 'complaints', p.complaints, complaintIds, 'complaint');
     ref(at, 'sources', p.sources, archiveIds, 'archive');
+  }
+
+  for (const r of rights) {
+    const at = `rights/${r.id}`;
+    if (!['enumerated', 'unenumerated'].includes(r.status)) {
+      err(at, `status "${r.status}" is not enumerated or unenumerated`);
+    }
+    if (r.status === 'enumerated' && !r.instruments?.length) {
+      err(at, 'an enumerated right must name the instrument that recognises it');
+    }
+    if (r.status === 'unenumerated' && r.instruments?.length) {
+      err(at, 'an unenumerated right must name no instrument; if one exists it is enumerated');
+    }
+    if (r.status === 'unenumerated' && !r.note) {
+      err(at, 'an unenumerated right must say plainly that it is a moral claim and not positive law');
+    }
   }
 
   for (const o of organizations) {
@@ -586,6 +621,9 @@ export function validate() {
     if (!IMPEDIMENT_KIND.includes(i.kind)) err(at, `kind "${i.kind}" is not written or unwritten`);
     if (!IMPEDIMENT_STATUS.includes(i.status)) {
       err(at, `status "${i.status}" is not one of ${IMPEDIMENT_STATUS.join(', ')}`);
+    }
+    if (!i.if_removed) {
+      err(at, 'if_removed must say what repealing or overruling this would actually resolve');
     }
     if (i.status !== 'operative' && !i.repudiated_by && !i.note) {
       err(at, `status is "${i.status}" but nothing records what displaced it`);
@@ -619,6 +657,22 @@ export function validate() {
     }
   }
   const usedImpediments = new Set(complaints.flatMap((c) => c.impediments ?? []));
+  for (const r of rights) {
+    const at = `rights/${r.id}`;
+    if (!['enumerated', 'unenumerated'].includes(r.status)) {
+      err(at, `status "${r.status}" is not enumerated or unenumerated`);
+    }
+    if (r.status === 'enumerated' && !r.instruments?.length) {
+      err(at, 'an enumerated right must name the instrument that recognises it');
+    }
+    if (r.status === 'unenumerated' && r.instruments?.length) {
+      err(at, 'an unenumerated right must name no instrument; if one exists it is enumerated');
+    }
+    if (r.status === 'unenumerated' && !r.note) {
+      err(at, 'an unenumerated right must say plainly that it is a moral claim and not positive law');
+    }
+  }
+
   for (const o of organizations) {
     const at = `organizations/${o.id}`;
     if (!o.claimed_sanction?.asserted) {
@@ -639,11 +693,11 @@ export function validate() {
     if (!usedImpediments.has(i.id)) warn(`impediments/${i.id}`, 'not invoked by any complaint');
   }
 
-  return { complaints, persons, organizations, impediments, archives, errors, warnings };
+  return { complaints, persons, organizations, rights, impediments, archives, errors, warnings };
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const { complaints, persons, organizations, impediments, archives, errors, warnings } = validate();
+  const { complaints, persons, organizations, rights, impediments, archives, errors, warnings } = validate();
   const unpunished = complaints.filter((c) => isUnpunished(c.process.outcome)).length;
   const captured = complaints.filter(
     (c) => c.finding.act === 'established' && isUnpunished(c.process.outcome)).length;
@@ -730,6 +784,16 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     `children: ${kids.total} of ${complaints.length} entries record harm reaching children as ` +
     `children, in ${populated.filter((r) => r.children).length} of ${populated.length} populated eras` +
     (kids.everyEra ? ' — every era in the corpus' : '')
+  );
+  const unenum = rights.filter((r) => r.status === 'unenumerated');
+  const fc = complaints.filter((c) => c.foreclosed_contribution);
+  console.log(
+    `rights: ${rights.length} named, ${unenum.length} unenumerated ` +
+    `(${unenum.map((r) => r.id).join(', ')}); RT-REMEDY violated by all ${complaints.length} by construction`
+  );
+  console.log(
+    `foreclosed contribution recorded on ${fc.length} entries; ` +
+    `${fc.filter((c) => c.foreclosed_contribution.quantifiable === false).length} state the input and none the output`
   );
   console.log(`${errors.length} error(s), ${warnings.length} warning(s)`);
   process.exit(errors.length ? 1 : 0);

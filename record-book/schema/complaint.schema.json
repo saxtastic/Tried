@@ -20,7 +20,8 @@
     "restoration",
     "concurrence",
     "citations",
-    "verification"
+    "verification",
+    "rights_violated"
   ],
   "additionalProperties": false,
   "properties": {
@@ -186,7 +187,7 @@
         },
         "official_capacity": {
           "type": "boolean",
-          "description": "True where a respondent acted under colour of law. See METHODOLOGY.md section 15."
+          "description": "True where a respondent acted under colour of law. See METHODOLOGY.md section 16."
         },
         "named": {
           "type": "array",
@@ -556,6 +557,41 @@
           "civil_rights",
           "modern"
         ]
+      }
+    },
+    "rights_violated": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^RT-[A-Z-]+$",
+        "not": {
+          "const": "RT-REMEDY"
+        }
+      },
+      "description": "Rights the conduct destroyed, by id into data/rights.json. RT-REMEDY is excluded: every entry violates it by construction and it is derived, never stored. A right named here characterises the conduct as offense[] does; most instruments postdate most entries and none applies retroactively."
+    },
+    "foreclosed_contribution": {
+      "type": "object",
+      "required": [
+        "basis",
+        "quantifiable",
+        "note"
+      ],
+      "additionalProperties": false,
+      "description": "The destruction of what a person or a people would have made. Records the INPUT destroyed, which is documentable, and never the output, which is not.",
+      "properties": {
+        "basis": {
+          "type": "string",
+          "description": "The documentable magnitude of what was destroyed: lives, child-years of schooling, a commercial district, lines of descent."
+        },
+        "quantifiable": {
+          "const": false,
+          "description": "Always false. An entry claiming to know what would have been produced fails the build - a counterfactual asserted as evidence is indistinguishable from fabrication."
+        },
+        "note": {
+          "type": "string"
+        }
       }
     }
   },

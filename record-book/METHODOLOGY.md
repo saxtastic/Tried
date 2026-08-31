@@ -373,7 +373,7 @@ notice, disguise or conversely a uniform, published platform, advance notice of
 an election it intended to decide by force, and in one case a deliberated
 sentence carried out on a stranger because a jury had acquitted someone else.
 
-This is the mirror of the book's other recurring finding. Section 15 records
+This is the mirror of the book's other recurring finding. Section 16 records
 officials acting *beyond* the statute of their role. These are private bodies
 claiming the role entirely. Both are the same displacement of authority, from
 opposite directions, and in several entries they meet: a sheriff surrenders
@@ -509,7 +509,103 @@ had reported on itself: `educational` stood at 2 of 22 and the methodology said
 the honest response was to write the missing entries rather than broaden the
 tagging. That is what these are.
 
-## 10. Interstitial harm
+## 10. Rights beyond the enumerated catalogue
+
+The charge was kidnapping. It was also the destruction of a right to live, to
+move, to keep a family, to learn, to vote, to hold what one built, and to take
+part in what a society makes of itself. `data/rights.json` names twenty-one, and
+`rights_violated` links each entry to the ones its conduct destroyed.
+
+**Every right here is tied to the instrument that recognises it, or marked as
+recognised by none.** That is the discipline that keeps this from being a list of
+grievances: a right either appears in a document that can be cited, or it is
+labelled as a moral claim and not passed off as law.
+
+### The caveat that has to come first
+
+**Most of these instruments postdate most of these entries, and none applies
+retroactively.** The Universal Declaration is 1948, the Covenants 1966, the
+Declaration on the Right to Development 1986 — which the United States voted
+against — and the Basic Principles on Reparation 2005.
+
+A right named against an entry therefore *characterises the conduct*, exactly as
+`offense[]` does. It is not an assertion that a remedy was available at the time,
+and nothing here should be put to a forum as though it were. The rendered page
+says this before anything else.
+
+### What the catalogue does show
+
+Eight of the twenty enumerated rights have **no U.S. constitutional analogue at
+all** — education, health, property against arbitrary deprivation, participation
+in cultural and scientific life, development, reparation, personhood before the
+law as such, and consent to medical experimentation as an express term.
+
+Two are worth naming specifically.
+
+**UDHR art. 27 and ICESCR art. 15** — the right to participate in cultural life,
+enjoy the arts, and share in scientific advancement and its benefits — is real
+positive international law, and it is the closest existing recognition of the
+interest in creating and contributing. It has no domestic constitutional
+analogue.
+
+**The Basic Principles on Reparation (2005)** name five forms: restitution,
+compensation, rehabilitation, satisfaction, and guarantees of non-repetition.
+Those map almost exactly onto `restoration.forms` in this book — material,
+symbolic, institutional reform. The mapping was not designed. The instrument and
+the log arrived at the same categories independently, which is some evidence that
+the categories are the right ones.
+
+### The right to an effective remedy is derived, not stored
+
+UDHR art. 8 and ICCPR art. 2(3). **Every entry in this book violates it by
+construction**: an established act with no forum, no conviction and no
+restoration *is* the denial of an effective remedy. Storing it twenty-five times
+would carry no information and would let the count drift, so the validator
+rejects it as a stored value and the pages derive it.
+
+### What was foreclosed
+
+`foreclosed_contribution` records the interest no instrument protects: what a
+person would have made.
+
+The field states **the input that was destroyed**, and never the output. That
+line is not a matter of tone — it is enforced. An entry whose
+`foreclosed_contribution.quantifiable` is anything but `false` fails the build.
+
+The reason is the same reason the rest of the book works. A counterfactual
+asserted as evidence would be indistinguishable from the fabrications this book's
+whole evidentiary standard exists to exclude, and the first reader to catch one
+would be right to discard everything else with it. So the corpus records that
+Prince Edward County withheld on the order of **ten thousand child-years of
+schooling** — which is arithmetic on documented enrolment and a documented
+five-year closure — and records nothing whatever about what those children would
+have gone on to do.
+
+**The unknowability is the sharper claim.** It is not possible to say what was
+lost. That is what makes the loss total rather than measurable, and a specific
+guess would shrink it to the size of the guess.
+
+`RT-UNREALISED-CAPACITY` is the one unenumerated right in the catalogue, named
+for exactly this and marked as protected by nothing.
+
+### What a repeal would resolve
+
+Each impediment carries `if_removed`: what removing it would actually open. Most
+would open nothing, and identifying which is the useful part.
+
+The two that would matter are **limitations** — specifically a tolling provision
+running from the date facts became provable rather than from the injury — and
+**descendant standing**, which is the bar that makes reparative claims
+legislative rather than judicial. No court can create that standing; a
+legislature can.
+
+`npm run record-book:interrogate -- --live` runs the whole query: what remains
+actionable, by which route, and what has ever actually delivered anything. The
+answer is that **every material restoration in this corpus came through a
+legislature, a claim bill, or an institution acting on its own record. None came
+from a court applying existing law to a historical claim.**
+
+## 11. Interstitial harm
 
 `harmed.interstitial` records what falls between the events and is counted
 nowhere: property abandoned under threat, exile, testimony never given, kinship
@@ -519,7 +615,7 @@ tally in any source. The field exists because leaving them out would let the
 book's own structure — one entry, one incident, one disposition — do the same
 work of erasure that the tallies do.
 
-## 11. Transmitted harm
+## 12. Transmitted harm
 
 `harmed.interstitial` records what falls between events within one generation.
 `harmed.transmitted` records what outlives it.
@@ -582,7 +678,7 @@ was assembled from knowledge of the field, not retrieved, and it is not a
 reconstruction of what DeGruy cites. It is marked as such in the manifest and
 must not be presented otherwise. Pull the actual citations from the book's notes.
 
-## 12. "Unpunished" is derived, not asserted
+## 13. "Unpunished" is derived, not asserted
 
 `process.outcome` records what the legal system actually did:
 
@@ -607,7 +703,7 @@ injuries while leaving the other untouched, and the book counts it that way.
 `scripts/validate.mjs` recomputes the field and fails the build on any
 disagreement, so the claim in the title of this book cannot drift from its data.
 
-## 13. Identity: who is in the register, and on what terms
+## 14. Identity: who is in the register, and on what terms
 
 The hardest question this book answers is what to do with a person whose injury
 is recorded and whose name is not.
@@ -657,7 +753,7 @@ carries them with its own citation. These are quotations from documents, not
 reconstructions. **The book never composes speech for the dead.** If no words
 survive, the field is absent — an absence that is itself part of the record.
 
-## 14. Impediments
+## 15. Impediments
 
 `data/impediments.json` catalogs the mechanisms that converted a crime into a
 non-crime: doctrines of personhood and jurisdiction, immunities, evidentiary and
@@ -676,7 +772,7 @@ book exists to show becomes legible: the same handful of doctrines, mostly about
 who may hear a claim rather than whether the injury occurred, recurring across a
 century and a half.
 
-## 15. Officials acting beyond their role
+## 16. Officials acting beyond their role
 
 A recurring classification is `official_participation` — conduct by sheriffs,
 deputies, jailers, guardsmen, and physicians acting under color of law and
@@ -688,7 +784,7 @@ defenses, and immunities differ, and because an officer exceeding the statute of
 their role is the case in which the state is both the injurer and the only
 available forum.
 
-## 16. Sources
+## 17. Sources
 
 `data/archives.json` is a manifest of the corpora this work draws on, with
 locator URLs and access terms. Public-domain texts can be fetched on demand with

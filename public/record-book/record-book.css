@@ -197,6 +197,8 @@ main, .masthead, footer { max-width: 46rem; margin: 0 auto; padding: 0 1.25rem; 
 .domain-block li { margin: .2rem 0; }
 
 .children { border-left: 3px solid var(--accent); padding-left: .9rem; }
+.foreclosed { border-left: 3px solid var(--accent); padding-left: .9rem; }
+.chip-warn { border-color: var(--warn); color: var(--warn); }
 .transmitted { border-left: 3px solid var(--rule); padding-left: .9rem; }
 .transmitted h3 { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
 .flag-trans-argued_in_literature, .flag-trans-contested {

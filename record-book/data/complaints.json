@@ -1,5 +1,5 @@
 {
-  "$comment": "Complaint log. process.unpunished is DERIVED - see METHODOLOGY.md section 12 - and is recomputed and checked by scripts/validate.mjs.",
+  "$comment": "Complaint log. process.unpunished is DERIVED - see METHODOLOGY.md section 13 - and is recomputed and checked by scripts/validate.mjs.",
   "complaints": [
     {
       "id": "CL-1857-DRED-SCOTT",
@@ -121,6 +121,12 @@
       ],
       "era": [
         "domestic_trade"
+      ],
+      "rights_violated": [
+        "RT-PERSONHOOD",
+        "RT-EQUALITY",
+        "RT-PARTICIPATE-GOVT",
+        "RT-FAIR-TRIAL"
       ]
     },
     {
@@ -251,7 +257,19 @@
         }
       ],
       "verification": "documented",
-      "status_note": "Entered to correct a gap this book reported on itself: educational harm appeared in two entries of twenty-two, which was a deficiency in the corpus rather than in the history. This is the foundational one, and it is aimed at children by design."
+      "status_note": "Entered to correct a gap this book reported on itself: educational harm appeared in two entries of twenty-two, which was a deficiency in the corpus rather than in the history. This is the foundational one, and it is aimed at children by design.",
+      "rights_violated": [
+        "RT-EDUCATION",
+        "RT-CULTURAL-SCIENTIFIC",
+        "RT-DEVELOPMENT",
+        "RT-EXPRESSION",
+        "RT-UNREALISED-CAPACITY"
+      ],
+      "foreclosed_contribution": {
+        "basis": "Every enslaved child in the enacting states, for 125 years, kept from literacy by criminal statute — and free Black children in several of those states. The input destroyed is a whole population's access to written thought across five generations.",
+        "quantifiable": false,
+        "note": "The book records the foreclosure and states its documentable magnitude. It does not record what would have been made. No entry here names a work, a discovery, an invention or an achievement that did not happen, and none ever will: a counterfactual asserted as evidence would be indistinguishable from the fabrications this book's entire evidentiary standard exists to exclude. What is recorded is the input that was destroyed, which is a fact. What it would have produced is unknowable, and the unknowability is itself the injury - it is not possible to say what was lost, and that is what makes the loss total rather than measurable."
+      }
     },
     {
       "id": "CL-CHATTEL-ENSLAVEMENT",
@@ -437,7 +455,24 @@
       "era": [
         "atlantic_trade",
         "domestic_trade"
-      ]
+      ],
+      "rights_violated": [
+        "RT-NOT-ENSLAVED",
+        "RT-LIFE",
+        "RT-NOT-TORTURED",
+        "RT-PERSONHOOD",
+        "RT-FAMILY",
+        "RT-EDUCATION",
+        "RT-MOVEMENT",
+        "RT-CULTURAL-SCIENTIFIC",
+        "RT-DEVELOPMENT",
+        "RT-UNREALISED-CAPACITY"
+      ],
+      "foreclosed_contribution": {
+        "basis": "Approximately 3.9 million people at the 1860 census alone, whose working and creative lives were appropriated in their entirety. Whatever any of them would otherwise have made was foreclosed by the same act that appropriated the labour.",
+        "quantifiable": false,
+        "note": "The book records the foreclosure and states its documentable magnitude. It does not record what would have been made. No entry here names a work, a discovery, an invention or an achievement that did not happen, and none ever will: a counterfactual asserted as evidence would be indistinguishable from the fabrications this book's entire evidentiary standard exists to exclude. What is recorded is the input that was destroyed, which is a fact. What it would have produced is unknowable, and the unknowability is itself the injury - it is not possible to say what was lost, and that is what makes the loss total rather than measurable."
+      }
     },
     {
       "id": "CL-1808-DOMESTIC-TRADE",
@@ -602,7 +637,20 @@
       "status_note": "Entered separately from chattel enslavement because the trade is a distinct course of conduct with a distinct and unusually complete documentary record. It is the entry in which the perpetrators' own instruments carry the proof: a bill of sale exists because title had to be provable, and it proves the transaction to us for the same reason it proved it to them.",
       "era": [
         "domestic_trade"
-      ]
+      ],
+      "rights_violated": [
+        "RT-NOT-ENSLAVED",
+        "RT-FAMILY",
+        "RT-MOVEMENT",
+        "RT-LIBERTY-SECURITY",
+        "RT-DEVELOPMENT",
+        "RT-UNREALISED-CAPACITY"
+      ],
+      "foreclosed_contribution": {
+        "basis": "Approximately one million people relocated by force, and the households, apprenticeships and communities each removal dissolved.",
+        "quantifiable": false,
+        "note": "The book records the foreclosure and states its documentable magnitude. It does not record what would have been made. No entry here names a work, a discovery, an invention or an achievement that did not happen, and none ever will: a counterfactual asserted as evidence would be indistinguishable from the fabrications this book's entire evidentiary standard exists to exclude. What is recorded is the input that was destroyed, which is a fact. What it would have produced is unknowable, and the unknowability is itself the injury - it is not possible to say what was lost, and that is what makes the loss total rather than measurable."
+      }
     },
     {
       "id": "CL-1860-CLOTILDA",
@@ -751,7 +799,19 @@
       "status_note": "Held against the rest of the corpus, this entry disposes of the objection that slavery's harms cannot be counted as crimes because they were lawful. Here the conduct was a capital crime when it was done, it was documented by its own perpetrators, and it was still unpunished.",
       "era": [
         "domestic_trade"
-      ]
+      ],
+      "rights_violated": [
+        "RT-NOT-ENSLAVED",
+        "RT-LIBERTY-SECURITY",
+        "RT-FAMILY",
+        "RT-MOVEMENT",
+        "RT-UNREALISED-CAPACITY"
+      ],
+      "foreclosed_contribution": {
+        "basis": "Roughly 110 people, taken as adults and children from a place with its own language, craft and learning, none of which survived the passage intact.",
+        "quantifiable": false,
+        "note": "The book records the foreclosure and states its documentable magnitude. It does not record what would have been made. No entry here names a work, a discovery, an invention or an achievement that did not happen, and none ever will: a counterfactual asserted as evidence would be indistinguishable from the fabrications this book's entire evidentiary standard exists to exclude. What is recorded is the input that was destroyed, which is a fact. What it would have produced is unknowable, and the unknowability is itself the injury - it is not possible to say what was lost, and that is what makes the loss total rather than measurable."
+      }
     },
     {
       "id": "CL-1838-GU272",
@@ -902,7 +962,18 @@
       "status_note": "The clearest demonstration in the corpus of the point the domestic trade entry makes generally: the ledger kept to prove title is the evidence, and where the names survive, the claim survives with them. This is the only entry here in which a perpetrator institution's own record produced material restoration. Note on tagging: the proceeds financed a college, but that is the institution's gain rather than an educational injury to the people sold, so this entry does not carry the educational domain. Broadening it would have improved a coverage number the methodology says to fix by writing the missing entries instead.",
       "era": [
         "domestic_trade"
-      ]
+      ],
+      "rights_violated": [
+        "RT-NOT-ENSLAVED",
+        "RT-FAMILY",
+        "RT-MOVEMENT",
+        "RT-DEVELOPMENT"
+      ],
+      "foreclosed_contribution": {
+        "basis": "272 people's labour and lineage, converted into the solvency of a college none of them could attend.",
+        "quantifiable": false,
+        "note": "The book records the foreclosure and states its documentable magnitude. It does not record what would have been made. No entry here names a work, a discovery, an invention or an achievement that did not happen, and none ever will: a counterfactual asserted as evidence would be indistinguishable from the fabrications this book's entire evidentiary standard exists to exclude. What is recorded is the input that was destroyed, which is a fact. What it would have produced is unknowable, and the unknowability is itself the injury - it is not possible to say what was lost, and that is what makes the loss total rather than measurable."
+      }
     },
     {
       "id": "CL-1841-NORTHUP",
@@ -1047,7 +1118,19 @@
       ],
       "era": [
         "domestic_trade"
-      ]
+      ],
+      "rights_violated": [
+        "RT-LIBERTY-SECURITY",
+        "RT-NOT-ENSLAVED",
+        "RT-FAIR-TRIAL",
+        "RT-FAMILY",
+        "RT-UNREALISED-CAPACITY"
+      ],
+      "foreclosed_contribution": {
+        "basis": "Twelve years of one man's life, and the narrative he wrote afterwards is the only reason any of it is recoverable.",
+        "quantifiable": false,
+        "note": "The book records the foreclosure and states its documentable magnitude. It does not record what would have been made. No entry here names a work, a discovery, an invention or an achievement that did not happen, and none ever will: a counterfactual asserted as evidence would be indistinguishable from the fabrications this book's entire evidentiary standard exists to exclude. What is recorded is the input that was destroyed, which is a fact. What it would have produced is unknowable, and the unknowability is itself the injury - it is not possible to say what was lost, and that is what makes the loss total rather than measurable."
+      }
     },
     {
       "id": "CL-1873-COLFAX",
@@ -1175,7 +1258,18 @@
       ],
       "era": [
         "reconstruction"
-      ]
+      ],
+      "rights_violated": [
+        "RT-LIFE",
+        "RT-PARTICIPATE-GOVT",
+        "RT-EQUALITY",
+        "RT-UNREALISED-CAPACITY"
+      ],
+      "foreclosed_contribution": {
+        "basis": "Between 60 and 150 people, most killed after surrender, in a parish where Black men had just been elected to office.",
+        "quantifiable": false,
+        "note": "The book records the foreclosure and states its documentable magnitude. It does not record what would have been made. No entry here names a work, a discovery, an invention or an achievement that did not happen, and none ever will: a counterfactual asserted as evidence would be indistinguishable from the fabrications this book's entire evidentiary standard exists to exclude. What is recorded is the input that was destroyed, which is a fact. What it would have produced is unknowable, and the unknowability is itself the injury - it is not possible to say what was lost, and that is what makes the loss total rather than measurable."
+      }
     },
     {
       "id": "CL-1892-MEMPHIS-PEOPLES-GROCERY",
@@ -1289,7 +1383,18 @@
       ],
       "era": [
         "jim_crow"
-      ]
+      ],
+      "rights_violated": [
+        "RT-LIFE",
+        "RT-PROPERTY",
+        "RT-LIBERTY-SECURITY",
+        "RT-UNREALISED-CAPACITY"
+      ],
+      "foreclosed_contribution": {
+        "basis": "Three men and a going concern. Thomas Moss was a letter carrier who had built a cooperative grocery; the business was sold at a fraction of its value to the competitor whose hostility produced the killings.",
+        "quantifiable": false,
+        "note": "The book records the foreclosure and states its documentable magnitude. It does not record what would have been made. No entry here names a work, a discovery, an invention or an achievement that did not happen, and none ever will: a counterfactual asserted as evidence would be indistinguishable from the fabrications this book's entire evidentiary standard exists to exclude. What is recorded is the input that was destroyed, which is a fact. What it would have produced is unknowable, and the unknowability is itself the injury - it is not possible to say what was lost, and that is what makes the loss total rather than measurable."
+      }
     },
     {
       "id": "CL-1892-FREE-SPEECH",
@@ -1397,7 +1502,17 @@
       ],
       "era": [
         "jim_crow"
-      ]
+      ],
+      "rights_violated": [
+        "RT-EXPRESSION",
+        "RT-PROPERTY",
+        "RT-MOVEMENT"
+      ],
+      "foreclosed_contribution": {
+        "basis": "A newspaper, its press, and the investigative work its editor would have done in Memphis over the following four decades had she been able to return.",
+        "quantifiable": false,
+        "note": "The book records the foreclosure and states its documentable magnitude. It does not record what would have been made. No entry here names a work, a discovery, an invention or an achievement that did not happen, and none ever will: a counterfactual asserted as evidence would be indistinguishable from the fabrications this book's entire evidentiary standard exists to exclude. What is recorded is the input that was destroyed, which is a fact. What it would have produced is unknowable, and the unknowability is itself the injury - it is not possible to say what was lost, and that is what makes the loss total rather than measurable."
+      }
     },
     {
       "id": "CL-1898-WILMINGTON",
@@ -1530,7 +1645,19 @@
       ],
       "era": [
         "jim_crow"
-      ]
+      ],
+      "rights_violated": [
+        "RT-LIFE",
+        "RT-PARTICIPATE-GOVT",
+        "RT-MOVEMENT",
+        "RT-PROPERTY",
+        "RT-UNREALISED-CAPACITY"
+      ],
+      "foreclosed_contribution": {
+        "basis": "A Black professional and political class — officeholders, a daily newspaper, businesses — that did not re-form in Wilmington, and 60 to 300 lives.",
+        "quantifiable": false,
+        "note": "The book records the foreclosure and states its documentable magnitude. It does not record what would have been made. No entry here names a work, a discovery, an invention or an achievement that did not happen, and none ever will: a counterfactual asserted as evidence would be indistinguishable from the fabrications this book's entire evidentiary standard exists to exclude. What is recorded is the input that was destroyed, which is a fact. What it would have produced is unknowable, and the unknowability is itself the injury - it is not possible to say what was lost, and that is what makes the loss total rather than measurable."
+      }
     },
     {
       "id": "CL-1918-TURNER",
@@ -1681,7 +1808,18 @@
       ],
       "era": [
         "jim_crow"
-      ]
+      ],
+      "rights_violated": [
+        "RT-LIFE",
+        "RT-NOT-TORTURED",
+        "RT-FAMILY",
+        "RT-UNREALISED-CAPACITY"
+      ],
+      "foreclosed_contribution": {
+        "basis": "Eleven lives at minimum, including a woman of about twenty-one and a child at term, and several hundred people who left the two counties.",
+        "quantifiable": false,
+        "note": "The book records the foreclosure and states its documentable magnitude. It does not record what would have been made. No entry here names a work, a discovery, an invention or an achievement that did not happen, and none ever will: a counterfactual asserted as evidence would be indistinguishable from the fabrications this book's entire evidentiary standard exists to exclude. What is recorded is the input that was destroyed, which is a fact. What it would have produced is unknowable, and the unknowability is itself the injury - it is not possible to say what was lost, and that is what makes the loss total rather than measurable."
+      }
     },
     {
       "id": "CL-1919-ELAINE",
@@ -1820,7 +1958,19 @@
       ],
       "era": [
         "jim_crow"
-      ]
+      ],
+      "rights_violated": [
+        "RT-LIFE",
+        "RT-FAIR-TRIAL",
+        "RT-NOT-TORTURED",
+        "RT-NO-ARBITRARY-ARREST",
+        "RT-UNREALISED-CAPACITY"
+      ],
+      "foreclosed_contribution": {
+        "basis": "Between 100 and 240 lives, and the farmers' union the meeting had been called to form.",
+        "quantifiable": false,
+        "note": "The book records the foreclosure and states its documentable magnitude. It does not record what would have been made. No entry here names a work, a discovery, an invention or an achievement that did not happen, and none ever will: a counterfactual asserted as evidence would be indistinguishable from the fabrications this book's entire evidentiary standard exists to exclude. What is recorded is the input that was destroyed, which is a fact. What it would have produced is unknowable, and the unknowability is itself the injury - it is not possible to say what was lost, and that is what makes the loss total rather than measurable."
+      }
     },
     {
       "id": "CL-1920-OCOEE",
@@ -1947,7 +2097,19 @@
       ],
       "era": [
         "jim_crow"
-      ]
+      ],
+      "rights_violated": [
+        "RT-LIFE",
+        "RT-PARTICIPATE-GOVT",
+        "RT-PROPERTY",
+        "RT-MOVEMENT",
+        "RT-UNREALISED-CAPACITY"
+      ],
+      "foreclosed_contribution": {
+        "basis": "July Perry, who was organising voter registration, and a community erased from the town.",
+        "quantifiable": false,
+        "note": "The book records the foreclosure and states its documentable magnitude. It does not record what would have been made. No entry here names a work, a discovery, an invention or an achievement that did not happen, and none ever will: a counterfactual asserted as evidence would be indistinguishable from the fabrications this book's entire evidentiary standard exists to exclude. What is recorded is the input that was destroyed, which is a fact. What it would have produced is unknowable, and the unknowability is itself the injury - it is not possible to say what was lost, and that is what makes the loss total rather than measurable."
+      }
     },
     {
       "id": "CL-1921-TULSA",
@@ -2098,7 +2260,20 @@
       ],
       "era": [
         "jim_crow"
-      ]
+      ],
+      "rights_violated": [
+        "RT-LIFE",
+        "RT-PROPERTY",
+        "RT-NO-ARBITRARY-ARREST",
+        "RT-MOVEMENT",
+        "RT-DEVELOPMENT",
+        "RT-UNREALISED-CAPACITY"
+      ],
+      "foreclosed_contribution": {
+        "basis": "Thirty-five blocks of accumulated commercial capacity — businesses, a hospital, schools, churches, libraries — and 39 to 300 lives, in a district that had become a byword for what Black enterprise could build.",
+        "quantifiable": false,
+        "note": "The book records the foreclosure and states its documentable magnitude. It does not record what would have been made. No entry here names a work, a discovery, an invention or an achievement that did not happen, and none ever will: a counterfactual asserted as evidence would be indistinguishable from the fabrications this book's entire evidentiary standard exists to exclude. What is recorded is the input that was destroyed, which is a fact. What it would have produced is unknowable, and the unknowability is itself the injury - it is not possible to say what was lost, and that is what makes the loss total rather than measurable."
+      }
     },
     {
       "id": "CL-1923-ROSEWOOD",
@@ -2225,7 +2400,18 @@
       ],
       "era": [
         "jim_crow"
-      ]
+      ],
+      "rights_violated": [
+        "RT-LIFE",
+        "RT-PROPERTY",
+        "RT-MOVEMENT",
+        "RT-UNREALISED-CAPACITY"
+      ],
+      "foreclosed_contribution": {
+        "basis": "A town, and the eight or more people killed in destroying it.",
+        "quantifiable": false,
+        "note": "The book records the foreclosure and states its documentable magnitude. It does not record what would have been made. No entry here names a work, a discovery, an invention or an achievement that did not happen, and none ever will: a counterfactual asserted as evidence would be indistinguishable from the fabrications this book's entire evidentiary standard exists to exclude. What is recorded is the input that was destroyed, which is a fact. What it would have produced is unknowable, and the unknowability is itself the injury - it is not possible to say what was lost, and that is what makes the loss total rather than measurable."
+      }
     },
     {
       "id": "CL-1932-TUSKEGEE-STUDY",
@@ -2364,7 +2550,19 @@
         "jim_crow",
         "civil_rights",
         "modern"
-      ]
+      ],
+      "rights_violated": [
+        "RT-CONSENT-EXPERIMENT",
+        "RT-HEALTH",
+        "RT-LIFE",
+        "RT-FAMILY",
+        "RT-UNREALISED-CAPACITY"
+      ],
+      "foreclosed_contribution": {
+        "basis": "623 men observed to autopsy over forty years, their wives, and children born with congenital syphilis — plus a measured and persisting withdrawal of trust in public medicine, which forecloses care for people not yet born.",
+        "quantifiable": false,
+        "note": "The book records the foreclosure and states its documentable magnitude. It does not record what would have been made. No entry here names a work, a discovery, an invention or an achievement that did not happen, and none ever will: a counterfactual asserted as evidence would be indistinguishable from the fabrications this book's entire evidentiary standard exists to exclude. What is recorded is the input that was destroyed, which is a fact. What it would have produced is unknowable, and the unknowability is itself the injury - it is not possible to say what was lost, and that is what makes the loss total rather than measurable."
+      }
     },
     {
       "id": "CL-1946-MOORES-FORD",
@@ -2503,7 +2701,16 @@
       ],
       "era": [
         "jim_crow"
-      ]
+      ],
+      "rights_violated": [
+        "RT-LIFE",
+        "RT-UNREALISED-CAPACITY"
+      ],
+      "foreclosed_contribution": {
+        "basis": "Four lives, one of them a veteran five years returned from the war, and a pregnancy at seven months.",
+        "quantifiable": false,
+        "note": "The book records the foreclosure and states its documentable magnitude. It does not record what would have been made. No entry here names a work, a discovery, an invention or an achievement that did not happen, and none ever will: a counterfactual asserted as evidence would be indistinguishable from the fabrications this book's entire evidentiary standard exists to exclude. What is recorded is the input that was destroyed, which is a fact. What it would have produced is unknowable, and the unknowability is itself the injury - it is not possible to say what was lost, and that is what makes the loss total rather than measurable."
+      }
     },
     {
       "id": "CL-1949-GROVELAND",
@@ -2636,7 +2843,7 @@
         "outstanding": "No criminal accountability for any officer. Exoneration corrected the state's injury to the victims and left the perpetrators' conduct unaddressed."
       },
       "verification": "documented",
-      "status_note": "Outcome is recorded as posthumous_exoneration and therefore still counts as unpunished. See METHODOLOGY.md section 12 for why.",
+      "status_note": "Outcome is recorded as posthumous_exoneration and therefore still counts as unpunished. See METHODOLOGY.md section 13 for why.",
       "finding": {
         "act": "established",
         "attribution": "named_in_sources"
@@ -2684,7 +2891,19 @@
       ],
       "era": [
         "jim_crow"
-      ]
+      ],
+      "rights_violated": [
+        "RT-LIFE",
+        "RT-FAIR-TRIAL",
+        "RT-NOT-TORTURED",
+        "RT-NO-ARBITRARY-ARREST",
+        "RT-UNREALISED-CAPACITY"
+      ],
+      "foreclosed_contribution": {
+        "basis": "Four young men's twenties and thirties: one killed at once, one shot in handcuffs, two imprisoned. Charles Greenlee was sixteen.",
+        "quantifiable": false,
+        "note": "The book records the foreclosure and states its documentable magnitude. It does not record what would have been made. No entry here names a work, a discovery, an invention or an achievement that did not happen, and none ever will: a counterfactual asserted as evidence would be indistinguishable from the fabrications this book's entire evidentiary standard exists to exclude. What is recorded is the input that was destroyed, which is a fact. What it would have produced is unknowable, and the unknowability is itself the injury - it is not possible to say what was lost, and that is what makes the loss total rather than measurable."
+      }
     },
     {
       "id": "CL-1955-TILL",
@@ -2841,7 +3060,18 @@
       ],
       "era": [
         "jim_crow"
-      ]
+      ],
+      "rights_violated": [
+        "RT-LIFE",
+        "RT-NOT-TORTURED",
+        "RT-LIBERTY-SECURITY",
+        "RT-UNREALISED-CAPACITY"
+      ],
+      "foreclosed_contribution": {
+        "basis": "One fourteen-year-old.",
+        "quantifiable": false,
+        "note": "The book records the foreclosure and states its documentable magnitude. It does not record what would have been made. No entry here names a work, a discovery, an invention or an achievement that did not happen, and none ever will: a counterfactual asserted as evidence would be indistinguishable from the fabrications this book's entire evidentiary standard exists to exclude. What is recorded is the input that was destroyed, which is a fact. What it would have produced is unknowable, and the unknowability is itself the injury - it is not possible to say what was lost, and that is what makes the loss total rather than measurable."
+      }
     },
     {
       "id": "CL-1927-STERILIZATION",
@@ -3014,7 +3244,19 @@
         }
       ],
       "verification": "documented",
-      "status_note": "The entry where the educational and medical systems meet. The classification that selected many of those sterilised was manufactured by intelligence testing applied to Black children in schools; the operation was performed by a health system acting on that classification. Both are recorded here as one course of conduct because the child passed from one to the other."
+      "status_note": "The entry where the educational and medical systems meet. The classification that selected many of those sterilised was manufactured by intelligence testing applied to Black children in schools; the operation was performed by a health system acting on that classification. Both are recorded here as one course of conduct because the child passed from one to the other.",
+      "rights_violated": [
+        "RT-CONSENT-EXPERIMENT",
+        "RT-HEALTH",
+        "RT-FAMILY",
+        "RT-LIBERTY-SECURITY",
+        "RT-UNREALISED-CAPACITY"
+      ],
+      "foreclosed_contribution": {
+        "basis": "Some 7,600 people in North Carolina alone and an estimated 60,000-70,000 nationally, together with every line of descent those operations ended. This is the only entry where the foreclosure was the explicit object rather than a consequence.",
+        "quantifiable": false,
+        "note": "The book records the foreclosure and states its documentable magnitude. It does not record what would have been made. No entry here names a work, a discovery, an invention or an achievement that did not happen, and none ever will: a counterfactual asserted as evidence would be indistinguishable from the fabrications this book's entire evidentiary standard exists to exclude. What is recorded is the input that was destroyed, which is a fact. What it would have produced is unknowable, and the unknowability is itself the injury - it is not possible to say what was lost, and that is what makes the loss total rather than measurable."
+      }
     },
     {
       "id": "CL-1959-PRINCE-EDWARD",
@@ -3173,7 +3415,19 @@
         }
       ],
       "verification": "documented",
-      "status_note": "The rare entry where a forum did find against the actor - and where the finding, arriving five years in, could not return what it was about. It is also the entry that shows the harm's whole arc inside one lifetime: withheld from the child, collected from the adult, and answered with a scholarship at fifty."
+      "status_note": "The rare entry where a forum did find against the actor - and where the finding, arriving five years in, could not return what it was about. It is also the entry that shows the harm's whole arc inside one lifetime: withheld from the child, collected from the adult, and answered with a scholarship at fifty.",
+      "rights_violated": [
+        "RT-EDUCATION",
+        "RT-EQUALITY",
+        "RT-CULTURAL-SCIENTIFIC",
+        "RT-DEVELOPMENT",
+        "RT-UNREALISED-CAPACITY"
+      ],
+      "foreclosed_contribution": {
+        "basis": "Roughly 2,000 children multiplied by five years — on the order of 10,000 child-years of schooling withheld, from a single county, by appropriation decision. It is the most exactly countable foreclosure in the corpus.",
+        "quantifiable": false,
+        "note": "The book records the foreclosure and states its documentable magnitude. It does not record what would have been made. No entry here names a work, a discovery, an invention or an achievement that did not happen, and none ever will: a counterfactual asserted as evidence would be indistinguishable from the fabrications this book's entire evidentiary standard exists to exclude. What is recorded is the input that was destroyed, which is a fact. What it would have produced is unknowable, and the unknowability is itself the injury - it is not possible to say what was lost, and that is what makes the loss total rather than measurable."
+      }
     },
     {
       "id": "CL-1960-KENNARD",
@@ -3308,7 +3562,19 @@
       ],
       "era": [
         "civil_rights"
-      ]
+      ],
+      "rights_violated": [
+        "RT-EDUCATION",
+        "RT-FAIR-TRIAL",
+        "RT-HEALTH",
+        "RT-NO-ARBITRARY-ARREST",
+        "RT-UNREALISED-CAPACITY"
+      ],
+      "foreclosed_contribution": {
+        "basis": "One man's admission to a college, his thirties, and his life; he died at thirty-six. The degree he applied for was awarded to nobody.",
+        "quantifiable": false,
+        "note": "The book records the foreclosure and states its documentable magnitude. It does not record what would have been made. No entry here names a work, a discovery, an invention or an achievement that did not happen, and none ever will: a counterfactual asserted as evidence would be indistinguishable from the fabrications this book's entire evidentiary standard exists to exclude. What is recorded is the input that was destroyed, which is a fact. What it would have produced is unknowable, and the unknowability is itself the injury - it is not possible to say what was lost, and that is what makes the loss total rather than measurable."
+      }
     },
     {
       "id": "CL-1919-NAACP-AGGREGATE",
@@ -3393,7 +3659,7 @@
         "outstanding": "The apology came eighty-seven years after the compilation was published. This entry stands for every killing in it that has no entry of its own."
       },
       "verification": "documented",
-      "status_note": "An aggregate entry, entered under the rule in METHODOLOGY.md section 13: where sources preserve only a count, the count is recorded as a count and is not permitted to stand in for individuated persons.",
+      "status_note": "An aggregate entry, entered under the rule in METHODOLOGY.md section 14: where sources preserve only a count, the count is recorded as a count and is not permitted to stand in for individuated persons.",
       "finding": {
         "act": "established",
         "attribution": "unattributed"
@@ -3440,7 +3706,18 @@
       "era": [
         "reconstruction",
         "jim_crow"
-      ]
+      ],
+      "rights_violated": [
+        "RT-LIFE",
+        "RT-NOT-TORTURED",
+        "RT-EQUALITY",
+        "RT-UNREALISED-CAPACITY"
+      ],
+      "foreclosed_contribution": {
+        "basis": "3,224 lives by the compilers' own count, which they state undercounts.",
+        "quantifiable": false,
+        "note": "The book records the foreclosure and states its documentable magnitude. It does not record what would have been made. No entry here names a work, a discovery, an invention or an achievement that did not happen, and none ever will: a counterfactual asserted as evidence would be indistinguishable from the fabrications this book's entire evidentiary standard exists to exclude. What is recorded is the input that was destroyed, which is a fact. What it would have produced is unknowable, and the unknowability is itself the injury - it is not possible to say what was lost, and that is what makes the loss total rather than measurable."
+      }
     },
     {
       "id": "CL-1981-DONALD",
@@ -3614,7 +3891,18 @@
       "status_note": "Entered deliberately as the corpus's counterexample. It is the only entry here whose process.outcome is convicted, and its presence is what makes the other twenty a finding rather than a selection. Note what actually ended the organisation: not the prosecutions, which reached two men, but a tort claim brought by the victim's mother.",
       "era": [
         "modern"
-      ]
+      ],
+      "rights_violated": [
+        "RT-LIFE",
+        "RT-NOT-TORTURED",
+        "RT-LIBERTY-SECURITY",
+        "RT-UNREALISED-CAPACITY"
+      ],
+      "foreclosed_contribution": {
+        "basis": "One nineteen-year-old, chosen because he was there.",
+        "quantifiable": false,
+        "note": "The book records the foreclosure and states its documentable magnitude. It does not record what would have been made. No entry here names a work, a discovery, an invention or an achievement that did not happen, and none ever will: a counterfactual asserted as evidence would be indistinguishable from the fabrications this book's entire evidentiary standard exists to exclude. What is recorded is the input that was destroyed, which is a fact. What it would have produced is unknowable, and the unknowability is itself the injury - it is not possible to say what was lost, and that is what makes the loss total rather than measurable."
+      }
     }
   ]
 }

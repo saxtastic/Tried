@@ -1,5 +1,5 @@
 {
-  "$comment": "Mechanisms by which documented injury was converted into non-cognizable claim. See METHODOLOGY.md section 14.",
+  "$comment": "Mechanisms by which documented injury was converted into non-cognizable claim. See METHODOLOGY.md section 15.",
   "impediments": [
     {
       "id": "IMP-NO-PERSONHOOD",
@@ -9,7 +9,8 @@
       "mechanism": "Held that persons of African descent were not and could not be citizens within the meaning of the Constitution, and so could not sue in federal court. Under the state slave codes an enslaved person was property, could not testify against a white person, could not contract, and could not be the victim of most offenses at law.",
       "effect": "No forum existed. The injury was not merely unpunished; it was not cognizable. This is the foundational impediment: every complaint arising before 1865 confronts it first.",
       "status": "repudiated",
-      "repudiated_by": "U.S. Const. amends. XIII (1865), XIV (1868); Civil Rights Act of 1866"
+      "repudiated_by": "U.S. Const. amends. XIII (1865), XIV (1868); Civil Rights Act of 1866",
+      "if_removed": "Already displaced. Nothing turns on it now except that the entries it governed have no surviving cause of action, because a claim that never accrued cannot be revived."
     },
     {
       "id": "IMP-STATE-ACTION",
@@ -19,7 +20,8 @@
       "mechanism": "The Fourteenth Amendment was read to restrain states only, not private persons. Federal prosecutions of private mob violence were held to be beyond the enumerated federal power, leaving such conduct to the states that had declined to prosecute it.",
       "effect": "Created the impunity gap that defines the lynching era: the state would not prosecute, and the federal government was held to lack the power to. Cruikshank overturned the only convictions obtained for the Colfax killings.",
       "status": "superseded",
-      "repudiated_by": "Narrowed by later Commerce Clause and Thirteenth Amendment enforcement doctrine; Emmett Till Antilynching Act, Pub. L. 117-107 (2022)"
+      "repudiated_by": "Narrowed by later Commerce Clause and Thirteenth Amendment enforcement doctrine; Emmett Till Antilynching Act, Pub. L. 117-107 (2022)",
+      "if_removed": "Narrowed, not removed. Its full removal would matter little now: the private actors it protected are dead. Its live effect is doctrinal - it is still cited for the proposition that the Fourteenth Amendment reaches only state conduct."
     },
     {
       "id": "IMP-SEPARATE-BUT-EQUAL",
@@ -29,7 +31,8 @@
       "mechanism": "Constitutionalized state-mandated racial separation, and with it the differential enforcement, differential punishment, and differential access to courts that separation carried.",
       "effect": "Legitimated the legal architecture within which most entries in this book occurred.",
       "status": "repudiated",
-      "repudiated_by": "Brown v. Board of Education, 347 U.S. 483 (1954)"
+      "repudiated_by": "Brown v. Board of Education, 347 U.S. 483 (1954)",
+      "if_removed": "Repudiated. Its residue is that no federal constitutional right to education replaced it, so the Prince Edward and anti-literacy entries violate a right that exists internationally and not domestically."
     },
     {
       "id": "IMP-JURY-EXCLUSION",
@@ -39,7 +42,8 @@
       "mechanism": "After Strauder, exclusion proceeded through property and literacy qualifications for jury service, discretionary selection by white commissioners, and peremptory strikes. Grand juries that declined to indict and petit juries that acquitted in minutes were drawn from the population least likely to convict.",
       "effect": "Where a prosecution occurred at all, the composition of the jury made its outcome close to predetermined. This is the most common proximate cause of acquittal in the entries below.",
       "status": "operative",
-      "note": "Batson v. Kentucky, 476 U.S. 79 (1986) addressed peremptory strikes but left a burden of proof that remains difficult to carry."
+      "note": "Batson v. Kentucky, 476 U.S. 79 (1986) addressed peremptory strikes but left a burden of proof that remains difficult to carry.",
+      "if_removed": "Removing the Batson burden of proof would change contemporary practice. It would do nothing for any entry here: those juries are long dissolved and the verdicts are final."
     },
     {
       "id": "IMP-PERSONS-UNKNOWN",
@@ -49,7 +53,8 @@
       "mechanism": "A coroner's jury drawn from the same community as the mob returned a finding that the deceased died at the hands of parties unknown, notwithstanding public participation, photographs, newspaper accounts naming participants, and advance notice of the event in the press.",
       "effect": "Closed the only official inquiry that would ever occur, and produced a written record affirmatively stating that no perpetrator could be identified. Ida B. Wells's method — reading white newspapers' own accounts back against these findings — was developed precisely to defeat this device.",
       "status": "repudiated",
-      "repudiated_by": "Superseded by modern medical examiner systems; the underlying practice has no contemporary formal analogue"
+      "repudiated_by": "Superseded by modern medical examiner systems; the underlying practice has no contemporary formal analogue",
+      "if_removed": "Gone as a practice. Its effect survives as the reason attribution is unattributed in three entries - the only official inquiry that would ever occur returned a finding designed to end inquiry."
     },
     {
       "id": "IMP-SOL",
@@ -58,7 +63,8 @@
       "authority": "State and federal limitations statutes generally; for civil rights claims, borrowed state personal-injury periods",
       "mechanism": "Time bars run from the injury, not from the date the facts became provable. Where the impediments above suppressed investigation for decades, the limitations period expired during the suppression.",
       "effect": "The principal formal obstacle to present-day claims. Murder is generally not time-barred; nearly everything else is. This is why so many entries below record a civil settlement or an apology rather than a prosecution.",
-      "status": "operative"
+      "status": "operative",
+      "if_removed": "THE decisive one. Repeal or tolling would reopen more of this corpus than any other single change. Murder is generally not time-barred already, which is why the criminal route is theoretically alive in the killing entries and dead in all the others. A statutory tolling provision running from the date facts became provable, rather than from the injury, is the specific reform that would matter."
     },
     {
       "id": "IMP-IMMUNITY",
@@ -67,7 +73,8 @@
       "authority": "Sovereign immunity generally; qualified immunity as stated in Harlow v. Fitzgerald, 457 U.S. 800 (1982) and Pearson v. Callahan, 555 U.S. 223 (2009)",
       "mechanism": "Governments are immune from suit absent waiver. Individual officials sued under 42 U.S.C. § 1983 are immune from damages unless the right violated was clearly established by closely analogous precedent at the time.",
       "effect": "Bars most civil recovery against officials who acted beyond the authority of their office — the precise conduct classified here as official_participation.",
-      "status": "operative"
+      "status": "operative",
+      "if_removed": "Abolishing qualified immunity would open civil claims against officials for conduct in the modern-era entries. It would not reach the historical ones, which are barred by limitations before immunity is ever argued."
     },
     {
       "id": "IMP-EXPIRED-JURISDICTION",
@@ -76,7 +83,8 @@
       "authority": "Emmett Till Unsolved Civil Rights Crime Act of 2007, Pub. L. 110-344; reauthorized by Pub. L. 114-325 (2016)",
       "mechanism": "Federal authority to reopen civil rights homicides reaches deaths occurring before December 31, 1979. The Department of Justice has closed most reviewed matters without prosecution, generally because every identified subject is deceased.",
       "effect": "The forum now exists and the defendants do not. This is the characteristic modern posture of the entries in this book: jurisdiction arrived after mortality removed its object.",
-      "status": "operative"
+      "status": "operative",
+      "if_removed": "Extending the pre-1980 cut-off would enlarge federal cold-case authority. It would change almost nothing: DOJ closes these matters because every identified subject is dead, not because the date bar excludes them. This is the impediment whose removal would be most symbolic and least effective."
     },
     {
       "id": "IMP-INSURANCE-RIOT-CLAUSE",
@@ -86,7 +94,8 @@
       "mechanism": "Policies excluded loss arising from riot. Insurers denied substantially all claims arising from the destruction of Greenwood on that basis.",
       "effect": "Converted destruction of a district into an uncompensated total loss, transferring the entire cost to the dispossessed. Property claims failed on the same ground the criminal claims failed: the scale of the participation was itself the defense.",
       "status": "operative",
-      "note": "The Oklahoma Commission of 2001 found that claims by Black claimants were denied while at least one claim by a white claimant for weapons losses was paid."
+      "note": "The Oklahoma Commission of 2001 found that claims by Black claimants were denied while at least one claim by a white claimant for weapons losses was paid.",
+      "if_removed": "A legislative rescission of riot exclusions applied retroactively to the destroyed districts is a live and specific proposal. It is the narrowest reform in this list with a real prospect of reaching a documented loss."
     },
     {
       "id": "IMP-NO-STANDING-DESCENDANT",
@@ -95,7 +104,8 @@
       "authority": "Article III standing doctrine; see e.g. Alexander v. Oklahoma, 382 F.3d 1206 (10th Cir. 2004), cert. denied",
       "mechanism": "A descendant asserting an ancestor's injury generally cannot show the particularized, personal injury standing requires, and inherited claims are time-barred independently.",
       "effect": "The doctrinal reason reparative claims are directed to legislatures rather than courts. Rosewood and Tulsa diverge here: Florida legislated a remedy; Oklahoma litigation was dismissed.",
-      "status": "operative"
+      "status": "operative",
+      "if_removed": "The bar that makes reparative claims legislative rather than judicial. Congress or a state legislature can create a statutory cause of action with standing for descendants; no court can. Every material restoration recorded in this book came through that route or through an institution acting on itself."
     }
   ]
 }

@@ -149,6 +149,43 @@ the operation was performed by a health system acting on that classification. Th
 record of the first became the warrant for the second, which is why they are one
 entry.
 
+**2e. Rights are named beyond the enumerated catalogue — and tied to instruments.**
+`data/rights.json` names 21. Each is bound to the instrument that recognises it
+or **marked as recognised by none**, which is what keeps this from being a list of
+grievances. Eight have no U.S. constitutional analogue: education, health,
+property against arbitrary deprivation, participation in cultural and scientific
+life, development, reparation, personhood before the law as such, and consent to
+medical experimentation as an express term.
+
+**The caveat comes first, on the page and here.** Most instruments postdate most
+entries and none applies retroactively — UDHR 1948, the Covenants 1966, the Right
+to Development 1986 (the US voted against), Basic Principles on Reparation 2005.
+A right named against an entry *characterises the conduct*, exactly as `offense[]`
+does. It is not a claim that a remedy existed then.
+
+The right to an **effective remedy** (UDHR 8, ICCPR 2(3)) is violated by every
+entry by construction — an established act with no forum, no conviction and no
+restoration *is* that denial — so it is derived, and the validator rejects it as a
+stored value.
+
+**`foreclosed_contribution`** records the interest no instrument protects: what a
+person would have made. It states **the input destroyed and never the output**,
+and that line is enforced — `quantifiable` must be `false` or the build fails.
+Prince Edward County withheld on the order of **10,000 child-years of schooling**,
+which is arithmetic on documented enrolment; what those children would have gone
+on to do is recorded nowhere. A counterfactual asserted as evidence would be
+indistinguishable from fabrication, and the unknowability is the sharper claim
+anyway: it is not possible to say what was lost, which is what makes the loss
+total rather than measurable.
+
+Each impediment carries **`if_removed`** — what repealing it would actually
+resolve. Most would resolve nothing; the two that would are limitations (a
+tolling provision running from when facts became provable) and descendant
+standing. `npm run record-book:interrogate -- --live` runs the whole query.
+**Every material restoration in this corpus came through a legislature, a claim
+bill, or an institution acting on its own record. None came from a court applying
+existing law to a historical claim.**
+
 **3a. Entries are classified by what was injured, not by who was injured.**
 `harm_domains` carries as many of eight as apply: `physiological`, `spiritual`,
 `social`, `political`, `economic`, `educational`, `interpersonal`,
@@ -230,7 +267,7 @@ anything under `public/record-book/`; it is overwritten.
 
 ## Current state
 
-25 complaint entries, 52 register rows, 6 organisations, 10 impediments, 53 archives.
+25 complaint entries, 52 register rows, 21 rights, 6 organisations, 10 impediments, 53 archives.
 
 In all 18 the act is **established** on the evidence. In 3 no participant is
 identified in any source. In all 18 no perpetrator was ever convicted. 7 name a

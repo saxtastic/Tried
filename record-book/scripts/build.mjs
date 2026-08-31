@@ -9,6 +9,7 @@ import { validate, isUnpunished, isMateriallyRestored, OUTCOMES, ACT, ATTRIBUTIO
          RESTORATION, VANTAGE, TRANSMISSION, DOMAINS, harmWeb,
          ECHELON, DISPOSITION, rungOf, routes, routeFinding,
          ERAS, childrenAcrossEras } from './validate.mjs';
+import { readFileSync } from 'node:fs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const OUT = join(ROOT, 'public', 'record-book');
@@ -21,6 +22,7 @@ const NAV = [
   ['web.html', 'Web of harm'],
   ['routes.html', 'Route of authority'],
   ['children.html', 'The child'],
+  ['rights.html', 'Rights'],
   ['register.html', 'Register'],
   ['impediments.html', 'Impediments'],
   ['archives.html', 'Archives'],
@@ -171,6 +173,19 @@ function renderComplaints({ complaints, persons, impediments }) {
   ${c.harmed?.interstitial ? `<div class="field"><h3>Interstitial harm</h3>
     <p>${esc(c.harmed.interstitial)}</p>
     <p class="meta">What falls between the recorded events, and is counted nowhere.</p>
+  </div>` : ''}
+
+  <div class="field"><h3>Rights violated</h3>
+    <p class="chips">${(c.rights_violated ?? []).map((r) =>
+      `<a class="chip" href="rights.html#${r}">${esc(RIGHTS.get(r)?.name ?? r)}</a>`).join('')}</p>
+    <p class="meta">Every entry also violates the right to an effective remedy, by construction —
+    an established act with no forum, no conviction and no restoration <em>is</em> that denial.
+    It is derived rather than listed here.</p>
+  </div>
+
+  ${c.foreclosed_contribution ? `<div class="field foreclosed"><h3>Foreclosed</h3>
+    <p>${esc(c.foreclosed_contribution.basis)}</p>
+    <p class="note">${esc(c.foreclosed_contribution.note)}</p>
   </div>` : ''}
 
   ${c.harmed?.children ? `<div class="field children"><h3>Reached as a child</h3>
@@ -629,6 +644,89 @@ function renderChildren({ complaints }) {
   return page('children.html', 'The child', lede, across + systems + entries);
 }
 
+
+// -------------------------------------------------------------------- rights
+function renderRights({ complaints, rights, impediments }) {
+  const byRight = new Map(rights.map((r) => [r.id, []]));
+  for (const c of complaints) for (const r of c.rights_violated ?? []) byRight.get(r)?.push(c);
+
+  const enumerated = rights.filter((r) => r.status === 'enumerated');
+  const unenumerated = rights.filter((r) => r.status === 'unenumerated');
+  const domestic = enumerated.filter((r) => r.instruments.some((i) => i.startsWith('U.S. Const')));
+  const intlOnly = enumerated.filter((r) => !r.instruments.some((i) => i.startsWith('U.S. Const')));
+
+  const caveat = `<section class="group finding"><h2>Read this first</h2>
+    <p><strong>Most of these instruments postdate most of these entries, and none applies
+    retroactively.</strong> The Universal Declaration is 1948; the Covenants are 1966; the
+    Declaration on the Right to Development is 1986 and the United States voted against it; the
+    Basic Principles on Reparation are 2005.</p>
+    <p>A right named against an entry therefore <em>characterises the conduct</em>, exactly as
+    <code>offense[]</code> does. It is not an assertion that a remedy was available at the time,
+    and nothing here should be presented to a forum as though it were. The book gains nothing by
+    overstating this and loses the standing that makes the rest of it usable.</p>
+    <p class="meta">What the catalogue does show is which interests the conduct destroyed that the
+    domestic constitutional catalogue has never recognised at all — ${intlOnly.length} of the
+    ${enumerated.length} enumerated rights here have no U.S. constitutional analogue, including
+    education, health, property against arbitrary deprivation, and participation in cultural and
+    scientific life.</p>
+  </section>`;
+
+  const list = (rs, title, gloss) => `<section class="group"><h2>${title}</h2>
+    <p class="gloss">${gloss}</p>
+    ${rs.map((r) => {
+      const es = byRight.get(r.id) ?? [];
+      return `<div class="domain-block" id="${r.id}">
+        <h3>${esc(r.name)} <span class="tally">${es.length} ${es.length === 1 ? 'entry' : 'entries'}</span></h3>
+        <p class="chips">${r.instruments.length
+          ? r.instruments.map((i) => `<span class="chip">${esc(i)}</span>`).join('')
+          : '<span class="chip chip-warn">no instrument recognises this</span>'}</p>
+        ${r.note ? `<p class="meta">${esc(r.note)}</p>` : ''}
+        ${es.length ? `<ul>${es.map((c) =>
+          `<li><a href="index.html#${c.id}">${esc(c.title)}</a></li>`).join('')}</ul>` : ''}
+      </div>`;
+    }).join('')}</section>`;
+
+  const foreclosed = complaints.filter((c) => c.foreclosed_contribution);
+  const fc = `<section class="group"><h2>What was foreclosed</h2>
+    <p class="gloss">The interest that no instrument protects: what a person would have made.
+    ${foreclosed.length} entries record its destruction. <strong>Each states the input that was
+    destroyed, which is a fact, and none states the output, which is unknowable.</strong> That
+    line is enforced by the validator, not by discipline — an entry claiming to know what would
+    have been produced fails the build.</p>
+    <p class="note">This is not modesty. A counterfactual asserted as evidence would be
+    indistinguishable from the fabrications this book's entire evidentiary standard exists to
+    exclude, and the first reader to notice would be right to discard everything else with it.
+    The unknowability is also the sharper claim: it is not possible to say what was lost, and
+    that is what makes the loss total rather than measurable.</p>
+    ${foreclosed.map((c) => `<div class="domain-block">
+      <h3><a href="index.html#${c.id}">${esc(c.title)}</a></h3>
+      <p>${esc(c.foreclosed_contribution.basis)}</p>
+    </div>`).join('')}</section>`;
+
+  const repeal = `<section class="group"><h2>What a repeal would actually resolve</h2>
+    <p class="gloss">Each impediment, and what removing it would open. Most would open nothing,
+    and saying which is the useful part.</p>
+    ${impediments.map((i) => `<div class="domain-block">
+      <h3>${esc(i.name)} <span class="flag flag-status-${esc(i.status)}">${esc(i.status)}</span></h3>
+      <p>${esc(i.if_removed)}</p>
+    </div>`).join('')}</section>`;
+
+  const lede = `The charge was kidnapping. It was also the destruction of a right to live, to
+    move, to keep a family, to learn, to vote, to hold what one built, and to take part in what a
+    society makes of itself. <strong>${rights.length} rights are named here</strong>, each tied to
+    the instrument that recognises it — or marked as recognised by none.
+    <br><br>${unenumerated.length} is unenumerated: the interest a person has in their own
+    unrealised work. No instrument protects it. The book records that as a gap in the
+    instruments, not as a right it can assert on anyone's behalf.`;
+
+  return page('rights.html', 'Rights', lede,
+    caveat + list(enumerated, 'Recognised somewhere',
+      'Each right, the instrument that recognises it, and the entries that violated it.') +
+    list(unenumerated, 'Recognised nowhere',
+      'Named because the conduct destroyed it, and marked because no positive instrument reaches it.') +
+    fc + repeal);
+}
+
 // ------------------------------------------------------------------ archives
 
 function renderArchives({ archives, complaints, persons }) {
@@ -863,6 +961,8 @@ main, .masthead, footer { max-width: 46rem; margin: 0 auto; padding: 0 1.25rem; 
 .domain-block li { margin: .2rem 0; }
 
 .children { border-left: 3px solid var(--accent); padding-left: .9rem; }
+.foreclosed { border-left: 3px solid var(--accent); padding-left: .9rem; }
+.chip-warn { border-color: var(--warn); color: var(--warn); }
 .transmitted { border-left: 3px solid var(--rule); padding-left: .9rem; }
 .transmitted h3 { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
 .flag-trans-argued_in_literature, .flag-trans-contested {
@@ -916,6 +1016,7 @@ footer { margin: 3rem auto 4rem; padding-top: 1.2rem; border-top: 1px solid var(
 // ---------------------------------------------------------------------- main
 
 const data = validate();
+const RIGHTS = new Map(data.rights.map((r) => [r.id, r]));
 if (data.errors.length) {
   for (const e of data.errors) console.error(`  ERROR ${e}`);
   console.error('\nBuild aborted: fix the errors above.');
@@ -930,6 +1031,7 @@ const files = {
   'web.html': renderWeb(data),
   'routes.html': renderRoutes(data),
   'children.html': renderChildren(data),
+  'rights.html': renderRights(data),
   'archives.html': renderArchives(data),
   'record-book.css': CSS,
 };
