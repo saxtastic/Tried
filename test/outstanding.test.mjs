@@ -1,0 +1,77 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
+import { readFile } from 'node:fs/promises';
+
+const run = (args = []) =>
+  JSON.parse(execFileSync('node', ['scripts/outstanding.mjs', '--json', ...args], { encoding: 'utf8' }));
+
+test('the list is derived from the record, not maintained by hand', () => {
+  const a = run();
+  const b = run();
+  assert.deepEqual(a, b, 'two runs over an unchanged tree must agree');
+  assert.ok(a.total > 0);
+});
+
+test('everything owed a source is found wherever it lives', () => {
+  const r = run();
+  const files = new Set(r.owed.map((x) => x.file));
+  assert.ok(files.has('public/simulator/corpus/trades.json'), 'the authored convergence verdicts');
+  assert.ok(files.has('public/simulator/corpus/provisions.json'), 'the statute recorded as paraphrase');
+  assert.ok([...files].some((f) => f.startsWith('corpus/')), 'officer premises held at basis none');
+});
+
+test('a node with basis none is reported once, not twice', () => {
+  const r = run();
+  const donald = r.owed.filter((x) => x.file.includes('donald-transfer-date'));
+  assert.equal(donald.length, 1, 'basis:none plus owed on one node is one item');
+  assert.equal(donald[0].kind, 'basis_none');
+  assert.match(donald[0].detail, /conveyance date/);
+});
+
+test('untried doors are reported as owed a search, with what would settle them', () => {
+  const r = run();
+  assert.ok(r.owedSearch.length >= 4);
+  for (const d of r.owedSearch) {
+    assert.ok(d.detail && d.detail.length > 20, `${d.id} must say what search is owed`);
+    assert.ok(d.theory);
+  }
+});
+
+test('unanswered vantages and missing arbitrations surface as awaiting', () => {
+  const r = run();
+  const ids = r.awaitingVantage.map((x) => x.id);
+  assert.ok(ids.includes('Q2-SURVIVAL'), 'Q2 has no arbitration and an unanswered vantage');
+  const arb = r.awaitingVantage.find((x) => x.kind === 'awaiting_arbitration');
+  assert.ok(arb, 'an arbitration that was never written is an outstanding item');
+});
+
+test('questions put to the owner are declared, since they cannot be derived', async () => {
+  const r = run();
+  assert.ok(r.awaitingOwner.length >= 3);
+  for (const q of r.awaitingOwner) {
+    assert.ok(q.question, 'each must be a question');
+    assert.ok(q.detail, 'each must carry enough context to answer without scrolling back');
+    assert.ok(q.asked_at, 'each must record when it was asked');
+    assert.equal(typeof q.blocking, 'boolean', 'blocking or not must be stated, not implied');
+  }
+  const project = JSON.parse(await readFile(new URL('../fleet/projects/simulator.json', import.meta.url), 'utf8'));
+  assert.equal(project.awaiting_owner.length, r.awaitingOwner.length, 'the script reads the project fragment');
+});
+
+test('--strict fails while anything awaits the owner', () => {
+  let code = 0;
+  try {
+    execFileSync('node', ['scripts/outstanding.mjs', '--strict', '--no-color'], { encoding: 'utf8', stdio: 'pipe' });
+  } catch (e) {
+    code = e.status;
+  }
+  assert.equal(code, 1, 'an unanswered question to a person should be able to gate a build');
+});
+
+test('an unresolved name is recorded as unresolved rather than guessed', () => {
+  const r = run();
+  const name = r.awaitingOwner.find((q) => /paralegal role actually called/i.test(q.question));
+  assert.ok(name, 'a word nobody could transcribe is an outstanding clarification, not a silent assumption');
+  assert.match(name.detail, /Recorded as an unresolved name rather than guessed at/);
+});

@@ -2,7 +2,7 @@
   "name": "ayeyoty-co",
   "private": true,
   "version": "0.1.0",
-  "description": "ayeyoty.co technovenue \u2014 an Apple-device-first static site on Cloudflare Workers",
+  "description": "ayeyoty.co technovenue — an Apple-device-first static site on Cloudflare Workers",
   "scripts": {
     "build:corpus": "node scripts/build-corpus.mjs",
     "check": "node scripts/check-tiers.mjs",
@@ -12,6 +12,7 @@
     "fleet": "node scripts/fleet.mjs all",
     "fleet:render": "node scripts/fleet.mjs render",
     "icons": "python3 scripts/make-icons.py",
+    "outstanding": "node scripts/outstanding.mjs",
     "propose": "node scripts/propose.mjs",
     "sim": "node sim/cli.mjs",
     "test": "node --test \"test/**/*.test.mjs\"",
