@@ -1,0 +1,171 @@
+[
+  {
+    "id": "tort.agency_vs_organisation",
+    "forum": "tort",
+    "theory": "Agency liability against the organisation for acts of its members",
+    "attempts": [
+      {
+        "who": "Beulah Mae Donald v. United Klans of America",
+        "year": 1987,
+        "court": "S.D. Ala.",
+        "reached": "remedy_executed",
+        "stopped_by": null,
+        "outcome": "$7M verdict; judgment exceeded assets; headquarters deed conveyed to the claimant",
+        "source": "https://www.splcenter.org/resources/civil-rights-case-docket/donald-v-united-klans-america/"
+      }
+    ],
+    "note": "The door is open and something went through it. The instrument was the organisation's own structure."
+  },
+  {
+    "id": "tort.agency_vs_institution_decision_body",
+    "forum": "tort",
+    "theory": "Agency liability against an educational institution for the acts of a decision body it constituted",
+    "attempts": [],
+    "owed": "A docket search for agency-theory tort claims against universities arising from disciplinary or academic decision panels. This session could not run it — every legal database was blocked by the egress proxy.",
+    "note": "UNTRIED IN THE SEARCHED RECORD, and the searched record here is empty, so the cell is unsearched rather than unattempted. Named because it is the same structural move as Donald applied to a different organisation."
+  },
+  {
+    "id": "education.private_disparate_impact",
+    "forum": "education_funding",
+    "theory": "Private action to enforce disparate-impact regulations under Title VI",
+    "attempts": [
+      {
+        "who": "Alexander v. Sandoval",
+        "year": 2001,
+        "court": "U.S.",
+        "reached": "filed",
+        "stopped_by": "no private right of action",
+        "outcome": "Held §602 regulations privately unenforceable",
+        "source": "corpus/precedents.json#sandoval"
+      }
+    ],
+    "note": "Closed on a rule rather than on a record, which is what makes it a legislative target rather than a litigation one."
+  },
+  {
+    "id": "education.records_private_right",
+    "forum": "education_funding",
+    "theory": "Private action on education-records provisions",
+    "attempts": [
+      {
+        "who": "Gonzaga University v. Doe",
+        "year": 2002,
+        "court": "U.S.",
+        "reached": "filed",
+        "stopped_by": "condition addressed to the funding agency, not rights-creating",
+        "outcome": "No personal rights enforceable under §1983",
+        "source": "corpus/precedents.json#gonzaga"
+      }
+    ],
+    "note": "Same shape as the impact door: shut at the threshold, on drafting."
+  },
+  {
+    "id": "admin.own_rules",
+    "forum": "administrative",
+    "theory": "The body is bound by the regulations it promulgated",
+    "attempts": [
+      {
+        "who": "United States ex rel. Accardi v. Shaughnessy",
+        "year": 1954,
+        "court": "U.S.",
+        "reached": "verdict_for_claimant",
+        "stopped_by": null,
+        "outcome": "Body held to its own rule",
+        "source": "corpus/precedents.json#accardi"
+      },
+      {
+        "who": "Motor Vehicle Mfrs. Ass'n v. State Farm",
+        "year": 1983,
+        "court": "U.S.",
+        "reached": "verdict_for_claimant",
+        "stopped_by": null,
+        "outcome": "Reasoned explanation required; post-hoc rationalisation rejected",
+        "source": "corpus/precedents.json#state_farm"
+      }
+    ],
+    "note": "Open as doctrine. What it yields is remand, which returns the question to the decider — the remedy is thin even when the door is wide."
+  },
+  {
+    "id": "admin.academic_deference",
+    "forum": "administrative",
+    "theory": "Review of a decision the institution characterises as academic",
+    "attempts": [
+      {
+        "who": "Regents v. Ewing",
+        "year": 1985,
+        "court": "U.S.",
+        "reached": "filed",
+        "stopped_by": "academic deference",
+        "outcome": "Overturned only on a substantial departure from accepted academic norms",
+        "source": "corpus/precedents.json#ewing"
+      },
+      {
+        "who": "Board of Curators v. Horowitz",
+        "year": 1978,
+        "court": "U.S.",
+        "reached": "filed",
+        "stopped_by": "academic deference",
+        "outcome": "Less process owed for academic than disciplinary decisions",
+        "source": "corpus/precedents.json#horowitz"
+      }
+    ],
+    "note": "The same bar stops it twice. A door with one dominant stopper is a door with one thing to argue about."
+  },
+  {
+    "id": "admin.process_owed",
+    "forum": "administrative",
+    "theory": "Process owed before withdrawal of a state-created entitlement",
+    "attempts": [
+      {
+        "who": "Goss v. Lopez",
+        "year": 1975,
+        "court": "U.S.",
+        "reached": "verdict_for_claimant",
+        "stopped_by": null,
+        "outcome": "Notice and opportunity to respond required",
+        "source": "corpus/precedents.json#goss"
+      }
+    ],
+    "note": "Open where the decision is disciplinary in substance. The characterisation fight is the whole fight."
+  },
+  {
+    "id": "ip.authorship",
+    "forum": "tort",
+    "theory": "Authorship vests in the creator absent a signed writing or employment in the agency sense",
+    "attempts": [
+      {
+        "who": "CCNV v. Reid",
+        "year": 1989,
+        "court": "U.S.",
+        "reached": "verdict_for_claimant",
+        "stopped_by": null,
+        "outcome": "Common-law agency governs work-for-hire; categories are exclusive",
+        "source": "corpus/precedents.json#reid"
+      }
+    ],
+    "note": "Open, and it sits in the forum requiring no concession."
+  },
+  {
+    "id": "tort.spoliation",
+    "forum": "tort",
+    "theory": "Spoliation as an independent tort where a body required to hold a record produces nothing",
+    "attempts": [],
+    "owed": "Jurisdiction-by-jurisdiction search. Independent spoliation torts are recognised in some states and refused in others, and this session could not determine which. Until that is filled the door's status is unsearched.",
+    "note": "UNTRIED HERE. Named because the passage model already scores a null return at 0.85 evidentiary value, and there is a live question whether that is only an inference at trial or a claim in itself."
+  },
+  {
+    "id": "contract.published_process_as_promise",
+    "forum": "contract",
+    "theory": "A published grievance procedure or catalogue is an enforceable promise",
+    "attempts": [],
+    "owed": "Search for catalogue-as-contract and handbook-as-contract claims against educational institutions, and the disclaimer language that defeats them.",
+    "note": "UNTRIED HERE. The self-binding theory already in the model is the administrative version of this; the contract version needs no deference and no exhaustion."
+  },
+  {
+    "id": "tort.interference_prospective_advantage",
+    "forum": "tort",
+    "theory": "Tortious interference with prospective economic advantage",
+    "attempts": [],
+    "owed": "Search for interference claims arising from institutional references, records or standing decisions.",
+    "note": "UNTRIED HERE. Reaches the career harm the other doors do not — the passage model's standing decay has no remedy anywhere else in this corpus."
+  }
+]

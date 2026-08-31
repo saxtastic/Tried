@@ -1,0 +1,43 @@
+{
+  "id": "venue",
+  "name": "ayeyoty.co technovenue",
+  "repo": "saxtastic/Tried",
+  "base_branch": "claude/cloudflare-ayeyoty-setup-uq8pl9",
+  "branch": "claude/ios-macos-code-repurpose-ofm9ks",
+  "pull_request": 1,
+  "owns": [
+    "public/index.html",
+    "public/404.html",
+    "public/venue.css",
+    "public/venue.js",
+    "public/app.webmanifest",
+    "public/_headers",
+    "public/robots.txt",
+    "public/sitemap.xml",
+    "public/icons/*",
+    "public/fleet/*",
+    "scripts/*",
+    "fleet/*",
+    "README.md",
+    "wrangler.toml",
+    "package.json"
+  ],
+  "ritual": false,
+  "state": "review",
+  "register": "D",
+  "note": "The shell. Front page and design system; every other surface in this repo opens as a subtree from it.",
+  "owns_note": "Enumerated, not public/*. A broad glob on the shell silently claims every subtree that opens from it, which is exactly the collision P1 exists to catch.",
+  "vantages_held": [
+    "engineering",
+    "creative-director"
+  ],
+  "survival": {
+    "duration": "indefinite — it is the shell every other surface opens from",
+    "survives_gallery": "⟦FILL: whether the venue has any physical instantiation, or is a website using the word venue⟧",
+    "irl_contingency": "⟦FILL⟧",
+    "produces_artifact": false,
+    "note": "Q2-SURVIVAL is open on this. The name makes a claim about a room that the repository does not currently support."
+  },
+  "pull_request_base": "claude/cloudflare-ayeyoty-setup-uq8pl9",
+  "_owner_note": "This file is owned by the project it describes. The venue assembles it and never edits another project's copy; a sibling edits only its own. That is the whole point of the split."
+}

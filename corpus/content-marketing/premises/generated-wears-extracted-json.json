@@ -1,0 +1,13 @@
+{
+  "id": "CM-P1",
+  "officer": "content-marketing",
+  "specificity": "broad",
+  "statement": "Generated copy and extracted copy are indistinguishable at the field level. A validator that guards only dates and money passes both.",
+  "basis": "confirmed",
+  "measured_by": "session_01GR1Ut4PmfsRVZo96RJZVJu, Q4-PROVENANCE audit of all 16 records",
+  "reproduce": "audit each field for a named source; compare against what the validator checks",
+  "derived_from": null,
+  "confidence": [0.85, 1.0],
+  "note": "Six field-groups rendered as fact with nothing behind them. Two of the six moved the ranking.",
+  "register": "D"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "CD-P1",
+  "officer": "creative-director",
+  "specificity": "local",
+  "statement": "Every subtree shares the shell: one stylesheet of tokens, one tier definition, one type scale. No subtree stylesheet declares a colour, a font or a breakpoint of its own.",
+  "basis": "confirmed",
+  "measured_by": "session_01GvNCLtH3R2cqohRaUwqKek",
+  "reproduce": "grep subtree stylesheets for colour, font-family and media-query declarations",
+  "derived_from": null,
+  "confidence": [0.85, 1.0],
+  "note": "True of fleet.css and of the fellowships stylesheet. The simulator's styles.css predates the convention and has not been re-verified since its merge.",
+  "register": "O"
+}

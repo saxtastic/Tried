@@ -2,16 +2,37 @@
   "name": "ayeyoty-co",
   "private": true,
   "version": "0.1.0",
-  "description": "ayeyoty.co static site hosted on Cloudflare Workers",
+  "description": "ayeyoty.co — the venue and its subtrees: fleet, fellowships, simulator, workstation",
   "scripts": {
+    "build": "npm run build:registry && npm run build:corpus && npm run build:workstation",
+    "build:corpus": "node scripts/build-corpus.mjs",
+    "build:registry": "node scripts/build-registry.mjs",
+    "build:workstation": "node scripts/build-workstation.mjs",
+    "check": "npm run check:data && npm run check:tiers && npm run check:vantage && npm run check:propose && npm test",
+    "check:data": "node scripts/build-registry.mjs --check && node scripts/check-registry.mjs",
+    "check:propose": "node scripts/check-propose.mjs",
+    "check:tiers": "node scripts/check-tiers.mjs",
+    "check:vantage": "node scripts/check-vantage.mjs",
+    "deploy": "npm run build && wrangler deploy",
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
+    "enoch": "node scripts/enoch.mjs",
+    "fleet": "node scripts/fleet.mjs all",
+    "fleet:render": "node scripts/fleet.mjs render",
+    "icons": "python3 scripts/make-icons.py",
+    "outstanding": "node scripts/outstanding.mjs",
+    "propose": "node scripts/propose.mjs",
     "record-book:validate": "node record-book/scripts/validate.mjs",
     "record-book:build": "node record-book/scripts/build.mjs",
     "record-book:fetch": "node record-book/scripts/fetch-archives.mjs",
-    "record-book:interrogate": "node record-book/scripts/interrogate.mjs"
+    "record-book:interrogate": "node record-book/scripts/interrogate.mjs",
+    "sim": "node sim/cli.mjs",
+    "test": "node --test \"test/**/*.test.mjs\"",
+    "verify": "node sim/verify.mjs"
   },
   "devDependencies": {
+    "playwright": "1.56.0",
     "wrangler": "^4.0.0"
-  }
+  },
+  "type": "module"
 }

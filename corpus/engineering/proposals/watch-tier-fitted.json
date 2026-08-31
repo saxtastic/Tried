@@ -1,0 +1,32 @@
+{
+  "id": "PROP-WATCH",
+  "title": "Fit the watch breakpoint to a measured width",
+  "industry": "device-targeted web",
+  "design": "Replace the 319px floor with the width watchOS actually reports.",
+  "officer": "engineering",
+  "specificity": "broad",
+  "hypothesis": "The watch tier can be fitted to a real measurement rather than a floor chosen under every iPhone.",
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The tier machinery holds at whatever width is chosen.",
+      "premises": ["ENG-P3"],
+      "prior": 0.9,
+      "range": [0.8, 0.98]
+    },
+    {
+      "id": "A2",
+      "statement": "The width Apple Watch reports is known.",
+      "premises": ["ENG-P4"],
+      "prior": 0.5,
+      "range": [0.1, 0.9]
+    }
+  ],
+  "simulation": {
+    "seed": 20260829,
+    "runs": 20000,
+    "thresholds": { "in_favor": 0.8, "nullified": 0.2 }
+  },
+  "verdict": null,
+  "register": "A"
+}

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Governance &amp; corpus simulator — ayeyoty.co</title>
+<meta name="description" content="An adversarial simulator for legal and institutional argument: one agent affirms a set of conditions, one negates them, and a bench decides on principle." />
+<meta name="theme-color" content="#f6f5fa" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0b0c10" media="(prefers-color-scheme: dark)" />
+<link rel="icon" href="/icons/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+<link rel="mask-icon" href="/icons/mask-icon.svg" color="#7c5cff" />
+<link rel="stylesheet" href="/venue.css" />
+<link rel="stylesheet" href="/simulator/styles.css" />
+<script src="/venue.js" defer></script>
+</head>
+<body>
+
+<a class="skip" href="#out">Skip to the argument</a>
+
+<header class="chrome">
+  <div class="shell">
+    <a class="wordmark" href="/">aye<span>yoty</span>.co</a>
+    <p class="chip" id="tier-chip" aria-live="polite">tier: <span id="tier-name">—</span></p>
+  </div>
+</header>
+
+<main>
+  <section class="shell hero">
+    <div class="hero-copy">
+      <p class="eyebrow">subtree · simulator</p>
+      <h1><span class="wide-only">Two agents. <em>One record.</em></span><span class="watch-only">Simulator</span></h1>
+      <p class="lede">One agent argues a set of legal conditions is satisfied; a second argues it is
+        not. A bench decides the contested ones on principle, records where no authority reaches,
+        sweeps every reading the words will bear, and names the statutory change that follows.
+        Runs from <code>simulator/corpus/</code> with no network and no dependencies.</p>
+      <div class="actions">
+        <button class="btn btn--primary" id="rerun" type="button">Re-run</button>
+        <button class="btn btn--quiet" id="download" type="button">Download JSON</button>
+      </div>
+    </div>
+
+    <div class="hero-art readout" aria-label="Disposition at a glance">
+      <p class="eyebrow">disposition</p>
+      <dl id="disposition"><dt>loading</dt><dd>—</dd></dl>
+    </div>
+  </section>
+
+  <section class="shell controls" id="controls">
+    <div class="section-head">
+      <h2>Controls</h2>
+      <p>The same record, re-read. Change the sense the words carry, or the kind of institution
+        the claim is made against, and watch which findings move.</p>
+    </div>
+    <div class="control-grid">
+      <p class="field">
+        <label for="regime">Interpretive regime</label>
+        <select id="regime"></select>
+      </p>
+      <p class="field">
+        <label for="policy">Institutional policy regime</label>
+        <select id="policy"><option value="">as recorded</option></select>
+      </p>
+      <fieldset class="field">
+        <legend>Tracks</legend>
+        <div class="toggles" id="tracks"></div>
+      </fieldset>
+    </div>
+  </section>
+
+  <div class="shell" id="out"><p class="loading">Running…</p></div>
+</main>
+
+<nav class="thumbbar" aria-label="Primary">
+  <a class="btn btn--primary" href="#out">Result</a>
+  <a class="btn btn--quiet" href="/">Venue</a>
+</nav>
+
+<footer class="footer">
+  <div class="shell">
+    <span>Simulator subtree — a surface of ayeyoty.co, not a second site.</span>
+    <span class="wide-only">A parameterised template, not a record of any real proceeding.</span>
+  </div>
+</footer>
+
+<script type="module" src="/simulator/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "id": "ENG-P4",
+  "officer": "engineering",
+  "specificity": "broad",
+  "statement": "Apple Watch reports a CSS viewport narrower than any iPhone.",
+  "basis": "none",
+  "measured_by": null,
+  "reproduce": null,
+  "derived_from": null,
+  "confidence": null,
+  "owed": "⟦FILL: the width a watch actually reports⟧ — the 319px breakpoint is a floor chosen under every iPhone, not a fitted number.",
+  "register": "V"
+}

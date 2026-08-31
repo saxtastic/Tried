@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Fellowships — ayeyoty.co</title>
+<meta name="description" content="Open calls for applications and fellowships, grouped by how long is left and ranked by return on effort." />
+<meta name="theme-color" content="#f6f5fa" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0b0c10" media="(prefers-color-scheme: dark)" />
+<link rel="icon" href="/icons/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+<link rel="mask-icon" href="/icons/mask-icon.svg" color="#7c5cff" />
+<link rel="stylesheet" href="/venue.css" />
+<link rel="stylesheet" href="/fellowships/fellowships.css" />
+<script src="/venue.js" defer></script>
+<script src="/fellowships/workflow.js" defer></script>
+<script src="/fellowships/vantage.js" defer></script>
+</head>
+<body>
+
+<a class="skip" href="#vantage">Skip to the module</a>
+
+<header class="chrome">
+  <div class="shell">
+    <a class="wordmark" href="/">aye<span>yoty</span>.co</a>
+    <p class="chip" id="tier-chip" aria-live="polite">tier: <span id="tier-name">—</span></p>
+  </div>
+</header>
+
+<main>
+  <section class="shell hero">
+    <div class="hero-copy">
+      <p class="eyebrow">subtree · fellowships</p>
+      <h1><span class="wide-only">What closes first, <em>worth what it costs</em>.</span><span class="watch-only">Fellowships</span></h1>
+      <!-- Lede is configuration, not copy: it comes from
+           data/vantage.config.json via the registry. -->
+      <p class="lede" id="vantage-lede">Loading the reference…</p>
+      <div class="actions">
+        <a class="btn btn--primary" href="#vantage">The radar</a>
+        <a class="btn btn--quiet wide-only" href="#provenance">What is sourced</a>
+      </div>
+    </div>
+
+    <div class="hero-art glance" aria-label="Reference at a glance">
+      <p class="eyebrow">at a glance</p>
+      <dl id="vantage-glance"></dl>
+    </div>
+  </section>
+
+  <!-- THE SINGULAR MODULE.
+       One module, no tabs. Its fields, its ordering, its horizon bands, its
+       colour and its density at each floor are all declared in
+       data/vantage.config.json. Nothing below is a view mode the reader has to
+       choose between; there is one surface, and configuration decides what it
+       holds. -->
+  <section class="shell module" id="vantage" aria-labelledby="vantage-title" data-state="loading">
+    <div class="section-head">
+      <h2 id="vantage-title">Vantage</h2>
+      <p>Grouped by how long is left. Inside each group the top of the list is the
+        best return for the effort it costs — award value and eligibility fit
+        against effort to submit.</p>
+    </div>
+
+    <div class="module-strip" id="vantage-strip" role="status" aria-live="polite"></div>
+
+    <div class="module-surface" id="vantage-surface"></div>
+
+    <p class="module-note" id="vantage-note"></p>
+  </section>
+
+  <section class="shell provenance" id="provenance">
+    <div class="section-head">
+      <h2>What is sourced, and what is owed</h2>
+      <p>A blank field is a finding. A fabricated one is a defect.</p>
+    </div>
+    <p>
+      No date in this reference was carried over from a programme’s usual cycle or
+      filled in from memory. A record carries a deadline only when something was
+      actually read to obtain it, and the URL that was read is recorded in
+      <code>sourced_from</code>. Everything else is blank and marked
+      <span class="prov prov--unsourced"><i></i>date not sourced</span>, which the
+      module groups into its own band rather than hiding.
+    </p>
+    <p>
+      Records marked <span class="prov prov--sourced"><i></i>sourced</span> were read
+      off a named third party, not the organisation’s own page — the container this
+      was built in cannot reach most of those pages directly. Primary confirmation
+      is still owed on every one of them. Raise a record to
+      <code>confirmed</code> by reading the guidelines yourself and setting
+      <code>date_basis</code>, <code>verified</code> and <code>sourced_from</code>
+      in <code>data/open-calls/</code>. The build refuses any record that claims
+      more than it can show.
+    </p>
+    <p>
+      Stage moves and drafts made here live for the life of the tab. Nothing is
+      stored in the browser and nothing is transmitted. No applicant-identifying
+      data belongs in this repository, in the registry, or in anything exported
+      from it.
+    </p>
+  </section>
+
+  <noscript>
+    <section class="shell provenance">
+      <div class="section-head"><h2>Without JavaScript</h2></div>
+      <p>
+        The module composes itself from configuration at runtime, so it needs
+        scripting. The underlying data is plain JSON and stays readable without
+        it: <a href="/fellowships/registry.json">registry.json</a>.
+      </p>
+    </section>
+  </noscript>
+</main>
+
+<footer class="footer">
+  <div class="shell">
+    <p>ayeyoty.co — fellowships subtree</p>
+    <p><a href="/fellowships/registry.json">registry.json</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

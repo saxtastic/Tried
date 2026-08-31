@@ -1,0 +1,19 @@
+{
+  "officer": "engineering",
+  "specificity": "instance",
+  "owns": "Whether the thing works, and what it measures at.",
+  "will_assert": [
+    "A measurement taken here, with the command that reproduces it",
+    "Whether a check passes, and on which tree",
+    "That a claim is decidable by running something"
+  ],
+  "will_not_assert": [
+    "Whether a thing should exist",
+    "Whether a surface reads as one thing or several",
+    "What an audience will rely on"
+  ],
+  "declines": "Questions of survival beyond the artifact. On Q2-SURVIVAL this officer declined the vantage and supplied measurement instead, which is the behaviour this field records rather than an exception to it.",
+  "bases_accepted": ["confirmed", "derived"],
+  "note": "Accepts sourced only where the source is a specification. An engineering claim resting on a press release is a product claim wearing a spec's clothes.",
+  "register": "O"
+}

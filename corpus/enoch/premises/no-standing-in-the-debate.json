@@ -1,0 +1,13 @@
+{
+  "id": "ENOCH-P1",
+  "officer": "enoch",
+  "specificity": "local",
+  "statement": "Enoch holds no vantage in fleet/questions.json and has answered no core question.",
+  "basis": "confirmed",
+  "measured_by": "session_01HCcyjiDYBhyRWFnL1qrKWB",
+  "reproduce": "node -e \"const q=require('./fleet/questions.json'); console.log(q.questions.flatMap(x=>x.answers||[]).filter(a=>a.vantage==='enoch').length)\" — returns 0",
+  "derived_from": null,
+  "confidence": [1.0, 1.0],
+  "why_it_matters": "This is not an omission to be corrected later. An officer that certifies the protocol cannot also have argued inside it, or its certification is a claim about its own conduct. The zero is the qualification for the office.",
+  "register": "O"
+}
