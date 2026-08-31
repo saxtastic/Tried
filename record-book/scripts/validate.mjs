@@ -22,7 +22,7 @@ export const OUTCOMES = {
   unresolved: 'Investigation opened and never closed',
 };
 
-// METHODOLOGY.md section 7: unpunished is derived. Only a sustained criminal
+// METHODOLOGY.md section 8: unpunished is derived. Only a sustained criminal
 // conviction of a perpetrator counts as punishment. Settlements, apologies and
 // exonerations of the victim do not.
 export const isUnpunished = (outcome) => outcome !== 'convicted';
@@ -81,6 +81,22 @@ export const VANTAGE = {
   clinical_research: 'Clinical or psychological research. A framework, not a finding - see TRANSMISSION.',
 };
 
+// HARM DOMAINS: what was injured, as distinct from what kind of event it was.
+// Classification says "lynching"; a domain says "the body", "the franchise",
+// "the line of descent". Entries carry as many as apply, and because they are
+// shared across a century the domains form a web rather than a list - two
+// entries a hundred years apart are joined by the thing they broke.
+export const DOMAINS = {
+  physiological: 'The body. Killing, torture, maiming, disease, treatment withheld.',
+  spiritual: 'The soul and the ties that bind it - to ancestors, to the dead, to land, to rite. Desecration, burial denied, severance from lineage.',
+  social: 'Standing and belonging. A community dispersed, a class prevented from re-forming, a people driven out.',
+  political: 'Self-governance. The franchise, office, representation, standing to be heard.',
+  economic: 'Property, wages, land, business, inheritance, and the compounding of what was taken.',
+  educational: 'Access to learning, literacy, and credential.',
+  interpersonal: 'The bonds between people. Kinship, marriage, parent and child, line of descent.',
+  intrapersonal: 'The interior life. Esteem, identity, the self a person is permitted to hold.',
+};
+
 // TRANSMISSION: harm that outlives the harmed generation. Distinct from
 // interstitial harm, which falls between events within one. The standing of a
 // transmission claim is recorded on the claim itself, because this is the
@@ -104,6 +120,34 @@ const STANDING = ['claimant', 'decedent_of_record', 'collective'];
 const VERIFICATION = ['documented', 'contested', 'unverified'];
 const IMPEDIMENT_KIND = ['written', 'unwritten'];
 const IMPEDIMENT_STATUS = ['operative', 'superseded', 'repudiated'];
+
+// The web. Which domains recur, which travel together, and which entries a
+// domain joins. Computed, never stored, so it cannot drift from the data.
+export function harmWeb(complaints) {
+  const names = Object.keys(DOMAINS);
+  const frequency = Object.fromEntries(names.map((n) => [n, 0]));
+  const entriesByDomain = Object.fromEntries(names.map((n) => [n, []]));
+  const pairs = Object.fromEntries(names.map((a) => [a, Object.fromEntries(names.map((b) => [b, 0]))]));
+
+  for (const c of complaints) {
+    const ds = c.harm_domains ?? [];
+    for (const a of ds) {
+      frequency[a] += 1;
+      entriesByDomain[a].push(c.id);
+      for (const b of ds) if (a !== b) pairs[a][b] += 1;
+    }
+  }
+  // Strongest joins first: the domains that most often travel together.
+  const joins = [];
+  for (let i = 0; i < names.length; i++) {
+    for (let j = i + 1; j < names.length; j++) {
+      const n = pairs[names[i]][names[j]];
+      if (n) joins.push({ a: names[i], b: names[j], n });
+    }
+  }
+  joins.sort((x, y) => y.n - x.n);
+  return { names, frequency, entriesByDomain, pairs, joins };
+}
 
 export function validate() {
   const complaints = read('complaints.json').complaints;
@@ -186,6 +230,19 @@ export function validate() {
     }
     if (!c.conduct) err(at, 'missing conduct');
 
+    if (!Array.isArray(c.harm_domains) || !c.harm_domains.length) {
+      err(at, 'harm_domains must name at least one domain of injury');
+    } else {
+      for (const dm of c.harm_domains) {
+        if (!(dm in DOMAINS)) {
+          err(at, `harm_domain "${dm}" is not one of ${Object.keys(DOMAINS).join(', ')}`);
+        }
+      }
+      if (new Set(c.harm_domains).size !== c.harm_domains.length) {
+        err(at, 'harm_domains contains a duplicate');
+      }
+    }
+
     const tr = c.harmed?.transmitted;
     if (tr) {
       if (!(tr.standing in TRANSMISSION)) {
@@ -262,7 +319,7 @@ export function validate() {
     if (!STANDING.includes(p.standing)) {
       err(at, `standing "${p.standing}" is not one of ${STANDING.join(', ')}`);
     }
-    // METHODOLOGY.md section 8: a count is a count and must say so; an
+    // METHODOLOGY.md section 9: a count is a count and must say so; an
     // individuated person is never carried as a number.
     if (p.identity_status === 'collectively_recorded' && !p.count) {
       err(at, 'collectively_recorded rows must carry a count');
@@ -277,7 +334,7 @@ export function validate() {
       err(at, 'name_unrecorded rows must state what attests the person\'s existence');
     }
     if (!p.consent_note) {
-      err(at, 'missing consent_note (METHODOLOGY.md section 8)');
+      err(at, 'missing consent_note (METHODOLOGY.md section 9)');
     }
     if (p.voice?.source && !archiveIds.has(p.voice.source)) {
       err(at, `voice.source references unknown archive "${p.voice.source}"`);
@@ -370,6 +427,16 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     `${transmitted} entries record harm that outlives the harmed generation ` +
     `(${transmitted - argued} documented, ${argued} recorded as argued and not adopted)`
   );
+  const web = harmWeb(complaints);
+  const top = web.joins.slice(0, 3).map((j) => `${j.a}+${j.b} (${j.n})`).join(', ');
+  const thin = web.names.filter((n) => web.frequency[n] <= 2);
+  console.log(`harm web: strongest joins ${top}`);
+  if (thin.length) {
+    console.log(
+      `thinly covered domains: ${thin.map((n) => `${n} (${web.frequency[n]})`).join(', ')}` +
+      ' — a gap in the corpus, not a gap in the history'
+    );
+  }
   console.log(`${errors.length} error(s), ${warnings.length} warning(s)`);
   process.exit(errors.length ? 1 : 0);
 }

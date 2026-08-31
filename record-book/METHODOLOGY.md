@@ -185,7 +185,65 @@ followed. The record therefore holds an accusation whose subjects were identifie
 to the state and never charged, which is a different thing from an unsolved
 killing, and the schema keeps them different.
 
-## 5. Interstitial harm
+## 5. Domains of harm, and the web
+
+`classification` says what kind of event it was — lynching, massacre, wrongful
+conviction. `harm_domains` says **what was injured**. They are different
+questions, and the second is the more useful one.
+
+Note what this axis is not. It is **not** a classification by identity. The book
+does not sort entries by who was harmed; race appears in the record as a fact of
+the conduct, never as a filing category. Sorting victims by identity reproduces
+the logic that produced the injuries. Sorting *injuries* by what they broke does
+the opposite.
+
+| Domain | What it names |
+| --- | --- |
+| `physiological` | The body. Killing, torture, maiming, disease, treatment withheld. |
+| `spiritual` | The soul and the ties that bind it — to ancestors, to the dead, to land, to rite. Desecration, burial denied, severance from lineage. |
+| `social` | Standing and belonging. A community dispersed, a class prevented from re-forming, a people driven out. |
+| `political` | Self-governance. The franchise, office, representation, standing to be heard. |
+| `economic` | Property, wages, land, business, inheritance, and the compounding of what was taken. |
+| `educational` | Access to learning, literacy, and credential. |
+| `interpersonal` | The bonds between people. Kinship, marriage, parent and child, line of descent. |
+| `intrapersonal` | The interior life. Esteem, identity, the self a person is permitted to hold. |
+
+An entry carries as many as apply, and most carry four.
+
+**Soul-tie** is held inside `spiritual` rather than given its own value, because
+in this corpus it is never severed alone — it comes with `interpersonal` where
+the tie is to kin, and with `spiritual` where it is to ancestors, the dead, or
+land. If entries accumulate where the tie is the whole of the injury, it earns
+its own domain and should be split out.
+
+### The web
+
+Because domains are shared, the log stops being a list of claims and becomes a
+web. Tulsa and chattel enslavement are joined by `economic`; Kennard and Ocoee by
+`political`; Till and Mary Turner by `spiritual`. Two entries a century apart are
+related by the thing they broke, which is a relation no chronology shows.
+
+`harmWeb()` computes the whole structure — frequency, co-occurrence, and the
+entries under each domain — and `web.html` renders it. Nothing is stored, so the
+findings cannot drift from the data as entries are added.
+
+Two findings the web surfaced, both computed rather than asserted:
+
+**No cell in the matrix is blank.** Every pair of the eight domains meets
+somewhere in the corpus. Five pairs meet in exactly one entry, and it is the same
+entry every time — chattel enslavement, which carries all eight domains alone.
+Remove it and the web comes apart at five joints. That is a statement about the
+corpus and about the thing it records.
+
+**`educational` appears in two entries of eighteen.** That is a gap in this
+corpus, not a gap in the history: anti-literacy statutes, the closure of public
+schools under massive resistance, and the destruction of school buildings in
+several of the massacres already entered all belong here and are not yet written.
+The validator reports thinly covered domains on every run, and the honest
+response is to add the missing entries rather than to broaden the tagging on the
+existing ones until the number looks better.
+
+## 6. Interstitial harm
 
 `harmed.interstitial` records what falls between the events and is counted
 nowhere: property abandoned under threat, exile, testimony never given, kinship
@@ -195,7 +253,7 @@ tally in any source. The field exists because leaving them out would let the
 book's own structure — one entry, one incident, one disposition — do the same
 work of erasure that the tallies do.
 
-## 6. Transmitted harm
+## 7. Transmitted harm
 
 `harmed.interstitial` records what falls between events within one generation.
 `harmed.transmitted` records what outlives it.
@@ -258,7 +316,7 @@ was assembled from knowledge of the field, not retrieved, and it is not a
 reconstruction of what DeGruy cites. It is marked as such in the manifest and
 must not be presented otherwise. Pull the actual citations from the book's notes.
 
-## 7. "Unpunished" is derived, not asserted
+## 8. "Unpunished" is derived, not asserted
 
 `process.outcome` records what the legal system actually did:
 
@@ -283,7 +341,7 @@ injuries while leaving the other untouched, and the book counts it that way.
 `scripts/validate.mjs` recomputes the field and fails the build on any
 disagreement, so the claim in the title of this book cannot drift from its data.
 
-## 8. Identity: who is in the register, and on what terms
+## 9. Identity: who is in the register, and on what terms
 
 The hardest question this book answers is what to do with a person whose injury
 is recorded and whose name is not.
@@ -333,7 +391,7 @@ carries them with its own citation. These are quotations from documents, not
 reconstructions. **The book never composes speech for the dead.** If no words
 survive, the field is absent — an absence that is itself part of the record.
 
-## 9. Impediments
+## 10. Impediments
 
 `data/impediments.json` catalogs the mechanisms that converted a crime into a
 non-crime: doctrines of personhood and jurisdiction, immunities, evidentiary and
@@ -352,7 +410,7 @@ book exists to show becomes legible: the same handful of doctrines, mostly about
 who may hear a claim rather than whether the injury occurred, recurring across a
 century and a half.
 
-## 10. Officials acting beyond their role
+## 11. Officials acting beyond their role
 
 A recurring classification is `official_participation` — conduct by sheriffs,
 deputies, jailers, guardsmen, and physicians acting under color of law and
@@ -364,7 +422,7 @@ defenses, and immunities differ, and because an officer exceeding the statute of
 their role is the case in which the state is both the injurer and the only
 available forum.
 
-## 11. Sources
+## 12. Sources
 
 `data/archives.json` is a manifest of the corpora this work draws on, with
 locator URLs and access terms. Public-domain texts can be fetched on demand with

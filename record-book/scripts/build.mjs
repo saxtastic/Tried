@@ -6,7 +6,7 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { validate, isUnpunished, isMateriallyRestored, OUTCOMES, ACT, ATTRIBUTION,
-         RESTORATION, VANTAGE, TRANSMISSION } from './validate.mjs';
+         RESTORATION, VANTAGE, TRANSMISSION, DOMAINS, harmWeb } from './validate.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const OUT = join(ROOT, 'public', 'record-book');
@@ -16,6 +16,7 @@ const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) =>
 
 const NAV = [
   ['index.html', 'Complaint log'],
+  ['web.html', 'Web of harm'],
   ['register.html', 'Register'],
   ['impediments.html', 'Impediments'],
   ['archives.html', 'Archives'],
@@ -143,6 +144,9 @@ function renderComplaints({ complaints, persons, impediments }) {
       ${c.respondents?.official_capacity
         ? '<span class="flag flag-official">Acting under colour of law</span>' : ''}
     </p>
+    <p class="domains">${c.harm_domains.map((dm) =>
+      `<a class="domain domain-${esc(dm)}" href="web.html#${esc(dm)}" title="${
+        esc(DOMAINS[dm])}">${esc(dm)}</a>`).join('')}</p>
     ${c.offense.length
       ? `<p class="offenses">${c.offense.map((o) =>
           `<span class="offense">${esc(o.replace(/_/g, ' '))}</span>`).join('')}</p>
@@ -336,6 +340,100 @@ function renderImpediments({ impediments, complaints }) {
   return page('impediments.html', 'Impediments', lede, body);
 }
 
+
+// ------------------------------------------------------------- web of harm
+// Form: bars for magnitude (8 values, direct-labelled); a ranked list for the
+// strongest joins, which answers "what travels together" more directly than a
+// matrix; and the matrix itself, which is the only form that shows ABSENCE -
+// the pairs that never co-occur. Every cell prints its value, so colour is
+// redundant encoding rather than the sole channel.
+function renderWeb({ complaints }) {
+  const web = harmWeb(complaints);
+  const byId = new Map(complaints.map((c) => [c.id, c]));
+  const max = Math.max(...Object.values(web.frequency));
+  const ranked = [...web.names].sort((a, b) => web.frequency[b] - web.frequency[a]);
+  const peak = Math.max(...web.joins.map((j) => j.n), 1);
+  // 5 sequential steps, light->dark; validated for monotonic lightness and
+  // >=4.5 text contrast against the ink each step carries.
+  const step = (n) => (n === 0 ? 0 : Math.min(5, Math.ceil((n / peak) * 5)));
+
+  const bars = `<section class="group"><h2>What was injured</h2>
+    <p class="gloss">How many of the ${complaints.length} entries record injury in each domain.</p>
+    <table class="bars"><tbody>
+    ${ranked.map((n) => `<tr>
+      <th scope="row">${esc(n)}</th>
+      <td class="bar-cell"><span class="bar" style="width:${(web.frequency[n] / max) * 100}%"></span>
+        <span class="bar-value">${web.frequency[n]}</span></td>
+      <td class="meta domain-def">${esc(DOMAINS[n])}</td>
+    </tr>`).join('')}
+    </tbody></table></section>`;
+
+  const joins = `<section class="group"><h2>What travels together</h2>
+    <p class="gloss">Domains that co-occur in the same entry, strongest first. These
+    joins are the web: two entries a century apart are related by the thing they broke.</p>
+    <ol class="joins">${web.joins.slice(0, 12).map((j) => `<li>
+      <span class="join-pair">${esc(j.a)} <span class="meta">+</span> ${esc(j.b)}</span>
+      <span class="join-bar" style="width:${(j.n / peak) * 100}%"></span>
+      <span class="join-n">${j.n}</span></li>`).join('')}</ol></section>`;
+
+  // Which pairs hang by a single entry, and which entry. Computed, because the
+  // finding changes as entries are added and the prose must not outlive it.
+  const single = web.joins.filter((j) => j.n === 1).map((j) => {
+    const who = complaints.filter(
+      (c) => c.harm_domains.includes(j.a) && c.harm_domains.includes(j.b));
+    return { ...j, entry: who[0] };
+  });
+  const carriers = [...new Set(single.map((x) => x.entry.id))];
+  const soleCarrier = carriers.length === 1 ? byId.get(carriers[0]) : null;
+  const blanks = web.joins.length < (web.names.length * (web.names.length - 1)) / 2;
+
+  const matrix = `<section class="group"><h2>Co-occurrence</h2>
+    <p class="gloss">Every pair of domains, and how many entries join them.${
+      blanks
+        ? ' A blank cell is a finding: the corpus holds no entry joining those two domains.'
+        : ` <strong>No cell is blank</strong> — every pair of domains meets somewhere in
+            the corpus.`}${
+      single.length && soleCarrier
+        ? ` ${single.length} of them meet in exactly one entry, and it is the same entry
+            every time: <a href="index.html#${soleCarrier.id}">${esc(soleCarrier.title)}</a>.
+            Remove it and the web comes apart at ${single.length} joints — which is a
+            statement about the corpus and about the thing it records.`
+        : ''}</p>
+    <div class="table-scroll"><table class="matrix"><thead><tr><td></td>
+    ${web.names.map((n) => `<th scope="col"><span>${esc(n)}</span></th>`).join('')}
+    </tr></thead><tbody>
+    ${web.names.map((a) => `<tr><th scope="row">${esc(a)}</th>
+      ${web.names.map((b) => {
+        if (a === b) return '<td class="cell-self" aria-label="same domain">—</td>';
+        const n = web.pairs[a][b];
+        return `<td class="cell cell-${step(n)}" title="${esc(a)} + ${esc(b)}: ${n} ${
+          n === 1 ? 'entry' : 'entries'}">${n || ''}</td>`;
+      }).join('')}</tr>`).join('')}
+    </tbody></table></div></section>`;
+
+  const index = `<section class="group"><h2>The index</h2>
+    <p class="gloss">Each domain and the entries it joins. This is the web made navigable.</p>
+    ${ranked.map((n) => `<div class="domain-block" id="${esc(n)}">
+      <h3>${esc(n)} <span class="tally">${web.frequency[n]}</span></h3>
+      <p class="meta">${esc(DOMAINS[n])}</p>
+      <ul>${web.entriesByDomain[n].map((id) =>
+        `<li><a href="index.html#${id}">${esc(byId.get(id).title)}</a></li>`).join('')}</ul>
+    </div>`).join('')}</section>`;
+
+  const thin = ranked.filter((n) => web.frequency[n] <= 2);
+  const lede = `Entries are classified by <strong>what was injured</strong>, not by who was
+    injured and not only by what kind of event it was. Because domains are shared, the log
+    stops being a list and becomes a web: Tulsa and chattel enslavement are joined by
+    <em>economic</em>; Kennard and Ocoee by <em>political</em>; Till and Mary Turner by
+    <em>spiritual</em>.${thin.length ? ` <strong>${thin.map((n) => esc(n)).join(', ')}</strong>
+    ${thin.length === 1 ? 'appears' : 'appear'} in ${thin.map((n) => web.frequency[n]).join(' and ')}
+    ${thin.length === 1 && web.frequency[thin[0]] === 1 ? 'entry' : 'entries'} — a gap in this
+    corpus, not a gap in the history, and a direction for the next entries rather than a
+    reason to pad the existing ones.` : ''}`;
+
+  return page('web.html', 'Web of harm', lede, bars + joins + matrix + index);
+}
+
 // ------------------------------------------------------------------ archives
 
 function renderArchives({ archives, complaints, persons }) {
@@ -476,6 +574,75 @@ main, .masthead, footer { max-width: 46rem; margin: 0 auto; padding: 0 1.25rem; 
 .axis-rest-none { color: var(--accent); font-weight: 600; }
 .axis-rest-material { color: #2f5d3f; font-weight: 600; }
 @media (prefers-color-scheme: dark) { .axis-rest-material { color: #7fb894; } }
+.domains { display: flex; flex-wrap: wrap; gap: .3rem; margin: .5rem 0 .2rem; }
+.domain {
+  padding: .12rem .5rem; border-radius: 10px; text-decoration: none;
+  background: var(--flag-bg); color: var(--ink-soft);
+  font-family: ui-sans-serif, system-ui, sans-serif; font-size: .7rem; letter-spacing: .03em;
+}
+.domain:hover { color: var(--accent); }
+
+/* Sequential ramp, light -> dark. Monotonic OKLCH lightness; each step's ink
+   validated at >= 4.5 text contrast. Dark mode is stepped from the dark surface,
+   not flipped. Every cell also prints its value, so colour is redundant. */
+:root {
+  --seq-1: #f6e7e3; --seq-2: #e8c3ba; --seq-3: #d4948a; --seq-4: #b45c4e; --seq-5: #7a2119;
+  --seq-ink-lo: #1d1c19; --seq-ink-hi: #ffffff;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --seq-1: #2e211d; --seq-2: #4a2c26; --seq-3: #6e3d34; --seq-4: #8f4e42; --seq-5: #d98a7e;
+    --seq-ink-lo: #e9e5da; --seq-ink-hi: #16150f;
+  }
+}
+
+.bars { width: 100%; border-collapse: collapse; }
+.bars th { text-align: left; font-weight: 400; padding: .3rem .7rem .3rem 0;
+  white-space: nowrap; font-size: .92rem; }
+.bars td { padding: .3rem 0; vertical-align: middle; }
+.bar-cell { width: 40%; white-space: nowrap; }
+.bar {
+  display: inline-block; height: 10px; background: var(--seq-5);
+  border-radius: 0 3px 3px 0; vertical-align: middle;
+}
+.bar-value { margin-left: .5rem; font-size: .85rem; color: var(--ink-soft); }
+.domain-def { padding-left: .9rem !important; width: 45%; }
+
+.joins { list-style: none; padding: 0; margin: .5rem 0 0; }
+.joins li { display: flex; align-items: center; gap: .6rem; padding: .28rem 0;
+  border-top: 1px solid var(--rule); }
+.join-pair { flex: 0 0 15rem; font-size: .88rem; }
+.join-bar { height: 8px; background: var(--seq-4); border-radius: 0 3px 3px 0; max-width: 45%; }
+.join-n { color: var(--ink-soft); font-size: .82rem; }
+
+.matrix { border-collapse: separate; border-spacing: 2px; font-size: .8rem; }
+.matrix th { font-weight: 400; color: var(--ink-soft);
+  font-family: ui-sans-serif, system-ui, sans-serif; font-size: .68rem; }
+.matrix thead th { vertical-align: bottom; padding: 0 0 .3rem; }
+.matrix thead th span { display: inline-block; writing-mode: vertical-rl;
+  transform: rotate(180deg); letter-spacing: .04em; }
+.matrix tbody th { text-align: right; padding-right: .4rem; white-space: nowrap; }
+.matrix td { width: 2.4rem; height: 2.1rem; text-align: center; border-radius: 2px;
+  color: var(--seq-ink-lo); }
+.cell-0 { background: var(--panel); outline: 1px solid var(--rule); }
+.cell-1 { background: var(--seq-1); }
+.cell-2 { background: var(--seq-2); }
+.cell-3 { background: var(--seq-3); }
+.cell-4 { background: var(--seq-4); color: var(--seq-ink-hi); }
+.cell-5 { background: var(--seq-5); color: var(--seq-ink-hi); }
+@media (prefers-color-scheme: dark) {
+  .cell-4 { color: var(--seq-ink-lo); }
+  .cell-5 { color: var(--seq-ink-hi); }
+}
+.cell-self { background: transparent; color: var(--rule); }
+.matrix tbody tr:hover th { color: var(--accent); }
+.matrix td:hover { outline: 2px solid var(--accent); }
+
+.domain-block { padding: .9rem 0; border-top: 1px solid var(--rule); }
+.domain-block h3 { margin: 0 0 .2rem; font-size: 1rem; }
+.domain-block ul { margin: .4rem 0 0; padding-left: 1.2rem; font-size: .9rem; }
+.domain-block li { margin: .2rem 0; }
+
 .transmitted { border-left: 3px solid var(--rule); padding-left: .9rem; }
 .transmitted h3 { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
 .flag-trans-argued_in_literature, .flag-trans-contested {
@@ -540,6 +707,7 @@ const files = {
   'index.html': renderComplaints(data),
   'register.html': renderRegister(data),
   'impediments.html': renderImpediments(data),
+  'web.html': renderWeb(data),
   'archives.html': renderArchives(data),
   'record-book.css': CSS,
 };

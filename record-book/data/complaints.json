@@ -1,5 +1,5 @@
 {
-  "$comment": "Complaint log. process.unpunished is DERIVED - see METHODOLOGY.md section 7 - and is recomputed and checked by scripts/validate.mjs.",
+  "$comment": "Complaint log. process.unpunished is DERIVED - see METHODOLOGY.md section 8 - and is recomputed and checked by scripts/validate.mjs.",
   "complaints": [
     {
       "id": "CL-1857-DRED-SCOTT",
@@ -90,6 +90,11 @@
           "source": "SRC-US-REPORTS",
           "vantage": "judicial_record"
         }
+      ],
+      "harm_domains": [
+        "political",
+        "intrapersonal",
+        "social"
       ]
     },
     {
@@ -235,6 +240,16 @@
           "source": "SRC-NMAAHC",
           "vantage": "material_record"
         }
+      ],
+      "harm_domains": [
+        "physiological",
+        "spiritual",
+        "social",
+        "political",
+        "economic",
+        "educational",
+        "interpersonal",
+        "intrapersonal"
       ]
     },
     {
@@ -353,6 +368,13 @@
           "source": "SRC-CHRONICLING-AMERICA",
           "vantage": "contemporaneous_press"
         }
+      ],
+      "harm_domains": [
+        "physiological",
+        "economic",
+        "political",
+        "interpersonal",
+        "intrapersonal"
       ]
     },
     {
@@ -448,6 +470,11 @@
           "source": "SRC-NARA-KKK-HEARINGS",
           "vantage": "congressional_testimony"
         }
+      ],
+      "harm_domains": [
+        "physiological",
+        "political",
+        "social"
       ]
     },
     {
@@ -543,6 +570,12 @@
           "source": "SRC-NATIONAL-CIVIL-RIGHTS-MUSEUM",
           "vantage": "material_record"
         }
+      ],
+      "harm_domains": [
+        "physiological",
+        "economic",
+        "social",
+        "interpersonal"
       ]
     },
     {
@@ -632,6 +665,12 @@
           "source": "SRC-NATIONAL-CIVIL-RIGHTS-MUSEUM",
           "vantage": "material_record"
         }
+      ],
+      "harm_domains": [
+        "economic",
+        "political",
+        "social",
+        "intrapersonal"
       ]
     },
     {
@@ -738,6 +777,12 @@
           "source": "SRC-CHRONICLING-AMERICA",
           "vantage": "contemporaneous_press"
         }
+      ],
+      "harm_domains": [
+        "physiological",
+        "political",
+        "economic",
+        "social"
       ]
     },
     {
@@ -849,6 +894,12 @@
           "source": "SRC-BEHIND-THE-VEIL",
           "vantage": "oral_history"
         }
+      ],
+      "harm_domains": [
+        "physiological",
+        "spiritual",
+        "interpersonal",
+        "social"
       ]
     },
     {
@@ -949,6 +1000,12 @@
           "source": "SRC-CHRONICLING-AMERICA",
           "vantage": "contemporaneous_press"
         }
+      ],
+      "harm_domains": [
+        "physiological",
+        "economic",
+        "political",
+        "social"
       ]
     },
     {
@@ -1049,6 +1106,12 @@
           "source": "SRC-CHRONICLING-AMERICA",
           "vantage": "contemporaneous_press"
         }
+      ],
+      "harm_domains": [
+        "physiological",
+        "political",
+        "economic",
+        "social"
       ]
     },
     {
@@ -1155,6 +1218,12 @@
           "source": "SRC-CHRONICLING-AMERICA",
           "vantage": "contemporaneous_press"
         }
+      ],
+      "harm_domains": [
+        "physiological",
+        "economic",
+        "social",
+        "spiritual"
       ]
     },
     {
@@ -1256,6 +1325,12 @@
           "source": "SRC-CHRONICLING-AMERICA",
           "vantage": "contemporaneous_press"
         }
+      ],
+      "harm_domains": [
+        "physiological",
+        "economic",
+        "social",
+        "interpersonal"
       ]
     },
     {
@@ -1361,6 +1436,12 @@
           "source": "SRC-DEGRUY-PTSS",
           "vantage": "clinical_research"
         }
+      ],
+      "harm_domains": [
+        "physiological",
+        "interpersonal",
+        "intrapersonal",
+        "social"
       ]
     },
     {
@@ -1461,6 +1542,12 @@
           "source": "SRC-NARA-RG60",
           "vantage": "government_record"
         }
+      ],
+      "harm_domains": [
+        "physiological",
+        "interpersonal",
+        "spiritual",
+        "social"
       ]
     },
     {
@@ -1536,7 +1623,7 @@
         "outstanding": "No criminal accountability for any officer. Exoneration corrected the state's injury to the victims and left the perpetrators' conduct unaddressed."
       },
       "verification": "documented",
-      "status_note": "Outcome is recorded as posthumous_exoneration and therefore still counts as unpunished. See METHODOLOGY.md section 7 for why.",
+      "status_note": "Outcome is recorded as posthumous_exoneration and therefore still counts as unpunished. See METHODOLOGY.md section 8 for why.",
       "finding": {
         "act": "established",
         "attribution": "named_in_sources"
@@ -1575,6 +1662,12 @@
           "source": "SRC-NARA-RG65",
           "vantage": "government_record"
         }
+      ],
+      "harm_domains": [
+        "physiological",
+        "political",
+        "intrapersonal",
+        "interpersonal"
       ]
     },
     {
@@ -1694,6 +1787,12 @@
           "source": "SRC-TILL-CENTER",
           "vantage": "material_record"
         }
+      ],
+      "harm_domains": [
+        "physiological",
+        "spiritual",
+        "interpersonal",
+        "social"
       ]
     },
     {
@@ -1796,6 +1895,12 @@
           "source": "SRC-MSSC-FILES",
           "vantage": "perpetrator_record"
         }
+      ],
+      "harm_domains": [
+        "educational",
+        "physiological",
+        "political",
+        "intrapersonal"
       ]
     },
     {
@@ -1857,7 +1962,7 @@
         "outstanding": "The apology came eighty-seven years after the compilation was published. This entry stands for every killing in it that has no entry of its own."
       },
       "verification": "documented",
-      "status_note": "An aggregate entry, entered under the rule in METHODOLOGY.md section 8: where sources preserve only a count, the count is recorded as a count and is not permitted to stand in for individuated persons.",
+      "status_note": "An aggregate entry, entered under the rule in METHODOLOGY.md section 9: where sources preserve only a count, the count is recorded as a count and is not permitted to stand in for individuated persons.",
       "finding": {
         "act": "established",
         "attribution": "unattributed"
@@ -1894,6 +1999,12 @@
           "source": "SRC-LEGACY-MUSEUM",
           "vantage": "material_record"
         }
+      ],
+      "harm_domains": [
+        "physiological",
+        "social",
+        "political",
+        "spiritual"
       ]
     }
   ]

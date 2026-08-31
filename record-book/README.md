@@ -89,6 +89,29 @@ that field is a finding of guilt, and the pages say so above every list.
    the injury occurred, where, and that it went unanswered. Standing to demand
    belongs to the living who choose to assert it.
 
+**3a. Entries are classified by what was injured, not by who was injured.**
+`harm_domains` carries as many of eight as apply: `physiological`, `spiritual`,
+`social`, `political`, `economic`, `educational`, `interpersonal`,
+`intrapersonal`. The book never sorts entries by identity — race appears as a
+fact of the conduct, never as a filing category, because sorting victims by
+identity reproduces the logic that produced the injuries. Sorting *injuries* by
+what they broke does the opposite.
+
+Because domains are shared, the log stops being a list and becomes a **web**:
+Tulsa and chattel enslavement joined by `economic`, Kennard and Ocoee by
+`political`, Till and Mary Turner by `spiritual` — relations no chronology shows.
+`harmWeb()` computes frequency, co-occurrence and the per-domain index; `web.html`
+renders it. Two findings it surfaced, both computed rather than written:
+
+- **No cell in the co-occurrence matrix is blank.** Every pair of domains meets
+  somewhere. Five pairs meet in exactly one entry, and it is the same entry every
+  time — chattel enslavement, which carries all eight alone. Remove it and the web
+  comes apart at five joints.
+- **`educational` appears in 2 of 18 entries.** A gap in the corpus, not in the
+  history. The validator reports thinly covered domains on every run, and the
+  honest response is to write the missing entries, not to broaden the tagging on
+  existing ones until the number improves.
+
 **3b. Harm that outlives the harmed generation is recorded, with its standing.**
 `harmed.transmitted` is separate from interstitial harm and carries a `standing`:
 `documented` (title transferred and never disturbed, a population kept out,
