@@ -1,0 +1,46 @@
+{
+  "id": "PROD-SERIES",
+  "channel": "youtube",
+  "status": "structure declared, no script written",
+  "shape": {
+    "pieces": 6,
+    "minutes_each": 10,
+    "cadence": "Tuesday and Thursday",
+    "basis": "sourced",
+    "source": "author, this session",
+    "derived": "Six pieces at two a week is three weeks of programming. That is a run, not a channel, and it is the right size to find out whether the cadence survives contact.",
+    "register": "D"
+  },
+  "each_piece_carries": [
+    { "field": "script", "required": true, "basis_required": "confirmed" },
+    {
+      "field": "provenance",
+      "required": true,
+      "asks": "how the script came about",
+      "quoted": "how the script came about… what the inspiration was",
+      "why": "The author asked for this explicitly and it is the unusual requirement. Most production systems store the output and lose the derivation. Here the derivation is a field, so a piece that cannot say where it came from is incomplete rather than merely undocumented.",
+      "register": "D"
+    },
+    {
+      "field": "constraint",
+      "required": true,
+      "quoted": "contained and constrained, but also refined and in alignment",
+      "asks": "what this piece is not allowed to become",
+      "register": "D"
+    },
+    { "field": "sourced_media", "required": false, "basis_required": "confirmed", "note": "Populated only from a scanned store. See mfile/." }
+  ],
+  "goal": {
+    "quoted": "be a generative producer of shareable, meaningful, influential storytelling that reimagines the work as being evidence of the criteria in which I live",
+    "register": "D",
+    "note": "Recorded as stated. It is a standard the pieces get measured against, not a description of them."
+  },
+  "owed": [
+    "The six subjects, or the one subject and its six angles.",
+    "Whether the provenance field is published with the piece or kept behind it. It is a different show depending."
+  ],
+  "refuses": [
+    "Generating six subjects and presenting them as the author's",
+    "Scheduling a post before a piece exists"
+  ]
+}

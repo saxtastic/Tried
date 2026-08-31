@@ -1,0 +1,21 @@
+{
+  "id": "MFILE-MANIFEST",
+  "version": 1,
+  "note": "What a scan must hand the administrator. Produced on the device or the mounted drive, never by this repository reaching outward. Written so a Shortcut, a shell one-liner and scripts/mfile-scan.mjs can all emit the same shape.",
+  "record": {
+    "path": { "type": "string", "required": true, "note": "relative to the scanned root" },
+    "name": { "type": "string", "required": true },
+    "ext": { "type": "string", "required": true, "note": "lowercased, no dot; empty string is legal" },
+    "bytes": { "type": "number", "required": true },
+    "mtime": { "type": "string", "required": true, "note": "ISO 8601" },
+    "store": { "type": "string", "required": true, "note": "a key from mfile/stores.json" },
+    "content_hash": { "type": "string", "required": false, "note": "sha256 hex. Absent is legal and degrades duplicate to candidate — it never fabricates one." },
+    "account": { "type": "string", "required": false }
+  },
+  "envelope": {
+    "scanned_at": "ISO 8601",
+    "root": "string",
+    "store": "string",
+    "records": "array of record"
+  }
+}

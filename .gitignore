@@ -2,3 +2,6 @@ node_modules/
 .wrangler/
 .dev.vars
 .env
+
+# turn archives are per-machine state, not a record
+turn/archive/

@@ -1,0 +1,35 @@
+{
+  "id": "QS-MFILE-INTAKE",
+  "domain": "file administration",
+  "produces": "a confirmed stem ruleset and a scope; no scan, no move, no rename",
+  "note": "Three questions. Answering them turns two of the four verdicts from candidate into stated, and turns the scanner on. Not answering them leaves the scanner honest and quiet, which is the correct failure.",
+  "questions": [
+    {
+      "id": "Q1",
+      "ask": "Point at one folder that is already the worst of it. Where is it, and roughly how many files?",
+      "type": "short_text",
+      "why": "One real folder beats a taxonomy. The scanner runs on a path; everything after that is measured instead of imagined.",
+      "unblocks": ["duplicate", "novel"]
+    },
+    {
+      "id": "Q2",
+      "ask": "Show three filenames of yours that are the SAME work at different stages. Just paste them.",
+      "type": "short_text",
+      "why": "This is the stem ruleset. Three examples of your own cadence are worth more than any list of suffixes I could write, and you have already said the cadence is unreliable — which means it has to be read off your files, not off a convention.",
+      "unblocks": ["iterative"]
+    },
+    {
+      "id": "Q3",
+      "ask": "When you say a file is still doing something — what is it doing? Named in a kit, on a page, in a release, sent to someone?",
+      "type": "short_text",
+      "why": "This defines the reference index, and the reference index is the only thing that can answer 'functional'. Without it the scanner will keep returning unknown, correctly, forever.",
+      "unblocks": ["functional"]
+    }
+  ],
+  "refuses": [
+    "Reading a cloud store before Q1 names a scope",
+    "Inventing a stem ruleset from suffix conventions",
+    "Reporting 'unused' for any file",
+    "Renaming, moving, archiving or deleting anything, under any answer"
+  ]
+}

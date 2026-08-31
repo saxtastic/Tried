@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>M file administrator — ayeyoty.co</title>
+<meta name="description" content="Four questions asked of every file: what is iterative, what is duplicate, what is novel, what is functional." />
+<meta name="theme-color" content="#f6f5fa" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0b0c10" media="(prefers-color-scheme: dark)" />
+<link rel="icon" href="/icons/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+<link rel="mask-icon" href="/icons/mask-icon.svg" color="#7c5cff" />
+<link rel="stylesheet" href="/venue.css" />
+<script src="/venue.js" defer></script>
+</head>
+<body>
+
+<a class="skip" href="#four">Skip to the four questions</a>
+
+<header class="chrome">
+  <div class="shell">
+    <a class="wordmark" href="/">aye<span>yoty</span>.co</a>
+    <p class="chip" id="tier-chip" aria-live="polite">tier: <span id="tier-name">—</span></p>
+  </div>
+</header>
+
+<main>
+  <section class="shell hero">
+    <div class="hero-copy">
+      <p class="eyebrow">subtree · m file administrator</p>
+      <h1>
+        <span class="wide-only">It does not run between the officers. It runs across all of them, on one input.</span>
+        <span class="watch-only">M file</span>
+      </h1>
+      <p class="lede">
+        Four questions asked of every file — what is iterative, what is duplicate, what is novel,
+        what is functional. Three of them a scan can answer. One of them no scan can answer, at any
+        resolution, ever, and saying so is the finding rather than the gap.
+      </p>
+      <div class="actions">
+        <a class="btn btn--primary" href="#four">The four</a>
+        <a class="btn btn--quiet" href="#ask">What it needs from you</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="shell" id="four">
+    <h2>The four questions</h2>
+    <div class="grid">
+
+      <div class="card">
+        <h3>Duplicate</h3>
+        <p>Two records are duplicates when their content hashes are equal. Same name is not
+          duplication. Same size is not duplication. Without a hash it will say
+          <em>candidate</em> and refuse the word.</p>
+      </div>
+
+      <div class="card">
+        <h3>Iterative</h3>
+        <p>Same normalised stem, different content, ordered by time — the newest is the head and the
+          rest are its history. Normalisation is the whole question, and it is read off your own
+          filenames rather than guessed from a list of suffixes.</p>
+      </div>
+
+      <div class="card">
+        <h3>Novel</h3>
+        <p>Unique content <em>and</em> a stem that appears once. Unique content is a fact about
+          bytes; novel is a claim about the work, and a work can be unique in content while being
+          the fourth attempt at the same thing.</p>
+      </div>
+
+      <div class="card">
+        <h3>Functional</h3>
+        <p>Is anything referring to it — a page, a kit, a release, a send? This is the one the
+          filesystem cannot answer, because bytes, names and dates are all internal to the file and
+          function is a relation to something else. It reports <em>unknown</em>, and it never
+          reports <em>unused</em>.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="shell" id="ask">
+    <h2>What it needs before it will speak</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>One folder</h3>
+        <p>Point at the folder that is already the worst of it. One real folder beats a taxonomy;
+          everything after that is measured instead of imagined.</p>
+      </div>
+      <div class="card">
+        <h3>Three filenames</h3>
+        <p>Three names of yours that are the same work at different stages. That is the ruleset.
+          Three examples of your cadence are worth more than any convention, because the cadence is
+          the thing you said was unreliable.</p>
+      </div>
+      <div class="card">
+        <h3>One definition</h3>
+        <p>When a file is still doing something — what is it doing? Named in a kit, on a page, in a
+          release, sent to someone? That sentence is the only thing that can answer the fourth
+          question.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="shell">
+    <h2>What it will not do</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Move anything</h3>
+        <p>It never renames, moves, archives or deletes, under any answer. It reads and it reports.
+          Both halves are asserted by a test that greps the source for a write.</p>
+      </div>
+      <div class="card">
+        <h3>Reach a store it was not pointed at</h3>
+        <p>No network request, no dependency. The scanner runs where the files already are — a Mac
+          with iCloud Drive mounted, a disk, a synced folder — and hands back one JSON file.
+          An iCloud placeholder is recorded as not-downloaded rather than pulled.</p>
+      </div>
+      <div class="card">
+        <h3>Estimate a verdict</h3>
+        <p>Every answer carries a basis. A verdict that cannot reach <em>confirmed</em> or
+          <em>derived</em> is returned at the degraded wording, never at the confident one — because
+          a guessed verdict on a file store is worse than none. It gets acted on.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<nav class="thumbbar" aria-label="Primary">
+  <a class="btn btn--primary" href="#four">Four</a>
+  <a class="btn btn--quiet" href="/">Venue</a>
+</nav>
+
+<footer class="footer">
+  <div class="shell">
+    <span>M file administrator — a subtree of ayeyoty.co.</span>
+    <span class="wide-only">Criteria in mfile/criteria.json. No cookies. No storage.</span>
+  </div>
+</footer>
+
+</body>
+</html>

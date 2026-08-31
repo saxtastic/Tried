@@ -432,6 +432,32 @@ into `public/_headers` beside the policy. **[O]**
 The default remains `default-src 'none'`; every directive in `_headers` is a
 named exception to it, and each one is written down beside the policy. **[O]**
 
+## The M file administrator
+
+Four questions asked of every file — what is **iterative**, what is
+**duplicate**, what is **novel**, what is **functional**.
+
+```bash
+npm run mfile -- --self                  # answered on this repository
+npm run mfile:scan -- <dir> --store icloud > m.json && npm run mfile -- m.json
+npm run turn -- "the objective" --dry    # the per-turn cycle
+```
+
+Three of the four are answerable from a manifest of bytes. The fourth is not
+answerable from any manifest, at any resolution, ever: function is a relation
+between a file and something outside it, and scanning only ever sees the inside.
+So it reports `unknown` for functional until a reference index exists, and it
+never reports `unused`.
+
+It reads and reports. It never renames, moves, archives or deletes — asserted by
+a test that greps its own source for a write. Every verdict carries a basis, and
+a verdict that cannot reach `confirmed` or `derived` is returned at the degraded
+wording rather than the confident one.
+
+- [`docs/mfile.md`](docs/mfile.md) — the criteria, the stores, the turn cycle
+- [`mfile/questions/intake.json`](mfile/questions/intake.json) — the three
+  questions that turn two of the four verdicts from candidate into stated
+
 ## Governance & corpus simulator
 
 An adversarial simulator for legal and institutional argument. One agent argues

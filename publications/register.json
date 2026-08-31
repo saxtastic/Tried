@@ -1,0 +1,43 @@
+{
+  "id": "PUB-REGISTER",
+  "note": "The other titles the author named, recorded as named. Three of the four are titles without a stated scope, and they are held that way rather than given one.",
+  "works": [
+    {
+      "id": "PUB-BSA",
+      "title": "Black Sonic Alchemy",
+      "state": "briefed",
+      "file": "publications/black-sonic-alchemy.json",
+      "register": "D"
+    },
+    {
+      "id": "PUB-AS",
+      "title": "acoustic sovereignty",
+      "state": "titled",
+      "quoted": "acoustic sovereignty",
+      "basis": "sourced",
+      "owed": "Whether this is a book, an essay, or the frame the other three sit inside. The repository's own terminology rule prefers acoustic energy to sound, which suggests the title is load-bearing rather than descriptive — but that is an inference, not the author's word.",
+      "register": "I"
+    },
+    {
+      "id": "PUB-SOV",
+      "title": "sovereignty as principal or sovereignty as legal statute",
+      "state": "titled",
+      "quoted": "sovereignty as principal or sovereignty as legal statute",
+      "basis": "sourced",
+      "owed": "The title is posed as a disjunction. Whether the book argues one side, or holds both open, changes everything after the first chapter.",
+      "adjacent": "The governance simulator already models this distinction — a bench deciding contested elements on principle versus on authority. Whether that engine is an instrument for this book is the author's call, not a conclusion.",
+      "register": "I"
+    },
+    {
+      "id": "PUB-RCL",
+      "title": "the record and the claimant law",
+      "state": "titled",
+      "quoted": "the record and the claimant law",
+      "basis": "sourced",
+      "owed": "Scope.",
+      "adjacent": "The record book on the open branch is a complaint log of documented unpunished crimes, 1841–1960, 47 citations. Whether it is this book's corpus, its subject, or unrelated has not been said.",
+      "register": "I"
+    }
+  ],
+  "load_bearing": "Four titles, one brief, and no manuscript in the repository. The honest state of the publication layer is that it is a register, and calling it a pipeline would be the hype-over-data failure the author named."
+}
