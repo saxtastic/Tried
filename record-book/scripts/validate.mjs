@@ -23,7 +23,7 @@ export const OUTCOMES = {
   unresolved: 'Investigation opened and never closed',
 };
 
-// METHODOLOGY.md section 9: unpunished is derived. Only a sustained criminal
+// METHODOLOGY.md section 11: unpunished is derived. Only a sustained criminal
 // conviction of a perpetrator counts as punishment. Settlements, apologies and
 // exonerations of the victim do not.
 export const isUnpunished = (outcome) => outcome !== 'convicted';
@@ -248,6 +248,7 @@ export function routeFinding(complaints) {
 
 export function validate() {
   const complaints = read('complaints.json').complaints;
+  const organizations = read('organizations.json').organizations;
   const persons = read('register.json').persons;
   const impediments = read('impediments.json').impediments;
   const archives = read('archives.json').archives;
@@ -266,7 +267,7 @@ export function validate() {
     }
   };
 
-  [[complaints, 'complaints'], [persons, 'register'],
+  [[complaints, 'complaints'], [persons, 'register'], [organizations, 'organizations'],
    [impediments, 'impediments'], [archives, 'archives']]
     .forEach(([rows, label]) => dupes(rows, label));
 
@@ -274,6 +275,7 @@ export function validate() {
   const complaintIds = ids(complaints);
   const impedimentIds = ids(impediments);
   const archiveIds = ids(archives);
+  const orgIds = ids(organizations);
 
   const ref = (where, field, values, pool, poolName) => {
     for (const v of values ?? []) {
@@ -327,6 +329,15 @@ export function validate() {
     }
     if (!c.conduct) err(at, 'missing conduct');
 
+    if (c.respondents?.organization && !orgIds.has(c.respondents.organization)) {
+      err(at, `respondents.organization references unknown organisation "${c.respondents.organization}"`);
+    }
+    // A body that claimed sanction must say what it claimed. The arrogation is
+    // the analytical point; asserting it without stating it would be empty.
+    const cs = c.respondents?.claimed_sanction;
+    if (cs && (!cs.asserted || !Array.isArray(cs.expressed_through) || !cs.expressed_through.length)) {
+      err(at, 'claimed_sanction must state what authority was asserted and how it was expressed');
+    }
     if (!ECHELON.includes(c.respondents?.echelon)) {
       err(at, `respondents.echelon "${c.respondents?.echelon}" is not one of ${ECHELON.join(', ')}`);
     }
@@ -445,7 +456,7 @@ export function validate() {
     if (!STANDING.includes(p.standing)) {
       err(at, `standing "${p.standing}" is not one of ${STANDING.join(', ')}`);
     }
-    // METHODOLOGY.md section 10: a count is a count and must say so; an
+    // METHODOLOGY.md section 12: a count is a count and must say so; an
     // individuated person is never carried as a number.
     if (p.identity_status === 'collectively_recorded' && !p.count) {
       err(at, 'collectively_recorded rows must carry a count');
@@ -460,7 +471,7 @@ export function validate() {
       err(at, 'name_unrecorded rows must state what attests the person\'s existence');
     }
     if (!p.consent_note) {
-      err(at, 'missing consent_note (METHODOLOGY.md section 10)');
+      err(at, 'missing consent_note (METHODOLOGY.md section 12)');
     }
     if (p.voice?.source && !archiveIds.has(p.voice.source)) {
       err(at, `voice.source references unknown archive "${p.voice.source}"`);
@@ -470,6 +481,22 @@ export function validate() {
     }
     ref(at, 'complaints', p.complaints, complaintIds, 'complaint');
     ref(at, 'sources', p.sources, archiveIds, 'archive');
+  }
+
+  for (const o of organizations) {
+    const at = `organizations/${o.id}`;
+    if (!o.claimed_sanction?.asserted) {
+      err(at, 'an organisation is entered here because it claimed sanction; say what it claimed');
+    }
+    if (!o.claimed_sanction?.expressed_through?.length) {
+      err(at, 'claimed_sanction.expressed_through must record how the claim was made visible');
+    }
+    if (typeof o.state_response?.suppressed !== 'boolean') {
+      err(at, 'state_response.suppressed must record whether any authority ever put a stop to it');
+    }
+    if (!o.state_response?.how) err(at, 'state_response.how must say what was or was not done');
+    ref(at, 'sources', o.sources, archiveIds, 'archive');
+    ref(at, 'complaints', o.complaints, complaintIds, 'complaint');
   }
 
   for (const i of impediments) {
@@ -510,15 +537,31 @@ export function validate() {
     }
   }
   const usedImpediments = new Set(complaints.flatMap((c) => c.impediments ?? []));
+  for (const o of organizations) {
+    const at = `organizations/${o.id}`;
+    if (!o.claimed_sanction?.asserted) {
+      err(at, 'an organisation is entered here because it claimed sanction; say what it claimed');
+    }
+    if (!o.claimed_sanction?.expressed_through?.length) {
+      err(at, 'claimed_sanction.expressed_through must record how the claim was made visible');
+    }
+    if (typeof o.state_response?.suppressed !== 'boolean') {
+      err(at, 'state_response.suppressed must record whether any authority ever put a stop to it');
+    }
+    if (!o.state_response?.how) err(at, 'state_response.how must say what was or was not done');
+    ref(at, 'sources', o.sources, archiveIds, 'archive');
+    ref(at, 'complaints', o.complaints, complaintIds, 'complaint');
+  }
+
   for (const i of impediments) {
     if (!usedImpediments.has(i.id)) warn(`impediments/${i.id}`, 'not invoked by any complaint');
   }
 
-  return { complaints, persons, impediments, archives, errors, warnings };
+  return { complaints, persons, organizations, impediments, archives, errors, warnings };
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const { complaints, persons, impediments, archives, errors, warnings } = validate();
+  const { complaints, persons, organizations, impediments, archives, errors, warnings } = validate();
   const unpunished = complaints.filter((c) => isUnpunished(c.process.outcome)).length;
   const captured = complaints.filter(
     (c) => c.finding.act === 'established' && isUnpunished(c.process.outcome)).length;
@@ -538,7 +581,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     `\n${complaints.length} complaints (${unpunished} unpunished, ` +
     `${complaints.length - unpunished} with a sustained conviction), ` +
     `${persons.length} register entries, ${impediments.length} impediments, ` +
-    `${archives.length} archives`
+    `${archives.length} archives, ${organizations.length} organisations`
   );
   console.log(
     `${captured} entries record an act established on the evidence for which no ` +
@@ -589,6 +632,11 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   console.log(
     `where the actor stood at county level or above (n=${f.high.n}), ${f.high.escaped} matters ` +
     `were heard above that level; where the actor stood below it (n=${f.low.n}), ${f.low.escaped} were`
+  );
+  const suppressed = organizations.filter((o) => o.state_response.suppressed);
+  console.log(
+    `organisations claiming sanction: ${organizations.length}; ` +
+    `${suppressed.length} were ever stopped by anything (${suppressed.map((o) => o.id).join(', ')})`
   );
   console.log(`${errors.length} error(s), ${warnings.length} warning(s)`);
   process.exit(errors.length ? 1 : 0);

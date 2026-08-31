@@ -159,7 +159,7 @@
         },
         "official_capacity": {
           "type": "boolean",
-          "description": "True where a respondent acted under colour of law. See METHODOLOGY.md section 12."
+          "description": "True where a respondent acted under colour of law. See METHODOLOGY.md section 14."
         },
         "named": {
           "type": "array",

@@ -207,7 +207,7 @@ anything under `public/record-book/`; it is overwritten.
 
 ## Current state
 
-21 complaint entries, 43 register rows, 10 impediments, 53 archives.
+22 complaint entries, 45 register rows, 6 organisations, 10 impediments, 53 archives.
 
 In all 18 the act is **established** on the evidence. In 3 no participant is
 identified in any source. In all 18 no perpetrator was ever convicted. 7 name a
@@ -251,6 +251,51 @@ book's own rule in `METHODOLOGY.md` section 4, each of them is entitled to an
 individuated row. Producing those rows means archival work in the collections
 listed in `data/archives.json`, county by county. That work is the reason this
 repository holds data rather than prose, and it is not finished.
+
+## Organisations that claimed sanction
+
+`data/organizations.json` records the bodies that were not mobs: persistent,
+named, officered organisations that **arrogated the state's function** — claiming
+the right to try, sentence and punish, and organising themselves to look like an
+authority. `claimed_sanction` records what each asserted and how it made the
+claim visible: ritual, hierarchy, written notice, disguise or uniform, published
+platform, advance notice of an election it meant to decide by force, and in one
+case a deliberated sentence carried out on a stranger because a jury had
+acquitted someone else.
+
+`state_response.suppressed` records whether anything ever stopped one. **Two of
+six.** The first Klan, by the Enforcement Acts of 1870–71 — effective, and never
+attempted again after *Cruikshank* narrowed its basis. The United Klans of
+America, by a $7 million civil verdict won in 1987 by Beulah Mae Donald, whose
+son it had killed; its headquarters was signed over to her. A tort claim brought
+by a victim's mother did what criminal law had done to no such organisation in a
+century. The second Klan was dissolved in 1944 for an unpaid tax debt.
+
+## Interrogating the record
+
+`npm run record-book:interrogate` reads the log's own citations and produces a
+**research brief** — what an entry establishes, what its sources cannot be asked
+to establish, the questions the data raises, and where the answers would be. It
+generates the plan, never the findings: nothing fetches, nothing is invented, and
+a brief cannot claim more than the corpus does.
+
+```bash
+npm run record-book:interrogate CL-1918-TURNER
+npm run record-book:interrogate -- --source SRC-NAACP-PAPERS
+npm run record-book:interrogate -- --gaps      # ranked, corpus-wide
+npm run record-book:interrogate -- --json CL-1918-TURNER
+```
+
+Every vantage carries what it **establishes**, what it is **silent on**, and how
+to **press** it — because a source is not reliable or unreliable, it answers some
+questions and is self-serving on others. Questions are raised by conditions in
+the data: an unattributed actor, a count never fixed, a collective register row,
+restoration that never came with the operative impediments named, a divergence
+between vantages, unresolved locators. A respondent recorded
+`names_withheld_in_source` is flagged **high priority** — the identification
+already happened once, so it is a retrieval problem, not an investigative one.
+
+`--gaps` ranks the corpus by how much is still open. That ranking is the work plan.
 
 ## The archives
 

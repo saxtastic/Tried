@@ -343,7 +343,100 @@ One entry carries no perpetrator track at all — *Dred Scott* — because the
 conduct was lawful judicial action and there was nothing to prosecute. That is
 recorded rather than papered over, and the page says so.
 
-## 7. Interstitial harm
+## 7. The claim of sanction
+
+Some of the actors in this book were not mobs. They were persistent, named,
+officered bodies that **arrogated the state's function** — they claimed the right
+to try, to sentence, and to punish, and they organised themselves to look like
+an authority while doing it.
+
+`data/organizations.json` records them, and the analytically load-bearing field
+is `claimed_sanction`: what authority the body asserted, and how it made that
+assertion visible. The forms recur — ritual, titles and hierarchy, written
+notice, disguise or conversely a uniform, published platform, advance notice of
+an election it intended to decide by force, and in one case a deliberated
+sentence carried out on a stranger because a jury had acquitted someone else.
+
+This is the mirror of the book's other recurring finding. Section 14 records
+officials acting *beyond* the statute of their role. These are private bodies
+claiming the role entirely. Both are the same displacement of authority, from
+opposite directions, and in several entries they meet: a sheriff surrenders
+custody and an organisation carries out the sentence.
+
+`respondents.organization` links an entry to the body, and `claimed_sanction` may
+also be recorded on the entry where the claim was expressed in that particular
+act. The validator requires that a body entered here states what it claimed —
+naming an organisation without recording the arrogation would be empty.
+
+### What ever stopped one
+
+`state_response.suppressed` records whether any authority ever put a stop to it.
+**Two of six.**
+
+The first Klan was suppressed, and suppressed effectively, by the Enforcement
+Acts of 1870 and 1871 — the third of which is the Ku Klux Klan Act — under which
+Grant suspended habeas corpus in nine South Carolina counties and hundreds of
+prosecutions followed. It is the one occasion in this corpus on which the federal
+government destroyed a terrorist organisation rather than declining to act. It
+worked. *Cruikshank* then narrowed the constitutional basis for it, and nothing
+comparable was attempted for a century.
+
+The United Klans of America was ended in 1987 by a civil verdict of $7 million
+obtained by Beulah Mae Donald, whose son the organisation had killed. Its
+headquarters was signed over to her. **A tort claim brought by a victim's mother
+did what criminal law had done to no such organisation in a hundred years**, and
+she died the following year.
+
+The second Klan was formally dissolved in 1944 for an unpaid tax debt.
+
+## 8. Interrogating the record
+
+`scripts/interrogate.mjs` reads the log's own citations and produces a **research
+brief**: what an entry currently establishes, what its sources cannot be asked to
+establish, the questions the data itself raises, and where the answers would be.
+
+It generates the plan, never the findings. Nothing in it fetches anything or
+supplies a fact; every line is derived from what is already recorded, so a brief
+cannot claim more than the corpus does.
+
+```bash
+npm run record-book:interrogate CL-1918-TURNER          # full brief
+npm run record-book:interrogate -- --source SRC-NAACP-PAPERS
+npm run record-book:interrogate -- --gaps               # ranked, corpus-wide
+npm run record-book:interrogate -- --json CL-1918-TURNER
+```
+
+The core of it is that **a source is not reliable or unreliable; it answers some
+questions and is silent or self-serving on others.** Every vantage carries three
+statements: what it establishes, what it is silent on, and how to press it. A
+perpetrator record is the strongest proof of an act and says nothing about harm.
+Contemporaneous press supplies a stated cause that is usually the pretext, which
+is exactly why reading it against the official finding works. Scholarship
+establishes nothing new by construction — its value here is the footnotes.
+
+Questions are raised by conditions in the data, not by judgement:
+
+- attribution `unattributed` → who would have written a name down, and in which
+  record group
+- a count estimated and never fixed → what would individuate it
+- a `collectively_recorded` register row → the individuation task, with that
+  row's own sources attached
+- restoration none or symbolic → what forum remains, with the **operative**
+  impediments named, because those are current law and would have to be met
+- `concurrence.diverge` → what independent vantage would resolve it
+- a respondent recorded `names_withheld_in_source` → flagged **high priority**,
+  because the identification already happened once and it is a retrieval problem
+  rather than an investigative one
+- unresolved locators → the fetch list
+
+It also proposes sources used by entries facing the same impediments but not yet
+cited on this one, on the reasoning that an evidentiary route which worked
+against a given bar is likely to work against it again.
+
+Run `--gaps` and the corpus ranks itself by how much is still open. That ranking
+is the work plan.
+
+## 9. Interstitial harm
 
 `harmed.interstitial` records what falls between the events and is counted
 nowhere: property abandoned under threat, exile, testimony never given, kinship
@@ -353,7 +446,7 @@ tally in any source. The field exists because leaving them out would let the
 book's own structure — one entry, one incident, one disposition — do the same
 work of erasure that the tallies do.
 
-## 8. Transmitted harm
+## 10. Transmitted harm
 
 `harmed.interstitial` records what falls between events within one generation.
 `harmed.transmitted` records what outlives it.
@@ -416,7 +509,7 @@ was assembled from knowledge of the field, not retrieved, and it is not a
 reconstruction of what DeGruy cites. It is marked as such in the manifest and
 must not be presented otherwise. Pull the actual citations from the book's notes.
 
-## 9. "Unpunished" is derived, not asserted
+## 11. "Unpunished" is derived, not asserted
 
 `process.outcome` records what the legal system actually did:
 
@@ -441,7 +534,7 @@ injuries while leaving the other untouched, and the book counts it that way.
 `scripts/validate.mjs` recomputes the field and fails the build on any
 disagreement, so the claim in the title of this book cannot drift from its data.
 
-## 10. Identity: who is in the register, and on what terms
+## 12. Identity: who is in the register, and on what terms
 
 The hardest question this book answers is what to do with a person whose injury
 is recorded and whose name is not.
@@ -491,7 +584,7 @@ carries them with its own citation. These are quotations from documents, not
 reconstructions. **The book never composes speech for the dead.** If no words
 survive, the field is absent — an absence that is itself part of the record.
 
-## 11. Impediments
+## 13. Impediments
 
 `data/impediments.json` catalogs the mechanisms that converted a crime into a
 non-crime: doctrines of personhood and jurisdiction, immunities, evidentiary and
@@ -510,7 +603,7 @@ book exists to show becomes legible: the same handful of doctrines, mostly about
 who may hear a claim rather than whether the injury occurred, recurring across a
 century and a half.
 
-## 12. Officials acting beyond their role
+## 14. Officials acting beyond their role
 
 A recurring classification is `official_participation` — conduct by sheriffs,
 deputies, jailers, guardsmen, and physicians acting under color of law and
@@ -522,7 +615,7 @@ defenses, and immunities differ, and because an officer exceeding the statute of
 their role is the case in which the state is both the injurer and the only
 available forum.
 
-## 13. Sources
+## 15. Sources
 
 `data/archives.json` is a manifest of the corpora this work draws on, with
 locator URLs and access terms. Public-domain texts can be fetched on demand with

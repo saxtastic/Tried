@@ -1,5 +1,5 @@
 {
-  "$comment": "Complaint log. process.unpunished is DERIVED - see METHODOLOGY.md section 9 - and is recomputed and checked by scripts/validate.mjs.",
+  "$comment": "Complaint log. process.unpunished is DERIVED - see METHODOLOGY.md section 11 - and is recomputed and checked by scripts/validate.mjs.",
   "complaints": [
     {
       "id": "CL-1857-DRED-SCOTT",
@@ -908,7 +908,8 @@
         "described": "Members of the attacking force, including former Confederate soldiers and members of the White League",
         "named_in_sources": true,
         "official_capacity": false,
-        "echelon": "proxy"
+        "echelon": "proxy",
+        "organization": "ORG-WHITE-LEAGUE"
       },
       "process": {
         "forum": "United States Circuit Court, District of Louisiana; Supreme Court of the United States",
@@ -1262,7 +1263,8 @@
             "note": "Named by the state commission as a leader of the coup. Never charged; held the mayoralty afterward."
           }
         ],
-        "echelon": "municipal"
+        "echelon": "municipal",
+        "organization": "ORG-RED-SHIRTS"
       },
       "process": {
         "forum": "New Hanover County; North Carolina",
@@ -1661,7 +1663,8 @@
         "described": "Members of the mob, including Ku Klux Klan participants; a deputy sheriff took Perry from custody",
         "named_in_sources": true,
         "official_capacity": true,
-        "echelon": "proxy"
+        "echelon": "proxy",
+        "organization": "ORG-KKK-2"
       },
       "process": {
         "forum": "Orange County; Florida",
@@ -2400,7 +2403,7 @@
         "outstanding": "No criminal accountability for any officer. Exoneration corrected the state's injury to the victims and left the perpetrators' conduct unaddressed."
       },
       "verification": "documented",
-      "status_note": "Outcome is recorded as posthumous_exoneration and therefore still counts as unpunished. See METHODOLOGY.md section 9 for why.",
+      "status_note": "Outcome is recorded as posthumous_exoneration and therefore still counts as unpunished. See METHODOLOGY.md section 11 for why.",
       "finding": {
         "act": "established",
         "attribution": "named_in_sources"
@@ -2809,7 +2812,7 @@
         "outstanding": "The apology came eighty-seven years after the compilation was published. This entry stands for every killing in it that has no entry of its own."
       },
       "verification": "documented",
-      "status_note": "An aggregate entry, entered under the rule in METHODOLOGY.md section 10: where sources preserve only a count, the count is recorded as a count and is not permitted to stand in for individuated persons.",
+      "status_note": "An aggregate entry, entered under the rule in METHODOLOGY.md section 12: where sources preserve only a count, the count is recorded as a count and is not permitted to stand in for individuated persons.",
       "finding": {
         "act": "established",
         "attribution": "unattributed"
@@ -2853,6 +2856,170 @@
         "political",
         "spiritual"
       ]
+    },
+    {
+      "id": "CL-1981-DONALD",
+      "title": "Lynching of Michael Donald, and the destruction of the organisation that did it",
+      "incident": {
+        "date": {
+          "start": "1981-03-21",
+          "precision": "day"
+        },
+        "place": {
+          "locality": "Mobile",
+          "county": "Mobile",
+          "state": "Alabama",
+          "country": "US"
+        },
+        "jurisdiction": [
+          "Mobile County",
+          "Alabama",
+          "United States"
+        ]
+      },
+      "classification": [
+        "lynching",
+        "organised_terror",
+        "reprisal_for_a_verdict"
+      ],
+      "harm_domains": [
+        "physiological",
+        "spiritual",
+        "interpersonal",
+        "social",
+        "intrapersonal"
+      ],
+      "conduct": "Members of the United Klans of America, angered that a jury had failed to convict a Black defendant charged with killing a white police officer, went out to find and kill a Black man at random. They abducted Michael Donald, nineteen years old and walking home, beat him, cut his throat, and hanged his body from a tree on a residential street in Mobile.",
+      "finding": {
+        "act": "established",
+        "attribution": "named_in_sources"
+      },
+      "offense": [
+        "homicide",
+        "abduction",
+        "organised_terror"
+      ],
+      "harmed": {
+        "persons": [
+          "PR-DONALD-MICHAEL",
+          "PR-DONALD-BEULAH-MAE"
+        ],
+        "count": {
+          "documented": 1
+        },
+        "collective": "Black residents of Mobile, and every community the organisation operated in",
+        "interstitial": "Mobile police initially pursued a theory that the killing was a drug dispute, which the family rejected and which delayed the investigation by months."
+      },
+      "respondents": {
+        "described": "James Knowles and Henry Hays, members of the United Klans of America, acting on the direction and in the culture of the organisation; Bennie Jack Hays, a UKA officer",
+        "named_in_sources": true,
+        "official_capacity": false,
+        "echelon": "proxy",
+        "organization": "ORG-UKA",
+        "claimed_sanction": {
+          "asserted": "The killing was carried out as a sentence. The organisation's members treated a jury's failure to convict as a wrong they were entitled to answer, and answered it by selecting a stranger and executing him.",
+          "expressed_through": [
+            "deliberated_sentence",
+            "titles_and_hierarchy",
+            "display_of_the_body"
+          ]
+        },
+        "named": [
+          {
+            "name": "Henry Francis Hays",
+            "role": "Member, United Klans of America",
+            "status": "convicted",
+            "source": "SRC-CRRJ",
+            "note": "Convicted of capital murder in Alabama in 1983 and executed in 1997."
+          },
+          {
+            "name": "James Knowles",
+            "role": "Member, United Klans of America",
+            "status": "convicted",
+            "source": "SRC-CRRJ",
+            "note": "Pleaded guilty to a federal civil rights violation, testified, and was sentenced to life."
+          }
+        ]
+      },
+      "process": {
+        "forum": "Mobile County; U.S. District Court, Southern District of Alabama; Alabama state courts",
+        "outcome": "convicted",
+        "narrative": "The only entry in this log in which perpetrators were convicted and the convictions stood. Knowles pleaded guilty federally and testified; Hays was convicted of capital murder and executed in 1997, the only white man executed in Alabama in the twentieth century for killing a Black person. Beulah Mae Donald then brought a civil action against the organisation itself, and in 1987 an all-white Mobile jury returned a verdict of $7 million against the United Klans of America, bankrupting it. Its headquarters was signed over to her.",
+        "escalation": [
+          {
+            "rung": "county",
+            "forum": "Mobile police, initial investigation",
+            "disposition": "investigated_no_charge",
+            "track": "against_perpetrators",
+            "note": "An early theory that the killing was a drug dispute delayed the case; the family rejected it and pressed for federal involvement."
+          },
+          {
+            "rung": "federal",
+            "forum": "FBI and U.S. Attorney, Southern District of Alabama",
+            "disposition": "convicted",
+            "track": "against_perpetrators",
+            "note": "Knowles pleaded guilty to a federal civil rights violation and testified against Hays."
+          },
+          {
+            "rung": "state",
+            "forum": "Alabama courts, 1983",
+            "disposition": "convicted",
+            "track": "against_perpetrators",
+            "note": "Hays convicted of capital murder; sentence carried out in 1997."
+          },
+          {
+            "rung": "federal",
+            "forum": "Donald v. United Klans of America, U.S. District Court, 1987",
+            "disposition": "settled",
+            "track": "against_perpetrators",
+            "note": "A $7 million verdict against the organisation, which bankrupted it. A tort claim did what a century of criminal law had not."
+          }
+        ]
+      },
+      "impediments": [],
+      "restoration": {
+        "forms": [
+          "partial_compensation",
+          "symbolic"
+        ],
+        "reached": "Beulah Mae Donald, who received the organisation's headquarters building and what its assets yielded. The sum was nominal against the verdict; what it purchased was the end of the organisation."
+      },
+      "remedy": {
+        "sought": [
+          "Federal prosecution",
+          "Alabama capital prosecution",
+          "Donald v. United Klans of America, civil action"
+        ],
+        "granted": [
+          "Two convictions, one execution",
+          "$7 million verdict; the United Klans of America dissolved"
+        ],
+        "outstanding": "The street where his body was hung was renamed for him in 2006. His mother died in 1988, the year after the verdict."
+      },
+      "concurrence": {
+        "agree": "The trial records, the co-defendant's sworn testimony, the civil verdict and later scholarship agree in full on who did it and why.",
+        "diverge": "Accounts differ on how far up the organisation the direction ran, and on why the initial local investigation took the course it did."
+      },
+      "citations": [
+        {
+          "source": "SRC-CRRJ",
+          "vantage": "scholarship"
+        },
+        {
+          "source": "SRC-EJI-LYNCHING",
+          "vantage": "scholarship"
+        },
+        {
+          "source": "SRC-NARA-RG21",
+          "vantage": "judicial_record"
+        },
+        {
+          "source": "SRC-CHRONICLING-AMERICA",
+          "vantage": "contemporaneous_press"
+        }
+      ],
+      "verification": "documented",
+      "status_note": "Entered deliberately as the corpus's counterexample. It is the only entry here whose process.outcome is convicted, and its presence is what makes the other twenty a finding rather than a selection. Note what actually ended the organisation: not the prosecutions, which reached two men, but a tort claim brought by the victim's mother."
     }
   ]
 }

@@ -1,0 +1,105 @@
+{
+  "$comment": "Organisations that claimed sanction over acts of violence: not spontaneous mobs but persistent, named bodies that arrogated the state's function of trying, sentencing and punishing. See METHODOLOGY.md, The claim of sanction.",
+  "organizations": [
+    {
+      "id": "ORG-KKK-1",
+      "name": "Ku Klux Klan (first era)",
+      "period": { "start": "1866", "end": "c. 1872" },
+      "region": "The former Confederate states, from Tennessee outward",
+      "claimed_sanction": {
+        "asserted": "A parallel judiciary and police. Members styled themselves an Invisible Empire with dens, officers, and a hierarchy; they held what they called trials, passed what they called sentences, served written notices and warnings on the people they intended to punish, and executed those sentences by whipping, arson and killing.",
+        "expressed_through": ["ritual", "titles_and_hierarchy", "written_notice", "disguise", "posted_warning"]
+      },
+      "conduct": "Whipping, arson, rape, and killing directed at freedpeople, Republican officeholders, teachers in Black schools, and white allies, with the object of destroying Reconstruction electoral politics.",
+      "state_response": {
+        "suppressed": true,
+        "how": "The Enforcement Acts of 1870 and 1871, the third of which is the Ku Klux Klan Act (17 Stat. 13), made conspiracy to deprive citizens of rights a federal offence and authorised the President to suspend habeas corpus. Grant suspended it in nine South Carolina counties in 1871; hundreds of prosecutions followed and the organisation was substantially broken by 1872.",
+        "note": "This is the one occasion in the corpus on which the federal government suppressed a terrorist organisation rather than declining to act. The suppression worked. Cruikshank then narrowed the constitutional basis for it, and nothing comparable was attempted again for a century."
+      },
+      "sources": ["SRC-NARA-KKK-HEARINGS", "SRC-NARA-RG21", "SRC-CHRONICLING-AMERICA"],
+      "complaints": []
+    },
+    {
+      "id": "ORG-KNIGHTS-WHITE-CAMELIA",
+      "name": "Knights of the White Camelia",
+      "period": { "start": "1867", "end": "c. 1870" },
+      "region": "Louisiana and the Gulf states",
+      "claimed_sanction": {
+        "asserted": "A sworn fraternal order with an initiation oath binding members to maintain white supremacy, operating as an enforcement arm of local political authority.",
+        "expressed_through": ["oath", "titles_and_hierarchy", "disguise"]
+      },
+      "conduct": "Electoral intimidation and violence in Louisiana during Reconstruction.",
+      "state_response": { "suppressed": false, "how": "No sustained federal action directed at this organisation specifically." },
+      "sources": ["SRC-NARA-KKK-HEARINGS"],
+      "complaints": []
+    },
+    {
+      "id": "ORG-WHITE-LEAGUE",
+      "name": "White League",
+      "period": { "start": "1874", "end": "c. 1877" },
+      "region": "Louisiana",
+      "claimed_sanction": {
+        "asserted": "An openly constituted paramilitary force. Unlike the Klan it wore no disguise and made no secret of its membership, claiming to act as the legitimate militia of the state against a government it declared illegitimate.",
+        "expressed_through": ["paramilitary_organisation", "public_membership", "published_platform", "armed_assembly"]
+      },
+      "conduct": "Armed attacks on Republican officeholders and Black citizens; the seizure of the New Orleans state house in September 1874, reversed only when federal troops arrived.",
+      "state_response": {
+        "suppressed": false,
+        "how": "Federal troops restored the Louisiana government in 1874, but the organisation was not prosecuted out of existence and its members held office afterward.",
+        "note": "A monument to the 1874 seizure stood in New Orleans until 2017."
+      },
+      "sources": ["SRC-CHRONICLING-AMERICA", "SRC-NARA-RG21"],
+      "complaints": ["CL-1873-COLFAX"]
+    },
+    {
+      "id": "ORG-RED-SHIRTS",
+      "name": "Red Shirts",
+      "period": { "start": "1875", "end": "c. 1900" },
+      "region": "Mississippi, South Carolina, North Carolina",
+      "claimed_sanction": {
+        "asserted": "An openly uniformed electoral enforcement body. The red shirt was the uniform of a movement that announced in advance, in the press and at rallies, that it would determine the outcome of elections by force, and then did.",
+        "expressed_through": ["uniform", "public_membership", "published_platform", "armed_assembly", "advance_notice"]
+      },
+      "conduct": "Voter intimidation, killings, and the armed overthrow of elected government, most completely at Wilmington in 1898.",
+      "state_response": { "suppressed": false, "how": "None. Participants held office afterward." },
+      "sources": ["SRC-WILMINGTON-COMMISSION", "SRC-CHRONICLING-AMERICA"],
+      "complaints": ["CL-1898-WILMINGTON"]
+    },
+    {
+      "id": "ORG-KKK-2",
+      "name": "Ku Klux Klan (second era)",
+      "period": { "start": "1915", "end": "c. 1944" },
+      "region": "National, including the Midwest and West as well as the South",
+      "claimed_sanction": {
+        "asserted": "A mass fraternal and political movement claiming to enforce a moral and racial order, operating openly, endorsing candidates, and at its height seating officeholders at state level.",
+        "expressed_through": ["ritual", "titles_and_hierarchy", "public_membership", "electoral_organisation", "parade"]
+      },
+      "conduct": "Lynching, arson, whipping and intimidation, alongside open political organisation.",
+      "state_response": {
+        "suppressed": false,
+        "how": "No federal suppression. The organisation declined after internal scandal and prosecution of individual leaders on unrelated charges, and was dissolved for unpaid taxes in 1944.",
+        "note": "It was a tax debt, not the violence, that formally ended it."
+      },
+      "sources": ["SRC-EJI-LYNCHING", "SRC-CHRONICLING-AMERICA"],
+      "complaints": ["CL-1920-OCOEE"]
+    },
+    {
+      "id": "ORG-UKA",
+      "name": "United Klans of America",
+      "period": { "start": "1961", "end": "1987" },
+      "region": "Alabama and the South",
+      "claimed_sanction": {
+        "asserted": "A chartered corporate body with officers and dues, claiming authority to punish. In the Donald case its members deliberated on and then carried out what they treated as a sentence, in response to a jury's failure to convict a Black defendant.",
+        "expressed_through": ["titles_and_hierarchy", "corporate_charter", "ritual", "deliberated_sentence"]
+      },
+      "conduct": "Responsible for the 1963 Sixteenth Street Baptist Church bombing in Birmingham and for the 1981 lynching of Michael Donald in Mobile, among other acts.",
+      "state_response": {
+        "suppressed": true,
+        "how": "Destroyed by a civil action, not a prosecution. In 1987 an all-white Mobile jury returned a $7 million verdict against the organisation in a suit brought by Beulah Mae Donald, bankrupting it; its headquarters building was signed over to her.",
+        "note": "The organisation was ended by the mother of the man it killed, using a tort claim, after a century in which criminal law had ended none of them."
+      },
+      "sources": ["SRC-CRRJ", "SRC-EJI-LYNCHING"],
+      "complaints": ["CL-1981-DONALD"]
+    }
+  ]
+}

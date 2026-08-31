@@ -8,7 +8,8 @@
     "deploy": "wrangler deploy",
     "record-book:validate": "node record-book/scripts/validate.mjs",
     "record-book:build": "node record-book/scripts/build.mjs",
-    "record-book:fetch": "node record-book/scripts/fetch-archives.mjs"
+    "record-book:fetch": "node record-book/scripts/fetch-archives.mjs",
+    "record-book:interrogate": "node record-book/scripts/interrogate.mjs"
   },
   "devDependencies": {
     "wrangler": "^4.0.0"
