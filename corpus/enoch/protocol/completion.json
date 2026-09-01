@@ -1,0 +1,279 @@
+{
+  "protocol": "definition-of-completion",
+  "version": 1,
+  "owner": "enoch",
+  "register": "O",
+  "office_note": "Enoch rules on order, not on merit. Every benchmark in this file is answerable by reading the record or running a named command, and none of them asks whether the work is any good. A benchmark that would require a view on the merits is out of order and does not belong here — that judgment is the owner's and the vantages', and this file would only launder it into something that looks like a measurement.",
+  "definition": {
+    "statement": "A piece of work is COMPLETE when every gate below passes on the current tree, every benchmark declared for it reads `met`, and every claim it ships carries a basis — with each basis `none` naming what is owed. Anything short of that is not a failure and is not called one.",
+    "verdicts": {
+      "complete": "All gates pass and all benchmarks are met. Says nothing about whether the work is good, only that it is finished on its own declared terms.",
+      "incomplete": "A gate fails, or a benchmark that can be read comes back unmet. There is a specific named thing to do and it is printed.",
+      "test_retest": "Gates pass but a benchmark cannot be read — its evidence does not exist yet, or the thing it measures has not been run twice. This is the honest verdict when the record does not separate the outcomes, and it names the measurement that would."
+    },
+    "why_not_a_checklist": "A hand-kept list of done-ness goes stale exactly as fast as everything else here has gone stale. Every benchmark names a command or a file, so the answer is recomputed rather than remembered. The one thing that cannot be derived — a question put to a person — lives in awaiting_owner and is reported as owed, never as met.",
+    "retest_rule": "Anything this repository generates must produce byte-identical output on a second run from the same inputs. Nondeterminism is not a nuisance here: a report that changes between runs cannot be cited, and a stale premise shipped for hours once because nothing was watching. Retest is therefore a gate, not a nicety."
+  },
+  "administration": {
+    "enoch": "Runs this protocol. Reports order: gate passed, benchmark met, evidence present. Never rules on whether an unmet benchmark matters.",
+    "project_owner": "Declares the benchmarks for its own project and nobody else's. A project that declares no benchmarks is reported as undeclared rather than as complete.",
+    "owner": "The human. The only source for anything in awaiting_owner, which is why those items are never derived and never marked met by a script.",
+    "escalation": "A benchmark that has read `test_retest` across three consecutive runs is reported as stalled. Stalled is still not a failure; it is a signal that the measurement named in the benchmark is the work.",
+    "sibling_project": "A gate can fail on something this project cannot close. G4 currently fails on Q2-SURVIVAL: two vantages answered, no arbitration written, and one of the two answers is this project's own — no question is closed by the asker answering it. Enoch reports it as out of order and does not excuse it. A protocol that let a project mark another project's obligation as satisfied would be certifying its own compliance."
+  },
+  "gates": [
+    {
+      "id": "G1",
+      "name": "tests",
+      "run": [
+        "npm",
+        "test"
+      ],
+      "asserts": "Every assertion in test/ holds on this tree.",
+      "administered_by": "enoch"
+    },
+    {
+      "id": "G2",
+      "name": "verify",
+      "run": [
+        "node",
+        "sim/verify.mjs",
+        "--strict"
+      ],
+      "asserts": "The simulator's own cross-checks hold and nothing claims a basis it does not have.",
+      "administered_by": "enoch"
+    },
+    {
+      "id": "G3",
+      "name": "propose",
+      "run": [
+        "node",
+        "scripts/check-propose.mjs"
+      ],
+      "asserts": "Every proposal states its seed, run count and thresholds, and reports sensitivity.",
+      "administered_by": "enoch"
+    },
+    {
+      "id": "G4",
+      "name": "points-of-order",
+      "run": [
+        "node",
+        "scripts/enoch.mjs",
+        "--strict"
+      ],
+      "asserts": "No point of order stands unanswered.",
+      "administered_by": "enoch"
+    },
+    {
+      "id": "G5",
+      "name": "tiers",
+      "run": [
+        "node",
+        "scripts/check-tiers.mjs"
+      ],
+      "slow": true,
+      "asserts": "Every surface under public/ resolves the tier the CSS reports, at four viewports, with no sideways scroll.",
+      "administered_by": "enoch"
+    },
+    {
+      "id": "G6",
+      "name": "reference data",
+      "run": [
+        "node",
+        "scripts/build-registry.mjs",
+        "--check"
+      ],
+      "asserts": "The fellowships registry the radar reconciles against is in step with data/open-calls/, so the radar is not reading a stale copy of somebody else's reference.",
+      "administered_by": "enoch"
+    },
+    {
+      "id": "G7",
+      "name": "registry rules",
+      "run": [
+        "node",
+        "scripts/check-registry.mjs"
+      ],
+      "asserts": "Every record in the reference declares a basis for every product field, names an https source where populated, and says what is owed where blank.",
+      "administered_by": "enoch"
+    },
+    {
+      "id": "G8",
+      "name": "vantage",
+      "run": [
+        "node",
+        "scripts/check-vantage.mjs"
+      ],
+      "asserts": "The vantage configuration is internally consistent.",
+      "administered_by": "enoch"
+    }
+  ],
+  "retests": [
+    {
+      "id": "T1",
+      "name": "corpus bundles",
+      "run": [
+        "node",
+        "scripts/build-corpus.mjs"
+      ],
+      "compare": [
+        "public/simulator/corpus.bundle.js",
+        "public/radar/corpus.bundle.js"
+      ],
+      "asserts": "Regenerating the bundles twice from unchanged JSON produces the same bytes both times, and the same bytes already on disk. The radar bundle carries a copy of the fellowships reference, so a change there surfaces here as a stale bundle rather than as a page quietly serving last week's deadlines."
+    },
+    {
+      "id": "T2",
+      "name": "outstanding register",
+      "run": [
+        "node",
+        "scripts/outstanding.mjs",
+        "--json",
+        "--no-color"
+      ],
+      "asserts": "The derived register of what is owed is the same on two consecutive reads. If it is not, something in it is being read from the clock or the filesystem order rather than from the record."
+    },
+    {
+      "id": "T3",
+      "name": "simulation",
+      "run": [
+        "node",
+        "sim/cli.mjs",
+        "--json"
+      ],
+      "asserts": "The simulator is a rules engine, not a sampler. Two runs against the same corpus are byte-identical or it is not one."
+    }
+  ],
+  "benchmarks": [
+    {
+      "id": "B1",
+      "project": "simulator",
+      "statement": "Every corpus record that asserts anything carries a basis, and every basis `none` names what is owed.",
+      "check": "basis_declared",
+      "over": [
+        "public/simulator/corpus",
+        "public/radar/corpus",
+        "corpus"
+      ],
+      "met_when": "no record carries a basis outside the four, and none reading `none` is silent about what would settle it"
+    },
+    {
+      "id": "B2",
+      "project": "simulator",
+      "statement": "No question put to the owner is marked resolved by anything other than the owner.",
+      "check": "owner_items_are_owed",
+      "over": [
+        "fleet/projects/simulator.json"
+      ],
+      "met_when": "every awaiting_owner item is reported as owed and none is derived-away"
+    },
+    {
+      "id": "B3",
+      "project": "simulator",
+      "statement": "Every browser surface runs under the shipped Content-Security-Policy without fetch, XHR, or an inline style attribute.",
+      "check": "csp_clean",
+      "over": [
+        "public/simulator/app.js",
+        "public/radar/app.js",
+        "public/venue.js"
+      ],
+      "met_when": "no surface script reaches for the network or sets a style attribute"
+    },
+    {
+      "id": "B4",
+      "project": "radar",
+      "statement": "No typed score anywhere in the radar corpus is recorded as computed.",
+      "check": "no_typed_score_claims_derivation",
+      "over": [
+        "public/radar/corpus"
+      ],
+      "met_when": "every fit or financial score carries basis `none`"
+    },
+    {
+      "id": "B5",
+      "project": "radar",
+      "statement": "Every field the workbooks did not contain — return category, effort, deadline date — names the rule that produced it or is left empty.",
+      "check": "derivation_named",
+      "over": [
+        "public/radar/engine/classify.js"
+      ],
+      "met_when": "every rule declares the fields it reads and why it fires"
+    },
+    {
+      "id": "B6",
+      "project": "radar",
+      "statement": "Nothing in the pipeline is scored as feasible on a date it does not have.",
+      "check": "test_named",
+      "over": [
+        "test/radar.test.mjs"
+      ],
+      "expects": [
+        "a recurring call is not scored as feasible on a date it does not have",
+        "an unknown effort makes feasibility unknown, never a pass"
+      ],
+      "met_when": "the named assertions exist and the suite passes"
+    },
+    {
+      "id": "B7",
+      "project": "simulator",
+      "statement": "Untried is never reported as closed, and never scored as a failure.",
+      "check": "test_named",
+      "over": [
+        "test/doors.test.mjs",
+        "test/radar.test.mjs"
+      ],
+      "expects": [
+        "untried is reported as an absence, never scored as a failure",
+        "never applied to is reported as an absence, not as a failure"
+      ],
+      "met_when": "the named assertions exist and the suite passes"
+    },
+    {
+      "id": "B8",
+      "project": "simulator",
+      "statement": "The repository can state what it owes without a person maintaining the list.",
+      "check": "command_produces",
+      "run": [
+        "node",
+        "scripts/outstanding.mjs",
+        "--json",
+        "--no-color"
+      ],
+      "met_when": "the register runs and reports at least one derived category"
+    },
+    {
+      "id": "B9",
+      "project": "radar",
+      "statement": "No call appears twice on the board, and no two rows are merged on a guess.",
+      "check": "test_named",
+      "over": [
+        "test/radar.test.mjs"
+      ],
+      "expects": [
+        "where both lists carry a call, the sourced record wins and the typed one is superseded",
+        "a near-match is reported and owed a decision, never merged on a guess",
+        "nothing is dropped in reconciliation"
+      ],
+      "met_when": "the named assertions exist and the suite passes"
+    },
+    {
+      "id": "B10",
+      "project": "radar",
+      "statement": "The radar never names a stage of another project's workflow without checking that the workflow still declares it.",
+      "check": "test_named",
+      "over": [
+        "test/radar.test.mjs"
+      ],
+      "expects": [
+        "every stage the radar names by hand exists in the workflow that declares them"
+      ],
+      "met_when": "the named assertion exists and the suite passes"
+    }
+  ],
+  "not_benchmarks": [
+    "Whether the argument in the simulator is a good argument.",
+    "Whether any opportunity in the radar is worth applying to.",
+    "Whether the site reads well.",
+    "Whether the owner should take any of this advice.",
+    "All four are the owner's, and a script that scored them would be inventing a measurement out of an opinion — the exact failure the radar exists to name."
+  ]
+}

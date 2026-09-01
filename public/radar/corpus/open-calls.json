@@ -1,0 +1,483 @@
+[
+  {
+    "id": "oc.nea_art_works",
+    "category": "open_call",
+    "kind": "Research Grant",
+    "org": "NEA — Art Works",
+    "amount_text": "Up to $100k",
+    "amount_range": [
+      100000,
+      100000
+    ],
+    "deadline_text": "Rolling (quarterly)",
+    "eligibility": "US-based orgs/artists",
+    "fit_score": 10,
+    "fit_score_text": "10/10",
+    "summary": "Apply as AYEYOTY + FTJC co-applicants. Project: Black Sonic Alchemy Community Soundscape Initiative. Community music + environmental justice frame fits Art Works category exactly.",
+    "status": "TODO",
+    "attempts": [],
+    "provenance": {
+      "org": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "amount_text": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "eligibility": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "amount_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "fit_score": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "attempts": {
+        "basis": "none",
+        "owed": "Whether this was ever actually applied to, and what came back. The workbook records status but no outcome."
+      }
+    },
+    "source": {
+      "file": "3090c11d-TAL_Master_OS_2026.xlsx",
+      "sheet": "OPEN CALLS + PROPOSALS"
+    }
+  },
+  {
+    "id": "oc.macdowell_fellowship",
+    "category": "open_call",
+    "kind": "Residency",
+    "org": "MacDowell Fellowship",
+    "amount_text": "$750 stipend + housing + studio",
+    "amount_range": [
+      750,
+      750
+    ],
+    "deadline_text": "Jan 15 (annual)",
+    "eligibility": "Artists in any discipline",
+    "fit_score": 10,
+    "fit_score_text": "10/10",
+    "summary": "Apply with BSA framework + URACE research as project. MacDowell is the most prestigious US artist residency. Acceptance transforms job applications immediately.",
+    "status": "TODO",
+    "attempts": [],
+    "provenance": {
+      "org": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "amount_text": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "eligibility": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "amount_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "fit_score": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "attempts": {
+        "basis": "none",
+        "owed": "Whether this was ever actually applied to, and what came back. The workbook records status but no outcome."
+      }
+    },
+    "source": {
+      "file": "3090c11d-TAL_Master_OS_2026.xlsx",
+      "sheet": "OPEN CALLS + PROPOSALS"
+    }
+  },
+  {
+    "id": "oc.grammy_museum_foundation",
+    "category": "open_call",
+    "kind": "Grant",
+    "org": "GRAMMY Museum Foundation",
+    "amount_text": "$5k–$20k",
+    "amount_range": [
+      5000,
+      20000
+    ],
+    "deadline_text": "Varies — check site",
+    "eligibility": "Recording Academy members eligible",
+    "fit_score": 9,
+    "fit_score_text": "9/10",
+    "summary": "You are a voting Recording Academy member. This is a direct eligibility pathway. Apply for: SSS recording session funding or BSA album production support.",
+    "status": "TODO",
+    "attempts": [],
+    "provenance": {
+      "org": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "amount_text": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "eligibility": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "amount_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "fit_score": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "attempts": {
+        "basis": "none",
+        "owed": "Whether this was ever actually applied to, and what came back. The workbook records status but no outcome."
+      }
+    },
+    "source": {
+      "file": "3090c11d-TAL_Master_OS_2026.xlsx",
+      "sheet": "OPEN CALLS + PROPOSALS"
+    }
+  },
+  {
+    "id": "oc.musicares",
+    "category": "open_call",
+    "kind": "Grant",
+    "org": "MusiCares",
+    "amount_text": "Emergency + development grants",
+    "amount_range": null,
+    "deadline_text": "Rolling",
+    "eligibility": "Musicians with financial hardship history",
+    "fit_score": 9,
+    "fit_score_text": "9/10",
+    "summary": "Given GWU financial disruption, you may qualify for MusiCares recovery support. Also has career development grants for established musicians.",
+    "status": "TODO",
+    "attempts": [],
+    "provenance": {
+      "org": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "amount_text": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "eligibility": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "amount_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "fit_score": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "attempts": {
+        "basis": "none",
+        "owed": "Whether this was ever actually applied to, and what came back. The workbook records status but no outcome."
+      }
+    },
+    "source": {
+      "file": "3090c11d-TAL_Master_OS_2026.xlsx",
+      "sheet": "OPEN CALLS + PROPOSALS"
+    }
+  },
+  {
+    "id": "oc.mellon_foundation_just_futures",
+    "category": "open_call",
+    "kind": "Grant",
+    "org": "Mellon Foundation — Just Futures",
+    "amount_text": "$25k–$150k",
+    "amount_range": [
+      25000,
+      150000
+    ],
+    "deadline_text": "LOI: Rolling, full proposals by invitation",
+    "eligibility": "Institutional orgs + academic researchers",
+    "fit_score": 9,
+    "fit_score_text": "9/10",
+    "summary": "Pitch: FSAEA + GIS acoustic mapping as 'arts + social justice + community' research. Requires institutional affiliation (UTC) as fiscal sponsor. Partner with Dr. Li.",
+    "status": "TODO",
+    "attempts": [],
+    "provenance": {
+      "org": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "amount_text": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "eligibility": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "amount_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "fit_score": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "attempts": {
+        "basis": "none",
+        "owed": "Whether this was ever actually applied to, and what came back. The workbook records status but no outcome."
+      }
+    },
+    "source": {
+      "file": "3090c11d-TAL_Master_OS_2026.xlsx",
+      "sheet": "OPEN CALLS + PROPOSALS"
+    }
+  },
+  {
+    "id": "oc.skowhegan_school_of_painting_sculpture",
+    "category": "open_call",
+    "kind": "Residency",
+    "org": "Skowhegan School of Painting + Sculpture",
+    "amount_text": "Full stipend + housing",
+    "amount_range": null,
+    "deadline_text": "Dec 1 (annual)",
+    "eligibility": "Visual + interdisciplinary artists",
+    "fit_score": 8,
+    "fit_score_text": "8/10",
+    "summary": "Your social practice + sound art = strong interdisciplinary fit. MFA is the qualifying credential. Apply with BSA framework as project proposal.",
+    "status": "TODO",
+    "attempts": [],
+    "provenance": {
+      "org": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "amount_text": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "eligibility": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "amount_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "fit_score": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "attempts": {
+        "basis": "none",
+        "owed": "Whether this was ever actually applied to, and what came back. The workbook records status but no outcome."
+      }
+    },
+    "source": {
+      "file": "3090c11d-TAL_Master_OS_2026.xlsx",
+      "sheet": "OPEN CALLS + PROPOSALS"
+    }
+  },
+  {
+    "id": "oc.onebeat_fresh_sound_new_voices",
+    "category": "open_call",
+    "kind": "Fellowship",
+    "org": "OneBeat / Fresh Sound New Voices",
+    "amount_text": "Project grants",
+    "amount_range": null,
+    "deadline_text": "Rolling LOI",
+    "eligibility": "OneBeat alumni — SSS qualifies",
+    "fit_score": 9,
+    "fit_score_text": "9/10",
+    "summary": "SSS as a trio = eligible OneBeat alumni ensemble. Kyla Rose is the contact. Clarify recording and hosting eligibility FIRST (see High Impact Emails tab). This is the most immediately accessible grant.",
+    "status": "TODO",
+    "attempts": [],
+    "provenance": {
+      "org": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "amount_text": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "eligibility": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "amount_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "fit_score": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "attempts": {
+        "basis": "none",
+        "owed": "Whether this was ever actually applied to, and what came back. The workbook records status but no outcome."
+      }
+    },
+    "source": {
+      "file": "3090c11d-TAL_Master_OS_2026.xlsx",
+      "sheet": "OPEN CALLS + PROPOSALS"
+    }
+  },
+  {
+    "id": "oc.tennessee_arts_commission",
+    "category": "open_call",
+    "kind": "Open Call",
+    "org": "Tennessee Arts Commission",
+    "amount_text": "$1k–$10k individual artist grants",
+    "amount_range": [
+      1000,
+      10000
+    ],
+    "deadline_text": "Spring + Fall cycles",
+    "eligibility": "TN-based artists",
+    "fit_score": 9,
+    "fit_score_text": "9/10",
+    "summary": "You are a TN-based artist. These are rolling state arts grants. Apply individually as AYEYOTY and as FTJC (once 501(c)(3) confirmed).",
+    "status": "TODO",
+    "attempts": [],
+    "provenance": {
+      "org": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "amount_text": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "eligibility": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "amount_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "fit_score": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "attempts": {
+        "basis": "none",
+        "owed": "Whether this was ever actually applied to, and what came back. The workbook records status but no outcome."
+      }
+    },
+    "source": {
+      "file": "3090c11d-TAL_Master_OS_2026.xlsx",
+      "sheet": "OPEN CALLS + PROPOSALS"
+    }
+  },
+  {
+    "id": "oc.headlands_center_for_the_arts",
+    "category": "open_call",
+    "kind": "Fellowship",
+    "org": "Headlands Center for the Arts",
+    "amount_text": "$1,000/mo + housing",
+    "amount_range": [
+      1000,
+      1000
+    ],
+    "deadline_text": "Oct 1 (annual)",
+    "eligibility": "Interdisciplinary artists",
+    "fit_score": 8,
+    "fit_score_text": "8/10",
+    "summary": "Headlands is near San Francisco — strong tech/arts/social justice community. BSA + acoustic sovereignty = strong programmatic fit for their social practice residency track.",
+    "status": "TODO",
+    "attempts": [],
+    "provenance": {
+      "org": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "amount_text": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "eligibility": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "amount_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "fit_score": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "attempts": {
+        "basis": "none",
+        "owed": "Whether this was ever actually applied to, and what came back. The workbook records status but no outcome."
+      }
+    },
+    "source": {
+      "file": "3090c11d-TAL_Master_OS_2026.xlsx",
+      "sheet": "OPEN CALLS + PROPOSALS"
+    }
+  },
+  {
+    "id": "oc.awesome_foundation_micro_grant",
+    "category": "open_call",
+    "kind": "Open Call",
+    "org": "Awesome Foundation Micro-Grant",
+    "amount_text": "$1,000",
+    "amount_range": [
+      1000,
+      1000
+    ],
+    "deadline_text": "Monthly rolling",
+    "eligibility": "Anyone with an awesome idea",
+    "fit_score": 8,
+    "fit_score_text": "8/10",
+    "summary": "Zero bureaucracy. $1,000. Monthly decisions. Apply for: SSS recording fund or URACE prototype hardware ($450 for Pi + sound meters). Fastest money available.",
+    "status": "TODO",
+    "attempts": [],
+    "provenance": {
+      "org": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "amount_text": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "eligibility": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "amount_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "fit_score": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "attempts": {
+        "basis": "none",
+        "owed": "Whether this was ever actually applied to, and what came back. The workbook records status but no outcome."
+      }
+    },
+    "source": {
+      "file": "3090c11d-TAL_Master_OS_2026.xlsx",
+      "sheet": "OPEN CALLS + PROPOSALS"
+    }
+  }
+]

@@ -84,7 +84,11 @@ if (questions?.questions) {
 // -- 3. owed a source --------------------------------------------------------
 
 const owed = [];
-const corpora = [path.join(ROOT, "corpus"), path.join(ROOT, "public/simulator/corpus")];
+const corpora = [
+  path.join(ROOT, "corpus"),
+  path.join(ROOT, "public/simulator/corpus"),
+  path.join(ROOT, "public/radar/corpus"),
+];
 for (const dir of corpora) {
   for (const file of walkJson(dir)) {
     const data = readJson(file);

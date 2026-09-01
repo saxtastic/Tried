@@ -6,18 +6,23 @@
   "branch": "claude/governance-corpus-simulator-m2sjkw",
   "source_revision": "claude/cloudflare-ayeyoty-setup-uq8pl9",
   "inherits": "venue",
-  "pull_request": 3,
+  "pull_request": 6,
   "owns": [
     "public/simulator/*",
+    "public/radar/*",
     "sim/*",
     "test/*",
-    "docs/*"
+    "docs/*",
+    "corpus/enoch/*",
+    "scripts/completion.mjs",
+    "scripts/extract-radar.mjs",
+    ".github/workflows/gates.yml"
   ],
   "claims_disputed": [],
   "ritual": false,
   "state": "review",
   "register": "O",
-  "note": "Built against the placeholder, in parallel with the venue rather than as a subtree of it. Corpus scanned 2026-08-29: generic federal statute text and public case law (Title VI, § 1983, 17 U.S.C. § 201, FERPA, a template enabling act), no personal names, no student records, no institution-specific provisions. The collision is architectural, not content.",
+  "note": "Built against the placeholder, in parallel with the venue rather than as a subtree of it. Corpus scanned 2026-08-29: generic federal statute text and public case law (Title VI, § 1983, 17 U.S.C. § 201, FERPA, a template enabling act), no personal names, no student records, no institution-specific provisions. The collision is architectural, not content. Radar subtree added 2026-09-01: extracted from four uploaded workbooks (open calls, metros, roles). Content is the owner's own research and job-search material — no third-party personal data, no institution-specific records. Reconciled against the fellowships reference on 2026-09-01: 25 calls, 1 superseded, 1 near-match left unmerged and reported. CI added 2026-09-01 (AO-1): the gates no longer run only when a session chooses to run them.",
   "vantages_held": [
     "engineering"
   ],
@@ -29,17 +34,10 @@
     "note": "Earlier entry here overstated survivability. Corrected against measurement supplied by the project itself."
   },
   "partial_compliance": "Fully resolved. Merged the shell at af83ccd, dropped the contested edits, re-added its card in the shell's idiom on its own branch, adopted the officer-corpus model at ba2422b, and retargeted PR #3 to the venue branch. P7, P8 and P13 all clear against it.",
-  "merged_upstream": "af83ccd — merged the venue shell; adopted the officer-corpus model at ba2422b",
-  "pull_request_base": "claude/ios-macos-code-repurpose-ofm9ks",
+  "merged_upstream": "af83ccd — merged the venue shell; adopted the officer-corpus model at ba2422b; PR #3 merged 2026-08-31 and the branch was rebased onto the default branch for PR #6",
+  "pull_request_base": "claude/cloudflare-ayeyoty-setup-uq8pl9",
   "_owner_note": "This file is owned by the project it describes. The venue assembles it and never edits another project's copy; a sibling edits only its own. That is the whole point of the split.",
   "awaiting_owner": [
-    {
-      "id": "AO-1",
-      "question": "Add a GitHub Actions workflow so the gates run without a session?",
-      "detail": "The repo has no .github. npm test (77), check, check:propose, verify --strict and outstanding all run only when a session chooses to run them. Offered twice; not answered. A stale premise (ENG-P1) shipped for hours because nothing was watching.",
-      "asked_at": "2026-08-30",
-      "blocking": false
-    },
     {
       "id": "AO-2",
       "question": "Build the four verbs — document / produce / share / perform — as the site's structure?",
@@ -55,18 +53,59 @@
       "blocking": true
     },
     {
-      "id": "AO-4",
-      "question": "What is the paralegal role actually called?",
-      "detail": "Transcribed as 'Enochian paralegal' and 'ENaki in paralegal'. Recorded as an unresolved name rather than guessed at. The corpus/paralegal/ officer is filed under the generic name until corrected. Nothing depends on it; the role is built either way.",
-      "asked_at": "2026-08-30",
-      "blocking": false
-    },
-    {
       "id": "AO-5",
       "question": "Q3 FORM versus RELIANCE — who owns the test?",
       "detail": "Unresolved and unowned since the Q3 arbitration declined to pick. Fellowships locates the danger in form (a judgment in a file shaped like a spec); engineering locates it in reliance (a claim a reader is invited to act on). They diverge on real cases and the next straddling file gets classified by whoever finds it.",
       "asked_at": "2026-08-30",
       "blocking": false
+    },
+    {
+      "id": "AO-6",
+      "question": "Should /radar/ get a card on the front page, and under what name?",
+      "detail": "The radar renders and passes the tier check at all four viewports, but nothing links to it: public/index.html is the shell's file and this project does not edit another project's copy. The shell adds the card or the surface stays unreachable from the front page. 'Radar' is this session's placeholder, not a decision.",
+      "asked_at": "2026-09-01",
+      "blocking": false
+    },
+    {
+      "id": "AO-7",
+      "question": "Which of the workbook open calls were actually applied to, and what came back?",
+      "detail": "The radar reconciles against the fellowships reference, whose stage machine carries real progress for its 16 calls. The 9 rows held only in the workbooks carry a TODO status and no outcome anywhere, so every one of them reads `untried`. Untried and applied-and-rejected are different findings and the board cannot tell them apart until someone says. This is the single field that would change the page most.",
+      "asked_at": "2026-09-01",
+      "blocking": false
+    },
+    {
+      "id": "AO-8",
+      "question": "The fit scores — keep them as declared opinion, or replace them with a rule?",
+      "detail": "20 typed scores across the workbooks, every one basis `none`: there is not a single formula in 4,300 populated cells, so no score in them was computed from anything. They can stay as the owner's stated preference, which is legitimate and useful, or be replaced by a rule over named inputs so they can be recomputed and argued with. What they cannot be is both a judgment and a measurement.",
+      "asked_at": "2026-09-01",
+      "blocking": false
+    }
+  ],
+  "resolved": [
+    {
+      "id": "AO-4",
+      "question": "What is the paralegal role actually called?",
+      "asked_at": "2026-08-30",
+      "resolved_at": "2026-09-01",
+      "answer": "Enoch. The office of the accounting record: the angel and the parliamentarian. Not a party to the debate and not inside the argument structure — the ratification of the argument structure and of the protocol structure.",
+      "resolved_by": "owner",
+      "what_changed": "corpus/enoch/ was already filed under that name at ba2422b. The generic corpus/paralegal/ officer stays, because it is a different office: the paralegal searches dockets and takes a side, Enoch reads the record and takes none. Kept as a resolved item rather than deleted, because a question that disappears when it is answered leaves no way to check what the answer was."
+    },
+    {
+      "id": "AO-1",
+      "question": "Add a GitHub Actions workflow so the gates run without a session?",
+      "asked_at": "2026-08-30",
+      "resolved_at": "2026-09-01",
+      "answer": "Yes. Asked a fourth time while the owner was away from a machine, and answered: add it.",
+      "resolved_by": "owner",
+      "what_changed": ".github/workflows/gates.yml runs the whole protocol on every push and pull request and writes the verdict and the outstanding register into the run summary. The workflow holds G4 open by name — Q2-SURVIVAL has two answers and no arbitration, and this project cannot close it — and that allowance sits in the workflow rather than in the protocol, because a record that could excuse a failure against itself is the structured-compliance shield. It cannot go stale: if G4 starts passing, the run goes red until the allowance is deleted."
+    }
+  ],
+  "reads_but_does_not_write": [
+    {
+      "path": "public/fellowships/registry.json",
+      "owner": "fellowships",
+      "why": "The radar reconciles the workbook rows against that reference and bundles a copy so the page can read it under a CSP that forbids fetch. Read only — this project never edits it. The `complete` protocol's T1 retest compares the committed bundle against a fresh build, so a change upstream surfaces here as a stale bundle rather than as a page serving last week's deadlines."
     }
   ]
 }

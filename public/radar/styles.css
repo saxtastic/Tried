@@ -1,0 +1,169 @@
+/* Radar subtree.
+ *
+ * Palette, type, spacing and tier behaviour come from /venue.css and /venue.js.
+ * What is here is only what the board needs: the return groups, the opportunity
+ * cards, the flag levels and the metro table.
+ *
+ * Two notes for whoever writes the third subtree:
+ *
+ * 1. .control-grid, .field, .toggles and .loading are now defined identically in
+ *    /simulator/styles.css and here. Two is a coincidence; three is a component.
+ *    They belong in venue.css and are not moved there only because venue.css is
+ *    the shell's file and this project does not edit another project's copy.
+ *
+ * 2. The status colours are the same three tokens the simulator declares, under
+ *    different names, for the same reason: venue.css has no status scale. If it
+ *    ever grows one, delete both blocks and follow it.
+ */
+
+:root {
+  --rdr-ok: #2f7a52;
+  --rdr-warn: #9a6b12;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --rdr-ok: #4ade80;
+    --rdr-warn: #fbbf24;
+  }
+}
+
+/* ---------------------------------------------------------------- readout -- */
+
+.readout {
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.readout dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.3rem 0.9rem;
+  margin: 0.6rem 0 0;
+  font-size: 0.85rem;
+}
+.readout dt { color: var(--fg-2); }
+.readout dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* --------------------------------------------------------------- controls -- */
+
+.control-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+  gap: var(--gutter);
+  margin-top: var(--gutter);
+}
+.field { margin: 0; min-width: 0; }
+.field > label,
+.field > legend {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--fg-2);
+  margin-bottom: 0.3rem;
+  padding: 0;
+}
+fieldset.field { border: 0; margin: 0; padding: 0; }
+input[type="number"],
+input[type="date"] {
+  width: 100%;
+  max-width: 100%;
+  padding: 0.5rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--surface-solid);
+  color: var(--fg);
+  border: 1px solid var(--hairline);
+  font: inherit;
+}
+.toggles { display: flex; flex-wrap: wrap; gap: 0.5rem 0.9rem; }
+.toggles label { display: inline-flex; gap: 0.35rem; align-items: center; font-size: 0.85rem; }
+
+/* ------------------------------------------------------------ the board --- */
+
+.loading { color: var(--fg-2); padding: 2rem 0; }
+
+.finding,
+.caution {
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: var(--gutter);
+  margin: 0 0 var(--gutter);
+  font-size: 0.92rem;
+}
+.caution { color: var(--fg-2); font-size: 0.84rem; }
+
+.group { margin-bottom: calc(var(--gutter) * 1.4); }
+.group .section-head h3 { margin: 0 0 0.2rem; }
+.group .section-head p { margin: 0; color: var(--fg-2); font-size: 0.85rem; }
+
+.ops {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(19rem, 100%), 1fr));
+  gap: var(--gutter);
+  margin-top: 0.8rem;
+}
+
+.op {
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: var(--gutter);
+  min-width: 0;
+}
+.op h4 {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+  line-height: 1.25;
+  /* Long organisation names must wrap at the watch tier rather than push the
+     page sideways. Measured at 208 pt: nothing here overflows. */
+  overflow-wrap: anywhere;
+}
+.op-meta { margin: 0 0 0.5rem; color: var(--fg-2); font-size: 0.8rem; }
+.op-rate { margin: 0.5rem 0 0; font-size: 0.85rem; color: var(--rdr-ok); font-variant-numeric: tabular-nums; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 0.3rem; list-style: none; margin: 0; padding: 0; }
+.tags li {
+  font-size: 0.72rem;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  padding: 0.1rem 0.5rem;
+  color: var(--fg-2);
+}
+
+.flags { list-style: none; margin: 0.7rem 0 0; padding: 0; display: grid; gap: 0.4rem; }
+.flags li {
+  font-size: 0.8rem;
+  line-height: 1.35;
+  border-left: 2px solid var(--hairline);
+  padding-left: 0.6rem;
+  color: var(--fg-2);
+}
+.flags li[data-level="warn"] { border-left-color: var(--rdr-warn); }
+
+.why { margin-top: 0.7rem; font-size: 0.8rem; }
+.why summary { cursor: pointer; color: var(--fg-2); }
+.rules { list-style: none; margin: 0.5rem 0 0; padding: 0; display: grid; gap: 0.35rem; color: var(--fg-2); }
+.basis { margin: 0.5rem 0 0; color: var(--fg-2); }
+
+/* ---------------------------------------------------------------- metros -- */
+
+/* The one wide thing on the page. It scrolls inside its own box so the page
+   itself never scrolls sideways at any tier. */
+.table-wrap { overflow-x: auto; margin-top: 0.8rem; }
+.metros { border-collapse: collapse; width: 100%; font-size: 0.82rem; }
+.metros th,
+.metros td {
+  text-align: left;
+  padding: 0.4rem 0.7rem 0.4rem 0;
+  border-bottom: 1px solid var(--hairline);
+  white-space: nowrap;
+}
+.metros th { color: var(--fg-2); font-weight: 600; }
+.metros td:first-child { white-space: normal; min-width: 9rem; }
+
+/* Where a row came from, and how far it has gone. Both belong on the card:
+   a sourced record and a typed one should never look alike. */
+.tags .tag-src,
+.tags .tag-stage { border-style: dashed; }
+.tags .tag-stage { color: var(--fg); }

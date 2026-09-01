@@ -1,0 +1,680 @@
+[
+  {
+    "id": "loc.phoenix_tempe_az_asu_",
+    "metro": "Phoenix / Tempe, AZ (ASU)",
+    "state_income_tax": "2.5%–4.5%",
+    "median_1br_rent": "$852–$1,061",
+    "rent_range": [
+      852,
+      1061
+    ],
+    "col_index": "103 (3% above national)",
+    "typical_salary": "$55,000–$80,000 (faculty/student affairs)",
+    "salary_range": [
+      55000,
+      80000
+    ],
+    "take_home_mo": "~$3,800–$5,200",
+    "take_home_range": [
+      3800,
+      5200
+    ],
+    "rent_pct_take_home": "22%–28% ✅",
+    "financial_score": 9,
+    "provenance": {
+      "median_1br_rent": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "typical_salary": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "rent_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "salary_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "take_home_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "financial_score": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "col_index": {
+        "basis": "none",
+        "owed": "The 2026 cost-of-living source the sheet says it is \"based on\". No citation is recorded in the workbook."
+      }
+    },
+    "source": {
+      "file": "bb1cf408-TAL_Job_Tracker_2026.xlsx",
+      "sheet": "CITY FINANCIAL ANALYSIS"
+    }
+  },
+  {
+    "id": "loc.chattanooga_tn_utc_current_",
+    "metro": "Chattanooga, TN (UTC — current)",
+    "state_income_tax": "0% income tax",
+    "median_1br_rent": "$800–$1,100",
+    "rent_range": [
+      800,
+      1100
+    ],
+    "col_index": "88 (12% below national)",
+    "typical_salary": "$45,000–$65,000 (current)",
+    "salary_range": [
+      45000,
+      65000
+    ],
+    "take_home_mo": "~$3,200–$4,200",
+    "take_home_range": [
+      3200,
+      4200
+    ],
+    "rent_pct_take_home": "25%–34% ✅",
+    "financial_score": 7,
+    "provenance": {
+      "median_1br_rent": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "typical_salary": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "rent_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "salary_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "take_home_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "financial_score": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "col_index": {
+        "basis": "none",
+        "owed": "The 2026 cost-of-living source the sheet says it is \"based on\". No citation is recorded in the workbook."
+      }
+    },
+    "source": {
+      "file": "bb1cf408-TAL_Job_Tracker_2026.xlsx",
+      "sheet": "CITY FINANCIAL ANALYSIS"
+    }
+  },
+  {
+    "id": "loc.nashville_tn",
+    "metro": "Nashville, TN",
+    "state_income_tax": "0% income tax",
+    "median_1br_rent": "$1,400–$1,900",
+    "rent_range": [
+      1400,
+      1900
+    ],
+    "col_index": "115 (15% above national)",
+    "typical_salary": "$55,000–$75,000",
+    "salary_range": [
+      55000,
+      75000
+    ],
+    "take_home_mo": "~$3,800–$5,200",
+    "take_home_range": [
+      3800,
+      5200
+    ],
+    "rent_pct_take_home": "37%–50% ⚠",
+    "financial_score": 6,
+    "provenance": {
+      "median_1br_rent": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "typical_salary": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "rent_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "salary_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "take_home_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "financial_score": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "col_index": {
+        "basis": "none",
+        "owed": "The 2026 cost-of-living source the sheet says it is \"based on\". No citation is recorded in the workbook."
+      }
+    },
+    "source": {
+      "file": "bb1cf408-TAL_Job_Tracker_2026.xlsx",
+      "sheet": "CITY FINANCIAL ANALYSIS"
+    }
+  },
+  {
+    "id": "loc.atlanta_ga",
+    "metro": "Atlanta, GA",
+    "state_income_tax": "1%–5.75%",
+    "median_1br_rent": "$1,200–$1,800",
+    "rent_range": [
+      1200,
+      1800
+    ],
+    "col_index": "105 (5% above national)",
+    "typical_salary": "$55,000–$80,000",
+    "salary_range": [
+      55000,
+      80000
+    ],
+    "take_home_mo": "~$3,500–$5,000",
+    "take_home_range": [
+      3500,
+      5000
+    ],
+    "rent_pct_take_home": "34%–51% ⚠",
+    "financial_score": 7,
+    "provenance": {
+      "median_1br_rent": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "typical_salary": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "rent_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "salary_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "take_home_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "financial_score": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "col_index": {
+        "basis": "none",
+        "owed": "The 2026 cost-of-living source the sheet says it is \"based on\". No citation is recorded in the workbook."
+      }
+    },
+    "source": {
+      "file": "bb1cf408-TAL_Job_Tracker_2026.xlsx",
+      "sheet": "CITY FINANCIAL ANALYSIS"
+    }
+  },
+  {
+    "id": "loc.washington_dc",
+    "metro": "Washington, DC",
+    "state_income_tax": "4%–10.75%",
+    "median_1br_rent": "$1,800–$2,800",
+    "rent_range": [
+      1800,
+      2800
+    ],
+    "col_index": "148 (48% above national)",
+    "typical_salary": "$65,000–$95,000",
+    "salary_range": [
+      65000,
+      95000
+    ],
+    "take_home_mo": "~$4,200–$6,000",
+    "take_home_range": [
+      4200,
+      6000
+    ],
+    "rent_pct_take_home": "43%–67% ❌",
+    "financial_score": 4,
+    "provenance": {
+      "median_1br_rent": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "typical_salary": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "rent_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "salary_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "take_home_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "financial_score": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "col_index": {
+        "basis": "none",
+        "owed": "The 2026 cost-of-living source the sheet says it is \"based on\". No citation is recorded in the workbook."
+      }
+    },
+    "source": {
+      "file": "bb1cf408-TAL_Job_Tracker_2026.xlsx",
+      "sheet": "CITY FINANCIAL ANALYSIS"
+    }
+  },
+  {
+    "id": "loc.new_york_city_ny",
+    "metro": "New York City, NY",
+    "state_income_tax": "4%–6.25% + city tax",
+    "median_1br_rent": "$2,200–$3,500",
+    "rent_range": [
+      2200,
+      3500
+    ],
+    "col_index": "187 (87% above national)",
+    "typical_salary": "$65,000–$100,000",
+    "salary_range": [
+      65000,
+      100000
+    ],
+    "take_home_mo": "~$4,200–$6,500",
+    "take_home_range": [
+      4200,
+      6500
+    ],
+    "rent_pct_take_home": "52%–83% ❌",
+    "financial_score": 2,
+    "provenance": {
+      "median_1br_rent": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "typical_salary": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "rent_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "salary_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "take_home_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "financial_score": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "col_index": {
+        "basis": "none",
+        "owed": "The 2026 cost-of-living source the sheet says it is \"based on\". No citation is recorded in the workbook."
+      }
+    },
+    "source": {
+      "file": "bb1cf408-TAL_Job_Tracker_2026.xlsx",
+      "sheet": "CITY FINANCIAL ANALYSIS"
+    }
+  },
+  {
+    "id": "loc.chicago_il",
+    "metro": "Chicago, IL",
+    "state_income_tax": "4.95%",
+    "median_1br_rent": "$1,200–$1,800",
+    "rent_range": [
+      1200,
+      1800
+    ],
+    "col_index": "107 (7% above national)",
+    "typical_salary": "$55,000–$80,000",
+    "salary_range": [
+      55000,
+      80000
+    ],
+    "take_home_mo": "~$3,500–$5,000",
+    "take_home_range": [
+      3500,
+      5000
+    ],
+    "rent_pct_take_home": "34%–51% ⚠",
+    "financial_score": 6,
+    "provenance": {
+      "median_1br_rent": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "typical_salary": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "rent_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "salary_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "take_home_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "financial_score": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "col_index": {
+        "basis": "none",
+        "owed": "The 2026 cost-of-living source the sheet says it is \"based on\". No citation is recorded in the workbook."
+      }
+    },
+    "source": {
+      "file": "bb1cf408-TAL_Job_Tracker_2026.xlsx",
+      "sheet": "CITY FINANCIAL ANALYSIS"
+    }
+  },
+  {
+    "id": "loc.los_angeles_ca",
+    "metro": "Los Angeles, CA",
+    "state_income_tax": "1%–9.3%",
+    "median_1br_rent": "$1,800–$2,800",
+    "rent_range": [
+      1800,
+      2800
+    ],
+    "col_index": "175 (75% above national)",
+    "typical_salary": "$65,000–$95,000",
+    "salary_range": [
+      65000,
+      95000
+    ],
+    "take_home_mo": "~$3,800–$5,500",
+    "take_home_range": [
+      3800,
+      5500
+    ],
+    "rent_pct_take_home": "47%–74% ❌",
+    "financial_score": 3,
+    "provenance": {
+      "median_1br_rent": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "typical_salary": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "rent_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "salary_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "take_home_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "financial_score": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "col_index": {
+        "basis": "none",
+        "owed": "The 2026 cost-of-living source the sheet says it is \"based on\". No citation is recorded in the workbook."
+      }
+    },
+    "source": {
+      "file": "bb1cf408-TAL_Job_Tracker_2026.xlsx",
+      "sheet": "CITY FINANCIAL ANALYSIS"
+    }
+  },
+  {
+    "id": "loc.seattle_wa",
+    "metro": "Seattle, WA",
+    "state_income_tax": "0% income tax",
+    "median_1br_rent": "$1,600–$2,400",
+    "rent_range": [
+      1600,
+      2400
+    ],
+    "col_index": "147 (47% above national)",
+    "typical_salary": "$65,000–$90,000",
+    "salary_range": [
+      65000,
+      90000
+    ],
+    "take_home_mo": "~$4,500–$6,300",
+    "take_home_range": [
+      4500,
+      6300
+    ],
+    "rent_pct_take_home": "36%–53% ⚠",
+    "financial_score": 5,
+    "provenance": {
+      "median_1br_rent": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "typical_salary": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "rent_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "salary_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "take_home_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "financial_score": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "col_index": {
+        "basis": "none",
+        "owed": "The 2026 cost-of-living source the sheet says it is \"based on\". No citation is recorded in the workbook."
+      }
+    },
+    "source": {
+      "file": "bb1cf408-TAL_Job_Tracker_2026.xlsx",
+      "sheet": "CITY FINANCIAL ANALYSIS"
+    }
+  },
+  {
+    "id": "loc.lisbon_porto_portugal",
+    "metro": "Lisbon / Porto, Portugal",
+    "state_income_tax": "0–48% (complex)",
+    "median_1br_rent": "€600–€1,200",
+    "rent_range": [
+      600,
+      1200
+    ],
+    "col_index": "70 (30% below US national)",
+    "typical_salary": "$40,000–$65,000 USD equiv",
+    "salary_range": [
+      40000,
+      65000
+    ],
+    "take_home_mo": "~$2,500–$4,000",
+    "take_home_range": [
+      2500,
+      4000
+    ],
+    "rent_pct_take_home": "25%–48%",
+    "financial_score": 8,
+    "provenance": {
+      "median_1br_rent": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "typical_salary": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "rent_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "salary_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "take_home_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "financial_score": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "col_index": {
+        "basis": "none",
+        "owed": "The 2026 cost-of-living source the sheet says it is \"based on\". No citation is recorded in the workbook."
+      }
+    },
+    "source": {
+      "file": "bb1cf408-TAL_Job_Tracker_2026.xlsx",
+      "sheet": "CITY FINANCIAL ANALYSIS"
+    }
+  },
+  {
+    "id": "loc.why_asu_phoenix_is_your_best_financial_m",
+    "metro": "WHY ASU / PHOENIX IS YOUR BEST FINANCIAL MOVE",
+    "state_income_tax": null,
+    "median_1br_rent": null,
+    "rent_range": null,
+    "col_index": null,
+    "typical_salary": null,
+    "salary_range": null,
+    "take_home_mo": null,
+    "take_home_range": null,
+    "rent_pct_take_home": null,
+    "financial_score": null,
+    "provenance": {
+      "median_1br_rent": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "typical_salary": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "rent_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "salary_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "take_home_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "financial_score": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "col_index": {
+        "basis": "none",
+        "owed": "The 2026 cost-of-living source the sheet says it is \"based on\". No citation is recorded in the workbook."
+      }
+    },
+    "source": {
+      "file": "bb1cf408-TAL_Job_Tracker_2026.xlsx",
+      "sheet": "CITY FINANCIAL ANALYSIS"
+    }
+  },
+  {
+    "id": "loc.financial_case_for_asu_phoenix_arizona_s",
+    "metro": "FINANCIAL CASE FOR ASU/PHOENIX:\n• Arizona state income tax: 2.5%–4.5% (one of the lowest in the West)\n• No inheritance tax, no estate tax\n• Median rent $852–$1,061 for 1BR — manageable on $65k+ salary\n• ASU faculty salary range: $55,000–$85,000 for lecturer/instructor roles, $70,000–$110,000 for tenure-track\n• ASU is the largest public university in the US (125,000+ students) — institutional stability\n• ASU has a robust Black cultural infrastructure: Herberger Institute for Design and the Arts, multicultural programs\n• Kenneth D. Cobbs (GWU Black House alum) is currently at ASU — insider network access\n• NACA homebuying: Phoenix median home $445k but ASU employee benefits include housing programs\n• Your MFA from GWU Corcoran + acoustic sovereignty research + OneBeat = genuinely competitive for ASU roles in social practice, sound art, or student affairs leadership\n• Desert climate: no winter. Memphis/South roots = cultural adjustment possible. Phoenix Black population ~7% but growing rapidly.",
+    "state_income_tax": null,
+    "median_1br_rent": null,
+    "rent_range": null,
+    "col_index": null,
+    "typical_salary": null,
+    "salary_range": null,
+    "take_home_mo": null,
+    "take_home_range": null,
+    "rent_pct_take_home": null,
+    "financial_score": null,
+    "provenance": {
+      "median_1br_rent": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "typical_salary": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      },
+      "rent_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "salary_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "take_home_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "financial_score": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "col_index": {
+        "basis": "none",
+        "owed": "The 2026 cost-of-living source the sheet says it is \"based on\". No citation is recorded in the workbook."
+      }
+    },
+    "source": {
+      "file": "bb1cf408-TAL_Job_Tracker_2026.xlsx",
+      "sheet": "CITY FINANCIAL ANALYSIS"
+    }
+  }
+]
