@@ -26,9 +26,13 @@
 
 name: gates
 
+# `push` is the default branch only. Every other branch here arrives through a
+# pull request, and listing both `push: ['**']` and `pull_request` ran the whole
+# protocol twice on the same commit — two Chromium downloads and two identical
+# green checks, which is noise on the PR and money on the runner.
 on:
   push:
-    branches: ['**']
+    branches: [claude/cloudflare-ayeyoty-setup-uq8pl9]
   pull_request:
   workflow_dispatch:
 
