@@ -15,13 +15,14 @@
     "docs/*",
     "corpus/enoch/*",
     "scripts/completion.mjs",
-    "scripts/extract-radar.mjs"
+    "scripts/extract-radar.mjs",
+    ".github/workflows/gates.yml"
   ],
   "claims_disputed": [],
   "ritual": false,
   "state": "review",
   "register": "O",
-  "note": "Built against the placeholder, in parallel with the venue rather than as a subtree of it. Corpus scanned 2026-08-29: generic federal statute text and public case law (Title VI, § 1983, 17 U.S.C. § 201, FERPA, a template enabling act), no personal names, no student records, no institution-specific provisions. The collision is architectural, not content. Radar subtree added 2026-09-01: extracted from four uploaded workbooks (open calls, metros, roles). Content is the owner's own research and job-search material — no third-party personal data, no institution-specific records. Reconciled against the fellowships reference on 2026-09-01: 25 calls, 1 superseded, 1 near-match left unmerged and reported.",
+  "note": "Built against the placeholder, in parallel with the venue rather than as a subtree of it. Corpus scanned 2026-08-29: generic federal statute text and public case law (Title VI, § 1983, 17 U.S.C. § 201, FERPA, a template enabling act), no personal names, no student records, no institution-specific provisions. The collision is architectural, not content. Radar subtree added 2026-09-01: extracted from four uploaded workbooks (open calls, metros, roles). Content is the owner's own research and job-search material — no third-party personal data, no institution-specific records. Reconciled against the fellowships reference on 2026-09-01: 25 calls, 1 superseded, 1 near-match left unmerged and reported. CI added 2026-09-01 (AO-1): the gates no longer run only when a session chooses to run them.",
   "vantages_held": [
     "engineering"
   ],
@@ -37,13 +38,6 @@
   "pull_request_base": "claude/cloudflare-ayeyoty-setup-uq8pl9",
   "_owner_note": "This file is owned by the project it describes. The venue assembles it and never edits another project's copy; a sibling edits only its own. That is the whole point of the split.",
   "awaiting_owner": [
-    {
-      "id": "AO-1",
-      "question": "Add a GitHub Actions workflow so the gates run without a session?",
-      "detail": "The repo has no .github. npm test (77), check, check:propose, verify --strict and outstanding all run only when a session chooses to run them. Offered twice; not answered. A stale premise (ENG-P1) shipped for hours because nothing was watching.",
-      "asked_at": "2026-08-30",
-      "blocking": false
-    },
     {
       "id": "AO-2",
       "question": "Build the four verbs — document / produce / share / perform — as the site's structure?",
@@ -96,6 +90,15 @@
       "answer": "Enoch. The office of the accounting record: the angel and the parliamentarian. Not a party to the debate and not inside the argument structure — the ratification of the argument structure and of the protocol structure.",
       "resolved_by": "owner",
       "what_changed": "corpus/enoch/ was already filed under that name at ba2422b. The generic corpus/paralegal/ officer stays, because it is a different office: the paralegal searches dockets and takes a side, Enoch reads the record and takes none. Kept as a resolved item rather than deleted, because a question that disappears when it is answered leaves no way to check what the answer was."
+    },
+    {
+      "id": "AO-1",
+      "question": "Add a GitHub Actions workflow so the gates run without a session?",
+      "asked_at": "2026-08-30",
+      "resolved_at": "2026-09-01",
+      "answer": "Yes. Asked a fourth time while the owner was away from a machine, and answered: add it.",
+      "resolved_by": "owner",
+      "what_changed": ".github/workflows/gates.yml runs the whole protocol on every push and pull request and writes the verdict and the outstanding register into the run summary. The workflow holds G4 open by name — Q2-SURVIVAL has two answers and no arbitration, and this project cannot close it — and that allowance sits in the workflow rather than in the protocol, because a record that could excuse a failure against itself is the structured-compliance shield. It cannot go stale: if G4 starts passing, the run goes red until the allowance is deleted."
     }
   ],
   "reads_but_does_not_write": [

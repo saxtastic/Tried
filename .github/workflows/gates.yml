@@ -1,0 +1,101 @@
+# The gates, run without a session.
+#
+# Everything this repository checks has until now run only when somebody chose
+# to run it. That is how a stale premise (ENG-P1) shipped for hours: nothing was
+# watching. This runs the whole protocol on every push and every pull request,
+# and writes the result — plus the list of what is outstanding — into the run
+# summary, so the answer is readable from a phone.
+#
+# One deliberate choice worth reading before you change it:
+#
+#   `--known-open G4` says this workflow is willing to wait on ONE named
+#   failure. G4 is `enoch --strict`, which is currently out of order because
+#   Q2-SURVIVAL has two answers and no arbitration — and one of those answers is
+#   the simulator's own, so it cannot close it: no question is closed by the
+#   asker answering it.
+#
+#   The allowance lives HERE, in a file a reviewer reads, and not in
+#   corpus/enoch/protocol/completion.json. A record that could excuse a failure
+#   against itself is the structured-compliance shield this repository already
+#   found once and modelled. It changes the exit code only; the verdict printed
+#   in the summary stays INCOMPLETE and names exactly what is failing.
+#
+#   It cannot go stale. If G4 starts passing, this run goes RED until the
+#   allowance is deleted — an allowance nobody needs any more is a lie that
+#   quietly accumulates. Anything failing that is not listed fails the build.
+
+name: gates
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gates-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      # G5 (check-tiers) serves ./public and opens it at four viewports. The
+      # browser has to match the pinned Playwright or it fails on a missing
+      # executable rather than on anything about the site.
+      - name: Install Chromium for the tier check
+        run: npx playwright install --with-deps chromium
+
+      - name: Run the protocol
+        id: protocol
+        run: |
+          set -o pipefail
+          npm run complete --silent -- --no-color --known-open G4 | tee complete.txt
+
+      # The owner's standing instruction: every check produces the list of
+      # outstanding requests and clarifications. It runs whether or not the
+      # gates passed, because what is owed does not depend on what is green.
+      - name: What is outstanding
+        if: always()
+        run: npm run outstanding --silent -- --no-color | tee outstanding.txt
+
+      - name: Write the summary
+        if: always()
+        run: |
+          {
+            echo '## Completion'
+            echo ''
+            echo '```'
+            cat complete.txt 2>/dev/null || echo '(the protocol step produced no output — it died before reporting)'
+            echo '```'
+            echo ''
+            echo '## Outstanding'
+            echo ''
+            echo '```'
+            cat outstanding.txt 2>/dev/null || echo '(the register produced no output)'
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Keep the reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gate-reports
+          path: |
+            complete.txt
+            outstanding.txt
+          if-no-files-found: warn

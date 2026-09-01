@@ -1,10 +1,11 @@
 # Definition of completion
 
 ```bash
-npm run complete                 # every gate, retest and benchmark
-npm run complete -- --fast       # skip gates marked slow (the browser one)
+npm run complete                    # every gate, retest and benchmark
+npm run complete -- --fast          # skip gates marked slow (the browser one)
 npm run complete -- --json
-npm run complete -- --strict     # non-zero unless the verdict is `complete`
+npm run complete -- --strict        # non-zero unless the verdict is `complete`
+npm run complete -- --known-open G4 # non-zero unless the only failures are the listed ids
 ```
 
 The protocol is a record — `corpus/enoch/protocol/completion.json` — and
@@ -92,3 +93,42 @@ than by the owner. Answered questions move to `resolved` carrying the answer,
 who gave it and what changed, rather than being deleted; a question that
 vanishes when it is answered leaves no way to check afterwards what the answer
 was.
+
+## Running without a session
+
+`.github/workflows/gates.yml` runs the whole protocol on every push and every
+pull request, and writes both the verdict and `npm run outstanding` into the run
+summary, so the answer is readable from a phone. Before it existed, everything
+here ran only when somebody chose to run it — which is how a stale premise
+shipped for hours with nothing watching.
+
+### The one allowance, and why it is where it is
+
+The workflow invokes `--known-open G4`. G4 is `enoch --strict`, currently out of
+order because `Q2-SURVIVAL` has two answers and no arbitration — and one of them
+is the simulator's own, so it cannot close it.
+
+That declaration lives in the workflow, in a file a reviewer reads, and **not**
+in `completion.json`. A record that could excuse a failure against itself is the
+structured-compliance shield this repository already found once, in accounting's
+rules-versus-principles literature, and modelled as a defeater. The flag changes
+the **exit code only**. The verdict in the summary still reads INCOMPLETE and
+still names G4.
+
+It cannot rot. The runner exits non-zero on three things besides an uncovered
+failure:
+
+| | |
+|---|---|
+| `no such id` | an allowance naming nothing looks like coverage and holds nothing open |
+| `stale allowance` | the id is passing — delete the allowance to get green |
+| `not covered` | something is failing that the allowance does not name |
+
+So an allowance nobody needs any more turns the build red until it is deleted,
+which is the only way one does not quietly accumulate.
+
+**Not covered by the test suite:** the exit codes themselves. G1 is `npm test`,
+so a test that ran the runner would run itself. All four paths were exercised by
+hand on 2026-09-01 (unknown → 1, stale → 1, uncovered → 1, covered-only → 0).
+What the suite does hold is the drift that would actually happen: an assertion
+that every id the workflow names still exists in the protocol.

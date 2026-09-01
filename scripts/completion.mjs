@@ -4,6 +4,7 @@
  *   npm run complete                 run every gate, retest and benchmark
  *   npm run complete -- --fast       skip the gates marked slow (the browser one)
  *   npm run complete -- --strict     exit non-zero unless the verdict is `complete`
+ *   npm run complete -- --known-open G4   exit 0 if the only failures are the listed ids
  *   npm run complete -- --json
  *
  * The protocol lives in corpus/enoch/protocol/completion.json and this file only
@@ -23,6 +24,18 @@
  *
  * Enoch administers this. Enoch rules on order, never on merit: this file will
  * say a gate was not run and will never say the work was not worth doing.
+ *
+ * `--known-open` is for a caller — CI, usually — that is willing to wait on a
+ * specific failure it cannot close. It is a flag and NOT a field in the
+ * protocol, deliberately: a record that could excuse a failure against itself
+ * is the structured-compliance shield this repository already found once and
+ * modelled. The declaration lives with whoever is waiting, in a file a reviewer
+ * reads, and it changes the EXIT CODE only — never the verdict, which stays
+ * INCOMPLETE and says exactly what is failing.
+ *
+ * It also refuses to go stale. If a listed id turns out to be passing, the run
+ * exits non-zero and says so: an allowance nobody needs any more is a lie that
+ * quietly accumulates, and this one has to be deleted to get green.
  */
 
 import fs from "node:fs";
@@ -33,6 +46,11 @@ import { fileURLToPath } from "node:url";
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const argv = process.argv.slice(2);
 const flag = (n) => argv.includes(`--${n}`);
+const listOf = (n) => {
+  const i = argv.indexOf(`--${n}`);
+  if (i === -1) return [];
+  return String(argv[i + 1] ?? "").split(/[,\s]+/).filter(Boolean);
+};
 
 const C = process.stdout.isTTY && !flag("no-color")
   ? { dim: (s) => `\x1b[2m${s}\x1b[0m`, b: (s) => `\x1b[1m${s}\x1b[0m`, r: (s) => `\x1b[31m${s}\x1b[0m`, g: (s) => `\x1b[32m${s}\x1b[0m`, y: (s) => `\x1b[33m${s}\x1b[0m` }
@@ -296,6 +314,24 @@ const skipped = gates.filter((g) => g.state === "skipped");
 
 const verdict = failed.length ? "incomplete" : unread.length || skipped.length ? "test_retest" : "complete";
 
+// What the caller has declared it is willing to wait on. This never touches the
+// verdict — only the exit code, and only for ids that are actually failing.
+const knownOpen = listOf("known-open");
+const allIds = [...gates, ...retests, ...benchmarks].map((x) => x.id);
+const unknownIds = knownOpen.filter((id) => !allIds.includes(id));
+const held = failed.filter((f) => knownOpen.includes(f.id));
+const unheld = failed.filter((f) => !knownOpen.includes(f.id));
+// An allowance for something that is passing is an allowance nobody needs. It
+// has to be deleted to get green, which is the only way one does not accumulate.
+const stale = knownOpen.filter((id) => allIds.includes(id) && !failed.some((f) => f.id === id));
+
+const exitCode = () => {
+  if (flag("strict") && verdict !== "complete") return 1;
+  if (unknownIds.length) return 1;
+  if (knownOpen.length && (unheld.length || stale.length)) return 1;
+  return 0;
+};
+
 const declaredProjects = [...new Set(benchmarks.map((b) => b.project))];
 const projects = fs.existsSync(path.join(ROOT, "fleet/projects"))
   ? fs.readdirSync(path.join(ROOT, "fleet/projects")).filter((f) => f.endsWith(".json")).map((f) => f.replace(/\.json$/, ""))
@@ -303,8 +339,12 @@ const projects = fs.existsSync(path.join(ROOT, "fleet/projects"))
 const undeclared = projects.filter((p) => !declaredProjects.includes(p));
 
 if (flag("json")) {
-  console.log(JSON.stringify({ verdict, gates, retests, benchmarks, undeclared_projects: undeclared }, null, 2));
-  process.exit(flag("strict") && verdict !== "complete" ? 1 : 0);
+  console.log(JSON.stringify({
+    verdict, gates, retests, benchmarks,
+    undeclared_projects: undeclared,
+    known_open: { declared: knownOpen, held: held.map((h) => h.id), not_held: unheld.map((h) => h.id), stale, unknown: unknownIds },
+  }, null, 2));
+  process.exit(exitCode());
 }
 
 const mark = { pass: C.g("PASS"), fail: C.r("FAIL"), skipped: C.y("SKIP"), met: C.g(" MET"), unmet: C.r("UNMET"), test_retest: C.y("RETST") };
@@ -349,7 +389,25 @@ console.log(`\n${C.b("VERDICT")}  ${line}`);
 console.log(wrap(protocol.definition.verdicts[verdict], 76, "  "));
 if (failed.length) {
   console.log(`\n  ${C.r("what is failing:")}`);
-  for (const f of failed) console.log(`    ${f.id} ${f.name ?? f.statement}`);
+  for (const f of failed) {
+    const tag = knownOpen.includes(f.id) ? C.y("  · held open by the caller") : "";
+    console.log(`    ${f.id} ${f.name ?? f.statement}${tag}`);
+  }
+}
+if (knownOpen.length) {
+  console.log(`\n  ${C.y("declared known-open:")} ${knownOpen.join(", ")}`);
+  console.log(wrap("Declared on the command line by whoever ran this, not in the protocol. It does not change the verdict above and never will — it only lets a caller that is waiting on a named failure exit zero.", 76, "    "));
+  if (unknownIds.length) {
+    console.log(`  ${C.r("no such id:")} ${unknownIds.join(", ")}`);
+    console.log(wrap("An allowance naming nothing is worse than none: it looks like coverage and holds nothing open. Fix the id or drop it.", 76, "    "));
+  }
+  if (stale.length) {
+    console.log(`  ${C.r("stale allowance:")} ${stale.join(", ")}`);
+    console.log(wrap("These are passing. The allowance is no longer needed and has to be deleted to get green — an allowance nobody needs is a lie that quietly accumulates.", 76, "    "));
+  }
+  if (unheld.length) {
+    console.log(`  ${C.r("not covered:")} ${unheld.map((u) => u.id).join(", ")}`);
+  }
 }
 if (unread.length) {
   console.log(`\n  ${C.y("what could not be read:")}`);
@@ -359,4 +417,4 @@ if (skipped.length) console.log(`\n  ${C.y("skipped:")} ${skipped.map((s) => s.i
 console.log(`\n${C.dim("  Enoch rules on order, not on merit. Nothing above says whether the work is good.")}`);
 console.log(`${C.dim(`  Protocol: ${rel(PROTOCOL_PATH)} — edit the record, not this script.`)}\n`);
 
-process.exit(flag("strict") && verdict !== "complete" ? 1 : 0);
+process.exit(exitCode());

@@ -71,3 +71,47 @@ test('a skipped gate is never reported as a passed gate', () => {
   assert.match(runner, /A skipped gate is not a passed gate/);
   assert.match(runner, /skipped\.length \? "test_retest"|unread\.length \|\| skipped\.length/);
 });
+
+// -- the workflow that runs it --------------------------------------------
+//
+// What is NOT covered here: the exit codes `--known-open` produces. Testing
+// those means running the runner, and gate G1 is `npm test`, so a test that ran
+// it would run itself. The three refusals were exercised by hand on 2026-09-01
+// — unknown id → 1, stale allowance → 1, uncovered failure → 1, covered-only →
+// 0 — and that is a measurement this suite does not repeat. What it can hold is
+// the drift that would actually happen: the workflow naming an id the protocol
+// no longer has.
+
+const workflow = await readFile(new URL('../.github/workflows/gates.yml', import.meta.url), 'utf8');
+
+test('the workflow runs the protocol and reports what is outstanding', () => {
+  assert.match(workflow, /npm run complete/, 'CI must run the protocol, not a hand-picked subset of it');
+  assert.match(workflow, /npm run outstanding/, 'every check produces the list of outstanding requests and clarifications');
+  assert.match(workflow, /GITHUB_STEP_SUMMARY/, 'the result has to be readable without opening a log');
+});
+
+test('every id the workflow holds open is an id the protocol still has', () => {
+  const ids = new Set([...protocol.gates, ...protocol.retests, ...protocol.benchmarks].map((x) => x.id));
+  const declared = [...workflow.matchAll(/--known-open\s+([A-Za-z0-9, ]+?)(?:\s*\||\s*$)/gm)]
+    .flatMap((m) => m[1].split(/[,\s]+/))
+    .filter(Boolean);
+  assert.ok(declared.length, 'if the workflow stops holding anything open, delete this expectation with it');
+  for (const id of declared) {
+    assert.ok(ids.has(id), `the workflow waits on "${id}", which the protocol no longer declares — rename it or drop the allowance`);
+  }
+});
+
+test('the allowance lives in the workflow and never in the protocol', () => {
+  const serialised = JSON.stringify(protocol);
+  assert.ok(
+    !/known[_-]?open|allowance|excused|waived/i.test(serialised),
+    'a record that can excuse a failure against itself is the structured-compliance shield, not a protocol',
+  );
+});
+
+test('the runner refuses an allowance that is wrong, stale, or too narrow', () => {
+  assert.match(runner, /no such id/, 'an allowance naming nothing must fail rather than look like coverage');
+  assert.match(runner, /stale allowance/, 'an allowance for something now passing must fail until it is deleted');
+  assert.match(runner, /not covered/, 'a failure outside the allowance must fail');
+  assert.match(runner, /never the verdict/, 'the allowance must be documented as touching the exit code only');
+});
