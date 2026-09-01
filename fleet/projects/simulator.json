@@ -6,7 +6,7 @@
   "branch": "claude/governance-corpus-simulator-m2sjkw",
   "source_revision": "claude/cloudflare-ayeyoty-setup-uq8pl9",
   "inherits": "venue",
-  "pull_request": 3,
+  "pull_request": 6,
   "owns": [
     "public/simulator/*",
     "public/radar/*",
@@ -33,8 +33,8 @@
     "note": "Earlier entry here overstated survivability. Corrected against measurement supplied by the project itself."
   },
   "partial_compliance": "Fully resolved. Merged the shell at af83ccd, dropped the contested edits, re-added its card in the shell's idiom on its own branch, adopted the officer-corpus model at ba2422b, and retargeted PR #3 to the venue branch. P7, P8 and P13 all clear against it.",
-  "merged_upstream": "af83ccd — merged the venue shell; adopted the officer-corpus model at ba2422b",
-  "pull_request_base": "claude/ios-macos-code-repurpose-ofm9ks",
+  "merged_upstream": "af83ccd — merged the venue shell; adopted the officer-corpus model at ba2422b; PR #3 merged 2026-08-31 and the branch was rebased onto the default branch for PR #6",
+  "pull_request_base": "claude/cloudflare-ayeyoty-setup-uq8pl9",
   "_owner_note": "This file is owned by the project it describes. The venue assembles it and never edits another project's copy; a sibling edits only its own. That is the whole point of the split.",
   "awaiting_owner": [
     {
