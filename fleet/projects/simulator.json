@@ -21,7 +21,7 @@
   "ritual": false,
   "state": "review",
   "register": "O",
-  "note": "Built against the placeholder, in parallel with the venue rather than as a subtree of it. Corpus scanned 2026-08-29: generic federal statute text and public case law (Title VI, § 1983, 17 U.S.C. § 201, FERPA, a template enabling act), no personal names, no student records, no institution-specific provisions. The collision is architectural, not content. Radar subtree added 2026-09-01: extracted from four uploaded workbooks (open calls, metros, roles). Content is the owner's own research and job-search material — no third-party personal data, no institution-specific records.",
+  "note": "Built against the placeholder, in parallel with the venue rather than as a subtree of it. Corpus scanned 2026-08-29: generic federal statute text and public case law (Title VI, § 1983, 17 U.S.C. § 201, FERPA, a template enabling act), no personal names, no student records, no institution-specific provisions. The collision is architectural, not content. Radar subtree added 2026-09-01: extracted from four uploaded workbooks (open calls, metros, roles). Content is the owner's own research and job-search material — no third-party personal data, no institution-specific records. Reconciled against the fellowships reference on 2026-09-01: 25 calls, 1 superseded, 1 near-match left unmerged and reported.",
   "vantages_held": [
     "engineering"
   ],
@@ -74,8 +74,8 @@
     },
     {
       "id": "AO-7",
-      "question": "Were any of these open calls actually applied to, and what came back?",
-      "detail": "All 16 opportunities read `untried`, which is what the workbooks say and not what happened — the sheets record a TODO status and no outcome anywhere. Untried and applied-and-rejected are different findings and the board cannot tell them apart until someone says. This is the single field that would change the most on the page.",
+      "question": "Which of the workbook open calls were actually applied to, and what came back?",
+      "detail": "The radar reconciles against the fellowships reference, whose stage machine carries real progress for its 16 calls. The 9 rows held only in the workbooks carry a TODO status and no outcome anywhere, so every one of them reads `untried`. Untried and applied-and-rejected are different findings and the board cannot tell them apart until someone says. This is the single field that would change the page most.",
       "asked_at": "2026-09-01",
       "blocking": false
     },
@@ -96,6 +96,13 @@
       "answer": "Enoch. The office of the accounting record: the angel and the parliamentarian. Not a party to the debate and not inside the argument structure — the ratification of the argument structure and of the protocol structure.",
       "resolved_by": "owner",
       "what_changed": "corpus/enoch/ was already filed under that name at ba2422b. The generic corpus/paralegal/ officer stays, because it is a different office: the paralegal searches dockets and takes a side, Enoch reads the record and takes none. Kept as a resolved item rather than deleted, because a question that disappears when it is answered leaves no way to check what the answer was."
+    }
+  ],
+  "reads_but_does_not_write": [
+    {
+      "path": "public/fellowships/registry.json",
+      "owner": "fellowships",
+      "why": "The radar reconciles the workbook rows against that reference and bundles a copy so the page can read it under a CSP that forbids fetch. Read only — this project never edits it. The `complete` protocol's T1 retest compares the committed bundle against a fresh build, so a change upstream surfaces here as a stale bundle rather than as a page serving last week's deadlines."
     }
   ]
 }

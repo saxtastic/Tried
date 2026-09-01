@@ -5,6 +5,7 @@ import { readFile } from 'node:fs/promises';
 import { renderRadarBundle, RADAR_BUNDLE_PATH } from '../scripts/build-corpus.mjs';
 import { board, score, RETURNS, EFFORT } from '../public/radar/engine/radar.js';
 import { classify, deadlineOf, RETURN_RULES, EFFORT_RULES } from '../public/radar/engine/classify.js';
+import { reconcile, fromRegistry, overlap, tokens, WON_STAGES, MATCH, NEAR } from '../public/radar/engine/reconcile.js';
 
 const read = async (f) => JSON.parse(await readFile(new URL(`../public/radar/corpus/${f}`, import.meta.url), 'utf8'));
 const openCalls = await read('open-calls.json');
@@ -247,4 +248,95 @@ test('the effort rules are ordered so size beats kind at both ends and a residen
     ['E1', 'E2', 'E3', 'E4', 'E5'],
     'the order is the argument; changing it must show up in the diff',
   );
+});
+
+// -- reconciliation with the fellowships reference ---------------------------
+
+const registryFile = JSON.parse(
+  await readFile(new URL('../public/fellowships/registry.json', import.meta.url), 'utf8'),
+);
+const reconciled = reconcile({ workbook: openCalls, registry: registryFile.calls, workflow: registryFile.workflow });
+
+test('every stage the radar names by hand exists in the workflow that declares them', () => {
+  const ids = new Set(registryFile.workflow.stages.map((s) => s.id));
+  for (const id of WON_STAGES) {
+    assert.ok(ids.has(id), `WON_STAGES names "${id}", which the fellowships workflow does not declare — a rename upstream must fail here, not silently reclassify a win`);
+  }
+});
+
+test('where both lists carry a call, the sourced record wins and the typed one is superseded', () => {
+  const hit = reconciled.superseded.find((s) => /macdowell/i.test(s.workbook));
+  assert.ok(hit, 'MacDowell is in both lists and must reconcile to one row');
+  assert.equal(hit.registry, 'fc.macdowell-fellowship');
+  const rows = reconciled.rows.filter((r) => /macdowell/i.test(r.id));
+  assert.equal(rows.length, 1, 'the board must not show the same call twice');
+  assert.equal(rows[0].source_of_record, 'fellowships-registry');
+});
+
+test('the one thing the workbook holds alone is carried across, still at basis none', () => {
+  const row = reconciled.rows.find((r) => r.id === 'fc.macdowell-fellowship');
+  assert.equal(row.fit_score, 10, 'the fit score is the workbook’s only unique contribution and must survive');
+  assert.equal(row.provenance.fit_score.basis, 'none');
+  assert.equal(row.fit_from, 'oc.macdowell_fellowship', 'a carried field names where it came from');
+});
+
+test('a near-match is reported and owed a decision, never merged on a guess', () => {
+  const near = reconciled.possible_duplicates.find((d) => /nea/i.test(d.workbook));
+  assert.ok(near, 'NEA — Art Works and the NEA’s Grants for Arts Projects must reach the near band');
+  assert.ok(near.score >= NEAR && near.score < MATCH);
+  assert.match(near.owed, /Both are carried until someone says/);
+  assert.equal(reconciled.rows.filter((r) => /nea/i.test(r.id)).length, 2, 'both are still on the board');
+});
+
+test('the reconciler states its own recall limit rather than implying completeness', () => {
+  assert.match(reconciled.finding, /acronym the list does not know is a match it cannot make/);
+});
+
+test('nothing is dropped in reconciliation', () => {
+  const { counts } = reconciled;
+  assert.equal(counts.total, counts.from_registry + counts.from_workbook);
+  assert.equal(counts.from_workbook, openCalls.length - counts.superseded);
+  assert.equal(counts.from_registry, registryFile.calls.length);
+});
+
+test('a registry award held at basis none does not become an amount', () => {
+  const unpriced = registryFile.calls.find((c) => (c.award?.basis ?? 'none') === 'none');
+  assert.ok(unpriced, 'the reference does hold unpriced awards; if not, this assertion is measuring nothing');
+  const row = fromRegistry(unpriced, registryFile.workflow);
+  assert.equal(row.amount_range, null, 'an unsourced award figure must not arrive as a number');
+});
+
+test('an uncommitted stage is never counted as an attempt — lapsed least of all', () => {
+  const wf = registryFile.workflow;
+  for (const stage of wf.stages.filter((s) => !s.committed)) {
+    const row = fromRegistry({ id: 'x', name: 'X', stage: stage.id, award: {} }, wf);
+    assert.deepEqual(row.attempts, [], `${stage.id} is not committed and must not read as an attempt`);
+  }
+  const lapsed = wf.stages.find((s) => s.id === 'lapsed');
+  assert.ok(lapsed && !lapsed.committed, 'a deadline that went by without a submission is the opposite of having tried');
+});
+
+test('a committed stage becomes an attempt at the depth the workflow says', () => {
+  const wf = registryFile.workflow;
+  const drafting = fromRegistry({ id: 'a', name: 'A', stage: 'drafting', award: {} }, wf);
+  const submitted = fromRegistry({ id: 'b', name: 'B', stage: 'submitted', award: {} }, wf);
+  const awarded = fromRegistry({ id: 'c', name: 'C', stage: 'awarded', award: {} }, wf);
+  const declined = fromRegistry({ id: 'd', name: 'D', stage: 'declined', award: {} }, wf);
+  assert.equal(score(drafting, { today: TODAY }).attempt_status, 'started');
+  assert.equal(score(submitted, { today: TODAY }).attempt_status, 'submitted_no_result');
+  assert.equal(score(awarded, { today: TODAY }).attempt_status, 'landed');
+  assert.equal(score(declined, { today: TODAY }).attempt_status, 'submitted_no_result');
+});
+
+test('token overlap is symmetric and blind to punctuation and filler', () => {
+  assert.equal(overlap('MacDowell Fellowship', 'macdowell fellowship'), 1);
+  assert.equal(overlap('A', 'B'), overlap('B', 'A'));
+  assert.equal(overlap('The Program of Arts', 'Arts'), 1, 'filler words carry no identity');
+  assert.ok(tokens('NEA').includes('endowment'), 'a named acronym expands so a pair can be compared');
+});
+
+test('the bundled reference is in step with the file it was copied from', async () => {
+  const bundle = await import(RADAR_BUNDLE_PATH);
+  assert.deepEqual(bundle.registry.calls, registryFile.calls, 'run `npm run build:corpus` — the fellowships registry moved');
+  assert.deepEqual(bundle.registry.workflow, registryFile.workflow);
 });

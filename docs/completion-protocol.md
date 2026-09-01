@@ -40,13 +40,15 @@ too: a skipped gate is not a passed gate.
 | G3 | `node scripts/check-propose.mjs` | every proposal states seed, runs, thresholds, sensitivity |
 | G4 | `node scripts/enoch.mjs --strict` | no point of order stands unanswered |
 | G5 | `node scripts/check-tiers.mjs` | every surface resolves its tier at four viewports |
+| G6 | `node scripts/build-registry.mjs --check` | the fellowships registry is in step with `data/open-calls/` |
+| G7 | `node scripts/check-registry.mjs` | every reference record declares a basis and names an https source |
+| G8 | `node scripts/check-vantage.mjs` | the vantage configuration is internally consistent |
 
-G5 is the only gate with a prerequisite, and Playwright is deliberately not a
-declared dependency: the browser it wants must match the one the machine
-already has. In this container that is Chromium 141 (Playwright build 1194) at
-`/opt/pw-browsers`, so the gate needs `npm i -D playwright@1.56` — a newer
-Playwright looks for build 1234 and fails on a missing executable rather than on
-anything about the site. `--fast` skips G5 and the run reports `test_retest`
+G5 is the only gate with a prerequisite, and the browser Playwright wants must match the one the
+machine already has. In this container that is Chromium 141 (Playwright build 1194) at
+`/opt/pw-browsers`, which is why `package.json` pins `playwright` at `1.56.0`:
+a newer Playwright looks for build 1234 and fails on a missing executable
+rather than on anything about the site. `--fast` skips G5 and the run reports `test_retest`
 rather than `complete`, because a skipped gate is not a passed gate. **[O]**
 
 ## Retest is a gate, not a nicety
@@ -66,6 +68,14 @@ copy is stale — a different fault, reported as one.
 Declared per project, in the project's own file. A project that declares no
 benchmark is reported as **undeclared**, which is not the same as complete: it
 is unmeasured. Four currently are.
+
+A gate can also fail on something the project running the protocol cannot
+close. G4 currently fails on `Q2-SURVIVAL`: two vantages answered, no
+arbitration written, and one of the two answers is the simulator's own — and no
+question is closed by the asker answering it. Enoch reports it out of order and
+does not excuse it. A protocol that let a project mark another project's
+obligation as satisfied would be certifying its own compliance, which is the
+one thing the office exists to prevent.
 
 The check vocabulary lives in the runner and is named from the protocol:
 `basis_declared`, `owner_items_are_owed`, `csp_clean`,

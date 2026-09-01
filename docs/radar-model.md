@@ -93,20 +93,59 @@ feasibility is `null`, not `true`. An opportunity with no effort estimate gets
 no return-per-hour and no feasibility at all, and says so on the card. Both are
 tested.
 
+## Reconciliation with the fellowships reference
+
+The fellowships project keeps `data/open-calls/` — sixteen calls read off each
+organisation's own page, every field carrying an https source and a read date,
+driven by a declared stage machine. The workbooks cover some of the same
+ground. Left alone the board would count MacDowell twice and show two different
+deadlines for it, which is worse than either list on its own.
+
+`public/radar/engine/reconcile.js` holds one rule: **where both carry a call,
+the sourced record wins.** The registry read it off the page and dated the read;
+the workbook row is a typed recollection. The one thing the workbook holds alone
+— the fit score — rides across carrying its basis, and nothing else does.
+
+Current state: 25 calls, 16 from the reference and 9 held only in the
+workbooks. One superseded (MacDowell). One near-match reported and **not**
+merged: `NEA — Art Works` against the NEA's `Grants for Arts Projects`. One is
+the other's former name and a reconciler has no business asserting that, so
+both stay on the board and the decision is owed to a person.
+
+Matching is token overlap plus a named acronym list (NEA, NSF, USA, TED). That
+list is the reconciler's recall limit and is stated as one: an acronym it does
+not know is a match it cannot make, and it cannot detect that it missed one.
+
+The registry's `stage` translates into the radar's attempt vocabulary by reading
+the workflow's own `committed` and `terminal` flags rather than a second copy of
+the stage list. `lapsed` — a deadline that went by without a submission —
+produces **no attempt**, because it is the opposite of having tried. `awarded`
+is the one stage the radar names by hand, since `awarded` and `declined` are
+both terminal and both committed and the flags cannot separate them; a test
+asserts the id still exists upstream, so a rename fails loudly rather than
+silently reclassifying a win as a loss.
+
+The reference is copied into `public/radar/corpus.bundle.js` at build time and
+read, never written. The `complete` protocol's T1 retest compares the committed
+bundle against a fresh build, so a change upstream surfaces as a stale bundle
+rather than as a page quietly serving last week's deadlines.
+
 ## Untried is not closed
 
-Straight out of `attempts.js`. All 16 opportunities currently read `untried`,
-which is what the workbooks say and not what happened — the sheets carry a
-`TODO` status and record no outcome anywhere. Never-applied and
+Straight out of `attempts.js`. Most rows read `untried` — which for the workbook
+half is what the sheets say and not what happened, since they carry a `TODO`
+status and record no outcome anywhere. The reference half is better: its stages
+carry real progress, and drafting, review and submitted come through as
+attempts. Never-applied and
 applied-and-rejected are different findings, and the board reports the first as
-an *absence* (level `info`), never as a failure. Which of the 16 were actually
+an *absence* (level `info`), never as a failure. Which of the workbook rows were actually
 sent is `AO-7`, and it is the single field that would change the page most.
 
 ## Running it
 
 ```bash
 npm run build:corpus     # regenerate public/radar/corpus.bundle.js from the JSON
-npm test                 # 30 assertions over the engine, the rules and the corpus
+npm test                 # 41 assertions over the engine, the rules, the corpus and the reconciler
 node scripts/extract-radar.mjs <dir-of-xlsx>   # re-extract (needs python3 + openpyxl)
 ```
 

@@ -161,3 +161,9 @@ input[type="date"] {
 }
 .metros th { color: var(--fg-2); font-weight: 600; }
 .metros td:first-child { white-space: normal; min-width: 9rem; }
+
+/* Where a row came from, and how far it has gone. Both belong on the card:
+   a sourced record and a typed one should never look alike. */
+.tags .tag-src,
+.tags .tag-stage { border-style: dashed; }
+.tags .tag-stage { color: var(--fg); }

@@ -7,7 +7,8 @@
 // the two stay in step.
 
 import { board, RETURNS } from './engine/radar.js';
-import { openCalls, locations, roles } from './corpus.bundle.js';
+import { reconcile } from './engine/reconcile.js';
+import { openCalls, locations, roles, registry } from './corpus.bundle.js';
 
 const el = (tag, attrs = {}, ...kids) => {
   const n = document.createElement(tag);
@@ -42,7 +43,13 @@ const ROLES = roles.map((r) => ({
   source: r.source,
 }));
 
-const OPS = [...openCalls, ...ROLES];
+// The workbook rows and the fellowships reference overlap. Reconcile before
+// scoring: where both carry a call, the record that was read off the
+// organisation's own page wins, and the workbook's fit score rides along
+// carrying its basis. Near-matches are reported, never merged.
+const RECONCILED = reconcile({ workbook: openCalls, registry: registry.calls, workflow: registry.workflow });
+
+const OPS = [...RECONCILED.rows, ...ROLES];
 
 const state = {
   hours: 20,
@@ -124,7 +131,11 @@ function rowNode(row) {
   return el('article', { class: 'op', 'data-status': row.attempt_status, 'data-feasible': String(row.deadline_feasible) },
     el('h4', {}, row.org ?? row.id),
     el('p', { class: 'op-meta' }, meta.join(' · ')),
-    el('ul', { class: 'tags' }, row.return_labels.map((l) => el('li', {}, l))),
+    el('ul', { class: 'tags' }, [
+      ...row.return_labels.map((l) => el('li', {}, l)),
+      row.stage_label ? el('li', { class: 'tag-stage' }, row.stage_label) : null,
+      el('li', { class: 'tag-src' }, row.source_of_record === 'fellowships-registry' ? 'sourced' : 'workbook'),
+    ]),
     row.return_per_hour !== null
       ? el('p', { class: 'op-rate' }, `${money(row.return_per_hour)} per hour of application, at the derived effort.`)
       : null,
@@ -158,6 +169,16 @@ function render() {
   );
 
   out.append(el('p', { class: 'finding' }, b.finding));
+  out.append(el('p', { class: 'finding' }, RECONCILED.finding));
+
+  if (RECONCILED.possible_duplicates.length) {
+    out.append(el('section', { class: 'group' },
+      el('div', { class: 'section-head' },
+        el('h3', {}, 'Owed a decision'),
+        el('p', {}, 'Two rows that look like the same call and did not match on a key. Both are carried until someone says which they are.')),
+      el('ul', { class: 'flags' }, RECONCILED.possible_duplicates.map((d) =>
+        el('li', { 'data-level': 'warn' }, `${d.workbook} ↔ ${d.registry} (${d.score}) — ${d.owed}`)))));
+  }
 
   let shown = 0;
   for (const [key, rows] of Object.entries(b.by_return)) {

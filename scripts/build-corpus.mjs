@@ -32,15 +32,27 @@ const PARTS = [
 export const RADAR_DIR = resolve(here, '..', 'public', 'radar', 'corpus');
 export const RADAR_BUNDLE_PATH = resolve(here, '..', 'public', 'radar', 'corpus.bundle.js');
 
+export const FELLOWSHIPS_REGISTRY = resolve(here, '..', 'public', 'fellowships', 'registry.json');
+
+// The radar reconciles the workbook rows against the fellowships project's
+// reference, so the reference is bundled with it. That file belongs to
+// fellowships and is READ here, never written — and because it is a copy, the
+// `complete` protocol's T1 retest compares the committed bundle against a fresh
+// build, so a registry change upstream shows up as a stale bundle rather than
+// as a page quietly serving last week's deadlines.
 const RADAR_PARTS = [
   ['openCalls', 'open-calls.json'],
   ['locations', 'locations.json'],
   ['roles', 'roles.json'],
+  ['registry', FELLOWSHIPS_REGISTRY, (r) => ({ workflow: r.workflow, calls: r.calls })],
 ];
 
 async function render({ dir, parts, source, named }) {
   const entries = await Promise.all(
-    parts.map(async ([key, file]) => [key, JSON.parse(await readFile(resolve(dir, file), 'utf8'))]),
+    parts.map(async ([key, file, pick]) => {
+      const data = JSON.parse(await readFile(resolve(dir, file), 'utf8'));
+      return [key, pick ? pick(data) : data];
+    }),
   );
   const body = entries
     .map(([key, value]) => `export const ${key} = ${JSON.stringify(value, null, 2)};`)
@@ -72,7 +84,7 @@ export async function renderRadarBundle() {
   return render({
     dir: RADAR_DIR,
     parts: RADAR_PARTS,
-    source: 'public/radar/corpus/*.json',
+    source: 'public/radar/corpus/*.json and public/fellowships/registry.json (read, never written)',
     named: 'radar',
   });
 }

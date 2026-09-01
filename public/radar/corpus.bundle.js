@@ -1,5 +1,5 @@
 // GENERATED FILE — do not edit.
-// Source: public/radar/corpus/*.json
+// Source: public/radar/corpus/*.json and public/fellowships/registry.json (read, never written)
 // Regenerate with: npm run build:corpus
 //
 // The page imports this instead of fetching, because the venue's
@@ -1359,5 +1359,1336 @@ export const roles = [
   }
 ];
 
-export const radar = { openCalls, locations, roles };
+export const registry = {
+  "workflow": {
+    "$comment": "THE WORKFLOW IS DECLARED HERE AND NOWHERE ELSE. public/workflow.js executes this file and never names a stage or a transition of its own. Add a stage here and the engine, the module and the checks all follow. This is the same rule venue.css keeps for --tier.",
+    "version": 1,
+    "initial": "discovered",
+    "stages": [
+      {
+        "id": "discovered",
+        "label": "Discovered",
+        "order": 0,
+        "terminal": false,
+        "committed": false,
+        "note": "In the reference, not yet looked at."
+      },
+      {
+        "id": "screening",
+        "label": "Screening",
+        "order": 1,
+        "terminal": false,
+        "committed": false,
+        "note": "Reading the guidelines against the profile."
+      },
+      {
+        "id": "eligible",
+        "label": "Eligible",
+        "order": 2,
+        "terminal": false,
+        "committed": false,
+        "note": "Cleared eligibility; not yet started."
+      },
+      {
+        "id": "drafting",
+        "label": "Drafting",
+        "order": 3,
+        "terminal": false,
+        "committed": true,
+        "note": "Materials in progress."
+      },
+      {
+        "id": "review",
+        "label": "In review",
+        "order": 4,
+        "terminal": false,
+        "committed": true,
+        "note": "Draft complete, being read before submission."
+      },
+      {
+        "id": "submitted",
+        "label": "Submitted",
+        "order": 5,
+        "terminal": false,
+        "committed": true,
+        "note": "Sent. Nothing further to do but wait."
+      },
+      {
+        "id": "decision",
+        "label": "Awaiting decision",
+        "order": 6,
+        "terminal": false,
+        "committed": true,
+        "note": "Past the close date, outcome not yet known."
+      },
+      {
+        "id": "awarded",
+        "label": "Awarded",
+        "order": 7,
+        "terminal": true,
+        "committed": true,
+        "note": "Won."
+      },
+      {
+        "id": "declined",
+        "label": "Declined",
+        "order": 8,
+        "terminal": true,
+        "committed": true,
+        "note": "Not selected."
+      },
+      {
+        "id": "ineligible",
+        "label": "Ineligible",
+        "order": 9,
+        "terminal": true,
+        "committed": false,
+        "note": "Screened out on the guidelines."
+      },
+      {
+        "id": "passed",
+        "label": "Passed",
+        "order": 10,
+        "terminal": true,
+        "committed": false,
+        "note": "Eligible, deliberately not pursued this cycle."
+      },
+      {
+        "id": "lapsed",
+        "label": "Lapsed",
+        "order": 11,
+        "terminal": true,
+        "committed": false,
+        "note": "Close date went by without a submission. Applied by the engine, never by hand."
+      }
+    ],
+    "transitions": [
+      {
+        "id": "screen",
+        "from": [
+          "discovered"
+        ],
+        "to": "screening",
+        "mode": "manual",
+        "label": "Screen"
+      },
+      {
+        "id": "qualify",
+        "from": [
+          "screening"
+        ],
+        "to": "eligible",
+        "mode": "manual",
+        "label": "Mark eligible"
+      },
+      {
+        "id": "disqualify",
+        "from": [
+          "screening"
+        ],
+        "to": "ineligible",
+        "mode": "manual",
+        "label": "Not eligible"
+      },
+      {
+        "id": "start",
+        "from": [
+          "eligible"
+        ],
+        "to": "drafting",
+        "mode": "manual",
+        "label": "Start draft"
+      },
+      {
+        "id": "ready",
+        "from": [
+          "drafting"
+        ],
+        "to": "review",
+        "mode": "manual",
+        "label": "Send to review"
+      },
+      {
+        "id": "reopen",
+        "from": [
+          "review"
+        ],
+        "to": "drafting",
+        "mode": "manual",
+        "label": "Back to draft"
+      },
+      {
+        "id": "submit",
+        "from": [
+          "review",
+          "drafting"
+        ],
+        "to": "submitted",
+        "mode": "manual",
+        "label": "Mark submitted"
+      },
+      {
+        "id": "pass",
+        "from": [
+          "discovered",
+          "screening",
+          "eligible",
+          "drafting"
+        ],
+        "to": "passed",
+        "mode": "manual",
+        "label": "Pass this cycle"
+      },
+      {
+        "id": "award",
+        "from": [
+          "decision",
+          "submitted"
+        ],
+        "to": "awarded",
+        "mode": "manual",
+        "label": "Awarded"
+      },
+      {
+        "id": "decline",
+        "from": [
+          "decision",
+          "submitted"
+        ],
+        "to": "declined",
+        "mode": "manual",
+        "label": "Declined"
+      },
+      {
+        "id": "close-out",
+        "from": [
+          "submitted"
+        ],
+        "to": "decision",
+        "mode": "auto",
+        "label": "Close date passed",
+        "guard": {
+          "all": [
+            {
+              "path": "derived.days",
+              "op": "lt",
+              "value": 0
+            }
+          ]
+        }
+      },
+      {
+        "id": "lapse",
+        "from": [
+          "discovered",
+          "screening",
+          "eligible",
+          "drafting",
+          "review"
+        ],
+        "to": "lapsed",
+        "mode": "auto",
+        "label": "Close date passed without submission",
+        "guard": {
+          "all": [
+            {
+              "path": "derived.days",
+              "op": "lt",
+              "value": 0
+            }
+          ]
+        }
+      }
+    ],
+    "guards": {
+      "$comment": "Structured predicates, not strings. There is no expression parser and no eval() in this repository: the engine walks these objects directly. Supported ops are listed here and asserted by scripts/check-registry.mjs.",
+      "ops": [
+        "eq",
+        "ne",
+        "lt",
+        "lte",
+        "gt",
+        "gte",
+        "in",
+        "truthy",
+        "falsy"
+      ],
+      "combinators": [
+        "all",
+        "any",
+        "not"
+      ],
+      "paths": "Dotted reads against { call, derived }. A path that does not resolve reads as undefined and fails every op except falsy."
+    }
+  },
+  "calls": [
+    {
+      "id": "ashoka-fellowship",
+      "name": "Ashoka Fellowship",
+      "org": "Ashoka",
+      "kind": "fellowship",
+      "url": "https://www.ashoka.org/en-us/program/ashoka-venture-and-fellowship",
+      "summary": null,
+      "eligibility": {
+        "stated": null,
+        "disciplines": null,
+        "geography": null,
+        "career_stage": null
+      },
+      "requirements": null,
+      "award": {
+        "min": null,
+        "max": null,
+        "currency": "USD",
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
+      },
+      "cycle": null,
+      "opens": null,
+      "closes": null,
+      "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
+      "stage": "discovered",
+      "drafts": [],
+      "provenance": {
+        "closes": {
+          "basis": "none",
+          "from": null,
+          "read": null,
+          "why": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "none",
+          "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+        },
+        "requirements": {
+          "basis": "none",
+          "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://www.ashoka.org/en-us/program/ashoka-venture-and-fellowship",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "none",
+          "why": "⟦FILL: cycle not established from a source.⟧"
+        }
+      },
+      "source": "https://www.ashoka.org/en-us/program/ashoka-venture-and-fellowship"
+    },
+    {
+      "id": "creative-capital-award",
+      "name": "Creative Capital Award",
+      "org": "Creative Capital",
+      "kind": "grant",
+      "url": "https://creative-capital.org/",
+      "summary": null,
+      "eligibility": {
+        "stated": null,
+        "disciplines": null,
+        "geography": null,
+        "career_stage": null
+      },
+      "requirements": null,
+      "award": {
+        "min": null,
+        "max": null,
+        "currency": "USD",
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
+      },
+      "cycle": "annual",
+      "opens": null,
+      "closes": null,
+      "cycle_note": "The 2027 open call closed 2 April 2026. The next cycle has not been announced. ⟦FILL: next open call deadline when announced⟧",
+      "stage": "discovered",
+      "drafts": [],
+      "provenance": {
+        "closes": {
+          "basis": "none",
+          "from": "https://creative-capital.org/creative-capital-award/award-application/",
+          "read": "2026-08-29",
+          "why": "The 2027 open call closed 2 April 2026. The next cycle has not been announced. ⟦FILL: next open call deadline when announced⟧"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "none",
+          "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+        },
+        "requirements": {
+          "basis": "none",
+          "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://creative-capital.org/",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "derived",
+          "from": "https://creative-capital.org/creative-capital-award/award-application/",
+          "read": "2026-08-29",
+          "rule": "inferred from the cycle the deadline sits in."
+        }
+      },
+      "source": "https://creative-capital.org/"
+    },
+    {
+      "id": "echoing-green-fellowship",
+      "name": "Echoing Green Fellowship",
+      "org": "Echoing Green",
+      "kind": "fellowship",
+      "url": "https://echoinggreen.org/fellowship/",
+      "summary": null,
+      "eligibility": {
+        "stated": null,
+        "disciplines": null,
+        "geography": null,
+        "career_stage": null
+      },
+      "requirements": null,
+      "award": {
+        "min": null,
+        "max": null,
+        "currency": "USD",
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
+      },
+      "cycle": null,
+      "opens": null,
+      "closes": null,
+      "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
+      "stage": "discovered",
+      "drafts": [],
+      "provenance": {
+        "closes": {
+          "basis": "none",
+          "from": null,
+          "read": null,
+          "why": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "none",
+          "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+        },
+        "requirements": {
+          "basis": "none",
+          "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://echoinggreen.org/fellowship/",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "none",
+          "why": "⟦FILL: cycle not established from a source.⟧"
+        }
+      },
+      "source": "https://echoinggreen.org/fellowship/"
+    },
+    {
+      "id": "fulbright-us-scholar",
+      "name": "Fulbright U.S. Scholar Program",
+      "org": "Institute of International Education / U.S. Department of State",
+      "kind": "fellowship",
+      "url": "https://fulbrightscholars.org/",
+      "summary": null,
+      "eligibility": {
+        "stated": null,
+        "disciplines": null,
+        "geography": null,
+        "career_stage": null
+      },
+      "requirements": null,
+      "award": {
+        "min": null,
+        "max": null,
+        "currency": "USD",
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
+      },
+      "cycle": "annual",
+      "opens": null,
+      "closes": "2026-09-15",
+      "cycle_note": "2027–2028 competition, 5:00pm ET. Over 380 awards across 130+ countries; each country award has its own terms.",
+      "stage": "screening",
+      "drafts": [],
+      "provenance": {
+        "closes": {
+          "basis": "sourced",
+          "from": "https://fulbrightscholars.org/us-scholar-awards",
+          "read": "2026-08-29"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "none",
+          "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+        },
+        "requirements": {
+          "basis": "none",
+          "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://fulbrightscholars.org/",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "derived",
+          "from": "https://fulbrightscholars.org/us-scholar-awards",
+          "read": "2026-08-29",
+          "rule": "inferred from the cycle the deadline sits in."
+        }
+      },
+      "source": "https://fulbrightscholars.org/"
+    },
+    {
+      "id": "guggenheim-fellowship",
+      "name": "Guggenheim Fellowship",
+      "org": "John Simon Guggenheim Memorial Foundation",
+      "kind": "fellowship",
+      "url": "https://www.gf.org/applicants/",
+      "summary": null,
+      "eligibility": {
+        "stated": "Citizens or permanent residents of the US or Canada at time of application, who have made significant recognised contributions to their field. Mid-career is defined by professional output, not age. Previous Guggenheim Fellows are not eligible.",
+        "disciplines": [
+          "arts",
+          "humanities",
+          "writing",
+          "social-science"
+        ],
+        "geography": [
+          "US",
+          "CA"
+        ],
+        "career_stage": [
+          "mid",
+          "established"
+        ]
+      },
+      "requirements": {
+        "essays": 3,
+        "recommendations": 3,
+        "work_sample": true,
+        "endorsement": false,
+        "fee_usd": 0,
+        "stated": "Three supplementary PDF statements including a career narrative of up to 1000 words; three references required, four maximum; work examples depending on field."
+      },
+      "award": {
+        "min": null,
+        "max": null,
+        "currency": "USD",
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
+      },
+      "cycle": "annual",
+      "opens": null,
+      "closes": "2026-09-15",
+      "cycle_note": "2027 competition. Work samples are due two weeks after the portal closes; decisions late April 2027.",
+      "stage": "drafting",
+      "drafts": [],
+      "provenance": {
+        "closes": {
+          "basis": "sourced",
+          "from": "https://www.gf.org/program/how-to-apply",
+          "read": "2026-08-29"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "derived",
+          "from": "https://www.gf.org/faq",
+          "read": "2026-08-29",
+          "rule": "stated is read from the source; the three enum arrays are mapped from it into this schema's vocabulary, which the source does not use."
+        },
+        "requirements": {
+          "basis": "sourced",
+          "from": "https://www.gf.org/program/how-to-apply",
+          "read": "2026-08-29"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://www.gf.org/applicants/",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "derived",
+          "from": "https://www.gf.org/program/how-to-apply",
+          "read": "2026-08-29",
+          "rule": "inferred from the cycle the deadline sits in."
+        }
+      },
+      "source": "https://www.gf.org/applicants/"
+    },
+    {
+      "id": "jerome-hill-artist-fellowship",
+      "name": "Jerome Hill Artist Fellowship",
+      "org": "Jerome Foundation",
+      "kind": "fellowship",
+      "url": "https://www.jeromefdn.org/",
+      "summary": null,
+      "eligibility": {
+        "stated": null,
+        "disciplines": null,
+        "geography": null,
+        "career_stage": null
+      },
+      "requirements": null,
+      "award": {
+        "min": null,
+        "max": null,
+        "currency": "USD",
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
+      },
+      "cycle": null,
+      "opens": null,
+      "closes": null,
+      "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
+      "stage": "discovered",
+      "drafts": [],
+      "provenance": {
+        "closes": {
+          "basis": "none",
+          "from": null,
+          "read": null,
+          "why": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "none",
+          "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+        },
+        "requirements": {
+          "basis": "none",
+          "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://www.jeromefdn.org/",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "none",
+          "why": "⟦FILL: cycle not established from a source.⟧"
+        }
+      },
+      "source": "https://www.jeromefdn.org/"
+    },
+    {
+      "id": "knight-arts-tech-fellowship",
+      "name": "Knight Arts + Technology Fellowship",
+      "org": "John S. and James L. Knight Foundation",
+      "kind": "fellowship",
+      "url": "https://knightfoundation.org/",
+      "summary": null,
+      "eligibility": {
+        "stated": null,
+        "disciplines": null,
+        "geography": null,
+        "career_stage": null
+      },
+      "requirements": null,
+      "award": {
+        "min": null,
+        "max": null,
+        "currency": "USD",
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
+      },
+      "cycle": null,
+      "opens": null,
+      "closes": null,
+      "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
+      "stage": "discovered",
+      "drafts": [],
+      "provenance": {
+        "closes": {
+          "basis": "none",
+          "from": null,
+          "read": null,
+          "why": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "none",
+          "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+        },
+        "requirements": {
+          "basis": "none",
+          "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://knightfoundation.org/",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "none",
+          "why": "⟦FILL: cycle not established from a source.⟧"
+        }
+      },
+      "source": "https://knightfoundation.org/"
+    },
+    {
+      "id": "macdowell-fellowship",
+      "name": "MacDowell Fellowship",
+      "org": "MacDowell",
+      "kind": "residency",
+      "url": "https://www.macdowell.org/apply",
+      "summary": null,
+      "eligibility": {
+        "stated": "Artists in architecture, film/video, interdisciplinary arts, literature, music composition, theatre and visual arts. At least 21 years old and not enrolled in a degree programme during the residency season; doctoral candidates who have completed coursework may apply.",
+        "disciplines": [
+          "architecture",
+          "film",
+          "writing",
+          "music",
+          "arts"
+        ],
+        "geography": [
+          "any"
+        ],
+        "career_stage": [
+          "emerging",
+          "mid",
+          "established"
+        ]
+      },
+      "requirements": {
+        "essays": 1,
+        "recommendations": 0,
+        "work_sample": true,
+        "endorsement": false,
+        "fee_usd": 30,
+        "stated": "Project proposal, a list of professional achievements, and a current work sample completed within the past four years. Reference letters are temporarily suspended. USD 30 processing fee, waivable on request."
+      },
+      "award": {
+        "min": null,
+        "max": null,
+        "currency": "USD",
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
+      },
+      "cycle": "biannual",
+      "opens": null,
+      "closes": "2026-09-10",
+      "cycle_note": "Spring–Summer 2027 residency cycle. MacDowell runs multiple cycles a year; the next after this one closes in February.",
+      "stage": "eligible",
+      "drafts": [],
+      "provenance": {
+        "closes": {
+          "basis": "sourced",
+          "from": "https://www.macdowell.org/apply/apply-for-fellowship",
+          "read": "2026-08-29"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "derived",
+          "from": "https://www.macdowell.org/apply/application-guidelines",
+          "read": "2026-08-29",
+          "rule": "stated is read from the source; the three enum arrays are mapped from it into this schema's vocabulary, which the source does not use."
+        },
+        "requirements": {
+          "basis": "sourced",
+          "from": "https://www.macdowell.org/apply/application-guidelines",
+          "read": "2026-08-29"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://www.macdowell.org/apply",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "derived",
+          "from": "https://www.macdowell.org/apply/apply-for-fellowship",
+          "read": "2026-08-29",
+          "rule": "inferred from the cycle the deadline sits in."
+        }
+      },
+      "source": "https://www.macdowell.org/apply"
+    },
+    {
+      "id": "mozilla-technology-fund",
+      "name": "Mozilla Technology Fund",
+      "org": "Mozilla Foundation",
+      "kind": "grant",
+      "url": "https://foundation.mozilla.org/",
+      "summary": null,
+      "eligibility": {
+        "stated": null,
+        "disciplines": null,
+        "geography": null,
+        "career_stage": null
+      },
+      "requirements": null,
+      "award": {
+        "min": null,
+        "max": null,
+        "currency": "USD",
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
+      },
+      "cycle": null,
+      "opens": null,
+      "closes": null,
+      "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
+      "stage": "discovered",
+      "drafts": [],
+      "provenance": {
+        "closes": {
+          "basis": "none",
+          "from": null,
+          "read": null,
+          "why": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "none",
+          "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+        },
+        "requirements": {
+          "basis": "none",
+          "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://foundation.mozilla.org/",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "none",
+          "why": "⟦FILL: cycle not established from a source.⟧"
+        }
+      },
+      "source": "https://foundation.mozilla.org/"
+    },
+    {
+      "id": "nea-grants-for-arts-projects",
+      "name": "Grants for Arts Projects",
+      "org": "National Endowment for the Arts",
+      "kind": "grant",
+      "url": "https://www.arts.gov/grants",
+      "summary": null,
+      "eligibility": {
+        "stated": null,
+        "disciplines": null,
+        "geography": null,
+        "career_stage": null
+      },
+      "requirements": null,
+      "award": {
+        "min": null,
+        "max": null,
+        "currency": "USD",
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
+      },
+      "cycle": "biannual",
+      "opens": null,
+      "closes": null,
+      "cycle_note": "FY2027 deadlines (12 Feb and 9 Jul 2026) have passed. FY2028 guidelines are expected late December 2026; deadlines not yet announced. ⟦FILL: FY2028 deadlines when published⟧",
+      "stage": "discovered",
+      "drafts": [],
+      "provenance": {
+        "closes": {
+          "basis": "none",
+          "from": "https://www.arts.gov/grants/grants-for-arts-projects/application-calendar",
+          "read": "2026-08-29",
+          "why": "FY2027 deadlines (12 Feb and 9 Jul 2026) have passed. FY2028 guidelines are expected late December 2026; deadlines not yet announced. ⟦FILL: FY2028 deadlines when published⟧"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "none",
+          "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+        },
+        "requirements": {
+          "basis": "none",
+          "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://www.arts.gov/grants",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "derived",
+          "from": "https://www.arts.gov/grants/grants-for-arts-projects/application-calendar",
+          "read": "2026-08-29",
+          "rule": "inferred from the cycle the deadline sits in."
+        }
+      },
+      "source": "https://www.arts.gov/grants"
+    },
+    {
+      "id": "nsf-graduate-research-fellowship",
+      "name": "NSF Graduate Research Fellowship",
+      "org": "National Science Foundation",
+      "kind": "fellowship",
+      "url": "https://www.nsfgrfp.org/",
+      "summary": null,
+      "eligibility": {
+        "stated": null,
+        "disciplines": null,
+        "geography": null,
+        "career_stage": null
+      },
+      "requirements": null,
+      "award": {
+        "min": null,
+        "max": null,
+        "currency": "USD",
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
+      },
+      "cycle": "annual",
+      "opens": null,
+      "closes": "2026-10-20",
+      "cycle_note": "Deadline is field-specific across 19–23 October 2026; this record carries the earliest that applies to its listed disciplines. Reference letters due 16 October.",
+      "stage": "discovered",
+      "drafts": [],
+      "provenance": {
+        "closes": {
+          "basis": "sourced",
+          "from": "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program/nsf26-526/solicitation",
+          "read": "2026-08-29"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "none",
+          "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+        },
+        "requirements": {
+          "basis": "none",
+          "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://www.nsfgrfp.org/",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "derived",
+          "from": "https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program/nsf26-526/solicitation",
+          "read": "2026-08-29",
+          "rule": "inferred from the cycle the deadline sits in."
+        }
+      },
+      "source": "https://www.nsfgrfp.org/"
+    },
+    {
+      "id": "pd-soros-fellowship",
+      "name": "Paul & Daisy Soros Fellowship for New Americans",
+      "org": "The Paul & Daisy Soros Fellowships for New Americans",
+      "kind": "fellowship",
+      "url": "https://www.pdsoros.org/",
+      "summary": null,
+      "eligibility": {
+        "stated": "Aged 30 or younger at the deadline. Naturalised US citizen, green card holder, born to non-citizen parents, born abroad and adopted by American parents, or DACA-eligible. Starting or continuing a full-time accredited graduate or professional degree in the US, and not past the second year of it.",
+        "disciplines": [
+          "any"
+        ],
+        "geography": [
+          "US"
+        ],
+        "career_stage": [
+          "student",
+          "emerging"
+        ]
+      },
+      "requirements": {
+        "essays": 2,
+        "recommendations": 3,
+        "work_sample": false,
+        "endorsement": false,
+        "fee_usd": 0,
+        "stated": "Transcripts, a resume or CV, two essays, and three to five recommendations, plus eligibility and background questions."
+      },
+      "award": {
+        "min": null,
+        "max": 90000,
+        "currency": "USD",
+        "basis": "sourced",
+        "note": "Up to $90,000 over two years."
+      },
+      "cycle": "annual",
+      "opens": null,
+      "closes": "2026-10-29",
+      "cycle_note": "2027 cycle, 2:00pm ET. 77 finalists interview in Jan–Feb 2027; 30 selected.",
+      "stage": "discovered",
+      "drafts": [],
+      "provenance": {
+        "closes": {
+          "basis": "sourced",
+          "from": "https://pdsoros.org/application-process/",
+          "read": "2026-08-29"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "derived",
+          "from": "https://pdsoros.org/eligibility/",
+          "read": "2026-08-29",
+          "rule": "stated is read from the source; the three enum arrays are mapped from it into this schema's vocabulary, which the source does not use."
+        },
+        "requirements": {
+          "basis": "sourced",
+          "from": "https://pdsoros.org/application-process/",
+          "read": "2026-08-29"
+        },
+        "award": {
+          "basis": "sourced",
+          "from": "https://pdsoros.org/application-process/",
+          "read": "2026-08-29"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://www.pdsoros.org/",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "derived",
+          "from": "https://pdsoros.org/application-process/",
+          "read": "2026-08-29",
+          "rule": "inferred from the cycle the deadline sits in."
+        }
+      },
+      "source": "https://www.pdsoros.org/"
+    },
+    {
+      "id": "rhodes-scholarship",
+      "name": "Rhodes Scholarship",
+      "org": "Rhodes Trust",
+      "kind": "scholarship",
+      "url": "https://www.rhodeshouse.ox.ac.uk/scholarships/the-rhodes-scholarship/",
+      "summary": null,
+      "eligibility": {
+        "stated": null,
+        "disciplines": null,
+        "geography": null,
+        "career_stage": null
+      },
+      "requirements": null,
+      "award": {
+        "min": null,
+        "max": null,
+        "currency": "GBP",
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
+      },
+      "cycle": "annual",
+      "opens": null,
+      "closes": "2026-10-07",
+      "cycle_note": "US constituency, 2027 entry, 23:59 ET. Other constituencies differ, and an endorsing university will set an earlier internal deadline.",
+      "stage": "discovered",
+      "drafts": [],
+      "provenance": {
+        "closes": {
+          "basis": "sourced",
+          "from": "https://www.rhodeshouse.ox.ac.uk/scholarships/applications/united-states/",
+          "read": "2026-08-29"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "none",
+          "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+        },
+        "requirements": {
+          "basis": "none",
+          "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://www.rhodeshouse.ox.ac.uk/scholarships/the-rhodes-scholarship/",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "derived",
+          "from": "https://www.rhodeshouse.ox.ac.uk/scholarships/applications/united-states/",
+          "read": "2026-08-29",
+          "rule": "inferred from the cycle the deadline sits in."
+        }
+      },
+      "source": "https://www.rhodeshouse.ox.ac.uk/scholarships/the-rhodes-scholarship/"
+    },
+    {
+      "id": "sundance-documentary-fund",
+      "name": "Sundance Documentary Fund",
+      "org": "Sundance Institute",
+      "kind": "grant",
+      "url": "https://www.sundance.org/programs/documentary-film/",
+      "summary": null,
+      "eligibility": {
+        "stated": null,
+        "disciplines": null,
+        "geography": null,
+        "career_stage": null
+      },
+      "requirements": null,
+      "award": {
+        "min": null,
+        "max": null,
+        "currency": "USD",
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
+      },
+      "cycle": "biannual",
+      "opens": null,
+      "closes": null,
+      "cycle_note": "Last cycle closed 15 June 2026. The next open call is announced in early 2027; no date published yet. ⟦FILL: next cycle deadline when announced⟧",
+      "stage": "review",
+      "drafts": [],
+      "provenance": {
+        "closes": {
+          "basis": "none",
+          "from": "https://www.sundance.org/documentary-fund/",
+          "read": "2026-08-29",
+          "why": "Last cycle closed 15 June 2026. The next open call is announced in early 2027; no date published yet. ⟦FILL: next cycle deadline when announced⟧"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "none",
+          "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+        },
+        "requirements": {
+          "basis": "none",
+          "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://www.sundance.org/programs/documentary-film/",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "derived",
+          "from": "https://www.sundance.org/documentary-fund/",
+          "read": "2026-08-29",
+          "rule": "inferred from the cycle the deadline sits in."
+        }
+      },
+      "source": "https://www.sundance.org/programs/documentary-film/"
+    },
+    {
+      "id": "ted-fellows",
+      "name": "TED Fellows Program",
+      "org": "TED",
+      "kind": "fellowship",
+      "url": "https://www.ted.com/participate/ted-fellows-program",
+      "summary": null,
+      "eligibility": {
+        "stated": null,
+        "disciplines": null,
+        "geography": null,
+        "career_stage": null
+      },
+      "requirements": null,
+      "award": {
+        "min": null,
+        "max": null,
+        "currency": "USD",
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
+      },
+      "cycle": null,
+      "opens": null,
+      "closes": null,
+      "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
+      "stage": "discovered",
+      "drafts": [],
+      "provenance": {
+        "closes": {
+          "basis": "none",
+          "from": null,
+          "read": null,
+          "why": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "none",
+          "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+        },
+        "requirements": {
+          "basis": "none",
+          "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://www.ted.com/participate/ted-fellows-program",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "none",
+          "why": "⟦FILL: cycle not established from a source.⟧"
+        }
+      },
+      "source": "https://www.ted.com/participate/ted-fellows-program"
+    },
+    {
+      "id": "united-states-artists-fellowship",
+      "name": "USA Fellowship",
+      "org": "United States Artists",
+      "kind": "fellowship",
+      "url": "https://www.unitedstatesartists.org/fellowship",
+      "summary": null,
+      "eligibility": {
+        "stated": null,
+        "disciplines": null,
+        "geography": null,
+        "career_stage": null
+      },
+      "requirements": null,
+      "award": {
+        "min": null,
+        "max": null,
+        "currency": "USD",
+        "basis": "none",
+        "note": "⟦FILL: award figure not sourced⟧"
+      },
+      "cycle": null,
+      "opens": null,
+      "closes": null,
+      "cycle_note": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧",
+      "stage": "discovered",
+      "drafts": [],
+      "provenance": {
+        "closes": {
+          "basis": "none",
+          "from": null,
+          "read": null,
+          "why": "⟦FILL: deadline not yet sourced — open `source` and read it off the guidelines⟧"
+        },
+        "summary": {
+          "basis": "none",
+          "why": "⟦FILL: no verbatim description was read from the organisation's own page. The previous text was written from general knowledge and has been removed rather than left rendering as fact.⟧"
+        },
+        "eligibility": {
+          "basis": "none",
+          "why": "⟦FILL: eligibility not read. Previous values were assigned without opening an eligibility page.⟧"
+        },
+        "requirements": {
+          "basis": "none",
+          "why": "⟦FILL: application requirements not read, so effort cannot be derived and is scored as unknown.⟧"
+        },
+        "award": {
+          "basis": "none",
+          "why": "⟦FILL: no award figure was read.⟧"
+        },
+        "kind": {
+          "basis": "derived",
+          "from": "https://www.unitedstatesartists.org/fellowship",
+          "rule": "classified from the programme's own description of itself into this schema's vocabulary."
+        },
+        "cycle": {
+          "basis": "none",
+          "why": "⟦FILL: cycle not established from a source.⟧"
+        }
+      },
+      "source": "https://www.unitedstatesartists.org/fellowship"
+    }
+  ]
+};
+
+export const radar = { openCalls, locations, roles, registry };
 export default radar;
