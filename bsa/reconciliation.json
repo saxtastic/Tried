@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "title": "BSA notation app — reconciliation contract",
+  "note": "Declared inputs live here, never in the code. scripts/bsa-reconcile.mjs reads this file and a directory of BSA builds, extracts what each build actually does, and reports every divergence against the resolutions below. Nothing here is inferred at runtime. Every resolution carries the register it was established at, in the venue's sense: O observed in a build, D documented in project prose, I inferred, V unverified.",
+
+  "canonical_base": {
+    "file": "BSA_App_v2.html",
+    "register": "I",
+    "because": [
+      "carries eight symbols, matching the published website copy",
+      "maps intervals, which is what the project's own pedagogy text requires",
+      "is the only build that holds the Pulse Map and the Archive",
+      "is the only build already honest about what it does not do"
+    ]
+  },
+
+  "builds": {
+    "BSA_Notation_App.html": { "version": "1.0", "views": 5, "register": "V" },
+    "BSA_App_v2.html": { "version": "2.0", "views": 6, "register": "V" },
+    "BSA_Translator.html": { "register": "V" },
+    "BSA_Translator_v2.html": { "register": "V" }
+  },
+
+  "divergences": [
+    {
+      "id": "mapping-basis",
+      "what": "Symbols are keyed to absolute pitch classes in the Translators (C is always Adinkrahene) and to intervals relative to the tonic in the App and v2.",
+      "resolution": "interval",
+      "register": "D",
+      "because": [
+        "the pedagogy text carried inside the builds states it: the Adinkra system centres on relationships (intervals) rather than absolute pitches",
+        "transposition invariance: transpose a melody and the Adinkra reading must survive; under a pitch-class map it does not"
+      ],
+      "loses": "the pitch-class table in both Translator files, which is dropped rather than merged"
+    },
+    {
+      "id": "symbol-inventory",
+      "what": "The App and v2 carry eight symbols including Akoma Ntoso and Boa Me. Both Translators carry six.",
+      "resolution": "eight",
+      "register": "D",
+      "because": ["the published website copy says eight symbols derived from Akan geometric tradition"],
+      "expected_count": 8,
+      "must_include": ["Adinkrahene", "Akoma Ntoso", "Boa Me"],
+      "must_include_register": "O",
+      "remaining_five": "not established in this session — the checker reports the detected set for confirmation rather than asserting names it has not read"
+    },
+    {
+      "id": "capture-honesty",
+      "what": "v1.0 labelled the tab Simulated Live Capture with a button reading Start Capture Simulation. v2.0 removed the fake export buttons and marks its Pulse Map figures as not field data yet. The newest Translator says Live Audio Capture, Real-Time Transcription, the app listens — over the same Math.sin generator.",
+      "resolution": "no-unbacked-live-claim",
+      "register": "O",
+      "because": ["the label came off while the underlying code did not change; restoring the disclosure is not new work"],
+      "rule": "A build may claim live capture only if it holds a real audio input path (getUserMedia, MediaRecorder, createMediaStreamSource, AudioWorklet). A build that synthesises its signal must say so where the signal is shown."
+    },
+    {
+      "id": "translator-only-content",
+      "what": "Song Examples and the PreK-21 ladder exist only in the Translator files.",
+      "resolution": "port-into-canonical",
+      "register": "V",
+      "because": ["the content is wanted; the map it currently sits on is not"],
+      "carries": ["Song Examples", "PreK-21 ladder"],
+      "drops": ["the pitch-class symbol table these sit beside"]
+    }
+  ],
+
+  "definition_of_done": [
+    { "id": "DOD-1", "check": "one canonical file exists; the other three builds are retired to an archive directory, not deleted", "automated": false },
+    { "id": "DOD-2", "check": "the canonical file resolves symbols from intervals only; no absolute pitch-class table remains", "automated": true },
+    { "id": "DOD-3", "check": "the canonical file carries exactly eight symbols, including Adinkrahene, Akoma Ntoso and Boa Me", "automated": true },
+    { "id": "DOD-4", "check": "transposing a melody by any interval leaves its Adinkra reading unchanged", "automated": false, "note": "needs a browser harness against the real file; stated here so it is not quietly skipped" },
+    { "id": "DOD-5", "check": "no live-capture claim stands without a real audio input path, and any synthesised signal is disclosed where it is shown", "automated": true },
+    { "id": "DOD-6", "check": "Song Examples and the PreK-21 ladder are present in the canonical file", "automated": true },
+    { "id": "DOD-7", "check": "the Pulse Map and the Archive survive the merge", "automated": true },
+    { "id": "DOD-8", "check": "apply_a_weighting_filter returns an actual A-weighting, verified against IEC 61672-1 Table 3", "automated": true, "note": "closed by bsa/dsp/a_weighting.py; still has to be wired into bsa_processing.py" },
+    { "id": "DOD-9", "check": "bsa_schema.sql exists, or setup guide section 4C stops pointing at it", "automated": false, "note": "blocked: the table definitions live in bsa_processing.py, which this session has not read" },
+    { "id": "DOD-10", "check": "the psycopg2 parameter embedded in a SQL string literal in the report generator is passed as a bound parameter", "automated": false, "note": "blocked on reading the file" }
+  ],
+
+  "not_established_here": [
+    "the five symbol names beyond Adinkrahene, Akoma Ntoso and Boa Me",
+    "the interval each symbol is assigned to",
+    "the pedagogy text, the Song Examples and the PreK-21 ladder verbatim",
+    "the PostGIS table definitions bsa_schema.sql would have to declare"
+  ]
+}
