@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "description": "ayeyoty.co — the venue and its subtrees: fleet, fellowships, simulator, workstation",
   "scripts": {
+    "bsa:reconcile": "node scripts/bsa-reconcile.mjs",
     "build": "npm run build:registry && npm run build:corpus && npm run build:workstation",
     "build:corpus": "node scripts/build-corpus.mjs",
     "build:registry": "node scripts/build-registry.mjs",
