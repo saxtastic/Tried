@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Opportunity radar — ayeyoty.co</title>
+<meta name="description" content="Open calls, residencies, roles and metros read out of the workbooks and grouped by what each one actually returns: money, shelter, food, distribution, venue, work, standing." />
+<meta name="theme-color" content="#f6f5fa" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0b0c10" media="(prefers-color-scheme: dark)" />
+<link rel="icon" href="/icons/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+<link rel="mask-icon" href="/icons/mask-icon.svg" color="#7c5cff" />
+<link rel="stylesheet" href="/venue.css" />
+<link rel="stylesheet" href="/radar/styles.css" />
+<script src="/venue.js" defer></script>
+</head>
+<body>
+
+<a class="skip" href="#board">Skip to the board</a>
+
+<header class="chrome">
+  <div class="shell">
+    <a class="wordmark" href="/">aye<span>yoty</span>.co</a>
+    <p class="chip" id="tier-chip" aria-live="polite">tier: <span id="tier-name">—</span></p>
+  </div>
+</header>
+
+<main>
+  <section class="shell hero">
+    <div class="hero-copy">
+      <p class="eyebrow">subtree · radar</p>
+      <h1><span class="wide-only">What is open. <em>What was tried.</em></span><span class="watch-only">Radar</span></h1>
+      <p class="lede">Open calls, residencies, roles and metros, read out of the workbooks and
+        grouped by what each one <em>returns</em> — money, shelter, food, distribution, a room,
+        work, standing — rather than ranked into one list. A pipeline that only counts cash
+        misses most of a year. Every derived field names the rule that produced it.</p>
+      <div class="actions">
+        <button class="btn btn--primary" id="rerun" type="button">Re-read</button>
+        <button class="btn btn--quiet" id="download" type="button">Download JSON</button>
+      </div>
+    </div>
+
+    <div class="hero-art readout" aria-label="The pipeline at a glance">
+      <p class="eyebrow">pipeline</p>
+      <dl id="counts"><dt>loading</dt><dd>—</dd></dl>
+    </div>
+  </section>
+
+  <section class="shell controls" id="controls">
+    <div class="section-head">
+      <h2>Controls</h2>
+      <p>Feasibility is the only thing here that moves, and it moves on two numbers:
+        how many hours a week are actually free, and what today is.</p>
+    </div>
+    <div class="control-grid">
+      <p class="field">
+        <label for="hours">Hours a week available</label>
+        <input id="hours" type="number" min="1" max="80" step="1" value="20" />
+      </p>
+      <p class="field">
+        <label for="today">Reading as of</label>
+        <input id="today" type="date" />
+      </p>
+      <fieldset class="field">
+        <legend>Show</legend>
+        <div class="toggles" id="filters"></div>
+      </fieldset>
+    </div>
+  </section>
+
+  <div class="shell" id="board"><p class="loading">Reading…</p></div>
+</main>
+
+<nav class="thumbbar" aria-label="Primary">
+  <a class="btn btn--primary" href="#board">Board</a>
+  <a class="btn btn--quiet" href="/">Venue</a>
+</nav>
+
+<footer class="footer">
+  <div class="shell">
+    <span>Radar subtree — a surface of ayeyoty.co, not a second site.</span>
+    <span class="wide-only">Fit scores were typed by hand into workbooks holding no formulas. Nothing here converts one into a measurement.</span>
+  </div>
+</footer>
+
+<script type="module" src="/radar/app.js"></script>
+</body>
+</html>

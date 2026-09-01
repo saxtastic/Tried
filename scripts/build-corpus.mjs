@@ -29,15 +29,24 @@ const PARTS = [
   ['institution', 'institution.template.json'],
 ];
 
-export async function renderBundle() {
+export const RADAR_DIR = resolve(here, '..', 'public', 'radar', 'corpus');
+export const RADAR_BUNDLE_PATH = resolve(here, '..', 'public', 'radar', 'corpus.bundle.js');
+
+const RADAR_PARTS = [
+  ['openCalls', 'open-calls.json'],
+  ['locations', 'locations.json'],
+  ['roles', 'roles.json'],
+];
+
+async function render({ dir, parts, source, named }) {
   const entries = await Promise.all(
-    PARTS.map(async ([key, file]) => [key, JSON.parse(await readFile(resolve(CORPUS_DIR, file), 'utf8'))]),
+    parts.map(async ([key, file]) => [key, JSON.parse(await readFile(resolve(dir, file), 'utf8'))]),
   );
   const body = entries
     .map(([key, value]) => `export const ${key} = ${JSON.stringify(value, null, 2)};`)
     .join('\n\n');
   return `// GENERATED FILE — do not edit.
-// Source: public/simulator/corpus/*.json
+// Source: ${source}
 // Regenerate with: npm run build:corpus
 //
 // The page imports this instead of fetching, because the venue's
@@ -45,13 +54,33 @@ export async function renderBundle() {
 
 ${body}
 
-export const corpus = { lexicon, provisions, precedents, conditions, passages, doors, claim, institution };
-export default corpus;
+export const ${named} = { ${entries.map(([k]) => k).join(', ')} };
+export default ${named};
 `;
 }
 
+export async function renderBundle() {
+  return render({
+    dir: CORPUS_DIR,
+    parts: PARTS,
+    source: 'public/simulator/corpus/*.json',
+    named: 'corpus',
+  });
+}
+
+export async function renderRadarBundle() {
+  return render({
+    dir: RADAR_DIR,
+    parts: RADAR_PARTS,
+    source: 'public/radar/corpus/*.json',
+    named: 'radar',
+  });
+}
+
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const out = await renderBundle();
-  await writeFile(BUNDLE_PATH, out, 'utf8');
-  console.log(`wrote ${BUNDLE_PATH} (${out.length} bytes)`);
+  for (const [path, make] of [[BUNDLE_PATH, renderBundle], [RADAR_BUNDLE_PATH, renderRadarBundle]]) {
+    const out = await make();
+    await writeFile(path, out, 'utf8');
+    console.log(`wrote ${path} (${out.length} bytes)`);
+  }
 }

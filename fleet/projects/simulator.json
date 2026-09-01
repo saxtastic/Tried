@@ -9,15 +9,19 @@
   "pull_request": 3,
   "owns": [
     "public/simulator/*",
+    "public/radar/*",
     "sim/*",
     "test/*",
-    "docs/*"
+    "docs/*",
+    "corpus/enoch/*",
+    "scripts/completion.mjs",
+    "scripts/extract-radar.mjs"
   ],
   "claims_disputed": [],
   "ritual": false,
   "state": "review",
   "register": "O",
-  "note": "Built against the placeholder, in parallel with the venue rather than as a subtree of it. Corpus scanned 2026-08-29: generic federal statute text and public case law (Title VI, § 1983, 17 U.S.C. § 201, FERPA, a template enabling act), no personal names, no student records, no institution-specific provisions. The collision is architectural, not content.",
+  "note": "Built against the placeholder, in parallel with the venue rather than as a subtree of it. Corpus scanned 2026-08-29: generic federal statute text and public case law (Title VI, § 1983, 17 U.S.C. § 201, FERPA, a template enabling act), no personal names, no student records, no institution-specific provisions. The collision is architectural, not content. Radar subtree added 2026-09-01: extracted from four uploaded workbooks (open calls, metros, roles). Content is the owner's own research and job-search material — no third-party personal data, no institution-specific records.",
   "vantages_held": [
     "engineering"
   ],
@@ -55,18 +59,43 @@
       "blocking": true
     },
     {
-      "id": "AO-4",
-      "question": "What is the paralegal role actually called?",
-      "detail": "Transcribed as 'Enochian paralegal' and 'ENaki in paralegal'. Recorded as an unresolved name rather than guessed at. The corpus/paralegal/ officer is filed under the generic name until corrected. Nothing depends on it; the role is built either way.",
-      "asked_at": "2026-08-30",
-      "blocking": false
-    },
-    {
       "id": "AO-5",
       "question": "Q3 FORM versus RELIANCE — who owns the test?",
       "detail": "Unresolved and unowned since the Q3 arbitration declined to pick. Fellowships locates the danger in form (a judgment in a file shaped like a spec); engineering locates it in reliance (a claim a reader is invited to act on). They diverge on real cases and the next straddling file gets classified by whoever finds it.",
       "asked_at": "2026-08-30",
       "blocking": false
+    },
+    {
+      "id": "AO-6",
+      "question": "Should /radar/ get a card on the front page, and under what name?",
+      "detail": "The radar renders and passes the tier check at all four viewports, but nothing links to it: public/index.html is the shell's file and this project does not edit another project's copy. The shell adds the card or the surface stays unreachable from the front page. 'Radar' is this session's placeholder, not a decision.",
+      "asked_at": "2026-09-01",
+      "blocking": false
+    },
+    {
+      "id": "AO-7",
+      "question": "Were any of these open calls actually applied to, and what came back?",
+      "detail": "All 16 opportunities read `untried`, which is what the workbooks say and not what happened — the sheets record a TODO status and no outcome anywhere. Untried and applied-and-rejected are different findings and the board cannot tell them apart until someone says. This is the single field that would change the most on the page.",
+      "asked_at": "2026-09-01",
+      "blocking": false
+    },
+    {
+      "id": "AO-8",
+      "question": "The fit scores — keep them as declared opinion, or replace them with a rule?",
+      "detail": "20 typed scores across the workbooks, every one basis `none`: there is not a single formula in 4,300 populated cells, so no score in them was computed from anything. They can stay as the owner's stated preference, which is legitimate and useful, or be replaced by a rule over named inputs so they can be recomputed and argued with. What they cannot be is both a judgment and a measurement.",
+      "asked_at": "2026-09-01",
+      "blocking": false
+    }
+  ],
+  "resolved": [
+    {
+      "id": "AO-4",
+      "question": "What is the paralegal role actually called?",
+      "asked_at": "2026-08-30",
+      "resolved_at": "2026-09-01",
+      "answer": "Enoch. The office of the accounting record: the angel and the parliamentarian. Not a party to the debate and not inside the argument structure — the ratification of the argument structure and of the protocol structure.",
+      "resolved_by": "owner",
+      "what_changed": "corpus/enoch/ was already filed under that name at ba2422b. The generic corpus/paralegal/ officer stays, because it is a different office: the paralegal searches dockets and takes a side, Enoch reads the record and takes none. Kept as a resolved item rather than deleted, because a question that disappears when it is answered leaves no way to check what the answer was."
     }
   ]
 }

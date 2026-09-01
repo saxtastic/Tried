@@ -1,0 +1,188 @@
+[
+  {
+    "id": "role.lecturer_instructor_social_practice_or_sound",
+    "role_type": "Lecturer / Instructor — Social Practice or Sound Art",
+    "why_competitive": "MFA is the terminal degree in fine arts. Your research (acoustic colonialism, FSAEA, URACE) is genuinely original. Your performing career and community practice are the portfolio. You do not need a PhD for most of these roles.",
+    "without_references": "STRONG WITHOUT REFERENCES. MFA + body of work + research = qualifiable. Strong portfolio is more important than letters for many lecturer searches. ASU, UCLA Extension, UArts, SAIC, MICA.",
+    "target_institutions": "ASU, SAIC, MICA, Virginia Commonwealth, CalArts, Temple, Tennessee colleges",
+    "salary_range_text": "$55,000–$75,000",
+    "salary_range": [
+      55000,
+      75000
+    ],
+    "provenance": {
+      "why_competitive": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "salary_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "role_type": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      }
+    },
+    "source": {
+      "file": "bb1cf408-TAL_Job_Tracker_2026.xlsx",
+      "sheet": "BEST FIT ROLES"
+    }
+  },
+  {
+    "id": "role.academic_advisor_director_of_advising_arts_o",
+    "role_type": "Academic Advisor / Director of Advising — Arts or Student Affairs",
+    "why_competitive": "Your UTC advising experience + AAI certification + social practice background + Black student community expertise = genuinely differentiated application.",
+    "without_references": "VERY STRONG WITHOUT REFERENCES. AAI certification, UTC experience, and GWU background speak for themselves. Many student affairs roles emphasize lived experience and professional practice over academic pedigree.",
+    "target_institutions": "ASU, Atlanta metro HBCUs, UTC (upgrade), Vanderbilt, Belmont",
+    "salary_range_text": "$55,000–$80,000",
+    "salary_range": [
+      55000,
+      80000
+    ],
+    "provenance": {
+      "why_competitive": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "salary_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "role_type": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      }
+    },
+    "source": {
+      "file": "bb1cf408-TAL_Job_Tracker_2026.xlsx",
+      "sheet": "BEST FIT ROLES"
+    }
+  },
+  {
+    "id": "role.artist_in_residence_visiting_artist_universi",
+    "role_type": "Artist-in-Residence / Visiting Artist — University or Cultural Institution",
+    "why_competitive": "These roles are often appointed rather than searched. Your OneBeat credential, URACE research, and performance career make you genuinely competitive. The saxophone trio (SSS) is a differentiating asset.",
+    "without_references": "MODERATE WITHOUT REFERENCES. Residency roles often rely on network nominations. Kenneth Cobbs + OneBeat network = most important assets here. Portfolio and performance documentation are critical.",
+    "target_institutions": "ASU Herberger Institute, MacDowell, Headlands, MASS MoCA, NYC cultural institutions",
+    "salary_range_text": "$40,000–$70,000 + stipend",
+    "salary_range": [
+      40000,
+      70000
+    ],
+    "provenance": {
+      "why_competitive": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "salary_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "role_type": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      }
+    },
+    "source": {
+      "file": "bb1cf408-TAL_Job_Tracker_2026.xlsx",
+      "sheet": "BEST FIT ROLES"
+    }
+  },
+  {
+    "id": "role.community_arts_director_program_director_non",
+    "role_type": "Community Arts Director / Program Director — Nonprofit or Civic",
+    "why_competitive": "FTJC founding, Juneteenth programming, UTC community engagement, Chattanooga civic relationships = direct experience. This is where your work is most immediately translatable.",
+    "without_references": "STRONG WITHOUT REFERENCES. Demonstrated organizational leadership is the primary credential. Your B.A. in Organizational Sciences is an underutilized credential in this context — lead with it.",
+    "target_institutions": "ArtsBuild Chattanooga, Americans for the Arts grantees, city cultural departments, community foundations",
+    "salary_range_text": "$50,000–$85,000",
+    "salary_range": [
+      50000,
+      85000
+    ],
+    "provenance": {
+      "why_competitive": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "salary_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "role_type": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      }
+    },
+    "source": {
+      "file": "bb1cf408-TAL_Job_Tracker_2026.xlsx",
+      "sheet": "BEST FIT ROLES"
+    }
+  },
+  {
+    "id": "role.trust_safety_ethics_researcher_tech_or_polic",
+    "role_type": "Trust & Safety / Ethics Researcher — Tech or Policy (non-traditional)",
+    "why_competitive": "Your acoustic sovereignty framework, FSAEA legislative work, and social practice methodology are genuinely applicable to AI ethics, tech equity, and cultural policy roles. This is the non-obvious pivot.",
+    "without_references": "WEAKER WITHOUT REFERENCES — policy/tech roles rely on publications and institutional affiliation. The FSAEA white paper (if submitted and accepted) dramatically changes this. AI Now Institute, Mozilla Foundation, Earthjustice are target orgs.",
+    "target_institutions": "AI Now Institute, Mozilla, Algorithmic Justice League, ACLU tech program",
+    "salary_range_text": "$80,000–$120,000",
+    "salary_range": [
+      80000,
+      120000
+    ],
+    "provenance": {
+      "why_competitive": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "salary_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "role_type": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      }
+    },
+    "source": {
+      "file": "bb1cf408-TAL_Job_Tracker_2026.xlsx",
+      "sheet": "BEST FIT ROLES"
+    }
+  },
+  {
+    "id": "role.cultural_attach_arts_diplomat_state_departme",
+    "role_type": "Cultural Attaché / Arts Diplomat — State Department",
+    "why_competitive": "Your OneBeat fellowship is a direct credential. State Department knows your name and your work. This is the only category where you are already pre-credentialed by the hiring institution.",
+    "without_references": "STRONG WITHOUT REFERENCES — your OneBeat alumni status is itself a reference. The ECA survey you received is evidence they are tracking alumni. USAJOBS is the application platform.",
+    "target_institutions": "U.S. Embassy cultural programs, State Dept ECA, British Council, Goethe-Institut",
+    "salary_range_text": "$60,000–$95,000",
+    "salary_range": [
+      60000,
+      95000
+    ],
+    "provenance": {
+      "why_competitive": {
+        "basis": "none",
+        "note": "AUTHORED JUDGMENT. The fit score was typed into the sheet by hand. There is not one formula in these workbooks, so no score in them was computed from anything.",
+        "owed": "A stated rule that derives fit from named inputs, so the number can be recomputed and argued with rather than asserted."
+      },
+      "salary_range": {
+        "basis": "derived",
+        "note": "Parsed from the extracted cell text by a stated rule; the rule is in scripts/extract-radar.mjs."
+      },
+      "role_type": {
+        "basis": "sourced",
+        "note": "Read verbatim off the workbook cell."
+      }
+    },
+    "source": {
+      "file": "bb1cf408-TAL_Job_Tracker_2026.xlsx",
+      "sheet": "BEST FIT ROLES"
+    }
+  }
+]

@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 
@@ -69,9 +70,22 @@ test('--strict fails while anything awaits the owner', () => {
   assert.equal(code, 1, 'an unanswered question to a person should be able to gate a build');
 });
 
-test('an unresolved name is recorded as unresolved rather than guessed', () => {
-  const r = run();
-  const name = r.awaitingOwner.find((q) => /paralegal role actually called/i.test(q.question));
-  assert.ok(name, 'a word nobody could transcribe is an outstanding clarification, not a silent assumption');
-  assert.match(name.detail, /Recorded as an unresolved name rather than guessed at/);
+test('an answered question is recorded as answered rather than deleted', () => {
+  // This assertion used to check the other half of the same invariant: that a
+  // word nobody could transcribe sat in awaiting_owner as an open clarification
+  // rather than being guessed at silently. The owner answered it on 2026-09-01
+  // — the office is Enoch — and the question was moved to `resolved` rather
+  // than removed, because a question that vanishes when it is answered leaves
+  // no way to check afterwards what the answer was.
+  const project = JSON.parse(readFileSync(new URL('../fleet/projects/simulator.json', import.meta.url), 'utf8'));
+  const name = (project.resolved ?? []).find((q) => /paralegal role actually called/i.test(q.question));
+  assert.ok(name, 'an answered question is kept with its answer, not deleted');
+  assert.match(name.answer, /Enoch/);
+  assert.ok(name.resolved_by && name.resolved_at, 'a resolution names who resolved it and when');
+
+  const open = new Set(run().awaitingOwner.map((q) => q.id));
+  for (const r of project.resolved ?? []) {
+    assert.ok(r.answer && r.resolved_by && r.what_changed, `${r.id} is resolved and must carry the answer, the resolver and what changed`);
+    assert.ok(!open.has(r.id), `${r.id} is in both lists — resolved and still awaiting the owner`);
+  }
 });
