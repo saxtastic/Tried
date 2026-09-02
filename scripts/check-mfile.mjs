@@ -8,7 +8,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { administer, normaliseStem } from "./mfile.mjs";
+import { administer, kindOf, normaliseStem } from "../src/administer.js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, p), "utf8"));
@@ -23,6 +23,7 @@ function ok(label, cond, detail) {
 }
 
 const criteria = read("mfile/criteria.json");
+const media = read("mfile/media.json");
 const stores = read("mfile/stores.json");
 const intake = read("mfile/questions/intake.json");
 
@@ -229,6 +230,65 @@ ok(
   ["duplicate", "iterative", "novel", "functional"].every((k) => unblocked.has(k)),
 );
 
+// --- media kinds -------------------------------------------------------------
+
+const allExt = media.kinds.flatMap((k) => k.ext);
+ok("no extension is claimed by two kinds", new Set(allExt).size === allExt.length);
+ok("every extension is lowercase and dotless", allExt.every((e) => e === e.toLowerCase() && !e.includes(".")));
+ok(
+  "every kind says what the scanner cannot read",
+  media.kinds.every((k) => typeof k.scanner_cannot_read === "string" && k.scanner_cannot_read.length > 0),
+);
+ok(
+  "no kind claims the scanner reads anything but the directory entry",
+  media.kinds.every((k) => k.scanner_reads.every((f) => ["bytes", "mtime", "name"].includes(f))),
+);
+ok("audio, video, image and document are all declared",
+  ["audio", "video", "image", "document"].every((k) => media.kinds.some((m) => m.key === k)));
+ok("an unlisted extension falls back rather than being dropped", kindOf("xyzzy") === media.fallback.key);
+ok("a video extension classifies as video", kindOf("MOV") === "video");
+ok("an audio extension classifies as audio", kindOf("wav") === "audio");
+
+const kinded = administer({
+  records: [
+    rec(1, { name: "a.wav", ext: "wav", path: "a.wav" }),
+    rec(2, { name: "b.mov", ext: "mov", path: "b.mov" }),
+    rec(3, { name: "c.zzz", ext: "zzz", path: "c.zzz" }),
+  ],
+});
+ok(
+  "the report rolls up by kind, and never at basis confirmed",
+  kinded.kinds.length === 3 && kinded.kinds.every((k) => k.basis === "derived"),
+);
+ok("a kind with no files is omitted rather than shown as zero", !kinded.kinds.some((k) => k.files === 0));
+
+// --- the endpoint ------------------------------------------------------------
+
+const worker = fs.readFileSync(path.join(ROOT, "src", "index.js"), "utf8");
+ok("the endpoint stores nothing", /stored: false/.test(worker) && !/KV|R2|D1|caches\.default\.put/.test(worker));
+ok("the endpoint is inert without its secret", /if \(!env\.MFILE_TOKEN\)/.test(worker));
+ok("the token compare is constant time", /diff \|=/.test(worker) && !/=== env\.MFILE_TOKEN/.test(worker));
+ok("the endpoint validates before administering", worker.indexOf("validate(manifest)") < worker.indexOf("administer(manifest)"));
+ok("the endpoint bounds the body and the record count", /MAX_BODY/.test(worker) && /MAX_RECORDS/.test(worker));
+ok(
+  "no token, key or secret is committed",
+  !/MFILE_TOKEN\s*=\s*["'][^"']+["']/.test(worker) && !/sk-[a-zA-Z0-9]{16}/.test(worker),
+);
+
+const core = fs.readFileSync(path.join(ROOT, "src", "administer.js"), "utf8");
+ok("the shared core touches no filesystem and no network", !/node:fs|node:path|fetch\(/.test(core));
+ok(
+  "unsupplied rules default to unconfirmed, so the edge withholds rather than guesses",
+  administer({ records: [rec(1)] }).verdicts[0].iterative.says !== "iterative",
+);
+
+// --- the shortcut ------------------------------------------------------------
+
+const shortcut = fs.readFileSync(path.join(ROOT, "ios", "shortcut.md"), "utf8");
+ok("the shortcut spec states that Shortcuts cannot hash", /no hashing action/i.test(shortcut));
+ok("the shortcut spec carries no literal token", !/X-MFile-Token:\s*[A-Za-z0-9_-]{12,}/.test(shortcut));
+ok("the shortcut spec names no move, rename or delete action", /no move, rename, delete or trash action/i.test(shortcut));
+
 // --- the administrator does not mutate --------------------------------------
 
 const src = fs.readFileSync(path.join(ROOT, "scripts", "mfile.mjs"), "utf8");
@@ -238,6 +298,6 @@ ok("the scanner never writes, renames or unlinks", !/fs\.(write|rename|unlink|rm
 ok("neither makes a network request", !/fetch\(|https?\.request|node:https/.test(src + scan));
 
 console.log(
-  `\n${failed ? `${failed} failed` : "all assertions passed"} — 4 questions, ${stores.stores.length} stores, ${intake.questions.length} intake questions\n`,
+  `\n${failed ? `${failed} failed` : "all assertions passed"} — 4 questions, ${media.kinds.length} media kinds, ${stores.stores.length} stores, ${intake.questions.length} intake questions\n`,
 );
 process.exit(failed ? 1 : 0);

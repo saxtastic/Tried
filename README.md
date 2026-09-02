@@ -443,6 +443,21 @@ npm run mfile:scan -- <dir> --store icloud > m.json && npm run mfile -- m.json
 npm run turn -- "the objective" --dry    # the per-turn cycle
 ```
 
+Audio, video, images and documents all count, classified by declared extension
+in `mfile/media.json` — a claim the filename makes, so never at basis
+`confirmed`. The scan reads the directory entry only; duration, resolution and
+EXIF live inside the file and each kind records that they are out of reach.
+
+`src/administer.js` is the engine and has no filesystem and no network, so the
+identical code runs in the CLI and at the edge. `POST /mfile/manifest` takes a
+manifest from the iPhone Shortcut in [`ios/shortcut.md`](ios/shortcut.md),
+administers it, and **stores nothing**. It is inert until
+`wrangler secret put MFILE_TOKEN` exists.
+
+`/mfile/` is one toggle, **Stated** and **Withheld** — not tabs. Same four
+questions on both sides; what changes is whether you are reading what it can
+say or what it refuses to.
+
 Three of the four are answerable from a manifest of bytes. The fourth is not
 answerable from any manifest, at any resolution, ever: function is a relation
 between a file and something outside it, and scanning only ever sees the inside.
@@ -457,6 +472,8 @@ wording rather than the confident one.
 - [`docs/mfile.md`](docs/mfile.md) — the criteria, the stores, the turn cycle
 - [`mfile/questions/intake.json`](mfile/questions/intake.json) — the three
   questions that turn two of the four verdicts from candidate into stated
+- [`ios/shortcut.md`](ios/shortcut.md) — the scanner as a Shortcut: no Mac, no
+  developer account, and it cannot hash, which is why `duplicate` degrades
 
 ## Governance & corpus simulator
 

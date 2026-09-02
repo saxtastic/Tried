@@ -18,9 +18,11 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { administer, normaliseStem } from "../src/administer.js";
+
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const CRITERIA = JSON.parse(fs.readFileSync(path.join(ROOT, "mfile", "criteria.json"), "utf8"));
 const STEM_RULES = path.join(ROOT, "mfile", "stem-rules.json");
+
 
 /** The owner's naming cadence, if it has been read off their files. */
 export function stemRules() {
@@ -29,172 +31,6 @@ export function stemRules() {
   }
   const r = JSON.parse(fs.readFileSync(STEM_RULES, "utf8"));
   return { confirmed: r.confirmed === true, rules: r.rules ?? [], source: r.source ?? null, scope: r.scope ?? "directory" };
-}
-
-/** Reduce a filename to the work it is a version of — only under confirmed rules. */
-export function normaliseStem(name, rules) {
-  let s = name.replace(/\.[^.]*$/, "").toLowerCase().trim();
-  for (const rule of rules) {
-    s = s.replace(new RegExp(rule.pattern, rule.flags ?? "g"), rule.replace ?? "");
-  }
-  return s.replace(/[\s._-]+/g, " ").trim();
-}
-
-function tally(records, key) {
-  const m = new Map();
-  for (const r of records) {
-    const v = r[key];
-    if (v === undefined || v === null || v === "") continue;
-    if (!m.has(v)) m.set(v, []);
-    m.get(v).push(r);
-  }
-  return m;
-}
-
-/**
- * Answer the four questions for every record.
- * Every verdict carries a basis. A verdict that cannot reach `confirmed` or
- * `derived` is returned at the degraded wording the criteria file specifies —
- * never at the confident one.
- */
-export function administer(manifest, override) {
-  const records = manifest.records ?? [];
-  const rules = override ?? stemRules();
-  const hashed = records.filter((r) => r.content_hash);
-  const haveHashes = hashed.length === records.length && records.length > 0;
-
-  const byHash = tally(records, "content_hash");
-  // Two files with one stem in two folders are versions of each other only if
-  // the folders mean nothing. In a media dump they usually mean nothing; in a
-  // built tree they mean everything. So the scope is declared, never assumed.
-  const scope = rules.scope ?? "directory";
-  const stems = new Map();
-  for (const r of records) {
-    const base = normaliseStem(r.name, rules.rules);
-    const dir = r.path.includes("/") ? r.path.slice(0, r.path.lastIndexOf("/")) : "";
-    const s = scope === "flat" ? `${base}.${r.ext}` : `${dir}\u0000${base}.${r.ext}`;
-    if (!stems.has(s)) stems.set(s, []);
-    stems.get(s).push(r);
-  }
-
-  const criterion = (k) => CRITERIA.questions.find((q) => q.key === k);
-  const hasReferenceIndex = Boolean(manifest.reference_index);
-  const referenced = new Set(
-    (manifest.reference_index?.refers_to ?? []).map((p) => String(p)),
-  );
-
-  const verdicts = records.map((r) => {
-    const base = normaliseStem(r.name, rules.rules);
-    const dir = r.path.includes("/") ? r.path.slice(0, r.path.lastIndexOf("/")) : "";
-    const stem = scope === "flat" ? `${base}.${r.ext}` : `${dir}\u0000${base}.${r.ext}`;
-    const sameHash = r.content_hash ? (byHash.get(r.content_hash) ?? []) : [];
-    const sameStem = stems.get(stem) ?? [];
-
-    // duplicate
-    let duplicate;
-    if (r.content_hash) {
-      duplicate = sameHash.length > 1
-        ? { says: "duplicate", basis: "confirmed", with: sameHash.filter((x) => x !== r).map((x) => x.path) }
-        : { says: "not-duplicate", basis: "confirmed", with: [] };
-    } else {
-      const near = records.filter((x) => x !== r && x.bytes === r.bytes && x.ext === r.ext);
-      duplicate = {
-        says: near.length ? "candidate" : "not-duplicate",
-        basis: near.length ? "derived" : "derived",
-        with: near.map((x) => x.path),
-        withheld: criterion("duplicate").degraded.must_not_say,
-        because: "no content hash in the manifest",
-      };
-    }
-
-    // iterative
-    const others = sameStem.filter((x) => x !== r && x.content_hash !== r.content_hash);
-    let iterative;
-    if (!rules.confirmed) {
-      iterative = {
-        says: others.length ? "candidate" : "unknown",
-        basis: "none",
-        with: others.map((x) => x.path),
-        withheld: criterion("iterative").degraded.must_not_say,
-        because: criterion("iterative").degraded.reason,
-      };
-    } else {
-      const series = [...sameStem].sort((a, b) => String(a.mtime).localeCompare(String(b.mtime)));
-      iterative = others.length
-        ? {
-            says: "iterative",
-            basis: "derived",
-            with: others.map((x) => x.path),
-            head: series[series.length - 1].path === r.path,
-            position: series.findIndex((x) => x.path === r.path) + 1,
-            of: series.length,
-          }
-        : { says: "not-iterative", basis: "derived", with: [] };
-    }
-
-    // novel
-    const uniqueContent = r.content_hash ? sameHash.length === 1 : null;
-    let novel;
-    if (!rules.confirmed) {
-      novel = uniqueContent === null
-        ? { says: "unknown", basis: "none", because: "no content hash and no confirmed stem rules" }
-        : {
-            says: uniqueContent ? "unique-content" : "not-unique",
-            basis: "confirmed",
-            withheld: criterion("novel").degraded.must_not_say,
-            because: criterion("novel").degraded.reason,
-          };
-    } else {
-      novel = {
-        says: uniqueContent && sameStem.length === 1 ? "novel" : "not-novel",
-        basis: "derived",
-      };
-    }
-
-    // functional
-    const functional = hasReferenceIndex
-      ? {
-          says: referenced.has(r.path) ? "functional" : "unreferenced",
-          basis: "confirmed",
-          note: referenced.has(r.path) ? null : "unreferenced in the supplied index, which is not the same as unused",
-        }
-      : {
-          says: "unknown",
-          basis: "none",
-          withheld: [criterion("functional").degraded.must_not_say, criterion("functional").degraded.must_not_say_either],
-          because: criterion("functional").degraded.reason,
-        };
-
-    return { path: r.path, name: r.name, bytes: r.bytes, store: r.store, stem: stem.replace("\u0000", "/"), duplicate, iterative, novel, functional };
-  });
-
-  const count = (k, v) => verdicts.filter((x) => x[k].says === v).length;
-
-  return {
-    scanned_at: manifest.scanned_at ?? null,
-    root: manifest.root ?? null,
-    records: records.length,
-    inputs: {
-      content_hash: haveHashes ? "present on every record" : `present on ${hashed.length} of ${records.length}`,
-      stem_rules: rules.confirmed ? `confirmed, ${scope} scope — ${rules.source}` : "not confirmed — see mfile/questions/intake.json Q2",
-      reference_index: hasReferenceIndex ? `present — ${referenced.size} paths` : "absent — see mfile/questions/intake.json Q3",
-    },
-    answered: {
-      duplicate: { duplicate: count("duplicate", "duplicate"), candidate: count("duplicate", "candidate"), clear: count("duplicate", "not-duplicate") },
-      iterative: { iterative: count("iterative", "iterative"), candidate: count("iterative", "candidate"), unknown: count("iterative", "unknown") },
-      novel: { novel: count("novel", "novel"), unique_content: count("novel", "unique-content"), unknown: count("novel", "unknown") },
-      functional: { functional: count("functional", "functional"), unreferenced: count("functional", "unreferenced"), unknown: count("functional", "unknown") },
-    },
-    withheld: CRITERIA.questions
-      .filter((q) => {
-        if (q.key === "duplicate") return !haveHashes;
-        if (q.key === "iterative" || q.key === "novel") return !rules.confirmed;
-        if (q.key === "functional") return !hasReferenceIndex;
-        return false;
-      })
-      .map((q) => ({ question: q.key, needs: q.requires, ask: `mfile/questions/intake.json` })),
-    verdicts,
-  };
 }
 
 function render(report) {
@@ -209,6 +45,14 @@ function render(report) {
   for (const [q, counts] of Object.entries(report.answered)) {
     const parts = Object.entries(counts).map(([k, v]) => `${v} ${k.replace(/_/g, " ")}`);
     L.push(`    ${q.padEnd(16)} ${parts.join(", ")}`);
+  }
+  if (report.kinds.length) {
+    L.push("");
+    L.push("  by kind — from the extension the name claims, not from the bytes");
+    for (const k of report.kinds) {
+      const mb = (k.bytes / 1048576).toFixed(1);
+      L.push(`    ${k.kind.padEnd(16)} ${String(k.files).padStart(6)} files  ${mb.padStart(9)} MB`);
+    }
   }
   if (report.withheld.length) {
     L.push("");
@@ -234,12 +78,23 @@ function render(report) {
 function selfManifest() {
   const out = [];
   const skip = new Set(["node_modules", ".git", ".wrangler"]);
+  // A build output is not a file in the store; it is a projection of one.
+  // Counting them would also make this manifest a function of its own bytes —
+  // public/mfile/data.js is generated FROM this scan, so including it means the
+  // scan never converges and `--check` can never pass.
+  const generated = new Set([
+    "public/mfile/data.js",
+    "public/workstation/data.js",
+    "public/fellowships/registry.json",
+    "public/simulator/corpus.bundle.js",
+  ]);
   const text = [];
   (function walk(dir, rel) {
     for (const e of fs.readdirSync(dir, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))) {
       if (skip.has(e.name)) continue;
       const abs = path.join(dir, e.name);
       const r = rel ? `${rel}/${e.name}` : e.name;
+      if (generated.has(r)) continue;
       if (e.isDirectory()) walk(abs, r);
       else if (e.isFile()) {
         const buf = fs.readFileSync(abs);
@@ -301,6 +156,6 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const manifest = args.includes("--self")
     ? selfManifest()
     : JSON.parse(fs.readFileSync(args.find((a) => !a.startsWith("--")) ?? "mfile/manifest.json", "utf8"));
-  const report = administer(manifest, args.includes("--self") ? SELF_RULES : undefined);
+  const report = administer(manifest, args.includes("--self") ? SELF_RULES : stemRules());
   process.stdout.write(args.includes("--json") ? JSON.stringify(report, null, 2) + "\n" : render(report));
 }
