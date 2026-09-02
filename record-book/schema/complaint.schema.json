@@ -1,0 +1,797 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ayeyoty.co/record-book/schema/complaint.schema.json",
+  "title": "Complaint entry",
+  "description": "One documented injury and the disposition of the legal process, if any, that followed it. process.unpunished is derived at build time and must not appear in stored data.",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "incident",
+    "era",
+    "classification",
+    "harm_domains",
+    "conduct",
+    "finding",
+    "offense",
+    "harmed",
+    "respondents",
+    "process",
+    "restoration",
+    "concurrence",
+    "citations",
+    "verification",
+    "rights_violated"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^CL-[A-Z0-9-]+$"
+    },
+    "title": {
+      "type": "string"
+    },
+    "incident": {
+      "type": "object",
+      "required": [
+        "date",
+        "place"
+      ],
+      "properties": {
+        "date": {
+          "type": "object",
+          "required": [
+            "start",
+            "precision"
+          ],
+          "properties": {
+            "start": {
+              "type": "string"
+            },
+            "end": {
+              "type": "string"
+            },
+            "precision": {
+              "enum": [
+                "day",
+                "month",
+                "year",
+                "range",
+                "era"
+              ]
+            }
+          }
+        },
+        "place": {
+          "type": "object",
+          "properties": {
+            "locality": {
+              "type": "string"
+            },
+            "county": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            },
+            "note": {
+              "type": "string"
+            }
+          }
+        },
+        "jurisdiction": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "classification": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "harmed": {
+      "type": "object",
+      "properties": {
+        "persons": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^PR-[A-Z0-9-]+$"
+          }
+        },
+        "count": {
+          "$ref": "#/$defs/count"
+        },
+        "collective": {
+          "type": "string"
+        },
+        "interstitial": {
+          "type": "string",
+          "description": "Harm that falls between the recorded events and is counted nowhere: displacement, exile, abandoned property, suppressed testimony, severed kinship, continuing effects on people who were never present at the event."
+        },
+        "transmitted": {
+          "type": "object",
+          "required": [
+            "description",
+            "standing"
+          ],
+          "additionalProperties": false,
+          "description": "Harm that outlives the harmed generation. Distinct from interstitial harm, which falls between events within one. The standing of the claim is recorded on the claim itself, because transmission is the hardest thing in this book to establish and the easiest to overstate.",
+          "properties": {
+            "description": {
+              "type": "string"
+            },
+            "standing": {
+              "enum": [
+                "documented",
+                "argued_in_literature",
+                "contested"
+              ],
+              "description": "documented: established by record - title transferred, population displaced, wealth destroyed, measured effects. argued_in_literature: advanced in a scholarly or clinical framework, recorded as an argument with its proponents named and never converted into a finding. contested: the literature is in open disagreement."
+            },
+            "note": {
+              "type": "string",
+              "description": "Required unless standing is documented: whose argument this is, and that the book does not adopt it."
+            }
+          }
+        },
+        "children": {
+          "type": "object",
+          "required": [
+            "harmed_as_children",
+            "mechanism",
+            "carried_into_adulthood"
+          ],
+          "additionalProperties": false,
+          "description": "How the injury reached a child as a child. Recorded because every other field here assumes an adult with capacity - a claimant who can assert, a forum that can hear - and that assumption fails at the point where most of these injuries begin.",
+          "properties": {
+            "harmed_as_children": {
+              "const": true
+            },
+            "mechanism": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              }
+            },
+            "carried_into_adulthood": {
+              "type": "string",
+              "description": "Required. Where the harm is actually collected: what the child carried forward, and often which institution collected it."
+            }
+          }
+        }
+      }
+    },
+    "respondents": {
+      "type": "object",
+      "required": [
+        "described",
+        "echelon"
+      ],
+      "properties": {
+        "described": {
+          "type": "string"
+        },
+        "named_in_sources": {
+          "type": "boolean"
+        },
+        "official_capacity": {
+          "type": "boolean",
+          "description": "True where a respondent acted under colour of law. See METHODOLOGY.md section 17."
+        },
+        "named": {
+          "type": "array",
+          "description": "Whom the SOURCES accuse. The book reports the naming and its provenance; it never adds an accusation of its own, and every name requires the source that made it. No entry here is a finding of guilt.",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "role",
+              "status",
+              "source"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "role": {
+                "type": "string"
+              },
+              "status": {
+                "enum": [
+                  "confessed",
+                  "confessed_after_acquittal",
+                  "charged_acquitted",
+                  "charged_no_conviction",
+                  "convicted_vacated",
+                  "convicted",
+                  "named_in_source",
+                  "names_withheld_in_source",
+                  "never_identified"
+                ]
+              },
+              "source": {
+                "type": "string",
+                "pattern": "^SRC-[A-Z0-9-]+$",
+                "description": "The source that names them. Required: an unsourced name is an accusation by this book, which it does not make."
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "echelon": {
+          "enum": [
+            "private_holder",
+            "proxy",
+            "municipal",
+            "county",
+            "district",
+            "state",
+            "regional",
+            "federal",
+            "supreme"
+          ],
+          "description": "The rung of authority the actor operated at, lowest first: private_holder (plantation, holder, overseer), proxy (patrol, posse, mob acting for the holder or community), municipal, county, district, state, regional, federal, supreme."
+        }
+      }
+    },
+    "process": {
+      "type": "object",
+      "required": [
+        "outcome",
+        "narrative",
+        "escalation"
+      ],
+      "properties": {
+        "forum": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "outcome": {
+          "enum": [
+            "no_process",
+            "investigated_no_charge",
+            "charged_acquitted",
+            "charged_no_conviction",
+            "convictions_vacated",
+            "convicted",
+            "civil_settlement",
+            "legislative_remedy",
+            "posthumous_exoneration",
+            "unresolved"
+          ]
+        },
+        "narrative": {
+          "type": "string"
+        },
+        "escalation": {
+          "type": "array",
+          "minItems": 1,
+          "description": "The route the matter actually travelled: each rung it reached, or failed to, with the forum and what that forum did. This is the book's nearest thing to an appeal route, and it is what lets the log ask whether a matter was ever heard above the level of the actor who caused it.",
+          "items": {
+            "type": "object",
+            "required": [
+              "rung",
+              "forum",
+              "disposition"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "rung": {
+                "enum": [
+                  "private_holder",
+                  "proxy",
+                  "municipal",
+                  "county",
+                  "district",
+                  "state",
+                  "regional",
+                  "federal",
+                  "supreme"
+                ]
+              },
+              "forum": {
+                "type": "string",
+                "description": "The named body. The rung is the analytical level; this carries the precision."
+              },
+              "disposition": {
+                "enum": [
+                  "no_process",
+                  "declined",
+                  "investigated_no_charge",
+                  "no_indictment",
+                  "acquitted",
+                  "no_conviction",
+                  "convicted",
+                  "vacated",
+                  "adverse",
+                  "dismissed_jurisdiction",
+                  "dismissed_time_barred",
+                  "dismissed_no_standing",
+                  "dismissed_immunity",
+                  "settled",
+                  "legislated",
+                  "commission_reported",
+                  "apology",
+                  "exonerated"
+                ]
+              },
+              "track": {
+                "enum": [
+                  "against_perpetrators",
+                  "against_the_harmed"
+                ],
+                "default": "against_perpetrators",
+                "description": "against_the_harmed records the inverted route: the state prosecuting the people it had already injured. Kept separate because in this corpus that track routinely climbs higher than the one against the perpetrators."
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "not": {
+        "required": [
+          "unpunished"
+        ]
+      }
+    },
+    "impediments": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^IMP-[A-Z0-9-]+$"
+      }
+    },
+    "remedy": {
+      "type": "object",
+      "properties": {
+        "sought": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "granted": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "outstanding": {
+          "type": "string"
+        }
+      }
+    },
+    "verification": {
+      "enum": [
+        "documented",
+        "contested",
+        "unverified"
+      ]
+    },
+    "status_note": {
+      "type": "string"
+    },
+    "finding": {
+      "type": "object",
+      "description": "The act and the actor are independent questions, and both are independent of what a forum did. An act may be established while no actor is identified and no process ever opened; that is the ordinary case in this book, not an inconsistency.",
+      "required": [
+        "act",
+        "attribution"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "act": {
+          "enum": [
+            "established",
+            "contested",
+            "unestablished"
+          ],
+          "description": "Did the violence occur? Answered by physical evidence, death records, ruins, and contemporaneous account - not by a forum, and not by this book's opinion."
+        },
+        "attribution": {
+          "enum": [
+            "named_in_sources",
+            "described_unidentified",
+            "unattributed",
+            "contested"
+          ],
+          "description": "Who did it? A separate and usually harder question. Never inferred from the act."
+        }
+      }
+    },
+    "offense": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The offences the conduct constitutes on its face. A characterisation of conduct, never a verdict on a person: naming an offence is not naming an offender, which is what finding.attribution is for. May be empty only with offense_note."
+    },
+    "offense_note": {
+      "type": "string",
+      "description": "Required when offense is empty: why no offence is named."
+    },
+    "conduct": {
+      "type": "string",
+      "description": "What was done. Stated as conduct, not as an allegation: whether it occurred is finding.act, and whether anyone answered for it is process.outcome."
+    },
+    "restoration": {
+      "type": "object",
+      "required": [
+        "forms",
+        "reached"
+      ],
+      "additionalProperties": false,
+      "description": "What reached the harmed. The resolve this book measures is restoration to victims, not punishment of offenders, so this axis is recorded and derived separately from process.outcome and neither may stand in for the other.",
+      "properties": {
+        "forms": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "full_restitution",
+              "partial_compensation",
+              "restoration_of_status",
+              "institutional_reform",
+              "symbolic"
+            ]
+          },
+          "description": "Only full_restitution and partial_compensation put anything material into the hands of the harmed. Institutional reform reaches future persons; symbolic forms cost nothing and return nothing. Empty where nothing was restored, which requires none_note."
+        },
+        "reached": {
+          "type": "string",
+          "description": "Who actually received it, or that nobody did. A remedy enacted is not a remedy delivered."
+        },
+        "none_note": {
+          "type": "string"
+        }
+      }
+    },
+    "concurrence": {
+      "type": "object",
+      "required": [
+        "agree",
+        "diverge"
+      ],
+      "additionalProperties": false,
+      "description": "Where the independent vantages agree and where they do not. Divergence is described, never resolved silently, because the shape of the divergence is itself evidence - most often about who was counting and who was not.",
+      "properties": {
+        "agree": {
+          "type": "string"
+        },
+        "diverge": {
+          "type": "string"
+        }
+      }
+    },
+    "citations": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Sources with the vantage each observed from. An act established on a single vantage cannot be checked against anything; the validator warns on it. Wells's method was to add an independent vantage, not to argue with the coroner.",
+      "items": {
+        "type": "object",
+        "required": [
+          "source",
+          "vantage"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "source": {
+            "type": "string",
+            "pattern": "^SRC-[A-Z0-9-]+$"
+          },
+          "vantage": {
+            "enum": [
+              "victim_testimony",
+              "witness",
+              "perpetrator_record",
+              "contemporaneous_press",
+              "investigative",
+              "official_investigation",
+              "official_commission",
+              "judicial_record",
+              "litigation_record",
+              "administrative_record",
+              "statistical_series",
+              "memoir",
+              "scholarship",
+              "government_record",
+              "congressional_testimony",
+              "oral_history",
+              "material_record",
+              "clinical_research",
+              "genealogical_record",
+              "commercial_record"
+            ]
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "harm_domains": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "What was injured, as distinct from what kind of event it was and from who was injured. classification says 'lynching'; a domain says 'the body', 'the franchise', 'the line of descent'. Entries carry as many as apply. Because domains are shared across the corpus they form a web rather than a list: two entries a century apart are joined by the thing they broke.",
+      "items": {
+        "enum": [
+          "physiological",
+          "spiritual",
+          "social",
+          "political",
+          "economic",
+          "educational",
+          "interpersonal",
+          "intrapersonal"
+        ]
+      }
+    },
+    "era": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Periods the entry falls in. Periodisation lets the log show a harm as a continuity rather than a series of incidents, which is the only way the injury to children becomes visible - it is the same injury arriving in different institutions.",
+      "items": {
+        "enum": [
+          "atlantic_trade",
+          "domestic_trade",
+          "reconstruction",
+          "jim_crow",
+          "civil_rights",
+          "modern"
+        ]
+      }
+    },
+    "rights_violated": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^RT-[A-Z-]+$",
+        "not": {
+          "const": "RT-REMEDY"
+        }
+      },
+      "description": "Rights the conduct destroyed, by id into data/rights.json. RT-REMEDY is excluded: every entry violates it by construction and it is derived, never stored. A right named here characterises the conduct as offense[] does; most instruments postdate most entries and none applies retroactively."
+    },
+    "foreclosed_contribution": {
+      "type": "object",
+      "required": [
+        "basis",
+        "quantifiable",
+        "note"
+      ],
+      "additionalProperties": false,
+      "description": "The destruction of what a person or a people would have made. Records the INPUT destroyed, which is documentable, and never the output, which is not.",
+      "properties": {
+        "basis": {
+          "type": "string",
+          "description": "The documentable magnitude of what was destroyed: lives, child-years of schooling, a commercial district, lines of descent."
+        },
+        "quantifiable": {
+          "const": false,
+          "description": "Always false. An entry claiming to know what would have been produced fails the build - a counterfactual asserted as evidence is indistinguishable from fabrication."
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "verification": {
+            "const": "contested"
+          }
+        },
+        "required": [
+          "verification"
+        ]
+      },
+      "then": {
+        "required": [
+          "status_note"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "offense": {
+            "maxItems": 0
+          }
+        },
+        "required": [
+          "offense"
+        ]
+      },
+      "then": {
+        "required": [
+          "offense_note"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "finding": {
+            "properties": {
+              "act": {
+                "const": "established"
+              }
+            },
+            "required": [
+              "act"
+            ]
+          }
+        },
+        "required": [
+          "finding"
+        ]
+      },
+      "then": {
+        "properties": {
+          "verification": {
+            "not": {
+              "const": "unverified"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "verification": {
+            "const": "documented"
+          }
+        },
+        "required": [
+          "verification"
+        ]
+      },
+      "then": {
+        "properties": {
+          "citations": {
+            "minItems": 1
+          }
+        },
+        "required": [
+          "citations"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "verification": {
+            "const": "unverified"
+          }
+        },
+        "required": [
+          "verification"
+        ]
+      },
+      "then": {
+        "properties": {
+          "citations": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "restoration": {
+            "properties": {
+              "forms": {
+                "maxItems": 0
+              }
+            },
+            "required": [
+              "forms"
+            ]
+          }
+        },
+        "required": [
+          "restoration"
+        ]
+      },
+      "then": {
+        "properties": {
+          "restoration": {
+            "required": [
+              "none_note"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "harmed": {
+            "properties": {
+              "transmitted": {
+                "properties": {
+                  "standing": {
+                    "not": {
+                      "const": "documented"
+                    }
+                  }
+                },
+                "required": [
+                  "standing"
+                ]
+              }
+            },
+            "required": [
+              "transmitted"
+            ]
+          }
+        },
+        "required": [
+          "harmed"
+        ]
+      },
+      "then": {
+        "properties": {
+          "harmed": {
+            "properties": {
+              "transmitted": {
+                "required": [
+                  "note"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "count": {
+      "type": "object",
+      "properties": {
+        "documented": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "estimated_low": {
+          "type": "integer"
+        },
+        "estimated_high": {
+          "type": "integer"
+        },
+        "note": {
+          "type": "string"
+        },
+        "collective_note": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

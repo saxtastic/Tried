@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ayeyoty.co/record-book/schema/impediment.schema.json",
+  "title": "Impediment entry",
+  "description": "A mechanism by which documented injury was converted into non-cognizable claim. See METHODOLOGY.md section 16.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "kind", "authority", "mechanism", "effect", "status"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^IMP-[A-Z0-9-]+$" },
+    "name": { "type": "string" },
+    "kind": {
+      "enum": ["written", "unwritten"],
+      "description": "written: a statute, holding, or policy. unwritten: a practice that did the same work without a rule."
+    },
+    "authority": { "type": "string" },
+    "mechanism": { "type": "string" },
+    "effect": { "type": "string" },
+    "status": { "enum": ["operative", "superseded", "repudiated"] },
+    "repudiated_by": { "type": "string" },
+    "note": { "type": "string" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "status": { "enum": ["superseded", "repudiated"] } },
+        "required": ["status"]
+      },
+      "then": { "anyOf": [{ "required": ["repudiated_by"] }, { "required": ["note"] }] }
+    }
+  ]
+}

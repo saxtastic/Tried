@@ -1,0 +1,58 @@
+{
+  "id": "record-book",
+  "name": "Record Book: a complaint log of documented unpunished crimes",
+  "repo": "saxtastic/Tried",
+  "base_branch": "claude/cloudflare-ayeyoty-setup-uq8pl9",
+  "branch": "claude/complaint-log-unpunished-crimes-x9cq7k",
+  "source_revision": "claude/cloudflare-ayeyoty-setup-uq8pl9",
+  "inherits": "venue",
+  "pull_request": 4,
+  "pull_request_base": "claude/cloudflare-ayeyoty-setup-uq8pl9",
+  "owns": [
+    "public/record-book/*",
+    "record-book/*"
+  ],
+  "claims_disputed": [],
+  "ritual": false,
+  "state": "review",
+  "register": "O",
+  "note": "A documentary instrument, not a filing: no lien, no assertion of jurisdiction, no legal effect. Data-first — canonical JSON under record-book/data/, rendered to static pages, nothing written twice. Four axes are kept apart and never collapsed: act (did it occur), actor (who did it), forum (what a court did), restoration (what reached the harmed). Every figure is derived on build with its n reported; no derived count is stored. Corpus scanned: 25 complaints 1740-1981, all historical, all from published scholarship, commissions, court records and the contemporaneous press. Named respondents are recorded as whom the sources accuse, with provenance, and no living person is pronounced guilty. Nobody is conscripted into a claim by being recorded — standing defaults, and every register row carries a consent_note.",
+  "vantages_held": [
+    "documentary",
+    "engineering"
+  ],
+  "survival": {
+    "duration": "indefinite — the record ages slowly, but archive locators rot",
+    "survives_gallery": "yes — it is a document set, not an installation",
+    "irl_contingency": "Static pages, same-origin only: no font, no CDN, no analytics, no third-party request, zero runtime dependencies. The no-browser contingency is the data itself — record-book/data/*.json is plain JSON, and validate.mjs, interrogate.mjs and inquire.mjs are text-mode.",
+    "produces_artifact": false,
+    "note": "53 archive locators are verified:false and have NOT been resolved. This environment has no outbound network egress — every host returns 403 at the proxy, NARA's catalogue API included, tested rather than assumed. The same standing applies to every figure in data/precedents.json."
+  },
+  "partial_compliance": "P8 and P12 resolved: merged the base at c6ca017, took the venue's public/index.html wholesale, and re-added the Record Book as a .card--link in its Subtrees section on this branch rather than upstream. P16 resolved by this file. Watch-tier overflow-wrap added after the venue flagged that two sessions had been caught by 208px. NOT yet done: public/record-book/record-book.css still declares its own colour, font and breakpoints rather than linking /venue.css first — see awaiting_owner AO-RB-1, which is a real trade-off rather than an oversight.",
+  "merged_upstream": "c6ca017 — merged claude/cloudflare-ayeyoty-setup-uq8pl9 at 344b79b, which carries the venue, fleet, fellowships, simulator and workstation",
+  "retarget_note": "The venue asked that PR #4 be retargeted to claude/ios-macos-code-repurpose-ofm9ks so its diff would not show the venue's work as this project's. Checked rather than assumed: the diff against the current base is 20 record-book files, 12 public/record-book files, package.json, .gitignore, and public/index.html — the last touched only to add this project's own Subtrees card, which is what P12 asks for. No venue work appears in it, so the retarget was not made. If the venue still wants it, say so and it will be done.",
+  "_owner_note": "This file is owned by the project it describes. The venue assembles it and never edits another project's copy; a sibling edits only its own.",
+  "awaiting_owner": [
+    {
+      "id": "AO-RB-1",
+      "question": "Should record-book.css link /venue.css first and drop its own palette?",
+      "detail": "The venue's subtree convention says yes, with public/fleet/fleet.css as the worked example. Not done, and flagged rather than silently skipped, because the record book's ramp was verified computationally: a sequential single-hue scale, monotonic in OKLCH lightness in both light and dark, every step's ink at >=4.5 text contrast — the dark step-4 measured 4.11 and was darkened until it cleared at 5.00. Adopting the venue palette wholesale would discard that verification, and re-verifying against venue.css is the actual task. Small, but it is a design decision and not mine to make unilaterally.",
+      "asked_at": "2026-09-02",
+      "blocking": false
+    },
+    {
+      "id": "AO-RB-2",
+      "question": "Does this material go on ayeyoty.co?",
+      "detail": "Raised by the venue session and recorded here rather than assumed. A merge is not the same thing as the owner having chosen to publish. Nothing in the work depends on the answer; only where it is served.",
+      "asked_at": "2026-08-30",
+      "blocking": false
+    },
+    {
+      "id": "AO-RB-3",
+      "question": "Resolve the archive locators, and the precedent figures, against sources.",
+      "detail": "53 archive rows and every figure in data/precedents.json are unresolved because this environment has no egress. The standing task is stated in the README and the entries carry verified:false rather than an unearned locator. This is the first thing to do in an environment that can reach the network.",
+      "asked_at": "2026-08-30",
+      "blocking": false
+    }
+  ]
+}

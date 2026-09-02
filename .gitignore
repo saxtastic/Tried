@@ -2,3 +2,6 @@ node_modules/
 .wrangler/
 .dev.vars
 .env
+
+# record-book working corpus (fetched, not committed)
+record-book/corpus/

@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ayeyoty.co/record-book/schema/person.schema.json",
+  "title": "Register entry",
+  "description": "A person, or an explicitly labelled count where sources preserve no individuation. identity_status and standing are independent: recording a person does not make them a claimant. See METHODOLOGY.md section 15.",
+  "type": "object",
+  "required": ["id", "name", "identity_status", "standing", "consent_note"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^PR-[A-Z0-9-]+$" },
+    "name": {
+      "type": "object",
+      "required": ["display"],
+      "properties": {
+        "display": { "type": "string" },
+        "given": { "type": "string" },
+        "family": { "type": "string" }
+      }
+    },
+    "identity_status": {
+      "enum": ["named", "name_unrecorded", "collectively_recorded"],
+      "description": "named: the name survives. name_unrecorded: a distinct individual, attested but unnamed, who gets their own row rather than being folded into a number. collectively_recorded: sources preserve only a count."
+    },
+    "standing": {
+      "enum": ["claimant", "decedent_of_record", "collective"],
+      "description": "claimant is entered only on documented assertion by a living person or representative. Nobody is conscripted into a claim by being recorded."
+    },
+    "life": {
+      "type": "object",
+      "properties": { "born": { "type": "string" }, "died": { "type": "string" } }
+    },
+    "place": { "type": "string" },
+    "role": { "type": "string" },
+    "harm": { "type": "string" },
+    "attestation": {
+      "type": "string",
+      "description": "Required for name_unrecorded rows: what establishes that this person existed."
+    },
+    "count": {
+      "type": "object",
+      "required": ["basis"],
+      "description": "Permitted only on collectively_recorded rows. A count must say that it is a count.",
+      "properties": {
+        "documented": { "type": ["integer", "null"] },
+        "estimated_low": { "type": "integer" },
+        "estimated_high": { "type": "integer" },
+        "basis": { "type": "string" }
+      }
+    },
+    "voice": {
+      "type": "object",
+      "required": ["citation"],
+      "description": "Quotation from a document. The book never composes speech for the dead; absence of this field is part of the record.",
+      "properties": {
+        "words": { "type": "string" },
+        "source": { "type": ["string", "null"], "pattern": "^SRC-[A-Z0-9-]+$" },
+        "citation": { "type": "string" }
+      }
+    },
+    "complaints": { "type": "array", "items": { "type": "string", "pattern": "^CL-[A-Z0-9-]+$" } },
+    "sources": { "type": "array", "items": { "type": "string", "pattern": "^SRC-[A-Z0-9-]+$" } },
+    "consent_note": { "type": "string" },
+    "note": { "type": "string" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "identity_status": { "const": "collectively_recorded" } }, "required": ["identity_status"] },
+      "then": { "required": ["count"] },
+      "else": { "not": { "required": ["count"] } }
+    },
+    {
+      "if": { "properties": { "identity_status": { "const": "name_unrecorded" } }, "required": ["identity_status"] },
+      "then": { "required": ["attestation"] }
+    }
+  ]
+}
