@@ -232,7 +232,7 @@ renders it. Two findings it surfaced, both computed rather than written:
   somewhere. Five pairs meet in exactly one entry, and it is the same entry every
   time — chattel enslavement, which carries all eight alone. Remove it and the web
   comes apart at five joints.
-- **`educational` appears in 2 of 18 entries.** A gap in the corpus, not in the
+- **`educational` appears in 4 of 25 entries.** A gap in the corpus, not in the
   history. The validator reports thinly covered domains on every run, and the
   honest response is to write the missing entries, not to broaden the tagging on
   existing ones until the number improves.
@@ -288,6 +288,12 @@ npm run record-book:build      # validate, then render public/record-book/
 npm run record-book:fetch      # pull fetchable public-domain texts
 npm run record-book:fetch -- --list    # what is fetchable, and under what rights
 npm run record-book:fetch -- --check   # resolve locators without downloading
+npm run record-book:interrogate -- --gaps    # ranked research questions per entry
+npm run record-book:inquire                  # aggregation, categorisation, pattern
+                                             # matching, trend, and the feasibility test
+npm run record-book:inquire -- --audit       # contested words the lexicon has not linked
+npm run record-book:inquire -- --feasibility # the principle-not-capacity computation
+npm run record-book:inquire -- --json
 ```
 
 The build is deterministic and derived entirely from `data/`. Do not hand-edit
@@ -297,13 +303,18 @@ anything under `public/record-book/`; it is overwritten.
 
 25 complaint entries, 52 register rows, 21 rights, 9 statutes, 6 organisations, 10 impediments, 53 archives.
 
-In all 18 the act is **established** on the evidence. In 3 no participant is
-identified in any source. In all 18 no perpetrator was ever convicted. 7 name a
+> **These figures are a snapshot and drift.** The authoritative counts are printed
+> by `npm run record-book:validate` on every run, and this block has been wrong
+> before — it sat at 18 entries while the corpus held 25. If it disagrees with the
+> validator, the validator is right and this paragraph is stale.
+
+In all 25 the act is **established** on the evidence. In 3 no participant is
+identified in any source. In 24 no perpetrator was ever convicted. 11 name a
 respondent the sources accuse, each with its provenance.
 
-On the axis that matters: **3 of 18 produced anything material for the harmed. 4
-produced nothing at all. None produced full restitution.** 6 record harm that
-outlives the harmed generation — 5 documented, 1 recorded as argued and not
+On the axis that matters: **7 of 25 produced anything material for the harmed. 6
+produced nothing at all. None produced full restitution.** 10 record harm that
+outlives the harmed generation — 9 documented, 1 recorded as argued and not
 adopted. Those numbers are the
 shape of the corpus and the reason the axes are kept apart — the established act
 is not diminished by the absent conviction, and neither is answered by an
@@ -313,10 +324,33 @@ Every complaint being unpunished is a finding about the corpus, not a selection
 rule — an entry with a conviction is in scope and would render with a different
 flag.
 
-Coverage runs from *Dred Scott* (1857) to the Sovereignty Commission's
-prosecution of Clyde Kennard (1960), with two entries — chattel enslavement and
+Coverage runs from the anti-literacy statutes (1740) to the killing of Michael
+Donald (1981), with two entries — chattel enslavement and
 the NAACP's 1889–1918 compilation — carried as explicitly labelled aggregates
 rather than allowed to masquerade as individuated records.
+
+## Language, precedent, and inquiry
+
+`data/lexicon.json` records words whose definition did operational work — where
+choosing one term over an available alternative changed what could be claimed,
+paid, barred or recorded. Three things are kept apart: what a word **denotes**,
+what a speaker **did** by deploying it (which lives in the contrast set, not the
+definition), and how that is **confirmed** — which is never from the word itself
+but from what the word licensed. Greenwood was a "riot" in every official record
+until 2001, and fire policies carried riot-exclusion clauses. The validator
+rejects a term with one sense, a reading with nothing that could defeat it, and a
+container term that does not state its own cost.
+
+`data/precedents.json` tests one claim: **that reparation is refused as a matter
+of principle, not prevented as a matter of capacity.** It is computed on every
+build from the `machinery` field and is built so it can fail. It also keeps
+`beneficiary` apart from `class`, and errors if `beneficiary` and
+`reached_the_harmed` disagree — because the two earliest programmes on file paid
+the holders of title, and a record that let those read as reparation to the
+harmed would be false in the way this book exists to prevent.
+
+Figures on that file are approximate and **no locator has been resolved** in this
+environment. They carry the standing of any other unverified locator here.
 
 ## Adding an entry
 

@@ -255,5 +255,17 @@ blockquote cite {
   letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
 .table-scroll { overflow-x: auto; }
 
+.senses, .ledger { border-collapse: collapse; width: 100%; margin: .8rem 0 1.1rem;
+  font-size: .88rem; }
+.senses th, .senses td, .ledger th, .ledger td { text-align: left; vertical-align: top;
+  padding: .5rem .7rem; border-bottom: 1px solid var(--rule); }
+.senses thead th, .ledger thead th { font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: .7rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink-soft); white-space: nowrap; }
+.senses tbody th, .ledger tbody th { font-weight: 600; white-space: nowrap; }
+.ledger .to-holders { color: var(--warn); font-weight: 600; }
+.defeat { border-left: 3px solid var(--warn); padding-left: .7rem; }
+.muted { color: var(--ink-soft); font-size: .85em; }
+
 footer { margin: 3rem auto 4rem; padding-top: 1.2rem; border-top: 1px solid var(--rule);
   color: var(--ink-soft); font-size: .82rem; }

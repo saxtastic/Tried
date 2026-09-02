@@ -93,6 +93,84 @@ export const LEG_STATUS = {
   asserted_not_verified: 'Recorded as an assertion. No source on file. Carries no finding whatever.',
 };
 
+// LANGUAGE. A word earns a lexicon entry only if choosing it over an available
+// alternative changed what could be claimed, paid, barred or recorded. Three
+// things are kept apart and must never be collapsed: what the word DENOTES,
+// what a speaker DID by deploying it, and HOW that deployment is confirmed.
+// Intent does not live in the definition - it lives in the contrast set, the
+// word that was available and not used. And it is never confirmed from the word
+// itself: it is confirmed from what the word licensed.
+export const CONFIRMATION = {
+  contrast_set: 'Which available alternative was not used.',
+  operational_consequence: 'What the choice licensed, paid, barred or voided. The strongest method, because it is a fact about the world rather than about the text.',
+  speaker_gloss: 'The speaker defined the term themselves.',
+  contemporaneous_usage: 'How the word was used by others at that moment, not now.',
+  translation_across_vantages: 'The same event named differently from different vantages. Concurrence, applied to words.',
+  later_revision: 'An institution changed the word later, which discloses what the old one was doing.',
+};
+// REGISTERS are modes of address, not sentiments. A term can appear in several.
+export const REGISTERS = [
+  'juridical', 'administrative', 'clinical', 'press', 'testimonial',
+  'civil', 'sovereign', 'incendiary', 'inspirational',
+];
+
+// PRECEDENT. The feasibility question turns on one field: whether an enacted
+// programme needed an instrument that did not already exist.
+export const MACHINERY = {
+  existing: 'Reused ordinary appropriation, claims, settlement or conveyance machinery.',
+  adapted: 'Standing forms of instrument, with an administration built to run them.',
+  novel: 'Required an instrument with no precedent.',
+  not_reached: 'Never enacted, so no machinery was tested.',
+};
+export const BENEFICIARY = {
+  the_harmed: 'Payment ran to the injured or their identified descendants.',
+  holders_of_title: 'Payment ran to the owners of the people held.',
+  none: 'Recommended and not appropriated.',
+};
+
+// Derived, never stored: the feasibility finding, recomputed on every build.
+// It is built so it can fail - if enacted programmes needed novel machinery,
+// the claim that capacity is not the constraint is false and this reports it.
+export function feasibility(precedents) {
+  const enacted = precedents.filter((p) => p.machinery !== 'not_reached');
+  const novel = enacted.filter((p) => p.machinery === 'novel');
+  const governmental = enacted.filter((p) => p.jurisdiction !== 'Institutional, not governmental');
+  const toHarmed = enacted.filter((p) => p.beneficiary === 'the_harmed');
+  const toHolders = enacted.filter((p) => p.beneficiary === 'holders_of_title');
+  const declined = precedents.filter((p) => p.machinery === 'not_reached');
+  return {
+    n: precedents.length,
+    enacted: enacted.length,
+    governmental: governmental.length,
+    novel: novel.length,
+    novelIds: novel.map((p) => p.id),
+    toHarmed: toHarmed.length,
+    toHolders: toHolders.length,
+    toHoldersIds: toHolders.map((p) => p.id),
+    declined: declined.map((p) => p.id),
+    // The claim under test, stated so that it reports false rather than silently holding.
+    capacityIsNotTheConstraint: enacted.length > 0 && novel.length === 0,
+  };
+}
+
+// Pattern matching across files: where does a complaint's own prose use a
+// contested term without the lexicon declaring that it bears on that entry?
+// Each hit is a question for a researcher, never a finding.
+export function lexicalAudit(complaints, lexicon) {
+  const hits = [];
+  for (const t of lexicon) {
+    const declared = new Set(t.bears_on);
+    const rx = new RegExp(`\\b${t.term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\w*`, 'i');
+    for (const c of complaints) {
+      if (declared.has(c.id)) continue;
+      const prose = [c.title, c.conduct, c.process?.narrative, c.status_note]
+        .filter(Boolean).join(' ');
+      if (rx.test(prose)) hits.push({ term: t.id, word: t.term, complaint: c.id });
+    }
+  }
+  return hits;
+}
+
 // ERAS, in order. Periodisation lets the log show a harm as a continuity rather
 // than a series of incidents - which is the only way the injury to children is
 // visible, because it is the same injury arriving in different institutions.
@@ -325,6 +403,8 @@ export function validate() {
   const persons = read('register.json').persons;
   const impediments = read('impediments.json').impediments;
   const archives = read('archives.json').archives;
+  const lexicon = read('lexicon.json').lexicon;
+  const precedents = read('precedents.json').precedents;
 
   const errors = [];
   const warnings = [];
@@ -775,8 +855,95 @@ export function validate() {
     if (!usedImpediments.has(i.id)) warn(`impediments/${i.id}`, 'not invoked by any complaint');
   }
 
+  // LEXICON. The rules here enforce the three-part separation. A word with one
+  // sense is not contested and does not belong; a reading with nothing that
+  // could defeat it is an assertion; and a container term must state its cost.
+  const allIds = new Set([...complaintIds, ...rightIds, ...impedimentIds, ...orgIds,
+    ...legislation.map((l) => l.id)]);
+  const lexIds = new Set();
+  for (const t of lexicon) {
+    const at = `lexicon/${t.id}`;
+    if (lexIds.has(t.id)) err(at, 'duplicate id');
+    lexIds.add(t.id);
+    if (!t.term) err(at, 'term is required');
+    if (!t.question) err(at, 'question must state what turns on the word');
+    if ((t.senses ?? []).length < 2) {
+      err(at, 'a term needs at least two senses; a word with one sense is not ' +
+              'contested and does not do the work this file records');
+    }
+    for (const [n, sn] of (t.senses ?? []).entries()) {
+      const sat = `${at}/senses[${n}]`;
+      if (!sn.gloss) err(sat, 'gloss is required');
+      if (!sn.deployed_by) err(sat, 'deployed_by is required; a sense is deployed by someone');
+      if (!sn.does_work) {
+        err(sat, 'does_work is required; if the sense accomplishes nothing it is ' +
+                 'a synonym, not a sense');
+      }
+      for (const e of sn.era ?? []) {
+        if (!ERAS.includes(e)) err(sat, `era ${e} is not on the list`);
+      }
+    }
+    if (!t.contested_axis) err(at, 'contested_axis must say what the disagreement is actually about');
+    const cf = t.confirmation;
+    if (!cf) err(at, 'confirmation is required');
+    else {
+      for (const m of cf.method ?? []) {
+        if (!CONFIRMATION[m]) err(at, `confirmation.method ${m} is not a recognised method`);
+      }
+      if (!(cf.method ?? []).length) err(at, 'confirmation.method must name how the reading is checked');
+      if (!cf.evidence) err(at, 'confirmation.evidence must say what was actually checked');
+      if (!cf.defeasible_by) {
+        err(at, 'confirmation.defeasible_by is required: state what would show this ' +
+                'reading is wrong, or the entry is an assertion about a word');
+      }
+    }
+    for (const r of t.registers ?? []) {
+      if (!REGISTERS.includes(r)) err(at, `register ${r} is not on the list`);
+    }
+    if (t.container) {
+      if (!t.container.buys || !t.container.hides) {
+        err(at, 'a container term must state both what the aggregation buys and what ' +
+                'it hides; an aggregation with no cost has not been examined');
+      }
+      if (!t.container.cost) err(at, 'container.cost must state the price in precision');
+    }
+    ref(at, 'bears_on', t.bears_on, allIds, 'record');
+    if (!(t.bears_on ?? []).length) {
+      warn(at, 'bears on no entry; a word that changes no reading in the corpus is decoration');
+    }
+  }
+
+  // PRECEDENT. beneficiary is required and separate from class, because the two
+  // largest programmes on file paid the holders of title rather than the held.
+  const preIds = new Set();
+  for (const pr of precedents) {
+    const at = `precedents/${pr.id}`;
+    if (preIds.has(pr.id)) err(at, 'duplicate id');
+    preIds.add(pr.id);
+    if (!MACHINERY[pr.machinery]) err(at, `machinery ${pr.machinery} is not on the list`);
+    if (!pr.machinery_note) {
+      err(at, 'machinery_note is required; the feasibility finding rests on this field ' +
+              'and it must be readable, not just codeable');
+    }
+    if (!BENEFICIARY[pr.beneficiary]) err(at, `beneficiary ${pr.beneficiary} is not on the list`);
+    if (typeof pr.reached_the_harmed !== 'boolean') {
+      err(at, 'reached_the_harmed must be stated; an enacted programme is not ' +
+              'evidence of restoration unless it reached someone');
+    }
+    if ((pr.beneficiary === 'the_harmed') !== (pr.reached_the_harmed === true)) {
+      err(at, 'beneficiary and reached_the_harmed disagree; a payment to holders of ' +
+              'title did not reach the harmed and the record must not read as though it did');
+    }
+    if (pr.machinery === 'not_reached' && pr.beneficiary !== 'none') {
+      err(at, 'a programme that was never enacted has no beneficiary');
+    }
+    if (!pr.figures_precision) err(at, 'figures_precision must be stated');
+    ref(at, 'complaints', pr.complaints, complaintIds, 'complaint');
+  }
+
+
   return { complaints, persons, organizations, rights, legislation, impediments, archives,
-    errors, warnings };
+    lexicon, precedents, errors, warnings };
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {

@@ -5,7 +5,7 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { validate, isUnpunished, isMateriallyRestored, OUTCOMES, ACT, ATTRIBUTION,
+import { feasibility, CONFIRMATION, validate, isUnpunished, isMateriallyRestored, OUTCOMES, ACT, ATTRIBUTION,
          RESTORATION, VANTAGE, TRANSMISSION, DOMAINS, harmWeb,
          ECHELON, DISPOSITION, rungOf, routes, routeFinding,
          ERAS, childrenAcrossEras } from './validate.mjs';
@@ -24,6 +24,8 @@ const NAV = [
   ['children.html', 'The child'],
   ['rights.html', 'Rights'],
   ['legislation.html', 'Legislation'],
+  ['lexicon.html', 'Language'],
+  ['precedent.html', 'Precedent'],
   ['register.html', 'Register'],
   ['impediments.html', 'Impediments'],
   ['archives.html', 'Archives'],
@@ -802,6 +804,150 @@ function renderLegislation({ legislation, complaints }) {
 
 // ------------------------------------------------------------------ archives
 
+function renderLexicon({ lexicon, complaints }) {
+  const senses = lexicon.reduce((n, t) => n + t.senses.length, 0);
+  const containers = lexicon.filter((t) => t.container);
+  const opConfirmed = lexicon.filter(
+    (t) => (t.confirmation.method ?? []).includes('operational_consequence'));
+
+  const body = `
+<section class="note">
+  <p><strong>Three things are kept apart here, and collapsing them is how a record gets
+  falsified.</strong> What a word <em>denotes</em> is dictionary work. What a speaker
+  <em>did</em> by choosing it lives in the contrast set &mdash; the word that was available
+  and not used. And the deployment is never confirmed from the word itself: it is confirmed
+  from <strong>what the word licensed</strong>. Greenwood was a <q>riot</q> in every official
+  record until 2001, and fire policies of the period carried riot-exclusion clauses. The word
+  was not a description of the event. It was the instrument that voided the claims.</p>
+  <p>${lexicon.length} terms carry ${senses} distinct senses here
+  (${(senses / lexicon.length).toFixed(1)} each). A term earns an entry only if choosing it
+  over an available alternative changed what could be claimed, paid, barred or recorded, and
+  the validator rejects any term with fewer than two senses, any reading with nothing that
+  could defeat it, and any container term that does not state its own cost.
+  ${opConfirmed.length} of ${lexicon.length} are confirmed by consequence rather than by
+  reading.</p>
+</section>
+
+${containers.length ? `<section class="note note--warn">
+  <h2>Container terms</h2>
+  <p>An aggregating word buys a count and charges for it. ${containers.map((t) =>
+    `<strong>${esc(t.term)}</strong> aggregates ${esc(t.container.aggregates)}
+     It buys: ${esc(t.container.buys)} It hides: ${esc(t.container.hides)}
+     <em>Cost:</em> ${esc(t.container.cost)}`).join('</p><p>')}</p>
+</section>` : ''}
+
+${lexicon.map((t) => `
+<article class="entry" id="${esc(t.id)}">
+  <h2>${esc(t.term)}</h2>
+  <p class="lede">${esc(t.question)}</p>
+  <div class="table-scroll"><table class="senses">
+    <thead><tr><th>Sense</th><th>Gloss</th><th>Deployed by</th><th>What it does</th></tr></thead>
+    <tbody>${t.senses.map((sn) => `
+      <tr><th scope="row">${esc(sn.sense)}</th><td>${esc(sn.gloss)}</td>
+      <td>${esc(sn.deployed_by)}</td><td>${esc(sn.does_work)}</td></tr>`).join('')}
+    </tbody>
+  </table></div>
+  <dl>
+    <dt>Contested axis</dt><dd>${esc(t.contested_axis)}</dd>
+    <dt>Confirmed by</dt><dd>${t.confirmation.method.map((m) =>
+      `<strong>${esc(m.replace(/_/g, ' '))}</strong> &mdash; ${esc(CONFIRMATION[m])}`).join('<br>')}</dd>
+    <dt>Evidence</dt><dd>${esc(t.confirmation.evidence)}</dd>
+    <dt>What would show this reading is wrong</dt>
+    <dd class="defeat">${esc(t.confirmation.defeasible_by)}</dd>
+    <dt>Bears on</dt><dd>${t.bears_on.map((b) => `<code>${esc(b)}</code>`).join(' ') || '&mdash;'}</dd>
+    <dt>Registers</dt><dd>${(t.registers ?? []).map(esc).join(', ') || '&mdash;'}</dd>
+  </dl>
+</article>`).join('')}`;
+
+  return page('lexicon.html', 'Language',
+    'Words whose definition did operational work &mdash; what each one meant, what deploying ' +
+    'it accomplished, and how that is confirmed from consequence rather than from the text.',
+    body);
+}
+
+function renderPrecedent({ precedents }) {
+  const f = feasibility(precedents);
+  const enacted = precedents.filter((p) => p.machinery !== 'not_reached');
+  const declined = precedents.filter((p) => p.machinery === 'not_reached');
+
+  const body = `
+<section class="note">
+  <h2>The claim under test</h2>
+  <p><strong>That reparation is refused as a matter of principle, not prevented as a matter of
+  capacity.</strong> This page does not argue it. It computes it, on every build, from the
+  programmes below, and it is built so it can fail: if any enacted programme had required an
+  instrument that did not already exist, the line beneath would say so.</p>
+  <p class="finding">${f.enacted} of ${f.n} programmes on file were enacted and executed
+  (${f.governmental} governmental). <strong>${f.novel}</strong> required machinery that did not
+  already exist.${f.capacityIsNotTheConstraint
+    ? ' Every one reused ordinary appropriation, claims, settlement or conveyance machinery &mdash; ' +
+      'the same instruments a legislature uses on any ordinary day. On this evidence the residual ' +
+      'obstacle is a decision.'
+    : ' The claim is falsified on the present data.'}</p>
+  <p>This is a finding about ${f.enacted} programmes, not a prediction about the next one. Scale,
+  class definition and political cost are real questions and are not answered here. What is
+  answered is narrower and load-bearing: <em>the machinery exists, and has been used.</em></p>
+</section>
+
+<section class="note note--warn">
+  <h2>Who was paid</h2>
+  <p>${f.toHarmed} of ${f.enacted} enacted programmes ran to the harmed.
+  <strong>${f.toHolders}</strong> ran to the holders of title:
+  ${f.toHoldersIds.map((i) => `<code>${esc(i)}</code>`).join(', ')}.</p>
+  <p>Compensation for slavery has already been legislated, appropriated and delivered in the
+  Anglo-American tradition &mdash; to the party holding title, within a year of enactment, on
+  both sides of the Atlantic. The identification problem, the valuation problem and the
+  administration problem were all solved. They were solved for the owners.</p>
+</section>
+
+<div class="table-scroll"><table class="ledger">
+  <thead><tr><th>Programme</th><th>Enacted</th><th>Beneficiary</th><th>Machinery</th>
+  <th>To first payment</th></tr></thead>
+  <tbody>${enacted.map((p) => `
+    <tr><th scope="row"><a href="#${esc(p.id)}">${esc(p.name)}</a></th>
+    <td>${esc(p.enacted)}</td>
+    <td class="${p.beneficiary === 'holders_of_title' ? 'to-holders' : ''}">${esc(p.beneficiary.replace(/_/g, ' '))}</td>
+    <td>${esc(p.machinery)}</td><td>${esc(p.enacted_to_first_payment)}</td></tr>`).join('')}
+  </tbody>
+</table></div>
+
+${declined.map((p) => `
+<section class="note note--warn" id="${esc(p.id)}">
+  <h2>The control: ${esc(p.name)}</h2>
+  <p>${esc(p.notes)}</p>
+  <p>${esc(p.machinery_note)}</p>
+</section>`).join('')}
+
+${enacted.map((p) => `
+<article class="entry" id="${esc(p.id)}">
+  <h2>${esc(p.name)}</h2>
+  <p class="lede">${esc(p.harm)}</p>
+  <dl>
+    <dt>Jurisdiction</dt><dd>${esc(p.jurisdiction)} &middot; ${esc(p.instrument)}, ${esc(p.enacted)}</dd>
+    <dt>Class</dt><dd>${esc(p.class)}</dd>
+    <dt>Beneficiary</dt><dd>${esc(p.beneficiary.replace(/_/g, ' '))} &mdash;
+      reached the harmed: <strong>${p.reached_the_harmed ? 'yes' : 'no'}</strong></dd>
+    <dt>Amount</dt><dd>${esc(p.amount)} <span class="muted">(figures ${esc(p.figures_precision)})</span></dd>
+    <dt>Delivery</dt><dd>${esc(p.delivery)}</dd>
+    <dt>Machinery</dt><dd><strong>${esc(p.machinery)}</strong> &mdash; ${esc(p.machinery_note)}</dd>
+    <dt>Enacted to first payment</dt><dd>${esc(p.enacted_to_first_payment)}</dd>
+    ${p.notes ? `<dt>Note</dt><dd>${esc(p.notes)}</dd>` : ''}
+  </dl>
+</article>`).join('')}
+
+<section class="note">
+  <p><strong>Locators are not resolved.</strong> This environment has no outbound network, so
+  no figure on this page has been checked against a source here. Amounts marked approximate are
+  approximate. Resolving them is the first task on this file, and until it is done these
+  entries carry the same standing as any other unverified locator in this book.</p>
+</section>`;
+
+  return page('precedent.html', 'Precedent',
+    'Reparative programmes that were actually enacted and executed, entered to test one claim: ' +
+    'that the obstacle is principle rather than feasibility.',
+    body);
+}
+
 function renderArchives({ archives, complaints, persons }) {
   const usedBy = (id) =>
     complaints.filter((c) => (c.sources ?? []).includes(id)).length +
@@ -1092,6 +1238,18 @@ blockquote cite {
   letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
 .table-scroll { overflow-x: auto; }
 
+.senses, .ledger { border-collapse: collapse; width: 100%; margin: .8rem 0 1.1rem;
+  font-size: .88rem; }
+.senses th, .senses td, .ledger th, .ledger td { text-align: left; vertical-align: top;
+  padding: .5rem .7rem; border-bottom: 1px solid var(--rule); }
+.senses thead th, .ledger thead th { font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: .7rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink-soft); white-space: nowrap; }
+.senses tbody th, .ledger tbody th { font-weight: 600; white-space: nowrap; }
+.ledger .to-holders { color: var(--warn); font-weight: 600; }
+.defeat { border-left: 3px solid var(--warn); padding-left: .7rem; }
+.muted { color: var(--ink-soft); font-size: .85em; }
+
 footer { margin: 3rem auto 4rem; padding-top: 1.2rem; border-top: 1px solid var(--rule);
   color: var(--ink-soft); font-size: .82rem; }
 `;
@@ -1116,6 +1274,8 @@ const files = {
   'children.html': renderChildren(data),
   'rights.html': renderRights(data),
   'legislation.html': renderLegislation(data),
+  'lexicon.html': renderLexicon(data),
+  'precedent.html': renderPrecedent(data),
   'archives.html': renderArchives(data),
   'record-book.css': CSS,
 };

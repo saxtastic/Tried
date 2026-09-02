@@ -1,0 +1,357 @@
+{
+  "$comment": "Terms whose definition does operational work in this corpus. A word earns an entry only if choosing it over an available alternative changed what could be claimed, paid, barred or recorded. Three fields are kept apart and must never be collapsed: what the word DENOTES, what a speaker DID by deploying it (which lives in the contrast set, not the definition), and HOW that deployment is confirmed (which is never the word itself - it is what the word licensed). See METHODOLOGY.md, Language as instrument.",
+  "lexicon": [
+    {
+      "id": "LEX-RIOT",
+      "term": "riot",
+      "question": "When an armed body destroys a district and the record calls it a riot, what does that word do that 'massacre' would not?",
+      "senses": [
+        {
+          "sense": "civil_disorder",
+          "gloss": "A disturbance of the peace by an assembled crowd, without a designated aggressor or victim class.",
+          "deployed_by": "Insurers, municipal authorities, state guard reports, the contemporaneous white press",
+          "does_work": "Distributes agency across everyone present, so no party is the attacker and no party is owed.",
+          "era": ["jim_crow"]
+        },
+        {
+          "sense": "organised_destruction",
+          "gloss": "A one-directional attack by an armed body on a defined population and its property.",
+          "deployed_by": "Survivors, the Black press, the 2001 Oklahoma commission",
+          "does_work": "Establishes an aggressor, and therefore a respondent and a debt.",
+          "era": ["jim_crow", "modern"]
+        }
+      ],
+      "contested_axis": "Directionality. Not whether violence occurred, but whether it had an author.",
+      "confirmation": {
+        "method": ["operational_consequence", "later_revision", "translation_across_vantages"],
+        "evidence": "Fire policies of the period carried riot-exclusion clauses. Classifying Greenwood a riot voided the insurance claims of the people whose property burned; the sole recovery on record went to a white claimant for guns taken. Oklahoma's own commission changed the word in 2001, eighty years on, which discloses what the earlier word had been doing.",
+        "defeasible_by": "Contemporaneous policies without riot-exclusion clauses, or claims paid to Black policyholders under the riot classification, would show the word was descriptive rather than operative."
+      },
+      "registers": ["administrative", "juridical", "press"],
+      "bears_on": ["CL-1921-TULSA", "CL-1919-ELAINE", "CL-1898-WILMINGTON", "IMP-INSURANCE-RIOT-CLAUSE"]
+    },
+    {
+      "id": "LEX-COMPENSATION",
+      "term": "compensation",
+      "question": "Compensation to whom? The word names a payment without naming its recipient, and in the one instance the United States enacted it for slavery, the recipient was not the enslaved.",
+      "senses": [
+        {
+          "sense": "indemnity_to_titleholder",
+          "gloss": "Payment to an owner for property lost by operation of law.",
+          "deployed_by": "Congress in 1862; Parliament in 1837",
+          "does_work": "Treats emancipation as a taking from the holder, and settles the account with him.",
+          "era": ["atlantic_trade", "domestic_trade"]
+        },
+        {
+          "sense": "indemnity_to_the_harmed",
+          "gloss": "Payment to a person for an injury done to them.",
+          "deployed_by": "Claimants, later redress statutes",
+          "does_work": "Treats the enslaved person as the injured party rather than the subject matter.",
+          "era": ["modern"]
+        }
+      ],
+      "contested_axis": "Who the injured party is. Both senses are ordinary legal English; they differ only in who is standing in the position of the wronged.",
+      "confirmation": {
+        "method": ["operational_consequence", "contrast_set"],
+        "evidence": "The District of Columbia Compensated Emancipation Act of 16 April 1862 appropriated funds to slaveholders on petition, adjudicated by a board of commissioners, and separately offered a sum to any freed person who agreed to emigrate. Payment flowed to the holder; the freed person was offered money to leave. The contrast set is exact: Congress had the word, the mechanism and the appropriation, and directed all three at title.",
+        "defeasible_by": "An 1862-64 federal appropriation paid directly to formerly enslaved people as indemnity for their enslavement would defeat this reading. None is on file."
+      },
+      "registers": ["juridical", "administrative"],
+      "bears_on": ["RT-REPARATION", "LEG-PUNISHMENT-CLAUSE"]
+    },
+    {
+      "id": "LEX-BLACK",
+      "term": "Black",
+      "question": "The corpus counts a harm across two hundred and thirty years using one word, while the instruments that recorded the harm changed what the word picked out almost every decade.",
+      "senses": [
+        {
+          "sense": "property_class",
+          "gloss": "In slave schedules, a countable holding recorded by age, sex and colour under an owner's name - frequently without a personal name at all.",
+          "deployed_by": "Census enumerators 1850 and 1860; bills of sale; coastwise manifests",
+          "does_work": "Establishes the transaction while withholding the person, which is why the ledger proves the trafficking and cannot supply the identity.",
+          "era": ["atlantic_trade", "domestic_trade"]
+        },
+        {
+          "sense": "graded_admixture",
+          "gloss": "Black, mulatto, quadroon, octoroon - the 1890 schedule's four-way division by fraction of ancestry.",
+          "deployed_by": "The 1890 census",
+          "does_work": "Makes the category a measurement of descent, administered by an enumerator's judgement rather than a subject's statement.",
+          "era": ["reconstruction", "jim_crow"]
+        },
+        {
+          "sense": "hypodescent",
+          "gloss": "Any African ancestry, by statute. Virginia's Racial Integrity Act of 1924 is the type case.",
+          "deployed_by": "State legislatures and registrars",
+          "does_work": "Converts a spectrum into a binary for the purpose of marriage, school and franchise law, and makes the boundary a criminal matter.",
+          "era": ["jim_crow"]
+        },
+        {
+          "sense": "self_identification",
+          "gloss": "A category the person selects; from 2000, selectable in combination.",
+          "deployed_by": "The census from 1960 onward",
+          "does_work": "Returns the classification to the classified, and thereby breaks comparability with every prior series.",
+          "era": ["civil_rights", "modern"]
+        }
+      ],
+      "contested_axis": "Who holds the pen. Every sense change is a change in who was authorised to assign the category, and the category was assigned long before it was claimed.",
+      "confirmation": {
+        "method": ["contemporaneous_usage", "later_revision", "operational_consequence"],
+        "evidence": "The federal schedules are dated and public. The categories are not stable across them, and the instruments state who did the assigning: enumerator judgement through 1950, self-report from 1960, combination from 2000.",
+        "defeasible_by": "A single federal instrument applying one stable definition of the class from 1790 to the present would defeat the claim that the container is administratively constructed."
+      },
+      "container": {
+        "aggregates": "Persons subjected to a classification, across instruments that did not define it the same way.",
+        "buys": "A harm becomes countable across eras, so a continuity can be shown rather than a series of unrelated incidents.",
+        "hides": "Which class each instrument actually named, and the fact that the classification was imposed by the same authorities the record accuses.",
+        "cost": "Precision at the level of the individual claimant. A count taken from the 1890 schedule and a count taken from the 2020 schedule are not counts of the same defined class, and any series that crosses that boundary must say so."
+      },
+      "registers": ["administrative", "juridical", "testimonial"],
+      "bears_on": ["CL-1860-CLOTILDA", "CL-1841-NORTHUP", "LEG-DISFRANCHISEMENT"]
+    },
+    {
+      "id": "LEX-SOVEREIGN",
+      "term": "sovereign",
+      "question": "The word claims a kind of authority. Which kind, and against whom, decides whether an instrument is evidence or is void on its face.",
+      "senses": [
+        {
+          "sense": "state_attribute",
+          "gloss": "The supreme authority of a polity, from which jurisdiction and immunity both descend.",
+          "deployed_by": "Courts, legislatures",
+          "does_work": "Supplies the ladder this book calls echelon, and supplies sovereign immunity, which is an impediment in the corpus.",
+          "era": ["atlantic_trade", "domestic_trade", "reconstruction", "jim_crow", "civil_rights", "modern"]
+        },
+        {
+          "sense": "personhood",
+          "gloss": "The condition of belonging to oneself - the interest that chattel enslavement destroys at its root.",
+          "deployed_by": "Narratives, abolitionist argument, the human-rights instruments in rights.json",
+          "does_work": "Names the injury at the level where it happened, before any question of forum.",
+          "era": ["atlantic_trade", "domestic_trade", "modern"]
+        },
+        {
+          "sense": "pseudo_juridical_claim",
+          "gloss": "An asserted individual exemption from the jurisdiction of courts and statutes, advanced through filings styled as instruments.",
+          "deployed_by": "Litigants in the sovereign-citizen tradition",
+          "does_work": "Reliably produces dismissal, sanctions, and the exclusion of the underlying grievance from any hearing on its merits.",
+          "era": ["modern"]
+        }
+      ],
+      "contested_axis": "Whether the word describes a relation the speaker has to themselves, or a relation they assert against a court. The first is the injury; the third forecloses the remedy.",
+      "confirmation": {
+        "method": ["operational_consequence", "contrast_set"],
+        "evidence": "The third sense is confirmed by what it produces on a docket: dismissal on the pleadings and, in a run of cases, sanction. That outcome is the reason this book is a documentary instrument and asserts no jurisdiction of its own - a record that overstates its authority is excluded from the proceedings it was built to supply.",
+        "defeasible_by": "A merits ruling for a claimant proceeding on the third sense would show it is not self-defeating. The book has not located one."
+      },
+      "registers": ["juridical", "sovereign", "incendiary"],
+      "bears_on": ["RT-PERSONHOOD", "IMP-IMMUNITY"]
+    },
+    {
+      "id": "LEX-JUSTICE",
+      "term": "justice",
+      "question": "Four distinct programmes travel under one word, and the corpus shows they can be satisfied separately - one delivered while the other three are refused.",
+      "senses": [
+        {
+          "sense": "retributive",
+          "gloss": "The offender is punished.",
+          "deployed_by": "Prosecutors, the criminal forum",
+          "does_work": "Measured here by process.outcome. Satisfied in one entry in the corpus; the count is derived on every build and never stored.",
+          "era": ["jim_crow", "civil_rights", "modern"]
+        },
+        {
+          "sense": "corrective",
+          "gloss": "The harmed are made whole.",
+          "deployed_by": "Claimants, claim bills, civil settlement",
+          "does_work": "Measured by restoration.forms. Satisfied materially in a minority of entries and fully in none; the counts are derived on every build and never stored.",
+          "era": ["modern"]
+        },
+        {
+          "sense": "procedural",
+          "gloss": "A regular forum heard the matter under regular rules.",
+          "deployed_by": "Courts describing their own sufficiency",
+          "does_work": "Can be fully satisfied while the other three are not, which is the ordinary case in this corpus.",
+          "era": ["reconstruction", "jim_crow", "civil_rights", "modern"]
+        },
+        {
+          "sense": "distributive",
+          "gloss": "The standing arrangement of holdings is itself corrected.",
+          "deployed_by": "Reparative legislation, commissions of inquiry",
+          "does_work": "The only sense under which a transmitted harm is reachable, and the sense no entry records as satisfied.",
+          "era": ["modern"]
+        }
+      ],
+      "contested_axis": "Which of the four a speaker means when they say the matter was resolved. A forum reporting justice done is ordinarily reporting the procedural sense.",
+      "confirmation": {
+        "method": ["operational_consequence", "speaker_gloss"],
+        "evidence": "The four axes this book already keeps apart - act, actor, forum, restoration - are these senses made into fields, so the sense a source intends can be read off which axis it speaks to.",
+        "defeasible_by": "An entry where a single finding satisfied all four senses at once would show the distinction is not load-bearing. None is on file."
+      },
+      "registers": ["juridical", "inspirational", "civil"],
+      "bears_on": ["RT-REMEDY", "CL-1981-DONALD", "CL-1923-ROSEWOOD"]
+    },
+    {
+      "id": "LEX-CIVIL",
+      "term": "civil",
+      "question": "The same four letters carry a forum, a status and a demand on the injured, and the third is routinely made to sound like the second.",
+      "senses": [
+        {
+          "sense": "non_criminal_forum",
+          "gloss": "The forum where a private party sues for damages, on the lower standard.",
+          "deployed_by": "Counsel, courts",
+          "does_work": "The only forum that ever destroyed an organisation in this corpus - a 1987 verdict, won by the mother of a man it killed.",
+          "era": ["modern"]
+        },
+        {
+          "sense": "civic_standing",
+          "gloss": "The rights attaching to membership in a polity.",
+          "deployed_by": "The Reconstruction amendments and their statutes",
+          "does_work": "Names what disfranchisement removed.",
+          "era": ["reconstruction", "civil_rights"]
+        },
+        {
+          "sense": "decorum_demanded_of_the_injured",
+          "gloss": "A requirement of composure and moderation placed on the person harmed as a precondition of being heard.",
+          "deployed_by": "Editorials, officials, respectability argument",
+          "does_work": "Converts a claim on the record into a question about the claimant's conduct, and makes admissibility depend on tone.",
+          "era": ["jim_crow", "civil_rights", "modern"]
+        }
+      ],
+      "contested_axis": "Whether the word describes a venue, a status, or a condition imposed on the person asserting the injury.",
+      "confirmation": {
+        "method": ["contrast_set", "operational_consequence"],
+        "evidence": "The third sense is identifiable by what it makes conditional: where the word attaches to the manner of the claim rather than to its forum or its substance, it is being used to regulate the claimant.",
+        "defeasible_by": "Usage in which a demand for civility attaches equally to the accused party would show the third sense is not directed at the injured."
+      },
+      "registers": ["civil", "juridical", "press"],
+      "bears_on": ["CL-1981-DONALD", "ORG-UKA"]
+    },
+    {
+      "id": "LEX-EDUCATION",
+      "term": "education",
+      "question": "Three things are called education, and this corpus records the state criminalising the first, withholding the second, and using the third as the warrant for a surgical procedure.",
+      "senses": [
+        {
+          "sense": "literacy",
+          "gloss": "The capacity to read and write.",
+          "deployed_by": "Anti-literacy statutes, which named and forbade it",
+          "does_work": "Made teaching a criminal act from 1740, then supplied the deficit that literacy tests measured a century and a half later.",
+          "era": ["atlantic_trade", "domestic_trade", "jim_crow"]
+        },
+        {
+          "sense": "schooling",
+          "gloss": "Access to an institution over a period of years.",
+          "deployed_by": "School boards, desegregation litigation",
+          "does_work": "The interest Prince Edward County extinguished by closing its schools rather than integrating them.",
+          "era": ["civil_rights"]
+        },
+        {
+          "sense": "measurement",
+          "gloss": "The classification of a child's capacity by test.",
+          "deployed_by": "Intelligence testing as applied in schools",
+          "does_work": "Produced the feeblemindedness finding that selected people for sterilisation - the record of the first institution became the warrant of the second.",
+          "era": ["jim_crow", "civil_rights"]
+        }
+      ],
+      "contested_axis": "Whether education names a capacity, an access, or a verdict rendered on a child.",
+      "confirmation": {
+        "method": ["operational_consequence"],
+        "evidence": "Each sense is confirmed by what followed from it: prosecution, closure, or operation. The third is the one that leaves a surgical record.",
+        "defeasible_by": "Sterilisation authorisations resting on a classification produced outside the school system would weaken the link between the third sense and the operation."
+      },
+      "registers": ["administrative", "clinical", "inspirational"],
+      "bears_on": ["CL-1740-ANTI-LITERACY", "CL-1927-STERILIZATION", "LEG-DISFRANCHISEMENT", "RT-EDUCATION"]
+    },
+    {
+      "id": "LEX-TREATMENT",
+      "term": "treatment",
+      "question": "Men were described as under treatment for forty years by the agency that was withholding it, and the word is the mechanism, not the description.",
+      "senses": [
+        {
+          "sense": "care_delivered",
+          "gloss": "Intervention intended to benefit the person receiving it.",
+          "deployed_by": "The ordinary clinical sense, and the sense the men understood",
+          "does_work": "Sustains the belief that attendance is care, which is what secured forty years of participation.",
+          "era": ["jim_crow", "civil_rights"]
+        },
+        {
+          "sense": "observation_of_untreated_course",
+          "gloss": "Enrolment in a protocol whose design requires that the disease not be treated.",
+          "deployed_by": "The Public Health Service in its own study documents",
+          "does_work": "Makes the withholding the object of the research, and continues it after a curative therapy becomes standard.",
+          "era": ["jim_crow", "civil_rights"]
+        }
+      ],
+      "contested_axis": "Whether the word describes what was given to the subject or what was being learned from the subject.",
+      "confirmation": {
+        "method": ["translation_across_vantages", "operational_consequence"],
+        "evidence": "The study's own record and the participants' understanding of the same arrangement diverge completely, and the divergence is the finding. The protocol's continuation after penicillin became standard care confirms which sense governed.",
+        "defeasible_by": "Contemporaneous protocol documents providing for treatment on diagnosis would defeat the second sense."
+      },
+      "registers": ["clinical", "administrative"],
+      "bears_on": ["CL-1932-TUSKEGEE-STUDY", "RT-CONSENT-EXPERIMENT", "RT-HEALTH"]
+    },
+    {
+      "id": "LEX-INCIDENT",
+      "term": "incident",
+      "question": "The flattening word. It gives an event a boundary in time and denies it a place in a series.",
+      "senses": [
+        {
+          "sense": "bounded_occurrence",
+          "gloss": "A discrete happening, complete in itself.",
+          "deployed_by": "Official summaries, press shorthand",
+          "does_work": "Severs the event from anything before or after it, so no pattern is available to be found and no continuity is on the record.",
+          "era": ["jim_crow", "civil_rights", "modern"]
+        },
+        {
+          "sense": "instance_of_a_practice",
+          "gloss": "One occurrence of a repeated and describable practice.",
+          "deployed_by": "Statistical series, commissions, this book's era field",
+          "does_work": "Makes the practice the object, so a count becomes possible and a continuity can be shown.",
+          "era": ["modern"]
+        }
+      ],
+      "contested_axis": "Whether the event is singular or serial. Nothing about the event itself decides this; the choice is made in the writing.",
+      "confirmation": {
+        "method": ["contrast_set", "later_revision"],
+        "evidence": "Where a source describes an occurrence without reference to any comparable occurrence it knew of, the first sense is operating. Periodisation is this book's answer: era is carried on every entry precisely so that no entry can be read as an incident.",
+        "defeasible_by": "A source using the singular sense while itself compiling the series would show the word is not doing the severing."
+      },
+      "registers": ["press", "administrative"],
+      "bears_on": ["CL-1918-TURNER", "CL-1921-TULSA"]
+    },
+    {
+      "id": "LEX-REPARATION",
+      "term": "reparation",
+      "question": "The word is treated as one demand. It is at least three, and they have different addressees, different instruments and different costs.",
+      "senses": [
+        {
+          "sense": "restitution",
+          "gloss": "The thing taken is returned, or its value is.",
+          "deployed_by": "Property claims, land return",
+          "does_work": "Requires an identified holding and an identified successor, which is what the destruction of records was for.",
+          "era": ["reconstruction", "modern"]
+        },
+        {
+          "sense": "compensation",
+          "gloss": "A sum is paid for an injury that cannot be undone.",
+          "deployed_by": "Redress statutes, claim bills",
+          "does_work": "Requires only a definable class and an appropriation - the form every enacted programme in precedents.json has taken.",
+          "era": ["modern"]
+        },
+        {
+          "sense": "atonement",
+          "gloss": "The wrong is acknowledged and the relation altered.",
+          "deployed_by": "Apologies, resolutions, commissions",
+          "does_work": "Costs nothing and returns nothing, and is the form most frequently supplied in place of the other two.",
+          "era": ["modern"]
+        }
+      ],
+      "contested_axis": "Which of the three is being refused when reparations are called impossible. The corpus indicates the objection attaches to the second and is argued as though it attached to the first.",
+      "confirmation": {
+        "method": ["operational_consequence", "contrast_set"],
+        "evidence": "restoration.forms already separates these: full_restitution, partial_compensation, and symbolic. Across the corpus the third is the commonest and the first is never reached.",
+        "defeasible_by": "An enacted programme that delivered the first sense at scale would show restitution is the operative meaning and change which objection is being answered."
+      },
+      "registers": ["juridical", "inspirational", "incendiary"],
+      "bears_on": ["RT-REPARATION", "CL-1923-ROSEWOOD"]
+    }
+  ]
+}

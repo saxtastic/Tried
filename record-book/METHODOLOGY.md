@@ -856,7 +856,97 @@ defenses, and immunities differ, and because an officer exceeding the statute of
 their role is the case in which the state is both the injurer and the only
 available forum.
 
-## 18. Sources
+## 18. Language as instrument
+
+`data/lexicon.json` records terms whose definition did operational work. A word earns
+an entry only if choosing it over an available alternative changed what could be
+claimed, paid, barred or recorded. Decoration does not qualify.
+
+Three things are kept apart, and collapsing them is how a record gets falsified:
+
+| | Question | Where it lives |
+| --- | --- | --- |
+| **Denotation** | What does the word pick out? | `senses[].gloss` |
+| **Deployment** | What did a speaker *do* by choosing it? | `senses[].does_work`, and the contrast set |
+| **Confirmation** | How do we know which sense was meant? | `confirmation` |
+
+Intent does not live in the definition. It lives in the **contrast set** — the word
+that was available and was not used. And it is never confirmed from the word itself:
+it is confirmed from **what the word licensed**. Greenwood was a "riot" in every
+official record until 2001, and fire policies of the period carried riot-exclusion
+clauses; the classification voided the claims. That is not a semantic preference, it
+is the mechanism, and `IMP-INSURANCE-RIOT-CLAUSE` already carries it as an impediment.
+
+`confirmation.method` is an enum of six, ranked in practice by how far each stands
+outside the text: `operational_consequence` is strongest because it is a fact about
+the world; `speaker_gloss` is weakest because it is the speaker marking their own
+homework. `translation_across_vantages` is this book's `concurrence` rule applied to
+words rather than to events.
+
+**`confirmation.defeasible_by` is required and the build fails without it.** Say what
+would show the reading is wrong, or the entry is an assertion about a word.
+
+A term with fewer than two senses is rejected: a word with one sense is not contested
+and is doing no work here. A `container` term — one that aggregates — must state both
+what the aggregation **buys** and what it **hides**, plus its `cost`. An aggregation
+with no stated cost has not been examined.
+
+`Black` is the container term in this corpus, and the entry is uncomfortable on
+purpose. The federal instruments that recorded the harm did not define the class the
+same way twice: property in the slave schedules, four-way graded admixture in 1890,
+hypodescent by statute in the 1920s, self-identification from 1960, combination from
+2000. Every one of those changes is a change in **who held the pen**, and it was held
+by the same authorities the record accuses. What the container buys is a harm
+countable across two hundred and thirty years — a continuity rather than a series of
+incidents. What it costs is precision at the level of the individual claimant: a count
+taken from the 1890 schedule and one taken from 2020 are not counts of the same
+defined class, and any series crossing that boundary has to say so.
+
+## 19. Precedent and feasibility
+
+`data/precedents.json` exists to test one claim: **that reparation is refused as a
+matter of principle rather than prevented as a matter of capacity.**
+
+The book does not argue this. It computes it, on every build, and it is built so it
+can fail. The load-bearing field is `machinery`, which records whether an enacted
+programme required an instrument that did not already exist. If any had, `feasibility()`
+would report the claim falsified rather than silently holding.
+
+`beneficiary` is deliberately kept apart from `class`, and the validator errors if
+`beneficiary` and `reached_the_harmed` disagree — because the two earliest programmes
+on file paid the holders of title, and a record that let those read as reparation to
+the harmed would be false in exactly the way this book exists to prevent.
+
+What the file is careful *not* to claim: nothing here answers scale, class definition
+at national size, or political cost. Those are real and open. The finding is narrower
+and load-bearing — the machinery exists and has been used, including for a class
+defined by a historical wrong and located from the state's own administrative records.
+
+`PRE-2001-TULSA-DECLINED` is the control, and the reason the file is honest: a state
+commission found the facts and recommended payment, and what failed was not
+identification, not valuation, and not administration.
+
+**Figures on this file are approximate and no locator has been resolved.** This
+environment has no outbound network. They carry the same standing as any other
+unverified locator here, and resolving them is the first task on the file.
+
+## 20. Inquiry alongside the log
+
+`scripts/inquire.mjs` runs the functions that sit beside the record rather than inside
+it: aggregation, categorisation, pattern matching, trend identification, and the
+feasibility computation.
+
+It generates a **research agenda, never a finding** — the same discipline as
+`interrogate.mjs`, and for the same reason: with no egress, a function of this kind can
+say what a corpus of this shape implies about itself and what to go and check. It
+cannot check it.
+
+`--audit` is the cross-file pattern matcher. It reports every place a complaint's own
+prose uses a contested term that the lexicon has not declared bears on that entry. Each
+hit is a question with two possible answers — the link is missing, or the word is being
+used in its uncontested sense — and deciding which is research, not computation.
+
+## 21. Sources
 
 `data/archives.json` is a manifest of the corpora this work draws on, with
 locator URLs and access terms. Public-domain texts can be fetched on demand with
