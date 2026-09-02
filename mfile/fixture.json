@@ -1,35 +1,250 @@
 {
   "id": "MFILE-FIXTURE",
-  "note": "A worked example, labelled as one. Not a scan of anybody's drive — the numbers below are made up, and they are made up in the shape a real phone scan arrives in: no content hashes, because Shortcuts cannot hash; a version series in audio; two exports of one video at different bitrates; a photo whose modification date is years after it was taken. Every one of those is a case the four questions have to handle, and the surface renders this so a reader can see the machine work before pointing it at anything real.",
+  "note": "A worked example, labelled as one. Not a scan of anybody's drive \u2014 the numbers below are invented, and they are invented in the shape real scans arrive in, through both doors. The files half has no content hashes because Shortcuts cannot hash. The photos half has capture dates, albums and durations, because that door affords them. Every case the four questions have to handle is in here, including the two that could do damage: an asset listed under three albums, and a pair whose head flips depending on which date orders it.",
   "manifest": {
     "root": "/On My iPhone/Studio",
     "store": "iphone-local",
     "records": [
-      { "path": "stems/take v1.wav", "name": "take v1.wav", "ext": "wav", "bytes": 48200000, "mtime": "2026-01-04T10:00:00Z", "store": "iphone-local" },
-      { "path": "stems/take v2.wav", "name": "take v2.wav", "ext": "wav", "bytes": 48910000, "mtime": "2026-02-11T10:00:00Z", "store": "iphone-local" },
-      { "path": "stems/take v2 copy.wav", "name": "take v2 copy.wav", "ext": "wav", "bytes": 48910000, "mtime": "2026-02-11T11:00:00Z", "store": "iphone-local" },
-      { "path": "stems/take final.wav", "name": "take final.wav", "ext": "wav", "bytes": 49330000, "mtime": "2026-02-19T09:00:00Z", "store": "iphone-local" },
-      { "path": "stems/voice memo 3.m4a", "name": "voice memo 3.m4a", "ext": "m4a", "bytes": 2400000, "mtime": "2025-11-02T22:14:00Z", "store": "iphone-local" },
-      { "path": "reels/ep1 export.mov", "name": "ep1 export.mov", "ext": "mov", "bytes": 740000000, "mtime": "2026-03-02T10:00:00Z", "store": "iphone-local" },
-      { "path": "reels/ep1 export 1080.mov", "name": "ep1 export 1080.mov", "ext": "mov", "bytes": 210000000, "mtime": "2026-03-02T12:00:00Z", "store": "iphone-local" },
-      { "path": "reels/ep1 export 1080.mp4", "name": "ep1 export 1080.mp4", "ext": "mp4", "bytes": 198000000, "mtime": "2026-03-02T12:40:00Z", "store": "iphone-local" },
-      { "path": "reels/ep2 rough.mov", "name": "ep2 rough.mov", "ext": "mov", "bytes": 512000000, "mtime": "2026-04-18T16:00:00Z", "store": "iphone-local" },
-      { "path": "kit/portrait.heic", "name": "portrait.heic", "ext": "heic", "bytes": 4100000, "mtime": "2026-05-30T08:00:00Z", "store": "iphone-local" },
-      { "path": "kit/portrait edit.heic", "name": "portrait edit.heic", "ext": "heic", "bytes": 4380000, "mtime": "2026-05-30T09:12:00Z", "store": "iphone-local" },
-      { "path": "kit/press shot.jpg", "name": "press shot.jpg", "ext": "jpg", "bytes": 2210000, "mtime": "2026-05-30T09:20:00Z", "store": "iphone-local" },
-      { "path": "kit/bio.pages", "name": "bio.pages", "ext": "pages", "bytes": 88000, "mtime": "2026-04-01T10:00:00Z", "store": "iphone-local" },
-      { "path": "kit/bio 2026.pages", "name": "bio 2026.pages", "ext": "pages", "bytes": 91000, "mtime": "2026-06-11T10:00:00Z", "store": "iphone-local" },
-      { "path": "kit/rider.pdf", "name": "rider.pdf", "ext": "pdf", "bytes": 140000, "mtime": "2026-02-02T10:00:00Z", "store": "iphone-local" },
-      { "path": "notes/untitled.txt", "name": "untitled.txt", "ext": "txt", "bytes": 1200, "mtime": "2026-06-30T23:59:00Z", "store": "iphone-local" },
-      { "path": "notes/untitled 2.txt", "name": "untitled 2.txt", "ext": "txt", "bytes": 1200, "mtime": "2026-07-01T00:04:00Z", "store": "iphone-local" },
-      { "path": "misc/IMG_4471.MOV", "name": "IMG_4471.MOV", "ext": "mov", "bytes": 88000000, "mtime": "2024-09-14T19:03:00Z", "store": "iphone-local" }
+      {
+        "path": "stems/take v1.wav",
+        "name": "take v1.wav",
+        "ext": "wav",
+        "bytes": 48200000,
+        "mtime": "2026-01-04T10:00:00Z",
+        "store": "iphone-local"
+      },
+      {
+        "path": "stems/take v2.wav",
+        "name": "take v2.wav",
+        "ext": "wav",
+        "bytes": 48910000,
+        "mtime": "2026-02-11T10:00:00Z",
+        "store": "iphone-local"
+      },
+      {
+        "path": "stems/take v2 copy.wav",
+        "name": "take v2 copy.wav",
+        "ext": "wav",
+        "bytes": 48910000,
+        "mtime": "2026-02-11T11:00:00Z",
+        "store": "iphone-local"
+      },
+      {
+        "path": "stems/take final.wav",
+        "name": "take final.wav",
+        "ext": "wav",
+        "bytes": 49330000,
+        "mtime": "2026-02-19T09:00:00Z",
+        "store": "iphone-local"
+      },
+      {
+        "path": "stems/voice memo 3.m4a",
+        "name": "voice memo 3.m4a",
+        "ext": "m4a",
+        "bytes": 2400000,
+        "mtime": "2025-11-02T22:14:00Z",
+        "store": "iphone-local"
+      },
+      {
+        "path": "reels/ep1 export.mov",
+        "name": "ep1 export.mov",
+        "ext": "mov",
+        "bytes": 740000000,
+        "mtime": "2026-03-02T10:00:00Z",
+        "store": "iphone-local"
+      },
+      {
+        "path": "reels/ep1 export 1080.mov",
+        "name": "ep1 export 1080.mov",
+        "ext": "mov",
+        "bytes": 210000000,
+        "mtime": "2026-03-02T12:00:00Z",
+        "store": "iphone-local"
+      },
+      {
+        "path": "reels/ep1 export 1080.mp4",
+        "name": "ep1 export 1080.mp4",
+        "ext": "mp4",
+        "bytes": 198000000,
+        "mtime": "2026-03-02T12:40:00Z",
+        "store": "iphone-local"
+      },
+      {
+        "path": "reels/ep2 rough.mov",
+        "name": "ep2 rough.mov",
+        "ext": "mov",
+        "bytes": 512000000,
+        "mtime": "2026-04-18T16:00:00Z",
+        "store": "iphone-local"
+      },
+      {
+        "path": "kit/portrait.heic",
+        "name": "portrait.heic",
+        "ext": "heic",
+        "bytes": 4100000,
+        "mtime": "2026-05-30T08:00:00Z",
+        "store": "iphone-local"
+      },
+      {
+        "path": "kit/portrait edit.heic",
+        "name": "portrait edit.heic",
+        "ext": "heic",
+        "bytes": 4380000,
+        "mtime": "2026-05-30T09:12:00Z",
+        "store": "iphone-local"
+      },
+      {
+        "path": "kit/press shot.jpg",
+        "name": "press shot.jpg",
+        "ext": "jpg",
+        "bytes": 2210000,
+        "mtime": "2026-05-30T09:20:00Z",
+        "store": "iphone-local"
+      },
+      {
+        "path": "kit/bio.pages",
+        "name": "bio.pages",
+        "ext": "pages",
+        "bytes": 88000,
+        "mtime": "2026-04-01T10:00:00Z",
+        "store": "iphone-local"
+      },
+      {
+        "path": "kit/bio 2026.pages",
+        "name": "bio 2026.pages",
+        "ext": "pages",
+        "bytes": 91000,
+        "mtime": "2026-06-11T10:00:00Z",
+        "store": "iphone-local"
+      },
+      {
+        "path": "kit/rider.pdf",
+        "name": "rider.pdf",
+        "ext": "pdf",
+        "bytes": 140000,
+        "mtime": "2026-02-02T10:00:00Z",
+        "store": "iphone-local"
+      },
+      {
+        "path": "notes/untitled.txt",
+        "name": "untitled.txt",
+        "ext": "txt",
+        "bytes": 1200,
+        "mtime": "2026-06-30T23:59:00Z",
+        "store": "iphone-local"
+      },
+      {
+        "path": "notes/untitled 2.txt",
+        "name": "untitled 2.txt",
+        "ext": "txt",
+        "bytes": 1200,
+        "mtime": "2026-07-01T00:04:00Z",
+        "store": "iphone-local"
+      },
+      {
+        "path": "misc/IMG_4471.MOV",
+        "name": "IMG_4471.MOV",
+        "ext": "mov",
+        "bytes": 88000000,
+        "mtime": "2024-09-14T19:03:00Z",
+        "store": "iphone-local"
+      },
+      {
+        "path": "photos://Portfolio/IMG_4471.MOV",
+        "name": "IMG_4471.MOV",
+        "ext": "mov",
+        "bytes": 88000000,
+        "mtime": "2026-07-20T11:00:00Z",
+        "store": "photos",
+        "asset_id": "A-4471",
+        "album": "Portfolio",
+        "captured_at": "2024-09-14T19:03:00Z",
+        "duration": 42.5,
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "path": "photos://Press/IMG_4471.MOV",
+        "name": "IMG_4471.MOV",
+        "ext": "mov",
+        "bytes": 88000000,
+        "mtime": "2026-07-20T11:00:00Z",
+        "store": "photos",
+        "asset_id": "A-4471",
+        "album": "Press",
+        "captured_at": "2024-09-14T19:03:00Z",
+        "duration": 42.5,
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "path": "photos://2026 kit/IMG_4471.MOV",
+        "name": "IMG_4471.MOV",
+        "ext": "mov",
+        "bytes": 88000000,
+        "mtime": "2026-07-20T11:00:00Z",
+        "store": "photos",
+        "asset_id": "A-4471",
+        "album": "2026 kit",
+        "captured_at": "2024-09-14T19:03:00Z",
+        "duration": 42.5,
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "path": "photos://Press/press v1.heic",
+        "name": "press v1.heic",
+        "ext": "heic",
+        "bytes": 4100000,
+        "mtime": "2026-08-02T09:00:00Z",
+        "store": "photos",
+        "asset_id": "A-9001",
+        "album": "Press",
+        "captured_at": "2019-06-02T10:00:00Z",
+        "width": 4032,
+        "height": 3024,
+        "favorite": false
+      },
+      {
+        "path": "photos://Press/press v2.heic",
+        "name": "press v2.heic",
+        "ext": "heic",
+        "bytes": 4380000,
+        "mtime": "2026-08-01T09:00:00Z",
+        "store": "photos",
+        "asset_id": "A-9002",
+        "album": "Press",
+        "captured_at": "2021-03-11T14:22:00Z",
+        "width": 4032,
+        "height": 3024,
+        "favorite": true
+      },
+      {
+        "path": "photos://Live/set closer.mov",
+        "name": "set closer.mov",
+        "ext": "mov",
+        "bytes": 1240000000,
+        "mtime": "2026-06-01T08:00:00Z",
+        "store": "photos",
+        "asset_id": "A-7710",
+        "album": "Live",
+        "captured_at": "2026-05-29T03:40:00Z",
+        "duration": 611.0,
+        "width": 3840,
+        "height": 2160
+      }
+    ],
+    "doors": [
+      "files",
+      "photos"
     ]
   },
   "what_it_demonstrates": [
-    "take v2.wav and take v2 copy.wav are byte-identical in size and extension. Without a hash that is candidate, not duplicate — and Shortcuts cannot hash.",
-    "untitled.txt and untitled 2.txt are the same size four minutes apart. Same reading.",
-    "ep1 exists as .mov at two bitrates and as .mp4. Three files, one work, three different sizes — no hash will ever call them duplicates, and only a confirmed stem rule calls them a series.",
-    "IMG_4471.MOV has a 2024 mtime in a folder of 2026 work. Modification time is not capture time; the report orders by mtime and says mtime.",
-    "Nothing here is referenced by anything, so functional is unknown for all eighteen. Not unused. Unknown."
+    "IMG_4471.MOV is listed under Portfolio, Press and 2026 kit with one asset id. That is ONE file listed three times, not three duplicates. Reporting it the other way would invite deleting two files that do not exist.",
+    "press v1 and press v2 were captured in 2019 and 2021 but written to the phone in the opposite order. Ordered by capture date v2 is the head; ordered by mtime v1 is. The two doors name opposite heads on the same pair, which is why the report says which date it used.",
+    "take v2.wav and take v2 copy.wav are byte-identical in size and extension. Without a hash that is candidate, not duplicate \u2014 and Shortcuts cannot hash.",
+    "ep1 exists as .mov at two bitrates and as .mp4. Three files, one work, three sizes \u2014 no hash will call them duplicates, and only a confirmed stem rule calls them a series.",
+    "The photos records carry duration and dimensions; the files records cannot. Same media, different door, different answers.",
+    "Nothing here is referenced by anything, so functional is unknown throughout. Not unused. Unknown."
   ]
 }

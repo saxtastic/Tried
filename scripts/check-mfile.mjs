@@ -8,7 +8,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { administer, kindOf, normaliseStem } from "../src/administer.js";
+import { administer, collapseAssets, kindOf, normaliseStem, orderingDate } from "../src/administer.js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, p), "utf8"));
@@ -24,6 +24,8 @@ function ok(label, cond, detail) {
 
 const criteria = read("mfile/criteria.json");
 const media = read("mfile/media.json");
+const doors = read("mfile/doors.json");
+const fixture = read("mfile/fixture.json");
 const stores = read("mfile/stores.json");
 const intake = read("mfile/questions/intake.json");
 
@@ -236,12 +238,20 @@ const allExt = media.kinds.flatMap((k) => k.ext);
 ok("no extension is claimed by two kinds", new Set(allExt).size === allExt.length);
 ok("every extension is lowercase and dotless", allExt.every((e) => e === e.toLowerCase() && !e.includes(".")));
 ok(
-  "every kind says what the scanner cannot read",
-  media.kinds.every((k) => typeof k.scanner_cannot_read === "string" && k.scanner_cannot_read.length > 0),
+  "every kind says what the files door cannot read",
+  media.kinds.every((k) => typeof k.files_door_cannot_read === "string" && k.files_door_cannot_read.length > 0),
 );
 ok(
-  "no kind claims the scanner reads anything but the directory entry",
-  media.kinds.every((k) => k.scanner_reads.every((f) => ["bytes", "mtime", "name"].includes(f))),
+  "no kind claims the files door reads anything but the directory entry",
+  media.kinds.every((k) => k.scanner_reads_via_files_door.every((f) => ["bytes", "mtime", "name"].includes(f))),
+);
+ok(
+  "the image kind no longer says capture date is out of reach full stop",
+  /PHOTOS door capture date IS available/i.test(media.kinds.find((k) => k.key === "image").files_door_cannot_read),
+);
+ok(
+  "audio is honest that no door gives it duration",
+  /Neither door/i.test(media.kinds.find((k) => k.key === "audio").files_door_cannot_read),
 );
 ok("audio, video, image and document are all declared",
   ["audio", "video", "image", "document"].every((k) => media.kinds.some((m) => m.key === k)));
@@ -261,6 +271,74 @@ ok(
   kinded.kinds.length === 3 && kinded.kinds.every((k) => k.basis === "derived"),
 );
 ok("a kind with no files is omitted rather than shown as zero", !kinded.kinds.some((k) => k.files === 0));
+
+// --- the two doors, and the one destructive mistake --------------------------
+
+const asset = (album) => ({
+  path: `photos://${album}/IMG_1.HEIC`,
+  name: "IMG_1.HEIC",
+  ext: "heic",
+  bytes: 4100000,
+  mtime: "2026-01-01T00:00:00Z",
+  captured_at: "2019-06-02T10:00:00Z",
+  asset_id: "A1",
+  album,
+  store: "photos",
+});
+const threeAlbums = [asset("Portfolio"), asset("Press"), asset("2026")];
+
+const collapsed = collapseAssets(threeAlbums);
+ok("one asset in three albums collapses to one file", collapsed.records.length === 1 && collapsed.collapsed === 2);
+ok(
+  "collapsing keeps every album it belonged to",
+  collapsed.records[0].albums.length === 3 && collapsed.records[0].albums.includes("Press"),
+);
+
+const albumReport = administer({ records: threeAlbums });
+ok(
+  "an asset in several albums is NEVER reported as a duplicate",
+  albumReport.answered.duplicate.duplicate === 0 && albumReport.answered.duplicate.candidate === 0,
+  JSON.stringify(albumReport.answered.duplicate),
+);
+ok("the report separates listings from files", albumReport.listed === 3 && albumReport.records === 1);
+ok("the collapse is stated, not silent", albumReport.collapsed.count === 2 && albumReport.collapsed.rule.length > 0);
+ok("records without an asset id are never collapsed together",
+  collapseAssets([rec(1), rec(2)]).collapsed === 0);
+
+// The head of a series is the file people keep, so the date that orders it matters.
+const dateRules = { confirmed: true, source: "t", scope: "directory", rules: [{ pattern: " v\\d+$", flags: "", replace: "" }] };
+const shot = [
+  { path: "a/e v1.heic", name: "e v1.heic", ext: "heic", bytes: 1, asset_id: "B1", album: "x", captured_at: "2019-01-01T00:00:00Z", mtime: "2026-08-02T00:00:00Z", store: "photos", content_hash: "h1" },
+  { path: "a/e v2.heic", name: "e v2.heic", ext: "heic", bytes: 2, asset_id: "B2", album: "x", captured_at: "2021-01-01T00:00:00Z", mtime: "2026-08-01T00:00:00Z", store: "photos", content_hash: "h2" },
+];
+const byCapture = administer({ records: shot }, dateRules);
+const byMtime = administer({ records: shot.map(({ captured_at, ...r }) => r) }, dateRules);
+ok("capture date orders the series when it is present", byCapture.verdicts[1].iterative.head === true);
+ok("mtime orders it when capture date is absent", byMtime.verdicts[0].iterative.head === true);
+ok(
+  "the two doors really do name opposite heads, and the report names the date it used",
+  byCapture.verdicts[1].iterative.head !== byMtime.verdicts[1].iterative.head &&
+    byCapture.verdicts[0].iterative.ordered_by === "captured_at" &&
+    byMtime.verdicts[0].iterative.ordered_by === "mtime",
+);
+ok("orderingDate prefers capture date and names which it used",
+  orderingDate({ captured_at: "a", mtime: "b" }).by === "captured_at" && orderingDate({ mtime: "b" }).by === "mtime");
+
+ok("both doors are declared with their identity field",
+  doors.doors.length === 2 && doors.doors.every((d) => typeof d.identity === "string" && d.identity));
+ok("the asset-id rule is marked hard, not advisory",
+  doors.rules.some((r) => /asset id/i.test(r.rule) && r.severity === "hard"));
+ok("the doors file records the claim it corrected rather than quietly editing it",
+  Array.isArray(doors.corrections) && doors.corrections.length > 0 && doors.corrections.every((c) => c.was && c.now));
+ok("People/Faces is declared unavailable rather than left to be discovered", doors.people.available === false);
+ok("no door claims to read people", doors.doors.every((d) => !d.reads.includes("people")));
+
+ok("the fixture exercises the multi-album case",
+  new Set(fixture.manifest.records.filter((r) => r.asset_id).map((r) => r.asset_id)).size <
+    fixture.manifest.records.filter((r) => r.asset_id).length);
+ok("the fixture exercises the flipped-head case",
+  fixture.manifest.records.some((r) => r.captured_at && r.mtime && r.captured_at < r.mtime));
+ok("the fixture is labelled as invented", /invented/i.test(fixture.note));
 
 // --- the endpoint ------------------------------------------------------------
 
@@ -287,7 +365,11 @@ ok(
 const shortcut = fs.readFileSync(path.join(ROOT, "ios", "shortcut.md"), "utf8");
 ok("the shortcut spec states that Shortcuts cannot hash", /no hashing action/i.test(shortcut));
 ok("the shortcut spec carries no literal token", !/X-MFile-Token:\s*[A-Za-z0-9_-]{12,}/.test(shortcut));
-ok("the shortcut spec names no move, rename or delete action", /no move, rename, delete or trash action/i.test(shortcut));
+ok("the shortcut spec forbids move, rename, delete and trash", /(no|neither has a) move, rename, delete or trash action/i.test(shortcut));
+ok("the shortcut spec covers both doors", /Scan Files for M/.test(shortcut) && /Scan Photos for M/.test(shortcut));
+ok("the shortcut spec warns that asset_id is what prevents a false duplicate",
+  /only ever one file there/i.test(shortcut));
+ok("the shortcut spec states People\/Faces is unavailable", /does not expose the People index/i.test(shortcut));
 
 // --- the administrator does not mutate --------------------------------------
 
@@ -298,6 +380,6 @@ ok("the scanner never writes, renames or unlinks", !/fs\.(write|rename|unlink|rm
 ok("neither makes a network request", !/fetch\(|https?\.request|node:https/.test(src + scan));
 
 console.log(
-  `\n${failed ? `${failed} failed` : "all assertions passed"} — 4 questions, ${media.kinds.length} media kinds, ${stores.stores.length} stores, ${intake.questions.length} intake questions\n`,
+  `\n${failed ? `${failed} failed` : "all assertions passed"} — 4 questions, ${media.kinds.length} media kinds, ${doors.doors.length} doors, ${stores.stores.length} stores, ${intake.questions.length} intake questions\n`,
 );
 process.exit(failed ? 1 : 0);

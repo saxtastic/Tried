@@ -25,26 +25,68 @@ has no rules file to read. The default when none are passed is *unconfirmed*,
 which withholds `iterative` and `novel` — a host that forgets to pass them gets
 silence rather than a confident wrong answer.
 
+## Two doors
+
+The same video read through Files and through Photos gives two different
+records, and the difference is not noise.
+
+| | Files | Photos |
+| --- | --- | --- |
+| identity | path | asset id |
+| name, size, extension, mtime | yes | yes |
+| capture date, duration, dimensions, album | **no** | **yes** |
+| people / faces | no | **no** |
+
+Two rules follow, and both are hard rather than advisory:
+
+**An asset id seen more than once is one file listed more than once, never a
+duplicate.** Scanning by album returns an asset once per album it belongs to; a
+photo in Portfolio, Press and 2026 comes back three times with one identifier.
+Reporting that as three duplicates invites someone to delete two files that do
+not exist. This is the single destructive mistake this tool could make, so the
+collapse happens before any question is asked and the report separates
+*listings* from *files*.
+
+**Where a record has a capture date, order by it; otherwise order by mtime, and
+say which.** A pair shot in 2019 and 2021 but written to the phone in the
+opposite order gets **opposite heads** depending on the date used — and the head
+is the file people keep. `check-mfile` asserts that the two really do disagree,
+so the rule cannot quietly stop mattering.
+
+A files record and a photos record are never merged on filename alone.
+`IMG_4471.MOV` in a folder and in the library are *probably* the same recording.
+Without a hash on both sides that is a guess, and the two doors cannot both be
+asked for one.
+
+### A claim this corrected
+
+An earlier version of `mfile/media.json` said capture date was out of reach and
+that the iterative verdict says mtime, "never when it was taken." That was true
+of the files door and it silently generalised to every door. Through Photos the
+capture date is available and it is the better date. The correction is recorded
+in `mfile/doors.json` rather than edited away, because the shape of the mistake
+— a limit of one path stated as a limit of the tool — is the kind worth being
+able to find again.
+
+Audio has no richer door: it does not live in the Photos library, so duration,
+sample rate and channels stay out of reach until something opens the files.
+
 ## Audio, video, images, documents
 
 `mfile/media.json` declares four kinds by extension, plus `other` for anything
 unlisted. Extension is a claim the filename makes, not a fact about the bytes,
 so the kind is recorded at basis `derived` and never `confirmed`.
 
-The scan reads the directory entry and nothing else: name, size, modification
-time. **Every richer property a media file has is out of reach** — duration,
-sample rate, resolution, frame rate, EXIF, capture date. Those live inside the
-file and reading them is a second pass that is not written. Each kind records
-what the scanner cannot read, so it is stated rather than discovered.
+The **files door** reads the directory entry and nothing else: name, size,
+modification time. Duration, sample rate, resolution and EXIF live inside the
+file, and opening them is a second pass that is not written. Each kind records
+what that door cannot read, so it is stated rather than discovered — and says
+where the photos door covers the gap.
 
-Two consequences worth naming:
-
-- **Modification time is not capture time.** A photo taken in 2019 and copied in
-  2024 has a 2024 mtime. Ordering an image series by mtime is wrong more often
-  than right, so the iterative verdict says *mtime*, never "when it was taken".
-- **A session file is a bundle, not a track.** `.logicx`, `.als`, `.band` are
-  directories, so the scan walks into them and reports their contents. The count
-  inflates and that is not an error — the parts are files.
+One consequence that neither door removes: **a session file is a bundle, not a
+track.** `.logicx`, `.als`, `.band` are directories, so the scan walks into them
+and reports their contents. The count inflates and that is not an error — the
+parts are files.
 
 ## The endpoint
 
@@ -66,9 +108,10 @@ verdict on a record nobody validated is the worst output this can give.
 
 ## The phone half
 
-[`ios/shortcut.md`](../ios/shortcut.md) builds the scanner as a Shortcut. No
-Mac, no Apple Developer account, fifteen minutes. It emits the same manifest a
-native app would, so nothing is thrown away when the app arrives.
+[`ios/shortcut.md`](../ios/shortcut.md) builds the scanner as **two** Shortcuts,
+one per door. No Mac, no Apple Developer account, fifteen minutes each. They
+emit the same manifest a native app would, so nothing is thrown away when the
+app arrives.
 
 One thing it cannot do: **Shortcuts has no hashing action.** So the manifest
 arrives with no `content_hash` and `duplicate` degrades to *candidate* — matched
@@ -140,8 +183,9 @@ ruleset, never assumed.
 `mfile/stores.json` records what is actually reachable from here, which is
 almost nothing:
 
-- **on-phone** — reachable only by the Shortcut, which posts to the endpoint.
-  This repository never touches the device.
+- **on-phone** and **Photos** — reachable only by the Shortcuts, which post to
+  the endpoint. This repository never touches the device. Name three albums, not
+  the whole library: forty thousand assets returns a report nobody reads.
 - **iCloud Drive** — not reachable from here either. Because
   iCloud Drive mounts as a path on a Mac, `mfile-scan.mjs` runs against it with
   no API and no credential. An `.icloud` placeholder is recorded as

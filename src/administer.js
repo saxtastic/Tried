@@ -6,6 +6,7 @@
 // someone's files.
 
 import CRITERIA from "../mfile/criteria.json" with { type: "json" };
+import DOORS from "../mfile/doors.json" with { type: "json" };
 import MEDIA from "../mfile/media.json" with { type: "json" };
 
 /** Extension -> kind. Declared in mfile/media.json, never sniffed from bytes. */
@@ -42,8 +43,43 @@ function tally(records, key) {
  * `derived` is returned at the degraded wording the criteria file specifies —
  * never at the confident one.
  */
+/**
+ * One asset in three albums comes back three times with one identifier.
+ * Collapsing them is not an optimisation — reporting them as three duplicates
+ * would invite someone to delete two files that do not exist. This is the one
+ * destructive mistake the tool could make, so it happens before anything else.
+ */
+export function collapseAssets(records) {
+  const seen = new Map();
+  const out = [];
+  for (const r of records) {
+    if (!r.asset_id) {
+      out.push(r);
+      continue;
+    }
+    const first = seen.get(r.asset_id);
+    if (!first) {
+      seen.set(r.asset_id, r);
+      out.push({ ...r, albums: r.album ? [r.album] : [] });
+      continue;
+    }
+    // Same asset, another album. Record the membership; do not add a file.
+    const held = out.find((x) => x.asset_id === r.asset_id);
+    if (held && r.album && !held.albums.includes(r.album)) held.albums.push(r.album);
+  }
+  return { records: out, collapsed: records.length - out.length };
+}
+
+/** The date a series should be ordered by, and the name of the date used. */
+export function orderingDate(r) {
+  return r.captured_at
+    ? { at: r.captured_at, by: "captured_at" }
+    : { at: r.mtime, by: "mtime" };
+}
+
 export function administer(manifest, override) {
-  const records = manifest.records ?? [];
+  const listed = manifest.records ?? [];
+  const { records, collapsed } = collapseAssets(listed);
   // No rules supplied means no confirmed cadence, which withholds `iterative`
   // and `novel`. The default is the cautious one on purpose: at the edge there
   // is no rules file to read, and a host that forgets to pass them gets silence
@@ -108,13 +144,16 @@ export function administer(manifest, override) {
         because: criterion("iterative").degraded.reason,
       };
     } else {
-      const series = [...sameStem].sort((a, b) => String(a.mtime).localeCompare(String(b.mtime)));
+      const series = [...sameStem].sort((a, b) =>
+        String(orderingDate(a).at).localeCompare(String(orderingDate(b).at)),
+      );
       iterative = others.length
         ? {
             says: "iterative",
             basis: "derived",
             with: others.map((x) => x.path),
             head: series[series.length - 1].path === r.path,
+            ordered_by: orderingDate(r).by,
             position: series.findIndex((x) => x.path === r.path) + 1,
             of: series.length,
           }
@@ -159,10 +198,27 @@ export function administer(manifest, override) {
 
   const count = (k, v) => verdicts.filter((x) => x[k].says === v).length;
 
+  const doors = [...new Set(records.map((r) => (r.asset_id ? "photos" : "files")))].sort();
+
   return {
     scanned_at: manifest.scanned_at ?? null,
     root: manifest.root ?? null,
     records: records.length,
+    listed: listed.length,
+    doors,
+    collapsed: {
+      count: collapsed,
+      rule: DOORS.rules[0].rule,
+      note: collapsed
+        ? `${collapsed} album listing(s) resolved to assets already counted. Not duplicates — one file, listed more than once.`
+        : "no asset appeared under more than one album",
+      basis: "confirmed",
+    },
+    dated_by: {
+      captured_at: records.filter((r) => r.captured_at).length,
+      mtime: records.filter((r) => !r.captured_at).length,
+      note: "A series ordered by the wrong date names the wrong file as its head, and the head is the one people keep.",
+    },
     inputs: {
       content_hash: haveHashes ? "present on every record" : `present on ${hashed.length} of ${records.length}`,
       stem_rules: rules.confirmed ? `confirmed, ${scope} scope — ${rules.source}` : "not confirmed — see mfile/questions/intake.json Q2",

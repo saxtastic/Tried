@@ -9,9 +9,20 @@
       "kind": "device",
       "access": "none",
       "reachable_from_repository": false,
-      "how_it_would_work": "Files app → On My iPhone → a single top-level folder. A Shortcut walks it and writes manifest.json beside it. The Shortcut is the scanner; this repository never touches the device.",
+      "how_it_would_work": "Files app \u2192 On My iPhone \u2192 a single top-level folder. A Shortcut walks it and writes manifest.json beside it. The Shortcut is the scanner; this repository never touches the device.",
       "owed": "The folder name, and whether the Shortcut may run on a schedule or only when tapped.",
       "register": "V"
+    },
+    {
+      "key": "photos",
+      "name": "Photos library",
+      "kind": "device",
+      "access": "none",
+      "reachable_from_repository": false,
+      "how_it_would_work": "A Shortcut runs Find Photos over the albums you name and posts the result. It is a richer door than Files: capture date, dimensions, duration, album membership and favourites all come back, none of which the folder scan can see.",
+      "owed": "Which albums. Everything is not an answer \u2014 a library of forty thousand assets returns a report nobody reads.",
+      "note": "People/Faces is not exposed to third-party apps or to Shortcuts. 'Every photo of X' has to come from an album you maintain.",
+      "register": "D"
     },
     {
       "key": "icloud",
@@ -46,7 +57,7 @@
   ],
   "multiple_accounts": {
     "status": "owed",
-    "note": "The request names multiple accounts. An account is not a store — it is a boundary between stores that may hold the same file twice. Until the accounts are named, the administrator cannot tell a cross-account duplicate from a backup, and those are opposite verdicts: one is waste, the other is the point.",
+    "note": "The request names multiple accounts. An account is not a store \u2014 it is a boundary between stores that may hold the same file twice. Until the accounts are named, the administrator cannot tell a cross-account duplicate from a backup, and those are opposite verdicts: one is waste, the other is the point.",
     "register": "I"
   }
 }

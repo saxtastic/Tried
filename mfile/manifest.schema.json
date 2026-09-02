@@ -1,16 +1,77 @@
 {
   "id": "MFILE-MANIFEST",
   "version": 1,
-  "note": "What a scan must hand the administrator. Produced on the device or the mounted drive, never by this repository reaching outward. Written so a Shortcut, a shell one-liner and scripts/mfile-scan.mjs can all emit the same shape.",
+  "note": "What a scan must hand the administrator. Produced on the device or the mounted drive, never by this repository reaching outward. Two doors produce it: a folder (path is identity) and the Photos library (asset_id is identity). A record has one or the other, never neither.",
   "record": {
-    "path": { "type": "string", "required": true, "note": "relative to the scanned root" },
-    "name": { "type": "string", "required": true },
-    "ext": { "type": "string", "required": true, "note": "lowercased, no dot; empty string is legal" },
-    "bytes": { "type": "number", "required": true },
-    "mtime": { "type": "string", "required": true, "note": "ISO 8601" },
-    "store": { "type": "string", "required": true, "note": "a key from mfile/stores.json" },
-    "content_hash": { "type": "string", "required": false, "note": "sha256 hex. Absent is legal and degrades duplicate to candidate — it never fabricates one." },
-    "account": { "type": "string", "required": false }
+    "path": {
+      "type": "string",
+      "required": true,
+      "note": "relative to the scanned root; for a photos record, a synthetic photos://<album>/<name>"
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "ext": {
+      "type": "string",
+      "required": true,
+      "note": "lowercased, no dot; empty string is legal"
+    },
+    "bytes": {
+      "type": "number",
+      "required": true
+    },
+    "mtime": {
+      "type": "string",
+      "required": true,
+      "note": "ISO 8601"
+    },
+    "store": {
+      "type": "string",
+      "required": true,
+      "note": "a key from mfile/stores.json"
+    },
+    "content_hash": {
+      "type": "string",
+      "required": false,
+      "note": "sha256 hex. Absent is legal and degrades duplicate to candidate \u2014 it never fabricates one."
+    },
+    "account": {
+      "type": "string",
+      "required": false
+    },
+    "asset_id": {
+      "type": "string",
+      "required": false,
+      "note": "Photos door only, and it is the identity there. The SAME asset_id seen under several albums is one file listed several times \u2014 see mfile/doors.json, first rule. Collapsing them is not optional."
+    },
+    "album": {
+      "type": "string",
+      "required": false,
+      "note": "Photos door only. One per listing; the administrator gathers them into `albums` when it collapses."
+    },
+    "captured_at": {
+      "type": "string",
+      "required": false,
+      "note": "ISO 8601. Photos door only, and where present it is the date a version series is ordered by \u2014 mtime is when the file was last written, which after a copy or a sync is not when the thing was made."
+    },
+    "width": {
+      "type": "number",
+      "required": false
+    },
+    "height": {
+      "type": "number",
+      "required": false
+    },
+    "duration": {
+      "type": "number",
+      "required": false,
+      "note": "seconds; videos and live photos"
+    },
+    "favorite": {
+      "type": "boolean",
+      "required": false
+    }
   },
   "envelope": {
     "scanned_at": "ISO 8601",

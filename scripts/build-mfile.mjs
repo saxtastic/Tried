@@ -36,6 +36,7 @@ const { verdicts, scanned_at, ...shape } = report;
 const criteria = JSON.parse(fs.readFileSync(path.join(ROOT, "mfile", "criteria.json"), "utf8"));
 const intake = JSON.parse(fs.readFileSync(path.join(ROOT, "mfile", "questions", "intake.json"), "utf8"));
 const stores = JSON.parse(fs.readFileSync(path.join(ROOT, "mfile", "stores.json"), "utf8"));
+const doors = JSON.parse(fs.readFileSync(path.join(ROOT, "mfile", "doors.json"), "utf8"));
 
 const bundle = {
   // Deliberately not scanned_at: a timestamp would make every build a diff.
@@ -60,6 +61,14 @@ const bundle = {
     reachable: s.reachable_from_repository,
     owed: s.owed ?? null,
   })),
+  doors: doors.doors.map((d) => ({
+    name: d.name,
+    identity: d.identity,
+    reads: d.reads,
+    cannot_read: d.cannot_read,
+  })),
+  hard_rules: doors.rules.filter((r) => r.severity === "hard").map((r) => ({ rule: r.rule, why: r.why })),
+  people: doors.people.note,
   load_bearing: criteria.load_bearing,
 };
 

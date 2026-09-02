@@ -56,10 +56,10 @@
     tally.textContent = "";
     var a = data.shape.answered;
     var rows = [
+      [data.shape.records, "files, from " + data.shape.listed + " listings"],
+      [data.shape.collapsed.count, "listings that were the same asset again"],
       [a.duplicate.duplicate + a.duplicate.candidate, "flagged as duplicate or candidate"],
-      [a.iterative.iterative, "placed in a version series"],
-      [a.functional.functional, "referred to by something else"],
-      [data.shape.records, "files read"],
+      [data.shape.dated_by.captured_at, "ordered by capture date, not mtime"],
     ];
     if (side === "withheld") {
       rows = [
@@ -79,6 +79,11 @@
 
   function renderStated() {
     var grid = el("div", "grid");
+    (data.doors || []).forEach(function (d) {
+      grid.appendChild(
+        card(d.name, ["Reads " + d.reads.join(", ") + "."], "identity: " + d.identity),
+      );
+    });
     data.questions.forEach(function (q) {
       grid.appendChild(
         card(q.key.charAt(0).toUpperCase() + q.key.slice(1), [q.asks, q.rule], "needs " + q.requires.join(", ")),
@@ -119,6 +124,13 @@
       .forEach(function (s) {
         grid.appendChild(card(s.name, ["Not reachable. " + (s.owed || "")], "owed"));
       });
+    (data.hard_rules || []).forEach(function (r) {
+      grid.appendChild(card("Hard rule", [r.rule, r.why], "not a heuristic"));
+    });
+    (data.doors || []).forEach(function (d) {
+      grid.appendChild(card(d.name + " cannot read", [d.cannot_read.join(", ") + "."], "through this door"));
+    });
+    if (data.people) grid.appendChild(card("People and faces", [data.people], "platform limit"));
     data.refuses.forEach(function (r) {
       grid.appendChild(card("Refused outright", [r], "under any answer"));
     });

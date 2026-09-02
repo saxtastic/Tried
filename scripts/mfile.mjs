@@ -36,7 +36,15 @@ export function stemRules() {
 function render(report) {
   const L = [];
   L.push("");
-  L.push(`M FILE ADMINISTRATOR — ${report.records} records${report.root ? ` under ${report.root}` : ""}`);
+  L.push(`M FILE ADMINISTRATOR — ${report.records} files from ${report.listed ?? report.records} listing(s)${report.root ? ` under ${report.root}` : ""}`);
+  L.push("");
+  if (report.doors) L.push(`  doors            ${report.doors.join(" + ")}`);
+  if (report.collapsed && report.collapsed.count) {
+    L.push(`  collapsed        ${report.collapsed.count} album listing(s) — one file, listed more than once, NOT duplicates`);
+  }
+  if (report.dated_by && report.dated_by.captured_at) {
+    L.push(`  ordered by       ${report.dated_by.captured_at} on capture date, ${report.dated_by.mtime} on mtime`);
+  }
   L.push("");
   L.push("  inputs");
   for (const [k, v] of Object.entries(report.inputs)) L.push(`    ${k.padEnd(16)} ${v}`);

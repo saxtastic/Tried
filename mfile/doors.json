@@ -1,0 +1,58 @@
+{
+  "id": "MFILE-DOORS",
+  "owner": "mfile-administrator",
+  "note": "The same video read through two doors gives two different records. This is not a redundancy to collapse — it is an asymmetry to exploit, and getting it wrong is the one way this tool could destroy something.",
+  "doors": [
+    {
+      "key": "files",
+      "name": "Files — a folder you granted",
+      "reads": ["name", "ext", "bytes", "mtime", "path"],
+      "cannot_read": ["captured_at", "width", "height", "duration", "camera", "location", "album"],
+      "identity": "path",
+      "note": "A path is a stable name for a place. Two paths are two files, always.",
+      "register": "D"
+    },
+    {
+      "key": "photos",
+      "name": "Photos — the library",
+      "reads": ["name", "ext", "bytes", "captured_at", "width", "height", "duration", "album", "favorite", "asset_id"],
+      "cannot_read": ["path", "people"],
+      "identity": "asset_id",
+      "note": "An asset has no path. It has an identifier, and it can appear in any number of albums at once.",
+      "register": "D"
+    }
+  ],
+  "corrections": [
+    {
+      "was": "Capture date is out of reach; modification time is the only date, and the iterative verdict says mtime, never 'when it was taken'.",
+      "scope_it_actually_had": "the files door only",
+      "now": "Through the photos door, capture date IS available and it is the better date. The claim was written before the photos door existed and it silently generalised from one door to all of them. Where captured_at is present the series is ordered by it, and the report says which date it used.",
+      "register": "D"
+    }
+  ],
+  "rules": [
+    {
+      "rule": "An asset id seen more than once is ONE file listed more than once, never a duplicate.",
+      "why": "Scanning by album returns an asset once per album it belongs to. A photo in Portfolio, Press and 2026 comes back three times with one identifier. Reporting that as three duplicates invites someone to delete two of them, and there is only one. This is the single destructive failure this tool could cause, so it is a rule and not a heuristic.",
+      "severity": "hard",
+      "register": "D"
+    },
+    {
+      "rule": "Where a record has captured_at, order by captured_at. Where it does not, order by mtime, and name which was used.",
+      "why": "A series ordered by the wrong date names the wrong file as the head, and the head is the one people keep.",
+      "severity": "hard",
+      "register": "D"
+    },
+    {
+      "rule": "A files record and a photos record are never merged on filename alone.",
+      "why": "IMG_4471.MOV in a folder and IMG_4471.MOV in the library are probably the same recording — probably. Without a hash on both sides that is a guess, and the two doors cannot both be asked for one.",
+      "severity": "hard",
+      "register": "I"
+    }
+  ],
+  "people": {
+    "available": false,
+    "note": "PhotoKit does not expose the People/Faces index to third-party apps, and neither does Shortcuts. 'Every photo of X' has to come from an album you maintain, not from Apple's face index. This is a platform limit, not a thing to work around.",
+    "register": "D"
+  }
+}

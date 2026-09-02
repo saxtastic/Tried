@@ -2,40 +2,57 @@
 window.MFILE = {
   "demonstrated_on": "an invented eighteen-file phone folder — see mfile/fixture.json",
   "demonstrates": [
+    "IMG_4471.MOV is listed under Portfolio, Press and 2026 kit with one asset id. That is ONE file listed three times, not three duplicates. Reporting it the other way would invite deleting two files that do not exist.",
+    "press v1 and press v2 were captured in 2019 and 2021 but written to the phone in the opposite order. Ordered by capture date v2 is the head; ordered by mtime v1 is. The two doors name opposite heads on the same pair, which is why the report says which date it used.",
     "take v2.wav and take v2 copy.wav are byte-identical in size and extension. Without a hash that is candidate, not duplicate — and Shortcuts cannot hash.",
-    "untitled.txt and untitled 2.txt are the same size four minutes apart. Same reading.",
-    "ep1 exists as .mov at two bitrates and as .mp4. Three files, one work, three different sizes — no hash will ever call them duplicates, and only a confirmed stem rule calls them a series.",
-    "IMG_4471.MOV has a 2024 mtime in a folder of 2026 work. Modification time is not capture time; the report orders by mtime and says mtime.",
-    "Nothing here is referenced by anything, so functional is unknown for all eighteen. Not unused. Unknown."
+    "ep1 exists as .mov at two bitrates and as .mp4. Three files, one work, three sizes — no hash will call them duplicates, and only a confirmed stem rule calls them a series.",
+    "The photos records carry duration and dimensions; the files records cannot. Same media, different door, different answers.",
+    "Nothing here is referenced by anything, so functional is unknown throughout. Not unused. Unknown."
   ],
   "shape": {
     "root": "/On My iPhone/Studio",
-    "records": 18,
+    "records": 22,
+    "listed": 24,
+    "doors": [
+      "files",
+      "photos"
+    ],
+    "collapsed": {
+      "count": 2,
+      "rule": "An asset id seen more than once is ONE file listed more than once, never a duplicate.",
+      "note": "2 album listing(s) resolved to assets already counted. Not duplicates — one file, listed more than once.",
+      "basis": "confirmed"
+    },
+    "dated_by": {
+      "captured_at": 4,
+      "mtime": 18,
+      "note": "A series ordered by the wrong date names the wrong file as its head, and the head is the one people keep."
+    },
     "inputs": {
-      "content_hash": "present on 0 of 18",
+      "content_hash": "present on 0 of 22",
       "stem_rules": "not confirmed — see mfile/questions/intake.json Q2",
       "reference_index": "absent — see mfile/questions/intake.json Q3"
     },
     "answered": {
       "duplicate": {
         "duplicate": 0,
-        "candidate": 4,
-        "clear": 14
+        "candidate": 10,
+        "clear": 12
       },
       "iterative": {
         "iterative": 0,
         "candidate": 0,
-        "unknown": 18
+        "unknown": 22
       },
       "novel": {
         "novel": 0,
         "unique_content": 0,
-        "unknown": 18
+        "unknown": 22
       },
       "functional": {
         "functional": 0,
         "unreferenced": 0,
-        "unknown": 18
+        "unknown": 22
       }
     },
     "kinds": [
@@ -50,8 +67,8 @@ window.MFILE = {
       },
       {
         "kind": "video",
-        "files": 5,
-        "bytes": 1748000000,
+        "files": 7,
+        "bytes": 3076000000,
         "duplicate": 0,
         "iterative": 0,
         "basis": "derived",
@@ -59,8 +76,8 @@ window.MFILE = {
       },
       {
         "kind": "image",
-        "files": 3,
-        "bytes": 10690000,
+        "files": 5,
+        "bytes": 19170000,
         "duplicate": 0,
         "iterative": 0,
         "basis": "derived",
@@ -201,6 +218,12 @@ window.MFILE = {
       "owed": "The folder name, and whether the Shortcut may run on a schedule or only when tapped."
     },
     {
+      "name": "Photos library",
+      "access": "none",
+      "reachable": false,
+      "owed": "Which albums. Everything is not an answer — a library of forty thousand assets returns a report nobody reads."
+    },
+    {
       "name": "iCloud Drive",
       "access": "none",
       "reachable": false,
@@ -219,5 +242,62 @@ window.MFILE = {
       "owed": "Authorisation, if Box is in scope at all."
     }
   ],
+  "doors": [
+    {
+      "name": "Files — a folder you granted",
+      "identity": "path",
+      "reads": [
+        "name",
+        "ext",
+        "bytes",
+        "mtime",
+        "path"
+      ],
+      "cannot_read": [
+        "captured_at",
+        "width",
+        "height",
+        "duration",
+        "camera",
+        "location",
+        "album"
+      ]
+    },
+    {
+      "name": "Photos — the library",
+      "identity": "asset_id",
+      "reads": [
+        "name",
+        "ext",
+        "bytes",
+        "captured_at",
+        "width",
+        "height",
+        "duration",
+        "album",
+        "favorite",
+        "asset_id"
+      ],
+      "cannot_read": [
+        "path",
+        "people"
+      ]
+    }
+  ],
+  "hard_rules": [
+    {
+      "rule": "An asset id seen more than once is ONE file listed more than once, never a duplicate.",
+      "why": "Scanning by album returns an asset once per album it belongs to. A photo in Portfolio, Press and 2026 comes back three times with one identifier. Reporting that as three duplicates invites someone to delete two of them, and there is only one. This is the single destructive failure this tool could cause, so it is a rule and not a heuristic."
+    },
+    {
+      "rule": "Where a record has captured_at, order by captured_at. Where it does not, order by mtime, and name which was used.",
+      "why": "A series ordered by the wrong date names the wrong file as the head, and the head is the one people keep."
+    },
+    {
+      "rule": "A files record and a photos record are never merged on filename alone.",
+      "why": "IMG_4471.MOV in a folder and IMG_4471.MOV in the library are probably the same recording — probably. Without a hash on both sides that is a guess, and the two doors cannot both be asked for one."
+    }
+  ],
+  "people": "PhotoKit does not expose the People/Faces index to third-party apps, and neither does Shortcuts. 'Every photo of X' has to come from an album you maintain, not from Apple's face index. This is a platform limit, not a thing to work around.",
   "load_bearing": "Three of the four questions are answerable from a manifest of bytes. The fourth is not answerable from any manifest, at any resolution, ever. Building an index of what refers to what is a separate and larger job than scanning a drive, and no amount of scanning substitutes for it."
 };
