@@ -432,6 +432,60 @@ into `public/_headers` beside the policy. **[O]**
 The default remains `default-src 'none'`; every directive in `_headers` is a
 named exception to it, and each one is written down beside the policy. **[O]**
 
+## The M file administrator
+
+Four questions asked of every file — what is **iterative**, what is
+**duplicate**, what is **novel**, what is **functional**.
+
+```bash
+npm run mfile -- --self                  # answered on this repository
+npm run mfile:scan -- <dir> --store icloud > m.json && npm run mfile -- m.json
+npm run turn -- "the objective" --dry    # the per-turn cycle
+```
+
+Audio, video, images and documents all count, through **two doors**: a folder
+you grant, and the Photos library. They afford different things, and the
+difference is not noise — Photos gives capture date, duration, dimensions and
+album membership that a folder scan cannot see.
+
+Two hard rules follow. **An asset id seen more than once is one file listed more
+than once, never a duplicate** — a photo in three albums comes back three times,
+and calling that three duplicates invites deleting two files that do not exist.
+And **where a capture date exists, order the series by it**: a pair shot in 2019
+and 2021 but copied in the opposite order gets opposite heads depending on the
+date used, and the head is the file people keep.
+
+`src/administer.js` is the engine and has no filesystem and no network, so the
+identical code runs in the CLI and at the edge. `POST /mfile/manifest` takes a
+manifest from either iPhone Shortcut in [`ios/shortcut.md`](ios/shortcut.md),
+administers it, and **stores nothing**. It is inert until
+`wrangler secret put MFILE_TOKEN` exists.
+
+`/mfile/` is one toggle, **Stated** and **Withheld** — not tabs. Same four
+questions on both sides; what changes is whether you are reading what it can
+say or what it refuses to.
+
+Three of the four are answerable from a manifest of bytes. The fourth is not
+answerable from any manifest, at any resolution, ever: function is a relation
+between a file and something outside it, and scanning only ever sees the inside.
+So it reports `unknown` for functional until a reference index exists, and it
+never reports `unused`.
+
+It reads and reports. It never renames, moves, archives or deletes — asserted by
+a test that greps its own source for a write. Every verdict carries a basis, and
+a verdict that cannot reach `confirmed` or `derived` is returned at the degraded
+wording rather than the confident one.
+
+- [`docs/mfile.md`](docs/mfile.md) — the criteria, the stores, the turn cycle
+- [`mfile/questions/intake.json`](mfile/questions/intake.json) — the three
+  questions that turn two of the four verdicts from candidate into stated
+- [`ios/shortcut.md`](ios/shortcut.md) — the scanner as two Shortcuts, one per
+  door: no Mac, no developer account, and neither can hash, which is why
+  `duplicate` degrades to *candidate*
+- [`mfile/doors.json`](mfile/doors.json) — what each door affords, the two hard
+  rules, and a claim this corrected: capture date was called out of reach when
+  that was only ever true of the folder scan
+
 ## Governance & corpus simulator
 
 An adversarial simulator for legal and institutional argument. One agent argues

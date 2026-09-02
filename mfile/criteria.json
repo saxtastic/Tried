@@ -1,0 +1,69 @@
+{
+  "id": "MFILE-CRITERIA",
+  "owner": "mfile-administrator",
+  "note": "The four questions, declared as criteria rather than inferred from the files. Each names the input it requires. A question whose input is absent is refused, not estimated — a guessed verdict on a file store is worse than no verdict, because it gets acted on.",
+  "questions": [
+    {
+      "key": "duplicate",
+      "asks": "Is this file the same content as another file?",
+      "rule": "Two records are duplicates when their content hashes are equal. Same name is not duplication. Same size is not duplication.",
+      "requires": ["content_hash"],
+      "basis_when_satisfied": "confirmed",
+      "degraded": {
+        "when": "content_hash absent",
+        "says": "candidate",
+        "rule": "equal bytes and equal extension",
+        "basis": "derived",
+        "must_not_say": "duplicate"
+      },
+      "register": "D"
+    },
+    {
+      "key": "iterative",
+      "asks": "Is this file a version of another file?",
+      "rule": "Two records are iterations of one work when their normalised stems are equal and their content hashes differ. Order is by modification time. The newest is the head; the rest are its history.",
+      "requires": ["content_hash", "stem_rules", "mtime"],
+      "basis_when_satisfied": "derived",
+      "degraded": {
+        "when": "stem_rules not confirmed by the owner",
+        "says": "candidate",
+        "basis": "none",
+        "must_not_say": "iterative",
+        "reason": "Normalisation is the whole question. A default ruleset that strips ' copy', ' (1)', ' final', ' v2' is a guess about one person's naming cadence, and the owner has stated that cadence is unreliable. Guessing it and then reporting confidently is how a file store gets reorganised into a worse one."
+      },
+      "register": "D"
+    },
+    {
+      "key": "novel",
+      "asks": "Does this file exist only once, as itself?",
+      "rule": "A record is novel when its content hash appears exactly once in the manifest and its normalised stem appears exactly once.",
+      "requires": ["content_hash", "stem_rules"],
+      "basis_when_satisfied": "derived",
+      "degraded": {
+        "when": "stem_rules not confirmed",
+        "says": "unique-content",
+        "basis": "confirmed",
+        "must_not_say": "novel",
+        "reason": "Unique content is a fact about bytes. Novel is a claim about the work, and a work can be novel in content while being the fourth attempt at the same thing."
+      },
+      "register": "D"
+    },
+    {
+      "key": "functional",
+      "asks": "Is this file currently doing something?",
+      "rule": "A record is functional when something outside it refers to it: a page links it, a document cites it, a project embeds it, a release ships it, a post used it.",
+      "requires": ["reference_index"],
+      "basis_when_satisfied": "confirmed",
+      "degraded": {
+        "when": "reference_index absent",
+        "says": "unknown",
+        "basis": "none",
+        "must_not_say": "functional",
+        "must_not_say_either": "unused",
+        "reason": "This is the one question the filesystem cannot answer. Bytes, names and timestamps are all internal to the file. Function is a relation to something else. The owner's own diagnosis names it exactly — the files are 'not referenced or standardized' — and the missing reference is not a gap in the report, it is the finding."
+      },
+      "register": "D"
+    }
+  ],
+  "load_bearing": "Three of the four questions are answerable from a manifest of bytes. The fourth is not answerable from any manifest, at any resolution, ever. Building an index of what refers to what is a separate and larger job than scanning a drive, and no amount of scanning substitutes for it."
+}

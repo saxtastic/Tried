@@ -1,0 +1,154 @@
+{
+  "id": "MFILE-MEDIA",
+  "owner": "mfile-administrator",
+  "note": "What kind of thing a file is, declared by extension rather than sniffed. Extension is a claim the filename makes, not a fact about the bytes \u2014 so the kind is recorded at basis 'derived' and never at 'confirmed'. A .mov that is really a .mp4 is mislabelled here and the report says nothing to the contrary.",
+  "kinds": [
+    {
+      "key": "audio",
+      "ext": [
+        "wav",
+        "aiff",
+        "aif",
+        "flac",
+        "alac",
+        "m4a",
+        "mp3",
+        "aac",
+        "ogg",
+        "opus",
+        "wma",
+        "caf",
+        "logicx",
+        "als",
+        "flp",
+        "ptx",
+        "band",
+        "aup3"
+      ],
+      "affords": [
+        "duration",
+        "sample rate",
+        "channels",
+        "bit depth"
+      ],
+      "note": "A session file (.logicx, .als, .band) is a bundle, not a track. It is a directory on disk, so the scan walks into it and reports its contents. That inflates the count and it is not an error \u2014 the parts are files.",
+      "register": "D",
+      "scanner_reads_via_files_door": [
+        "bytes",
+        "mtime",
+        "name"
+      ],
+      "files_door_cannot_read": "duration, sample rate, channels. Neither door gives these: audio does not live in the Photos library, so there is no richer door to switch to. A second pass that opens files is the only way, and it is not written."
+    },
+    {
+      "key": "video",
+      "ext": [
+        "mov",
+        "mp4",
+        "m4v",
+        "avi",
+        "mkv",
+        "webm",
+        "mpg",
+        "mpeg",
+        "wmv",
+        "flv",
+        "prproj",
+        "fcpbundle",
+        "drp",
+        "aep"
+      ],
+      "affords": [
+        "duration",
+        "resolution",
+        "frame rate",
+        "codec"
+      ],
+      "note": "Video is where the duplicate question pays for itself: one ten-minute export at three bitrates is three files with three hashes and one work. They are iterations, not duplicates, and only a confirmed stem rule can tell them apart.",
+      "register": "D",
+      "scanner_reads_via_files_door": [
+        "bytes",
+        "mtime",
+        "name"
+      ],
+      "files_door_cannot_read": "duration, resolution, frame rate \u2014 through the files door. The photos door returns duration and dimensions for anything in the library."
+    },
+    {
+      "key": "image",
+      "ext": [
+        "jpg",
+        "jpeg",
+        "png",
+        "heic",
+        "heif",
+        "gif",
+        "webp",
+        "tif",
+        "tiff",
+        "bmp",
+        "raw",
+        "dng",
+        "cr2",
+        "cr3",
+        "nef",
+        "arw",
+        "orf",
+        "raf",
+        "psd",
+        "ai",
+        "sketch"
+      ],
+      "affords": [
+        "dimensions",
+        "capture date",
+        "camera",
+        "location"
+      ],
+      "register": "D",
+      "scanner_reads_via_files_door": [
+        "bytes",
+        "mtime",
+        "name"
+      ],
+      "files_door_cannot_read": "EXIF. Through the FILES door capture date is unavailable and modification time is the only date, and the two disagree constantly \u2014 a photo taken in 2019 and copied in 2024 has a 2024 mtime. Through the PHOTOS door capture date IS available and is the date a series is ordered by. The earlier version of this field said capture date was out of reach full stop; that generalised from one door to all of them and is corrected in mfile/doors.json."
+    },
+    {
+      "key": "document",
+      "ext": [
+        "pdf",
+        "doc",
+        "docx",
+        "pages",
+        "rtf",
+        "txt",
+        "md",
+        "odt",
+        "epub",
+        "key",
+        "ppt",
+        "pptx",
+        "xls",
+        "xlsx",
+        "numbers",
+        "csv"
+      ],
+      "affords": [
+        "page count",
+        "word count",
+        "title"
+      ],
+      "register": "D",
+      "scanner_reads_via_files_door": [
+        "bytes",
+        "mtime",
+        "name"
+      ],
+      "files_door_cannot_read": "page count, word count, embedded title."
+    }
+  ],
+  "fallback": {
+    "key": "other",
+    "note": "Anything unlisted. It is counted and reported, never dropped. A store where 'other' is the largest kind is telling you the kind list is wrong, which is worth knowing."
+  },
+  "load_bearing": "The FILES door reads the directory entry and nothing else: name, size, modification time. Every richer property \u2014 duration, resolution, capture date \u2014 needs the file opened, and that pass is not written. The PHOTOS door is the exception and the reason to build it: capture date, duration, dimensions and album membership all come back without opening anything. Audio has no such door, so it stays at name, size and mtime."
+}

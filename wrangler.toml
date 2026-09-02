@@ -1,11 +1,19 @@
 name = "ayeyoty-co"
 compatibility_date = "2026-08-08"
 
-# Static venue served directly from Cloudflare's edge (Workers Static Assets).
-# No worker script: every response is a file under ./public, and public/_headers
-# supplies the security and caching headers at deploy time.
+# The venue is static; every response is a file under ./public, and
+# public/_headers supplies the security and caching headers at deploy time.
+#
+# One exception: src/index.js handles POST /mfile/manifest and falls through to
+# the asset binding for everything else. The endpoint is inert until its secret
+# exists, so a deploy without it serves the site and refuses the endpoint:
+#
+#   npx wrangler secret put MFILE_TOKEN
+main = "src/index.js"
+
 [assets]
 directory = "./public"
+binding = "ASSETS"
 not_found_handling = "404-page"   # serves public/404.html
 
 # Attach the domain in the Cloudflare dashboard under

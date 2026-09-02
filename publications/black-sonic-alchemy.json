@@ -1,0 +1,49 @@
+{
+  "id": "PUB-BSA",
+  "title": "Black Sonic Alchemy",
+  "edition": "revised and expanded",
+  "status": "declared, not drafted",
+  "note": "The brief below is the author's, quoted. Nothing in this file is a paraphrase, and nothing here proposes content. A production file that summarises an author's intent has already begun rewriting it.",
+  "extent": {
+    "from": { "pages": 60, "form": "mosaic", "basis": "sourced", "source": "author, this session", "register": "D" },
+    "to": { "pages": 270, "basis": "sourced", "source": "author, this session", "register": "D" },
+    "note": "A 4.5× expansion is not an edit pass. What fills 210 pages is the open question, and it is not answered here."
+  },
+  "brief": [
+    {
+      "instruction": "excise the grief",
+      "quoted": "excise grief around his cousin's loss and personal narrative",
+      "toward": "commonality of understanding that alchemy as a process of spiritual proportion",
+      "register": "D"
+    },
+    {
+      "instruction": "add the metallurgy thread",
+      "quoted": "metallurgy as a practice of angelic spiritual holiness that was documented as a offering in exchange for the property, for the right to visualize, to materialize, and manifest property",
+      "register": "D",
+      "owed": "Which documentation. This is a historical claim with a source behind it or it is a figure; the manuscript needs to know which, because the two are written differently."
+    },
+    {
+      "instruction": "be opaque",
+      "quoted": "I would like to be… because I wanna be opaque",
+      "register": "D",
+      "reading": "Opacity as a stance the prose takes, not a difficulty it fails to avoid. It sits against the excised grief: the personal is removed and what replaces it does not explain itself either.",
+      "owed": "Confirmation of that reading. It is the single decision that most changes the book, and it rests on an interrupted sentence."
+    },
+    {
+      "instruction": "the stance toward the market",
+      "quoted": "activates all the modification and capitalism available, but does it with a conscious glitching mind",
+      "register": "D"
+    }
+  ],
+  "sources": {
+    "declared": ["the existing ~60-page mosaic", "the author's other writing", "assets and media", "\"the way I type\""],
+    "held_by_repository": [],
+    "basis": "none",
+    "owed": "Not one of these is in this repository. Until at least the mosaic is, every production step here is a plan about a document nobody working on it has read."
+  },
+  "refuses": [
+    "Drafting a page before the mosaic is in hand",
+    "Deciding what 'opaque' means on the author's behalf",
+    "Treating the cousin's loss as material to be repositioned rather than removed"
+  ]
+}
