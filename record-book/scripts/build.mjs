@@ -1238,6 +1238,11 @@ blockquote cite {
   letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
 .table-scroll { overflow-x: auto; }
 
+/* Watch tier is 208px. Ids like PRE-1862-DC-COMPENSATED-EMANCIPATION and sense
+   keys like decorum_demanded_of_the_injured are unbroken tokens far wider than
+   that, and without this they push the page into a horizontal scroll. */
+code, dd, td, th, .lede, .defeat { overflow-wrap: anywhere; }
+
 .senses, .ledger { border-collapse: collapse; width: 100%; margin: .8rem 0 1.1rem;
   font-size: .88rem; }
 .senses th, .senses td, .ledger th, .ledger td { text-align: left; vertical-align: top;
